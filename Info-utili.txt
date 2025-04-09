@@ -1,0 +1,80 @@
+Struttura Cartella e Pagine:
+Pagine Errore:
+.htaccess
+403.html
+404.html
+500.html
+
+Assets:
+css
+desktop.css
+mobile.css
+print.css
+js
+img
+Background
+Icons
+Logo
+Users
+
+
+Note sul testo:
+Interlinea 1.5
+Testo con le grazie per la stampa e senza grazia per il resto
+
+Note Immagini:
+Immagini meglio se in estensione .webp
+
+Note grafica:
+Quando si passa a mobile il menù diventa un menù ad hamburger
+Appena l’utente si logga il testo del link ”Area riservata” diventa “ImgLogoUtente + “Profilo””?
+Al posto di usare valori assoluti (px) usare valori responsive (em, %, rem…)
+Allo scroll, bottone che “Torna all’inizio”
+Testo menù in grassetto e in grande
+
+Note PHP eJS:
+Controllo form (es OR 1=1)
+
+Note accessibilità:
+Label su tutti i bottoni e dove necessario e su tutti gli input 
+Aria-label dove non è possibile usare le label
+Breadcrumb per ogni pagina
+Aiuta alla navigazione(bottoni nascosti)->text-indent:-999em;
+Usare <span lang=”lingua usata”> dove necessario
+usare flex al posto di grid in css per una più veloce renderizzazione
+Navigazione con TAB funzionale e non solo con il mouse
+Se usiamo degli acronimi usare approriatamente <abbr …>
+alt delle immagini
+Contrasto per testo errori
+niente buchi nelle intestazioni (tipo se metto h3 questo deve per forza seguire un h1 e un h2)
+
+
+Strumenti di validazione:
+Validare la sintassi di HTML, CSS (siti ufficiali)
+Usare browser diversi
+Usare screenreader, software per ipovedenti (magnifier), display piccolo, …
+
+FireFox Web Developer Toolbar
+Chrome Device Emulation
+Silktide (estensione di chrome che simula diverse disabilità)
+Total Validator
+Weve di Webaims (anche come estensione di chrome)
+ARC Toolkit (anche come estensione di chrome)
+Test sulla velocità del caricamento immagini e in generale del sito
+Informazioni sui test di accessibilità → https://web.math.unipd.it/accessibility/
+Informazioni sui test di accessibilità → https://web.math.unipd.it/accessibility-dev
+Controllo contrasti - https://contrastchecker.com/
+
+
+
+
+Cose da evitare:
+Testo scorrevole e lampeggiante
+Font troppo elaborati
+Sottolineatura di testo che non è link o ancora
+meglio evitare il testo barrato (solo se estremamente necessario)
+Evitare i pop-up
+link rotti, circolari
+
+Domande
+-Site map nel sito e/o nella relazione
