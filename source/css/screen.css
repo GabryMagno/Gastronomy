@@ -15,6 +15,7 @@
     --buttoncolor: #C65C45;
     --headerbgcolor: #73142F;
     --secondaryelementcolor: #7A9884;
+    --linkcolor: #F3FF00;
 
     /*TESTO*/
     --title: 5rem;
@@ -70,7 +71,7 @@ nav#menu ul{
 
 nav#menu li{
     margin: 0 1rem;
-    color: #F3FF00;
+    color: var(--linkcolor);
     padding: 0.5rem 0.7rem;
     align-self: center;
 }
