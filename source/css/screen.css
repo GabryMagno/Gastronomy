@@ -1,0 +1,131 @@
+*,
+*::after,
+*::before {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+    line-height: 1.5;
+    box-sizing: border-box;
+}
+:root {
+    /*COLORI*/
+    --bgcolor: #FAF4ED;
+    --txtcolor: #2C1C18;
+    --errorcolor: #7C0A01;
+    --buttoncolor: #C65C45;
+    --headerbgcolor: #73142F;
+    --secondaryelementcolor: #7A9884;
+
+    /*TESTO*/
+    --title: 5rem;
+    --menu: 1.5rem;
+}
+
+body{
+    background-color: var(--bgcolor);
+}
+
+header{
+    background-image:url(../../img/sfondo-prova.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    padding-bottom: 3rem;
+    min-height: 75vh;
+}
+
+h1#title{
+    font-size: 4rem;
+    color: var(--bgcolor)
+}
+
+h2{
+    margin: 1rem;
+    color: var(--txtcolor);
+}
+
+#navigation{
+    position: absolute;
+    text-indent: -999rem;
+}
+
+nav#menu , nav#menu a, a{
+    color: #F3FF00;
+}
+
+nav#menu {
+    padding: 1.5rem ;
+    min-width: 100%;
+    background-color: var(--txtcolor);
+    opacity: 90%;
+}
+
+nav#menu ul{
+    display: flex;
+    list-style-type: none;
+    align-items:center;
+    padding: .2rem 1.5rem;
+    justify-content: end;
+}
+
+nav#menu li{
+    margin: 0 1rem;
+    color: #F3FF00;
+    padding: 0.5rem 0.7rem;
+    align-self: center;
+}
+
+nav#menu li#here{
+    color: #FFFFFF;
+    border-radius: 2rem;
+    background-color: var(--headerbgcolor);
+}
+
+h1, nav#breadcrumb, h2, h3{
+    text-align: center;
+}
+
+nav#breadcrumb{
+    border-radius: 2rem;
+    color: #FFFFFF;
+    background-color: var(--headerbgcolor);
+    padding: 0.5rem 0.7rem;
+    margin: 1rem 40%;
+}
+
+span#current-path{
+    font-size: 1.2rem;
+}
+
+div#main-info{
+    text-align: center;
+    margin: 1rem;
+    padding: 0.5rem;
+    border: 0.3rem;
+}
+
+div.products,div#new-products{
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem;
+    border: 0.5rem;
+    background-color: var(--headerbgcolor);
+    color: #FFFFFF;
+}
+
+div#new-products{
+    margin-top: 1rem;
+}
+
+div.new{
+    width: 33%;
+    text-align: center;
+}
+
+div.products img,div#new-products img{
+    width: 12rem;
+    height: 12rem;
+}
+div#best-products{
+    background-color: var(--errorcolor);
+}
