@@ -45,19 +45,51 @@
         <main>
             <div id="list-content">
                 <div id="filter">
+                    <h2>FILTRI</h2>
                     <form>
                         <fieldset>
-                            <input type="checkbox" id="isVegetarian" name="Vegetarian" value="Vegetariano">
-                            <label for="isVegetarian">Vegetariano</label>
-                            <input type="checkbox" id="isVegan" name="Vegan" value="Vegano">
-                            <label for="isVegan">Vegano</label>
-                            <input type="checkbox" id="isCeliac" name="Celiac" value="Celiaco">
-                            <label for="isCeliac">Celiaco</label>
+                            <div id="first">
+                                <input type="checkbox" id="isVegetarian" name="Vegetarian" value="Vegetariano">
+                                <label for="isVegetarian">Vegetariano</label>
+                                <input type="checkbox" id="isVegan" name="Vegan" value="Vegano">
+                                <label for="isVegan">Vegano</label>
+                                <input type="checkbox" id="isCeliac" name="Celiac" value="Celiaco">
+                                <label for="isCeliac">Celiaco</label>
+                            </div>
                         </fieldset>
+                        <div class="buttons">
+                            <button type="reset" id="reset-filters" class="choice">ANNULLA</button>
+                            <button type="submit" id="submit-filters" class="choice">CONFERMA</button>
+                        </div>
                     </form>
                 </div>
                 <div id="show-products">
-                
+                    <form id="search">
+                        <label for="searching-bar" class="display-none">Barra di ricerca</label>
+                        <input type="search" id="searching-bar" placeholder="Cerca un prodotto"/>
+                    </form>
+                    <ul id="list">
+                        <li class="product-brochure">
+                            <img src="../../img/antipasto.png" alt="La novità degli antipasti" />
+                            <p id="title">Parmigiana di melanzane</p>
+                            <p>Prezzo prodotto</p>
+                            <a href="">Vai alla scheda del prodotto</a>
+                        </li>
+                        <li class="product-brochure">
+                            <img src="../../img/contorno.png" alt="La novità dei contorni" />
+                            <p id="title">Nome prodotto</p>
+                            <p>Prezzo prodotto</p>
+                            <a href="">Vai alla scheda del prodotto</a>
+                        </li>
+                        <li class="product-brochure">
+                            <img src="../../img/antipasto.png" alt="La novità degli antipasti" />
+                            <p id="title">Nome prodotto</p>
+                            <p>Prezzo prodotto</p>
+                            <a href="">Vai alla scheda del prodotto</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </main>
+    </body>
+</html>

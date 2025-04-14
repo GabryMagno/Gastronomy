@@ -22,8 +22,17 @@
     --menu: 1.5rem;
 }
 
+/*GENERAL*/
+html{
+    overflow-x: hidden;
+}
+
 body{
     background-color: var(--bgcolor);
+}
+
+.display-none{
+    display: none;
 }
 
 header{
@@ -32,8 +41,12 @@ header{
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
-    padding-bottom: 3rem;
-    min-height: 75vh;
+    padding-bottom: 2rem;
+    min-height: 70vh;
+}
+
+div#header{
+    width: 100%;
 }
 
 a{
@@ -51,13 +64,18 @@ h2{
     color: var(--txtcolor);
 }
 
+p#title{
+    margin-bottom: 2em;
+}
+
+/*NAVIGATION MENU*/
 #navigation{
     position: absolute;
-    text-indent: -999rem;
+    text-indent: -999em;
 }
 
 nav#menu {
-    padding: 1.5rem ;
+    padding: 1.5em ;
     min-width: 100%;
     background-color: var(--txtcolor);
     opacity: 90%;
@@ -99,7 +117,8 @@ nav#breadcrumb{
 span#current-path{
     font-size: 1.2rem;
 }
-
+/*FOOTER*/
+/*HOME*/
 div#main-info{
     text-align: center;
     margin: 1rem;
@@ -129,6 +148,91 @@ div.products img,div#new-products img{
     width: 12rem;
     height: 12rem;
 }
+
 div#best-products{
     background-color: var(--errorcolor);
+}
+
+/*PRODUCT-LIST*/
+
+div#list-content{
+    margin: 1em;
+    display: flex;
+}
+
+div#filter{
+    display:flex;
+    flex-direction: column;
+    width: 30%;
+}
+
+div#first{
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+div.buttons{
+    display: flex;
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
+
+button.choice{
+    padding: 1em 0;
+    margin: 1em 0;
+    width: 50%;
+}
+
+button#submit-filters{
+    background-color: var(--headerbgcolor);
+    color: var(--linkcolor);
+    margin-left: 1em;
+}
+
+div#show-products{
+    width: 70%;
+}
+
+form#search{
+    margin: 0.5em;
+    padding: 1em;
+}
+
+
+input#searching-bar{
+    border-radius: 0.5em;
+    border: 4px solid var(--headerbgcolor);
+    width: 100%;
+}
+
+ul#list{
+    overflow: auto;
+    display: flex;
+    padding: 1em;
+    overflow-x: hidden;
+    flex-wrap: wrap;
+}
+
+li.product-brochure {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin: 0 2em 1em 1em;
+    padding: 1.5em;
+    background-color: var(--headerbgcolor);
+    justify-content: center;
+    align-items: center;
+    color: var(--bgcolor);
+    text-align: center;
+    border-radius: 0.75em;
+    border: 3px solid black;
+}
+
+
+li.product-brochure img{
+    width: 8em;
+    height: 8em;
+    margin-bottom: 1em;
 }
