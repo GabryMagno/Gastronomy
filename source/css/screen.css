@@ -31,8 +31,14 @@ header{
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+    background-position: center;
     padding-bottom: 3rem;
     min-height: 75vh;
+}
+
+a{
+    color:var(--linkcolor);
+    text-decoration: underline;
 }
 
 h1#title{
@@ -48,10 +54,6 @@ h2{
 #navigation{
     position: absolute;
     text-indent: -999rem;
-}
-
-nav#menu , nav#menu a, a{
-    color: #F3FF00;
 }
 
 nav#menu {
@@ -114,8 +116,8 @@ div.products,div#new-products{
     color: #FFFFFF;
 }
 
-div#new-products{
-    margin-top: 1rem;
+div#new-products, div#best-products{
+    margin: 1rem 2rem;
 }
 
 div.new{
