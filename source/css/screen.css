@@ -35,6 +35,11 @@ body{
     display: none;
 }
 
+.inline{
+    display: inline;
+}
+
+
 header{
     background-image:url(../../img/sfondo-prova.png);
     background-repeat: no-repeat;
@@ -52,6 +57,7 @@ div#header{
 a{
     color:var(--linkcolor);
     text-decoration: underline;
+    margin: 1em;
 }
 
 h1#title{
@@ -92,7 +98,7 @@ nav#menu ul{
 nav#menu li{
     margin: 0 1rem;
     color: var(--linkcolor);
-    padding: 0.5rem 0.7rem;
+    padding: 0.5rem 0.5rem;
     align-self: center;
 }
 
@@ -118,6 +124,18 @@ span#current-path{
     font-size: 1.2rem;
 }
 /*FOOTER*/
+footer{
+    text-align: center;
+    background-color: var(--txtcolor);
+    color: var(--bgcolor);
+    padding: 1.2em 0;
+}
+
+footer a{
+    color: var(--linkcolor);
+    padding: 0.5rem 0.7rem;
+    margin: 0.5rem 2rem;
+}
 /*HOME*/
 div#main-info{
     text-align: center;
@@ -126,31 +144,35 @@ div#main-info{
     border: 0.3rem;
 }
 
-div.products,div#new-products{
+ul.products,ul#new-products{
     display: flex;
     justify-content: center;
     padding: 1.5rem;
     border: 0.5rem;
-    background-color: var(--headerbgcolor);
     color: #FFFFFF;
 }
 
-div#new-products, div#best-products{
+ul#new-products, ul#best-products{
     margin: 1rem 2rem;
 }
 
-div.new{
+li.new{
     width: 33%;
     text-align: center;
+    list-style-type: none;
+    background-color: var(--headerbgcolor);
+    border: 3px solid black;
+    padding: 1em;
+    margin: 1em;
 }
 
-div.products img,div#new-products img{
-    width: 12rem;
-    height: 12rem;
-}
-
-div#best-products{
+ul#best-products li{
     background-color: var(--errorcolor);
+}
+
+ul.products img,ul#new-products img{
+    width: 10em;
+    height: 10em;
 }
 
 /*PRODUCT-LIST*/
@@ -166,11 +188,22 @@ div#filter{
     width: 30%;
 }
 
+div#filter fieldset{
+    border: 3px solid black;
+}
+
 div#first{
     padding: 1em;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    background-color: #00FFDD;
+}
+
+
+div#first input{
+    margin: 1em 0 0 0;
+    width: 20%;
+    min-height: 1em;
 }
 
 div.buttons{
@@ -183,6 +216,7 @@ button.choice{
     padding: 1em 0;
     margin: 1em 0;
     width: 50%;
+    border: 3px solid black;
 }
 
 button#submit-filters{
