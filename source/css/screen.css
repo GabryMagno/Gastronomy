@@ -18,13 +18,13 @@
     --linkcolor: #F3FF00;
 
     /*TESTO*/
-    --title: 5rem;
-    --menu: 1.5rem;
+    --title: 5em;
+    --menu: 1.5em;
 }
 
 /*GENERAL*/
 html{
-    overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 body{
@@ -47,7 +47,7 @@ header{
     background-size: cover;
     background-position: center;
     padding-bottom: 2rem;
-    min-height: 70vh;
+    min-height: 60vh;
 }
 
 div#header{
@@ -58,20 +58,27 @@ a{
     color:var(--linkcolor);
     text-decoration: underline;
     margin: 1em;
+    text-align: center;
 }
 
 h1#title{
-    font-size: 4rem;
+    font-size: 4em;
     color: var(--bgcolor)
 }
 
 h2{
     margin: 1rem;
+    font-size: 2em;
     color: var(--txtcolor);
+}
+
+h3{
+    font-size: 1.2em;
 }
 
 p#title{
     margin-bottom: 2em;
+    font-size: 1.3em;
 }
 
 /*NAVIGATION MENU*/
@@ -91,15 +98,15 @@ nav#menu ul{
     display: flex;
     list-style-type: none;
     align-items:center;
-    padding: .2rem 1.5rem;
+    padding: .3em 1.5em;
     justify-content: end;
 }
 
 nav#menu li{
-    margin: 0 1rem;
+    margin: 0 0.5em;
     color: var(--linkcolor);
-    padding: 0.5rem 0.5rem;
     align-self: center;
+    padding: 0.5em;
 }
 
 nav#menu li#here{
@@ -144,6 +151,10 @@ div#main-info{
     border: 0.3rem;
 }
 
+li a{
+    margin: 0;
+}
+
 ul.products,ul#new-products{
     display: flex;
     justify-content: center;
@@ -171,8 +182,8 @@ ul#best-products li{
 }
 
 ul.products img,ul#new-products img{
-    width: 10em;
-    height: 10em;
+    width: 8.5em;
+    height: 8.5em;
 }
 
 /*PRODUCT-LIST*/
@@ -180,65 +191,79 @@ ul.products img,ul#new-products img{
 div#list-content{
     margin: 1em;
     display: flex;
+    justify-content: space-between;
 }
 
 div#filter{
     display:flex;
     flex-direction: column;
-    width: 30%;
+    width: 23%;
 }
 
 div#filter fieldset{
     border: 3px solid black;
 }
 
-div#first{
-    padding: 1em;
+div.filters{
+    padding: 0.8em;
     display: flex;
     flex-direction: column;
-    background-color: #00FFDD;
+    background-color: var(--bgcolor);
 }
 
 
-div#first input{
+div.filters input{
     margin: 1em 0 0 0;
-    width: 20%;
+    width: 30%;
     min-height: 1em;
+}
+
+input#price, input#grade{
+    width: 100%;
 }
 
 div.buttons{
     display: flex;
+    flex-direction: column;
     margin-bottom: 1em;
     margin-top: 1em;
 }
 
 button.choice{
-    padding: 1em 0;
-    margin: 1em 0;
-    width: 50%;
+    padding: 1em 0;  
+    width: 100%;
     border: 3px solid black;
+}
+
+button#reset-filters{
+    background-color: var(--txtcolor);
+    color: var(--bgcolor);
 }
 
 button#submit-filters{
     background-color: var(--headerbgcolor);
     color: var(--linkcolor);
-    margin-left: 1em;
+    margin-top: 1em;
 }
 
 div#show-products{
-    width: 70%;
+    width: 75%;
+    box-sizing: border-box;
+    margin-bottom: 0.5em;
 }
 
 form#search{
     margin: 0.5em;
     padding: 1em;
+    padding-top: 0;
 }
-
 
 input#searching-bar{
     border-radius: 0.5em;
     border: 4px solid var(--headerbgcolor);
     width: 100%;
+    min-height: 3.5vh;
+    font-size: 1.1em;
 }
 
 ul#list{
@@ -247,14 +272,19 @@ ul#list{
     padding: 1em;
     overflow-x: hidden;
     flex-wrap: wrap;
+    width: fit-content;
+    justify-content: space-between;
+    background-color: var(--txtcolor);
+    margin-left: 1.5em;
+    width: 96%;
 }
 
 li.product-brochure {
     display: flex;
     flex-direction: column;
     width: 40%;
-    margin: 0 2em 1em 1em;
-    padding: 1.5em;
+    margin: 0 3em 1em 1em;
+    padding: 1.3em;
     background-color: var(--headerbgcolor);
     justify-content: center;
     align-items: center;
@@ -264,9 +294,26 @@ li.product-brochure {
     border: 3px solid black;
 }
 
+ul#list li:nth-child(2n){
+    margin-right: 0;
+}
 
 li.product-brochure img{
-    width: 10em;
-    height: 10em;
+    width: 8.5em;
+    height: 8.5em;
     margin-bottom: 1em;
+}
+
+/*CHI SIAMO*/
+div#mission{
+    display: flex;
+    margin: 1em;
+    justify-content: center;
+    align-items: center;
+}
+
+div#goal{
+    border: 3px solid black;
+    margin: 2em;
+    text-align: center;
 }
