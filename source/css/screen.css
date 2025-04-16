@@ -109,6 +109,13 @@ nav#menu li{
     padding: 0.5em;
 }
 
+nav#menu li:nth-child(4){
+    margin: 0;
+    color: var(--linkcolor);
+    align-self: center;
+    padding: 0.5em;
+}
+
 nav#menu li#here{
     color: #FFFFFF;
     border-radius: 2rem;
@@ -214,7 +221,7 @@ div.filters{
 
 div.filters input{
     margin: 1em 0 0 0;
-    width: 30%;
+    width: 10%;
     min-height: 1em;
 }
 
@@ -235,7 +242,7 @@ button.choice{
     border: 3px solid black;
 }
 
-button#reset-filters{
+button#reset-filters, button#reset-advice{
     background-color: var(--txtcolor);
     color: var(--bgcolor);
 }
@@ -315,5 +322,55 @@ div#mission{
 div#goal{
     border: 3px solid black;
     margin: 2em;
+    text-align: left;
+    padding: 1em;
+}
+
+form#advice{
+    margin: 1em;
     text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+form#advice fieldset{
+    width: 75%;
+    margin: 1em;
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    background-color: var(--txtcolor);
+    color: var(--bgcolor);
+    border: 3px solid black;
+}
+form#advice label{
+    margin-top: 1em;
+}
+form#advice textarea{
+    padding: 1em;
+    margin: 1.5em 1em 2em 1em;
+    height: 30vh;
+}
+
+div#buttons-advice{
+    display: flex;
+    justify-content: end;
+    width: 75%;
+}
+
+form#advice button{
+    width: 100%;
+    margin-left: 1em;
+}
+
+form#advice button#reset-advice{
+    margin-left: 0;
+}
+
+button#submit-advice{
+    background-color: var(--headerbgcolor);
+    color: var(--linkcolor);
 }

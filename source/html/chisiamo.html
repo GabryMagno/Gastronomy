@@ -5,14 +5,15 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title>Cuochi per Caso</title>
         <link rel="icon" type="image" href="../../img/logo.png" />
-        <meta name="description" content="Cuochi per Caso, il sito in cui la gastronomia diventa un modo per sperimentare" />
-        <meta name="keywords" content="Cuochi per Caso, primi, secondi, contorni, antipasti, dolci, gastronomia" />
+        <meta name="description" content="Cuochi per Caso, la lista dei prodotti offerti" />
+        <meta name="keywords" content="Cuochi per Caso, prodotti, primi, secondi, contorni, antipasti, dolci, gastronomia" />
         <meta name="author" content="Cuochi per Caso" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <!--CSS-->
         <link rel="stylesheet" href="../css/print.css" media="print" />
         <link rel="stylesheet" href="../css/screen.css" media="screen" />
         <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 800px)" />
+        <!--JAVASCRIPT-->
     </head>
     <body>
         <header id="return">
@@ -39,7 +40,7 @@
                 <h1 id="title">CUOCHI PER CASO</h1>
 
                 <nav id="breadcrumb">
-                    <p>Sei in : CHI SIAMO<p>
+                    <p>Sei in : <span id="current-path">CHI SIAMO</span><p>
                 </nav>
 
             </div>
@@ -49,11 +50,28 @@
                 <img src="../../img/Cuochi.png"/>
                 <div id="goal">
                     <h2>IL NOSTRO OBIETTIVO</h2>
-                    <p>Il nostro obiettivo</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua. 
+                        Ut enim ad minim veniam, quis nostrum exercitationem ullamco laboriosam, nisi ut aliquid ex ea commodi consequatur. 
+                        Duis aute irure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                        Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 </div>
             </div>
+            <h3>SE HAI UN SUGGERIMENTO:</h3>
+            <form method="post" id="advice">
+                <fieldset>
+                    <label for="user-advice" class="form-label">Scrivi qua il tuo suggerimento</label>
+                    <textarea name="suggerimento" placeholder="Scrivi un suggerimento" id="user-advice" required minlength="20" maxlength="500"></textarea>
+                </fieldset>
+                <div id="buttons-advice">
+                    <button type="reset" id="reset-advice" class="choice">ANNULLA</button>
+                    <button type="submit" id="submit-advice" class="choice">CONFERMA</button>
+                </div>
+            </form>
+          
+            <div id="authors">
 
-            <div id=""></div>
+            </div>
+        </main>
         </main>
         <footer>
             <p>Tutti i diritti sono riservati</p>
