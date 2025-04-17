@@ -104,7 +104,7 @@ p#title{
 
 /* -- LOGO MENU --*/
 .hidden {
-    text-indent: 100%;
+    text-indent: -9999px;
     white-space: nowrap;
     overflow: hidden;
 }
@@ -114,6 +114,10 @@ h1.hidden{
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    
+    width: 200px;
+    aspect-ratio: 3/1;
+
     margin-left: 1em;
 }
 
@@ -133,7 +137,7 @@ h1.hidden{
 
 
 
-nav#menu li{
+#menu li{
     margin: 0 0.5em;
     padding: 0.5em;
     color: var(--linkcolor);
@@ -156,7 +160,7 @@ nav#menu li{
     width: 30%;
     position: absolute;
 
-    top: 5em;
+    top: 10em;
     left: 50%;
     transform: translateX(-50%);
 
