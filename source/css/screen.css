@@ -10,6 +10,7 @@
 :root {
     /*COLORI*/
     --bgcolor: #FAF4ED;
+    --title_color: #FAF4ED;
     --txtcolor: #2C1C18;
     --errorcolor: #7C0A01;
     --buttoncolor: #C65C45;
@@ -81,34 +82,93 @@ p#title{
     font-size: 1.3em;
 }
 
-/*NAVIGATION MENU*/
-#navigation{
+/* ==== AIUTI ALLA NAVIGAZIONE === */
+.navigation{
     position: absolute;
     text-indent: -999em;
 }
 
-nav#menu {
-    padding: 1.5em ;
-    min-width: 100%;
-    background-color: var(--txtcolor);
-    opacity: 90%;
+/* ==== TOP NAVBAR ==== */
+.navbar_top{
+    background-color: var(--headerbgcolor);
+    color: var(--title_color);
+    display: inline-flex;
+    overflow: hidden;
+    position: absolute;
+
+    top: 0;
+    width: 100%;
+    padding-top: 1em;
+    padding-bottom: 1em;
 }
 
-nav#menu ul{
-    display: flex;
-    list-style-type: none;
-    align-items:center;
+/* -- LOGO MENU --*/
+.hidden {
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+h1.hidden{
+    background-image: url("../../img/loghi/logo_colori_lato_scritta_bianca.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 1em;
+}
+
+/* -- MENU -- */
+#menu {
+    list-style: none;
+    margin-left: auto;
+    display: inline-flex;
     padding: .3em 1.5em;
     justify-content: end;
+    flex-direction: row;
 }
 
-nav#menu li{
+#menu a{
+    text-align: center;
+}
+
+#menu li{
     margin: 0 0.5em;
+    padding: 0.5em;
     color: var(--linkcolor);
     align-self: center;
-    padding: 0.5em;
 }
 
+#menu li#here{
+    color: var(--title_color);
+    background-color: var(--buttoncolor);
+    border-radius: 2em;
+    padding: 0.4em 0.6em;
+    text-decoration: none;
+    pointer-events: none;
+}
+
+/* ==== BREADCRUMB ==== */
+#breadcrumb {
+    color: var(--title_color);
+    background-color: var(--headerbgcolor);
+    width: 30%;
+    position: absolute;
+
+    top: 5em;
+    left: 50%;
+    transform: translateX(-50%);
+
+    border-radius: 2em;
+    padding: 0.5rem 0.7rem;
+    margin: 1em;
+}
+
+#bredcrumb p {
+
+}
+
+
+/* DA SISTEMARE */
 nav#menu li:nth-child(4){
     margin: 0;
     color: var(--linkcolor);
@@ -116,27 +176,15 @@ nav#menu li:nth-child(4){
     padding: 0.5em;
 }
 
-nav#menu li#here{
-    color: #FFFFFF;
-    border-radius: 2rem;
-    background-color: var(--headerbgcolor);
-}
-
 h1, nav#breadcrumb, h2, h3{
     text-align: center;
-}
-
-nav#breadcrumb{
-    border-radius: 2rem;
-    color: #FFFFFF;
-    background-color: var(--headerbgcolor);
-    padding: 0.5rem 0.7rem;
-    margin: 1rem 40%;
 }
 
 span#current-path{
     font-size: 1.2rem;
 }
+
+
 /*FOOTER*/
 footer{
     text-align: center;
@@ -150,7 +198,9 @@ footer a{
     padding: 0.5rem 0.7rem;
     margin: 0.5rem 2rem;
 }
+
 /*HOME*/
+
 div#main-info{
     text-align: center;
     margin: 1rem;
