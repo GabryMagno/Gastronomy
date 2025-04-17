@@ -83,7 +83,7 @@ p#title{
 }
 
 /* ==== AIUTI ALLA NAVIGAZIONE === */
-.navigation{
+#navigation{
     position: absolute;
     text-indent: -999em;
 }
@@ -95,8 +95,6 @@ p#title{
     display: inline-flex;
     overflow: hidden;
     position: absolute;
-
-    top: 0;
     width: 100%;
     padding-top: 1em;
     padding-bottom: 1em;
@@ -126,15 +124,23 @@ h1.hidden{
     list-style: none;
     margin-left: auto;
     display: inline-flex;
-    padding: .3em 1.5em;
     justify-content: end;
     flex-direction: row;
+    background-color: var(--txtcolor);
+    width: 100%;
+    opacity: 80%;
+    padding: 1em 0.5em;
 }
 
 #menu a{
     text-align: center;
 }
 
+#menu ul{
+    display: flex;
+    justify-content: end;
+    list-style-type: none;
+}
 
 
 #menu li{
