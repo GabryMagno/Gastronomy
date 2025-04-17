@@ -102,7 +102,7 @@ p#title{
 
 /* -- LOGO MENU --*/
 .hidden {
-    text-indent: -9999px;
+    text-indent: -999em;
     white-space: nowrap;
     overflow: hidden;
 }
@@ -166,17 +166,12 @@ h1.hidden{
     width: 30%;
     position: absolute;
 
-    top: 10em;
     left: 50%;
     transform: translateX(-50%);
 
     border-radius: 2em;
     padding: 0.5rem 0.7rem;
     margin: 1em;
-}
-
-#bredcrumb p {
-
 }
 
 
@@ -383,6 +378,7 @@ div#mission{
     margin: 1em;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 div#goal{
