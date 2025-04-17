@@ -88,7 +88,7 @@ p#title{
     text-indent: -999em;
 }
 
-/* ==== TOP NAVBAR ==== */
+/* ==== TOP NAVBAR ==== 
 .navbar_top{
     background-color: var(--headerbgcolor);
     color: var(--title_color);
@@ -100,7 +100,7 @@ p#title{
     padding-bottom: 1em;
 }
 
-/* -- LOGO MENU --*/
+/* -- LOGO MENU --*//*
 .hidden {
     text-indent: -999em;
     white-space: nowrap;
@@ -118,6 +118,7 @@ h1.hidden{
 
     margin-left: 1em;
 }
+*/
 
 /* -- MENU -- */
 #menu {
@@ -386,6 +387,7 @@ div#goal{
     margin: 2em;
     text-align: left;
     padding: 1em;
+    width: 55%;
 }
 
 form#advice{
@@ -465,3 +467,64 @@ div#contacts{
     width: 4em;
     height: 4em;
 }
+
+/*AREA RISERVATA*/
+
+form h3,#sub-title{
+    text-align: center;
+    margin-top: 1em;
+}
+
+#login-user{
+    display: flex;
+    flex-direction: column;
+    margin: 2em 0;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+#login-user form{
+    width: 60%;
+    height: fit-content;
+    background-color: var(--bgcolor);
+}
+
+
+form.privacy-area fieldset{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form.privacy-area input{
+    margin: 1em;
+    width: 75%;
+}
+
+button#submit-login{
+    background-color: var(--headerbgcolor);
+    color: var(--bgcolor);
+    border-radius: 2em;
+    text-align: center;
+    width: 30%;
+    margin: 1em;
+}
+
+div#to-register{
+    width: 60%;
+    text-align: center;
+    background-color: var(--headerbgcolor);
+}
+
+p.privacy-area{
+    color: white;
+    height: 100%;
+    margin: 1em 0;
+}
+
+p#register{ 
+    width: 100%;
+    margin: 1em 0;
+}
+
