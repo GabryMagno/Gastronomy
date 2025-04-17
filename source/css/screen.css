@@ -131,7 +131,9 @@ h1.hidden{
     text-align: center;
 }
 
-#menu li{
+
+
+nav#menu li{
     margin: 0 0.5em;
     padding: 0.5em;
     color: var(--linkcolor);
@@ -175,6 +177,14 @@ nav#menu li:nth-child(4){
     align-self: center;
     padding: 0.5em;
 }
+
+
+nav#menu li#here{
+    color: #FFFFFF;
+    border-radius: 1.5rem;
+    background-color: var(--headerbgcolor);
+}
+
 
 h1, nav#breadcrumb, h2, h3{
     text-align: center;
@@ -340,7 +350,7 @@ li.product-brochure {
     display: flex;
     flex-direction: column;
     width: 40%;
-    margin: 0 3em 1em 1em;
+    margin: 0 0.5em 1em 0.5em;
     padding: 1.3em;
     background-color: var(--headerbgcolor);
     justify-content: center;
@@ -349,10 +359,6 @@ li.product-brochure {
     text-align: center;
     border-radius: 0.75em;
     border: 3px solid black;
-}
-
-ul#list li:nth-child(2n){
-    margin-right: 0;
 }
 
 li.product-brochure img{
@@ -392,7 +398,7 @@ form#advice fieldset{
     display: flex;
     flex-direction: column;
     justify-content: end;
-    background-color: var(--txtcolor);
+    background-color: black;
     color: var(--bgcolor);
     border: 3px solid black;
 }
@@ -423,4 +429,33 @@ form#advice button#reset-advice{
 button#submit-advice{
     background-color: var(--headerbgcolor);
     color: var(--linkcolor);
+}
+
+div#contacts{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--bgcolor);
+    padding: 1em;
+    margin: 1em 0;
+}
+
+.author{
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1em;
+    width: 75%;
+    border: 3px solid white;
+    line-break: anywhere;
+}
+
+.author img{
+    margin: 1em 0;
+    border-radius: 8em;
+    width: 4em;
+    height: 4em;
 }
