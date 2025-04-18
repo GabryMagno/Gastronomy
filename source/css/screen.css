@@ -26,10 +26,12 @@
 /*GENERAL*/
 html{
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body{
     background-color: var(--bgcolor);
+    overflow-x: hidden;
 }
 
 .display-none{
@@ -48,7 +50,7 @@ header{
     background-size: cover;
     background-position: center;
     padding-bottom: 2rem;
-    min-height: 60vh;
+    min-height: 70vh;
 }
 
 div#header{
@@ -123,14 +125,17 @@ h1.hidden{
 /* -- MENU -- */
 #menu {
     list-style: none;
-    margin-left: auto;
     display: inline-flex;
-    justify-content: end;
-    flex-direction: row;
+    justify-content: space-between;
     background-color: var(--txtcolor);
     width: 100%;
     opacity: 80%;
     padding: 1em 0.5em;
+}
+
+#menu img{
+    width: 5em;
+    height: 5em;
 }
 
 #menu a{
@@ -175,7 +180,6 @@ h1.hidden{
     margin: 1em;
 }
 
-
 /* DA SISTEMARE */
 nav#menu li:nth-child(4){
     margin: 0;
@@ -213,6 +217,18 @@ footer a{
     color: var(--linkcolor);
     padding: 0.5rem 0.7rem;
     margin: 0.5rem 2rem;
+}
+
+footer img{
+    height: 2em;
+    width: 4em;
+}
+
+div#validation{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
 }
 
 /*HOME*/
@@ -333,10 +349,10 @@ form#search{
 
 input#searching-bar{
     border-radius: 0.5em;
-    border: 4px solid var(--headerbgcolor);
     width: 100%;
     min-height: 3.5vh;
     font-size: 1.1em;
+    padding: 0.4em;
 }
 
 ul#list{
@@ -346,7 +362,7 @@ ul#list{
     overflow-x: hidden;
     flex-wrap: wrap;
     width: fit-content;
-    justify-content: space-between;
+    justify-content: space-evenly;
     background-color: var(--txtcolor);
     margin-left: 1.5em;
     width: 96%;
@@ -365,6 +381,9 @@ li.product-brochure {
     text-align: center;
     border-radius: 0.75em;
     border: 3px solid black;
+    opacity: 90;
+    transform: scale(.9);
+    transition: opacity 500ms, transform 500ms;
 }
 
 li.product-brochure img{
@@ -470,7 +489,7 @@ div#contacts{
 
 /*AREA RISERVATA*/
 
-form h3,#sub-title{
+#sub-title, form h3{
     text-align: center;
     margin-top: 1em;
 }
@@ -500,6 +519,9 @@ form.privacy-area fieldset{
 form.privacy-area input{
     margin: 1em;
     width: 75%;
+    border-radius: 1.5em;
+    border: 3px solid black;
+    padding: 0.5em;
 }
 
 button#submit-login{
@@ -507,7 +529,7 @@ button#submit-login{
     color: var(--bgcolor);
     border-radius: 2em;
     text-align: center;
-    width: 30%;
+    width: 37.5%;
     margin: 1em;
 }
 
@@ -515,6 +537,11 @@ div#to-register{
     width: 60%;
     text-align: center;
     background-color: var(--headerbgcolor);
+}
+
+div#to-register h3{
+    color: var(--bgcolor);
+    margin: 1em 0;
 }
 
 p.privacy-area{
