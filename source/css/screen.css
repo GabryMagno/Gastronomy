@@ -332,7 +332,7 @@ button#reset-filters, button#reset-advice{
 
 button#submit-filters{
     background-color: var(--headerbgcolor);
-    color: var(--linkcolor);
+    color: var(--bgcolor);
     margin-top: 1em;
 }
 
@@ -456,12 +456,11 @@ form#advice button#reset-advice{
 
 button#submit-advice{
     background-color: var(--headerbgcolor);
-    color: var(--linkcolor);
+    color: var(--bgcolor);
 }
 
 div#contacts{
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     color: var(--bgcolor);
@@ -475,9 +474,8 @@ div#contacts{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 1em;
-    width: 75%;
-    border: 3px solid white;
+    margin: 1em 0.25em;
+    width: 37.5%;
     line-break: anywhere;
 }
 
