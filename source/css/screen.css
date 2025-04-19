@@ -487,14 +487,14 @@ div#contacts{
     height: 4em;
 }
 
-/*AREA RISERVATA*/
+/*AREA RISERVATA - LOGIN - REGISTER*/
 
-#sub-title, form h3{
+#sub-title, form.privacy-area h3{
     text-align: center;
     margin-top: 1em;
 }
 
-#login-user{
+#login-user,#register-user{
     display: flex;
     flex-direction: column;
     margin: 2em 0;
@@ -503,12 +503,20 @@ div#contacts{
     justify-content: center;
 }
 
-#login-user form{
+#login-user form,#register-user form{
     width: 60%;
     height: fit-content;
     background-color: var(--bgcolor);
 }
 
+form.privacy-area label{
+    float: left;
+    text-decoration: solid;
+}
+
+form.privacy-area h3{
+    margin-bottom: 2em;
+}
 
 form.privacy-area fieldset{
     display: flex;
@@ -524,7 +532,7 @@ form.privacy-area input{
     padding: 0.5em;
 }
 
-button#submit-login{
+#submit-login,#submit-register{
     background-color: var(--headerbgcolor);
     color: var(--bgcolor);
     border-radius: 2em;
@@ -533,13 +541,13 @@ button#submit-login{
     margin: 1em;
 }
 
-div#to-register{
+div#to-register,div#to-login{
     width: 60%;
     text-align: center;
     background-color: var(--headerbgcolor);
 }
 
-div#to-register h3{
+div#to-register h3, div#to-login h3{
     color: var(--bgcolor);
     margin: 1em 0;
 }
@@ -550,8 +558,7 @@ p.privacy-area{
     margin: 1em 0;
 }
 
-p#register{ 
+p#register,p#login{ 
     width: 100%;
     margin: 1em 0;
 }
-
