@@ -32,6 +32,7 @@ html{
 body{
     background-color: var(--bgcolor);
     overflow-x: hidden;
+    height: 100%;
 }
 
 .display-none{
@@ -41,7 +42,6 @@ body{
 .inline{
     display: inline;
 }
-
 
 header{
     background-image:url(../../img/sfondo-prova.png);
@@ -135,7 +135,7 @@ h1.hidden{
 
 #menu img{
     width: 5em;
-    height: 5em;
+    
 }
 
 #menu a{
@@ -154,6 +154,7 @@ h1.hidden{
     padding: 0.5em;
     color: var(--linkcolor);
     align-self: center;
+    font-size: 0.97em;
 }
 
 #menu li#here{
@@ -342,14 +343,13 @@ div#show-products{
 }
 
 form#search{
-    margin: 0.5em;
-    padding: 1em;
-    padding-top: 0;
+    margin: 1em 0 1em 1em;
+    padding: 0 0.7em 0 0;
 }
 
 input#searching-bar{
     border-radius: 0.5em;
-    width: 100%;
+    width: 98%;
     min-height: 3.5vh;
     font-size: 1.1em;
     padding: 0.4em;
@@ -358,20 +358,19 @@ input#searching-bar{
 ul#list{
     overflow: auto;
     display: flex;
-    padding: 1em;
+    padding: 0.7em;
     overflow-x: hidden;
     flex-wrap: wrap;
-    width: fit-content;
     justify-content: space-evenly;
     background-color: var(--txtcolor);
-    margin-left: 1.5em;
-    width: 96%;
+    margin-left: 1em;
+    width: 98%;
 }
 
 li.product-brochure {
     display: flex;
     flex-direction: column;
-    width: 40%;
+    width: 45%;
     margin: 0 0.5em 1em 0.5em;
     padding: 1.3em;
     background-color: var(--headerbgcolor);
@@ -390,6 +389,8 @@ li.product-brochure img{
     width: 8.5em;
     height: 8.5em;
     margin-bottom: 1em;
+    border: 3px solid black;
+    position: relative;
 }
 
 /*CHI SIAMO*/
@@ -510,8 +511,9 @@ div#contacts{
 }
 
 form.privacy-area label{
-    float: left;
-    text-decoration: solid;
+    text-align: left;
+    font-weight: bold;
+    margin-top: 1em;
 }
 
 form.privacy-area h3{
@@ -528,7 +530,7 @@ form.privacy-area input{
     margin: 1em;
     width: 75%;
     border-radius: 1.5em;
-    border: 3px solid black;
+    border: 3px solid #2C1C18;
     padding: 0.5em;
 }
 
@@ -538,7 +540,7 @@ form.privacy-area input{
     border-radius: 2em;
     text-align: center;
     width: 37.5%;
-    margin: 1em;
+    margin: 1em 1em 2em 1em;
 }
 
 div#to-register,div#to-login{
