@@ -205,7 +205,7 @@ span#current-path{
     font-size: 1.2rem;
 }
 
-span#current-path a{
+span#current-path a, li a{
     margin: 0;
 }
 
@@ -243,10 +243,6 @@ div#main-info{
     margin: 1rem;
     padding: 0.5rem;
     border: 0.3rem;
-}
-
-li a{
-    margin: 0;
 }
 
 ul.products,ul#new-products{
@@ -304,7 +300,6 @@ div.filters{
     background-color: var(--bgcolor);
 }
 
-
 div.filters input{
     margin: 1em 0 0 0;
     width: 10%;
@@ -318,8 +313,7 @@ input#price, input#grade{
 div.buttons{
     display: flex;
     flex-direction: column;
-    margin-bottom: 1em;
-    margin-top: 1em;
+    margin: 1em 0 1em 0
 }
 
 button.choice{
@@ -371,7 +365,7 @@ ul#list{
 li.product-brochure {
     display: flex;
     flex-direction: column;
-    width: 45%;
+    width: 37.5%;
     margin: 0 0.5em 1em 0.5em;
     padding: 0;
     background-color: white;
@@ -417,6 +411,12 @@ li.product-brochure a, li.new a{
     text-align: center;
     padding: 1em;
     bottom: 0;
+}
+
+p#product-name{
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-bottom: 1.5em;
 }
 
 /*CHI SIAMO*/
@@ -588,3 +588,5 @@ p#register,p#login{
     width: 100%;
     margin: 1em 0;
 }
+
+/*USER PAGES*/
