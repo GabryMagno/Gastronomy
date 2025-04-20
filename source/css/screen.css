@@ -205,6 +205,10 @@ span#current-path{
     font-size: 1.2rem;
 }
 
+span#current-path a{
+    margin: 0;
+}
+
 
 /*FOOTER*/
 footer{
@@ -287,7 +291,7 @@ div#list-content{
 div#filter{
     display:flex;
     flex-direction: column;
-    width: 23%;
+    width: 23.5%;
 }
 
 div#filter fieldset{
@@ -337,7 +341,7 @@ button#submit-filters{
 }
 
 div#show-products{
-    width: 75%;
+    width: 74.5%;
     box-sizing: border-box;
     margin-bottom: 0.5em;
 }
@@ -349,22 +353,21 @@ form#search{
 
 input#searching-bar{
     border-radius: 0.5em;
-    width: 98%;
+    width: 100%;
     min-height: 3.5vh;
     font-size: 1.1em;
     padding: 0.4em;
 }
 
 ul#list{
-    overflow: auto;
+    overflow: hidden;
     display: flex;
     padding: 0.7em;
-    overflow-x: hidden;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    background-color: var(--txtcolor);
+    background-color: var(--bgcolor);
     margin-left: 1em;
-    width: 98%;
+    width: 100%;
 }
 
 li.product-brochure {
@@ -372,25 +375,46 @@ li.product-brochure {
     flex-direction: column;
     width: 45%;
     margin: 0 0.5em 1em 0.5em;
-    padding: 1.3em;
-    background-color: var(--headerbgcolor);
+    padding: 0;
+    background-color: white;
     justify-content: center;
     align-items: center;
-    color: var(--bgcolor);
+    color: var(--txtcolor);
     text-align: center;
-    border-radius: 0.75em;
-    border: 3px solid black;
-    opacity: 90;
-    transform: scale(.9);
-    transition: opacity 500ms, transform 500ms;
+    border-radius: 0.9em;
+    transition: .4s;
+    box-shadow: 0 1em 2em rgba(0, 0, 0, 0.25),
+                0 0.8em 0.8em rgba(0, 0, 0, 0.22);
+}
+
+li.product-brochure:hover{
+    transform: translate(0, -0.4em );
+    box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.16),
+                0 0.2em 0.4em rgba(0, 0, 0, 0.24);
 }
 
 li.product-brochure img{
-    width: 8.5em;
-    height: 8.5em;
+    border-top-right-radius: 0.72em;
+    border-top-left-radius: 0.72em;
+    width: 100%;
+    max-height: 40vh;
     margin-bottom: 1em;
-    border: 3px solid black;
     position: relative;
+    display: block;
+}
+
+li.product-brochure a{
+    background-color: var(--headerbgcolor);
+    width: 100%;
+    margin-top: 1.5em;
+    border: 0;
+    border-bottom-left-radius: 0.72em;
+    border-bottom-right-radius: 0.72em;
+    height: 100%;
+    display: block;
+    text-align: center;
+    padding: 1em;
+    bottom: 0;
 }
 
 /*CHI SIAMO*/
