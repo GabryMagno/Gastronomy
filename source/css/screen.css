@@ -265,19 +265,18 @@ li.new{
     width: 33%;
     text-align: center;
     list-style-type: none;
-    background-color: var(--headerbgcolor);
-    border: 3px solid black;
-    padding: 1em;
     margin: 1em;
-}
-
-ul#best-products li{
-    background-color: var(--errorcolor);
-}
-
-ul.products img,ul#new-products img{
-    width: 8.5em;
-    height: 8.5em;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    color: var(--txtcolor);
+    text-align: center;
+    border-radius: 0.9em;
+    transition: .4s;
+    box-shadow: 0 1em 2em rgba(0, 0, 0, 0.25),
+                0 0.8em 0.8em rgba(0, 0, 0, 0.22);
 }
 
 /*PRODUCT-LIST*/
@@ -366,7 +365,6 @@ ul#list{
     flex-wrap: wrap;
     justify-content: space-evenly;
     background-color: var(--bgcolor);
-    margin-left: 1em;
     width: 100%;
 }
 
@@ -387,13 +385,13 @@ li.product-brochure {
                 0 0.8em 0.8em rgba(0, 0, 0, 0.22);
 }
 
-li.product-brochure:hover{
+li.product-brochure:hover,li.new:hover{
     transform: translate(0, -0.4em );
     box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.16),
                 0 0.2em 0.4em rgba(0, 0, 0, 0.24);
 }
 
-li.product-brochure img{
+li.product-brochure img,ul.products img,ul#new-products img{
     border-top-right-radius: 0.72em;
     border-top-left-radius: 0.72em;
     width: 100%;
@@ -403,7 +401,11 @@ li.product-brochure img{
     display: block;
 }
 
-li.product-brochure a{
+ul.products img,ul#new-products img{
+    max-height: 20vh;
+}
+
+li.product-brochure a, li.new a{
     background-color: var(--headerbgcolor);
     width: 100%;
     margin-top: 1.5em;
