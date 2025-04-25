@@ -60,9 +60,14 @@
 
             <div id="user-info">
                 <img src="../../img/Cuochi.png" alt="logo utente"/>
-                <p>Nome+Cognome utente</p>
-                <p>Età</p>
-                <p>Data d'iscrizione</p>
+                <div id="general-info">
+                    <p>Nome+Cognome utente</p>
+                    <p>Età</p>
+                    <p>Data d'iscrizione</p>
+                </div>
+            </div>
+            <div id="user-settings">
+                <a href="user-settings.html" id="profile-settings">VAI ALLE IMPOSTAZIONI</a>
             </div>
             <h3>I TUOI PRODOTTI PREFERITI</h3>
             <div id="favorites">
@@ -111,10 +116,9 @@
                 <!--passate e prossime?-->
                 <h3>LE TUE DEGUSTAZIONI</h3>
             </div>
-            <div id="user-settings">
-                <a href="user-settings.html" id="profile-settings">VAI ALLE IMPOSTAZIONI</a>
-                <button>LOGOUT</button>
-            </div>
+            <form id="logout" method="post" action="signout.php">
+                <button type="submit" id="logout-button"><span lang="en">LOGOUT</span></button>
+            </form>
         </main>
         <footer>
             <a href="#return">Torna su</a>

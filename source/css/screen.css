@@ -408,7 +408,7 @@ li.product-brochure a, li.new a{/*.new -> HOME*/
 
 p#product-name{
     font-weight: bold;
-    font-size: 1.5em;
+    font-size: 1.1em;
     margin-bottom: 1.5em;
 }
 
@@ -586,12 +586,30 @@ p#register,p#login{
 div#favorites, div#user-info{
     display: flex;
     margin: 1.5em 2em;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
-div#user-info{
+div#user-info img{
+    box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.9),
+                0 0.2em 0.4em rgba(0, 0, 0, 0.9);
+}
+
+#user-profile-main h3{
+    box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.9),
+                0 0.2em 0.4em rgba(0, 0, 0, 0.9);
+    background-color: #4C0002;
+    color: var(--bgcolor);
+    padding: 0.5em;
+}
+
+div#user-info #general-info{
     flex-direction: column;
+    margin-left: 1em;
+}
+
+div#user-info img{
+    border-radius: 50%;
 }
 
 a#prev{
@@ -611,7 +629,6 @@ ul#favorites-list{
     display: flex;
     list-style-type: none;
     overflow-x: scroll;
-    scroll-behavior: smooth;
 }
 
 ul#favorites-list li.product-brochure{
@@ -632,4 +649,23 @@ a#profile-settings, a#prev, a#next{
     background-color: var(--headerbgcolor);
     padding: 1em;
     border-radius: 1em;
+}
+
+a#profile-settings{
+    width: 25em;
+}
+
+form#logout{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#logout-button{
+    padding: 1em;
+    margin: 1em 0;
+    border-radius: 1em;
+    background-color: var(--errorcolor);
+    color: var(--bgcolor);
+    width: 25em;
 }
