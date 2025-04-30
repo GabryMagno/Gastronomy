@@ -1,0 +1,16 @@
+- novità e migliori come liste (ul e li)
+- sistemare keywords per ogni pagina
+- link chi siamo si spezza/va a capo
+- sotto il footer c'è altro
+- uso di article, section e aside
+- sistemare navigazione nascosta
+- dove ci sono più id mettere class (per una stessa regola css) se conveniente
+- voto con stelle
+- DEGUSTAZIONE -> Nuove degustazioni -> Degustazioni future -> Migliori degustazioni -> Prenota una degustazione
+- non possiamo fare controlli sul login perché mail e password devono essere user+user(tipo)
+- aggiungere info utili per completare i campi delle form
+- PULSANTE TEMA CHIARO-SCURO?
+- sui filtri un solo pulsante o tutti e due?
+- display none non è da usare per gli elementi che vogliamo nascondere alla vista ma non agli screen reader
+- sezioni titoli con sfondo nel user main/setting da fare come menù a tendina
+- mettere il conferma prima dell'annulla nei filtri?
