@@ -754,3 +754,26 @@ form#logout{
 .form-setting .reset-setting{
     margin-right: 1em;
 }
+
+/*ERROR*/
+.description-error{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 3em;
+    color: black;
+}
+
+.error-title{
+    color: black;
+}
+
+.home-link{
+    border-radius: 1em;
+    background-color: var(--headerbgcolor);
+    color: var(--linkcolor);
+    margin: 3em 0 1em 0;
+    padding: 1em;
+}
