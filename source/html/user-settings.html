@@ -56,14 +56,52 @@
         </header>
 
         <main id="user-settings-main">
-            <div id="change-personal-info">
-                <!--change Nome-->
-                <!--change Cognome-->
-                <!--change Data di nascita-->
-                <!--change Logo-->
+            <h2>IMPOSTAZIONI</h2>
+            <div id="setting-user">
+            <form id="change-personal-info" class="form-setting">
+                <h3>MODIFICA DATI PERSONALI</h3>
+                <fieldset class="user-form">
+                    <label for="change-name">Modifica Nome</label>
+                    <input type="text" name="name" id="change-name" />
+
+                    <label for="change-surname">Modifica Cognome</label>
+                    <input type="text" name="surname" id="change-surname" />
+
+                    <label for="change-date">Modifica Data di Nascita</label>
+                    <input type="text" name="name" id="change-date" />
+                    <div id="new-logo">
+                        <label for="change-logo">Modifica Logo</label>
+                        <input type="file" name="name" id="change-logo" />
+                        <img src="../../img/Cuochi.png" alt="logo utente" />
+                    </div>
+                </fieldset>
+                <div class="buttons">
+                    <button type="reset" id="reset-user-setting" class="choice reset-setting">ANNULLA</button>
+                    <button type="submit" id="submit-user-setting" class="choice submit-setting">CONFERMA</button>
+                </div>
+            </form>
+            <form id="change-password-email" class="form-setting">
+                <h3>MODIFICA <span lang="en">PASSWORD</span></h3>
+                <fieldset class="user-form">
+                    <label for="change-name">Vecchia <span lang="en">Password</span></label>
+                    <input type="text" name="name" id="change-name" />
+
+                    <label for="change-surname">Nuova <span lang="en">Password</span></label>
+                    <input type="text" name="surname" id="change-surname" />
+
+                    <label for="change-date">Conferma Nuova <span lang="en">Password</span></label>
+                    <input type="text" name="name" id="change-date" />
+                </fieldset>
+                <div class="buttons">
+                    <button type="reset" id="reset-password-setting" class="choice reset-setting">ANNULLA</button>
+                    <button type="submit" id="submit-password-setting" class="choice submit-setting">CONFERMA</button>
+                </div>
+            </form>
+            <form id="delete-account">
+                <h3>ELIMINAZIONE ACCOUNT</h3>
+                <button type="submit" id="delete-user-account" class="pay-attention">ELIMINA <span lang="en">ACCOUNT</span></button>
+            </form>
             </div>
-            <div id="change-password-email"></div>
-            <div id="delete-account"></div>
         </main>
         <footer>
             <a href="#return">Torna su</a>

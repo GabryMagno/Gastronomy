@@ -1,0 +1,1073 @@
+*,
+*::after,
+*::before {
+    padding: 0;
+    margin: 0;
+    font-family: 'Nunito', sans-serif;
+    line-height: 1.5;
+    box-sizing: border-box;
+}
+
+:root {
+    /*COLORI*/
+    --bgcolor: #FAF4ED;
+    --title_color: #FAF4ED;
+    --txtcolor: #2C1C18;
+    --errorcolor: #7C0A01;
+    --buttoncolor_arancio: #C65C45;
+    --buttoncolor_rosso: #73142F;
+    --buttoncolor_rosso_hover: #991d40;
+    --headerbgcolor: #73142F;
+    --secondaryelementcolor: #7A9884;
+    --linkcolor: #F3FF00;
+
+    /*TESTO*/
+    --title: 5em;
+    --menu: 1.5em;
+}
+
+/*  
+    ===============================
+            GENERALE PAGINA
+    ===============================
+*/
+
+html{
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body{
+    background-color: var(--bgcolor);
+    overflow-x: hidden;
+    height: 100%;
+}
+
+.display-none{
+    display: none;
+}
+
+.inline{
+    display: inline;
+}
+
+header{
+    background-image:url(../../img/sfondo-prova.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    padding-bottom: 3rem;
+    min-height: 70vh;
+}
+
+header h1{
+    font-size: 5em;
+    padding-top: 3em;
+    margin-bottom: -0.1em;
+}
+
+header p{
+    font-size: 2em;
+}
+
+header .header_text{
+    text-align: center;
+    color: var(--title_color);
+}
+
+header #breadcrumb p{
+    font-size: 1.2em;
+    text-align: center;
+}
+
+div#header{
+    width: 100%;
+}
+
+a{
+    color:var(--linkcolor);
+    text-decoration: underline;
+    text-align: center;
+}
+
+h1#title{
+    font-size: 4em;
+    color: var(--bgcolor)
+}
+
+h2{
+    margin: 1rem;
+    font-size: 2em;
+    color: var(--txtcolor);
+}
+
+h3{
+    font-size: 1.2em;
+}
+
+p#title{
+    margin-bottom: 2em;
+    font-size: 1.3em;
+}
+
+/*  
+    ===============================
+        AIUTI ALLA NAVIGAZIONE 
+    ===============================
+*/
+
+.navigation ul {
+    list-style-type: none;
+}
+
+.a_navigation{
+    position: absolute;
+    text-indent: -999em;
+    background-color: var(--headerbgcolor);
+}
+
+.a_navigation:focus{
+    position: absolute;
+    text-indent: 0;
+    background-color: var(--headerbgcolor);
+    text-align: center;
+
+    margin: auto;
+    top: 10em;
+    left: 1em;
+}
+
+/*  
+    ===============================
+            TOP NAVBAR 
+    ===============================
+*/
+.navbar_top{
+    background-color: var(--headerbgcolor);
+    color: var(--title_color);
+    display: inline-flex;
+    overflow: hidden;
+    position: absolute;
+
+    top: 0;
+    width: 100%;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+}
+
+/*  
+    ===============================
+            LOGO MENU 
+    ===============================
+*/
+
+.hidden {
+    text-indent: -999em;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.logo-accessibile{
+    background-image: url("../../img/loghi/logo_colori_lato_scritta_bianca.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    width: 200px;
+    aspect-ratio: 3/1;
+
+    margin-left: 1em;
+}
+
+/*  
+    ===============================
+            MENU 
+    ===============================
+*/
+#menu {
+    list-style: none;
+    margin-left: auto;
+    display: inline-flex;
+    padding: .3em 1.5em;
+    justify-content: end;
+    flex-direction: row;
+}
+
+#menu a{
+    text-align: center;
+}
+
+#menu li{
+    margin: 0 0.5em;
+    padding: 0.2em;
+    color: var(--linkcolor);
+    align-self: center;
+}
+
+#menu li#here{
+    color: var(--title_color);
+    background-color: var(--buttoncolor_arancio);
+    border-radius: 2em;
+    padding: 0.4em 0.6em;
+    text-decoration: none;
+    pointer-events: none;
+
+    border: 1px solid var(--title_color);
+}
+
+/* === MENU AD HAMBURGER === */
+
+#menu-button{
+    background-color: var(--headerbgcolor);
+}
+
+#menu-button[data-hidden="false"]{
+    position: absolute;
+    margin: -9999em;
+}
+
+/*  
+    ===============================
+            BREADCRUMB 
+    ===============================
+*/
+#breadcrumb {
+    display: block;
+
+    color: var(--title_color);
+    background-color: var(--headerbgcolor);
+    max-width: 30%;
+    margin: 5em auto;
+    border-radius: 2em;
+    padding: 0.5rem 1rem;
+    text-align: center;
+}
+
+/*  
+    ===============================
+            FOOTER 
+    ===============================
+*/
+
+footer {
+    background-color: var(--txtcolor);
+    color: var(--bgcolor);
+
+    margin-top: 2em;
+    padding: 1.2em;
+    text-align: center;
+
+    display: inline-block;
+    width: 100%;
+}
+
+footer p{
+    display: inline-block;
+    margin: auto 0.2em;
+}
+
+footer img {
+    height: 2em;
+    width: auto;
+    vertical-align: middle;
+}
+
+footer .torna-su {
+    display: block;
+    margin-top: 0.5em;
+}
+
+/*
+=====================================================================================================================================================
+===============================                           CONTENUTI PAGINE                            ===============================================
+=====================================================================================================================================================
+*/
+
+.section-divider {
+    border: none;
+    height: 2px;
+    background-color: black;
+    width: 100%;
+}
+
+.section-title{
+    text-align: center;
+    font-weight: bold;
+    font-size: 2em;
+    padding-top: 0.5em;
+}
+
+.section-descrizione{
+    font-size: 1.2em;
+    text-align: center;
+}
+
+
+/*  
+    ===============================
+            PAGINA HOME 
+    ===============================
+*/
+
+ul.products,ul#best-products{
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem;
+    border: 0.5rem;
+    color: #FFFFFF;
+}
+
+ul#best-products{
+    margin: 1rem 2rem;
+}
+
+li.new{
+    width: 33%;
+    list-style-type: none;
+    margin: 1em;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    color: var(--txtcolor);
+    border-radius: 0.9em;
+    transition: .4s;
+    box-shadow: 0 1em 2em rgba(0, 0, 0, 0.25),
+                0 0.8em 0.8em rgba(0, 0, 0, 0.22);
+}
+
+/* === BOX PROMOZIONALE CON BOTTONE === */
+
+.promo-box{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    padding: 3em;
+    flex-wrap: wrap;
+    background-color: var(--secondaryelementcolor);
+}
+
+.promo-text{
+    max-width: 60%;
+}
+
+.promo-text p{
+    font-size: 1.5em;
+}
+
+.promo-text h2.promo-domanda{
+    margin: 0;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.promo-button{
+    color: var(--title_color);
+    text-decoration: none;
+
+    padding: 0.8em 2.2em;
+    border-radius: 2em;
+
+    font-weight: bold;
+    font-size: 1.8em;
+}
+
+.promo-button .button{
+    color: var(--txtcolor);
+    background-color: var(--bgcolor);
+    border-radius: 2em;
+    padding: 0.4em 0.6em;
+
+    border: 1px solid var(--txtcolor);
+}
+
+.promo-button .button:hover{
+    background-color: #dbd3ca;
+}
+
+/* === BOX CATEGORIE PRODOTTI === */
+#categorie{
+    margin-bottom: 3em;
+    text-align: center;
+}
+
+.categoria-grid{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5em;
+    margin-top: 1em;
+}
+
+.categoria-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 250px;
+    padding: 1em;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: #333;
+}
+
+.categoria-box:hover {
+    transform: translate(0, -0.4em );
+    box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.16),
+                0 0.2em 0.4em rgba(0, 0, 0, 0.24);
+}
+
+.categoria-box img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 0.5em;
+}
+
+.categoria-box span {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+/* === BOX DEGUSTAZIONI === */
+#degustazioni-home {
+    position: relative;
+
+    background-image: url(../../img/tavola-degustazioni.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    color: var(--title_color);
+    overflow: hidden;
+}
+
+#degustazioni-home::before{
+    content: "";
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background-color: var(--headerbgcolor);
+    opacity: 0.7;
+    z-index: 0;
+}
+
+#degustazioni-home > * {
+    position: relative;
+    z-index: 1;
+}
+
+#degustazioni-home h2{
+    margin-top: 0;
+    padding-top: 1em;
+    color: var(--title_color);
+}
+
+#degustazioni-home p{
+    font-size: 1.5em;
+}
+
+#degustazioni-home ul{
+    list-style: none;
+    padding: 30px;
+}
+
+#degustazioni-home ul li{
+    font-size: 1.3em;
+    position: relative;
+    padding-left: 30px;
+}
+
+#degustazioni-home ul li::before{
+    content: "";
+    position: absolute;
+
+    left: 0;
+    top: 5px;
+    width: 20px;
+    height: 20px;
+
+    background-image: url('../../img/icone/forchettacoltello-white.svg');
+    background-size: contain;
+    background-image: no-repeat;
+}
+
+#degustazioni-home .promo-box{
+    background-color: transparent;
+    padding-top: 0;
+}
+
+/* === BOX RECENSIONI CLIENTI === */
+#recensioni-home{
+    background-color: var(--secondaryelementcolor);
+    margin: 0;
+}
+
+#recensioni-home h2{
+    margin: 0;
+    padding-top: 1rem;
+}
+
+.recensione-container {
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem 1rem;
+}
+
+.recensione-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    background-color: var(--bgcolor);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    padding: 1rem;
+    margin: 1rem;
+    width: 300px;
+    
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.recensione-foto{
+    width: 80px;
+    height: 80px;
+
+    border-radius: 50%;
+    background-color: #999;
+
+    overflow: hidden;
+    margin-top: -50px;
+    margin-bottom: 0.5rem;
+
+    border: 3px solid white;
+}
+
+.recensione-foto img{
+    width: 100%;
+    height: 100%;
+    
+    object-fit: cover;
+    object-position: center;
+}
+
+.recensione-contenuto{
+    text-align: center;
+}
+
+.recensione-cliente{
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
+
+.recensione-testo{
+    font-size: 1rem;
+    line-height: 1.4;
+    margin: 0.5rem 0;
+}
+
+.recensione-valutazione{
+    font-weight: bold;
+    color: var(--errorcolor);
+    margin-top: 0.5rem;
+}
+
+
+/*  
+    ===============================
+            PAGINA PRODOTTI 
+    ===============================
+*/
+
+div#list-content{
+    margin: 1em;
+    display: flex;
+    justify-content: space-between;
+}
+
+div#filter{
+    display:flex;
+    flex-direction: column;
+    width: 23.5%;
+}
+
+div#filter fieldset{
+    border: 3px solid black;
+}
+
+div.filters{
+    padding: 0.8em;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bgcolor);
+}
+
+div.filters input{
+    margin: 1em 0 0 0;
+    width: 10%;
+    min-height: 1em;
+}
+
+input#price, input#grade{
+    width: 100%;
+}
+
+div.buttons{
+    display: flex;
+    flex-direction: column;
+    margin: 1em 0 1em 0
+}
+
+button.choice{
+    padding: 1em 0;  
+    width: 100%;
+    border: 3px solid black;
+}
+
+button#reset-filters, button#reset-advice{
+    background-color: var(--txtcolor);
+    color: var(--bgcolor);
+}
+
+button#submit-filters{
+    background-color: var(--headerbgcolor);
+    color: var(--bgcolor);
+    margin-top: 1em;
+}
+
+div#show-products{
+    width: 74.5%;
+    box-sizing: border-box;
+    margin-bottom: 0.5em;
+}
+
+form#search{
+    margin: 1em 0 1em 1em;
+    padding: 0 0.7em 0 0;
+}
+
+input#searching-bar{
+    border-radius: 0.5em;
+    width: 100%;
+    min-height: 3.5vh;
+    font-size: 1.1em;
+    padding: 0.4em;
+}
+
+ul#list{
+    overflow: hidden;
+    display: flex;
+    padding: 0.7em;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    background-color: var(--bgcolor);
+    width: 100%;
+}
+
+li.product-brochure {
+    display: flex;
+    flex-direction: column;
+    width: 37.5%;
+    margin: 0 0.5em 1em 0.5em;
+    padding: 0;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    color: var(--txtcolor);
+    text-align: center;
+    border-radius: 0.9em;
+    transition: .4s;
+    box-shadow: 0 1em 2em rgba(0, 0, 0, 0.25),
+                0 0.8em 0.8em rgba(0, 0, 0, 0.22);
+}
+
+li.product-brochure:hover,li.new:hover{
+    transform: translate(0, -0.4em );
+    box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.16),
+                0 0.2em 0.4em rgba(0, 0, 0, 0.24);
+}
+
+li.product-brochure img,ul.products img,ul#best-products img{
+    max-width: 75%;
+    height: auto;
+    margin: 1em 0;
+    border-radius: 0.72em;
+}
+
+li.product-brochure a, li.new a{/*.new -> HOME*/
+    background-color: var(--headerbgcolor);
+    width: 100%;
+    margin-top: 1.5em;
+    border: 0;
+    border-bottom-left-radius: 0.72em;
+    border-bottom-right-radius: 0.72em;
+    height: 100%;
+    display: block;
+    text-align: center;
+    padding: 1em;
+    bottom: 0;
+}
+
+p.product-name{
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-bottom: 1.5em;
+}
+
+/* === PAGINA CHI SIAMO === */
+div#mission{
+    display: flex;
+    margin: 1em;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+div#goal{
+    border: 3px solid black;
+    margin: 2em;
+    text-align: left;
+    padding: 1em;
+    width: 55%;
+}
+
+form#advice{
+    margin: 1em;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+form#advice fieldset{
+    width: 75%;
+    margin: 1em;
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    background-color: black;
+    color: var(--bgcolor);
+    border: 3px solid black;
+}
+form#advice label{
+    margin-top: 1em;
+}
+form#advice textarea{
+    padding: 1em;
+    margin: 1.5em 1em 2em 1em;
+    height: 30vh;
+}
+
+div#buttons-advice{
+    display: flex;
+    justify-content: end;
+    width: 75%;
+}
+
+form#advice button{
+    width: 100%;
+    margin-left: 1em;
+}
+
+form#advice button#reset-advice{
+    margin-left: 0;
+}
+
+button#submit-advice{
+    background-color: var(--headerbgcolor);
+    color: var(--bgcolor);
+}
+
+div#contacts{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--bgcolor);
+    padding: 1em;
+    margin: 1em 0;
+}
+
+.author{
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1em 0.25em;
+    width: 37.5%;
+    line-break: anywhere;
+}
+
+.author img{
+    margin: 1em 0;
+    border-radius: 8em;
+    width: 4em;
+    height: 4em;
+}
+
+/*  
+    ===============================
+            PAGINA AREA RISERVATA, LOGIN, REGISTRAZIONE 
+    ===============================
+*/
+
+#sub-title, form.privacy-area h3{
+    text-align: center;
+    margin-top: 1em;
+}
+
+#login-user,#register-user{
+    display: flex;
+    flex-direction: column;
+    margin: 2em 0;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+#login-user form,#register-user form{
+    width: 60%;
+    height: fit-content;
+    background-color: var(--bgcolor);
+}
+
+form.privacy-area label{
+    text-align: left;
+    font-weight: bold;
+    margin-top: 1em;
+}
+
+form.privacy-area h3{
+    margin-bottom: 2em;
+}
+
+form.privacy-area fieldset{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form.privacy-area input{
+    margin: 1em;
+    width: 75%;
+    border-radius: 1.5em;
+    border: 3px solid #2C1C18;
+    padding: 0.5em;
+}
+
+#submit-login,#submit-register{
+    background-color: var(--headerbgcolor);
+    color: var(--bgcolor);
+    border-radius: 2em;
+    text-align: center;
+    width: 37.5%;
+    margin: 1em 1em 2em 1em;
+}
+
+div#to-register,div#to-login{
+    width: 60%;
+    text-align: center;
+    background-color: var(--headerbgcolor);
+}
+
+div#to-register h3, div#to-login h3{
+    color: var(--bgcolor);
+    margin: 1em 0;
+}
+
+p.privacy-area{
+    color: white;
+    height: 100%;
+    margin: 1em 0;
+}
+
+p#register,p#login{ 
+    width: 100%;
+    margin: 1em 0;
+}
+
+/*  
+    ===============================
+            PAGINA UTENTE 
+    ===============================
+*/
+
+div#favorites, div#user-info{
+    display: flex;
+    margin: 1.5em 2em;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div#user-info{
+    flex-direction: column;
+}
+
+a#prev{
+    float: left;
+}
+
+a#next{
+    float: right;
+}
+
+a#prev, a#next{
+    width: 6em;
+    text-align: center;
+}
+
+ul#favorites-list{
+    display: flex;
+    list-style-type: none;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+}
+
+ul#favorites-list li.product-brochure{
+    min-width: 32.2%;
+}
+
+div#user-settings{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1em;
+    padding: 1em;
+}
+
+a#profile-settings, a#prev, a#next{
+    text-align: center;
+    background-color: var(--headerbgcolor);
+    padding: 1em;
+    border-radius: 1em;
+}
+
+/*  
+    ===============================
+            PAGINA DEGUSTAZIONE 
+    ===============================
+*/
+
+.degustazione-card {
+    display: flex;
+
+    background-color: white;
+    border-radius: 0.9em;
+
+    overflow: hidden;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin: 20px auto;
+
+    max-width: 90%;
+}
+
+.degustazione-card img{
+    width: 200px;
+    height: auto;
+    object-fit: cover;
+}
+
+.degustazione-contenuto{
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.degustazione-contenuto h2{
+    margin: 0 0 10px;
+}
+
+.degustazione-contenuto p{
+    margin: 0 0 10px;
+}
+
+.degustazione-button{
+    margin: 10px auto 0;
+
+    background-color: var(--buttoncolor_rosso);
+    color: var(--title_color);
+    text-decoration: none;
+
+    padding: 0.5em 1em;
+    border-radius: 1em;
+
+    font-weight: bold;
+    font-size: 1em;
+
+    max-width: 15%;
+    display: block;
+    text-align: center;
+}
+
+.degustazione-button:hover{
+    background-color: var(--buttoncolor_rosso_hover);
+}
+
+/* === CONTENUTO DEGUSTAZIONE === */
+.degustazione-dettagli dt{
+    font-weight: bold;
+    float: left;
+
+    display: inline;
+    padding-left: 26px;
+    padding-right: 0.2em;
+
+    position: relative;
+    margin-bottom: 0.5em;
+}
+
+.degustazione-dettagli dt::after{
+    content: ":";
+}
+
+#degustazione-persone::before,
+#degustazione-durata::before,
+#degustazione-prezzo::before{
+    content: "";
+    display: inline-block;
+    position: absolute;
+
+    left: 0;
+    top: 0.1em;
+    width: 20px;
+    height: 20px;
+
+    background-size: contain;
+    background-image: no-repeat;
+}
+
+#degustazione-persone::before{
+    background-image: url('../../img/icone/persona-nero.svg');
+}
+
+#degustazione-durata::before{
+    background-image: url('../../img/icone/durata-nero.svg');
+}
+
+#degustazione-prezzo::before{
+    background-image: url('../../img/icone/costo-nero.svg');
+}
+
+
+/* ================================================= */
