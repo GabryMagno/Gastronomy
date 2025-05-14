@@ -1076,7 +1076,7 @@ a#profile-settings, a#prev, a#next{
 
 .error_header{
     background-image: none;
-    min-height: 10vh;
+    min-height: 0vh;
 }
 
 .error_header .header_text{
@@ -1089,7 +1089,7 @@ a#profile-settings, a#prev, a#next{
     text-align: center;
     font-weight: bold;
     font-size: 3em;
-    padding-top: 0.5em;
+    padding-top: 1.5em;
 }
 
 .error_main h3{
@@ -1105,9 +1105,7 @@ a#profile-settings, a#prev, a#next{
 .error_main img{
     display: block;
     margin: 0 auto;
-}
 
-.error_main #errore403{
     width: auto;
     height: 400px;
 }
@@ -1122,6 +1120,10 @@ a#profile-settings, a#prev, a#next{
     font-size: 1.5em;
 }
 
+.error-button-container{
+    text-align: center;
+}
+
 .error-button{
     border-radius: 1em;
 
@@ -1132,8 +1134,8 @@ a#profile-settings, a#prev, a#next{
     margin: 0 auto;
     padding: 0.5em 1em;
 
-    max-width: 15%;
-    display: block;
+    width: 10%;
+    display: inline-block;
     text-align: center;
 }
 
