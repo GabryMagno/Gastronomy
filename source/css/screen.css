@@ -776,4 +776,10 @@ form#logout{
     color: var(--linkcolor);
     margin: 3em 0 1em 0;
     padding: 1em;
+    width: 25rem;
+    word-wrap:break-word;
+}
+
+a#advice-link{
+    margin-top: 1em;
 }
