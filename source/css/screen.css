@@ -3,7 +3,7 @@
 *::before {
     padding: 0;
     margin: 0;
-    font-family: sans-serif;
+    font-family: 'Nunito', sans-serif;
     line-height: 1.5;
     box-sizing: border-box;
 }
@@ -13,7 +13,8 @@
     --title_color: #FAF4ED;
     --txtcolor: #2C1C18;
     --errorcolor: #7C0A01;
-    --buttoncolor: #C65C45;
+    --buttoncolor_arancio: #C65C45;
+    --buttoncolor_rosso: #73142F;
     --headerbgcolor: #73142F;
     --secondaryelementcolor: #7A9884;
     --linkcolor: #F3FF00;
@@ -23,7 +24,12 @@
     --menu: 1.5em;
 }
 
-/*GENERAL*/
+/*  
+    ===============================
+            GENERALE PAGINA
+    ===============================
+*/
+
 html{
     scroll-behavior: smooth;
     overflow-x: hidden;
@@ -49,8 +55,28 @@ header{
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
-    padding-bottom: 2rem;
+    padding-bottom: 3rem;
     min-height: 70vh;
+}
+
+header h1{
+    font-size: 5em;
+    padding-top: 3em;
+    margin-bottom: -0.1em;
+}
+
+header p{
+    font-size: 2em;
+}
+
+header .header_text{
+    text-align: center;
+    color: var(--title_color);
+}
+
+header #breadcrumb p{
+    font-size: 1.2em;
+    text-align: center;
 }
 
 div#header{
@@ -84,32 +110,64 @@ p#title{
     font-size: 1.3em;
 }
 
-/* ==== AIUTI ALLA NAVIGAZIONE === */
-#navigation{
-    position: absolute;
-    text-indent: -999em;
+/*  
+    ===============================
+        AIUTI ALLA NAVIGAZIONE 
+    ===============================
+*/
+
+.navigation ul {
+    list-style-type: none;
 }
 
-/* ==== TOP NAVBAR ==== 
+.a_navigation{
+    position: absolute;
+    text-indent: -999em;
+    background-color: var(--headerbgcolor);
+}
+
+.a_navigation:focus{
+    position: absolute;
+    text-indent: 0;
+    background-color: var(--headerbgcolor);
+    text-align: center;
+
+    margin: auto;
+    top: 10em;
+    left: 1em;
+}
+
+/*  
+    ===============================
+            TOP NAVBAR 
+    ===============================
+*/
 .navbar_top{
     background-color: var(--headerbgcolor);
     color: var(--title_color);
     display: inline-flex;
     overflow: hidden;
     position: absolute;
+
+    top: 0;
     width: 100%;
-    padding-top: 1em;
-    padding-bottom: 1em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
 }
 
-/* -- LOGO MENU --*//*
+/*  
+    ===============================
+            LOGO MENU 
+    ===============================
+*/
+
 .hidden {
     text-indent: -999em;
     white-space: nowrap;
     overflow: hidden;
 }
 
-h1.hidden{
+.logo-accessibile{
     background-image: url("../../img/loghi/logo_colori_lato_scritta_bianca.png");
     background-size: contain;
     background-repeat: no-repeat;
@@ -120,132 +178,126 @@ h1.hidden{
 
     margin-left: 1em;
 }
-*/
 
-/* -- MENU -- */
+/*  
+    ===============================
+            MENU 
+    ===============================
+*/
 #menu {
     list-style: none;
+    margin-left: auto;
     display: inline-flex;
-    justify-content: space-between;
-    background-color: var(--txtcolor);
-    width: 100%;
-    opacity: 80%;
-    padding: 1em 0.5em;
-}
-
-#menu img{
-    width: 5em;
-    
+    padding: .3em 1.5em;
+    justify-content: end;
+    flex-direction: row;
 }
 
 #menu a{
     text-align: center;
 }
 
-#menu ul{
-    display: flex;
-    justify-content: end;
-    list-style-type: none;
-}
-
-
 #menu li{
     margin: 0 0.5em;
-    padding: 0.5em;
+    padding: 0.2em;
     color: var(--linkcolor);
     align-self: center;
-    font-size: 0.97em;
 }
 
 #menu li#here{
     color: var(--title_color);
-    background-color: var(--buttoncolor);
+    background-color: var(--buttoncolor_arancio);
     border-radius: 2em;
     padding: 0.4em 0.6em;
     text-decoration: none;
     pointer-events: none;
+
+    border: 1px solid var(--title_color);
 }
 
-/* ==== BREADCRUMB ==== */
+/* === MENU AD HAMBURGER === */
+
+#menu-button{
+    background-color: var(--headerbgcolor);
+}
+
+#menu-button[data-hidden="false"]{
+    position: absolute;
+    margin: -9999em;
+}
+
+/*  
+    ===============================
+            BREADCRUMB 
+    ===============================
+*/
 #breadcrumb {
+    display: block;
+
     color: var(--title_color);
     background-color: var(--headerbgcolor);
-    width: 30%;
-    position: absolute;
-
-    left: 50%;
-    transform: translateX(-50%);
-
+    max-width: 30%;
+    margin: 5em auto;
     border-radius: 2em;
-    padding: 0.5rem 0.7rem;
-    margin: 1em;
-}
-
-/* DA SISTEMARE */
-nav#menu li:nth-child(4){
-    margin: 0;
-    color: var(--linkcolor);
-    align-self: center;
-    padding: 0.5em;
-}
-
-
-nav#menu li#here{
-    color: #FFFFFF;
-    border-radius: 1.5rem;
-    background-color: var(--headerbgcolor);
-}
-
-
-h1, nav#breadcrumb, h2, h3{
+    padding: 0.5rem 1rem;
     text-align: center;
 }
 
-span#current-path{
-    font-size: 1.2rem;
-}
+/*  
+    ===============================
+            FOOTER 
+    ===============================
+*/
 
-span#current-path a, li a{
-    margin: 0;
-}
-
-
-/*FOOTER*/
-footer{
-    text-align: center;
+footer {
     background-color: var(--txtcolor);
     color: var(--bgcolor);
-    padding: 1.2em 0;
-}
 
-footer a{
-    color: var(--linkcolor);
-    padding: 0.5rem 0.7rem;
-    margin: 0.5rem 2rem;
-}
-
-footer img{
-    height: 2em;
-    width: 4em;
-}
-
-div#validation{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 1em;
-}
-
-/*HOME*/
-
-div#main-info{
+    margin-top: 2em;
+    padding: 1.2em;
     text-align: center;
-    margin: 1rem;
-    padding: 0.5rem;
-    border: 0.3rem;
+
+    display: inline-block;
+    width: 100%;
 }
 
-ul.products,ul#new-products{
+footer p{
+    display: inline-block;
+    margin: auto 0.2em;
+}
+
+footer img {
+    height: 2em;
+    width: auto;
+    vertical-align: middle;
+}
+
+footer .torna-su {
+    display: block;
+    margin-top: 0.5em;
+}
+
+/*
+=====================================================================================================================================================
+===============================                           CONTENUTI PAGINE                            ===============================================
+=====================================================================================================================================================
+*/
+
+.section-divider {
+    border: none;
+    height: 2px;
+    background-color: black;
+    width: 100%;
+}
+
+
+/*  
+    ===============================
+            PAGINA HOME 
+    ===============================
+*/
+
+ul.products,ul#best-products{
     display: flex;
     justify-content: center;
     padding: 1.5rem;
@@ -253,13 +305,12 @@ ul.products,ul#new-products{
     color: #FFFFFF;
 }
 
-ul#new-products, ul#best-products{
+ul#best-products{
     margin: 1rem 2rem;
 }
 
 li.new{
     width: 33%;
-    text-align: center;
     list-style-type: none;
     margin: 1em;
     display: flex;
@@ -275,7 +326,200 @@ li.new{
                 0 0.8em 0.8em rgba(0, 0, 0, 0.22);
 }
 
-/*PRODUCT-LIST*/
+.home-section-title{
+    text-align: center;
+    font-weight: bold;
+    font-size: 2em;
+    padding-top: 0.5em;
+}
+
+.home-section-descrizione{
+    font-size: 1.2em;
+    text-align: center;
+}
+
+/* === BOX PROMOZIONALE CON BOTTONE === */
+
+.promo-box{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    padding: 3em;
+    flex-wrap: wrap;
+    background-color: var(--secondaryelementcolor);
+}
+
+.promo-text{
+    max-width: 60%;
+}
+
+.promo-text p{
+    font-size: 1.5em;
+}
+
+.promo-text h2.promo-domanda{
+    margin: 0;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.promo-button{
+    color: var(--title_color);
+    text-decoration: none;
+
+    padding: 0.8em 2.2em;
+    border-radius: 2em;
+
+    font-weight: bold;
+    font-size: 1.8em;
+}
+
+.promo-button .button{
+    color: var(--txtcolor);
+    background-color: var(--bgcolor);
+    border-radius: 2em;
+    padding: 0.4em 0.6em;
+
+    border: 1px solid var(--txtcolor);
+}
+
+.promo-button .button:hover{
+    background-color: #dbd3ca;
+
+}
+
+/* === BOX CATEGORIE PRODOTTI === */
+#categorie{
+    margin-bottom: 3em;
+    text-align: center;
+}
+
+.categoria-grid{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5em;
+    margin-top: 1em;
+}
+
+.categoria-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 250px;
+    padding: 1em;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: #333;
+}
+
+.categoria-box:hover {
+    transform: translate(0, -0.4em );
+    box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.16),
+                0 0.2em 0.4em rgba(0, 0, 0, 0.24);
+}
+
+.categoria-box img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 0.5em;
+}
+
+.categoria-box span {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+/* === BOX RECENSIONI CLIENTI === */
+#recensioni-home{
+    background-color: var(--secondaryelementcolor);
+    margin: 0;
+}
+
+#recensioni-home h2{
+    margin: 0;
+    padding-top: 1rem;
+}
+
+.recensione-container {
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem 1rem;
+}
+
+.recensione-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    background-color: var(--bgcolor);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    padding: 1rem;
+    margin: 1rem;
+    width: 300px;
+    
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.recensione-foto{
+    width: 80px;
+    height: 80px;
+
+    border-radius: 50%;
+    background-color: #999;
+
+    overflow: hidden;
+    margin-top: -50px;
+    margin-bottom: 0.5rem;
+
+    border: 3px solid white;
+}
+
+.recensione-foto img{
+    width: 100%;
+    height: 100%;
+    
+    object-fit: cover;
+}
+
+.recensione-contenuto{
+    text-align: center;
+}
+
+.recensione-cliente{
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
+
+.recensione-testo{
+    font-size: 1rem;
+    line-height: 1.4;
+    margin: 0.5rem 0;
+}
+
+.recensione-valutazione{
+    font-weight: bold;
+    color: var(--errorcolor);
+    margin-top: 0.5rem;
+}
+
+
+/*  
+    ===============================
+            PAGINA PRODOTTI 
+    ===============================
+*/
 
 div#list-content{
     margin: 1em;
@@ -379,13 +623,13 @@ li.product-brochure {
                 0 0.8em 0.8em rgba(0, 0, 0, 0.22);
 }
 
-li.product-brochure:hover,li.new:hover{/*.new -> HOME*/
+li.product-brochure:hover,li.new:hover{
     transform: translate(0, -0.4em );
     box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.16),
                 0 0.2em 0.4em rgba(0, 0, 0, 0.24);
 }
 
-li.product-brochure img,ul.products img,ul#new-products img{/*.products e #new-products -> HOME*/
+li.product-brochure img,ul.products img,ul#best-products img{
     max-width: 75%;
     height: auto;
     margin: 1em 0;
@@ -406,13 +650,13 @@ li.product-brochure a, li.new a{/*.new -> HOME*/
     bottom: 0;
 }
 
-p#product-name{
+p.product-name{
     font-weight: bold;
     font-size: 1.5em;
     margin-bottom: 1.5em;
 }
 
-/*CHI SIAMO*/
+/* === PAGINA CHI SIAMO === */
 div#mission{
     display: flex;
     margin: 1em;
@@ -505,7 +749,7 @@ div#contacts{
     height: 4em;
 }
 
-/*AREA RISERVATA - LOGIN - REGISTER*/
+/* === PAGINA AREA RISERVATA, LOGIN, REGISTRAZIONE === */
 
 #sub-title, form.privacy-area h3{
     text-align: center;
@@ -633,3 +877,5 @@ a#profile-settings, a#prev, a#next{
     padding: 1em;
     border-radius: 1em;
 }
+
+/* ================================================= */

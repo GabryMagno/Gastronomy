@@ -1,110 +1,204 @@
 <!DOCTYPE html>
 <html lang="it">
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Cuochi per Caso</title>
-        <link rel="icon" type="image" href="../../img/logo.png" />
-        <meta name="description" content="Cuochi per Caso, il sito in cui la gastronomia diventa un modo per sperimentare" />
-        <meta name="keywords" content="Cuochi per Caso, primi, secondi, contorni, antipasti, dolci, gastronomia" />
-        <meta name="author" content="Cuochi per Caso" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <!--CSS-->
-        <link rel="stylesheet" href="../css/print.css" media="print" />
-        <link rel="stylesheet" href="../css/screen.css" media="screen" />
-        <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 800px)" />
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>Home | Gastronomia Cuochi per caso</title>
+        <link rel="icon" href="../../img/favicon.svg" type="image/svg+xml">
+
+        <meta name="description" content="Cuochi per Caso, il sito in cui la gastronomia diventa un modo per sperimentare">
+        <meta name="keywords" content="Cuochi per Caso, primi, secondi, contorni, antipasti, dolci, gastronomia">
+        <meta name="author" content="Cuochi per Caso, Nicolò Bolzon, Gabriele Isacco Magnelli">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--- CSS -->
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <link rel="stylesheet" href="../css/screen.css" media="screen and (min-width: 1025px)">
+        <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 1024px)">
+
+        <!--- FONT -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
     </head>
-    <body>
-        <header id="return">
-            <div id="header">
-                <nav id="navigation" aria-label="dove ti trovi">
-                    <ul id="help-navigaton">
-                        <li><a href="#breadcrumb">Vai a dove ti trovi</a></li>
-                        <li><a href="#menu">Vai al menu</a></li>
-                        <li><a href="#contents">Vai al contenuto</a></li>
-                    </ul>
-                </nav>
+    
+    <body id="home_body">
+        <header id="home_header">
+            <nav class="navigation" aria-label="Aiuti alla navigazione">
+                <ul>
+                    <li><a href="#breadcrumb" class="a_navigation">Vai dove ti trovi</a></li>
+                    <li><a href="#menu" class="a_navigation">Vai al menu</a></li>
+                    <li><a href="#content" class="a_navigation">Vai al contenuto</a></li>
+                </ul>
+            </nav>
 
-                <nav id="menu" aria-label="menu">
-                    <!--Da mettere il menù ad hamburger-->
-                    <img src="../../img/loghi/logo_bianco.png">
-                    <ul>
-                        <li id="here"><span lang="en">HOME</span></li>
-                        <li><a href="prodotti.html">PRODOTTI</a></li>
-                        <li><a href="degustazione.html">DEGUSTAZIONE</a></li>
-                        <li><a href="chisiamo.html">CHI SIAMO</a></li>
-                        <li><a href="areariservata.html">LOGIN</a></li>
-                    </ul>
-                </nav>
+            <h1 class="header_text">Cuochi per Caso</h1>
+            <p class="header_text">La tua Gastronomia di fiducia</p>
 
-                <h1 id="title">CUOCHI PER CASO</h1>
+            <nav id="return" class="navbar_top">
+                
+                <h2 class="hidden logo-accessibile">Cuochi per Caso</h2>
+                
+                <button id="menu-button" aria-label="Comprimi o espandi il menu di navigazione" data-hidden="false">
+                    <span class="menu-button-1" aria-hidden="true"></span>
+                    <span class="menu-button-2" aria-hidden="true"></span>
+                    <span class="menu-button-3" aria-hidden="true"></span>
+                </button>
 
-                <nav id="breadcrumb">
-                    <p>Sei in : <span lang="en" id="current-path">HOME</span><p>
-                </nav>
+                <ul id="menu" aria-label="Menu del sito">
+                    <li id="here"><span lang="en">Home</span></li>
+                    <li><a href="chisiamo.html">Chi siamo</a></li>
+                    <li><a href="prodotti.html">Prodotti</a></li>
+                    <li><a href="degustazione.html">Degustazione</a></li>
+                    <li><a href="login.html">Area Riservata</a></li>
+                </ul>
+            </nav>
 
-            </div>
+            <nav id="breadcrumb">
+                <p>Ti trovi in: <span lang="en" id="current-path">HOME</span></p>
+            </nav>
+                
         </header>
 
-        <main id="contents">
-            <div id="main-info">
-                <h2>L'OBIETTIVO DI CUOCHI PER CASO</h2>
-                <p>Descrizione obiettivo</p>
-            </div>
-            <h2>NOVITA'</h2>
+        <main id="home_main">
+            <section aria-labelledby="prodotti-consigliati">
+                <h2 class="home-section-title">Prodotti Consigliati</h2>
+                <p class="home-section-descrizione">Lasciati tentare dalle nostre specialità gastronomiche: una selezione irresistibile di prodotti scelti per rendere unico il tuo pranzo o la tua cena di oggi!</p>
+                <ul id="best-products">
+                    <li class="new">
+                        <img src="../../img/primo.png" alt="Nuovo prodotto">
+                        <h3 class="product-name">Nome prodotto</h3>
+                        <p>Prezzo prodotto</p>
+                        <a href="#">Scheda del prodotto</a>
+                    </li>
+                    <li class="new">
+                        <img src="../../img/contorno.png" alt="Nuovo prodotto">
+                        <h3 class="product-name">Nome prodotto</h3>
+                        <p>Prezzo prodotto</p>
+                        <a href="#">Scheda del prodotto</a>
+                    </li>
+                    <li class="new">
+                        <img src="../../img/antipasto.png" alt="Nuovo prodotto">
+                        <h3 class="product-name">Nome prodotto</h3>
+                        <p>Prezzo prodotto</p>
+                        <a href="#">Scheda del prodotto</a>
+                    </li>
+                </ul>
+            </section>
+            <section aria-labelledby="promo">
+                <div class="promo-box">
+                    <div class="promo-text">
+                        <h2 class="promo-domanda">Ti abbiamo fatto venire fame?</h2>
+                        <p>Scopri tutti i nostri prodotti gastronomici: eccellenze da gustare, perché il sapore parla da s&eacute;.</p>
+                        <p>Provali e lasciati conquistare!</p>
+                    </div>
+                    <div class="promo-button">
+                        <a href="prodotti.html" class="button">Esplora le ricette</a>
+                    </div>
+                </div>
+            </section>
 
-            <ul id="new-products">
-                <li class="new">
-                    <img src="../../img/primo.png" alt="Nuovo prodotto" />
-                    <p id="product-name">Nome prodotto</p>
-                    <p>Prezzo prodotto</p>
-                    <a href="">Scheda del prodotto</a>
-                </li>
-                <li class="new">
-                    <img src="../../img/contorno.png" alt="Nuovo prodotto" />
-                    <p id="product-name">Nome prodotto</p>
-                    <p>Prezzo prodotto</p>
-                    <a href="">Scheda del prodotto</a>
-                </li>
-                <li class="new">
-                    <img src="../../img/antipasto.png" alt="Nuovo prodotto" />
-                    <p id="product-name">Nome prodotto</p>
-                    <p>Prezzo prodotto</p>
-                    <a href="">Scheda del prodotto</a>
-                </li>
-            </ul>
+            <hr class="section-divider">
 
-            <h2 id="best">MIGLIORI PRODOTTI</h2>
+            <section aria-labelledby="categorie" id="categorie">
+                <h2 class="home-section-title">I nostri prodotti</h2>
+                <p class="home-section-descrizione">Dalla pasta fatta a mano ai secondi ricchi di sapore, dai contorni sfiziosi ai dolci che conquistano al primo assaggio: nella nostra gastronomia trovi tutto ciò che serve per un pranzo o una cena indimenticabili!</p>
+            
+                <div class="categoria-grid">
+                    <a href="#" class="categoria-box">
+                        <img src="../../img/antipasto.png" alt="Antipasti">
+                        <span>Antipasti</span>
+                    </a>
+                    
+                    <a href="#" class="categoria-box">
+                        <img src="../../img/Primo.png" alt="Primi Piatti">
+                        <span>Primi</span>
+                    </a>
 
-            <ul id="best-products" class="products">
-                <li class="new">
-                    <img src="../../img/contorno.png" alt="Miglior prodotto" />
-                    <p id="product-name">Nome prodotto</p>
-                    <p>Prezzo prodotto</p>
-                    <a href="">Scheda del prodotto</a>
-                </li>
-                <li class="new">
-                    <img src="../../img/antipasto.png" alt="Miglior prodotto" />
-                    <p id="product-name">Nome prodotto</p>
-                    <p>Prezzo prodotto</p>
-                    <a href="">VScheda del prodotto</a>
-                </li>
-                <li class="new">
-                    <img src="../../img/contorno.png" alt="Miglior prodotto" />
-                    <p id="product-name">Nome prodotto</p>
-                    <p>Prezzo prodotto</p>
-                    <a href="">Scheda del prodotto</a>
-                </li>
-            </ul>
+                    <a href="#" class="categoria-box">
+                        <img src="../../img/Primo.png" alt="Secondi Piatti">
+                        <span>Secondi</span>
+                    </a>
 
+                    <a href="#" class="categoria-box">
+                        <img src="../../img/contorno.png" alt="Contorni">
+                        <span>Contorni</span>
+                    </a>
+
+                    <a href="#" class="categoria-box">
+                        <img src="../../img/contorno.png" alt="Dolci">
+                        <span>Dolci</span>
+                    </a>
+                </div>
+            </section>
+
+            <hr class="section-divider">
+            <section aria-labelledby="recensioni" id="recensioni-home">
+                <h2 class="home-section-title">Recensioni</h2>
+                <p class="home-section-descrizione">Cosa dicono i nostri clienti? Scopri le recensioni sui nostri piatti e lasciati conquistare!</p>
+
+                <div class="recensione-container">
+                    <div class="recensione-card">
+                        <div class="recensione-foto">
+                            <img src="../../img/user1.png" alt="Foto profilo di Mario Rossi">
+                        </div>
+                        <div class="recensione-contenuto">
+                            <h3 class="recensione-cliente">Mario Rossi</h3>
+                            <p class="recensione-testo">
+                                Ho ordinato per la prima volta e sono rimasto molto soddisfatto!
+                            </p>
+                            <p class="recensione-valutazione">Valutazione: ★★★★☆</p>
+                        </div>
+                    </div>
+
+                    <div class="recensione-card">
+                        <div class="recensione-foto">
+                            <img src="../../img/user1.png" alt="Foto profilo di Tullio Vardanega">
+                        </div>
+                        <div class="recensione-contenuto">
+                            <h3 class="nome-cliente">Tullio Vardanega</h3>
+                            <p class="recensione-testo">
+                                Horca loca! Questi piatti tipici della Patagonia mi hanno fatto impazzire!
+                            </p>
+                            <p class="recensione-valutazione">Valutazione: ★★★★☆</p>
+                        </div>
+                    </div>
+
+                    <div class="recensione-card">
+                        <div class="recensione-foto">
+                            <img src="../../img/user1.png" alt="Foto profilo di Claudio Enrico Palazzi">
+                        </div>
+                        <div class="recensione-contenuto">
+                            <h3 class="nome-cliente">Claudio Enrico Palazzi</h3>
+                            <p class="recensione-testo">
+                                Essere responsabile del corso di Informatica a Unipd richiede energia… e appetito! Per fortuna questa gastronomia sa come soddisfare anche le fame più accademiche!
+                            </p>
+                            <p class="recensione-valutazione">Valutazione: ★★★★☆</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
         </main>
+
+        <footer>
+            <p class="torna-su"><a href="#return">Torna su</a></p>
+
+            <p>
+                <a href="https://validator.w3.org/check?uri=referer">
+                    <img src="https://www.w3.org/html/logo/badge/html5-badge-h-solo.png" alt="HTML5 Valido!">
+                </a>
+            </p>
+            
+            <p>&copy; 2025 Gastronomia Cuochi per Caso - Tutti i diritti sono riservati</p>
+
+            <p>
+                <a href="https://jigsaw.w3.org/css-validator/check/referer">
+                    <img src="https://jigsaw.w3.org/css-validator/images/vcss" alt="CSS Valido!">
+                </a>
+            </p>
+        </footer>
     </body>
-    <footer>
-        <a href="#return">Torna su</a>
-        <div id="validation">
-            <a href="https://validator.w3.org/nu/"><img src="https://www.w3.org/Icons/valid-xhtml10" alt="HTML Valido"></a>
-            <p>Tutti i diritti sono riservati - Alcune immagini sono state generate da alcune piattaforme con l'uso dell'intelligenza artificiale.</p>
-            <a href="http://jigsaw.w3.org/css-validator/check/referer"><img src="http://jigsaw.w3.org/css-validator/images/vcss-blue" alt="CSS Valido"></a>
-        </div>
-    </footer>
 </html>
