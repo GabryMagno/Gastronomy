@@ -1003,17 +1003,16 @@ a#profile-settings, a#prev, a#next{
 }
 
 .degustazione-button{
-    margin: 10px auto 0;
+    border-radius: 1em;
 
     background-color: var(--buttoncolor_rosso);
     color: var(--title_color);
-    text-decoration: none;
+        text-decoration: none;
 
-    padding: 0.5em 1em;
-    border-radius: 1em;
-
-    font-weight: bold;
     font-size: 1em;
+
+    margin: 10px auto 0;
+    padding: 0.5em 1em;
 
     max-width: 15%;
     display: block;
@@ -1068,6 +1067,88 @@ a#profile-settings, a#prev, a#next{
 #degustazione-prezzo::before{
     background-image: url('../../img/icone/costo-nero.svg');
 }
+
+/*  
+    ===============================
+            PAGINE ERRORI 
+    ===============================
+*/
+
+.error_header{
+    background-image: none;
+    min-height: 10vh;
+}
+
+.error_header .header_text{
+    display: none;
+}
+
+.error_main h2{
+    color: var(--errorcolor);
+
+    text-align: center;
+    font-weight: bold;
+    font-size: 3em;
+    padding-top: 0.5em;
+}
+
+.error_main h3{
+    color: var(--errorcolor);
+
+    text-align: center;
+    font-weight: bold;
+    font-size: 2em;
+
+    margin: 1rem;
+}
+
+.error_main img{
+    display: block;
+    margin: 0 auto;
+}
+
+.error_main #errore403{
+    width: auto;
+    height: 400px;
+}
+
+.error-description{
+    color: var(--txtcolor);
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 0.5em;
+
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.error-button{
+    border-radius: 1em;
+
+    background-color: var(--buttoncolor_rosso);
+    color: var(--linkcolor);
+    font-size: 1em;
+
+    margin: 0 auto;
+    padding: 0.5em 1em;
+
+    max-width: 15%;
+    display: block;
+    text-align: center;
+}
+
+.error-button:hover{
+    background-color: var(--buttoncolor_rosso_hover);
+}
+
+/* === ERRORE 403 === */
+
+
+/* === ERRORE 404 === */
+
+
+/* === ERRORE 500 === */
+
 
 
 /* ================================================= */
