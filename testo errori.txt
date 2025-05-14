@@ -1,0 +1,16 @@
+ERRORE 404 - Pagina non trovata
+
+Titolo: "Oops! Il piatto è bruciato..."
+Testo: "Siamo spiacenti, ma non siamo riusciti a trovare ciò che stavi cercando. Forse è finito in un angolo sperduto della cucina! Torna indietro, magari trovi un’altra prelibatezza. Buon appetito!"
+
+========
+ERRORE 403 - Accesso Negato
+
+Titolo: "Oh no! Sembra che tu stia cercando di entrare in cucina senza la ricetta giusta."
+Testo: "Forse ci è sfuggito qualcosa, ma non preoccuparti, niente panico! Torna indietro e prova a prendere la strada giusta per scoprire i nostri piatti prelibati. Se hai bisogno di una mano, siamo qui per aiutarti!"
+
+========
+ERRORE 500 - Internal Server Error
+
+Titolo: "Oops! Siamo in un guaio..."
+Testo: "Qualcosa è andato storto nella nostra cucina digitale! Non preoccuparti, i cuochi stanno preparando una nuova ricetta per risolvere il problema. Torniamo subito online, nel frattempo, un po' di pazienza… e magari un assaggio delle nostre delizie ti farà dimenticare l'attesa!"
