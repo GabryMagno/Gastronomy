@@ -989,18 +989,14 @@ a#profile-settings, a#prev, a#next{
 
 .degustazione-contenuto{
     flex: 1;
-    padding: 20px;
+    padding: 1em;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.degustazione-contenuto h2{
-    margin: 0 0 10px;
-}
-
-.degustazione-contenuto p{
-    margin: 0 0 10px;
+.degustazione-contenuto h2, .degustazione-contenuto p{
+    margin: 0 0 1em;
 }
 
 .degustazione-button{
@@ -1008,7 +1004,7 @@ a#profile-settings, a#prev, a#next{
 
     background-color: var(--buttoncolor_rosso);
     color: var(--title_color);
-        text-decoration: none;
+    text-decoration: none;
 
     font-size: 1em;
 
@@ -1025,11 +1021,23 @@ a#profile-settings, a#prev, a#next{
 }
 
 /* === CONTENUTO DEGUSTAZIONE === */
+.degustazione-dettagli{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-degustazione{
+    display: flex;
+    gap: 0.5em;
+    margin-bottom: 1em;
+}
+
 .degustazione-dettagli dt{
     font-weight: bold;
-    float: left;
 
-    display: inline;
+    display: inline-block;
     padding-left: 26px;
     padding-right: 0.2em;
 
