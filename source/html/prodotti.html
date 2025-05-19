@@ -14,8 +14,8 @@
 
         <!-- CSS -->
         <link rel="stylesheet" href="../css/print.css" media="print">
-        <link rel="stylesheet" href="../css/desktop.css" media="screen and (min-width: 1025px)">
-        <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 1024px)">
+        <link rel="stylesheet" href="../css/desktop.css" media="screen">
+        <link rel="stylesheet" href="../css/mobile.css" media="screen (max-width: 767px)">
 
         <!-- FONT -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -106,7 +106,7 @@
                                 </div>
                             </div>
                             <h3>VALUTAZIONE</h3>
-                            <div class="filters">
+                            <div class="filters" id="star-rating">
                                 <label for="grade">Valutazione</label>
                                 <input type="range" id="grade" name="min_rate" min="1" max="5" value="5"/>
                                 <p aria-hidden="true" id="rate">5 / 5</p>
