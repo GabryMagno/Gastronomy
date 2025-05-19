@@ -100,10 +100,12 @@ h2{
     margin: 1rem;
     font-size: 2em;
     color: var(--txtcolor);
+    text-align: center;
 }
 
 h3{
     font-size: 1.2em;
+    text-align: center;
 }
 
 p#title{
