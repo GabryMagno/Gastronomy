@@ -172,15 +172,13 @@ p#title{
 }
 
 .logo-accessibile{
-    background-image: url("../../img/loghi/logo_colori_lato_scritta_bianca.png");
-    background-size: contain;
+    background-image: url("../../img/loghi/logo_scritta_bianca.png");
     background-repeat: no-repeat;
+    background-size: contain;
     background-position: center;
-    
-    width: 200px;
-    aspect-ratio: 3/1;
-
-    margin-left: 1em;
+    margin-left: 0.5em;
+    width: 5em;
+    height: 2em;
 }
 
 /*  
@@ -202,7 +200,7 @@ p#title{
 }
 
 #menu li{
-    margin: 0 0.5em;
+    margin: 0 0.25em;
     padding: 0.2em;
     color: var(--linkcolor);
     align-self: center;
@@ -1015,7 +1013,6 @@ a#profile-settings, a#prev, a#next{
     margin: 10px auto 0;
     padding: 0.5em 1em;
 
-    max-width: 15%;
     display: block;
     text-align: center;
 }
