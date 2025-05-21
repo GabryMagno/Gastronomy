@@ -20,6 +20,7 @@
     --headerbgcolor: #73142F;
     /*--secondaryelementcolor: #7A9884;*/
     --secondaryelementcolor:#84E79B;
+    --herelinkcolor: #000638;
     --linkcolor: #F3FF00;
 
     /*TESTO*/
@@ -204,7 +205,14 @@ p#title{
 }
 
 #menu li{
-    margin: 0 0.25em;
+    margin: 0 0.15em;
+    padding: 0.2em;
+    color: var(--linkcolor);
+    align-self: center;
+}
+
+#menu li:nth-child(2){
+    margin: 0;
     padding: 0.2em;
     color: var(--linkcolor);
     align-self: center;
@@ -212,7 +220,7 @@ p#title{
 
 #menu li#here{
     color: var(--title_color);
-    background-color: #000638;
+    background-color: var(--herelinkcolor);
     border-radius: 2em;
     padding: 0.4em 0.6em;
     text-decoration: none;
@@ -383,7 +391,7 @@ li.new{
 .promo-button .button{
     /*color: var(--txtcolor);
     background-color: var(--bgcolor);*/
-    background-color: #000638;
+    background-color: var(--herelinkcolor);
     border-radius: 2em;
     padding: 0.4em 0.6em;
 
@@ -734,8 +742,11 @@ p.product-name{
     font-size: 1.5em;
     margin-bottom: 1.5em;
 }
-
-/* === PAGINA CHI SIAMO === */
+/*  
+    ===============================
+            PAGINA CHI SIAMO
+    ===============================
+*/
 div#mission{
     display: flex;
     margin: 1em;
@@ -803,6 +814,7 @@ button#submit-advice{
 
 div#contacts{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     color: var(--bgcolor);
@@ -811,21 +823,33 @@ div#contacts{
 }
 
 .author{
-    background-color: black;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 1em 0.25em;
-    width: 37.5%;
+    width: 75%;
     line-break: anywhere;
 }
+
+.info-author{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--herelinkcolor);
+    width: 100%;
+    text-align: center;
+    padding: 0.4em;
+    bottom: 0;
+    border: 0;
+    margin-left: 0.5em;
+}
+
 
 .author img{
     margin: 1em 0;
     border-radius: 8em;
     width: 4em;
     height: 4em;
+    background-color: var(--txtcolor);
 }
 
 /*  
