@@ -195,6 +195,10 @@ p#title{
     flex-direction: row;
 }
 
+#return{
+    opacity: 0.85;
+}
+
 #menu a{
     text-align: center;
 }
@@ -610,7 +614,6 @@ div#filter{
 
 div#filter fieldset{
     border: 3px solid black;
-    padding: 1em;
 }
 
 div.filters{
