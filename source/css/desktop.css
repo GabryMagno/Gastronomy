@@ -179,7 +179,10 @@ p#title{
     background-position: center;
     margin-left: 0.5em;
     width: 5em;
-    height: 2em;
+    height: 2.5em;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /*  
@@ -194,39 +197,32 @@ p#title{
     padding: .3em 1.5em;
     justify-content: end;
     flex-direction: row;
+    gap: 1em;
 }
 
-#return{
-    opacity: 0.85;
+#menu li {
+    padding: 0.2em 0.6em;
+    color: var(--linkcolor);
+    align-self: center;
 }
 
-#menu a{
+#menu a {
     text-align: center;
+    text-decoration: none;
+    display: block;
 }
 
-#menu li{
-    margin: 0 0.15em;
-    padding: 0.2em;
-    color: var(--linkcolor);
-    align-self: center;
-}
-
-#menu li:nth-child(2){
-    margin: 0;
-    padding: 0.2em;
-    color: var(--linkcolor);
-    align-self: center;
-}
-
-#menu li#here{
+#menu li#here {
     color: var(--title_color);
     background-color: var(--herelinkcolor);
     border-radius: 2em;
     padding: 0.4em 0.6em;
-    text-decoration: none;
     pointer-events: none;
-
     border: 1px solid var(--title_color);
+}
+
+#return {
+    opacity: 0.85;
 }
 
 /* === MENU AD HAMBURGER === */
