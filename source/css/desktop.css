@@ -649,12 +649,12 @@ button.choice{
     border: 3px solid black;
 }
 
-button#reset-filters, button#reset-advice{
+button#reset-filters, button#reset-advice, button.reset-setting{
     background-color: var(--txtcolor);
     color: var(--bgcolor);
 }
 
-button#submit-filters{
+button#submit-filters, button.submit-setting{
     background-color: var(--headerbgcolor);
     color: var(--bgcolor);
     margin-top: 1em;
@@ -874,7 +874,7 @@ div#contacts{
     background-color: var(--bgcolor);
 }
 
-form.privacy-area label{
+form.privacy-area label,fieldset.user-form {
     text-align: left;
     font-weight: bold;
     margin-top: 1em;
@@ -890,7 +890,7 @@ form.privacy-area fieldset{
     align-items: center;
 }
 
-form.privacy-area input{
+form.privacy-area input , fieldset.user-form input{
     margin: 1em;
     width: 75%;
     border-radius: 1.5em;
@@ -935,15 +935,40 @@ p#register,p#login{
     ===============================
 */
 
+/*USER-MAIN*/
 div#favorites, div#user-info{
     display: flex;
     margin: 1.5em 2em;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
-div#user-info{
+div#user-info img{
+    box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.9),
+                0 0.2em 0.4em rgba(0, 0, 0, 0.9);
+}
+
+#user-profile-main h3, #user-settings-main h3{
+    box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.9),
+                0 0.2em 0.4em rgba(0, 0, 0, 0.9);
+    background-color: #4C0002;
+    color: var(--bgcolor);
+    padding: 0.5em;
+}
+
+div#user-info #general-info{
+    display: flex;
     flex-direction: column;
+    margin-left: 1em;
+}
+
+#general-info{
+    height: 100%;
+    justify-content: space-between;
+}
+
+div#user-info img{
+    border-radius: 50%;
 }
 
 a#prev{
@@ -962,12 +987,12 @@ a#prev, a#next{
 ul#favorites-list{
     display: flex;
     list-style-type: none;
-    overflow-x: scroll;
-    scroll-behavior: smooth;
+    overflow-x: hidden;
+    overscroll-behavior-inline: contain;
 }
 
 ul#favorites-list li.product-brochure{
-    min-width: 32.2%;
+    min-width: 32%;
 }
 
 div#user-settings{
@@ -979,11 +1004,108 @@ div#user-settings{
     padding: 1em;
 }
 
-a#profile-settings, a#prev, a#next{
+a#profile-settings{
     text-align: center;
     background-color: var(--headerbgcolor);
     padding: 1em;
     border-radius: 1em;
+}
+
+img#prev, img#next{
+    margin: 0 2em;
+    width: 4em;
+    cursor: pointer;
+}
+
+a#profile-settings{
+    width: 25em;
+}
+
+form#logout{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.pay-attention{
+    padding: 1em;
+    margin: 1em 0;
+    border-radius: 1em;
+    background-color: var(--errorcolor);
+    color: var(--bgcolor);
+    width: 25em;
+    cursor: pointer;
+}
+
+/*USER_SETTING*/
+#setting-user{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#setting-user h3{
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.form-setting{
+    width: 60%;
+    margin: 1em 0;
+}
+
+#setting-user fieldset{
+    margin: 0.4em 0 1.5em 0;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    text-align: center;
+}
+
+#setting-user label{
+    margin: 1em 0 0 0;
+}
+
+#setting-user input{
+    width: auto;
+}
+
+#new-logo{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#new-logo img{
+    width: 10em;
+    height: 10em;
+    border-radius: 50%;
+}
+
+#delete-account{
+    width: 60%;
+    margin: 3em 0;
+}
+
+#delete-account button{
+    width: 100%;
+    margin: 1.5em 0;
+}
+
+.form-setting .buttons{
+    flex-direction: row;
+}
+
+.form-setting button{
+    width: 50%;
+    margin-top: 0;
+}
+
+.form-setting .reset-setting{
+    margin-right: 1em;
 }
 
 /*  
