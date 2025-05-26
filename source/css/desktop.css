@@ -610,13 +610,13 @@ div#list-content{
     justify-content: space-between;
 }
 
-div#filter{
+aside#filter{
     display:flex;
     flex-direction: column;
     width: 23.5%;
 }
 
-div#filter fieldset{
+aside#filter fieldset{
     border: 3px solid black;
 }
 
@@ -660,23 +660,43 @@ button#submit-filters, button.submit-setting{
     margin-top: 1em;
 }
 
-div#show-products{
+section#show-products{
     width: 74.5%;
     box-sizing: border-box;
     margin-bottom: 0.5em;
 }
 
-form#search{
+form#search, form#other-filters{
     margin: 1em 0 1em 1em;
     padding: 0 0.7em 0 0;
 }
 
-input#searching-bar{
+form#other-filters{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form#other-filters label{
+    margin: 0.5em 1em;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+select#select-for{
+    border: 2px solid black;
+    padding: 0.3em;
+}
+
+input#searching-bar, select#select-for{
     border-radius: 0.5em;
-    width: 100%;
     min-height: 3.5vh;
     font-size: 1.1em;
     padding: 0.4em;
+}
+
+input#searching-bar{
+    width: 100%;
 }
 
 ul#list{
@@ -737,6 +757,13 @@ p.product-name{
     font-weight: bold;
     font-size: 1.5em;
     margin-bottom: 1.5em;
+}
+
+div#product-pages{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1.5em 0;
 }
 /*  
     ===============================
@@ -983,16 +1010,16 @@ a#prev, a#next{
     width: 6em;
     text-align: center;
 }
+div#favorites{
+    display: flex;
+    flex-direction: column;
+}
 
 ul#favorites-list{
     display: flex;
     list-style-type: none;
     overflow-x: hidden;
     overscroll-behavior-inline: contain;
-}
-
-ul#favorites-list li.product-brochure{
-    min-width: 32%;
 }
 
 div#user-settings{
@@ -1009,6 +1036,10 @@ a#profile-settings{
     background-color: var(--headerbgcolor);
     padding: 1em;
     border-radius: 1em;
+}
+
+div#favorites-pages{
+    display: flex;
 }
 
 img#prev, img#next{
