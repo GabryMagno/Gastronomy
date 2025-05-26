@@ -1038,10 +1038,6 @@ a#profile-settings{
     border-radius: 1em;
 }
 
-div#favorites-pages{
-    display: flex;
-}
-
 img#prev, img#next{
     margin: 0 2em;
     width: 4em;
@@ -1213,11 +1209,9 @@ form#logout{
 
 .degustazione-dettagli dt{
     font-weight: bold;
-
     display: inline-block;
     padding-left: 26px;
     padding-right: 0.2em;
-
     position: relative;
     margin-bottom: 0.5em;
 }
@@ -1232,7 +1226,6 @@ form#logout{
     content: "";
     display: inline-block;
     position: absolute;
-
     left: 0;
     top: 0.1em;
     width: 20px;
