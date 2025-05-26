@@ -31,7 +31,7 @@ function validateName() {
 		deleteError(check);
 		var p = messageError("name-error");
 	    p.innerText = "Il nome utente è un campo obbligatorio";
-		const parent = document.getElementById("register_nome");
+		const parent = document.getElementById("register_nome").parentNode;
 		parent.appendChild(p);
 		UltimateCheck();
 		return false;
