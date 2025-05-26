@@ -17,6 +17,9 @@
         <link rel="stylesheet" href="../css/desktop.css" media="screen ">
         <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 767px)">
 
+        <!--JS-->
+        <script async src="../js/register.js"></script>
+
         <!-- FONT -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -69,10 +72,11 @@
                 <form id="register-form" class="privacy-area" method="post" action="register.php">
                     <fieldset>
                         <!--- id (auto), email, password, nome, cognome, data_nascita, data_iscrizione (auto), url immagine (auto inizio)-->
-
-                        <label id="lbl_register_nome" for="register_nome">Nome</label> 
-                        <input id="register_nome" class="register_input" type="text" name="nome" required data-msg-required="Inserisci il tuo nome" placeholder="Nome" />
-
+                        <div>
+                            <label id="lbl_register_nome" for="register_nome">Nome</label> 
+                            <input id="register_nome" class="register_input" type="text" name="nome" required data-msg-required="Inserisci il tuo nome" placeholder="Nome" />
+                        </div>
+                        
                         <label id="lbl_register_cognome" for="register_cognome">Cognome</label>
                         <input id="register_cognome" class="register_input" type="text" name="cognome" required data-msg-required="Inserisci il tuo cognome" placeholder="Cognome" />
 

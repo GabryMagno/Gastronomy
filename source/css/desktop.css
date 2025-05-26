@@ -917,6 +917,13 @@ form.privacy-area fieldset{
     align-items: center;
 }
 
+form.privacy-area div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 form.privacy-area input , fieldset.user-form input{
     margin: 1em;
     width: 75%;
@@ -1330,6 +1337,17 @@ form#logout{
 
 /* === ERRORE 500 === */
 
+/*MESSAGGI D'ERRORE*/
+.error{
+    color: var(--errorcolor);
+    display: block;
+    text-align: center;
+    margin: 1em;
+    font-weight: bold;
+}
 
+.not-available{
+    opacity: 0.6;
+}
 
 /* ================================================= */
