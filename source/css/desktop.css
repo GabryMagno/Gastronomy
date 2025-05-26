@@ -939,6 +939,7 @@ form.privacy-area input , fieldset.user-form input{
     text-align: center;
     width: 37.5%;
     margin: 1em 1em 2em 1em;
+    cursor: pointer;
 }
 
 div#to-register,div#to-login{
@@ -965,7 +966,7 @@ p#register,p#login{
 
 /*  
     ===============================
-            PAGINA UTENTE 
+            PAGINE UTENTE 
     ===============================
 */
 
