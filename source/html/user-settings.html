@@ -68,14 +68,18 @@
             <form id="change-personal-info" class="form-setting">
                 <h3>MODIFICA DATI PERSONALI</h3>
                 <fieldset class="user-form">
+
+                    <label for="change-username">Modifica Username</label>
+                    <input type="text" name="new-username" id="change-username" />
+
                     <label for="change-name">Modifica Nome</label>
-                    <input type="text" name="name" id="change-name" />
+                    <input type="text" name="new-name" id="change-name" />
 
                     <label for="change-surname">Modifica Cognome</label>
-                    <input type="text" name="surname" id="change-surname" />
+                    <input type="text" name="new-surname" id="change-surname" />
 
                     <label for="change-date">Modifica Data di Nascita</label>
-                    <input type="text" name="name" id="change-date" />
+                    <input type="date" name="new-date" id="change-date" />
                     <div id="new-logo">
                         <label for="change-logo">Modifica Logo</label>
                         <input type="file" name="name" id="change-logo" />
@@ -90,14 +94,14 @@
             <form id="change-password-email" class="form-setting">
                 <h3>MODIFICA <span lang="en">PASSWORD</span></h3>
                 <fieldset class="user-form">
-                    <label for="change-name">Vecchia <span lang="en">Password</span></label>
-                    <input type="text" name="name" id="change-name" />
+                    <label for="old-password">Vecchia <span lang="en">Password</span></label>
+                    <input type="text" name="old-password" id="old-password" />
 
-                    <label for="change-surname">Nuova <span lang="en">Password</span></label>
-                    <input type="text" name="surname" id="change-surname" />
+                    <label for="new-passowrd">Nuova <span lang="en">Password</span></label>
+                    <input type="text" name="new-password" id="new-password" />
 
-                    <label for="change-date">Conferma Nuova <span lang="en">Password</span></label>
-                    <input type="text" name="name" id="change-date" />
+                    <label for="confirm-new-passowrd">Conferma Nuova <span lang="en">Password</span></label>
+                    <input type="text" name="confirm-new-password" id="confirm-new-passowrd" />
                 </fieldset>
                 <div class="buttons">
                     <button type="reset" id="reset-password-setting" class="choice reset-setting">ANNULLA</button>
