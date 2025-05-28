@@ -876,9 +876,9 @@ div#contacts{
 }
 
 /*  
-    ===============================
+    ====================================================
             PAGINA AREA RISERVATA, LOGIN, REGISTRAZIONE 
-    ===============================
+    ====================================================
 */
 
 #sub-title, form.privacy-area h3{
@@ -1072,7 +1072,11 @@ form#logout{
     cursor: pointer;
 }
 
-/*USER_SETTING*/
+/*  
+    ===================================
+            PAGINA IMPOSTAZIONI UTENTE
+    ===================================
+*/
 #setting-user{
     display: flex;
     flex-direction: column;
