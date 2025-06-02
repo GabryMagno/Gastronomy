@@ -83,6 +83,7 @@ function validateUsername(){
 	if(Username === "user" || Username === "admin"){
 		var check = document.getElementById("username-error");
 		deleteError(check);
+		FirstFormUltimateCheck();
 		return true;
 	}
 

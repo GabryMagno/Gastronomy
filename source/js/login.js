@@ -57,8 +57,9 @@ function validateUsername(){
 	} 
 
     if(Username === "user" || Username === "admin") {
-        var check = document.getElementById("password-error");
+        var check = document.getElementById("username-error");
 	    deleteError(check);
+        UltimateCheck();
         return true;
     }
 
@@ -90,6 +91,7 @@ function validatePassword(){
     if(Password === "user" || Password === "admin"){
         var check = document.getElementById("password-error");
 	    deleteError(check);
+        UltimateCheck();
         return true;
     }
 
