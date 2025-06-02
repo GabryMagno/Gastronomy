@@ -26,6 +26,7 @@
         <script async src="../js/user-settings.js"></script>
     </head>
 
+<<<<<<< HEAD
     <body>
         <header id="return">
             <div id="header">
@@ -48,14 +49,45 @@
                         <li id="here">Profilo</a></li>
                     </ul>
                 </nav>
+=======
 
-                <h1 id="title">CUOCHI PER CASO</h1>
+    <body id="login_body">
 
-                <nav id="breadcrumb">
-                    <p>Sei in : <span id="current-path"><a href="user-profile.html">PROFILO</a> > IMPOSTAZIONI</span><p>
-                </nav>
+       <header id="home_header">
+            <nav class="navigation" aria-label="Aiuti alla navigazione">
+                <ul>
+                    <li><a href="#breadcrumb" class="a_navigation">Vai dove ti trovi</a></li>
+                    <li><a href="#menu" class="a_navigation">Vai al menu</a></li>
+                </ul>
+            </nav>
+>>>>>>> 38a659f32b4303a89eb21369a92380f83095e20b
 
-            </div>
+            <h1 class="header_text">Cuochi per Caso</h1>
+            <p class="header_text">La tua Gastronomia di fiducia</p>
+
+            <nav id="return" class="navbar_top">
+                
+                <h2 class="hidden logo-accessibile">Cuochi per Caso</h2>
+                
+                <button id="menu-button" aria-label="Comprimi o espandi il menu di navigazione" data-hidden="false">
+                    <span class="menu-button-1" aria-hidden="true"></span>
+                    <span class="menu-button-2" aria-hidden="true"></span>
+                    <span class="menu-button-3" aria-hidden="true"></span>
+                </button>
+
+                <ul id="menu" aria-label="Menu del sito">
+                    <li><a href="index.html"><span lang="en">Home</span></a></li>
+                    <li><a href="chisiamo.html">Chi siamo</a></li>
+                    <li><a href="prodotti.html">Prodotti</a></li>
+                    <li><a href="degustazioni.html">Degustazioni</a></li>
+                    <li id="here"><span lang="en">Login</span></li>
+                </ul>
+            </nav>
+
+            <nav id="breadcrumb">
+                <p>Ti trovi in: <a href="user-profile.html">PROFILO</a> > IMPOSTAZIONI</p>
+            </nav>
+                
         </header>
 
         <main id="user-settings-main">

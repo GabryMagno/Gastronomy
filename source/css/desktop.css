@@ -703,13 +703,13 @@ div#list-content{
     justify-content: space-between;
 }
 
-div#filter{
+aside#filter{
     display:flex;
     flex-direction: column;
     width: 23.5%;
 }
 
-div#filter fieldset{
+aside#filter fieldset{
     border: 3px solid black;
 }
 
@@ -742,34 +742,54 @@ button.choice{
     border: 3px solid black;
 }
 
-button#reset-filters, button#reset-advice{
+button#reset-filters, button#reset-advice, button.reset-setting{
     background-color: var(--txtcolor);
     color: var(--bgcolor);
 }
 
-button#submit-filters{
+button#submit-filters, button.submit-setting{
     background-color: var(--headerbgcolor);
     color: var(--bgcolor);
     margin-top: 1em;
 }
 
-div#show-products{
+section#show-products{
     width: 74.5%;
     box-sizing: border-box;
     margin-bottom: 0.5em;
 }
 
-form#search{
+form#search, form#other-filters{
     margin: 1em 0 1em 1em;
     padding: 0 0.7em 0 0;
 }
 
-input#searching-bar{
+form#other-filters{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form#other-filters label{
+    margin: 0.5em 1em;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+select#select-for{
+    border: 2px solid black;
+    padding: 0.3em;
+}
+
+input#searching-bar, select#select-for{
     border-radius: 0.5em;
-    width: 100%;
     min-height: 3.5vh;
     font-size: 1.1em;
     padding: 0.4em;
+}
+
+input#searching-bar{
+    width: 100%;
 }
 
 ul#list{
@@ -830,6 +850,13 @@ p.product-name{
     font-weight: bold;
     font-size: 1.5em;
     margin-bottom: 1.5em;
+}
+
+div#product-pages{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1.5em 0;
 }
 /*  
     ===============================
@@ -1033,7 +1060,7 @@ PAGINA AREA RISERVATA, LOGIN, REGISTRAZIONE
     background-color: var(--bgcolor);
 }
 
-form.privacy-area label{
+form.privacy-area label,fieldset.user-form {
     text-align: left;
     font-weight: bold;
     margin-top: 1em;
@@ -1049,7 +1076,14 @@ form.privacy-area fieldset{
     align-items: center;
 }
 
-form.privacy-area input{
+form.privacy-area div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form.privacy-area input , fieldset.user-form input{
     margin: 1em;
     width: 75%;
     border-radius: 1.5em;
@@ -1064,6 +1098,7 @@ form.privacy-area input{
     text-align: center;
     width: 37.5%;
     margin: 1em 1em 2em 1em;
+    cursor: pointer;
 }
 
 div#to-register,div#to-login{
@@ -1090,19 +1125,44 @@ p#register,p#login{
 
 /*  
     ===============================
-            PAGINA UTENTE 
+            PAGINE UTENTE 
     ===============================
 */
 
+/*USER-MAIN*/
 div#favorites, div#user-info{
     display: flex;
     margin: 1.5em 2em;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
-div#user-info{
+div#user-info img{
+    box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.9),
+                0 0.2em 0.4em rgba(0, 0, 0, 0.9);
+}
+
+#user-profile-main h3, #user-settings-main h3{
+    box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.9),
+                0 0.2em 0.4em rgba(0, 0, 0, 0.9);
+    background-color: #4C0002;
+    color: var(--bgcolor);
+    padding: 0.5em;
+}
+
+div#user-info #general-info{
+    display: flex;
     flex-direction: column;
+    margin-left: 1em;
+}
+
+#general-info{
+    height: 100%;
+    justify-content: space-between;
+}
+
+div#user-info img{
+    border-radius: 50%;
 }
 
 a#prev{
@@ -1117,16 +1177,16 @@ a#prev, a#next{
     width: 6em;
     text-align: center;
 }
+div#favorites{
+    display: flex;
+    flex-direction: column;
+}
 
 ul#favorites-list{
     display: flex;
     list-style-type: none;
-    overflow-x: scroll;
-    scroll-behavior: smooth;
-}
-
-ul#favorites-list li.product-brochure{
-    min-width: 32.2%;
+    overflow-x: hidden;
+    overscroll-behavior-inline: contain;
 }
 
 div#user-settings{
@@ -1138,7 +1198,7 @@ div#user-settings{
     padding: 1em;
 }
 
-a#profile-settings, a#prev, a#next{
+a#profile-settings{
     text-align: center;
     background-color: var(--headerbgcolor);
     padding: 1em;
@@ -1150,6 +1210,33 @@ a#profile-settings, a#prev, a#next{
         PAGINA IMPOSTAZIONI UTENTE
     ===================================
 */
+
+img#prev, img#next{
+    margin: 0 2em;
+    width: 4em;
+    cursor: pointer;
+}
+
+a#profile-settings{
+    width: 25em;
+}
+
+form#logout{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.pay-attention{
+    padding: 1em;
+    margin: 1em 0;
+    border-radius: 1em;
+    background-color: var(--errorcolor);
+    color: var(--bgcolor);
+    width: 25em;
+    cursor: pointer;
+}
+
 #setting-user{
     display: flex;
     flex-direction: column;
@@ -1173,14 +1260,6 @@ a#profile-settings, a#prev, a#next{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-#setting-user fieldset{
-    margin: 0.4em 0 1.5em 0;
-    display: flex;
-    flex-direction: column;
-    padding: 1em;
-    text-align: center;
 }
 
 #setting-user label{
@@ -1282,11 +1361,9 @@ a#profile-settings, a#prev, a#next{
 
 .degustazione-dettagli dt{
     font-weight: bold;
-
     display: inline-block;
     padding-left: 26px;
     padding-right: 0.2em;
-
     position: relative;
     margin-bottom: 0.5em;
 }
@@ -1301,7 +1378,6 @@ a#profile-settings, a#prev, a#next{
     content: "";
     display: inline-block;
     position: absolute;
-
     left: 0;
     top: 0.1em;
     width: 20px;
@@ -1746,6 +1822,7 @@ h3 + .singleproduct-rating {
 }
 
 /* === MESSAGGI DI ERRORE */
+
 .error{
     color: var(--errorcolor);
     display: block;

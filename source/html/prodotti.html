@@ -66,7 +66,7 @@
 
         <main id="contents">
             <div id="list-content">
-                <div id="filter">
+                <aside id="filter">
                     <h2 class="section-title">FILTRI</h2>
                     <form id="filter-content">
                         <fieldset>
@@ -126,13 +126,22 @@
                             <button type="submit" id="submit-filters" class="choice">CONFERMA</button>
                         </div>
                     </form>
-                </div>
-                <div id="show-products">
+                </aside>
+                <section id="show-products">
                     <h2 class="section-title">RICERCA e RISULTATI</h2>
 
                     <form id="search">
                         <label for="searching-bar" class="display-none">Barra di ricerca</label>
                         <input type="search" id="searching-bar" placeholder="Cerca un prodotto"/>
+                    </form>
+                    <form id="other-filters">
+                        <label for="select-for">FILTRA PER : </label>
+                        <select id="select-for">
+                            <option>Dal più recente</option>
+                            <option>Dal meno recente</option>
+                            <option>Dal voto più alto</option>
+                            <option>Dal voto più basso</option>
+                        </select>
                     </form>
             
                     <ul id="list">
@@ -158,8 +167,13 @@
                             <a href="">Scheda del prodotto</a>
                         </li>
                     </ul>
+                    <div id="product-pages">
+                        <img src="../../img/back.png" id="prev" alt="prodotti della pagina precedente"/>
+                        <p id="current-page"> 1 / 10</p>
+                        <img src="../../img/next.png" id="next" alt="prodotti della pagina successiva"/>
+                    </div>
 
-                </div>
+                </section>
             </div>
         </main>
         <footer>
