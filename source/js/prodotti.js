@@ -1,14 +1,6 @@
 function FilterForm(){
-    var vote = document.getElementById("grade").value;
     var cost =  document.getElementById("price").value;
-    document.getElementById("rate").innerText = vote + " / 10";
     document.getElementById("text-price").innerText = cost + " €";
-}
-
-function UpdateVoto(){
-    const Voto = document.forms["filter-content"]["grade"].value;
-    document.getElementById("rate").innerText = Voto + " / 10";
-    return Voto;
 }
 
 function UpdatePrezzo(){
@@ -18,7 +10,6 @@ function UpdatePrezzo(){
 }
 
 const filters = {
-    "grade" : ["input", UpdateVoto],
     "price" : ["input", UpdatePrezzo],
 }
 
