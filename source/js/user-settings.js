@@ -80,6 +80,13 @@ function validateUsername(){
 	var Username = document.forms['change-personal-info']['change-username'].value;
 	const allowedChars = /^[a-zA-ZÀ-Ýß-ÿ0-9]{4,16}$/; //lettere maiuscole, lettere minuscole e numeri
 
+	if(Username === "user" || Username === "admin"){
+		var check = document.getElementById("username-error");
+		deleteError(check);
+		FirstFormUltimateCheck();
+		return true;
+	}
+
 	if(Username.length < 4){
 		return checkInput("change-username", "username-error", "Lo <span lang='en'>username</span> deve avere una lunghezza minima di 4 caratteri", 1, 1);
 	}
@@ -101,7 +108,7 @@ function validateName() {
 	var Name = document.forms['change-personal-info']['change-name'].value;
 	const allowedChars = /^[a-zA-ZÀ-Ýß-ÿ]+$/; // lettere maiuscole e minuscole
     
-    if(Name.length <= 0){
+    if(Name.length < 1){
 		return checkInput("change-name", "name-error", "Se vuoi modificare il nome devi inserire almeno un carattere", 0, 1);
 	}
 
@@ -224,6 +231,7 @@ function chargeNewLogo() {
 function validateOldPassword(){
     var oldPassword = document.forms['change-password-email']['old-password'].value;
 	const allowedChars = /^(?=.*[a-zß-ÿ])(?=.*[A-ZÀ-Ý])(?=.*[\d])(?=.*[.,!?@+\-_€$%&^*<>]).{8,}$/;// --> .,!?@+\-_€$%&^*<> questi sono i caratteri speciali
+
     if(oldPassword === "user" || oldPassword === "admin"){
 		var check = document.getElementById("old-password-error");
 		deleteError(check);

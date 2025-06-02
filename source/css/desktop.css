@@ -1847,7 +1847,10 @@ h3 + .singleproduct-rating {
     font-weight: bold;
 }
 
-button#submit-register.not-available, button#submit-user-setting.not-available, button#submit-password-setting.not-available{
+button#submit-register.not-available, 
+button#submit-user-setting.not-available, 
+button#submit-password-setting.not-available,
+button#submit-login.not-available{
     opacity: 0.6;
     cursor: not-allowed;
 }

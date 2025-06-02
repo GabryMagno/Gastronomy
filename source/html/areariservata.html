@@ -17,6 +17,9 @@
         <link rel="stylesheet" href="../css/desktop.css" media="screen ">
         <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 767px)">
 
+        <!--JS-->
+        <script async src="../js/login.js"></script>
+
         <!-- FONT -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -66,12 +69,16 @@
             <div id="login-user">
                 <form id="login_form" method="post" action="login.php" class="privacy-area">
                     <fieldset>
+
+                        <div>
+                            <label id="lbl_login_name" for="login_username"><span lang="en">Username</span></label>
+                            <input type="text" name="name" id="login_username" required data-msg-required="Inserisci il tuo username" data-msg-invalid="Username inserito non valido" placeholder="Username">
+                        </div>
                         
-                        <label id="lbl_login_name" for="login_username"><span lang="en">Username</span></label>
-                        <input type="text" name="name" id="login_username" required data-msg-required="Inserisci il tuo username" data-msg-invalid="Username inserito non valido" placeholder="Username">
-                        
-                        <label id="lbl_login_password" for="login_password">Password</label>
-                        <input type="password" name="password" id="login_password" required data-msg-required="Inserisci la tua password" placeholder="Password" />
+                        <div>
+                            <label id="lbl_login_password" for="login_password">Password</label>
+                            <input type="password" name="password" id="login_password" required data-msg-required="Inserisci la tua password" placeholder="Password" />
+                        </div>
 
                         <button type="submit" id="submit-login" class="choice">ACCEDI</button>
 
