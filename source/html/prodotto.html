@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>Prodotto | Gastronomia Cuochi per caso</title>
+        <link rel="icon" href="../../img/icone/favicon.svg" type="image/svg+xml">
+
+        <meta name="description" content="Cuochi per Caso, il sito in cui la gastronomia diventa un modo per sperimentare">
+        <meta name="keywords" content="Cuochi per Caso, primi, secondi, contorni, antipasti, dolci, gastronomia">
+        <meta name="author" content="Cuochi per Caso, Nicolò Bolzon, Gabriele Isacco Magnelli">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <link rel="stylesheet" href="../css/desktop.css" media="screen ">
+        <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 767px)">
+
+        <!-- FONT -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        <header class="hidden_header">
+            <nav class="navigation" aria-label="Aiuti alla navigazione">
+                <ul>
+                    <li><a href="#menu" class="a_navigation">Vai al menu</a></li>
+                </ul>
+            </nav>
+
+            <h1 class="header_text">Cuochi per Caso</h1>
+            <p class="header_text">La tua Gastronomia di fiducia</p>
+
+            <nav id="return" class="navbar_top">
+                
+                <h2 class="hidden logo-accessibile">Cuochi per Caso</h2>
+                
+                <button id="menu-button" aria-label="Comprimi o espandi il menu di navigazione" data-hidden="false">
+                    <span class="menu-button-1" aria-hidden="true"></span>
+                    <span class="menu-button-2" aria-hidden="true"></span>
+                    <span class="menu-button-3" aria-hidden="true"></span>
+                </button>
+
+                <ul id="menu" aria-label="Menu del sito">
+                    <li><a href="index.html"><span lang="en">Home</span></a></li>
+                    <li><a href="chisiamo.html">Chi siamo</a></li>
+                    <li><a href="prodotti.html">Prodotti</a></li>
+                    <li><a href="degustazioni.html">Degustazioni</a></li>
+                    <li><a href="login.html"><span lang="en">Login</span></a></li>
+                </ul>
+            </nav>
+                
+        </header>
+
+        <main class="singleproduct_main">
+            <article class="singleproduct">
+                <div class="singleproduct-img">
+                    <img src="../../img/antipasto.png" alt="">
+                </div>
+                <div class="singleproduct-descrizione">
+                    <div class="singleproduct-intestazione">
+                        <h2>[Nome Prodotto]</h2>
+                        <button id="singleproduct-stella" title="Aggiungi tra i preferiti" aria-label="Aggiungi ai preferiti">
+                            <img src="../../img/icone/star.svg" alt="">
+                        </button>
+                    </div>                    
+                    <hr class="section-divider section-singleproduct">
+                    <div id="singleproduct-diete">
+                        <img src="../../img/icone/vegano-verde.svg" alt="icona verde con indicazione prodotto vegano">
+                        <img src="../../img/icone/vegetariano-verde.svg" alt="icona verde con indicazione prodotto vegetariano">
+                        <img src="../../img/icone/celiaco-verde.svg" alt="icona verde con indicazione prodotto per persone celiache">
+                    </div>
+
+                    <dl class="singleproduct-dettagli">
+                        <dt id="prodotto-categoria">Categoria</dt>
+                        <dd>[Categoria]</dd>
+                        <dt id="prodotto-descrizione">Descrizione</dt>
+                        <dd>[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu leo sed odio cursus placerat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In porta mollis eros non commodo. Maecenas blandit sapien arcu, non iaculis ex cursus id. Aliquam ut posuere leo. Duis non sollicitudin dui, ac convallis nunc. Proin vel mauris purus. Duis feugiat vestibulum ipsum. Vestibulum eu tortor quis erat fringilla aliquam.]</dd>
+                        <dt id="prodotto-ingredienti">Ingredienti</dt>
+                        <dd>
+                            <ul>
+                                <li>[qta] [Ingrediente] [unita_misura]</li>
+                                <li>[qta] [Ingrediente] [unita_misura]</li>
+                                <li>[qta] [Ingrediente] [unita_misura]</li>
+                            </ul>
+                        </dd>
+                        <dt id="prodotto-valutazione">Valutazione Media</dt>
+                        <dd id="prodotto-valutazione-testo">[Valutazione]</dd>
+                    </dl>
+
+                    <p id="prodotto-nondisponibile">NON DISPONIBILE</p>
+
+                    <form method="post" id="prenotazione">
+                        <fieldset>
+                            <legend>Prenotazione Prodotto</legend>
+
+                            <input type="hidden" name="id_utente" value="[id_utente]">
+                            <input type="hidden" name="nome_prodotto" value="[nome_prodotto]">
+
+                            <label for="quantita">Quantità da prenotare:</label>
+                            <div id="quantita-unita">
+                                <input type="number" id="quantita" name="quantita" min="[min_prenotabile]" max="[max_prenotabile]" required>
+                                <span class="unita">[unita]</span>
+                            </div>
+                            <small class="descrizione-quantita">Puoi prenotare da [min_prenotabile] a [max_prenotabile] unit&agrave;.</small>
+
+                            <label for="data-ritiro">Data di ritiro:</label>
+                            <input type="date" id="data-ritiro" name="data_ritiro" required>
+
+                            <button type="submit" aria-label="Prenota Prodotto" class="bottoni-rossi">Prenota</button>
+                        </fieldset>
+                    </form>
+
+                </div>
+                <hr class="section-divider section-singleproduct">
+                
+                <h3>Valutazione e Commento</h3>
+                <dl class="singleproduct-rating">
+                    <dt>Data</dt>
+                    <dd>[Data Valutazione]</dd>
+                    <dt>Valutazione</dt>
+                    <dd class="rating-stars">
+                        <img src="../../img/icone/star-checked.svg" alt="">
+                        <img src="../../img/icone/star-checked.svg" alt="">
+                        <img src="../../img/icone/star-checked.svg" alt="">
+                        <img src="../../img/icone/star-checked.svg" alt="">
+                        <img src="../../img/icone/star.svg" alt="">
+                    </dd>
+                    <dt>Commento</dt>
+                    <dd>[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu leo sed odio cursus placerat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In porta mollis eros non commodo. Maecenas blandit sapien arcu, non iaculis ex cursus id. Aliquam ut posuere leo. Duis non sollicitudin dui, ac convallis nunc. Proin vel mauris purus. Duis feugiat vestibulum ipsum. Vestibulum eu tortor quis erat fringilla aliquam.]</dd>
+                </dl>
+
+                <form method="post" id="elimina-valutazione">
+                    <input type="hidden" name="id_utente" value="[id_utente]">
+                    <input type="hidden" name="nome_prodotto" value="[nome_prodotto]">
+                    <button type="submit" aria-label="Elimina valutazione" class="bottoni-rossi">Elimina valutazione</button>
+                </form>
+
+                <hr class="section-divider section-singleproduct">
+
+                <h3>Inserisci Valutazione e Commento</h3>
+
+                <form method="post" id="advice">
+                    <fieldset>
+                        <legend>Valutazione del prodotto</legend>
+                        <div class="rating" role="radiogroup" aria-label="Valutazione da 1 a 5 stelle">
+                            <input type="radio" name="rating" id="star5" value="5" required>
+                            <label for="star5" title="5 stelle" aria-label="5 stelle">&#9733;</label>
+
+                            <input type="radio" name="rating" id="star4" value="4">
+                            <label for="star4" title="4 stelle" aria-label="4 stelle">&#9733;</label>
+
+                            <input type="radio" name="rating" id="star3" value="3">
+                            <label for="star3" title="3 stelle" aria-label="3 stelle">&#9733;</label>
+
+                            <input type="radio" name="rating" id="star2" value="2">
+                            <label for="star2" title="2 stelle" aria-label="2 stelle">&#9733;</label>
+
+                            <input type="radio" name="rating" id="star1" value="1">
+                            <label for="star1" title="1 stella" aria-label="1 stella">&#9733;</label>
+                        </div>
+
+                        <label for="user-advice" class="form-label">Scrivi qua il tuo commento</label>
+                        <textarea name="suggerimento" placeholder="Scrivi qua il tuo commento sul prodotto." id="user-advice" required minlength="20" maxlength="500"></textarea>
+                    </fieldset>
+
+                    <div id="buttons-advice">
+                        <button type="reset" id="reset-advice" class="choice">ANNULLA</button>
+                        <button type="submit" id="submit-advice" class="choice">CONFERMA</button>
+                    </div>
+                </form>
+            </article>
+        </main>
+
+        <footer>
+            <p class="torna-su"><a href="#return">Torna su</a></p>
+
+            <p>
+                <a href="https://validator.w3.org/check?uri=referer">
+                    <img src="https://www.w3.org/html/logo/badge/html5-badge-h-solo.png" alt="HTML5 Valido!">
+                </a>
+            </p>
+            
+            <p>&copy; 2025 Gastronomia Cuochi per Caso - Tutti i diritti sono riservati</p>
+
+            <p>
+                <a href="https://jigsaw.w3.org/css-validator/check/referer">
+                    <img src="https://jigsaw.w3.org/css-validator/images/vcss" alt="CSS Valido!">
+                </a>
+            </p>
+        </footer>
+    </body>
+</html>

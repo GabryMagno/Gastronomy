@@ -54,7 +54,7 @@ body{
 }
 
 header{
-    background-image:url(../../img/sfondo-prova.png);
+    background-image:url(../../img/header.webp);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -83,6 +83,15 @@ header #breadcrumb p{
     text-align: center;
 }
 
+.hidden_header{
+    background-image: none;
+    min-height: 0vh;
+}
+
+.hidden_header .header_text{
+    display: none;
+}
+
 div#header{
     width: 100%;
 }
@@ -106,7 +115,7 @@ h2{
 }
 
 h3{
-    font-size: 1.2em;
+    font-size: 1.7em;
     text-align: center;
 }
 
@@ -114,6 +123,8 @@ p#title{
     margin-bottom: 2em;
     font-size: 1.3em;
 }
+
+
 
 /*  
     ===============================
@@ -198,6 +209,8 @@ p#title{
     justify-content: end;
     flex-direction: row;
     gap: 1em;
+
+    text-align: center;
 }
 
 #menu li {
@@ -208,7 +221,6 @@ p#title{
 
 #menu a {
     text-align: center;
-    text-decoration: none;
     display: block;
 }
 
@@ -303,14 +315,95 @@ footer .torna-su {
     text-align: center;
     font-weight: bold;
     font-size: 2em;
-    padding-top: 0.5em;
+    padding-top: 0.1em;
 }
 
 .section-descrizione{
     font-size: 1.2em;
     text-align: center;
+
+    padding-left: 2em;
+    padding-right: 2em;
 }
 
+/* === BOTTONI === */
+.bottoni-rossi{
+    border-radius: 1em;
+
+    background-color: var(--buttoncolor_rosso);
+    color: var(--title_color);
+    text-decoration: none;
+
+    font-size: 1em;
+
+    margin: 10px auto 0;
+    padding: 0.5em 1em;
+
+    display: block;
+    text-align: center;
+
+    cursor: pointer;
+}
+
+.bottoni-rossi:hover{
+    background-color: var(--buttoncolor_rosso_hover);
+}
+
+/* === FORM SUGGERIMENTI === */
+
+form#advice{
+    margin: 1em;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+form#advice fieldset{
+    width: 75%;
+    margin: 1em;
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    background-color: black;
+    color: var(--bgcolor);
+
+    border: 3px solid black;
+    border-radius: 0.5em;
+}
+
+form#advice label{
+    margin-top: 1em;
+}
+
+form#advice textarea{
+    padding: 1em;
+    margin: 1.5em 1em 2em 1em;
+    height: 30vh;
+    resize: none;
+}
+
+div#buttons-advice{
+    display: flex;
+    justify-content: end;
+    width: 75%;
+}
+
+form#advice button{
+    width: 100%;
+    margin-left: 1em;
+}
+
+form#advice button#reset-advice{
+    margin-left: 0;
+}
+
+button#submit-advice{
+    background-color: var(--headerbgcolor);
+    color: var(--bgcolor);
+}
 
 /*  
     ===============================
@@ -447,7 +540,7 @@ li.new{
 #degustazioni-home {
     position: relative;
 
-    background-image: url(../../img/tavola-degustazioni.png);
+    background-image: url(../../img/tavola-degustazioni.webp);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -743,114 +836,180 @@ p.product-name{
             PAGINA CHI SIAMO
     ===============================
 */
-div#mission{
-    display: flex;
-    margin: 1em;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+
+#descrizione-storia-iniziale{
+    text-align: justify;
 }
 
-div#goal{
-    border: 3px solid black;
+#storia{
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+
+/* GASTRONOMIA - STORIA PRIMA */
+#storia-old {
+    display: flex;
+    align-items: center;
+    gap: 2em;
     margin: 2em;
-    text-align: left;
-    padding: 1em;
-    width: 55%;
 }
 
-form#advice{
-    margin: 1em;
-    text-align: center;
-    justify-content: center;
+/* GASTRONOMIA - STORIA NUOVA */
+#storia-oggi{
+    display: flex;
+    flex-direction: row-reverse;
     align-items: center;
+    gap: 2em;
+    margin: 2em;
+}
+
+/* GASTRONOMIA - STORIA IN COMUNE */
+#storia-old img, #storia-oggi img{
+    width: 35%;
+    height: auto;
+    object-fit: cover;
+
+    border-radius: 0.5em;
+    border: 1px solid black;
+}
+
+#storia-old .testo, #storia-oggi .testo {
+    width: 65%;
     display: flex;
+
     flex-direction: column;
+    justify-content: center;
+
+    align-items: flex-start;
 }
 
-form#advice fieldset{
-    width: 75%;
-    margin: 1em;
-    min-height: 40vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    background-color: black;
-    color: var(--bgcolor);
-    border: 3px solid black;
-}
-form#advice label{
-    margin-top: 1em;
-}
-form#advice textarea{
-    padding: 1em;
-    margin: 1.5em 1em 2em 1em;
-    height: 30vh;
-}
-
-div#buttons-advice{
-    display: flex;
-    justify-content: end;
-    width: 75%;
-}
-
-form#advice button{
+#storia-old .testo h3, #storia-oggi .testo h3{
     width: 100%;
-    margin-left: 1em;
-}
 
-form#advice button#reset-advice{
-    margin-left: 0;
-}
-
-button#submit-advice{
-    background-color: var(--headerbgcolor);
-    color: var(--bgcolor);
-}
-
-div#contacts{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: var(--bgcolor);
-    padding: 1em;
-    margin: 1em 0;
-}
-
-.author{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 1em 0.25em;
-    width: 75%;
-    line-break: anywhere;
-}
-
-.info-author{
-    display: flex;
-    flex-direction: column;
-    background-color: var(--herelinkcolor);
-    width: 100%;
     text-align: center;
-    padding: 0.4em;
+    margin: 0 0 10px 0;
+}
+
+#storia-old .testo p, #storia-oggi .testo p{
+    
+    font-size: 1.2em;
+
+    text-align: justify;
+    margin: 0;
+}
+
+#chef-section-title{
+    margin: 0;
+    color: var(--title_color);
+
+    z-index: 1;
+}
+
+#chisiamo-chef{
+    background-image: url("../../img/cucina.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 3em;
+}
+
+#chisiamo-chef::before{
+    content: "";
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
     bottom: 0;
-    border: 0;
-    margin-left: 0.5em;
+
+    background-color: var(--txtcolor);
+    opacity: 0.7;
+    z-index: 0;
 }
 
+#chef-container{
+    margin: 3em;
+    display: flex;
+    gap: 3em;
+    flex-wrap: wrap;
+    justify-content: center;
+    z-index: 1;
+}
 
-.author img{
-    margin: 1em 0;
-    border-radius: 8em;
-    width: 4em;
-    height: 4em;
-    background-color: var(--txtcolor);
+#chisiamo-chef article {
+    background-color: var(--headerbgcolor);
+    border: 1.5px solid black;
+    border-radius: 0.5em;
+
+    padding: 20px;
+    flex: 1 1 300px;
+
+    text-align: left;
+}
+
+#chisiamo-chef article h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 15px;
+
+    color: var(--bgcolor);
+}
+
+.chef-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+
+    flex-direction: row;
+}
+
+.chef-content img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 0.5em;
+}
+
+.chef-content div {
+    max-width: 100%
+}
+
+.chef-content p {
+    color: var(--title_color);
+
+    display: block;
+    margin: 0;
+}
+
+.chef-content a {
+    display: block;
+
+    margin-top: 25px;
+}
+
+#chisiamo-info{
+    background-color: var(--secondaryelementcolor);
+}
+
+#chisiamo-info > h2{
+    margin: 0;
+    padding-top: 1rem;
 }
 
 /*  
     ===============================
-            PAGINA AREA RISERVATA, LOGIN, REGISTRAZIONE 
+PAGINA AREA RISERVATA, LOGIN, REGISTRAZIONE 
     ===============================
 */
 
@@ -986,6 +1145,89 @@ a#profile-settings, a#prev, a#next{
     border-radius: 1em;
 }
 
+/*
+    ===================================
+        PAGINA IMPOSTAZIONI UTENTE
+    ===================================
+*/
+#setting-user{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#setting-user h3{
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.form-setting{
+    width: 60%;
+    margin: 1em 0;
+}
+
+.form-setting fieldset div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#setting-user fieldset{
+    margin: 0.4em 0 1.5em 0;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    text-align: center;
+}
+
+#setting-user label{
+    margin: 1em 0 0 0;
+}
+
+#setting-user input{
+    width: 100%;
+}
+
+#new-logo{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#new-logo img{
+    width: 10em;
+    height: 10em;
+    border-radius: 50%;
+}
+
+#delete-account{
+    width: 60%;
+    margin: 3em 0;
+}
+
+#delete-account button{
+    width: 100%;
+    margin: 1.5em 0;
+}
+
+.form-setting .buttons{
+    flex-direction: row;
+}
+
+.form-setting button{
+    width: 50%;
+    margin-top: 0;
+}
+
+.form-setting .reset-setting{
+    margin-right: 1em;
+}
+
 /*  
     ===============================
             PAGINA DEGUSTAZIONE 
@@ -1024,26 +1266,6 @@ a#profile-settings, a#prev, a#next{
     margin: 0 0 1em;
 }
 
-.degustazione-button{
-    border-radius: 1em;
-
-    background-color: var(--buttoncolor_rosso);
-    color: var(--title_color);
-    text-decoration: none;
-
-    font-size: 1em;
-
-    margin: 10px auto 0;
-    padding: 0.5em 1em;
-
-    display: block;
-    text-align: center;
-}
-
-.degustazione-button:hover{
-    background-color: var(--buttoncolor_rosso_hover);
-}
-
 /* === CONTENUTO DEGUSTAZIONE === */
 .degustazione-dettagli{
     display: flex;
@@ -1073,9 +1295,9 @@ a#profile-settings, a#prev, a#next{
     content: ":";
 }
 
-#degustazione-persone::before,
-#degustazione-durata::before,
-#degustazione-prezzo::before{
+.degustazione-persone::before,
+.degustazione-durata::before,
+.degustazione-prezzo::before{
     content: "";
     display: inline-block;
     position: absolute;
@@ -1089,16 +1311,368 @@ a#profile-settings, a#prev, a#next{
     background-image: no-repeat;
 }
 
-#degustazione-persone::before{
+.degustazione-persone::before{
     background-image: url('../../img/icone/persona-nero.svg');
 }
 
-#degustazione-durata::before{
+.degustazione-durata::before{
     background-image: url('../../img/icone/durata-nero.svg');
 }
 
-#degustazione-prezzo::before{
+.degustazione-prezzo::before{
     background-image: url('../../img/icone/costo-nero.svg');
+}
+
+/*  
+    ===============================
+            PAGINA PRODOTTO 
+    ===============================
+*/
+.singleproduct_main{
+    margin-top: 5em;
+}
+
+.singleproduct{
+    display: flex;
+
+    flex-wrap: wrap;
+    margin-top: 0.5em;
+    margin-left: 3em;
+    margin-right: 3em;
+
+    gap: 1em;
+}
+
+.singleproduct-intestazione{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.singleproduct-intestazione h2{
+    color: var(--headerbgcolor);
+
+    text-align: left;
+    font-weight: bold;
+    font-size: 2em;
+
+    margin: 0;
+}
+
+#singleproduct-stella {
+    background: none;
+    border: none;
+
+    padding: 0;
+    cursor: pointer;
+}
+
+#singleproduct-stella img {
+    width: 40px;
+    height: auto;
+}
+
+.singleproduct{
+    display: flex;
+
+    flex-wrap: wrap;
+    margin-top: 0.5em;
+    margin-left: 3em;
+    margin-right: 3em;
+
+    gap: 1em;
+}
+
+.singleproduct h3::before{
+    content: "";
+    display: inline-block;
+    position: relative;
+
+    left: 0;
+    margin-right: 0.3em;
+    width: 20px;
+    height: 20px;
+
+    background-size: contain;
+
+    background-image: url('../../img/icone/valutazione-nero.svg');
+}
+
+.singleproduct h3::after{
+    content: ":";
+}
+
+.singleproduct-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.singleproduct-img, .singleproduct-descrizione{
+    flex: 1 1 300px;
+    padding: 0 1rem 1rem 1rem;
+}
+
+.singleproduct-img img{
+
+    aspect-ratio: 1/1;
+    width: 600px;
+    height: auto;
+
+    max-width: 90%;
+    max-height: 90%;
+
+    object-fit: cover;
+
+    display: block;
+
+    border-radius: 4px;
+    border: 1px solid var(--title_color);
+}
+
+.section-singleproduct{
+    height: 5px;
+    background-color: var(--headerbgcolor)
+}
+
+/* === CONTENUTO SINGOLO PRODOTTO === */
+#singleproduct-diete{
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+#singleproduct-diete img{
+    margin-right: 0.8em;
+
+    height: 70px;
+    width: auto;
+}
+
+.singleproduct-dettagli dt{
+    font-weight: bold;
+
+    font-size: 1.2em;
+}
+
+.singleproduct-dettagli dt::after{
+    content: ":";
+}
+
+.singleproduct-dettagli dt,
+.singleproduct-dettagli dd {
+    display: inline-block;
+}
+
+.singleproduct-dettagli {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+
+    row-gap: 0.5em;
+    column-gap: 1em;
+    grid-gap: 1.5em;
+
+    align-items: baseline;
+}
+
+#prodotto-ingredienti::before,
+#prodotto-descrizione::before,
+#prodotto-categoria::before,
+#prodotto-valutazione::before{
+    content: "";
+    display: inline-block;
+    position: relative;
+
+    left: 0;
+    margin-right: 0.3em;
+    width: 20px;
+    height: 20px;
+
+    background-size: contain;
+}
+
+#prodotto-categoria::before{
+    background-image: url('../../img/icone/categoria-nero.svg');
+}
+
+#prodotto-descrizione::before{
+    background-image: url('../../img/icone/descrizione-nero.svg');
+}
+
+#prodotto-ingredienti::before{
+    background-image: url('../../img/icone/ingredienti-nero.svg');
+}
+
+#prodotto-valutazione::before{
+    background-image: url('../../img/icone/star.svg');
+}
+
+#prodotto-valutazione-testo::after{
+    content: " / 5 stelle";
+}
+
+#prodotto-nondisponibile{
+    text-align: center;
+    font-weight: bolder;
+    font-size: 1.7em;
+
+    color: var(--errorcolor);
+
+    margin-top: 1em;
+}
+
+#aggiungi-prenotazione{
+    margin-top: 1em;
+}
+
+form#prenotazione{
+    width: 90%;
+    margin: 2em auto;
+
+    justify-content: center;
+    align-items: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+
+    background-color: white;
+    
+    border: 2px solid black;
+    border-radius: 0.5em;
+}
+
+form#prenotazione fieldset{
+    width: 90%;
+    border: none;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 0.5em;
+
+    padding: 0.5em;
+}
+
+form#prenotazione legend{
+    text-align: center;
+    padding-top: 0.5em;
+
+    font-weight: bold;
+    font-size: 1.7em;
+}
+
+form#prenotazione label{
+    font-weight: bold;
+}
+
+form#prenotazione small{
+    text-align: center;
+    margin-bottom: 0.5em;
+}
+
+form#prenotazione input{
+    padding: 0.5em;
+    border: 1px solid #aaa;
+    border-radius: 0.4em;
+}
+
+form#prenotazione #quantita{
+    width: 12em;
+}
+
+.quantita-unita{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.descrizione-quantita {
+    font-size: 0.9em;
+    color: #666;
+}
+
+
+/* === AREA COMMENTI === */
+
+.singleproduct-rating dt,
+.singleproduct-rating dd {
+    display: inline-block;
+}
+
+.singleproduct-rating {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+
+    row-gap: 0.5em;
+    column-gap: 1em;
+    grid-gap: 1.5em;
+
+    align-items: baseline;
+}
+
+.singleproduct-rating dt{
+    font-weight: bold;
+
+    font-size: 1.2em;
+}
+
+.singleproduct-rating dt::after{
+    content: ":";
+}
+
+h3 + .singleproduct-rating {
+    width: 100%;
+    margin-top: 0.5em;
+}
+
+.rating-stars{
+    display: flex;
+    gap: 0.5em;
+}
+
+.rating-stars .star{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.rating-stars img{
+    width: 30px;
+}
+
+.rating input{
+    display: none;
+}
+
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+.rating input {
+    display: none;
+}
+
+.rating label {
+    font-size: 2rem;
+
+    color: var(--bgcolor);
+    cursor: pointer;
+}
+
+.rating input:checked ~ label {
+    color: gold;
+}
+
+.rating label:hover,
+.rating label:hover ~ label {
+    color: gold;
+}
+
+#elimina-valutazione{
+    width: fit-content;
+    margin: 10px auto;
 }
 
 /*  
@@ -1106,15 +1680,6 @@ a#profile-settings, a#prev, a#next{
             PAGINE ERRORI 
     ===============================
 */
-
-.error_header{
-    background-image: none;
-    min-height: 0vh;
-}
-
-.error_header .header_text{
-    display: none;
-}
 
 .error_main h2{
     color: var(--errorcolor);
@@ -1155,6 +1720,7 @@ a#profile-settings, a#prev, a#next{
 
 .error-button-container{
     text-align: center;
+    margin: 1rem;
 }
 
 .error-button{
@@ -1167,8 +1733,11 @@ a#profile-settings, a#prev, a#next{
     margin: 0 auto;
     padding: 0.5em 1em;
 
-    width: 10%;
-    display: inline-block;
+    width: 10em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
     text-align: center;
 }
 
@@ -1176,14 +1745,18 @@ a#profile-settings, a#prev, a#next{
     background-color: var(--buttoncolor_rosso_hover);
 }
 
-/* === ERRORE 403 === */
+/* === MESSAGGI DI ERRORE */
+.error{
+    color: var(--errorcolor);
+    display: block;
+    text-align: center;
+    margin: 1em;
+    font-weight: bold;
+}
 
-
-/* === ERRORE 404 === */
-
-
-/* === ERRORE 500 === */
-
-
+button#submit-register.not-available, button#submit-user-setting.not-available, button#submit-password-setting.not-available{
+    opacity: 0.6;
+    cursor: not-allowed;
+}
 
 /* ================================================= */

@@ -14,8 +14,8 @@ CREATE TABLE utenti (
     email VARCHAR(100) NOT NULL UNIQUE,
     username VARCHAR(16) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    nome VARCHAR(50) NOT NULL,
-    cognome VARCHAR(50) NOT NULL,
+    nome VARCHAR(30) NOT NULL,
+    cognome VARCHAR(30) NOT NULL,
     data_nascita DATE NOT NULL,
     data_iscrizione TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     url_immagine VARCHAR(255),
@@ -23,8 +23,11 @@ CREATE TABLE utenti (
 );
 
 CREATE TABLE prodotti (
-    nome VARCHAR(50) PRIMARY KEY,
+    nome VARCHAR(30) PRIMARY KEY,
     categoria enum('antipasto', 'primo', 'secondo', 'contorno','dolce') NOT NULL,
+    unita enum('porzione','vaschetta','kg', 'gr', 'pezzo') NOT NULL,
+    min_prenotabile SMALLINT CHECK(min_prenotabile > 0),
+    max_prenotabile SMALLINT CHECK(max_prenotabile > min_prenotabile),
     descrizione TEXT,
     prezzo DECIMAL(10, 2) NOT NULL,
     isDisponibile BOOLEAN NOT NULL,
@@ -32,15 +35,15 @@ CREATE TABLE prodotti (
 );
 
 CREATE TABLE ingredienti (
-    nome VARCHAR(50) PRIMARY KEY,
+    nome VARCHAR(30) PRIMARY KEY,
     isCeliaco BOOLEAN NOT NULL,
     isVegano BOOLEAN NOT NULL,
     isVegetariano BOOLEAN NOT NULL
 );
 
 CREATE TABLE prodotto_ingredienti(
-    prodotto VARCHAR(50) NOT NULL,
-    ingrediente VARCHAR(50) NOT NULL,
+    prodotto VARCHAR(30) NOT NULL,
+    ingrediente VARCHAR(30) NOT NULL,
     quanto_basta BOOLEAN NOT NULL,
     quantita SMALLINT CHECK(quantita >= 0),
     unita_misura enum ('g', 'ml', 'num_el'),
@@ -52,7 +55,7 @@ CREATE TABLE prodotto_ingredienti(
 
 CREATE TABLE degustazioni (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nome_prodotto VARCHAR(50),
+    nome_prodotto VARCHAR(30),
     id_cliente INT,
     data_inizio DATE NOT NULL,
     data_fine DATE NOT NULL,
@@ -65,7 +68,7 @@ CREATE TABLE degustazioni (
 
 CREATE TABLE preferiti (
     id_utente INT,
-    nome_prodotto VARCHAR(50),
+    nome_prodotto VARCHAR(30),
     PRIMARY KEY (id_utente, nome_prodotto),
     FOREIGN KEY (id_utente) REFERENCES utenti(id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (nome_prodotto) REFERENCES prodotti(nome) ON DELETE CASCADE ON UPDATE CASCADE
@@ -74,7 +77,7 @@ CREATE TABLE preferiti (
 CREATE TABLE prenotazioni (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_utente INT,
-    nome_prodotto VARCHAR(50),
+    nome_prodotto VARCHAR(30),
     quantita INT NOT NULL,
     data_ritiro DATE NOT NULL,
     FOREIGN KEY (id_utente) REFERENCES utenti(id) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -83,7 +86,7 @@ CREATE TABLE prenotazioni (
 
 CREATE TABLE valutazioni (
     id_utente INT,
-    nome_prodotto VARCHAR(50),
+    nome_prodotto VARCHAR(30),
     data TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     voto INT CHECK (voto >= 0 AND voto <= 5),
     commento TEXT,

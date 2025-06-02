@@ -9,7 +9,7 @@
 
         <meta name="description" content="Cuochi per Caso, il sito in cui la gastronomia diventa un modo per sperimentare">
         <meta name="keywords" content="Cuochi per Caso, primi, secondi, contorni, antipasti, dolci, gastronomia">
-        <meta name="author" content="Cuochi per Caso, Nicolò Bolzon, Gabriele Isacco Magnelli">
+        <meta name="author" content="Cuochi per Caso, Nicol&ograve; Bolzon, Gabriele Isacco Magnelli">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- CSS -->
@@ -24,7 +24,7 @@
     </head>
     
     <body>
-        <header id="home_header">
+        <header>
             <nav class="navigation" aria-label="Aiuti alla navigazione">
                 <ul>
                     <li><a href="#breadcrumb" class="a_navigation">Vai dove ti trovi</a></li>
@@ -61,47 +61,101 @@
                 
         </header>
 
-        <main id="contents">
-            <div id="mission">
-                <img src="../../img/Cuochi.png"/>
-                <div id="goal">
-                    <h2 class="section-title">IL NOSTRO OBIETTIVO</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua. 
-                        Ut enim ad minim veniam, quis nostrum exercitationem ullamco laboriosam, nisi ut aliquid ex ea commodi consequatur. 
-                        Duis aute irure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                        Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                </div>
-            </div>
-            <h3>SE HAI UN SUGGERIMENTO:</h3>
-            <form method="post" id="advice">
-                <fieldset>
-                    <label for="user-advice" class="form-label">Scrivi qua il tuo suggerimento</label>
-                    <textarea name="suggerimento" placeholder="Scrivi un suggerimento" id="user-advice" required minlength="20" maxlength="500"></textarea>
-                </fieldset>
-                <div id="buttons-advice">
-                    <button type="reset" id="reset-advice" class="choice">ANNULLA</button>
-                    <button type="submit" id="submit-advice" class="choice">CONFERMA</button>
-                </div>
-            </form>
-             
-            <h2>CONTATTI</h2>
-            <div id="contacts">
-                <div id="author1" class="author">
-                    <img src="../../img/Cuochi.png" alt="" />
-                    <div class="info-author">
-                        <p>GABRIELE MAGNELLI</p>
-                        <a href="mailto.gabrieleisacco.magnelli@studenti.unipd.it">gabriele.magnelli@studenti.unipd.it</a>
+        <main>
+            <h2 class="section-title">La nostra storia</h2>
+            <p class="section-descrizione" id="descrizione-storia-iniziale">
+                <strong>"Cuochi per Caso"</strong> &egrave; una gastronomia con una lunga tradizione, oggi gestita da due studenti di Informatica dell’Universit&agrave; di Padova.
+                Il nome non &egrave; solo un gioco di parole: eravamo stati chiamati per creare il sito web, ma tra una riga di codice e una teglia di lasagne, ci siamo ritrovati dietro ai fornelli!
+                Da allora uniamo passione, innovazione e sapori autentici… per caso, ma con tanto cuore.
+            </p>
+            <section id="storia">
+                <article id="storia-old">
+                    <img src="../../img/old-esterno-gastronomia.webp" alt="Facciata del primo e antico edificio della gastronomia Cuochi per Caso">
+                    <div class="testo">
+                        <h3>La nostra vecchia storia</h3>
+                        <p>
+                            Tanto tempo fa, quando le ricette si tramandavano ancora a voce e il profumo del rag&ugrave; invadeva le strade, nasceva <strong>"Cuochi per Caso"</strong>. Non si chiamava ancora cos&igrave;, certo, ma gi&agrave; allora era un piccolo regno di sapori casalinghi, gestito con passione da mani esperte e cuori pieni di amore per la cucina. Le nonne impastavano a occhi chiusi, i clienti entravano per “una cosa veloce” e uscivano con tre vassoi e un sorriso. Era un luogo dove il tempo sembrava rallentare, e ogni piatto raccontava una storia.
+                        </p>
                     </div>
-                </div>
-                <div id="author2" class="author">
-                    <img src="../../img/Cuochi.png" alt="" />
-                    <div class="info-author">
-                        <p>NICOLO' BOLZON</p>
-                        <a href="mailto.nicolo.bolzon@studenti.unipd.it">nicolo.bolzon@studenti.unipd.it</a>
+                </article>
+
+                <article id="storia-oggi">
+                    <img src="../../img/esterno-gastronomia.webp" alt="Facciata dell'attuale e nuovo edificio della gastronomia Cuochi per Caso">
+                    <div class="testo">
+                        <h3>La nostra nuova storia</h3>
+                        <p>
+                            Poi, un giorno, arriviamo noi: due studenti di Informatica dell’Universit&agrave; di Padova, armati di laptop e cavi USB, pronti a modernizzare il sito della gastronomia. Il piano era semplice: sistemare qualche pagina web, magari aggiungere una sezione con i piatti del giorno, e via.
+                            Invece... un giorno manca il cuoco. Il giorno dopo pure. E cos&igrave;, tra un div di troppo e una lasagna da infornare, ci siamo ritrovati con un mestolo in mano e un grembiule addosso.
+                            Ora siamo qui: ancora con il codice nel cuore, ma con la farina sulle mani. Perché s&igrave;, siamo diventati davvero <strong>cuochi per caso</strong>, ma non potremmo esserne più felici.
+                        </p>
                     </div>
+                </article>
+            </section>
+
+            <hr class="section-divider">
+
+            <section id="chisiamo-chef">
+                <h2 class="section-title" id="chef-section-title">I nostri Chef</h2> 
+                <div id="chef-container">
+                    <article>
+                        <h2>Gabriele Magnelli</h2>
+                        <div class="chef-content">
+                            <img src="../../img/Cuochi.png" alt="Foto di Gabriele Magnelli">
+                            <div>
+                                <p><strong>Gabriele</strong> &egrave; uno studente di Informatica all’Universit&agrave; di Padova, &egrave; lo chef del codice dinamico: appassionato di <span lang="en">JavaScript</span>, d&agrave; vita a pagine interattive e saporite, mescolando logica e creativit&agrave; come in una ricetta bilanciata.</p>
+                                <a class="chef-email" href="mailto:gabrieleisacco.magnelli@studenti.unipd.it">gabriele.magnelli@studenti.unipd.it</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article>
+                        <h2>Nicol&ograve; Bolzon</h2>
+                        <div class="chef-content">
+                            <img src="../../img/Cuochi.png" alt="Foto di Nicol&ograve; Bolzon">
+                            <div>
+                                <p><strong>Nicol&ograve;</strong> &egrave; uno studente di Informatica all’Universit&agrave; di Padova con la passione per il front-end e per l’impiattamento… di pagine web. Nella gastronomia "Cuochi per Caso", si occupa di servire interfacce appetitose e accessibili.</p>
+                                <a class="chef-email" href="mailto:nicolo.bolzon@studenti.unipd.it">nicolo.bolzon@studenti.unipd.it</a>
+                            </div>
+                        </div>
+                    </article>
                 </div>
-            </div>
-        </main>
+            </section>
+
+            <hr class="section-divider">
+
+            <section id="chisiamo-suggerimenti">
+                <h2 class="section-title">Hai un suggerimento?</h2>
+                <p class="section-descrizione">Dicci la tua! Che sia un complimento, un consiglio o un'idea brillante, siamo tutto orecchi. Compila il box qui sotto e aiutaci a rendere la nostra gastronomia ancora più gustosa!</p>
+
+                <form method="post" id="advice">
+                    <fieldset>
+                        <label for="user-advice" class="form-label">Scrivi qua il tuo suggerimento</label>
+                        <textarea name="suggerimento" placeholder="Scrivi un suggerimento" id="user-advice" required minlength="20" maxlength="500"></textarea>
+                    </fieldset>
+                    <div id="buttons-advice">
+                        <button type="reset" id="reset-advice" class="choice">ANNULLA</button>
+                        <button type="submit" id="submit-advice" class="choice">CONFERMA</button>
+                    </div>
+                </form>
+            </section>
+
+            <hr class="section-divider">
+
+            <section id="chisiamo-info">
+                <h2 class="section-title">Come raggiungerci</h2>
+                <p>
+
+                </p>
+                <h3>Orari</h3>
+                <p>
+
+                </p>
+                <h3>Informazioni</h3>
+                <p>
+
+                </p>
+            </section>
+
         </main>
         <footer>
             <p class="torna-su"><a href="#return">Torna su</a></p>

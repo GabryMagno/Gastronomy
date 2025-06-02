@@ -21,10 +21,13 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+
+        <!--JS-->
+        <script async src="../js/prodotti.js"></script>
     </head>
 
     <body>
-        <header id="home_header">
+        <header>
             <nav class="navigation" aria-label="Aiuti alla navigazione">
                 <ul>
                     <li><a href="#breadcrumb" class="a_navigation">Vai dove ti trovi</a></li>
@@ -65,7 +68,7 @@
             <div id="list-content">
                 <div id="filter">
                     <h2 class="section-title">FILTRI</h2>
-                    <form>
+                    <form id="filter-content">
                         <fieldset>
                             <h3>TIPO DI CUCINA</h3>
                             <div id="first" class="filters">
@@ -106,10 +109,10 @@
                                 </div>
                             </div>
                             <h3>VALUTAZIONE</h3>
-                            <div class="filters" id="star-rating">
-                                <label for="grade">Valutazione</label>
-                                <input type="range" id="grade" name="min_rate" min="1" max="5" value="5"/>
-                                <p aria-hidden="true" id="rate">5 / 5</p>
+                            <div class="filters">
+                                <label for="price">Prezzo massimo</label>
+                                <input type="range" id="price" name="price" min="1" max="100" />
+                                <p aria-hidden="true" id="text-price">100 &euro;</p>
                             </div>
                             <h3>PREZZO</h3>
                             <div class="filters">
