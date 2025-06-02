@@ -31,9 +31,6 @@
                 </ul>
             </nav>
 
-            <h1 class="header_text">Cuochi per Caso</h1>
-            <p class="header_text">La tua Gastronomia di fiducia</p>
-
             <nav id="return" class="navbar_top">
                 
                 <h2 class="hidden logo-accessibile">Cuochi per Caso</h2>
@@ -52,6 +49,13 @@
                     <li><a href="login.html"><span lang="en">Login</span></a></li>
                 </ul>
             </nav>
+
+            <nav id="breadcrumb">
+                <p>Ti trovi in: <a href="prodotti.html">PRODOTTI</a> > [Nome Prodotto]</p>
+            </nav>
+
+            <h1 class="header_text">Cuochi per Caso</h1>
+            <p class="header_text">La tua Gastronomia di fiducia</p>
                 
         </header>
 
@@ -78,7 +82,7 @@
                         <dt id="prodotto-categoria">Categoria</dt>
                         <dd>[Categoria]</dd>
                         <dt id="prodotto-descrizione">Descrizione</dt>
-                        <dd>[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu leo sed odio cursus placerat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In porta mollis eros non commodo. Maecenas blandit sapien arcu, non iaculis ex cursus id. Aliquam ut posuere leo. Duis non sollicitudin dui, ac convallis nunc. Proin vel mauris purus. Duis feugiat vestibulum ipsum. Vestibulum eu tortor quis erat fringilla aliquam.]</dd>
+                        <dd>[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu leo sed odio cursus placerat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In porta mollis eros non commodo. Maecenas blandit sapien arcu, non iaculis ex cursus id. Aliquam ut posuere leo.]</dd>
                         <dt id="prodotto-ingredienti">Ingredienti</dt>
                         <dd>
                             <ul>
@@ -89,25 +93,27 @@
                         </dd>
                         <dt id="prodotto-valutazione">Valutazione Media</dt>
                         <dd id="prodotto-valutazione-testo">[Valutazione]</dd>
+                        <dt id="prodotto-prezzo">Prezzo</dt>
+                        <dd id="prodotto-prezzo-testo">[Prezzo] €<span id="prodotto-prezzo-unita"> a [Unita]</span></dd>
                     </dl>
 
                     <p id="prodotto-nondisponibile">NON DISPONIBILE</p>
 
-                    <form method="post" id="prenotazione">
+                    <form method="post" id="prenotazione" class="form-bianco">
                         <fieldset>
                             <legend>Prenotazione Prodotto</legend>
 
                             <input type="hidden" name="id_utente" value="[id_utente]">
                             <input type="hidden" name="nome_prodotto" value="[nome_prodotto]">
 
-                            <label for="quantita">Quantità da prenotare:</label>
+                            <label for="quantita">Quantità da prenotare</label>
                             <div id="quantita-unita">
                                 <input type="number" id="quantita" name="quantita" min="[min_prenotabile]" max="[max_prenotabile]" required>
                                 <span class="unita">[unita]</span>
                             </div>
                             <small class="descrizione-quantita">Puoi prenotare da [min_prenotabile] a [max_prenotabile] unit&agrave;.</small>
 
-                            <label for="data-ritiro">Data di ritiro:</label>
+                            <label for="data-ritiro">Data di ritiro</label>
                             <input type="date" id="data-ritiro" name="data_ritiro" required>
 
                             <button type="submit" aria-label="Prenota Prodotto" class="bottoni-rossi">Prenota</button>
@@ -117,7 +123,7 @@
                 </div>
                 <hr class="section-divider section-singleproduct">
                 
-                <h3>Valutazione e Commento</h3>
+                <h3>Valutazioni e Commenti</h3>
                 <dl class="singleproduct-rating">
                     <dt>Data</dt>
                     <dd>[Data Valutazione]</dd>
@@ -143,9 +149,10 @@
 
                 <h3>Inserisci Valutazione e Commento</h3>
 
-                <form method="post" id="advice">
+                <form method="post" id="valutazione" class="form-bianco">
                     <fieldset>
-                        <legend>Valutazione del prodotto</legend>
+                        <legend>La tua valutazione del prodotto</legend>
+                        <label for="rating" class="form-label">Valutazione</label>
                         <div class="rating" role="radiogroup" aria-label="Valutazione da 1 a 5 stelle">
                             <input type="radio" name="rating" id="star5" value="5" required>
                             <label for="star5" title="5 stelle" aria-label="5 stelle">&#9733;</label>
@@ -162,15 +169,18 @@
                             <input type="radio" name="rating" id="star1" value="1">
                             <label for="star1" title="1 stella" aria-label="1 stella">&#9733;</label>
                         </div>
+                        <small class="descrizione-quantita">Esprimi la tua valutazione del prodotto selezionando da 1 a 5 stelle.</small>
 
-                        <label for="user-advice" class="form-label">Scrivi qua il tuo commento</label>
-                        <textarea name="suggerimento" placeholder="Scrivi qua il tuo commento sul prodotto." id="user-advice" required minlength="20" maxlength="500"></textarea>
+                        <label for="user-advice" class="form-label">Scrivi qui il tuo commento</label>
+                        <textarea name="suggerimento" placeholder="Scrivi qui il tuo commento sul prodotto." id="user-advice" required minlength="20" maxlength="500"></textarea>
+                        
+                        <div id="buttons-advice">
+                            <button type="reset" class="bottoni-neri">Annulla</button>
+                            <button type="submit" class="bottoni-rossi">Conferma</button>
+                        </div>
+                    
                     </fieldset>
 
-                    <div id="buttons-advice">
-                        <button type="reset" id="reset-advice" class="choice">ANNULLA</button>
-                        <button type="submit" id="submit-advice" class="choice">CONFERMA</button>
-                    </div>
                 </form>
             </article>
         </main>

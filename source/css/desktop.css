@@ -19,7 +19,8 @@
     --buttoncolor_rosso_hover: #991d40;
     --headerbgcolor: #73142F;
     /*--secondaryelementcolor: #7A9884;*/
-    --secondaryelementcolor:#84E79B;
+    /*--secondaryelementcolor:#84E79B;*/
+    --secondaryelementcolor: #B8D86C;
     --herelinkcolor: #000638;
     --linkcolor: #F3FF00;
 
@@ -59,28 +60,23 @@ header{
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
-    padding-bottom: 3rem;
     min-height: 70vh;
 }
 
 header h1{
     font-size: 5em;
-    padding-top: 3em;
+    padding-top: 1.6em;
     margin-bottom: -0.1em;
 }
 
 header p{
     font-size: 2em;
+    padding-bottom: 4.5em;
 }
 
 header .header_text{
     text-align: center;
     color: var(--title_color);
-}
-
-header #breadcrumb p{
-    font-size: 1.2em;
-    text-align: center;
 }
 
 .hidden_header{
@@ -163,12 +159,16 @@ p#title{
     color: var(--title_color);
     display: inline-flex;
     overflow: hidden;
-    position: absolute;
+    position: relative;
 
     top: 0;
     width: 100%;
     padding-top: 0.2em;
     padding-bottom: 0.2em;
+
+    opacity: 0.9;
+
+    margin-bottom: 0;
 }
 
 /*  
@@ -184,16 +184,16 @@ p#title{
 }
 
 .logo-accessibile{
-    background-image: url("../../img/loghi/logo_scritta_bianca.png");
+    background-image: url("../../img/loghi/logo_colori_lato_scritta_bianca.png");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
     margin-left: 0.5em;
     width: 5em;
-    height: 2.5em;
+    height: 2em;
 
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
 }
 
 /*  
@@ -233,10 +233,6 @@ p#title{
     border: 1px solid var(--title_color);
 }
 
-#return {
-    opacity: 0.85;
-}
-
 /* === MENU AD HAMBURGER === */
 
 #menu-button{
@@ -254,15 +250,24 @@ p#title{
     ===============================
 */
 #breadcrumb {
-    display: block;
-
     color: var(--title_color);
     background-color: var(--headerbgcolor);
-    max-width: 30%;
-    margin: 5em auto;
-    border-radius: 2em;
-    padding: 0.5rem 1rem;
-    text-align: center;
+
+    width: 100%;
+    position: relative;
+
+    border-top: 1px solid var(--title_color);
+
+    opacity: 0.9;
+}
+
+header #breadcrumb p{
+    font-size: 1.1em;
+    text-align: left;
+
+    padding-left: 1em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
 }
 
 /*  
@@ -349,6 +354,28 @@ footer .torna-su {
     background-color: var(--buttoncolor_rosso_hover);
 }
 
+.bottoni-neri{
+    border-radius: 1em;
+
+    background-color: var(--txtcolor);
+    color: var(--title_color);
+    text-decoration: none;
+
+    font-size: 1em;
+
+    margin: 10px auto 0;
+    padding: 0.5em 1em;
+
+    display: block;
+    text-align: center;
+
+    cursor: pointer;
+}
+
+.bottoni-neri:hover{
+    background-color: var(--buttoncolor_rosso_hover);
+}
+
 /* === FORM SUGGERIMENTI === */
 
 form#advice{
@@ -387,22 +414,8 @@ form#advice textarea{
 
 div#buttons-advice{
     display: flex;
-    justify-content: end;
-    width: 75%;
-}
-
-form#advice button{
+    justify-content: center;
     width: 100%;
-    margin-left: 1em;
-}
-
-form#advice button#reset-advice{
-    margin-left: 0;
-}
-
-button#submit-advice{
-    background-color: var(--headerbgcolor);
-    color: var(--bgcolor);
 }
 
 /*  
@@ -601,7 +614,7 @@ li.new{
 
     background-image: url('../../img/icone/forchettacoltello-white.svg');
     background-size: contain;
-    background-image: no-repeat;
+    background-repeat: no-repeat;
 }
 
 #degustazioni-home .promo-box{
@@ -736,13 +749,7 @@ div.buttons{
     margin: 1em 0 1em 0
 }
 
-button.choice{
-    padding: 1em 0;  
-    width: 100%;
-    border: 3px solid black;
-}
-
-button#reset-filters, button#reset-advice, button.reset-setting{
+button#reset-filters, button.reset-setting{
     background-color: var(--txtcolor);
     color: var(--bgcolor);
 }
@@ -912,6 +919,7 @@ div#product-pages{
 
 #storia-old .testo h3, #storia-oggi .testo h3{
     width: 100%;
+    color: var(--txtcolor);
 
     text-align: center;
     margin: 0 0 10px 0;
@@ -1314,7 +1322,7 @@ a#profile-settings{
 }
 
 .degustazione-card img{
-    width: 200px;
+    width: 250px;
     height: auto;
     object-fit: cover;
 }
@@ -1370,7 +1378,7 @@ a#profile-settings{
     height: 20px;
 
     background-size: contain;
-    background-image: no-repeat;
+    background-repeat: no-repeat;
 }
 
 .degustazione-persone::before{
@@ -1512,7 +1520,6 @@ a#profile-settings{
 
 .singleproduct-dettagli dt{
     font-weight: bold;
-
     font-size: 1.2em;
 }
 
@@ -1539,7 +1546,8 @@ a#profile-settings{
 #prodotto-ingredienti::before,
 #prodotto-descrizione::before,
 #prodotto-categoria::before,
-#prodotto-valutazione::before{
+#prodotto-valutazione::before,
+#prodotto-prezzo::before{
     content: "";
     display: inline-block;
     position: relative;
@@ -1572,6 +1580,15 @@ a#profile-settings{
     content: " / 5 stelle";
 }
 
+#prodotto-prezzo-testo{
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+#prodotto-prezzo-unita{
+    font-weight: normal;
+}
+
 #prodotto-nondisponibile{
     text-align: center;
     font-weight: bolder;
@@ -1580,15 +1597,16 @@ a#profile-settings{
     color: var(--errorcolor);
 
     margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 #aggiungi-prenotazione{
     margin-top: 1em;
 }
 
-form#prenotazione{
+form.form-bianco{
     width: 90%;
-    margin: 2em auto;
+    margin: 0 2em 2em 2em;
 
     justify-content: center;
     align-items: center;
@@ -1603,7 +1621,7 @@ form#prenotazione{
     border-radius: 0.5em;
 }
 
-form#prenotazione fieldset{
+form.form-bianco fieldset{
     width: 90%;
     border: none;
 
@@ -1615,7 +1633,7 @@ form#prenotazione fieldset{
     padding: 0.5em;
 }
 
-form#prenotazione legend{
+form.form-bianco legend{
     text-align: center;
     padding-top: 0.5em;
 
@@ -1623,28 +1641,37 @@ form#prenotazione legend{
     font-size: 1.7em;
 }
 
-form#prenotazione label{
+form.form-bianco .form-label{
     font-weight: bold;
+    font-size: 1.2em;
 }
 
-form#prenotazione small{
+form.form-bianco .form-label::after{
+    content: ":";
+}
+
+form.form-bianco small{
     text-align: center;
     margin-bottom: 0.5em;
 }
 
-form#prenotazione input{
+form.form-bianco input{
     padding: 0.5em;
     border: 1px solid #aaa;
     border-radius: 0.4em;
+
+    text-align: center;
 }
 
 form#prenotazione #quantita{
-    width: 12em;
+    width: 100%;
 }
 
-.quantita-unita{
+#quantita-unita{
     display: flex;
     align-items: center;
+    justify-content: center;
+
     gap: 1em;
 }
 
@@ -1709,7 +1736,7 @@ h3 + .singleproduct-rating {
 .rating {
     display: flex;
     flex-direction: row-reverse;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 .rating input {
@@ -1719,8 +1746,11 @@ h3 + .singleproduct-rating {
 .rating label {
     font-size: 2rem;
 
-    color: var(--bgcolor);
+    color: #7c7c7c;
     cursor: pointer;
+
+    margin-top: -0.5em;
+    margin-bottom: -0.2em;
 }
 
 .rating input:checked ~ label {
@@ -1749,7 +1779,7 @@ h3 + .singleproduct-rating {
     text-align: center;
     font-weight: bold;
     font-size: 3em;
-    padding-top: 1.5em;
+    padding-top: 0.2em;
 }
 
 .error_main h3{
