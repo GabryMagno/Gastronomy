@@ -1779,6 +1779,13 @@ h3 + .singleproduct-rating {
     margin: 10px auto;
 }
 
+#user-comment{
+    height: 20vh;
+    padding: 1em;
+    border: 2px solid black;
+    border-radius: 0.5em;
+}
+
 /*  
     ===============================
             PAGINE ERRORI 
