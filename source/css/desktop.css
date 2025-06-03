@@ -749,21 +749,24 @@ div.buttons{
     margin: 1em 0 1em 0
 }
 
-button#reset-filters, button.reset-setting{
+button#reset-filters, button.reset-setting, button#reset-advice{
     background-color: var(--txtcolor);
     color: var(--bgcolor);
+    padding: 1em;
 }
 
-button#submit-filters, button.submit-setting{
+button#submit-filters, button.submit-setting, button#submit-advice{
     background-color: var(--headerbgcolor);
     color: var(--bgcolor);
     margin-top: 1em;
+    padding: 1em;
 }
 
 section#show-products{
     width: 74.5%;
     box-sizing: border-box;
     margin-bottom: 0.5em;
+    margin-left: 5em;
 }
 
 form#search, form#other-filters{
@@ -861,9 +864,10 @@ p.product-name{
 
 div#product-pages{
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     margin: 1.5em 0;
+    width: 25em;
 }
 /*  
     ===============================
@@ -1042,10 +1046,18 @@ div#product-pages{
     padding-top: 1rem;
 }
 
+button#submit-advice{
+    margin: 0 0 0 1em;
+}
+
+button#submit-advice, button#reset-advice{
+    width: 36.5%;
+}
+
 /*  
-    ===============================
-PAGINA AREA RISERVATA, LOGIN, REGISTRAZIONE 
-    ===============================
+   =============================================
+    PAGINA AREA RISERVATA, LOGIN, REGISTRAZIONE 
+   =============================================
 */
 
 #sub-title, form.privacy-area h3{
@@ -1107,6 +1119,7 @@ form.privacy-area input , fieldset.user-form input{
     width: 37.5%;
     margin: 1em 1em 2em 1em;
     cursor: pointer;
+    padding: 1em;
 }
 
 div#to-register,div#to-login{
@@ -1137,7 +1150,6 @@ p#register,p#login{
     ===============================
 */
 
-/*USER-MAIN*/
 div#favorites, div#user-info{
     display: flex;
     margin: 1.5em 2em;
