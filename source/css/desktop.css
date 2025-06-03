@@ -1862,7 +1862,9 @@ h3 + .singleproduct-rating {
 button#submit-register.not-available, 
 button#submit-user-setting.not-available, 
 button#submit-password-setting.not-available,
-button#submit-login.not-available{
+button#submit-login.not-available,
+button#submit-advice.not-available,
+button#reset-advice.not-available{
     opacity: 0.6;
     cursor: not-allowed;
 }

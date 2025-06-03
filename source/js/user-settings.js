@@ -1,5 +1,15 @@
 function validateUserPersonalSettings() {
 
+	let reset_button = document.getElementById("reset-user-setting");
+
+	reset_button.addEventListener("click", () => {
+		deleteError(document.getElementById("username-error"));
+		deleteError(document.getElementById("name-error"));
+		deleteError(document.getElementById("surname-error"));
+		deleteError(document.getElementById("date-error"));
+		deleteError(document.getElementById("logo-error"));
+	});
+
 	let form = document.getElementById("change-personal-info");
 
 	form.addEventListener("submit", function (event) {
@@ -12,6 +22,14 @@ function validateUserPersonalSettings() {
 }
 
 function validateUserPasswordSettings(){
+	let reset_button = document.getElementById("reset-password-setting");
+
+	reset_button.addEventListener("click", () => {
+		deleteError(document.getElementById("old-password-error"));
+		deleteError(document.getElementById("password-error"));
+		deleteError(document.getElementById("repeat-password-error"));
+	});
+
 	let form = document.getElementById("change-password-email");
 
 	form.addEventListener("submit", function (event) {
@@ -301,12 +319,12 @@ window.addEventListener('load', () => {
 	document.getElementById("submit-user-setting").classList.add("not-available");
 	document.getElementById("submit-password-setting").disabled = true;
 	document.getElementById("submit-password-setting").classList.add("not-available");
-	checkRegister();
+	checkSettings();
 	validateUserPersonalSettings();
 	validateUserPasswordSettings();
 });
 
-function checkRegister() {
+function checkSettings() {
 	for (var id in listeners) {
 		if (!document.getElementById(id)) {
 			continue;

@@ -116,12 +116,12 @@ const listeners = {
 
 window.addEventListener('load', () => {
 	document.getElementById("submit-login").disabled = true;
-	document.getElementById("submit-login").classList.add("not-available")
-	checkRegister();
+	document.getElementById("submit-login").classList.add("not-available");
+	checkLogin();
 	validateUserLogin();
 });
 
-function checkRegister() {
+function checkLogin() {
 	for (var id in listeners) {
 		if (!document.getElementById(id)) {
 			continue;
