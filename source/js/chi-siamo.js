@@ -3,6 +3,11 @@ function validateUserAdvice() {
     reset_button.addEventListener("click", () =>{
         var check = document.getElementById("advice-error");
         deleteError(check);
+        document.getElementById("submit-advice").classList.add("not-available");
+		document.getElementById("submit-advice").disabled = true;
+        document.getElementById("user-advice").value = "";
+        document.getElementById("reset-advice").classList.add("not-available");
+		document.getElementById("reset-advice").disabled = true;
     })
 
 	let form = document.getElementById("advice");
