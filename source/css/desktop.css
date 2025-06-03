@@ -864,10 +864,10 @@ p.product-name{
 
 div#product-pages{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     margin: 1.5em 0;
-    width: 25em;
+    gap: 1em;
 }
 /*  
     ===============================
