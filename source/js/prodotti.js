@@ -1,4 +1,9 @@
 function FilterForm(){
+    let reset_button = document.getElementById("reset-filters");
+    reset_button.addEventListener("click", () =>{
+        document.getElementById("price").value = 100;
+        document.getElementById("text-price").innerText =   "100 €";
+    });
     var cost =  document.getElementById("price").value;
     document.getElementById("text-price").innerText = cost + " €";
 }
