@@ -749,21 +749,24 @@ div.buttons{
     margin: 1em 0 1em 0
 }
 
-button#reset-filters, button.reset-setting{
+button#reset-filters, button.reset-setting, button#reset-advice{
     background-color: var(--txtcolor);
     color: var(--bgcolor);
+    padding: 1em;
 }
 
-button#submit-filters, button.submit-setting{
+button#submit-filters, button.submit-setting, button#submit-advice{
     background-color: var(--headerbgcolor);
     color: var(--bgcolor);
     margin-top: 1em;
+    padding: 1em;
 }
 
 section#show-products{
     width: 74.5%;
     box-sizing: border-box;
     margin-bottom: 0.5em;
+    margin-left: 5em;
 }
 
 form#search, form#other-filters{
@@ -864,6 +867,7 @@ div#product-pages{
     justify-content: center;
     align-items: center;
     margin: 1.5em 0;
+    gap: 1em;
 }
 /*  
     ===============================
@@ -1042,10 +1046,18 @@ div#product-pages{
     padding-top: 1rem;
 }
 
+button#submit-advice{
+    margin: 0 0 0 1em;
+}
+
+button#submit-advice, button#reset-advice{
+    width: 36.5%;
+}
+
 /*  
-    ===============================
-PAGINA AREA RISERVATA, LOGIN, REGISTRAZIONE 
-    ===============================
+   =============================================
+    PAGINA AREA RISERVATA, LOGIN, REGISTRAZIONE 
+   =============================================
 */
 
 #sub-title, form.privacy-area h3{
@@ -1107,6 +1119,7 @@ form.privacy-area input , fieldset.user-form input{
     width: 37.5%;
     margin: 1em 1em 2em 1em;
     cursor: pointer;
+    padding: 1em;
 }
 
 div#to-register,div#to-login{
@@ -1137,7 +1150,6 @@ p#register,p#login{
     ===============================
 */
 
-/*USER-MAIN*/
 div#favorites, div#user-info{
     display: flex;
     margin: 1.5em 2em;
@@ -1767,6 +1779,13 @@ h3 + .singleproduct-rating {
     margin: 10px auto;
 }
 
+#user-comment{
+    height: 20vh;
+    padding: 1em;
+    border: 2px solid black;
+    border-radius: 0.5em;
+}
+
 /*  
     ===============================
             PAGINE ERRORI 
@@ -1850,7 +1869,11 @@ h3 + .singleproduct-rating {
 button#submit-register.not-available, 
 button#submit-user-setting.not-available, 
 button#submit-password-setting.not-available,
-button#submit-login.not-available{
+button#submit-login.not-available,
+button#submit-advice.not-available,
+button#reset-advice.not-available,
+button#reset-comment.not-available,
+button#submit-comment.not-available{
     opacity: 0.6;
     cursor: not-allowed;
 }

@@ -17,6 +17,9 @@
         <link rel="stylesheet" href="../css/desktop.css" media="screen ">
         <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 767px)">
 
+        <!--JS-->
+        <script async src="../js/prodotto.js"></script>
+
         <!-- FONT -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -171,12 +174,12 @@
                         </div>
                         <small class="descrizione-quantita">Esprimi la tua valutazione del prodotto selezionando da 1 a 5 stelle.</small>
 
-                        <label for="user-advice" class="form-label">Scrivi qui il tuo commento</label>
-                        <textarea name="suggerimento" placeholder="Scrivi qui il tuo commento sul prodotto." id="user-advice" required minlength="20" maxlength="500"></textarea>
+                        <label for="user-comment" class="form-label">Scrivi qui il tuo commento</label>
+                        <textarea name="commento" placeholder="Scrivi qui il tuo commento sul prodotto." id="user-comment" required minlength="30" maxlength="300"></textarea>
                         
                         <div id="buttons-advice">
-                            <button type="reset" class="bottoni-neri">Annulla</button>
-                            <button type="submit" class="bottoni-rossi">Conferma</button>
+                            <button type="reset" class="bottoni-neri" id="reset-comment">Annulla</button>
+                            <button type="submit" class="bottoni-rossi" id="submit-comment">Conferma</button>
                         </div>
                     </fieldset>
                 </form>
