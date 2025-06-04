@@ -124,146 +124,6 @@ p#title{
     font-size: 1.3em;
 }
 
-/* --- FORM BIANCHI --- */
-
-form.form-bianco{
-    width: 90%;
-    margin: 0 auto 2em auto;
-
-    justify-content: center;
-    align-items: center;
-
-    display: flex;
-    flex-direction: column;
-
-    background-color: white;
-    
-    border: 2px solid black;
-    border-radius: 0.5em;
-}
-
-form.form-bianco fieldset{
-    width: 90%;
-    border: none;
-
-    display: flex;
-    flex-direction: column;
-
-    gap: 0.5em;
-
-    padding: 0.5em;
-}
-
-form.form-bianco legend{
-    text-align: center;
-    padding-top: 0.5em;
-
-    font-weight: bold;
-    font-size: 1.7em;
-}
-
-form.form-bianco .form-label{
-    font-weight: bold;
-    font-size: 1.2em;
-}
-
-form.form-bianco .form-label::after{
-    content: ":";
-}
-
-form.form-bianco small{
-    text-align: center;
-    margin-bottom: 0.5em;
-}
-
-form.form-bianco input{
-    padding: 0.5em;
-    border: 1px solid #aaa;
-    border-radius: 0.5em;
-
-    text-align: center;
-}
-
-form.form-bianco textarea{
-    padding: 0.5em;
-    border: 1px solid #aaa;
-    border-radius: 0.5em;
-
-    font-size: 1em;
-
-    resize: none;
-
-    height: 100px;
-}
-
-/* === BOTTONI === */
-
-.bottoni-neri, .bottoni-rossi, .bottoni-errori{
-    border-radius: 1em;
-    
-    border: 1px solid var(--txtcolor);
-
-    text-decoration: none;
-
-    font-size: 1em;
-
-    margin: 10px 0 10px 0;
-    padding: 0.5em 1em;
-
-    width: 10em;
-
-    text-align: center;
-
-    align-items: center;
-    justify-content: center;
-
-    cursor: pointer;
-}
-
-.bottoni-rossi{
-    background-color: var(--buttoncolor_rosso);
-    color: var(--title_color);
-}
-
-.bottoni-rossi:hover{
-    background-color: var(--buttoncolor_rosso_hover);
-}
-
-.bottoni-errori{
-    background-color: var(--buttoncolor_rosso);
-    color: var(--linkcolor);
-
-    text-decoration: underline;
-}
-
-.bottoni-errori:hover{
-    background-color: var(--buttoncolor_rosso_hover);
-}
-
-.bottoni-rossi:hover{
-    background-color: var(--buttoncolor_rosso_hover);
-}
-
-.bottoni-neri{
-    background-color: var(--buttoncolor_nero);
-    color: var(--title_color);
-    text-decoration: none;
-}
-
-.bottoni-neri:hover{
-    background-color: var(--buttoncolor_nero_hover);
-}
-
-.button-container{
-    justify-content: center;
-    width: 100%;
-
-    display: flex;
-
-    text-align: center;
-    gap: 1em;
-}
-
 /*  
     ===============================
         AIUTI ALLA NAVIGAZIONE 
@@ -473,18 +333,182 @@ footer .torna-su {
     padding-right: 2em;
 }
 
+/* --- FORM BIANCHI --- */
+
+form.form-bianco{
+    width: 90%;
+    margin: 0 auto 2em auto;
+
+    justify-content: center;
+    align-items: center;
+
+    display: flex;
+    flex-direction: column;
+
+    background-color: white;
+    
+    border: 2px solid black;
+    border-radius: 0.5em;
+}
+
+form.form-bianco fieldset{
+    width: 90%;
+    border: none;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 0.5em;
+
+    padding: 0.5em;
+}
+
+form.form-bianco legend{
+    text-align: center;
+    padding-top: 0.5em;
+
+    font-weight: bold;
+    font-size: 1.7em;
+}
+
+form.form-bianco .form-label{
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+form.form-bianco .form-label::after{
+    content: ":";
+}
+
+form.form-bianco small{
+    text-align: center;
+    margin-bottom: 0.5em;
+}
+
+form.form-bianco input{
+    padding: 0.5em;
+    border: 1px solid #aaa;
+    border-radius: 0.5em;
+
+    text-align: center;
+}
+
+form.form-bianco textarea{
+    padding: 0.5em;
+    border: 1px solid #aaa;
+    border-radius: 0.5em;
+
+    font-size: 1em;
+
+    resize: none;
+
+    height: 100px;
+}
+
+/* === BOTTONI === */
+
+.bottoni-neri, .bottoni-rossi, .bottoni-errori{
+    border-radius: 1em;
+    
+    border: 1px solid var(--txtcolor);
+
+    text-decoration: none;
+
+    font-size: 1em;
+
+    margin: 10px 0 10px 0;
+    padding: 0.5em 1em;
+
+    width: 10em;
+
+    text-align: center;
+
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+.bottoni-rossi{
+    background-color: var(--buttoncolor_rosso);
+    color: var(--title_color);
+}
+
+.bottoni-rossi:hover{
+    background-color: var(--buttoncolor_rosso_hover);
+}
+
+.bottoni-errori{
+    background-color: var(--buttoncolor_rosso);
+    color: var(--linkcolor);
+
+    text-decoration: underline;
+}
+
+.bottoni-errori:hover{
+    background-color: var(--buttoncolor_rosso_hover);
+}
+
+.bottoni-rossi:hover{
+    background-color: var(--buttoncolor_rosso_hover);
+}
+
+.bottoni-neri{
+    background-color: var(--buttoncolor_nero);
+    color: var(--title_color);
+    text-decoration: none;
+}
+
+.bottoni-neri:hover{
+    background-color: var(--buttoncolor_nero_hover);
+}
+
+.button-container{
+    justify-content: center;
+    width: 100%;
+
+    display: flex;
+
+    text-align: center;
+    gap: 1em;
+}
+
+
+.promo-button{
+    color: var(--title_color);
+    text-decoration: none;
+
+    padding: 0.8em 2.2em;
+    border-radius: 0.5em;
+
+    font-weight: bold;
+    font-size: 1.8em;
+}
+
+.promo-button .button{
+    background-color: var(--headerbgcolor);
+    border-radius: 0.5em;
+    padding: 0.4em 0.6em;
+
+    border: 1px solid var(--txtcolor);
+}
+
 /*  
     ===============================
             PAGINA HOME 
     ===============================
 */
 
-ul.products,ul#best-products{
+ul.products, ul#best-products{
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+
     padding: 1.5rem;
     border: 0.5rem;
     color: #FFFFFF;
+
+    list-style: none;
 }
 
 ul#best-products{
@@ -492,8 +516,12 @@ ul#best-products{
 }
 
 li.new{
-    width: 33%;
-    list-style-type: none;
+    flex: 0 0 25%;
+    display: flex;
+    flex-direction: column;
+}
+
+li.new article{
     margin: 1em;
     display: flex;
     flex-direction: column;
@@ -520,44 +548,25 @@ li.new{
 }
 
 .promo-text{
-    max-width: 60%;
+    max-width: 80%;
 }
 
 .promo-text p{
     font-size: 1.5em;
+    text-align: justify;
 }
 
 .promo-text h2.promo-domanda{
     margin: 0;
+    margin-bottom: 0.5em;
     font-weight: bold;
     font-size: 2em;
 }
 
-.promo-button{
-    color: var(--title_color);
-    text-decoration: none;
-
-    padding: 0.8em 2.2em;
-    border-radius: 2em;
-
-    font-weight: bold;
-    font-size: 1.8em;
-}
-
-.promo-button .button{
-    background-color: var(--headerbgcolor);
-    border-radius: 2em;
-    padding: 0.4em 0.6em;
-
-    border: 1px solid var(--txtcolor);
-}
 #link-degustazione{
     background-color: var(--herelinkcolor);
     border: 1px solid white;
 }
-/*.promo-button .button:hover{
-    background-color: #dbd3ca;
-}*/
 
 /* === BOX CATEGORIE PRODOTTI === */
 #categorie{
@@ -774,7 +783,7 @@ div#list-content{
 aside#filter{
     display:flex;
     flex-direction: column;
-    width: 23.5%;
+    width: 25%;
 }
 
 aside#filter fieldset{
@@ -818,10 +827,10 @@ button#submit-filters, button.submit-setting{
 }
 
 section#show-products{
-    width: 74.5%;
+    width: 75%;
     box-sizing: border-box;
     margin-bottom: 0.5em;
-    margin-left: 5em;
+    margin-left: 2.5em;
 }
 
 form#search, form#other-filters{
@@ -884,7 +893,7 @@ li.product-brochure {
                 0 0.8em 0.8em rgba(0, 0, 0, 0.22);
 }
 
-li.product-brochure:hover,li.new:hover{
+li.product-brochure:hover,li.new article:hover{
     transform: translate(0, -0.4em );
     box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.16),
                 0 0.2em 0.4em rgba(0, 0, 0, 0.24);
@@ -897,7 +906,7 @@ li.product-brochure img,ul.products img,ul#best-products img{
     border-radius: 0.72em;
 }
 
-li.product-brochure a, li.new a{/*.new -> HOME*/
+li.product-brochure a, li.new article a{
     background-color: var(--headerbgcolor);
     width: 100%;
     margin-top: 1.5em;
@@ -911,10 +920,12 @@ li.product-brochure a, li.new a{/*.new -> HOME*/
     bottom: 0;
 }
 
-p.product-name{
+h3.product-name, h4.product-name{
     font-weight: bold;
-    font-size: 1.5em;
-    margin-bottom: 1.5em;
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+
+    padding: 0 1em;
 }
 
 div#product-pages{
@@ -935,7 +946,6 @@ div#product-pages{
 }
 
 #storia{
-    margin-top: 3em;
     margin-bottom: 3em;
 }
 
@@ -1062,7 +1072,7 @@ div#product-pages{
 
 .chef-content {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 20px;
 
     flex-direction: row;
@@ -1082,6 +1092,8 @@ div#product-pages{
 .chef-content p {
     color: var(--title_color);
 
+    text-align: start;
+
     display: block;
     margin: 0;
 }
@@ -1091,6 +1103,13 @@ div#product-pages{
 
     margin-top: 25px;
 }
+
+.chef-content-descrizione{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 
 form#advice{
     margin-top: 2em;
@@ -1157,7 +1176,7 @@ form.privacy-area div{
 form.privacy-area input , fieldset.user-form input{
     margin: 1em;
     width: 75%;
-    border-radius: 1.5em;
+    border-radius: 0.5em;
     border: 3px solid #2C1C18;
     padding: 0.5em;
 }
@@ -1165,7 +1184,7 @@ form.privacy-area input , fieldset.user-form input{
 #submit-login,#submit-register{
     background-color: var(--headerbgcolor);
     color: var(--bgcolor);
-    border-radius: 2em;
+    border-radius: 0.5em;
     text-align: center;
     width: 37.5%;
     margin: 1em 1em 2em 1em;
@@ -1273,7 +1292,7 @@ a#profile-settings{
     text-align: center;
     background-color: var(--headerbgcolor);
     padding: 1em;
-    border-radius: 1em;
+    border-radius: 0.5em;
 }
 
 /*  
@@ -1347,7 +1366,7 @@ a#profile-settings{
     background-color: var(--errorcolor);
     color: var(--bgcolor);
     padding: 1em;
-    border-radius: 1.5em;
+    border-radius: 0.5em;
 }
 
 .form-setting .buttons{

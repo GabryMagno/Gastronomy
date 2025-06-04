@@ -109,14 +109,14 @@
                             <input type="hidden" name="id_utente" value="[id_utente]">
                             <input type="hidden" name="nome_prodotto" value="[nome_prodotto]">
 
-                            <label for="quantita">Quantità da prenotare</label>
+                            <label for="quantita" class="form-label">Quantità da prenotare</label>
                             <div id="quantita-unita">
-                                <input type="number" id="quantita" name="quantita" min="[min_prenotabile]" max="[max_prenotabile]" required>
+                                <input type="number" id="quantita" name="quantita" min="1" max="10" required>
                                 <span class="unita">[unita]</span>
                             </div>
                             <small class="descrizione-quantita">Puoi prenotare da [min_prenotabile] a [max_prenotabile] unit&agrave;.</small>
 
-                            <label for="data-ritiro">Data di ritiro</label>
+                            <label for="data-ritiro" class="form-label">Data di ritiro</label>
                             <input type="date" id="data-ritiro" name="data_ritiro" required>
 
                             <div class="button-container">
@@ -160,7 +160,7 @@
                 <form method="post" id="valutazione" class="form-bianco">
                     <fieldset>
                         <legend>La tua valutazione del prodotto</legend>
-                        <label for="rating" class="form-label">Valutazione</label>
+                        <h4 class="form-label">Valutazione</h4>
                         <div class="rating" role="radiogroup" aria-label="Valutazione da 1 a 5 stelle">
                             <input type="radio" name="rating" id="star5" value="5" required>
                             <label for="star5" title="5 stelle" aria-label="5 stelle">&#9733;</label>

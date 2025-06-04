@@ -78,3 +78,7 @@ link rotti, circolari
 
 Domande
 -Site map nel sito e/o nella relazione
+
+
+DATABASE:
+- Un cliente può effettuare solo una degustazione per quel prodotto
