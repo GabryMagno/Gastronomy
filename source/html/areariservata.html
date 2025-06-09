@@ -65,32 +65,23 @@
         <main>
             <h2 class="section-title">Accedi</h2>
             <p class="section-descrizione">Riprendi il tuo viaggio gastronomico con noi!</p>
-             
-            <div>
-                <form id="login_form" method="post" action="login.php" class="form-bianco" id="login-user">
+                <form method="post" action="login.php" class="form-bianco" id="login-user">
                     <fieldset>
-                        <div>
-                            <label id="lbl_login_name" for="login_username"><span lang="en">Username</span></label>
-                            <input type="text" name="name" id="login_username" required data-msg-required="Inserisci il tuo username" data-msg-invalid="Username inserito non valido" placeholder="Username">
-                        </div>
-                        
-                        <div>
-                            <label id="lbl_login_password" for="login_password">Password</label>
-                            <input type="password" name="password" id="login_password" required data-msg-required="Inserisci la tua password" placeholder="Password">
-                        </div>
+                        <label id="lbl_login_name" for="login_username"><span lang="en">Username</span></label>
+                        <input type="text" name="name" id="login_username" required data-msg-required="Inserisci il tuo username" data-msg-invalid="Username inserito non valido" placeholder="Username">
+                        <label id="lbl_login_password" for="login_password">Password</label>
+                        <input type="password" name="password" id="login_password" required data-msg-required="Inserisci la tua password" placeholder="Password">
 
-                        <button type="submit" id="submit-login" class="choice">ACCEDI</button>
-
+                        <div class="button-container">
+                            <button type="submit" id="submit-login" class="bottoni-rossi">Accedi</button>
+                        </div>
                     </fieldset>
+                    <div id="to-register">
+                        <h3>Sei nuovo qui?</h3>
+                        <p class="privacy-area">Se non hai ancora assaporato qualcosa di eccezionale della nostra gastronomia e desideri provare qualcosa di nuovo:</p> 
+                        <p id="register"><a href="register.html">CREA UN NUOVO <span lang="en">ACCOUNT</span></a></p>
+                    </div>
                 </form>
-            
-                <div id="to-register">
-                    <h3>SEI NUOVO QUI?</h3>
-                    <p class="privacy-area">Se non hai ancora assaporato qualcosa di eccezionale della nostra gastronomia e desideri provare qualcosa di nuovo :</p> 
-                    <p id="register"><a href="register.html">CREA UN NUOVO <span lang="en">ACCOUNT</span></a></p>
-                </div>
-            </div>
-
         </main>
         <footer>
             <p class="torna-su"><a href="#return">Torna su</a></p>

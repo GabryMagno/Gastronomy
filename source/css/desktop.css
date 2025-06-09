@@ -412,6 +412,20 @@ form.form-bianco textarea{
     height: 100px;
 }
 
+form.form-bianco#login-user, form.form-bianco#register-form{
+    margin-top: 1em;
+    width: 70%;
+}
+
+form.form-bianco#login-user label, form.form-bianco#register-form label{
+    text-align: center;
+    font-weight: bold;
+}
+
+form.form-bianco#login-user label::after, form.form-bianco#register-form label::after{
+    content: ":";
+}
+
 /* === BOTTONI === */
 
 .bottoni-neri, .bottoni-rossi, .bottoni-link{
@@ -1100,7 +1114,6 @@ div#product-pages{
     justify-content: center;
 }
 
-
 form#advice{
     margin-top: 2em;
 }
@@ -1129,15 +1142,6 @@ form#advice textarea{
     margin-top: 1em;
 }
 
-#login-user, #register-user{
-    display: flex;
-    flex-direction: column;
-    margin: 2em 0;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-}
-
 form.privacy-area label,fieldset.user-form {
     text-align: left;
     font-weight: bold;
@@ -1161,10 +1165,6 @@ form.privacy-area div{
     align-items: center;
 }
 
-#register-form{
-    width: 65%;
-}
-
 form.privacy-area input , fieldset.user-form input{
     margin: 1em;
     width: 75%;
@@ -1173,21 +1173,17 @@ form.privacy-area input , fieldset.user-form input{
     padding: 0.5em;
 }
 
-#submit-login,#submit-register{
-    background-color: var(--headerbgcolor);
-    color: var(--bgcolor);
-    border-radius: 0.5em;
-    text-align: center;
-    width: 37.5%;
-    margin: 1em 1em 2em 1em;
-    cursor: pointer;
-    padding: 1em;
-}
-
 div#to-register,div#to-login{
-    width: 65%;
     text-align: center;
     background-color: var(--headerbgcolor);
+
+    width: 100%;
+
+    justify-content: center;
+    align-items: center;
+
+    display: flex;
+    flex-direction: column;
 }
 
 div#to-register h3, div#to-login h3{
@@ -1195,10 +1191,13 @@ div#to-register h3, div#to-login h3{
     margin: 1em 0;
 }
 
+div#to-register h3::after, div#to-login h3::after{
+    content: "";
+}
+
 p.privacy-area{
     color: white;
     height: 100%;
-    margin: 1em 0;
 }
 
 p#register,p#login{ 
