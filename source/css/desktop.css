@@ -378,12 +378,12 @@ form.form-bianco legend{
     font-size: 1.7em;
 }
 
-form.form-bianco .form-label{
+form.form-bianco .form-label, form.form-bianco h3{
     font-weight: bold;
     font-size: 1.2em;
 }
 
-form.form-bianco .form-label::after{
+form.form-bianco .form-label::after, form.form-bianco h3::after{
     content: ":";
 }
 
@@ -485,6 +485,10 @@ form.form-bianco textarea{
     flex-direction: column;
     align-items: center;
     gap: 0em;
+}
+
+#vertical button{
+    width: 9em;
 }
 
 .promo-button{
@@ -804,6 +808,10 @@ div.filters input{
     min-height: 1em;
 }
 
+div.filters p{
+    text-align: center;
+}
+
 input#price, input#grade{
     width: 100%;
 }
@@ -1117,19 +1125,13 @@ form#advice{
     margin-top: 1em;
 }
 
-#login-user,#register-user{
+#login-user, #register-user{
     display: flex;
     flex-direction: column;
     margin: 2em 0;
     width: 100%;
     align-items: center;
     justify-content: center;
-}
-
-#login-user form,#register-user form{
-    width: 60%;
-    height: fit-content;
-    background-color: var(--bgcolor);
 }
 
 form.privacy-area label,fieldset.user-form {
@@ -1340,15 +1342,6 @@ a#profile-settings{
 #delete-account{
     width: 60%;
     margin: 3em 0;
-}
-
-#delete-account button{
-    width: 100%;
-    margin: 1.5em 0;
-    background-color: var(--errorcolor);
-    color: var(--bgcolor);
-    padding: 1em;
-    border-radius: 0.5em;
 }
 
 .form-setting .buttons{

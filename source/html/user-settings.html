@@ -97,10 +97,11 @@
                         <img id="new-image" src="../../img/Cuochi.png" alt="logo utente" />
                     </div>
                 </fieldset>
-                <div class="buttons">
-                    <button type="reset" id="reset-user-setting" class="choice reset-setting">ANNULLA</button>
-                    <button type="submit" id="submit-user-setting" class="choice submit-setting">CONFERMA</button>
+                <div class="button-container">
+                    <button type="reset" class="bottoni-neri" id="reset-advice">Annulla</button>
+                    <button type="submit" class="bottoni-rossi" id="submit-advice">Conferma</button>
                 </div>
+
             </form>
             <form id="change-password-email" class="form-setting">
                 <h3>MODIFICA <span lang="en">PASSWORD</span></h3>
@@ -120,14 +121,16 @@
                         <input type="password" name="confirm-new-password" id="confirm-new-password" />
                     </div>
                 </fieldset>
-                <div class="buttons">
-                    <button type="reset" id="reset-password-setting" class="choice reset-setting">ANNULLA</button>
-                    <button type="submit" id="submit-password-setting" class="choice submit-setting">CONFERMA</button>
+                <div class="button-container">
+                    <button type="reset" class="bottoni-neri" id="reset-advice">Annulla</button>
+                    <button type="submit" class="bottoni-rossi" id="submit-advice">Conferma</button>
                 </div>
             </form>
             <form id="delete-account">
                 <h3>ELIMINAZIONE ACCOUNT</h3>
-                <button type="submit" id="delete-user-account" class="pay-attention">ELIMINA <span lang="en">ACCOUNT</span></button>
+                <div class="button-container">
+                    <button type="submit" class="bottoni-rossi" id="delete-user-account">Elimina <span lang="en">Account</span></button>
+                </div>
             </form>
             </div>
         </main>

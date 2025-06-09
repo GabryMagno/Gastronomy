@@ -70,6 +70,8 @@
                     <h2 class="section-title">Filtri</h2>
                     <form id="filter-content" class="form-bianco">
                         <fieldset>
+                            <legend>Filtra i prodotti</legend>
+                            <hr>
                             <h3> Tipo di Cucina</h3>
                             <div id="first" class="filters">
                                 <div class="inline">
@@ -85,6 +87,9 @@
                                     <label for="isCeliac">Celiaco</label>
                                 </div>
                             </div>
+
+                            <hr>
+
                             <h3>Categoria</h3>
                             <div id="second" class="filters">
                                 <div class="inline">
@@ -100,16 +105,19 @@
                                     <label for="Secondo">Secondo</label>
                                 </div>
                                 <div class="inline">
-                                    <input type="checkbox" id="Contorno" name="Celiac" value="Celiaco">
+                                    <input type="checkbox" id="Contorno" name="Contorno" value="Contorno">
                                     <label for="Contorno">Contorno</label>
                                 </div>
                                 <div class="inline">
-                                    <input type="checkbox" id="Dolce" name="Celiac" value="Celiaco">
+                                    <input type="checkbox" id="Dolce" name="Dolce" value="Dolce">
                                     <label for="Dolce">Dolce</label>
                                 </div>
                             </div>
 
+                            <hr>
+
                             <h3>Valutazione</h3>
+                            <small class="descrizione-quantita">Filtra per valutazioni superiori a...</small>  
                             <div class="rating" role="radiogroup" aria-label="Valutazione da 1 a 5 stelle">
                                 <input type="radio" name="rating" id="star5" value="5" required>
                                 <label for="star5" title="5 stelle" aria-label="5 stelle">&#9733;</label>
@@ -125,8 +133,9 @@
 
                                 <input type="radio" name="rating" id="star1" value="1">
                                 <label for="star1" title="1 stella" aria-label="1 stella">&#9733;</label>
-                            </div>
-                                
+                            </div>                              
+                            <hr>
+
                             <h3>Prezzo</h3>
                             <div class="filters">
                                 <label for="price">Prezzo massimo</label>
@@ -174,6 +183,13 @@
                             <a href="prodotto.html">Scheda del prodotto</a>
                         </li>
                         <li class="product-brochure">
+                            <img src="../../img/antipasto.png" alt="La novità degli antipasti">
+                            <h3 class="product-name">Nome prodotto</h3>
+                            <p>Valutazione</p>
+                            <p>Prezzo prodotto</p>
+                            <a href="prodotto.html">Scheda del prodotto</a>
+                        </li>
+                                                <li class="product-brochure">
                             <img src="../../img/antipasto.png" alt="La novità degli antipasti">
                             <h3 class="product-name">Nome prodotto</h3>
                             <p>Valutazione</p>
