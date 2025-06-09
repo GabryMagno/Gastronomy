@@ -1832,7 +1832,7 @@ h3 + .singleproduct-rating {
     color: var(--errorcolor);
     display: block;
     text-align: center;
-    margin: 1em;
+    margin: 0.2em;
     font-weight: bold;
 }
 
