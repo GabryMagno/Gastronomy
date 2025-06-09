@@ -793,7 +793,7 @@ div#list-content{
 aside#filter{
     display:flex;
     flex-direction: column;
-    width: 25%;
+    min-width: 25%;
 }
 
 div.filters{
