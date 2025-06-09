@@ -21,12 +21,15 @@
     --buttoncolor_nero: #2C1C18;
     --buttoncolor_nero_hover: #494140;
 
+    --herelinkcolor_hover: #0f1657;
+
     --headerbgcolor: #73142F;
     /*--secondaryelementcolor: #7A9884;*/
     /*--secondaryelementcolor:#84E79B;*/
     --secondaryelementcolor: #B8D86C;
     --herelinkcolor: #000638;
     --linkcolor: #F3FF00;
+    --visitedcolor: #FF9900;
 
     /*TESTO*/
     --title: 5em;
@@ -100,6 +103,10 @@ a{
     color:var(--linkcolor);
     text-decoration: underline;
     text-align: center;
+}
+
+a:visited{
+    color: var(--visitedcolor);
 }
 
 h1#title{
@@ -407,7 +414,7 @@ form.form-bianco textarea{
 
 /* === BOTTONI === */
 
-.bottoni-neri, .bottoni-rossi, .bottoni-errori{
+.bottoni-neri, .bottoni-rossi, .bottoni-link{
     border-radius: 1em;
     
     border: 1px solid var(--txtcolor);
@@ -438,14 +445,14 @@ form.form-bianco textarea{
     background-color: var(--buttoncolor_rosso_hover);
 }
 
-.bottoni-errori{
+.bottoni-link{
     background-color: var(--buttoncolor_rosso);
     color: var(--linkcolor);
 
     text-decoration: underline;
 }
 
-.bottoni-errori:hover{
+.bottoni-link:hover{
     background-color: var(--buttoncolor_rosso_hover);
 }
 
@@ -473,24 +480,28 @@ form.form-bianco textarea{
     gap: 1em;
 }
 
-
-.promo-button{
-    color: var(--title_color);
-    text-decoration: none;
-
-    padding: 0.8em 2.2em;
-    border-radius: 0.5em;
-
-    font-weight: bold;
-    font-size: 1.8em;
+/* Container Bottoni pagina prodotti */
+.button-container#vertical{
+    flex-direction: column;
+    align-items: center;
+    gap: 0em;
 }
 
-.promo-button .button{
-    background-color: var(--headerbgcolor);
-    border-radius: 0.5em;
-    padding: 0.4em 0.6em;
+.promo-button{
+    padding: 0.8em 2em;
+    border-radius: 1em;
 
-    border: 1px solid var(--txtcolor);
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.promo-button#link-degustazione{
+    background-color: var(--herelinkcolor);
+    border: 1px solid var(--bgcolor);
+}
+
+.promo-button#link-degustazione:hover{
+    background-color: var(--herelinkcolor_hover);
 }
 
 /*  
@@ -561,11 +572,6 @@ li.new article{
     margin-bottom: 0.5em;
     font-weight: bold;
     font-size: 2em;
-}
-
-#link-degustazione{
-    background-color: var(--herelinkcolor);
-    border: 1px solid white;
 }
 
 /* === BOX CATEGORIE PRODOTTI === */
@@ -786,15 +792,10 @@ aside#filter{
     width: 25%;
 }
 
-aside#filter fieldset{
-    border: 3px solid black;
-}
-
 div.filters{
     padding: 0.8em;
     display: flex;
     flex-direction: column;
-    background-color: var(--bgcolor);
 }
 
 div.filters input{
@@ -805,25 +806,6 @@ div.filters input{
 
 input#price, input#grade{
     width: 100%;
-}
-
-div.buttons{
-    display: flex;
-    flex-direction: column;
-    margin: 1em 0 1em 0
-}
-
-button#reset-filters, button.reset-setting{
-    background-color: var(--txtcolor);
-    color: var(--bgcolor);
-    padding: 1em;
-}
-
-button#submit-filters, button.submit-setting{
-    background-color: var(--headerbgcolor);
-    color: var(--bgcolor);
-    margin-top: 1em;
-    padding: 1em;
 }
 
 section#show-products{
@@ -1263,8 +1245,8 @@ a#next{
     float: right;
 }
 
-a#prev, a#next{
-    width: 6em;
+a#prev, a#next, img#prev, img#next{
+    width: 4em;
     text-align: center;
 }
 div#favorites{
