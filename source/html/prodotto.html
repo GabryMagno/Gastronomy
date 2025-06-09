@@ -49,7 +49,7 @@
                     <li><a href="chisiamo.html">Chi siamo</a></li>
                     <li><a href="prodotti.html">Prodotti</a></li>
                     <li><a href="degustazioni.html">Degustazioni</a></li>
-                    <li><a href="login.html"><span lang="en">Login</span></a></li>
+                    <li><a href="areariservata.html"><span lang="en">Login</span></a></li>
                 </ul>
             </nav>
 
@@ -116,11 +116,13 @@
                             </div>
                             <small class="descrizione-quantita">Puoi prenotare da [min_prenotabile] a [max_prenotabile] unit&agrave;.</small>
 
-                            <label for="data-ritiro" class="form-label">Data di ritiro</label>
-                            <input type="date" id="data-ritiro" name="data_ritiro" required>
+                            <div>
+                                <label for="data-ritiro" class="form-label" id="order-label">Data di ritiro</label>
+                                <input type="date" id="data-ritiro" name="data_ritiro" required>
+                            </div>
 
                             <div class="button-container">
-                                <button type="submit" aria-label="Prenota Prodotto" class="bottoni-rossi">Prenota</button>
+                                <button type="submit" aria-label="Prenota Prodotto" class="bottoni-rossi" id="submit-order">Prenota</button>
                             </div>
                         </fieldset>
                     </form>

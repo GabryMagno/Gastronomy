@@ -8,6 +8,7 @@ function validateUserAdvice() {
         document.getElementById("user-advice").value = "";
         document.getElementById("reset-advice").classList.add("not-available");
 		document.getElementById("reset-advice").disabled = true;
+        document.getElementById("user-advice").focus();
     })
 
 	let form = document.getElementById("advice");

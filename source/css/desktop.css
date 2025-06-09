@@ -1105,6 +1105,10 @@ form#advice{
     margin-top: 2em;
 }
 
+form#advice textarea{
+    height: 20vh;
+}
+
 #chisiamo-info{
     background-color: var(--secondaryelementcolor);
 }
@@ -1677,6 +1681,14 @@ form#prenotazione #quantita{
     gap: 1em;
 }
 
+label#order-label{
+    display: block;
+}
+
+#data-ritiro{
+    width: 100%;
+}
+
 .descrizione-quantita {
     font-size: 0.9em;
     color: #666;
@@ -1832,7 +1844,8 @@ button#submit-login.not-available,
 button#submit-advice.not-available,
 button#reset-advice.not-available,
 button#reset-comment.not-available,
-button#submit-comment.not-available{
+button#submit-comment.not-available,
+button#submit-order.not-available{
     opacity: 0.6;
     cursor: not-allowed;
 }

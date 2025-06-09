@@ -139,23 +139,20 @@ function validateEmail(){
 
 function validateDate(){
 	var birthDate = document.getElementById("register_datanascita").value;
-	console.log(birthDate)
 	var day = birthDate.substring(8, 10);
-	console.log(day)
     var month = birthDate.substring(5, 7);
-	console.log(month)
     var year = birthDate.substring(0, 4);
-	console.log(year)
 
+	if(month == 2 && day > 28){
+		return checkInput("register_datanascita", "date-error", "Febbraio ha 28 giorni(tranne per gli anni bisestili)", 0);
+	}else
 	if (year > 2007) {
 		return checkInput("register_datanascita", "date-error", "Per registrarti devi avere almeno 18 anni", 0);
-	} 
+	}else
 	if (year <1900) {
 		return checkInput("register_datanascita", "date-error", "Per registrarsi inserire un anno successivo al 1899 (almeno 1900)", 0);
 	}
-	if(month === 2 && day > 28 ){
-		return checkInput("register_datanascita", "date-error", "Febbraio ha 28 giorni(tranne per gli anni bisestili)", 0);
-	}
+
 	var check = document.getElementById("date-error");
 	deleteError(check);
 	UltimateCheck();

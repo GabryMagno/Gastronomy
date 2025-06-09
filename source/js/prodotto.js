@@ -8,17 +8,72 @@ function validateUserComment() {
         document.getElementById("user-comment").value = "";
         document.getElementById("reset-comment").classList.add("not-available");
 		document.getElementById("reset-comment").disabled = true;
+        document.getElementById("user-comment").focus();
     })
 
 	let form = document.getElementById("valutazione");
 
 	form.addEventListener("submit", function (event) {
-		if (! (validateAdvice()) ) {
+		if (! (validateDateOrder()) ) {
 			event.preventDefault();
 			document.getElementById("submit-comment").classList.add("not-available");
 			document.getElementById("submit-comment").disabled = true;
 		}
 	});
+}
+
+function ValidateUserOrder(){
+    let form = document.getElementById("prenotazione");
+
+	form.addEventListener("submit", function (event) {
+		if (! (validateComment()) ) {
+			event.preventDefault();
+			document.getElementById("submit-order").classList.add("not-available");
+			document.getElementById("submit-order").disabled = true;
+		}
+	});
+
+}
+
+/*function validateNumberElementOrder(){
+    
+}*/
+
+function validateDateOrder(){
+    var orderDate = document.getElementById("data-ritiro").value;
+	var day = orderDate.substring(8, 10);
+    var month = orderDate.substring(5, 7);
+    var year = orderDate.substring(0, 4);
+    var inputDate = new Date(month + "/" + day + "/" + year);
+    console.log(inputDate);
+
+    // Get today's date
+    var todaysDate = new Date();
+    console.log(todaysDate);
+
+    // call setHours to take the time out of the comparison
+
+	if (inputDate.setHours(0,0,0,0) < todaysDate.setHours(0,0,0,0)) {
+        var check = document.getElementById("date-error");
+        deleteError(check);
+        var p = messageError("date-error");
+        var now_day = todaysDate.getDate();
+        var now_month = todaysDate.getMonth() + 1;
+        var now_year = todaysDate.getFullYear();
+        if(now_day < 10) now_day = "0"+todaysDate.getDate();
+        if(now_month < 10) now_month = "0"+(todaysDate.getMonth()+1); 
+        p.innerHTML= "L'ordine può essere ritirato solo nei giorni successivi ad oggi: " + (now_day) + "-" + (now_month) +"-" + now_year;
+        document.getElementById("submit-order").classList.add("not-available");
+		document.getElementById("submit-order").disabled = true;
+        const parent = document.getElementById("data-ritiro").parentNode;
+        parent.appendChild(p);
+        return false;
+	}
+	var check = document.getElementById("date-error");
+	deleteError(check);
+	document.getElementById("submit-order").classList.remove("not-available");
+	document.getElementById("submit-order").disabled = false;
+	return true;
 }
 
 function messageError(id){
@@ -80,6 +135,7 @@ function validateComment(){
 
 const listeners = {
 	"user-comment" : ["input", validateComment],
+    "data-ritiro" : ["input", validateDateOrder],
 };
 
 window.addEventListener('load', () => {
@@ -87,6 +143,9 @@ window.addEventListener('load', () => {
 	document.getElementById("submit-comment").classList.add("not-available");
     document.getElementById("reset-comment").classList.add("not-available");
 	document.getElementById("reset-comment").disabled = true;
+    document.getElementById("submit-order").disabled = true;
+	document.getElementById("submit-order").classList.add("not-available");
+    ValidateUserOrder();
     checkComment();
 	validateUserComment();
 });
