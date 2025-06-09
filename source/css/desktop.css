@@ -1157,6 +1157,10 @@ form.privacy-area div{
     align-items: center;
 }
 
+#register-form{
+    width: 65%;
+}
+
 form.privacy-area input , fieldset.user-form input{
     margin: 1em;
     width: 75%;
@@ -1177,7 +1181,7 @@ form.privacy-area input , fieldset.user-form input{
 }
 
 div#to-register,div#to-login{
-    width: 60%;
+    width: 65%;
     text-align: center;
     background-color: var(--headerbgcolor);
 }
