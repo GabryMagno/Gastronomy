@@ -711,12 +711,12 @@ li.new article{
 }
 
 /* === BOX RECENSIONI CLIENTI === */
-#recensioni-home{
+.recensioni{
     background-color: var(--secondaryelementcolor);
     margin: 0;
 }
 
-#recensioni-home h2{
+.recensioni h2{
     margin: 0;
     padding-top: 1rem;
 }
@@ -726,8 +726,12 @@ li.new article{
     flex-wrap: wrap;
 
     justify-content: center;
+    
     gap: 2rem;
     padding: 2rem 1rem;
+
+    max-width: 95%;
+    margin: 0 auto;
 }
 
 .recensione-card{
@@ -745,6 +749,10 @@ li.new article{
     width: 300px;
     
     box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.singleproduct .recensione-container .recensione-card{
+    background-color: white;
 }
 
 .recensione-foto{
@@ -779,10 +787,20 @@ li.new article{
     margin: 0.5rem 0;
 }
 
+.recensione-data{
+    font-size: 0.85rem;
+    font-style: italic;
+    margin: -0.25rem 0 0.5rem 0;
+}
+
 .recensione-testo{
     font-size: 1rem;
     line-height: 1.4;
     margin: 0.5rem 0;
+}
+
+.recensione-prodotto{
+    margin-top: 1em;
 }
 
 .recensione-valutazione{
@@ -1772,8 +1790,9 @@ h3 + .singleproduct-rating {
 }
 
 #elimina-valutazione{
-    width: fit-content;
-    margin: 10px auto;
+    flex-basis: 100%;
+    width: 100%;
+    margin: 1rem 0;
 }
 
 #user-comment{
