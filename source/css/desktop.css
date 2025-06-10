@@ -1879,7 +1879,9 @@ button#submit-advice.not-available,
 button#reset-advice.not-available,
 button#reset-comment.not-available,
 button#submit-comment.not-available,
-button#submit-order.not-available{
+button#submit-order.not-available,
+button#reset-user-setting.not-available,
+button#reset-password-setting.not-available{
     opacity: 0.6;
     cursor: not-allowed;
 }

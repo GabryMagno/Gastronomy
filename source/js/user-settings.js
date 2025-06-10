@@ -13,7 +13,7 @@ function validateUserPersonalSettings() {
 	let form = document.getElementById("change-personal-info");
 
 	form.addEventListener("submit", function (event) {
-		if (!(validateName() && validateSurname() && validateUsername() && validateDate())) {
+		if (!(validateUsername() && validateName() && validateSurname() && validateDate())) {
 			event.preventDefault();
 			document.getElementById("submit-user-setting").classList.add("not-available");
 			document.getElementById("submit-user-setting").disabled = true;
@@ -28,6 +28,11 @@ function validateUserPasswordSettings(){
 		deleteError(document.getElementById("old-password-error"));
 		deleteError(document.getElementById("password-error"));
 		deleteError(document.getElementById("repeat-password-error"));
+		EliminateValue("old-password");
+		EliminateValue("new-password");
+		EliminateValue("confirm-new-password");
+		document.getElementById("reset-password-setting").disabled = true;
+		document.getElementById("reset-password-setting").classList.add("not-available");
 	});
 
 	let form = document.getElementById("change-password-email");
@@ -39,6 +44,14 @@ function validateUserPasswordSettings(){
 			document.getElementById("submit-password-setting").disabled = true;
 		}
 	});
+}
+
+function EliminateValue(id){
+    document.getElementById(id).value = "";
+}
+
+function DefaultValue(id){
+	document.getElementById(id).value = document.getElementById(id).DefaultValue;
 
 }
 
@@ -106,6 +119,7 @@ function validateUsername(){
 	}
 
 	if(Username.length < 4){
+		checkCancelButtonPrivateSettings();
 		return checkInput("change-username", "username-error", "Lo <span lang='en'>username</span> deve avere una lunghezza minima di 4 caratteri", 1, 1);
 	}
 
@@ -118,6 +132,7 @@ function validateUsername(){
 	}
 	var check = document.getElementById("username-error");
 	deleteError(check);
+	checkCancelButtonPrivateSettings();
 	FirstFormUltimateCheck()
 	return true;
 }
@@ -127,6 +142,7 @@ function validateName() {
 	const allowedChars = /^[a-zA-ZÀ-Ýß-ÿ]+$/; // lettere maiuscole e minuscole
     
     if(Name.length < 1){
+		checkCancelButtonPrivateSettings();
 		return checkInput("change-name", "name-error", "Se vuoi modificare il nome devi inserire almeno un carattere", 0, 1);
 	}
 
@@ -139,6 +155,7 @@ function validateName() {
 	}
 	var check = document.getElementById("name-error");
 	deleteError(check);
+	checkCancelButtonPrivateSettings();
 	FirstFormUltimateCheck();
 	return true;
 }
@@ -148,6 +165,7 @@ function validateSurname() {
 	const allowedChars = /^[a-zA-ZÀ-Ýß-ÿ]+$/; // lettere maiuscole e minuscole
     
     if(Surname.length < 1){
+		checkCancelButtonPrivateSettings();
 		return checkInput("change-surname", "surname-error", "Se vuoi modificare il cognome devi inserire almeno un carattere", 0);
 	}
 
@@ -160,6 +178,7 @@ function validateSurname() {
 	}
 	var check = document.getElementById("surname-error");
 	deleteError(check);
+	checkCancelButtonPrivateSettings();
 	FirstFormUltimateCheck()
 	return true;
 }
@@ -188,7 +207,7 @@ function validateDate(){
 	var day = birthDate.substring(8, 10);
     var month = birthDate.substring(5, 7);
     var year = birthDate.substring(0, 4);
-
+	checkCancelButtonPrivateSettings();
 	if (year > 2007) {
 		return checkInput("change-date", "date-error", "Per avere un profilo devi avere almeno 18 anni", 0, 1);
 	} 
@@ -232,6 +251,9 @@ function chargeNewLogo() {
 
 					deleteError(sizeError);
 					deleteError(formatError);
+
+					document.getElementById("reset-user-setting").disabled = true;
+		            document.getElementById("reset-user-setting").classList.add("not-available");
 				}
 		        else{
 					return checkInput("change-logo","logo-error","L'estensione del <span lang='en'>file</span> caricato non è corretta",1,1);
@@ -249,7 +271,7 @@ function chargeNewLogo() {
 function validateOldPassword(){
     var oldPassword = document.forms['change-password-email']['old-password'].value;
 	const allowedChars = /^(?=.*[a-zß-ÿ])(?=.*[A-ZÀ-Ý])(?=.*[\d])(?=.*[.,!?@+\-_€$%&^*<>]).{8,}$/;// --> .,!?@+\-_€$%&^*<> questi sono i caratteri speciali
-
+    checkCancelButtonPasswordSettings();
     if(oldPassword === "user" || oldPassword === "admin"){
 		var check = document.getElementById("old-password-error");
 		deleteError(check);
@@ -274,7 +296,7 @@ function validateNewPassword(){
 	var newPassword = document.forms['change-password-email']['new-password'].value;
 	const allowedChars = /^(?=.*[a-zß-ÿ])(?=.*[A-ZÀ-Ý])(?=.*[\d])(?=.*[.,!?@+\-_€$%&^*<>]).{8,}$/;// --> .,!?@+\-_€$%&^*<> questi sono i caratteri speciali
 	validateRepeatPassword();
-
+    checkCancelButtonPasswordSettings();
 	if(newPassword.length < 8){
 		return checkInput("new-password", "password-error", "La <span lang='en'>password</span> deve avere una lunghezza minima di 8 caratteri.", 1, 2);
 	}
@@ -292,7 +314,7 @@ function validateNewPassword(){
 function validateRepeatPassword(){
 	var Password = document.forms['change-password-email']['new-password'].value;
 	var repeatPassword = document.forms['change-password-email']['confirm-new-password'].value;
-
+	checkCancelButtonPasswordSettings();
 	if(repeatPassword !== Password){
 		return checkInput("confirm-new-password", "repeat-password-error", "Le <span lang='en'>password</span> non coincidono.", 1, 2);
 	}
@@ -301,6 +323,40 @@ function validateRepeatPassword(){
 	deleteError(check);
 	SecondFormUltimateCheck();
 	return true;
+}
+
+
+function checkCancelButtonPrivateSettings(){
+	var Nome = document.getElementById("change-name").value;
+	var Cognome = document.getElementById("change-surname").value;
+	var Username = document.getElementById("change-username").value;
+	var Data = document.getElementById("change-date").value;
+
+	var cancel_button = document.getElementById("reset-user-setting");
+
+	if(Nome.length < 1 && Cognome.length < 1 && Username.length < 1 && Data.length < 1){
+		document.getElementById("reset-user-setting").disabled = true;
+		document.getElementById("reset-user-setting").classList.add("not-available");
+	}else{
+		document.getElementById("reset-user-setting").disabled = false;
+		document.getElementById("reset-user-setting").classList.remove("not-available");
+	}
+}
+
+function checkCancelButtonPasswordSettings(){
+	var oldPassword = document.getElementById("old-password").value;
+	var newPassword = document.getElementById("new-password").value;
+	var repeatNewPassword = document.getElementById("confirm-new-password").value;
+
+	var cancel_button = document.getElementById("reset-password-setting");
+
+	if(oldPassword.length < 1 && newPassword.length < 1 && repeatNewPassword.length < 1){
+		document.getElementById("reset-password-setting").disabled = true;
+		document.getElementById("reset-password-setting").classList.add("not-available");
+	}else{
+		document.getElementById("reset-password-setting").disabled = false;
+		document.getElementById("reset-password-setting").classList.remove("not-available");
+	}
 }
 
 const listeners = {
@@ -319,6 +375,8 @@ window.addEventListener('load', () => {
 	document.getElementById("submit-user-setting").classList.add("not-available");
 	document.getElementById("submit-password-setting").disabled = true;
 	document.getElementById("submit-password-setting").classList.add("not-available");
+	checkCancelButtonPrivateSettings();
+	checkCancelButtonPasswordSettings();
 	checkSettings();
 	validateUserPersonalSettings();
 	validateUserPasswordSettings();
