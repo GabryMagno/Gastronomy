@@ -53,7 +53,7 @@ function validateDateOrder(){
 
     // call setHours to take the time out of the comparison
 
-	if (inputDate.setHours(0,0,0,0) < todaysDate.setHours(0,0,0,0)) {
+	if (inputDate.setHours(0,0,0,0) <= todaysDate.setHours(0,0,0,0)) {
         var check = document.getElementById("date-error");
         deleteError(check);
         var p = messageError("date-error");

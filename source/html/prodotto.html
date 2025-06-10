@@ -70,9 +70,16 @@
                 <div class="singleproduct-descrizione">
                     <div class="singleproduct-intestazione">
                         <h2>[Nome Prodotto]</h2>
-                        <button id="singleproduct-stella" title="Aggiungi tra i preferiti" aria-label="Aggiungi ai preferiti">
-                            <img src="../../img/icone/star.svg" alt="">
-                        </button>
+
+                        <form method="post" id="modifica-preferiti">
+                            <input type="hidden" name="id_utente" value="[id_utente]">
+                            <input type="hidden" name="nome_prodotto" value="[nome_prodotto]">
+
+                            <button type="submit" id="singleproduct-stella" title="Aggiungi tra i preferiti" aria-label="Aggiungi ai preferiti">
+                                <img src="../../img/icone/star.svg" alt="">
+                            </button>
+                        </form>
+
                     </div>                    
                     <hr class="section-divider section-singleproduct">
                     <div id="singleproduct-diete">

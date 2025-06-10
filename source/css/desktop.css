@@ -578,6 +578,8 @@ li.new article{
 
 .promo-text{
     max-width: 80%;
+    margin-right: 1em;
+    margin-bottom: 1.5em;
 }
 
 .promo-text p{
@@ -801,6 +803,7 @@ li.new article{
 
 .recensione-prodotto{
     margin-top: 1em;
+    font-weight: bold;
 }
 
 .recensione-valutazione{
@@ -846,6 +849,7 @@ div.filters p{
 
 input#price, input#grade{
     width: 100%;
+    padding: 0;
 }
 
 section#show-products{
@@ -1798,7 +1802,6 @@ h3 + .singleproduct-rating {
 #user-comment{
     height: 20vh;
     padding: 1em;
-    border: 2px solid black;
     border-radius: 0.5em;
 }
 
