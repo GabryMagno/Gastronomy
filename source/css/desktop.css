@@ -1195,6 +1195,14 @@ form.privacy-area input , fieldset.user-form input{
     padding: 0.5em;
 }
 
+#register-form label{
+    display: block;
+}
+
+#register-form input{
+    width: 100%;
+}
+
 div#to-register,div#to-login{
     text-align: center;
     background-color: var(--headerbgcolor);
