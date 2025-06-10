@@ -1197,10 +1197,15 @@ form.privacy-area input , fieldset.user-form input{
 
 #register-form label{
     display: block;
+    margin-bottom: 0.5em;
 }
 
 #register-form input{
     width: 100%;
+}
+
+#register-form div{
+    margin-bottom: 1.5em;
 }
 
 div#to-register,div#to-login{
