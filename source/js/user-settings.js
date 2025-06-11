@@ -134,10 +134,10 @@ function validateUsername(){
         failHint("min-char-username","Minimo 4 caratteri");
 		successHint("max-char-username","Massimo 16 caratteri");
 
-		if(/\s/.test(Username)) failHint("space-username","Nessuno spazio consentito");
+		if(/\s{1,}/.test(Username)) failHint("space-username","Nessuno spazio consentito");
 	    else successHint("space-username","Nessuno spazio consentito");
-
-		if (/^[a-zA-ZÀ-Ýß-ÿ0-9]$/.test(Username)) failHint("letter-number-username", "Inserire solo lettere o numeri");
+         
+		if (!(/^[\w]{1,}$/.test(Username)) || Username == "") failHint("letter-number-username", "Inserire solo lettere o numeri");
 		else successHint("letter-number-username","Inserire solo lettere o numeri");
 
 		return checkInput("change-username", "username-error", "Lo <span lang='en'>username</span> deve avere una lunghezza minima di 4 caratteri", 1, 1);
@@ -147,10 +147,10 @@ function validateUsername(){
 		failHint("max-char-username","Massimo 16 caratteri");
 		successHint("min-char-username","Minimo 4 caratteri");
 
-		if(/\s/.test(Username)) failHint("space-username","Nessuno spazio consentito");
+		if(/\s{1,}/.test(Username)) failHint("space-username","Nessuno spazio consentito");
 	    else successHint("space-username","Nessuno spazio consentito");
 
-		if (/^[a-zA-ZÀ-Ýß-ÿ0-9]$/.test(Username)) failHint("letter-number-username","Inserire solo lettere o numeri");
+		if (!(/^[\w]{1,}$/.test(Username))) failHint("letter-number-username","Inserire solo lettere o numeri");
 		else successHint("letter-number-username","Inserire solo lettere o numeri");
 
 		return checkInput("change-username", "username-error", "Lo <span lang='en'>username</span> non deve superare i 16 caratteri", 1, 1);
@@ -161,7 +161,7 @@ function validateUsername(){
 		successHint("max-char-username","Massimo 16 caratteri");
 		failHint("letter-number-username","Inserire solo lettere o numeri");
 
-		if(/\s/.test(Username)) failHint("space-username","Nessuno spazio consentito");
+		if(/\s{1,}/.test(Username)) failHint("space-username","Nessuno spazio consentito");
 	    else successHint("space-username","Nessuno spazio consentito");
 
 		return checkInput("change-username", "username-error", "<span lang='en'>Username</span> non valido, usa solo lettere o numeri.", 1, 1);
