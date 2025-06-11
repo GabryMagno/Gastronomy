@@ -106,6 +106,17 @@ function messageError(id){
 function deleteError(p){
 	if(p) p.remove();
 }
+function failHint(id,standard){
+	document.getElementById(id).classList.remove("success-hint");
+    document.getElementById(id).classList.add("fail-hint");
+	document.getElementById(id).textContent = "❌ " + standard; 
+}
+
+function successHint(id,standard){
+	document.getElementById(id).classList.remove("fail-hint");
+	document.getElementById(id).classList.add("success-hint");
+	document.getElementById(id).textContent = "✔️ " + standard; 
+}
 
 function validateUsername(){
 	var Username = document.forms['change-personal-info']['change-username'].value;
@@ -120,18 +131,48 @@ function validateUsername(){
 
 	if(Username.length < 4){
 		checkCancelButtonPrivateSettings();
+
+        failHint("min-char-username","Minimo 4 caratteri");
+		successHint("max-char-username","Massimo 16 caratteri");
+
+		if(/\s/.test(Username)) failHint("space-username","Nessuno spazio consentito");
+	    else successHint("space-username","Nessuno spazio consentito");
+
+		if (/^[a-zA-ZÀ-Ýß-ÿ0-9]$/.test(Username)) failHint("letter-number-username", "Inserire solo lettere o numeri");
+		else successHint("letter-number-username","Inserire solo lettere o numeri");
+
 		return checkInput("change-username", "username-error", "Lo <span lang='en'>username</span> deve avere una lunghezza minima di 4 caratteri", 1, 1);
 	}
 
 	if(Username.length > 16){
+		failHint("max-char-username","Massimo 16 caratteri");
+		successHint("min-char-username","Minimo 4 caratteri");
+
+		if(/\s/.test(Username)) failHint("space-username","Nessuno spazio consentito");
+	    else successHint("space-username","Nessuno spazio consentito");
+
+		if (/^[a-zA-ZÀ-Ýß-ÿ0-9]$/.test(Username)) failHint("letter-number-username","Inserire solo lettere o numeri");
+		else successHint("letter-number-username","Inserire solo lettere o numeri");
+
 		return checkInput("change-username", "username-error", "Lo <span lang='en'>username</span> non deve superare i 16 caratteri", 1, 1);
 	}
 
-	if (Username.search(/^[a-zA-ZÀ-Ýß-ÿ0-9]{1,15}$/) != 0 || !allowedChars.test(Username)) {
+	if (Username.search(/^[a-zA-ZÀ-Ýß-ÿ0-9]{4,16}$/) != 0 || !allowedChars.test(Username)) {
+		successHint("min-char-username","Minimo 4 caratteri");
+		successHint("max-char-username","Massimo 16 caratteri");
+		failHint("letter-number-username","Inserire solo lettere o numeri");
+
+		if(/\s/.test(Username)) failHint("space-username","Nessuno spazio consentito");
+	    else successHint("space-username","Nessuno spazio consentito");
+
 		return checkInput("change-username", "username-error", "<span lang='en'>Username</span> non valido, usa solo lettere o numeri.", 1, 1);
 	}
 	var check = document.getElementById("username-error");
 	deleteError(check);
+	successHint("min-char-username","Minimo 4 caratteri");
+	successHint("max-char-username","Massimo 16 caratteri");
+	successHint("letter-number-username","Inserire solo lettere o numeri");
+	successHint("space-username","Nessuno spazio consentito");
 	checkCancelButtonPrivateSettings();
 	FirstFormUltimateCheck()
 	return true;
