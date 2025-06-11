@@ -107,12 +107,14 @@ function failHint(id,standard){
 	document.getElementById(id).classList.remove("success-hint");
 	document.getElementById(id).textContent = "❌ " + standard;
 	document.getElementById(id).classList.add("fail-hint");
+	document.getElementById(id).setAttribute("aria-label","Non valido:" + standard);
 }
 
 function successHint(id,standard){
 	document.getElementById(id).classList.remove("fail-hint");
 	document.getElementById(id).textContent = "✔️ " + standard;
 	document.getElementById(id).classList.add("success-hint"); 
+	document.getElementById(id).setAttribute("aria-label","Valido:" + standard);
 }
 
 function validateUsername(){
