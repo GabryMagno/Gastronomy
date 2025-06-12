@@ -69,10 +69,12 @@
 
             <h2 class="section-title">Impostazioni</h2>
 
-            <div id="setting-user">
-                <form id="change-personal-info" class="form-bianco">
-                <h3>MODIFICA DATI PERSONALI</h3>
-                <fieldset class="user-form">
+            <form id="change-personal-info" class="form-bianco">
+                <div class="info-sezione">
+                    <h3>Modifica Dati Personali</h3>
+                </div>
+                
+                <fieldset>
                     <div>
                         <label for="change-username">Modifica Username</label>
                         <input type="text" name="new-username" id="change-username" aria-describedby="hints" />
@@ -91,83 +93,73 @@
 
                     <div>
                         <label for="change-name">Modifica Nome</label>
-                        <input type="text" name="new-name" id="change-name" />
+                        <input type="text" name="new-name" id="change-name">
                     </div>
 
                     <div>
                         <label for="change-surname">Modifica Cognome</label>
-                        <input type="text" name="new-surname" id="change-surname" />
+                        <input type="text" name="new-surname" id="change-surname">
                     </div>
 
                     <div>
                         <label for="change-date">Modifica Data di Nascita</label>
-                        <input type="date" name="new-date" id="change-date" />
+                        <input type="date" name="new-date" id="change-date">
                     </div>
 
                     <div id="new-logo">
                         <label for="change-logo">Modifica Logo</label>
-                        <input type="file" name="name" id="change-logo" />
-                        <img id="new-image" src="../../img/Cuochi.png" alt="logo utente" />
+                        <input type="file" name="name" id="change-logo">
+                        <img id="new-image" src="../../img/Cuochi.png" alt="logo utente">
                     </div>
+
                 </fieldset>
                 <div class="button-container">
                     <button type="reset" class="bottoni-neri" id="reset-user-setting">Annulla</button>
                     <button type="submit" class="bottoni-rossi" id="submit-user-setting">Conferma</button>
                 </div>
             </form>
-            </div>
-
-            <form method="post" action="login.php" class="form-bianco" id="login-user">
-                <fieldset>
-                    <label id="lbl_login_name" for="login_username"><span lang="en">Username</span></label>
-                    <input type="text" name="name" id="login_username" required data-msg-required="Inserisci il tuo username" data-msg-invalid="Username inserito non valido" placeholder="Username">
-                    <label id="lbl_login_password" for="login_password">Password</label>
-                    <input type="password" name="password" id="login_password" required data-msg-required="Inserisci la tua password" placeholder="Password">
-
-                    <div class="button-container">
-                        <button type="submit" id="submit-login" class="bottoni-rossi">Accedi</button>
-                    </div>
-                </fieldset>
-                <div id="to-register">
-                    <h3>Sei nuovo qui?</h3>
-                    <p class="privacy-area">Se non hai ancora assaporato qualcosa di eccezionale della nostra gastronomia e desideri provare qualcosa di nuovo:</p> 
-                    <p id="register"><a href="register.html">CREA UN NUOVO <span lang="en">ACCOUNT</span></a></p>
-                </div>
-            </form>
-
-            <div id="setting-user">
             
-            <form id="change-password-email" class="form-setting">
-                <h3>MODIFICA <span lang="en">PASSWORD</span></h3>
-                <fieldset class="user-form">
+            <form id="change-password-email" class="form-bianco">
+                <div class="info-sezione">
+                    <h3>Modifica Password</h3>
+                </div>
+
+                <fieldset>
                     <div>
                         <label for="old-password">Vecchia <span lang="en">Password</span></label>
-                        <input type="password" name="old-password" id="old-password" />
+                        <input type="password" name="old-password" id="old-password">
                     </div>
 
                     <div>
                         <label for="new-password">Nuova <span lang="en">Password</span></label>
-                        <input type="password" name="new-password" id="new-password" />
+                        <input type="password" name="new-password" id="new-password">
                     </div>
 
                     <div>
                         <label for="confirm-new-password">Conferma Nuova <span lang="en">Password</span></label>
-                        <input type="password" name="confirm-new-password" id="confirm-new-password" />
+                        <input type="password" name="confirm-new-password" id="confirm-new-password">
                     </div>
                 </fieldset>
+
                 <div class="button-container">
                     <button type="reset" class="bottoni-neri" id="reset-password-setting">Annulla</button>
                     <button type="submit" class="bottoni-rossi" id="submit-password-setting">Conferma</button>
                 </div>
             </form>
-            <form id="delete-account">
-                <h3>ELIMINAZIONE ACCOUNT</h3>
+
+            <form id="delete-account" class="form-bianco">
+                <div class="info-sezione">
+                    <h3>Eliminazione Account</h3>
+                </div>
+
+                <input type="hidden" name="id_utente" value="[id_utente]">
+
                 <div class="button-container">
                     <button type="submit" class="bottoni-rossi" id="delete-user-account">Elimina <span lang="en">Account</span></button>
                 </div>
             </form>
-            </div>
         </main>
+
         <footer>
             <p class="torna-su"><a href="#return">Torna su</a></p>
 

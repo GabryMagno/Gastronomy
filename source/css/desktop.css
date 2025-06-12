@@ -380,12 +380,14 @@ form.form-bianco legend{
     font-size: 1.7em;
 }
 
-form.form-bianco .form-label, form.form-bianco h3{
+form.form-bianco .form-label,
+form.form-bianco h3{
     font-weight: bold;
     font-size: 1.2em;
 }
 
-form.form-bianco .form-label::after, form.form-bianco h3::after{
+form.form-bianco .form-label::after,
+form.form-bianco h3::after{
     content: ":";
 }
 
@@ -394,7 +396,9 @@ form.form-bianco small{
     margin-bottom: 0.5em;
 }
 
-form.form-bianco input{
+form.form-bianco input,
+form.form-bianco textarea,
+#change-logo{
     padding: 0.5em;
     border: 1px solid #aaa;
     border-radius: 0.5em;
@@ -403,34 +407,43 @@ form.form-bianco input{
 }
 
 form.form-bianco textarea{
-    padding: 0.5em;
-    border: 1px solid #aaa;
-    border-radius: 0.5em;
-
     font-size: 1em;
-
     resize: none;
-
     height: 100px;
 }
 
-form.form-bianco#login-user, form.form-bianco#register-form{
+form.form-bianco,
+form.form-bianco#login-user,
+form.form-bianco#register-form,
+form.form-bianco#change-personal-info,
+form.form-bianco#change-password-email,
+form.form-bianco#delete-account{
     margin-top: 1em;
     width: 70%;
 }
 
-form.form-bianco#login-user label, form.form-bianco#register-form label{
+form.form-bianco#login-user label,
+form.form-bianco#register-form label,
+form.form-bianco#change-personal-info label,
+form.form-bianco#change-password-email label,
+form.form-bianco#delete-account label{
     text-align: center;
     font-weight: bold;
 }
 
-form.form-bianco#login-user label::after, form.form-bianco#register-form label::after{
+form.form-bianco#login-user label::after,
+form.form-bianco#register-form label::after,
+form.form-bianco#change-personal-info label::after,
+form.form-bianco#change-password-email label::after,
+form.form-bianco#delete-account label::after{
     content: ":";
 }
 
 /* === BOTTONI === */
 
-.bottoni-neri, .bottoni-rossi, .bottoni-link{
+.bottoni-neri,
+.bottoni-rossi,
+.bottoni-link{
     border-radius: 1em;
     
     border: 1px solid var(--txtcolor);
@@ -469,10 +482,6 @@ form.form-bianco#login-user label::after, form.form-bianco#register-form label::
 }
 
 .bottoni-link:hover{
-    background-color: var(--buttoncolor_rosso_hover);
-}
-
-.bottoni-rossi:hover{
     background-color: var(--buttoncolor_rosso_hover);
 }
 
@@ -1166,7 +1175,7 @@ form#advice textarea{
     margin-top: 1em;
 }
 
-form.privacy-area label,fieldset.user-form {
+form.privacy-area label, fieldset.user-form {
     text-align: left;
     font-weight: bold;
     margin-top: 1em;
@@ -1202,15 +1211,22 @@ form.privacy-area input , fieldset.user-form input{
     margin-bottom: 0.5em;
 }
 
-#register-form input{
-    width: 100%;
-}
-
-#login-user div, #register-form div{
+#login-user div,
+#register-form div,
+#change-personal-info div,
+#change-password-email div{
     margin-bottom: 1.5em;
 }
 
-div#to-register,div#to-login{
+#register-form input,
+#change-personal-info input,
+#change-password-email input{
+    width: 100%;
+}
+
+div#to-register,
+div#to-login,
+div.info-sezione{
     text-align: center;
     background-color: var(--headerbgcolor);
 
@@ -1225,12 +1241,19 @@ div#to-register,div#to-login{
     margin-bottom: 0;
 }
 
-div#to-register h3, div#to-login h3{
+div#to-register h3,
+div#to-login h3{
     color: var(--bgcolor);
     margin: 1em 0;
 }
 
-div#to-register h3::after, div#to-login h3::after{
+div.info-sezione h3{
+    color: var(--bgcolor);
+    margin: 0.5em 0;
+}
+
+div#to-register h3::after,
+div#to-login h3::after{
     content: "";
 }
 
@@ -1260,14 +1283,6 @@ div#favorites, div#user-info{
 div#user-info img{
     box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.9),
                 0 0.2em 0.4em rgba(0, 0, 0, 0.9);
-}
-
-#user-profile-main h3, #user-settings-main h3{
-    box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.9),
-                0 0.2em 0.4em rgba(0, 0, 0, 0.9);
-    background-color: #4C0002;
-    color: var(--bgcolor);
-    padding: 0.5em;
 }
 
 div#user-info #general-info{
@@ -1326,22 +1341,26 @@ a#profile-settings{
 }
 /*  
     ===================================
-            PAGINA IMPOSTAZIONI UTENTE
+        PAGINA IMPOSTAZIONI UTENTE
     ===================================
 */
 details {
+    margin-top: 0.2em;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 0.5em;
     padding: 0;
 }
 
 summary {
     background-color: #f1f1f1;
-    padding: 12px 16px;
+    padding: 8px 8px;
+    font-size: 0.9em;
     font-weight: bold;
     cursor: pointer;
     list-style: none;
     outline: none;
+
+    border-radius: 0.5em;
 }
 
 summary::-webkit-details-marker {
@@ -1385,47 +1404,6 @@ summary:focus{
     color: var(--errorcolor);
 }
 
-#setting-user{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-}
-
-#setting-user h3{
-    width: 100%;
-    margin-bottom: 0.5em;
-}
-
-.form-setting{
-    width: 60%;
-    margin: 1em 0;
-}
-
-.form-setting fieldset div{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-#setting-user fieldset{
-    margin: 0.4em 0 1.5em 0;
-    display: flex;
-    flex-direction: column;
-    padding: 1em;
-    text-align: center;
-}
-
-#setting-user label{
-    margin: 1em 0 0 0;
-}
-
-#setting-user input{
-    width: 100%;
-}
-
 #new-logo{
     text-align: center;
     display: flex;
@@ -1435,27 +1413,11 @@ summary:focus{
 }
 
 #new-logo img{
-    width: 10em;
-    height: 10em;
+    width: 8em;
+    height: 8em;
     border-radius: 50%;
-}
 
-#delete-account{
-    width: 60%;
-    margin: 3em 0;
-}
-
-.form-setting .buttons{
-    flex-direction: row;
-}
-
-.form-setting button{
-    width: 50%;
-    margin-top: 0;
-}
-
-.form-setting .reset-setting{
-    margin-right: 1em;
+    margin-top: 1.5em;
 }
 
 
