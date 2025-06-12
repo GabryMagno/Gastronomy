@@ -26,16 +26,11 @@
     --headerbgcolor: #73142F;
 
     --hintsuccess: #105724;
-    /*--secondaryelementcolor: #7A9884;*/
-    /*--secondaryelementcolor:#84E79B;*/
+
     --secondaryelementcolor: #B8D86C;
     --herelinkcolor: #000638;
     --linkcolor: #F3FF00;
     --visitedcolor: #FF9900;
-
-    /*TESTO*/
-    --title: 5em;
-    --menu: 1.5em;
 }
 
 /*  
@@ -53,10 +48,6 @@ body{
     background-color: var(--bgcolor);
     overflow-x: hidden;
     height: 100%;
-}
-
-.display-none{
-    display: none;
 }
 
 .inline{
@@ -90,11 +81,20 @@ header .header_text{
 
 .hidden_header{
     background-image: none;
-    min-height: 0vh;
+    min-height: 0;
+    overflow: hidden;
 }
 
 .hidden_header .header_text{
-    display: none;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
 div#header{
@@ -1519,7 +1519,7 @@ summary:focus{
     ===============================
 */
 .singleproduct_main{
-    margin-top: 5em;
+    margin-top: 2em;
 }
 
 .singleproduct{
@@ -1811,7 +1811,7 @@ h3 + .singleproduct-rating {
 .rating label {
     font-size: 2rem;
 
-    color: #7c7c7c;
+    color: #1a2c2c;
     cursor: pointer;
 
     margin-top: -0.5em;
@@ -1819,12 +1819,12 @@ h3 + .singleproduct-rating {
 }
 
 .rating input:checked ~ label {
-    color: gold;
+    color: #B25500;
 }
 
 .rating label:hover,
 .rating label:hover ~ label {
-    color: gold;
+    color: #B25500;
 }
 
 #elimina-valutazione{
