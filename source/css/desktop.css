@@ -1204,7 +1204,7 @@ form.privacy-area input , fieldset.user-form input{
     width: 100%;
 }
 
-#register-form div{
+#login-user div, #register-form div{
     margin-bottom: 1.5em;
 }
 
@@ -1219,6 +1219,8 @@ div#to-register,div#to-login{
 
     display: flex;
     flex-direction: column;
+
+    margin-bottom: 0;
 }
 
 div#to-register h3, div#to-login h3{
