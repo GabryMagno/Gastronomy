@@ -13,10 +13,9 @@ function validateUserPersonalSettings() {
 	let form = document.getElementById("change-personal-info");
 
 	form.addEventListener("submit", function (event) {
-		if (!(validateName() && validateSurname() && validateUsername() && validateDate())) {
+		if (!(validateUsername() && validateName() && validateSurname() && validateDate())) {
 			event.preventDefault();
-			document.getElementById("submit-user-setting").classList.add("not-available");
-			document.getElementById("submit-user-setting").disabled = true;
+			disableButton("submit-user-setting");
 		}
 	});
 }
@@ -28,6 +27,11 @@ function validateUserPasswordSettings(){
 		deleteError(document.getElementById("old-password-error"));
 		deleteError(document.getElementById("password-error"));
 		deleteError(document.getElementById("repeat-password-error"));
+		EliminateValue("old-password");
+		EliminateValue("new-password");
+		EliminateValue("confirm-new-password");
+		document.getElementById("reset-password-setting").disabled = true;
+		document.getElementById("reset-password-setting").classList.add("not-available");
 	});
 
 	let form = document.getElementById("change-password-email");
@@ -35,11 +39,27 @@ function validateUserPasswordSettings(){
 	form.addEventListener("submit", function (event) {
 		if (! (validateOldPassword() && validateNewPassword() && validateRepeatPassword())) {
 			event.preventDefault();
-			document.getElementById("submit-password-setting").classList.add("not-available");
-			document.getElementById("submit-password-setting").disabled = true;
+			disableButton("submit-password-setting");
 		}
 	});
+}
 
+function disableButton(id){
+    document.getElementById(id).classList.add("not-available");
+	document.getElementById(id).disabled = true;
+}
+
+function enableButton(id){
+	document.getElementById(id).classList.remove("not-available");
+	document.getElementById(id).disabled = false;
+}
+
+function EliminateValue(id){
+    document.getElementById(id).value = "";
+}
+
+function DefaultValue(id){
+	document.getElementById(id).value = document.getElementById(id).DefaultValue;
 }
 
 function FirstFormUltimateCheck(){
@@ -47,26 +67,16 @@ function FirstFormUltimateCheck(){
 	var errorName = document.getElementById("name-error");
 	var errorSurname =  document.getElementById("surname-error");
 	var errorDate = document.getElementById("date-error");
-	if (errorName || errorSurname || errorUsername || errorDate){
-		document.getElementById("submit-user-setting").disabled = true;
-		document.getElementById("submit-user-setting").classList.add("not-available");
-	}else{
-		document.getElementById("submit-user-setting").disabled = false;
-		document.getElementById("submit-user-setting").classList.remove("not-available")
-	}
+	if (errorName || errorSurname || errorUsername || errorDate) disableButton("submit-user-setting");
+	else enableButton("submit-user-setting");
 }
 
 function SecondFormUltimateCheck(){
 	var errorOldPassword = document.getElementById("old-password-error");
 	var errorNewPassword = document.getElementById("password-error");
 	var errorNewRepeatPassword = document.getElementById("repeat-password-error");
-	if (errorOldPassword || errorNewPassword || errorNewRepeatPassword){
-		document.getElementById("submit-password-setting").disabled = true;
-		document.getElementById("submit-password-setting").classList.add("not-available");
-	}else{
-		document.getElementById("submit-password-setting").disabled = false;
-		document.getElementById("submit-password-setting").classList.remove("not-available")
-	}
+	if (errorOldPassword || errorNewPassword || errorNewRepeatPassword) disableButton("submit-password-setting")
+	else enableButton("submit-password-setting");
 }
 
 function checkInput(id_element, id_error_message, error_message, addHtml, whatCheck){
@@ -93,6 +103,19 @@ function messageError(id){
 function deleteError(p){
 	if(p) p.remove();
 }
+function failHint(id,standard){
+	document.getElementById(id).classList.remove("success-hint");
+	document.getElementById(id).textContent = "❌ " + standard;
+	document.getElementById(id).classList.add("fail-hint");
+	document.getElementById(id).setAttribute("aria-label","Non valido:" + standard);
+}
+
+function successHint(id,standard){
+	document.getElementById(id).classList.remove("fail-hint");
+	document.getElementById(id).textContent = "✔️ " + standard;
+	document.getElementById(id).classList.add("success-hint"); 
+	document.getElementById(id).setAttribute("aria-label","Valido:" + standard);
+}
 
 function validateUsername(){
 	var Username = document.forms['change-personal-info']['change-username'].value;
@@ -106,18 +129,50 @@ function validateUsername(){
 	}
 
 	if(Username.length < 4){
+		checkCancelButtonPrivateSettings();
+
+        failHint("min-char-username","Minimo 4 caratteri");
+		successHint("max-char-username","Massimo 16 caratteri");
+
+		if(/\s{1,}/.test(Username)) failHint("space-username","Nessuno spazio consentito");
+	    else successHint("space-username","Nessuno spazio consentito");
+         
+		if (!(/^[\w]{1,}$/.test(Username)) || Username == "") failHint("letter-number-username", "Inserire solo lettere o numeri");
+		else successHint("letter-number-username","Inserire solo lettere o numeri");
+
 		return checkInput("change-username", "username-error", "Lo <span lang='en'>username</span> deve avere una lunghezza minima di 4 caratteri", 1, 1);
 	}
 
 	if(Username.length > 16){
+		failHint("max-char-username","Massimo 16 caratteri");
+		successHint("min-char-username","Minimo 4 caratteri");
+
+		if(/\s{1,}/.test(Username)) failHint("space-username","Nessuno spazio consentito");
+	    else successHint("space-username","Nessuno spazio consentito");
+
+		if (!(/^[\w]{1,}$/.test(Username))) failHint("letter-number-username","Inserire solo lettere o numeri");
+		else successHint("letter-number-username","Inserire solo lettere o numeri");
+
 		return checkInput("change-username", "username-error", "Lo <span lang='en'>username</span> non deve superare i 16 caratteri", 1, 1);
 	}
 
-	if (Username.search(/^[a-zA-ZÀ-Ýß-ÿ0-9]{1,15}$/) != 0 || !allowedChars.test(Username)) {
+	if (Username.search(/^[a-zA-ZÀ-Ýß-ÿ0-9]{4,16}$/) != 0 || !allowedChars.test(Username)) {
+		successHint("min-char-username","Minimo 4 caratteri");
+		successHint("max-char-username","Massimo 16 caratteri");
+		failHint("letter-number-username","Inserire solo lettere o numeri");
+
+		if(/\s{1,}/.test(Username)) failHint("space-username","Nessuno spazio consentito");
+	    else successHint("space-username","Nessuno spazio consentito");
+
 		return checkInput("change-username", "username-error", "<span lang='en'>Username</span> non valido, usa solo lettere o numeri.", 1, 1);
 	}
 	var check = document.getElementById("username-error");
 	deleteError(check);
+	successHint("min-char-username","Minimo 4 caratteri");
+	successHint("max-char-username","Massimo 16 caratteri");
+	successHint("letter-number-username","Inserire solo lettere o numeri");
+	successHint("space-username","Nessuno spazio consentito");
+	checkCancelButtonPrivateSettings();
 	FirstFormUltimateCheck()
 	return true;
 }
@@ -127,6 +182,7 @@ function validateName() {
 	const allowedChars = /^[a-zA-ZÀ-Ýß-ÿ]+$/; // lettere maiuscole e minuscole
     
     if(Name.length < 1){
+		checkCancelButtonPrivateSettings();
 		return checkInput("change-name", "name-error", "Se vuoi modificare il nome devi inserire almeno un carattere", 0, 1);
 	}
 
@@ -139,6 +195,7 @@ function validateName() {
 	}
 	var check = document.getElementById("name-error");
 	deleteError(check);
+	checkCancelButtonPrivateSettings();
 	FirstFormUltimateCheck();
 	return true;
 }
@@ -148,6 +205,7 @@ function validateSurname() {
 	const allowedChars = /^[a-zA-ZÀ-Ýß-ÿ]+$/; // lettere maiuscole e minuscole
     
     if(Surname.length < 1){
+		checkCancelButtonPrivateSettings();
 		return checkInput("change-surname", "surname-error", "Se vuoi modificare il cognome devi inserire almeno un carattere", 0);
 	}
 
@@ -160,6 +218,7 @@ function validateSurname() {
 	}
 	var check = document.getElementById("surname-error");
 	deleteError(check);
+	checkCancelButtonPrivateSettings();
 	FirstFormUltimateCheck()
 	return true;
 }
@@ -188,7 +247,7 @@ function validateDate(){
 	var day = birthDate.substring(8, 10);
     var month = birthDate.substring(5, 7);
     var year = birthDate.substring(0, 4);
-
+	checkCancelButtonPrivateSettings();
 	if (year > 2007) {
 		return checkInput("change-date", "date-error", "Per avere un profilo devi avere almeno 18 anni", 0, 1);
 	} 
@@ -232,6 +291,9 @@ function chargeNewLogo() {
 
 					deleteError(sizeError);
 					deleteError(formatError);
+
+					document.getElementById("reset-user-setting").disabled = true;
+		            document.getElementById("reset-user-setting").classList.add("not-available");
 				}
 		        else{
 					return checkInput("change-logo","logo-error","L'estensione del <span lang='en'>file</span> caricato non è corretta",1,1);
@@ -249,7 +311,7 @@ function chargeNewLogo() {
 function validateOldPassword(){
     var oldPassword = document.forms['change-password-email']['old-password'].value;
 	const allowedChars = /^(?=.*[a-zß-ÿ])(?=.*[A-ZÀ-Ý])(?=.*[\d])(?=.*[.,!?@+\-_€$%&^*<>]).{8,}$/;// --> .,!?@+\-_€$%&^*<> questi sono i caratteri speciali
-
+    checkCancelButtonPasswordSettings();
     if(oldPassword === "user" || oldPassword === "admin"){
 		var check = document.getElementById("old-password-error");
 		deleteError(check);
@@ -274,7 +336,7 @@ function validateNewPassword(){
 	var newPassword = document.forms['change-password-email']['new-password'].value;
 	const allowedChars = /^(?=.*[a-zß-ÿ])(?=.*[A-ZÀ-Ý])(?=.*[\d])(?=.*[.,!?@+\-_€$%&^*<>]).{8,}$/;// --> .,!?@+\-_€$%&^*<> questi sono i caratteri speciali
 	validateRepeatPassword();
-
+    checkCancelButtonPasswordSettings();
 	if(newPassword.length < 8){
 		return checkInput("new-password", "password-error", "La <span lang='en'>password</span> deve avere una lunghezza minima di 8 caratteri.", 1, 2);
 	}
@@ -292,7 +354,7 @@ function validateNewPassword(){
 function validateRepeatPassword(){
 	var Password = document.forms['change-password-email']['new-password'].value;
 	var repeatPassword = document.forms['change-password-email']['confirm-new-password'].value;
-
+	checkCancelButtonPasswordSettings();
 	if(repeatPassword !== Password){
 		return checkInput("confirm-new-password", "repeat-password-error", "Le <span lang='en'>password</span> non coincidono.", 1, 2);
 	}
@@ -301,6 +363,26 @@ function validateRepeatPassword(){
 	deleteError(check);
 	SecondFormUltimateCheck();
 	return true;
+}
+
+
+function checkCancelButtonPrivateSettings(){
+	var Nome = document.getElementById("change-name").value;
+	var Cognome = document.getElementById("change-surname").value;
+	var Username = document.getElementById("change-username").value;
+	var Data = document.getElementById("change-date").value;
+
+	if(Nome.length < 1 && Cognome.length < 1 && Username.length < 1 && Data.length < 1) disableButton("reset-user-setting");
+	else enableButton("reset-user-setting");
+}
+
+function checkCancelButtonPasswordSettings(){
+	var oldPassword = document.getElementById("old-password").value;
+	var newPassword = document.getElementById("new-password").value;
+	var repeatNewPassword = document.getElementById("confirm-new-password").value;
+
+	if(oldPassword.length < 1 && newPassword.length < 1 && repeatNewPassword.length < 1)disableButton("reset-password-setting")
+	else enableButton("reset-password-setting");
 }
 
 const listeners = {
@@ -319,6 +401,8 @@ window.addEventListener('load', () => {
 	document.getElementById("submit-user-setting").classList.add("not-available");
 	document.getElementById("submit-password-setting").disabled = true;
 	document.getElementById("submit-password-setting").classList.add("not-available");
+	checkCancelButtonPrivateSettings();
+	checkCancelButtonPasswordSettings();
 	checkSettings();
 	validateUserPersonalSettings();
 	validateUserPasswordSettings();
