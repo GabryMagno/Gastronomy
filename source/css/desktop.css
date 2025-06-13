@@ -635,8 +635,8 @@ li.new article{
     padding: 1em;
     background-color: white;
     border-radius: 12px;
-    text-decoration: none;
-    color: #333;
+    text-decoration: underline;
+    color: var(--txtcolor);
 
     transition: .4s;
     box-shadow: 0 0.3em 0.3em rgba(0, 0, 0, 0.25),
@@ -647,6 +647,11 @@ li.new article{
     transform: translate(0, -0.4em );
     box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.16),
                 0 0.2em 0.4em rgba(0, 0, 0, 0.24);            
+}
+
+a.categoria-box:visited{
+    color: var(--headerbgcolor);
+    text-decoration: underline var(--headerbgcolor);
 }
 
 .categoria-box img {
@@ -1271,7 +1276,9 @@ form#advice textarea{
     font-weight: bold;
 }
 
-@media screen and (max-width: 768px) {
+/*DA METTERE NEL MOBILE*/
+
+@media screen and (max-width: 767px) {
     #chisiamo-info {
         padding: 2em 3em;
     }
@@ -1544,6 +1551,13 @@ summary:focus{
     ===============================
 */
 
+@media screen and (max-width: 1000px) {
+    .singleproduct,
+    .singledegustazione{
+        flex-direction: column;
+    }
+}
+
 .singledegustazione_main{
     margin-top: 2em;
 }
@@ -1627,6 +1641,10 @@ p.degustazione-nondisponibile#degustazione-singola {
 
 .degustazione-prenota{
     margin-top: 1.5em;
+}
+
+form#prenotazione-degustazione #quantita{
+    width: 100%;
 }
 
 /*  
