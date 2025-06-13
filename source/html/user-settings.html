@@ -80,36 +80,76 @@
                         <label for="change-username">Modifica Username</label>
                         <input type="text" name="new-username" id="change-username" aria-describedby="hints" />
                         <details>
-                        <summary id="hints" role="button" aria-expanded="false" aria-controls="hint-list">
-                            Suggerimenti Username
-                        </summary>
-                        <ul class="suggestions-list" id="hint-list">
-                            <li id="letter-number-username">Inserire solo lettere o numeri</li>
-                            <li id="min-char-username">Minimo 4 caratteri</li>
-                            <li id="max-char-username">Massimo 16 caratteri</li>
-                            <li id="space-username">Nessuno spazio consentito</li>
-                        </ul>
+                            <summary id="hints-username" class="hints" role="button" aria-expanded="false" aria-controls="hint-list-username">
+                                Suggerimenti Username
+                            </summary>
+                            <ul class="suggestions-list" id="hint-list-username">
+                                <li id="letter-number-username">Inserire solo lettere o numeri</li>
+                                <li id="min-char-username">Minimo 4 caratteri</li>
+                                <li id="max-char-username">Massimo 16 caratteri</li>
+                                <li id="space-username">Nessuno spazio consentito</li>
+                            </ul>
                         </details>
                     </div>
 
                     <div>
                         <label for="change-name">Modifica Nome</label>
                         <input type="text" name="new-name" id="change-name">
+                        <details>
+                            <summary id="hints-name" class="hints" role="button" aria-expanded="false" aria-controls="hint-list-name">
+                                Suggerimenti Nome
+                            </summary>
+                            <ul class="suggestions-list" id="hint-list-name">
+                                <li id="letter-name">Inserire solo lettere</li>
+                                <li id="min-char-name">Minimo 1 carattere</li>
+                                <li id="max-char-name">Massimo 15 caratteri</li>
+                                <li id="space-name">Nessuno spazio consentito</li>
+                            </ul>
+                        </details>
                     </div>
 
                     <div>
                         <label for="change-surname">Modifica Cognome</label>
                         <input type="text" name="new-surname" id="change-surname">
+                        <details>
+                            <summary id="hints-surname" class="hints" role="button" aria-expanded="false" aria-controls="hint-list-surname">
+                                Suggerimenti Cognome
+                            </summary>
+                            <ul class="suggestions-list" id="hint-list-suraname">
+                                <li id="letter-surname">Inserire solo lettere</li>
+                                <li id="min-char-surname">Minimo 1 carattere</li>
+                                <li id="max-char-surname">Massimo 15 caratteri</li>
+                                <li id="space-surname">Nessuno spazio consentito</li>
+                            </ul>
+                        </details>
                     </div>
 
                     <div>
                         <label for="change-date">Modifica Data di Nascita</label>
                         <input type="date" name="new-date" id="change-date">
+                        <details>
+                            <summary id="hints-date" class="hints" role="button" aria-expanded="false" aria-controls="hint-list-date">
+                                Suggerimenti Data di Nascita
+                            </summary>
+                            <ul class="suggestions-list" id="hint-list-date">
+                                <li id="min-date">Devi avere almeno 18 anni</li>
+                                <li id="max-date">Sono accettate solo le date successive al 1 gennaio 1900</li>
+                            </ul>
+                        </details>
                     </div>
 
                     <div id="new-logo">
                         <label for="change-logo">Modifica Logo</label>
                         <input type="file" name="name" id="change-logo">
+                        <details>
+                            <summary id="hints-logo" class="hints" role="button" aria-expanded="false" aria-controls="hint-list-logo">
+                                Suggerimenti Logo
+                            </summary>
+                            <ul class="suggestions-list" id="hint-list-logo">
+                                <li id="max-size-file">File di dimensione massima a 2<span lang='en' abbr='megabyte'>MB</span></li>
+                                <li id="min-char-name">Solo file di tipo png, jpeg o jpg"</li>
+                            </ul>
+                        </details>
                         <img id="new-image" src="../../img/Cuochi.png" alt="logo utente">
                     </div>
 

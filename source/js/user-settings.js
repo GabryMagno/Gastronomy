@@ -110,6 +110,7 @@ function failHint(id,standard){
 	document.getElementById(id).textContent = "❌ " + standard;
 	document.getElementById(id).classList.add("fail-hint");
 	document.getElementById(id).setAttribute("aria-label","Non valido:" + standard);
+	document.getElementById(id).style.listStyleType = "none";
 }
 
 function successHint(id,standard){
@@ -117,6 +118,7 @@ function successHint(id,standard){
 	document.getElementById(id).textContent = "✔️ " + standard;
 	document.getElementById(id).classList.add("success-hint"); 
 	document.getElementById(id).setAttribute("aria-label","Valido:" + standard);
+	document.getElementById(id).style.listStyleType = "none";
 }
 
 function validateUsername(){
@@ -185,18 +187,49 @@ function validateName() {
     
     if(Name.length < 1){
 		checkCancelButtonPrivateSettings();
+
+		failHint("min-char-name","Minimo 1 carattere");
+		successHint("max-char-name","Massimo 15 caratteri");
+
+        if(/\s{1,}/.test(Name)) failHint("space-name","Nessuno spazio consentito");
+	    else successHint("space-name","Nessuno spazio consentito");
+         
+		if (!(/^[a-zA-ZÀ-Ýß-ÿ]{1,}$/.test(Name)) || Name == "") failHint("letter-name", "Inserire solo lettere");
+		else successHint("letter-name","Inserire solo lettere");
+
 		return checkInput("change-name", "name-error", "Se vuoi modificare il nome devi inserire almeno un carattere", 0, 1);
 	}
 
 	if(Name.length > 15){
+		successHint("min-char-name","Minimo 1 carattere");
+		failHint("max-char-name","Massimo 15 caratteri");
+
+		if(/\s{1,}/.test(Name)) failHint("space-name","Nessuno spazio consentito");
+	    else successHint("space-name","Nessuno spazio consentito");
+         
+		if (!(/^[a-zA-ZÀ-Ýß-ÿ]{1,}$/.test(Name)) || Name == "") failHint("letter-name", "Inserire solo lettere");
+		else successHint("letter-name","Inserire solo lettere");
+
 		return checkInput("change-name", "name-error", "Il nome non deve superare i 15 caratteri", 0, 1);
 	}
 
 	if (Name.search(/^[a-zA-ZÀ-Ýß-ÿ]{1,15}$/) != 0 || !allowedChars.test(Name)) {
+
+		successHint("min-char-name","Minimo 1 carattere");
+		successHint("max-char-name","Massimo 15 caratteri");
+		failHint("letter-name","Inserire solo lettere")
+
+		if(/\s{1,}/.test(Name)) failHint("space-name","Nessuno spazio consentito");
+	    else successHint("space-name","Nessuno spazio consentito");
+
 		return checkInput("change-name", "name-error", "Nome non valido, usa solo lettere.", 0, 1);
 	}
 	var check = document.getElementById("name-error");
 	deleteError(check);
+	successHint("min-char-name","Minimo 1 carattere");
+	successHint("max-char-name","Massimo 15 caratteri");
+	successHint("letter-name","Inserire solo lettere");
+	successHint("space-name","Nessuno spazio consentito");
 	checkCancelButtonPrivateSettings();
 	FirstFormUltimateCheck();
 	return true;
@@ -301,7 +334,7 @@ function chargeNewLogo() {
 					return checkInput("change-logo","logo-error","L'estensione del <span lang='en'>file</span> caricato non è corretta",1,1);
 				}
             }else{
-				return checkInput("change-logo","logo-error","Sono accettati solo <span lang='en'>file</span> di dimensione inferiore a <span lang='en' abbr='megabyte'>2MB</span>",1,1);
+				return checkInput("change-logo","logo-error","Sono accettati solo <span lang='en'>file</span> di dimensione inferiore a 2<span lang='en' abbr='megabyte'>MB</span>",1,1);
 			}
 		}
 
