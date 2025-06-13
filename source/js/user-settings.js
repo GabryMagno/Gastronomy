@@ -8,6 +8,8 @@ function validateUserPersonalSettings() {
 		deleteError(document.getElementById("surname-error"));
 		deleteError(document.getElementById("date-error"));
 		deleteError(document.getElementById("logo-error"));
+		DefaultValue("change-username");
+		disableButton("reset-user-setting");
 	});
 
 	let form = document.getElementById("change-personal-info");
@@ -59,7 +61,7 @@ function EliminateValue(id){
 }
 
 function DefaultValue(id){
-	document.getElementById(id).value = document.getElementById(id).DefaultValue;
+	document.getElementById(id).value = document.getElementById(id).defaultValue;
 }
 
 function FirstFormUltimateCheck(){

@@ -1487,6 +1487,11 @@ summary {
     border-radius: 0.5em;
 }
 
+#hints{
+    background-color: #73142F;
+    color: white;
+}
+
 summary::-webkit-details-marker {
     display: none;
 }
