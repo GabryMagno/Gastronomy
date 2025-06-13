@@ -241,18 +241,48 @@ function validateSurname() {
     
     if(Surname.length < 1){
 		checkCancelButtonPrivateSettings();
+
+		failHint("min-char-surname","Minimo 1 carattere");
+		successHint("max-char-surname","Massimo 15 caratteri");
+
+        if(/\s{1,}/.test(Surname)) failHint("space-surname","Nessuno spazio consentito");
+	    else successHint("space-surname","Nessuno spazio consentito");
+         
+		if (!(/^[a-zA-ZÀ-Ýß-ÿ]{1,}$/.test(Surname)) || Surname == "") failHint("letter-surname", "Inserire solo lettere");
+		else successHint("letter-surname","Inserire solo lettere");
+
 		return checkInput("change-surname", "surname-error", "Se vuoi modificare il cognome devi inserire almeno un carattere", 0);
 	}
 
 	if(Surname.length > 15){
+        successHint("min-char-surname","Minimo 1 carattere");
+		failHint("max-char-surname","Massimo 15 caratteri");
+
+		if(/\s{1,}/.test(Surname)) failHint("space-surname","Nessuno spazio consentito");
+	    else successHint("space-surname","Nessuno spazio consentito");
+         
+		if (!(/^[a-zA-ZÀ-Ýß-ÿ]{1,}$/.test(Surname)) || Name == "") failHint("letter-surname", "Inserire solo lettere");
+		else successHint("letter-surname","Inserire solo lettere");
+
 		return checkInput("change-surname", "surname-error", "Il cognome non deve deve superare i 15 caratteri", 0);
 	}
 
 	if (Surname.search(/^[a-zA-ZÀ-Ýß-ÿ]{1,15}$/) != 0 || !allowedChars.test(Surname)) {
+		successHint("min-char-surname","Minimo 1 carattere");
+		successHint("max-char-surname","Massimo 15 caratteri");
+		failHint("letter-surname","Inserire solo lettere")
+
+		if(/\s{1,}/.test(Surname)) failHint("space-surname","Nessuno spazio consentito");
+	    else successHint("space-surname","Nessuno spazio consentito");
+
 		return checkInput("change-surname", "surname-error", "Cognome non valido, usa solo lettere.", 0);
 	}
 	var check = document.getElementById("surname-error");
 	deleteError(check);
+	successHint("min-char-surname","Minimo 1 carattere");
+	successHint("max-char-surname","Massimo 15 caratteri");
+	successHint("letter-surname","Inserire solo lettere");
+	successHint("space-surname","Nessuno spazio consentito");
 	checkCancelButtonPrivateSettings();
 	FirstFormUltimateCheck()
 	return true;
@@ -284,13 +314,19 @@ function validateDate(){
     var year = birthDate.substring(0, 4);
 	checkCancelButtonPrivateSettings();
 	if (year > 2007) {
+		failHint("min-date","Devi avere almeno 18 anni");
+		successHint("max-date","Sono accettate solo le date successive al 1 gennaio 1900");
 		return checkInput("change-date", "date-error", "Per avere un profilo devi avere almeno 18 anni", 0, 1);
 	} 
 	if (year <1900) {
-		return checkInput("change-date", "date-error", "Per avere un profilo inserire un anno successivo al 1899 (almeno 1900)", 0, 1);
+		successHint("min-date","Devi avere almeno 18 anni");
+		failHint("max-date","Sono accettate solo le date successive al 1 gennaio 1900");
+		return checkInput("change-date", "date-error", "Per avere un profilo inserire un anno successivo al 1899 (almeno 1 gennaio 1900)", 0, 1);
 	}
 	var check = document.getElementById("date-error");
 	deleteError(check);
+	successHint("min-date","Devi avere almeno 18 anni");
+	successHint("max-date","Sono accettate solo le date successive al 1 gennaio 1900");
 	FirstFormUltimateCheck();
 	return true;
 }
@@ -326,6 +362,9 @@ function chargeNewLogo() {
 
 					deleteError(sizeError);
 					deleteError(formatError);
+
+					successHint("max-size-file","File di dimensione massima a 2<span lang='en' abbr='megabyte'>MB</span>");
+					successHint("type-file","Solo file di tipo png, jpeg o jpg");
 
 					document.getElementById("reset-user-setting").disabled = true;
 		            document.getElementById("reset-user-setting").classList.add("not-available");
