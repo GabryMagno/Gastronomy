@@ -85,7 +85,7 @@ header .header_text{
     overflow: hidden;
 }
 
-.hidden_header .header_text{
+.hidden_header .header_text, .hidden_testo{
     position: absolute;
     width: 1px;
     height: 1px;
@@ -422,6 +422,11 @@ form.form-bianco#delete-account{
     width: 70%;
 }
 
+form.form-bianco#filter-content{
+    margin-top: 0;
+    width: 90%;
+}
+
 form.form-bianco#login-user label,
 form.form-bianco#register-form label,
 form.form-bianco#change-personal-info label,
@@ -463,6 +468,10 @@ form.form-bianco#delete-account label::after{
     justify-content: center;
 
     cursor: pointer;
+}
+
+a.bottoni-rossi{
+    color: white;
 }
 
 .bottoni-rossi{
@@ -627,15 +636,18 @@ li.new article{
     padding: 1em;
     background-color: white;
     border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     text-decoration: none;
     color: #333;
+
+    transition: .4s;
+    box-shadow: 0 0.3em 0.3em rgba(0, 0, 0, 0.25),
+                0 0.3em 0.3em rgba(0, 0, 0, 0.22);
 }
 
 .categoria-box:hover {
     transform: translate(0, -0.4em );
     box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.16),
-                0 0.2em 0.4em rgba(0, 0, 0, 0.24);
+                0 0.2em 0.4em rgba(0, 0, 0, 0.24);            
 }
 
 .categoria-box img {
@@ -734,20 +746,59 @@ li.new article{
     padding-top: 1rem;
 }
 
-.recensione-container {
-    display: flex;
-    flex-wrap: wrap;
-
-    justify-content: center;
-    
-    gap: 2rem;
-    padding: 2rem 1rem;
-
+.recensioni-wrapper{
+    position: relative;
     max-width: 95%;
     margin: 0 auto;
+    display: flex;
+    align-items: center;
+
+    padding-left: 3rem;  
+    padding-right: 3rem;
+    padding-bottom: 1em;
+}
+
+.recensione-container {
+    flex-grow: 1;
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 2.5rem 0 1rem 0;
+    
+    scroll-padding-left: 50%;
+    scrollbar-width: thin;               
+    scrollbar-color: #888 transparent;
+}
+
+.recensione-container::-webkit-scrollbar {
+    height: 12px;
+}
+
+.recensione-container::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 6px;
+}
+
+.recensione-container::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 6px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+    transition: background-color 0.3s ease;
+}
+
+.recensione-container::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0,0,0,0.6);
 }
 
 .recensione-card{
+flex-shrink: 0;
+    width: 300px;
+    scroll-snap-align: start;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -758,10 +809,35 @@ li.new article{
     border-radius: 8px;
 
     padding: 1rem;
-    margin: 1rem;
-    width: 300px;
-    
     box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0,0,0,0.5);
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    user-select: none;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+    z-index: 9999;
+    color: white;
+}
+
+.scroll-btn:hover {
+    background-color: rgba(0,0,0,0.3);
+}
+
+.scroll-btn.left {
+    left: -1rem;
+}
+
+.scroll-btn.right {
+    right: -1rem;
 }
 
 .singleproduct .recensione-container .recensione-card{
@@ -831,7 +907,7 @@ li.new article{
 */
 
 div#list-content{
-    margin: 1em;
+    margin: 0 1em;
     display: flex;
     justify-content: space-between;
 }
@@ -984,6 +1060,14 @@ div#product-pages{
 
 #storia{
     margin-bottom: 3em;
+}
+
+#storia .section-divider{
+    border: none;
+    height: 3px;
+    background-color: var(--headerbgcolor);
+    width: 25%;
+    margin: 2.5em auto;
 }
 
 /* GASTRONOMIA - STORIA PRIMA */
@@ -1157,11 +1241,45 @@ form#advice textarea{
 
 #chisiamo-info{
     background-color: var(--secondaryelementcolor);
+
+    padding: 1.5em 5em;
+
+    text-align: center;
+    color: var(--txtcolor);
 }
 
-#chisiamo-info > h2{
-    margin: 0;
-    padding-top: 1rem;
+#chisiamo-info h2{
+    margin-top: 0em;
+}
+
+#chisiamo-info h3{
+    margin-top: 1em;
+}
+
+#chisiamo-info h2,
+#chisiamo-info h3 {
+    margin-bottom: 0.5em;
+    color: var(--txtcolor);
+}
+
+#chisiamo-info p {
+    line-height: 1.6;
+    font-size: 1.1rem;
+    margin-bottom: 0.5em;
+}
+
+.chisiamo-bold {
+    font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+    #chisiamo-info {
+        padding: 2em 3em;
+    }
+
+    #chisiamo-info p {
+        font-size: 1rem;
+    }
 }
 
 /*  
@@ -1427,6 +1545,10 @@ summary:focus{
     ===============================
 */
 
+.singledegustazione_main{
+    margin-top: 2em;
+}
+
 .degustazione-card {
     display: flex;
 
@@ -1435,7 +1557,8 @@ summary:focus{
 
     overflow: hidden;
 
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+                
     margin: 20px auto;
 
     max-width: 90%;
@@ -1449,68 +1572,53 @@ summary:focus{
 
 .degustazione-contenuto{
     flex: 1;
-    padding: 1em;
+    padding: 1.5em;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
 .degustazione-contenuto h2, .degustazione-contenuto p{
-    margin: 0 0 1em;
+    margin: 1em 0 1em;
 }
 
-/* === CONTENUTO DEGUSTAZIONE === */
-.degustazione-dettagli{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.info-degustazione{
-    display: flex;
-    gap: 0.5em;
+p.degustazione-nondisponibile#degustazione-singola {
     margin-bottom: 1em;
 }
 
-.degustazione-dettagli dt{
+.degustazione-contenuto p.degustazione-nondisponibile{
+    margin-bottom: 0;
+}
+
+.degustazione-dettagli{
+    margin-top: 0.5em;
+}
+
+/* === CONTENUTO DEGUSTAZIONE === 
+
+    Alcuni CSS si trovano nella sezione seguente "PAGINA PRODOTTO".
+    Questa scelta è stata effettuata per dare maggiore uniformità al codice CSS e alla grafica del sito
+
+*/
+
+.degustazione-bold{
     font-weight: bold;
-    display: inline-block;
-    padding-left: 26px;
-    padding-right: 0.2em;
-    position: relative;
-    margin-bottom: 0.5em;
-}
-
-.degustazione-dettagli dt::after{
-    content: ":";
-}
-
-.degustazione-persone::before,
-.degustazione-durata::before,
-.degustazione-prezzo::before{
-    content: "";
-    display: inline-block;
-    position: absolute;
-    left: 0;
-    top: 0.1em;
-    width: 20px;
-    height: 20px;
-
-    background-size: contain;
-    background-repeat: no-repeat;
 }
 
 .degustazione-persone::before{
     background-image: url('../../img/icone/persona-nero.svg');
 }
 
-.degustazione-durata::before{
-    background-image: url('../../img/icone/durata-nero.svg');
+.degustazione-prenotazione::before{
+    background-image: url('../../img/icone/calendario-nero.svg');
 }
 
 .degustazione-prezzo::before{
     background-image: url('../../img/icone/costo-nero.svg');
+}
+
+.degustazione-prenota{
+    margin-top: 1.5em;
 }
 
 /*  
@@ -1522,7 +1630,8 @@ summary:focus{
     margin-top: 2em;
 }
 
-.singleproduct{
+.singleproduct,
+.singledegustazione{
     display: flex;
 
     flex-wrap: wrap;
@@ -1533,13 +1642,15 @@ summary:focus{
     gap: 1em;
 }
 
-.singleproduct-intestazione{
+.singleproduct-intestazione,
+.singledegustazione-intestazione{
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.singleproduct-intestazione h2{
+.singleproduct-intestazione h2,
+.singledegustazione-intestazione h2{
     color: var(--headerbgcolor);
 
     text-align: left;
@@ -1562,18 +1673,8 @@ summary:focus{
     height: auto;
 }
 
-.singleproduct{
-    display: flex;
-
-    flex-wrap: wrap;
-    margin-top: 0.5em;
-    margin-left: 3em;
-    margin-right: 3em;
-
-    gap: 1em;
-}
-
-.singleproduct h3::before{
+.singleproduct h3::before,
+.singledegustazione h3::before{
     content: "";
     display: inline-block;
     position: relative;
@@ -1588,22 +1689,26 @@ summary:focus{
     background-image: url('../../img/icone/valutazione-nero.svg');
 }
 
-.singleproduct h3::after{
+.singleproduct h3::after
+.singledegustazione h3::after{
     content: ":";
 }
 
-.singleproduct-img{
+.singleproduct-img,
+.singledegustazione-img{
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.singleproduct-img, .singleproduct-descrizione{
+.singleproduct-img, .singleproduct-descrizione,
+.singledegustazione-img, .singledegustazione-descrizione{
     flex: 1 1 300px;
     padding: 0 1rem 1rem 1rem;
 }
 
-.singleproduct-img img{
+.singleproduct-img img,
+.singledegustazione-img img{
 
     aspect-ratio: 1/1;
     width: 600px;
@@ -1620,12 +1725,13 @@ summary:focus{
     border: 1px solid var(--title_color);
 }
 
-.section-singleproduct{
+.section-singleproduct,
+.section-singledegustazione{
     height: 5px;
     background-color: var(--headerbgcolor)
 }
 
-/* === CONTENUTO SINGOLO PRODOTTO === */
+/* === CONTENUTO SINGOLO PRODOTTO e DEGUSTAZIONE === */
 #singleproduct-diete{
     margin-top: 1em;
     margin-bottom: 1em;
@@ -1638,21 +1744,26 @@ summary:focus{
     width: auto;
 }
 
-.singleproduct-dettagli dt{
+.singleproduct-dettagli dt,
+.degustazione-dettagli dt{
     font-weight: bold;
     font-size: 1.2em;
 }
 
-.singleproduct-dettagli dt::after{
+.singleproduct-dettagli dt::after,
+.degustazione-dettagli dt::after{
     content: ":";
 }
 
 .singleproduct-dettagli dt,
-.singleproduct-dettagli dd {
+.singleproduct-dettagli dd,
+.degustazione-dettagli dt,
+.degustazione-dettagli dd {
     display: inline-block;
 }
 
-.singleproduct-dettagli {
+.singleproduct-dettagli,
+.degustazione-dettagli{
     display: grid;
     grid-template-columns: max-content 1fr;
 
@@ -1667,7 +1778,10 @@ summary:focus{
 #prodotto-descrizione::before,
 #prodotto-categoria::before,
 #prodotto-valutazione::before,
-#prodotto-prezzo::before{
+#prodotto-prezzo::before,
+.degustazione-prenotazione::before,
+.degustazione-persone::before,
+.degustazione-prezzo::before{
     content: "";
     display: inline-block;
     position: relative;
@@ -1700,7 +1814,7 @@ summary:focus{
     content: " / 5 stelle";
 }
 
-#prodotto-prezzo-testo{
+#prodotto-prezzo-testo, .prodotto-prezzo-testo{
     font-size: 1.5em;
     font-weight: bold;
 }
@@ -1709,7 +1823,8 @@ summary:focus{
     font-weight: normal;
 }
 
-#prodotto-nondisponibile{
+#prodotto-nondisponibile,
+.degustazione-nondisponibile{
     text-align: center;
     font-weight: bolder;
     font-size: 1.7em;
@@ -1717,7 +1832,6 @@ summary:focus{
     color: var(--errorcolor);
 
     margin-top: 1em;
-    margin-bottom: 1em;
 }
 
 #aggiungi-prenotazione{
