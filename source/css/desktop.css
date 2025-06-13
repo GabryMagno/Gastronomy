@@ -412,7 +412,6 @@ form.form-bianco textarea{
     height: 100px;
 }
 
-form.form-bianco,
 form.form-bianco#login-user,
 form.form-bianco#register-form,
 form.form-bianco#change-personal-info,
@@ -1583,6 +1582,7 @@ summary:focus{
 }
 
 p.degustazione-nondisponibile#degustazione-singola {
+    margin-top: 2em;
     margin-bottom: 1em;
 }
 
@@ -1592,6 +1592,14 @@ p.degustazione-nondisponibile#degustazione-singola {
 
 .degustazione-dettagli{
     margin-top: 0.5em;
+}
+
+.singledegustazione-descrizione p{
+    margin-top: 1em;
+}
+
+.singledegustazione-descrizione .degustazione-dettagli{
+    margin-top: 2.5em;
 }
 
 /* === CONTENUTO DEGUSTAZIONE === 
