@@ -107,15 +107,17 @@ function deleteError(p){
 }
 function failHint(id,standard){
 	document.getElementById(id).classList.remove("success-hint");
-	document.getElementById(id).textContent = "❌ " + standard;
+	//if(check_num === 1) document.getElementById(id).addHtml = "❌ " + standard
+	document.getElementById(id).textContent = "❌ " + standard;//in caso va messo else all'inizio e check_num come parametro della funzione
 	document.getElementById(id).classList.add("fail-hint");
 	document.getElementById(id).setAttribute("aria-label","Non valido:" + standard);
 	document.getElementById(id).style.listStyleType = "none";
 }
 
-function successHint(id,standard){
+function successHint(id,standard,){
 	document.getElementById(id).classList.remove("fail-hint");
-	document.getElementById(id).textContent = "✔️ " + standard;
+	//if(check_num) document.getElementById(id).addHtml = "✔️ " + standard
+    document.getElementById(id).textContent = "✔️ " + standard;//in caso va messo else all'inizio e check_num come parametro della funzione
 	document.getElementById(id).classList.add("success-hint"); 
 	document.getElementById(id).setAttribute("aria-label","Valido:" + standard);
 	document.getElementById(id).style.listStyleType = "none";
@@ -363,17 +365,19 @@ function chargeNewLogo() {
 					deleteError(sizeError);
 					deleteError(formatError);
 
-					successHint("max-size-file","File di dimensione massima a 2<span lang='en' abbr='megabyte'>MB</span>");
-					successHint("type-file","Solo file di tipo png, jpeg o jpg");
+					successHint("max-size-file","Immagini di dimensione massima a 2MB");
+					successHint("type-file","Solo immagini di tipo png, jpeg o jpg");
 
 					document.getElementById("reset-user-setting").disabled = true;
 		            document.getElementById("reset-user-setting").classList.add("not-available");
 				}
 		        else{
-					return checkInput("change-logo","logo-error","L'estensione del <span lang='en'>file</span> caricato non è corretta",1,1);
+					failHint("type-file","Solo immagini di tipo png, jpeg o jpg");
+					return checkInput("change-logo","logo-error","L'estensione dell'immagine caricata non è corretta",1,1);
 				}
             }else{
-				return checkInput("change-logo","logo-error","Sono accettati solo <span lang='en'>file</span> di dimensione inferiore a 2<span lang='en' abbr='megabyte'>MB</span>",1,1);
+				failHint("max-size-file","Immagini di dimensione massima a 2MB");
+				return checkInput("change-logo","logo-error","Sono accettati solo immagini di dimensione inferiore a 2<span lang='en' abbr='megabyte'>MB</span>",1,1);
 			}
 		}
 
@@ -382,45 +386,93 @@ function chargeNewLogo() {
 	return true;
 }
 
+function checkHintPassword(password,id){
+	if((/[a-zß-ÿ]/.test(password))) successHint("lowercase-letter-"+id,"Almeno una lettera minuscola");
+	else failHint("lowercase-letter-"+id,"Almeno una lettera minuscola");
+
+	if((/[A-Z]/.test(password))) successHint("uppercase-letter-"+id,"Almeno una lettera maiuscola");
+	else failHint("uppercase-letter-"+id,"Almeno una lettera maiuscola");
+
+	if(/[0-9]/.test(password)) successHint("number-"+id,"Almeno un numero");
+	else failHint("number-"+id,"Almeno un numero");
+
+	if((/[.,!?@+\-_€$%&^*<>]/.test(password))) successHint("special-char-"+id,"Almeno un carattere speciale (solo tra questi: . , ! ? @ + \ - _ € $ % & ^ *<>)");
+	else failHint("special-char-"+id,"Almeno un carattere speciale (solo tra questi: . , ! ? @ + \ - _ € $ % & ^ *<>)");
+    
+	if(password.search(/^(?=.*\d)(?=.*[.,!?@+\-_€$%&^*<>])(?=.*[a-z])(?=.*[A-Z]).{8,}$/ !=0 || /\s{1,}/.test(password) || /={1,}/.test(password)) != 0) failHint("valid-old","Formato valido");
+	else successHint("valid-old","Formato valido");
+
+}
+
+function successHintPassword(id){
+	successHint("lowercase-letter-"+id,"Almeno una lettera minuscola");
+	successHint("uppercase-letter-"+id,"Almeno una lettera maiuscola");
+	successHint("number-"+id,"Almeno un numero");
+	successHint("special-char-"+id,"Almeno un carattere speciale (solo tra questi: . , ! ? @ + \ - _ € $ % & ^ *<>)");
+	successHint("min-letter-"+id,"Almeno 8 caratteri");
+	successHint("valid-"+id,"Formato valido");
+}
+
 function validateOldPassword(){
     var oldPassword = document.forms['change-password-email']['old-password'].value;
-	const allowedChars = /^(?=.*[a-zß-ÿ])(?=.*[A-ZÀ-Ý])(?=.*[\d])(?=.*[.,!?@+\-_€$%&^*<>]).{8,}$/;// --> .,!?@+\-_€$%&^*<> questi sono i caratteri speciali
+	//const allowedChars = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;// --> .,!?@+\-_€$%&^*<> questi sono i caratteri speciali
     checkCancelButtonPasswordSettings();
     if(oldPassword === "user" || oldPassword === "admin"){
 		var check = document.getElementById("old-password-error");
 		deleteError(check);
+		successHintPassword("old");
 		SecondFormUltimateCheck();
 		return true;
 	}
 
 	else if(oldPassword.length < 8){
+		failHint("min-letter-old","Almeno 8 caratteri");
+
+		checkHintPassword(oldPassword,"old");
+
 		return checkInput("old-password", "old-password-error", "La <span lang='en'>password</span> deve avere una lunghezza minima di 8 caratteri.", 1, 2);
 	}
 
-	else if(oldPassword.search(/^(?=.*[a-zß-ÿ])(?=.*[A-ZÀ-Ý])(?=.*[\d])(?=.*[.,!?@+\-_€$%&^*<>]).{8,}$/) != 0 || !allowedChars.test(newPassword)){
+	else if(oldPassword.search(/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/) != 0 || /\s{1,}/.test(oldPassword) || /={1,}/.test(oldPassword)){
+		successHint("min-letter-old","Almeno 8 caratteri");
+        
+		checkHintPassword(oldPassword,"old");
+
 		return checkInput("old-password", "old-password-error", "La <span lang='en'>password</span> deve contenere almeno una lettera minuscola, una lettera maiuscola, un numero e un carattere speciale.", 1, 2);
 	}
     var check = document.getElementById("old-password-error");
 	deleteError(check);
+	successHintPassword("old");
 	SecondFormUltimateCheck();
 	return true;
 }
 
 function validateNewPassword(){
 	var newPassword = document.forms['change-password-email']['new-password'].value;
-	const allowedChars = /^(?=.*[a-zß-ÿ])(?=.*[A-ZÀ-Ý])(?=.*[\d])(?=.*[.,!?@+\-_€$%&^*<>]).{8,}$/;// --> .,!?@+\-_€$%&^*<> questi sono i caratteri speciali
+	//const allowedChars = /^(?=.*[a-zß-ÿ])(?=.*[A-ZÀ-Ý])(?=.*[\d])(?=.*[.,!?@+\-_€$%&^*<>]).{8,}$/;// --> .,!?@+\-_€$%&^*<> questi sono i caratteri speciali
 	validateRepeatPassword();
     checkCancelButtonPasswordSettings();
 	if(newPassword.length < 8){
+        failHint("min-letter-new","Almeno 8 caratteri");
+		failHint("valid-new","Formato valido");
+
+		checkHintPassword(newPassword,"new");
+
 		return checkInput("new-password", "password-error", "La <span lang='en'>password</span> deve avere una lunghezza minima di 8 caratteri.", 1, 2);
 	}
 
-	if(newPassword.search(/^(?=.*[a-zß-ÿ])(?=.*[A-ZÀ-Ý])(?=.*[\d])(?=.*[.,!?@+\-_€$%&^*<>]).{8,}$/) != 0 || !allowedChars.test(newPassword)){
+	if(newPassword.search(/^(?=.*[a-zß-ÿ])(?=.*[A-ZÀ-Ý])(?=.*[\d])(?=.*[.,!?@+\-_€$%&^*<>]).{8,}$/) != 0 || /\s{1,}/.test(newPassword) || /={1,}/.test(newPassword)){
+        successHint("min-letter-new","Almeno 8 caratteri");
+		failHint("valid-new","Formato valido");
+        
+		checkHintPassword(newPassword,"new");
+
 		return checkInput("new-password", "password-error", "La <span lang='en'>password</span> deve contenere almeno una lettera minuscola, una lettera maiuscola, un numero e un carattere speciale.", 1, 2);
 	}
 
     var check = document.getElementById("password-error");
 	deleteError(check);
+	successHintPassword("new");
 	SecondFormUltimateCheck();
 	return true;
 }
