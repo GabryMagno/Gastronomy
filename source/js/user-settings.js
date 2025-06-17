@@ -420,18 +420,21 @@ function chargeNewLogo() {
 					deleteError(sizeError);
 					deleteError(formatError);
 
-					successHint("max-size-file","Immagini di dimensione massima a 2MB");
-					successHint("type-file","Solo immagini di tipo png, jpeg o jpg");
+					successHint("max-size-file","Dimensione massima a 2MB");
+					successHint("type-file","Solo formati png, jpeg o jpg");
 
 					document.getElementById("reset-user-setting").disabled = true;
 		            document.getElementById("reset-user-setting").classList.add("not-available");
-				}
-		        else{
-					failHint("type-file","Solo immagini di tipo png, jpeg o jpg");
+				}else{
+					if(Byte > 2048 ) failHint("max-size-file","Dimensione massima a 2MB");
+					else successHint("max-size-file","Dimensione massima a 2MB");
+					failHint("type-file","Solo formati png, jpeg o jpg");
 					return checkInput("change-logo","logo-error","L'estensione dell'immagine caricata non è corretta",1,1);
 				}
             }else{
-				failHint("max-size-file","Immagini di dimensione massima a 2MB");
+				if(acceptedImgType.includes(file['type'])) successHint("type-file","Solo formati png, jpeg o jpg");
+				else failHint("type-file","Solo formati png, jpeg o jpg");
+				failHint("max-size-file","Dimensione massima a 2MB");
 				return checkInput("change-logo","logo-error","Sono accettati solo immagini di dimensione inferiore a 2<span lang='en' abbr='megabyte'>MB</span>",1,1);
 			}
 		}
