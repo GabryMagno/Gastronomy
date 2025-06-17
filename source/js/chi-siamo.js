@@ -55,8 +55,19 @@ function validateAdvice(){
         const parent = document.getElementById("user-advice").parentNode;
         parent.appendChild(p);
         return false;
-    }
-    else if(Advice.length > 300){
+    }else if(!Advice.replace(/\s/g, '').length){
+        var check = document.getElementById("comment-error");
+        deleteError(check);
+        var p = messageError("comment-error");
+        p.innerText = "La lunghezza minima del messaggio non deve essere inferiore ai 30 caratteri";
+        document.getElementById("submit-comment").classList.add("not-available");
+		document.getElementById("submit-comment").disabled = true;
+        document.getElementById("reset-comment").classList.remove("not-available");
+	    document.getElementById("reset-comment").disabled = false;
+        const parent = document.getElementById("user-comment").parentNode;
+        parent.appendChild(p);
+        return false;
+    }else if(Advice.length > 300){
         var check = document.getElementById("advice-error");
         deleteError(check);
         var p = messageError("advice-error");

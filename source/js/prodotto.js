@@ -89,15 +89,15 @@ function deleteError(p){
 }
 
 function validateComment(){
-    const Advice = document.forms['valutazione']['user-comment'].value;
-    if(Advice.length < 1){
+    const Comment = document.forms['valutazione']['user-comment'].value;
+    if(Comment.length < 1){
         document.getElementById("submit-comment").classList.add("not-available");
 		document.getElementById("submit-comment").disabled = true;
         document.getElementById("reset-comment").classList.add("not-available");
 		document.getElementById("reset-comment").disabled = true;
 
     }
-    else if(Advice.length < 30){
+    else if(Comment.length < 30 || /^\\s*$/.test(Comment)){
         var check = document.getElementById("comment-error");
         deleteError(check);
         var p = messageError("comment-error");
@@ -109,8 +109,19 @@ function validateComment(){
         const parent = document.getElementById("user-comment").parentNode;
         parent.appendChild(p);
         return false;
-    }
-    else if(Advice.length > 300){
+    }else if(!Comment.replace(/\s/g, '').length){
+        var check = document.getElementById("comment-error");
+        deleteError(check);
+        var p = messageError("comment-error");
+        p.innerText = "La lunghezza minima del messaggio non deve essere inferiore ai 30 caratteri";
+        document.getElementById("submit-comment").classList.add("not-available");
+		document.getElementById("submit-comment").disabled = true;
+        document.getElementById("reset-comment").classList.remove("not-available");
+	    document.getElementById("reset-comment").disabled = false;
+        const parent = document.getElementById("user-comment").parentNode;
+        parent.appendChild(p);
+        return false;
+    }else if(Comment.length > 300){
         var check = document.getElementById("comment-error");
         deleteError(check);
         var p = messageError("comment-error");
