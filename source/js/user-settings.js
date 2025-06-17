@@ -8,6 +8,17 @@ function validateUserPersonalSettings() {
 		deleteError(document.getElementById("surname-error"));
 		deleteError(document.getElementById("date-error"));
 		deleteError(document.getElementById("logo-error"));
+          
+        resetHint("letter-number-username","Inserire solo lettere o numeri");
+		resetHintPrivateInfo("letter-","Inserire Inserire solo lettere");
+		resetHintPrivateInfo("min-char-","Minimo 4 carattere","Minimo 4 caratteri");
+		resetHintPrivateInfo("max-char-","Massimo 16 caratteri","Massimo 15 caratteri");
+		resetHintPrivateInfo("space-","Nessuno spazio consentito","Nessuno spazio consentito");
+		resetHint("min-date","Devi avere almeno 18 anni");
+		resetHint("max-date","Sono accettate solo le date successive al 1 gennaio 1900");
+		resetHint("max-size-file","Immagini di dimensione massima a 2MB");
+		resetHint("type-file","Solo immagini di tipo png, jpeg o jpg");
+
 		DefaultValue("change-username");
 		disableButton("reset-user-setting");
 	});
@@ -29,9 +40,18 @@ function validateUserPasswordSettings(){
 		deleteError(document.getElementById("old-password-error"));
 		deleteError(document.getElementById("password-error"));
 		deleteError(document.getElementById("repeat-password-error"));
+
 		EliminateValue("old-password");
 		EliminateValue("new-password");
 		EliminateValue("confirm-new-password");
+
+        resetHintPassword("lowercase-letter-","Almeno una lettera minuscola");
+		resetHintPassword("uppercase-letter-","Almeno una lettera maiuscola");
+		resetHintPassword("number-","Almeno un numero");
+		resetHintPassword("special-char-","Almeno un carattere speciale (. , ! ? @ + \ - _ € $ % & ^ *<> # =)");
+		resetHintPassword("min-letter-","Almeno 8 caratteri");
+		resetHintPassword("valid-","Formato valido");
+
 		document.getElementById("reset-password-setting").disabled = true;
 		document.getElementById("reset-password-setting").classList.add("not-available");
 	});
@@ -44,6 +64,35 @@ function validateUserPasswordSettings(){
 			disableButton("submit-password-setting");
 		}
 	});
+}
+
+/*  
+    ===================================
+        FUNZIONI DI USO GENERALE
+    ===================================
+*/
+
+function resetHint(id,standard){
+	document.getElementById(id).textContent = standard;
+	document.getElementById(id).classList.remove("fail-hint");
+	document.getElementById(id).classList.remove("success-hint");
+	document.getElementById(id).style.listStyleType = "disc";
+}
+
+function resetHintPrivateInfo(id,standard1,standard2){
+	if(id==="letter-"){
+    	resetHint(id+"name",standard1);
+		resetHint(id+"surname",standard1);
+	}else{
+		resetHint(id+"username",standard1);
+		resetHint(id+"name",standard2);
+		resetHint(id+"surname",standard2);
+	}
+}
+
+function resetHintPassword(id,standard){
+	resetHint(id+"old",standard);
+	resetHint(id+"new",standard);
 }
 
 function disableButton(id){
@@ -114,7 +163,7 @@ function failHint(id,standard){
 	document.getElementById(id).style.listStyleType = "none";
 }
 
-function successHint(id,standard,){
+function successHint(id,standard){
 	document.getElementById(id).classList.remove("fail-hint");
 	//if(check_num) document.getElementById(id).addHtml = "✔️ " + standard
     document.getElementById(id).textContent = "✔️ " + standard;//in caso va messo else all'inizio e check_num come parametro della funzione
@@ -122,6 +171,12 @@ function successHint(id,standard,){
 	document.getElementById(id).setAttribute("aria-label","Valido:" + standard);
 	document.getElementById(id).style.listStyleType = "none";
 }
+
+/*  
+    =========================================
+        FUNZIONI DI VALIDAZIONE E SPECIFICHE
+    =========================================
+*/
 
 function validateUsername(){
 	var Username = document.forms['change-personal-info']['change-username'].value;
@@ -396,10 +451,10 @@ function checkHintPassword(password,id){
 	if(/[0-9]/.test(password)) successHint("number-"+id,"Almeno un numero");
 	else failHint("number-"+id,"Almeno un numero");
 
-	if((/[.,!?@+\-_€$%&^*<>]/.test(password))) successHint("special-char-"+id,"Almeno un carattere speciale (solo tra questi: . , ! ? @ + \ - _ € $ % & ^ *<>)");
-	else failHint("special-char-"+id,"Almeno un carattere speciale (solo tra questi: . , ! ? @ + \ - _ € $ % & ^ *<>)");
+	if((/[.,!?@+\-_€$%&^*<>=#]/.test(password))) successHint("special-char-"+id,"Almeno un carattere speciale (. , ! ? @ + \ - _ € $ % & ^ *<> # =)");
+	else failHint("special-char-"+id,"Almeno un carattere speciale (. , ! ? @ + \ - _ € $ % & ^ *<> # =)");
     
-	if(password.search(/^(?=.*\d)(?=.*[.,!?@+\-_€$%&^*<>])(?=.*[a-z])(?=.*[A-Z]).{8,}$/ !=0 || /\s{1,}/.test(password) || /={1,}/.test(password)) != 0) failHint("valid-old","Formato valido");
+	if(password.search(/^(?=.*\d)(?=.*[.,!?@+\-_€$%&^*<>=#])(?=.*[a-z])(?=.*[A-Z]).{8,}$/ !=0 || /\s{1,}/.test(password)) != 0) failHint("valid-old","Formato valido");
 	else successHint("valid-old","Formato valido");
 
 }
@@ -408,14 +463,14 @@ function successHintPassword(id){
 	successHint("lowercase-letter-"+id,"Almeno una lettera minuscola");
 	successHint("uppercase-letter-"+id,"Almeno una lettera maiuscola");
 	successHint("number-"+id,"Almeno un numero");
-	successHint("special-char-"+id,"Almeno un carattere speciale (solo tra questi: . , ! ? @ + \ - _ € $ % & ^ *<>)");
+	successHint("special-char-"+id,"Almeno un carattere speciale (. , ! ? @ + \ - _ € $ % & ^ *<> # =)");
 	successHint("min-letter-"+id,"Almeno 8 caratteri");
 	successHint("valid-"+id,"Formato valido");
 }
 
 function validateOldPassword(){
     var oldPassword = document.forms['change-password-email']['old-password'].value;
-	//const allowedChars = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;// --> .,!?@+\-_€$%&^*<> questi sono i caratteri speciali
+	//const allowedChars = /^(?=.*\d)(?=.*[!@#$%^&#=*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;// --> .,!?@+\-_€$%&^*<> questi sono i caratteri speciali
     checkCancelButtonPasswordSettings();
     if(oldPassword === "user" || oldPassword === "admin"){
 		var check = document.getElementById("old-password-error");
@@ -433,7 +488,7 @@ function validateOldPassword(){
 		return checkInput("old-password", "old-password-error", "La <span lang='en'>password</span> deve avere una lunghezza minima di 8 caratteri.", 1, 2);
 	}
 
-	else if(oldPassword.search(/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/) != 0 || /\s{1,}/.test(oldPassword) || /={1,}/.test(oldPassword)){
+	else if(oldPassword.search(/^(?=.*\d)(?=.*[!@#$%^&=#*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/) != 0 || /\s{1,}/.test(oldPassword)){
 		successHint("min-letter-old","Almeno 8 caratteri");
         
 		checkHintPassword(oldPassword,"old");
@@ -461,7 +516,7 @@ function validateNewPassword(){
 		return checkInput("new-password", "password-error", "La <span lang='en'>password</span> deve avere una lunghezza minima di 8 caratteri.", 1, 2);
 	}
 
-	if(newPassword.search(/^(?=.*[a-zß-ÿ])(?=.*[A-ZÀ-Ý])(?=.*[\d])(?=.*[.,!?@+\-_€$%&^*<>]).{8,}$/) != 0 || /\s{1,}/.test(newPassword) || /={1,}/.test(newPassword)){
+	if(newPassword.search(/^(?=.*[a-zß-ÿ])(?=.*[A-ZÀ-Ý])(?=.*[\d])(?=.*[.,=#!?@+\-_€$%&^*<>]).{8,}$/) != 0 || /\s{1,}/.test(newPassword)){
         successHint("min-letter-new","Almeno 8 caratteri");
 		failHint("valid-new","Formato valido");
         
@@ -510,7 +565,11 @@ function checkCancelButtonPasswordSettings(){
 	if(oldPassword.length < 1 && newPassword.length < 1 && repeatNewPassword.length < 1)disableButton("reset-password-setting")
 	else enableButton("reset-password-setting");
 }
-
+/*  
+    ===================================
+        GESTIONE CARICAMENTO PAGINA
+    ===================================
+*/
 const listeners = {
 	"change-name" : ["input", validateName ],
 	"change-surname" : ["input", validateSurname ],
