@@ -1655,6 +1655,10 @@ p.degustazione-nondisponibile#degustazione-singola {
     background-image: url('../../img/icone/costo-nero.svg');
 }
 
+.degustazione-prodotto::before{
+    background-image: url('../../img/icone/descrizione-nero.svg');
+}
+
 .degustazione-prenota{
     margin-top: 1.5em;
 }
@@ -1786,6 +1790,10 @@ form#prenotazione-degustazione #quantita{
     width: auto;
 }
 
+.diet-label {
+  display: none;
+}
+
 .singleproduct-dettagli dt,
 .degustazione-dettagli dt{
     font-weight: bold;
@@ -1823,7 +1831,8 @@ form#prenotazione-degustazione #quantita{
 #prodotto-prezzo::before,
 .degustazione-prenotazione::before,
 .degustazione-persone::before,
-.degustazione-prezzo::before{
+.degustazione-prezzo::before,
+.degustazione-prodotto::before{
     content: "";
     display: inline-block;
     position: relative;
@@ -1944,14 +1953,8 @@ h3 + .singleproduct-rating {
     gap: 0.5em;
 }
 
-.rating-stars .star{
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.rating-stars img{
-    width: 30px;
+.rating-stars span{
+    font-size: 1.8em;
 }
 
 .rating input{

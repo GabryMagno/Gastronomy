@@ -1,37 +1,125 @@
 @page {
-	margin: 1cm;
-	size: A4;
+  margin: 1cm;
+  size: A4;
 }
 
 * {
-	font-family: "Georgia", "Times New Roman", Times, serif;
-    font-size: 12pt;
+  font-family: "Georgia", "Times New Roman", Times, serif;
+  font-size: 12pt;
+  line-height: 1.5;
+  color: black;
+  background-color: white;
+  background: none;
+  text-align: justify;
+  text-decoration: none;
 
-    line-height: 1.5em;
-    text-decoration: none;
-    text-align: justify;
-
-    break-before: avoid;
-    break-inside: avoid;
-
-    color: black;
-    background-color: white;
+  box-shadow: none;
+  border-radius: 0;
 }
 
 body {
-    align-items: center;
-	text-align: center;
-	margin-top: 2cm;
+  margin: 2cm;
+  text-align: left;
 }
 
-a{
-    
+header, nav, footer, aside, .navbar_top, .promo-box, .scroll-btn, .a_navigation, #menu-button {
+  display: none
+}
+
+.hidden,
+.hidden_header,
+.hidden_testo {
+  display: none;
+}
+
+h1, h2, h3, img {
+  break-inside: avoid;
+  page-break-after: avoid;
+}
+
+p{
+    margin-bottom: 1em;
 }
 
 a:after {
-	content: " [" attr(href) "]";
+  content: " [" attr(href) "]";
+  font-size: 0.9em;
 }
 
-form{
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1em auto;
+  page-break-inside: avoid;
+}
+
+form {
+  display: none;
+}
+
+button, select, textarea, input {
+  display: none;
+}
+
+ul, ol {
+  padding-left: 1.5em;
+  margin-bottom: 1em;
+}
+li {
+  margin-bottom: 0.5em;
+}
+
+.error {
+  color: #B00020;
+  font-weight: bold;
+}
+
+.no-print{
     display: none;
+}
+
+/* INDICAZIONE PAGINA NON OTTIMIZZATA PER STAMPA */
+  body.no-print-content * {
+    display: none;
+  }
+  body.no-print-content::before {
+    content: "Questa pagina non è pensata per la stampa.";
+    text-align: center;
+    display: block;
+    margin: 20px;
+    font-size: 1.2em;
+    color: gray;
+  }
+
+/* PAGINA PRODOTTO SINGOLO */
+  #singleproduct-diete img {
+    display: none;
+  }
+
+  .diet-label {
+    display: inline-block;
+    margin-right: 1em;
+    font-weight: bold;
+  }
+
+  #singleproduct-diete {
+    display: block;
+    margin-bottom: 1em;
+  }
+
+
+/* RECENSIONI */
+.recensione-wrapper,
+.recensione-container,
+.recensione-card {
+  display: block;
+  width: 100%;
+  break-inside: avoid;
+  page-break-inside: auto;
+  margin-bottom: 1em;
+}
+
+.recensione-foto {
+  display: none;
 }
