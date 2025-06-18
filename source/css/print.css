@@ -9,7 +9,6 @@
   line-height: 1.5;
   color: black;
   background-color: white;
-  background: none;
   text-align: justify;
   text-decoration: none;
 
@@ -19,17 +18,62 @@
 
 body {
   margin: 2cm;
+}
+
+/* HEADER PRINT LAYOUT */
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header h1,
+header p.header_text {
+  display: block ;
+  text-align: center;
+  margin-bottom: 0.1em;
+  font-size: 1.5em;
+  color: black;
+}
+
+#breadcrumb {
+  order: 1;
+  align-self: flex-start;
   text-align: left;
+  display: block ;
+  margin-top: 1.5em;
+  font-size: 1em;
+  color: black;
+
+  font-style: italic;
 }
 
-header, nav, footer, aside, .navbar_top, .promo-box, .scroll-btn, .a_navigation, #menu-button {
-  display: none
+h2.section-title {
+  display: block;
+  margin-top: 2em;
+  font-size: 1.2em;
+  color: black;
 }
 
+header nav,
+nav,
+footer,
+aside,
+.navbar_top,
+.promo-box,
+.scroll-btn,
+.a_navigation,
+#menu-button,
+form,
+button,
+select,
+textarea,
+input,
 .hidden,
 .hidden_header,
-.hidden_testo {
-  display: none;
+.hidden_testo,
+.no-print {
+  display: none ;
 }
 
 h1, h2, h3, img {
@@ -37,8 +81,8 @@ h1, h2, h3, img {
   page-break-after: avoid;
 }
 
-p{
-    margin-bottom: 1em;
+p {
+  margin-bottom: 1em;
 }
 
 a:after {
@@ -54,62 +98,67 @@ img {
   page-break-inside: avoid;
 }
 
-form {
-  display: none;
-}
-
-button, select, textarea, input {
-  display: none;
-}
-
 ul, ol {
   padding-left: 1.5em;
   margin-bottom: 1em;
 }
+
 li {
   margin-bottom: 0.5em;
 }
 
-.error {
-  color: #B00020;
+dt{
+    font-weight: bold;
+}
+
+dt::after{
+    content: ":";
+}
+
+/* MESSAGGIO PER PAGINA NON STAMPABILE */
+body.no-print-content * {
+  display: none ;
+}
+body.no-print-content::before {
+  content: "Questa pagina non è pensata per la stampa.";
+  text-align: center;
+  display: block;
+  margin: 20px;
+  font-size: 1.2em;
+  color: gray;
+}
+
+/* PERSONALIZZAZIONI PER ALCUNE PAGINE SPECIFICHE */
+/* HOME */
+.categoria-grid{
+    width: 50%;
+}
+
+.new img{
+    width: 60%;
+}
+
+/* CHI SIAMO */
+.chef-content img {
+    width: 40%;
+}
+
+/* PRODOTTO SINGOLO */
+#singleproduct-diete img {
+  display: none;
+}
+
+.diet-label {
+  display: inline-block;
+  margin-right: 1em;
   font-weight: bold;
 }
 
-.no-print{
-    display: none;
+#singleproduct-diete {
+  display: block;
+  margin-bottom: 1em;
 }
 
-/* INDICAZIONE PAGINA NON OTTIMIZZATA PER STAMPA */
-  body.no-print-content * {
-    display: none;
-  }
-  body.no-print-content::before {
-    content: "Questa pagina non è pensata per la stampa.";
-    text-align: center;
-    display: block;
-    margin: 20px;
-    font-size: 1.2em;
-    color: gray;
-  }
-
-/* PAGINA PRODOTTO SINGOLO */
-  #singleproduct-diete img {
-    display: none;
-  }
-
-  .diet-label {
-    display: inline-block;
-    margin-right: 1em;
-    font-weight: bold;
-  }
-
-  #singleproduct-diete {
-    display: block;
-    margin-bottom: 1em;
-  }
-
-
-/* RECENSIONI */
 .recensione-wrapper,
 .recensione-container,
 .recensione-card {
@@ -122,4 +171,13 @@ li {
 
 .recensione-foto {
   display: none;
+}
+
+/* DEGUSTAZIONI */
+.degustazione-card{
+    text-align: center;
+}
+
+.degustazione-card img{
+    width: 60%;
 }
