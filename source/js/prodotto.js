@@ -3,6 +3,12 @@ function validateUserComment() {
     reset_button.addEventListener("click", () =>{
         var check = document.getElementById("comment-error");
         deleteError(check);
+        resetHint("min-char-comment","Minimo 30 caratteri");
+        resetHint("max-char-comment","Massimo 300 caratteri");
+        for(i=1;i<6;i++){
+            if(i == 1) document.getElementsByTagName("1 stella").style.color = "#1a2c2c";
+            else document.getElementsByTagName(i.toString() + " stella").style.color = "#1a2c2c";
+        }
         document.getElementById("submit-comment").classList.add("not-available");
 		document.getElementById("submit-comment").disabled = true;
         document.getElementById("user-comment").value = "";
@@ -33,6 +39,32 @@ function ValidateUserOrder(){
 		}
 	});
 
+}
+
+
+function resetHint(id,standard){
+	document.getElementById(id).textContent = standard;
+	document.getElementById(id).classList.remove("fail-hint");
+	document.getElementById(id).classList.remove("success-hint");
+	document.getElementById(id).style.listStyleType = "disc";
+}
+
+function failHint(id,standard){
+	document.getElementById(id).classList.remove("success-hint");
+	//if(check_num === 1) document.getElementById(id).addHtml = "❌ " + standard
+	document.getElementById(id).textContent = "❌ " + standard;//in caso va messo else all'inizio e check_num come parametro della funzione
+	document.getElementById(id).classList.add("fail-hint");
+	document.getElementById(id).setAttribute("aria-label","Non valido:" + standard);
+	document.getElementById(id).style.listStyleType = "none";
+}
+
+function successHint(id,standard){
+	document.getElementById(id).classList.remove("fail-hint");
+	//if(check_num) document.getElementById(id).addHtml = "✔️ " + standard
+    document.getElementById(id).textContent = "✔️ " + standard;//in caso va messo else all'inizio e check_num come parametro della funzione
+	document.getElementById(id).classList.add("success-hint"); 
+	document.getElementById(id).setAttribute("aria-label","Valido:" + standard);
+	document.getElementById(id).style.listStyleType = "none";
 }
 
 /*function validateNumberElementOrder(){
@@ -95,7 +127,10 @@ function validateComment(){
 		document.getElementById("submit-comment").disabled = true;
         document.getElementById("reset-comment").classList.add("not-available");
 		document.getElementById("reset-comment").disabled = true;
-
+        
+        failHint("min-char-comment","Minimo 30 caratteri");
+        successHint("max-char-comment","Massimo 300 caratteri");
+        return false;
     }
     else if(Comment.length < 30 || /^\\s*$/.test(Comment)){
         var check = document.getElementById("comment-error");
@@ -108,6 +143,8 @@ function validateComment(){
 	    document.getElementById("reset-comment").disabled = false;
         const parent = document.getElementById("user-comment").parentNode;
         parent.appendChild(p);
+        failHint("min-char-comment","Minimo 30 caratteri");
+        successHint("max-char-comment","Massimo 300 caratteri");
         return false;
     }else if(!Comment.replace(/\s/g, '').length){
         var check = document.getElementById("comment-error");
@@ -132,10 +169,14 @@ function validateComment(){
 	    document.getElementById("reset-comment").disabled = false;
         const parent = document.getElementById("user-comment").parentNode;
         parent.appendChild(p);
+        successHint("min-char-comment","Minimo 30 caratteri");
+        failHint("max-char-comment","Massimo 300 caratteri");
         return false;
     }
     var check = document.getElementById("comment-error");
     deleteError(check);
+    successHint("min-char-comment","Minimo 30 caratteri");
+    successHint("max-char-comment","Massimo 300 caratteri");
     document.getElementById("submit-comment").classList.remove("not-available");
 	document.getElementById("submit-comment").disabled = false;
     document.getElementById("reset-comment").classList.remove("not-available");

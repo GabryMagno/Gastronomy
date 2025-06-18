@@ -137,6 +137,15 @@
                 <form method="post" id="advice" class="form-bianco">
                     <fieldset>
                         <label for="user-advice" class="form-label">Scrivi qua il tuo suggerimento</label>
+                        <details>
+                            <summary id="hints-advice" class="hints" role="button" aria-expanded="false" aria-controls="hint-list-advice">
+                                Suggerimenti Suggerimento
+                            </summary>
+                            <ul class="suggestions-list" id="hint-list-advice">
+                                <li id="min-char-advice">Minimo 30 caratteri</li>
+                                <li id="max-char-advice">Massimo 300 caratteri</li>
+                            </ul>
+                        </details>
                         <textarea name="suggerimento" placeholder="Scrivi un suggerimento" id="user-advice" required minlength="30" maxlength="300"></textarea>
                     </fieldset>
                     <div class="button-container">
