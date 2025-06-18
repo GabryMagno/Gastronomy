@@ -5,6 +5,10 @@ function validateUserComment() {
         deleteError(check);
         resetHint("min-char-comment","Minimo 30 caratteri");
         resetHint("max-char-comment","Massimo 300 caratteri");
+        for(i=1;i<6;i++){
+            if(i == 1) document.getElementsByTagName("1 stella").style.color = "#1a2c2c";
+            else document.getElementsByTagName(i.toString() + " stella").style.color = "#1a2c2c";
+        }
         document.getElementById("submit-comment").classList.add("not-available");
 		document.getElementById("submit-comment").disabled = true;
         document.getElementById("user-comment").value = "";
