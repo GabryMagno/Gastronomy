@@ -454,11 +454,11 @@ function checkHintPassword(password,id){
 	if(/[0-9]/.test(password)) successHint("number-"+id,"Almeno un numero");
 	else failHint("number-"+id,"Almeno un numero");
 
-	if((/[.,!?@+\-_€$%&^*<>=#]/.test(password))) successHint("special-char-"+id,"Almeno un carattere speciale (. , ! ? @ + \ - _ € $ % & ^ *<> # =)");
-	else failHint("special-char-"+id,"Almeno un carattere speciale (. , ! ? @ + \ - _ € $ % & ^ *<> # =)");
+	if((/[.,!?@+\-_€$%&^*<>=#]/.test(password))) successHint("special-char-"+id,"Almeno un carattere speciale (. , ! ? @ + \ - _ € $ % & ^ * < > # =)");
+	else failHint("special-char-"+id,"Almeno un carattere speciale (. , ! ? @ + \ - _ € $ % & ^ * < > # =)");
     
-	if(password.search(/^(?=.*\d)(?=.*[.,!?@+\-_€$%&^*<>=#])(?=.*[a-z])(?=.*[A-Z]).{8,}$/ !=0 || /\s{1,}/.test(password)) != 0) failHint("valid-old","Formato valido");
-	else successHint("valid-old","Formato valido");
+	if(password.search(/^(?=.*\d)(?=.*[.,!?@+\-_€$%&^*<>=#])(?=.*[a-z])(?=.*[A-Z]).{8,}$/ !=0 || /\s{1,}/.test(password)) != 0) failHint("valid-"+id,"Formato valido");
+	else successHint("valid-"+id,"Formato valido");
 
 }
 
@@ -466,7 +466,7 @@ function successHintPassword(id){
 	successHint("lowercase-letter-"+id,"Almeno una lettera minuscola");
 	successHint("uppercase-letter-"+id,"Almeno una lettera maiuscola");
 	successHint("number-"+id,"Almeno un numero");
-	successHint("special-char-"+id,"Almeno un carattere speciale (. , ! ? @ + \ - _ € $ % & ^ *<> # =)");
+	successHint("special-char-"+id,"Almeno un carattere speciale (. , ! ? @ + \ - _ € $ % & ^ * < > # =)");
 	successHint("min-letter-"+id,"Almeno 8 caratteri");
 	successHint("valid-"+id,"Formato valido");
 }
