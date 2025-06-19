@@ -119,6 +119,7 @@ dt::after{
 body.no-print-content * {
   display: none ;
 }
+
 body.no-print-content::before {
   content: "Questa pagina non è pensata per la stampa.";
   text-align: center;

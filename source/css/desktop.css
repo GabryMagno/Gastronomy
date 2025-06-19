@@ -525,6 +525,11 @@ a.bottoni-rossi{
     gap: 0em;
 }
 
+/* Container visualizza prodotto degustazione */
+.button-container#degustazione-visualprodotto{
+    justify-content: left;
+}
+
 #vertical button{
     width: 9em;
 }
@@ -1504,7 +1509,8 @@ summary {
 }
 
 summary::-webkit-details-marker {
-    display: none;
+    position: absolute;
+    text-indent: -999em;
 }
 
 summary::after {
@@ -1791,7 +1797,8 @@ form#prenotazione-degustazione #quantita{
 }
 
 .diet-label {
-  display: none;
+    position: absolute;
+    text-indent: -999em;
 }
 
 .singleproduct-dettagli dt,
