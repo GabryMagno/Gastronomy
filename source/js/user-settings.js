@@ -549,7 +549,6 @@ function validateRepeatPassword(){
 	return true;
 }
 
-
 function checkCancelButtonPrivateSettings(){
 	var Nome = document.getElementById("change-name").value;
 	var Cognome = document.getElementById("change-surname").value;

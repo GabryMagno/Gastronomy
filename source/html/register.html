@@ -73,18 +73,60 @@
                         <div>
                             <label id="lbl_register_username" for="register_username">Username</label>
                             <input id="register_username" class="register_input" type="text" name="username"  required data-msg-required="Inserisci il tuo username" placeholder="Username">
+                            <details open>
+                                <summary id="hints-username" class="hints" role="button" aria-expanded="false" aria-controls="hint-list-username">
+                                    Suggerimenti Username
+                                </summary>
+                                <ul class="suggestions-list" id="hint-list-username">
+                                    <li id="letter-number-username">Inserire solo lettere o numeri</li>
+                                    <li id="min-char-username">Minimo 4 caratteri</li>
+                                    <li id="max-char-username">Massimo 16 caratteri</li>
+                                    <li id="space-username">Nessuno spazio consentito</li>
+                                </ul>
+                            </details>
                         </div>
                         <div>
                             <label id="lbl_register_nome" for="register_nome">Nome</label> 
                             <input id="register_nome" class="register_input" type="text" name="nome"  required data-msg-required="Inserisci il tuo nome" placeholder="Nome">
+                            <details open>
+                                <summary id="hints-name" class="hints" role="button" aria-expanded="false" aria-controls="hint-list-name">
+                                    Suggerimenti Nome
+                                </summary>
+                                <ul class="suggestions-list" id="hint-list-name">
+                                    <li id="letter-name">Inserire solo lettere</li>
+                                    <li id="min-char-name">Minimo 1 carattere</li>
+                                    <li id="max-char-name">Massimo 15 caratteri</li>
+                                    <li id="space-name">Nessuno spazio consentito</li>
+                                </ul>
+                            </details>
                         </div>
                         <div> 
                             <label id="lbl_register_cognome" for="register_cognome">Cognome</label>
                             <input id="register_cognome" class="register_input" type="text" name="cognome" required data-msg-required="Inserisci il tuo cognome" placeholder="Cognome">
+                            <details open>
+                                <summary id="hints-surname" class="hints" role="button" aria-expanded="false" aria-controls="hint-list-surname">
+                                    Suggerimenti Cognome
+                                </summary>
+                                <ul class="suggestions-list" id="hint-list-suraname">
+                                    <li id="letter-surname">Inserire solo lettere</li>
+                                    <li id="min-char-surname">Minimo 1 carattere</li>
+                                    <li id="max-char-surname">Massimo 15 caratteri</li>
+                                    <li id="space-surname">Nessuno spazio consentito</li>
+                                </ul>
+                            </details>
                         </div>
                         <div>    
                             <label id="lbl_register_datanascita" for="register_datanascita">Data di nascita</label>
                             <input id="register_datanascita" class="register_input" type="date" name="data" required data-msg-required="Inserisci la tua data di nascita">
+                            <details open>
+                                <summary id="hints-date" class="hints" role="button" aria-expanded="false" aria-controls="hint-list-date">
+                                    Suggerimenti Data di Nascita
+                                </summary>
+                                <ul class="suggestions-list" id="hint-list-date">
+                                    <li id="min-date">Devi avere almeno 18 anni</li>
+                                    <li id="max-date">Sono accettate solo le date successive al 1 gennaio 1900</li>
+                                </ul>
+                            </details>
                         </div>
                         <div>  
                             <label id="lbl_register_email" for="register_email"><span lang="en">Email</span></label>
@@ -93,6 +135,19 @@
                         <div>   
                             <label id="lbl_register_password" for="register_password"><span lang="en">Password</span></label>
                             <input type="password" name="password" id="register_password" required data-msg-required="Inserisci la tua password" placeholder="Password">
+                            <details open>
+                                <summary id="hints-password" class="hints" role="button" aria-expanded="false" aria-controls="hint-list-password">
+                                    Suggerimenti Password
+                                </summary>
+                                <ul class="suggestions-list" id="hint-list-passord">
+                                    <li id="lowercase-letter-password">Almeno una lettera minuscola</li>
+                                    <li id="uppercase-letter-password">Almeno una lettera maiuscola</li>
+                                    <li id="number-password">Almeno un numero</li>
+                                    <li id="special-char-password">Almeno un carattere speciale (. , ! ? @ + \ - _ € $ % & ^ * < > # =)</li>
+                                    <li id="min-letter-password">Almeno 8 caratteri</li>
+                                    <li id="valid-password">Formato valido</li>
+                                </ul>
+                            </details>
                         </div>
                         <div>
                             <label id="lbl_register_password2" for="register_password2">Conferma <span lang="en">password</span></label>
