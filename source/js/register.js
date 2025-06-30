@@ -52,27 +52,92 @@ function deleteError(p){
 	if(p) p.remove();
 }
 
+function failHint(id,standard){
+	document.getElementById(id).classList.remove("success-hint");
+	//if(check_num === 1) document.getElementById(id).addHtml = "❌ " + standard
+	document.getElementById(id).textContent = "❌ " + standard;//in caso va messo else all'inizio e check_num come parametro della funzione
+	document.getElementById(id).classList.add("fail-hint");
+	document.getElementById(id).setAttribute("aria-label","Non valido:" + standard);
+	document.getElementById(id).style.listStyleType = "none";
+}
+
+function successHint(id,standard){
+	document.getElementById(id).classList.remove("fail-hint");
+	//if(check_num) document.getElementById(id).addHtml = "✔️ " + standard
+    document.getElementById(id).textContent = "✔️ " + standard;//in caso va messo else all'inizio e check_num come parametro della funzione
+	document.getElementById(id).classList.add("success-hint"); 
+	document.getElementById(id).setAttribute("aria-label","Valido:" + standard);
+	document.getElementById(id).style.listStyleType = "none";
+}
+
 function validateUsername(){
 	var Username = document.forms['register-form']['register_username'].value;
 	const allowedChars = /^[a-zA-ZÀ-Ýß-ÿ0-9]{1,16}$/; //lettere maiuscole, lettere minuscole e numeri
-	
+	// DA TOGLIERE UNA VOLTA AGGIUNTI USER E ADMIN
+	if(Username === "user" || Username === "admin") {
+        var check = document.getElementById("username-error");
+	    deleteError(check);
+		successHint("max-char-username","Massimo 16 caratteri");
+		successHint("letter-number-username","Minimo 4 caratteri");
+		successHint("min-char-username","Inserire solo lettere o numeri");
+		successHint("space-username","Nessuno spazio consentito");
+        UltimateCheck();
+        return true;
+    }
+
 	if(Username.length < 1){
+		successHint("max-char-username","Massimo 16 caratteri");
+
+		failHint("min-char-username","Minimo 4 caratteri");
+		failHint("letter-number-username","Inserire solo lettere o numeri");
+		successHint("space-username","Nessuno spazio consentito");
+
 		return  checkInput("register_username", "username-error", "Lo <span lang='en'>username</span> è un campo obbligatorio", 1);
 	} 
 
 	if(Username.length < 4){
+		successHint("max-char-username","Massimo 16 caratteri");
+		failHint("min-char-username","Minimo 4 caratteri");
+
+		if(/\s{1,}/.test(Username)) failHint("space-username","Nessuno spazio consentito");
+	    else successHint("space-username","Nessuno spazio consentito");
+
+		if (!(/^[\w]{1,}$/.test(Username)) || Username == "") failHint("letter-number-username", "Inserire solo lettere o numeri");
+		else successHint("letter-number-username","Inserire solo lettere o numeri");
+
 		return checkInput("register_username", "username-error", "Lo <span lang='en'>username</span> deve avere una lunghezza minima di 4 caratteri", 1);
 	}
 
 	if(Username.length > 16){
+		successHint("min-char-username","Massimo 4 caratteri");
+		failHint("max-char-username","Minimo 16 caratteri");
+
+		if(/\s{1,}/.test(Username)) failHint("space-username","Nessuno spazio consentito");
+	    else successHint("space-username","Nessuno spazio consentito");
+
+		if (!(/^[\w]{1,}$/.test(Username)) || Username == "") failHint("letter-number-username", "Inserire solo lettere o numeri");
+		else successHint("letter-number-username","Inserire solo lettere o numeri");
+
 		return checkInput("register_username", "username-error", "Lo <span lang='en'>username</span> non deve superare i 16 caratteri", 1);
 	}
 
 	if (Username.search(/^[a-zA-ZÀ-Ýß-ÿ0-9]{1,16}$/) != 0 || !allowedChars.test(Username)) {
+		successHint("max-char-username","Massimo 16 caratteri");
+		successHint("letter-number-username","Minimo 4 caratteri");
+
+		if(/\s{1,}/.test(Username)) failHint("space-username","Nessuno spazio consentito");
+	    else successHint("space-username","Nessuno spazio consentito");
+
+		failHint("letter-number-username","Inserire solo lettere o numeri");
+
 		return checkInput("register_username", "username-error", "<span lang='en'>Username</span> non valido, usa solo lettere o numeri.", 1);
 	}
 	var check = document.getElementById("username-error");
 	deleteError(check);
+	successHint("max-char-username","Massimo 16 caratteri");
+	successHint("letter-number-username","Minimo 4 caratteri");
+	successHint("min-char-username","Inserire solo lettere o numeri");
+	successHint("space-username","Nessuno spazio consentito");
 	UltimateCheck();
 	return true;
 }
@@ -82,18 +147,46 @@ function validateName() {
 	const allowedChars = /^[a-zA-ZÀ-Ýß-ÿ]+$/; // lettere maiuscole e minuscole
     
     if(Name.length <= 0){
+		failHint("min-char-name","Minimo 1 carattere");
+		successHint("max-char-name","Massimo 15 caratteri");
+
+        if(/\s{1,}/.test(Name)) failHint("space-name","Nessuno spazio consentito");
+	    else successHint("space-name","Nessuno spazio consentito");
+         
+		if (!(/^[a-zA-ZÀ-Ýß-ÿ]{1,}$/.test(Name)) || Name == "") failHint("letter-name", "Inserire solo lettere");
+		else successHint("letter-name","Inserire solo lettere");
 		return checkInput("register_nome", "name-error", "Il nome è un campo obbligatorio", 0);
 	}
 
 	if(Name.length > 15){
+		successHint("min-char-name","Minimo 1 carattere");
+		failHint("max-char-name","Massimo 15 caratteri");
+
+		if(/\s{1,}/.test(Name)) failHint("space-name","Nessuno spazio consentito");
+	    else successHint("space-name","Nessuno spazio consentito");
+         
+		if (!(/^[a-zA-ZÀ-Ýß-ÿ]{1,}$/.test(Name)) || Name == "") failHint("letter-name", "Inserire solo lettere");
+		else successHint("letter-name","Inserire solo lettere");
+
 		return checkInput("register_nome", "name-error", "Il nome non deve superare i 15 caratteri", 0);
 	}
 
 	if (Name.search(/^[a-zA-ZÀ-Ýß-ÿ]{1,15}$/) != 0 || !allowedChars.test(Name)) {
+		successHint("min-char-name","Minimo 1 carattere");
+		successHint("max-char-name","Massimo 15 caratteri");
+		failHint("letter-name","Inserire solo lettere");
+
+		if(/\s{1,}/.test(Name)) failHint("space-name","Nessuno spazio consentito");
+	    else successHint("space-name","Nessuno spazio consentito");
+
 		return checkInput("register_nome", "name-error", "Nome non valido, usa solo lettere.", 0);
 	}
 	var check = document.getElementById("name-error");
 	deleteError(check);
+	successHint("min-char-name","Minimo 1 carattere");
+	successHint("max-char-name","Massimo 15 caratteri");
+	successHint("letter-name","Inserire solo lettere");
+	successHint("space-name","Nessuno spazio consentito");
 	UltimateCheck();
 	return true;
 }
@@ -103,18 +196,47 @@ function validateSurname() {
 	const allowedChars = /^[a-zA-ZÀ-Ýß-ÿ]+$/; // lettere maiuscole e minuscole
     
     if(Surname.length <= 0){
+		failHint("min-char-surname","Minimo 1 carattere");
+		successHint("max-char-surname","Massimo 15 caratteri");
+
+        if(/\s{1,}/.test(Surname)) failHint("space-surname","Nessuno spazio consentito");
+	    else successHint("space-surname","Nessuno spazio consentito");
+         
+		if (!(/^[a-zA-ZÀ-Ýß-ÿ]{1,}$/.test(Surname)) || Surname == "") failHint("letter-surname", "Inserire solo lettere");
+		else successHint("letter-surname","Inserire solo lettere");
+
 		return checkInput("register_cognome", "surname-error", "Il cognome è un campo obbligatorio", 0);
 	}
 
 	if(Surname.length > 15){
+		 successHint("min-char-surname","Minimo 1 carattere");
+		failHint("max-char-surname","Massimo 15 caratteri");
+
+		if(/\s{1,}/.test(Surname)) failHint("space-surname","Nessuno spazio consentito");
+	    else successHint("space-surname","Nessuno spazio consentito");
+         
+		if (!(/^[a-zA-ZÀ-Ýß-ÿ]{1,}$/.test(Surname)) || Name == "") failHint("letter-surname", "Inserire solo lettere");
+		else successHint("letter-surname","Inserire solo lettere");
+
 		return checkInput("register_cognome", "surname-error", "Il cognome non deve deve superare i 15 caratteri", 0);
 	}
 
 	if (Surname.search(/^[a-zA-ZÀ-Ýß-ÿ]{1,15}$/) != 0 || !allowedChars.test(Surname)) {
+		successHint("min-char-surname","Minimo 1 carattere");
+		successHint("max-char-surname","Massimo 15 caratteri");
+		failHint("letter-surname","Inserire solo lettere")
+
+		if(/\s{1,}/.test(Surname)) failHint("space-surname","Nessuno spazio consentito");
+	    else successHint("space-surname","Nessuno spazio consentito");
+
 		return checkInput("register_cognome", "surname-error", "Cognome non valido, usa solo lettere.", 0);
 	}
 	var check = document.getElementById("surname-error");
 	deleteError(check);
+	successHint("min-char-surname","Minimo 1 carattere");
+	successHint("max-char-surname","Massimo 15 caratteri");
+	successHint("letter-surname","Inserire solo lettere");
+	successHint("space-surname","Nessuno spazio consentito");
 	UltimateCheck();
 	return true;
 }
@@ -143,41 +265,106 @@ function validateDate(){
     var month = birthDate.substring(5, 7);
     var year = birthDate.substring(0, 4);
 
-	if(month == 2 && day > 28){
+    //CONTROLLI SUL CORRETTO FORMATO DELLE DATE??
+	/*if(month == 2 && day > 28){
+		if(year > 2007) failHint("min-date","Devi avere almeno 18 anni");
+		else successHint("min-date","Devi avere almeno 18 anni");
+
+		if(year < 1900)  failHint("max-date","Sono accettate solo le date successive al 1 gennaio 1900");
+		else successHint("max-date","Sono accettate solo le date successive al 1 gennaio 1900");
+
 		return checkInput("register_datanascita", "date-error", "Febbraio ha 28 giorni(tranne per gli anni bisestili)", 0);
-	}else
+	}else*/
+
 	if (year > 2007) {
+		failHint("min-date","Devi avere almeno 18 anni");
+		successHint("max-date","Sono accettate solo le date successive al 1 gennaio 1900");
+		
 		return checkInput("register_datanascita", "date-error", "Per registrarti devi avere almeno 18 anni", 0);
 	}else
 	if (year <1900) {
+		successHint("min-date","Devi avere almeno 18 anni");
+		failHint("max-date","Sono accettate solo le date successive al 1 gennaio 1900");
+
 		return checkInput("register_datanascita", "date-error", "Per registrarsi inserire un anno successivo al 1899 (almeno 1900)", 0);
 	}
 
 	var check = document.getElementById("date-error");
 	deleteError(check);
+	successHint("min-date","Devi avere almeno 18 anni");
+	successHint("max-date","Sono accettate solo le date successive al 1 gennaio 1900");
 	UltimateCheck();
 	return true;
+}
+
+function checkHintPassword(password){
+	if((/[a-zß-ÿ]/.test(password))) successHint("lowercase-letter-password","Almeno una lettera minuscola");
+	else failHint("lowercase-letter-password","Almeno una lettera minuscola");
+
+	if((/[A-Z]/.test(password))) successHint("uppercase-letter-password","Almeno una lettera maiuscola");
+	else failHint("uppercase-letter-password","Almeno una lettera maiuscola");
+
+	if(/[0-9]/.test(password)) successHint("number-password","Almeno un numero");
+	else failHint("number-password","Almeno un numero");
+
+	if((/[.,!?@+\-_€$%&^*<>=#]/.test(password))) successHint("special-char-password","Almeno un carattere speciale (. , ! ? @ + \ - _ € $ % & ^ * < > # =)");
+	else failHint("special-char-password","Almeno un carattere speciale (. , ! ? @ + \ - _ € $ % & ^ * < > # =)");
+    
+	if(password.search(/^(?=.*\d)(?=.*[.,!?@+\-_€$%&^*<>=#])(?=.*[a-z])(?=.*[A-Z]).{8,}$/ !=0 || /\s{1,}/.test(password)) != 0) failHint("valid-password","Formato valido");
+	else successHint("valid-password","Formato valido");
+
+}
+
+function successHintPassword(){
+	successHint("lowercase-letter-password","Almeno una lettera minuscola");
+	successHint("uppercase-letter-password","Almeno una lettera maiuscola");
+	successHint("number-password","Almeno un numero");
+	successHint("special-char-password","Almeno un carattere speciale (. , ! ? @ + \ - _ € $ % & ^ * < > # =)");
+	successHint("min-letter-password","Almeno 8 caratteri");
+	successHint("valid-password","Formato valido");
 }
 
 function validatePassword(){
 	var Password = document.forms['register-form']['register_password'].value;
 	const allowedChars = /^(?=.*[a-zß-ÿ])(?=.*[A-ZÀ-Ý])(?=.*[\d])(?=.*[.,!?@+\-_€$%&^*<>]).{8,}$/;// --> .,!?@+\-_€$%&^*<> questi sono i caratteri speciali
 	validateRepeatPassword();
+    
+    //DA TOGLIERE UNA VOLTA AGGIUNTI ADMIN E USER
+	if(Password === "user" || Password === "admin"){
+		var check = document.getElementById("password-error");
+		deleteError(check);
+		successHintPassword();
+		SecondFormUltimateCheck();
+		return true;
+	}
 
 	if(Password.length < 1){
+		failHint("min-letter-password","Almeno 8 caratteri");
+
+		checkHintPassword(Password);
+
 		return checkInput("register_password", "password-error", "La <span lang='en'>password</span> è un campo obbligatorio.", 1);
 	}
 
 	if(Password.length < 8){
+		failHint("min-letter-password","Almeno 8 caratteri");
+        
+		checkHintPassword(Password);
+
 		return checkInput("register_password", "password-error", "La <span lang='en'>password</span> deve avere una lunghezza minima di 8 caratteri.", 1);
 	}
 
 	if(Password.search(/^(?=.*[a-zß-ÿ])(?=.*[A-ZÀ-Ý])(?=.*[\d])(?=.*[.,!?@+\-_€$%&^*<>]).{8,}$/) != 0 || !allowedChars.test(Password)){
+		successHint("min-letter-password","Almeno 8 caratteri");
+        
+		checkHintPassword(Password);
+		
 		return checkInput("register_password", "password-error", "La <span lang='en'>password</span> deve contenere almeno una lettera minuscola, una lettera maiuscola, un numero e un carattere speciale.", 1);
 	}
 
     var check = document.getElementById("password-error");
 	deleteError(check);
+	successHintPassword();
 	UltimateCheck();
 	return true;
 }

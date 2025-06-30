@@ -274,7 +274,7 @@ function validateName() {
 
 		successHint("min-char-name","Minimo 1 carattere");
 		successHint("max-char-name","Massimo 15 caratteri");
-		failHint("letter-name","Inserire solo lettere")
+		failHint("letter-name","Inserire solo lettere");
 
 		if(/\s{1,}/.test(Name)) failHint("space-name","Nessuno spazio consentito");
 	    else successHint("space-name","Nessuno spazio consentito");
@@ -374,7 +374,7 @@ function validateDate(){
 		failHint("min-date","Devi avere almeno 18 anni");
 		successHint("max-date","Sono accettate solo le date successive al 1 gennaio 1900");
 		return checkInput("change-date", "date-error", "Per avere un profilo devi avere almeno 18 anni", 0, 1);
-	} 
+	} else
 	if (year <1900) {
 		successHint("min-date","Devi avere almeno 18 anni");
 		failHint("max-date","Sono accettate solo le date successive al 1 gennaio 1900");
