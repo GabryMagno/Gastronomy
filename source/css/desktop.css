@@ -204,6 +204,9 @@ button:focus-visible {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
+
+    color: white;
+
     margin-left: 0.5em;
     width: 5em;
     height: 2em;
