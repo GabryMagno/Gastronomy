@@ -1307,6 +1307,14 @@ form#advice textarea{
    =============================================
 */
 
+.block{
+    display: block;
+}
+
+.width{
+    width: 100%;
+}
+
 #sub-title, form.privacy-area h3{
     text-align: center;
     margin-top: 1em;
