@@ -246,14 +246,24 @@ function validateEmail(){
 	const allowedChars = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 	if(Email.length < 1){
+		failHint("domain-char","Il dominio deve contenere almeno due caratteri");
+		successHint("space-email","Nessuno spazio consentito");
+
 		return checkInput("register_email", "email-error", "L'<span lang='en'>email</span> è un campo obbligatorio.", 1);
 	}
 
 	if(Email.search(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/) != 0 || !allowedChars.test(Email)){
+		if(/\s{1,}/.test(Email)) failHint("space-email","Nessuno spazio consentito");
+		else successHint("space-email","Nessuno spazio consentito");
+
+		if(!(/^[a-zA-Z0-9](\.?[a-zA-Z0-9_-]+)*@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}/.test(Email))) failHint("domain-char","Il dominio deve contenere almeno due caratteri");
+		else successHint("domain-char","Il dominio deve contenere almeno due caratteri");
 		return checkInput("register_email", "email-error", "L'<span lang='en'>email</span> inserita non è valida.", 1);
 	}
 	var check = document.getElementById("email-error");
 	deleteError(check);
+	successHint("domain-char","Il dominio deve contenere almeno due caratteri");
+	successHint("space-email","Nessuno spazio consentito");
 	UltimateCheck();
 	return true;
 

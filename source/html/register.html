@@ -131,6 +131,15 @@
                         <div>  
                             <label id="lbl_register_email" for="register_email"><span lang="en">Email</span></label>
                             <input type="email" name="email" id="register_email"  data-msg-required="Inserisci la tua email" required data-msg-invalid="L'email inserita non Ã¨ corretta" placeholder="antonella.clerici@email.com">
+                            <details open>
+                                <summary id="hints-email" class="hints" role="button" aria-expanded="false" aria-controls="hint-list-email">
+                                    Suggerimenti <span lang="en">Email</span>
+                                </summary>
+                                <ul class="suggestions-list" id="hint-list-email">
+                                    <li id="space-email">Nessuno spazio consentito</li>
+                                    <li id="domain-char">Il dominio deve contenere almeno due caratteri</li>
+                                </ul>
+                            </details>
                         </div>
                         <div>   
                             <label id="lbl_register_password" for="register_password"><span lang="en">Password</span></label>
