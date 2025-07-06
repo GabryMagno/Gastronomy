@@ -336,7 +336,7 @@ function successHintPassword(){
 
 function validatePassword(){
 	var Password = document.forms['register-form']['register_password'].value;
-	const allowedChars = /^(?=.*[a-zß-ÿ])(?=.*[A-ZÀ-Ý])(?=.*[\d])(?=.*[.,!?@+\-_€$%&^*<>]).{8,}$/;// --> .,!?@+\-_€$%&^*<> questi sono i caratteri speciali
+	const allowedChars = /^(?=.*[a-zß-ÿ])(?=.*[A-ZÀ-Ý])(?=.*[\d])(?=.*[.,!?@+\-_€$%&^*<>=]).{8,}$/;// --> .,!?@+\-_€$%&^*<> questi sono i caratteri speciali
 	validateRepeatPassword();
     
     //DA TOGLIERE UNA VOLTA AGGIUNTI ADMIN E USER
@@ -364,7 +364,7 @@ function validatePassword(){
 		return checkInput("register_password", "password-error", "La <span lang='en'>password</span> deve avere una lunghezza minima di 8 caratteri.", 1);
 	}
 
-	if(Password.search(/^(?=.*[a-zß-ÿ])(?=.*[A-ZÀ-Ý])(?=.*[\d])(?=.*[.,!?@+\-_€$%&^*<>]).{8,}$/) != 0 || !allowedChars.test(Password)){
+	if(Password.search(/^(?=.*[a-zß-ÿ])(?=.*[A-ZÀ-Ý])(?=.*[\d])(?=.*[.,!?@+\-_€$%&^*<>=]).{8,}$/) != 0 || !allowedChars.test(Password)){
 		successHint("min-letter-password","Almeno 8 caratteri");
         
 		checkHintPassword(Password);
