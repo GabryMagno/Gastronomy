@@ -617,7 +617,6 @@ li.new article{
 
 .promo-text p{
     font-size: 1.5em;
-    text-align: justify;
 }
 
 .promo-text h2.promo-domanda{
@@ -713,7 +712,7 @@ a.categoria-box:visited{
     z-index: 1;
 }
 
-#degustazioni-home h2{
+#degustazioni-home h3{
     margin-top: 0;
     padding-top: 1em;
     color: var(--title_color);
@@ -759,7 +758,7 @@ a.categoria-box:visited{
     margin: 0;
 }
 
-.recensioni h2{
+.recensioni h3{
     margin: 0;
     padding-top: 1rem;
 }
@@ -1135,7 +1134,7 @@ div#product-pages{
     align-items: flex-start;
 }
 
-#storia-old .testo h3, #storia-oggi .testo h3{
+#storia-old .testo h4, #storia-oggi .testo h4{
     width: 100%;
     color: var(--txtcolor);
 
