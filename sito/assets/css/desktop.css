@@ -55,7 +55,7 @@ body{
 }
 
 header{
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(../../img/header.webp);
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(../img/header.webp);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -201,7 +201,7 @@ button:focus-visible {
 }
 
 .logo-accessibile{
-    background-image: url("../../img/loghi/logo_colori_lato_scritta_bianca.png");
+    background-image: url("../img/loghi/logo_colori_lato_scritta_bianca.png");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
@@ -685,7 +685,7 @@ a.categoria-box:visited{
 #degustazioni-home {
     position: relative;
 
-    background-image: url(../../img/tavola-degustazioni.webp);
+    background-image: url(../img/tavola-degustazioni.webp);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -744,7 +744,7 @@ a.categoria-box:visited{
     width: 20px;
     height: 20px;
 
-    background-image: url('../../img/icone/forchettacoltello-white.svg');
+    background-image: url('../img/icone/forchettacoltello-white.svg');
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -853,12 +853,12 @@ flex-shrink: 0;
 
 .scroll-btn.left {
     left: -1rem;
-    background-image: url("../../img/icone/back-tri.svg");
+    background-image: url("../img/icone/back-tri.svg");
 }
 
 .scroll-btn.right {
     right: -1rem;
-    background-image: url("../../img/icone/next-tri.svg");
+    background-image: url("../img/icone/next-tri.svg");
 }
 
 .scroll-btn.left, .scroll-btn.right{
@@ -1160,7 +1160,7 @@ div#product-pages{
 }
 
 #chisiamo-chef{
-    background-image: url("../../img/cucina.webp");
+    background-image: url("../img/cucina.webp");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -1674,19 +1674,19 @@ p.degustazione-nondisponibile#degustazione-singola {
 }
 
 .degustazione-persone::before{
-    background-image: url('../../img/icone/persona-nero.svg');
+    background-image: url('../img/icone/persona-nero.svg');
 }
 
 .degustazione-prenotazione::before{
-    background-image: url('../../img/icone/calendario-nero.svg');
+    background-image: url('../img/icone/calendario-nero.svg');
 }
 
 .degustazione-prezzo::before{
-    background-image: url('../../img/icone/costo-nero.svg');
+    background-image: url('../img/icone/costo-nero.svg');
 }
 
 .degustazione-prodotto::before{
-    background-image: url('../../img/icone/descrizione-nero.svg');
+    background-image: url('../img/icone/descrizione-nero.svg');
 }
 
 .degustazione-prenota{
@@ -1762,7 +1762,7 @@ form#prenotazione-degustazione #quantita{
 
     background-size: contain;
 
-    background-image: url('../../img/icone/valutazione-nero.svg');
+    background-image: url('../img/icone/valutazione-nero.svg');
 }
 
 .singleproduct h4::after
@@ -1877,19 +1877,19 @@ form#prenotazione-degustazione #quantita{
 }
 
 #prodotto-categoria::before{
-    background-image: url('../../img/icone/categoria-nero.svg');
+    background-image: url('../img/icone/categoria-nero.svg');
 }
 
 #prodotto-descrizione::before{
-    background-image: url('../../img/icone/descrizione-nero.svg');
+    background-image: url('../img/icone/descrizione-nero.svg');
 }
 
 #prodotto-ingredienti::before{
-    background-image: url('../../img/icone/ingredienti-nero.svg');
+    background-image: url('../img/icone/ingredienti-nero.svg');
 }
 
 #prodotto-valutazione::before{
-    background-image: url('../../img/icone/star.svg');
+    background-image: url('../img/icone/star.svg');
 }
 
 #prodotto-valutazione-testo::after{
