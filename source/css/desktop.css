@@ -390,12 +390,14 @@ form.form-bianco legend{
 }
 
 form.form-bianco .form-label,
+form.form-bianco h3,
 form.form-bianco h4{
     font-weight: bold;
     font-size: 1.2em;
 }
 
 form.form-bianco .form-label::after,
+form.form-bianco h3::after,
 form.form-bianco h4::after{
     content: ":";
 }
