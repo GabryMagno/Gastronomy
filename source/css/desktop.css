@@ -55,23 +55,24 @@ body{
 }
 
 header{
-    background-image:url(../../img/header.webp);
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(../../img/header.webp);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
-    min-height: 70vh;
 }
 
 header h1{
     font-size: 5em;
-    padding-top: 1.6em;
+    padding-top: 2.5em;
     margin-bottom: -0.1em;
 }
 
-header p{
+header h2.header_text{
     font-size: 2em;
-    padding-bottom: 4.5em;
+    padding-bottom: 6em;
+    font-weight: normal;
+    margin: 0rem;
 }
 
 header .header_text{
@@ -116,14 +117,14 @@ h1#title{
     color: var(--bgcolor)
 }
 
-h2{
+h2, h3{
     margin: 1rem;
     font-size: 2em;
     color: var(--txtcolor);
     text-align: center;
 }
 
-h3{
+h4{
     font-size: 1.7em;
     text-align: center;
 }
@@ -389,13 +390,13 @@ form.form-bianco legend{
 }
 
 form.form-bianco .form-label,
-form.form-bianco h3{
+form.form-bianco h4{
     font-weight: bold;
     font-size: 1.2em;
 }
 
 form.form-bianco .form-label::after,
-form.form-bianco h3::after{
+form.form-bianco h4::after{
     content: ":";
 }
 
@@ -851,10 +852,20 @@ flex-shrink: 0;
 
 .scroll-btn.left {
     left: -1rem;
+    background-image: url("../../img/icone/back-tri.svg");
 }
 
 .scroll-btn.right {
     right: -1rem;
+    background-image: url("../../img/icone/next-tri.svg");
+}
+
+.scroll-btn.left, .scroll-btn.right{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 50px;
+    height: 50px;
 }
 
 .singleproduct .recensione-container .recensione-card{
@@ -1092,7 +1103,7 @@ div#product-pages{
     display: flex;
     align-items: center;
     gap: 2em;
-    margin: 2em;
+    margin: 2.5em;
 }
 
 /* GASTRONOMIA - STORIA NUOVA */
@@ -1101,7 +1112,7 @@ div#product-pages{
     flex-direction: row-reverse;
     align-items: center;
     gap: 2em;
-    margin: 2em;
+    margin: 2.5em;
 }
 
 /* GASTRONOMIA - STORIA IN COMUNE */
@@ -1129,7 +1140,7 @@ div#product-pages{
     color: var(--txtcolor);
 
     text-align: center;
-    margin: 0 0 10px 0;
+    margin: 0 0 20px 0;
 }
 
 #storia-old .testo p, #storia-oggi .testo p{
@@ -1199,7 +1210,7 @@ div#product-pages{
     text-align: left;
 }
 
-#chisiamo-chef article h2 {
+#chisiamo-chef article h3 {
     font-size: 1.5em;
     font-weight: bold;
     margin-top: 0;
@@ -1265,16 +1276,16 @@ form#advice textarea{
     color: var(--txtcolor);
 }
 
-#chisiamo-info h2{
+#chisiamo-info h3{
     margin-top: 0em;
 }
 
-#chisiamo-info h3{
+#chisiamo-info h4{
     margin-top: 1em;
 }
 
-#chisiamo-info h2,
-#chisiamo-info h3 {
+#chisiamo-info h3,
+#chisiamo-info h4 {
     margin-bottom: 0.5em;
     color: var(--txtcolor);
 }
@@ -1351,7 +1362,8 @@ form.privacy-area input , fieldset.user-form input{
     padding: 0.5em;
 }
 
-#register-form label{
+#register-form label,
+#login-user label{
     display: block;
     margin-bottom: 0.5em;
 }
@@ -1390,8 +1402,8 @@ div.info-sezione{
     border-radius: 0.4em 0.4em 0 0;
 }
 
-div#to-register h3,
-div#to-login h3{
+div#to-register h4,
+div#to-login h4{
     color: var(--bgcolor);
     margin: 1em 0;
 }
@@ -1401,8 +1413,8 @@ div.info-sezione h3{
     margin: 0.5em 0;
 }
 
-div#to-register h3::after,
-div#to-login h3::after{
+div#to-register h4::after,
+div#to-login h4::after{
     content: "";
 }
 
@@ -1712,8 +1724,8 @@ form#prenotazione-degustazione #quantita{
     align-items: center;
 }
 
-.singleproduct-intestazione h2,
-.singledegustazione-intestazione h2{
+.singleproduct-intestazione h3,
+.singledegustazione-intestazione h3{
     color: var(--headerbgcolor);
 
     text-align: left;
@@ -1736,8 +1748,8 @@ form#prenotazione-degustazione #quantita{
     height: auto;
 }
 
-.singleproduct h3::before,
-.singledegustazione h3::before{
+.singleproduct h4::before,
+.singledegustazione h4::before{
     content: "";
     display: inline-block;
     position: relative;
@@ -1752,8 +1764,8 @@ form#prenotazione-degustazione #quantita{
     background-image: url('../../img/icone/valutazione-nero.svg');
 }
 
-.singleproduct h3::after
-.singledegustazione h3::after{
+.singleproduct h4::after
+.singledegustazione h4::after{
     content: ":";
 }
 
@@ -2028,7 +2040,7 @@ h3 + .singleproduct-rating {
     ===============================
 */
 
-.error_main h2{
+.error_main h3{
     color: var(--errorcolor);
 
     text-align: center;
@@ -2037,7 +2049,7 @@ h3 + .singleproduct-rating {
     padding-top: 0.2em;
 }
 
-.error_main h3{
+.error_main h4{
     color: var(--errorcolor);
 
     text-align: center;

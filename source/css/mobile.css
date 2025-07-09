@@ -1,0 +1,41 @@
+
+/*  
+    ===============================
+                MENU 
+    ===============================
+*/
+
+
+#menu-button {
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    margin: 10px;
+    z-index: 999;
+}
+
+#menu-button span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: #333;
+}
+
+#menu {
+    display: none;
+    flex-direction: column;
+    background-color: white;
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    z-index: 998;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+}
+
+#menu.show {
+    display: flex;
+}

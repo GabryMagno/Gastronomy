@@ -60,12 +60,12 @@
             </nav>
             
             <h1 class="header_text">Cuochi per Caso</h1>
-            <p class="header_text">La tua Gastronomia di fiducia</p>
+            <h2 class="header_text">La tua Gastronomia di fiducia</h2>
                 
         </header>
 
         <main id="register-main">
-            <h2 class="section-title">Registrati</h2>
+            <h3 class="section-title">Registrati</h3>
             <p class="section-descrizione">Comincia il tuo viaggio gastronomico con noi!</p>
             
                 <form method="post" action="register.php" class="form-bianco" id="register-form">
@@ -74,7 +74,7 @@
                             <label id="lbl_register_username" for="register_username">Username</label>
                             <input id="register_username" class="register_input" type="text" name="username"  required data-msg-required="Inserisci il tuo username" placeholder="Username">
                             <details open>
-                                <summary id="hints-username" class="hints" role="button" aria-expanded="false" aria-controls="hint-list-username">
+                                <summary id="hints-username" class="hints" aria-expanded="false" aria-controls="hint-list-username">
                                     Suggerimenti Username
                                 </summary>
                                 <ul class="suggestions-list" id="hint-list-username">
@@ -89,7 +89,7 @@
                             <label id="lbl_register_nome" for="register_nome">Nome</label> 
                             <input id="register_nome" class="register_input" type="text" name="nome"  required data-msg-required="Inserisci il tuo nome" placeholder="Nome">
                             <details open>
-                                <summary id="hints-name" class="hints" role="button" aria-expanded="false" aria-controls="hint-list-name">
+                                <summary id="hints-name" class="hints" aria-expanded="false" aria-controls="hint-list-name">
                                     Suggerimenti Nome
                                 </summary>
                                 <ul class="suggestions-list" id="hint-list-name">
@@ -104,10 +104,10 @@
                             <label id="lbl_register_cognome" for="register_cognome">Cognome</label>
                             <input id="register_cognome" class="register_input" type="text" name="cognome" required data-msg-required="Inserisci il tuo cognome" placeholder="Cognome">
                             <details open>
-                                <summary id="hints-surname" class="hints" role="button" aria-expanded="false" aria-controls="hint-list-surname">
+                                <summary id="hints-surname" class="hints" aria-expanded="false" aria-controls="hint-list-surname">
                                     Suggerimenti Cognome
                                 </summary>
-                                <ul class="suggestions-list" id="hint-list-suraname">
+                                <ul class="suggestions-list" id="hint-list-surname">
                                     <li id="letter-surname">Inserire solo lettere</li>
                                     <li id="min-char-surname">Minimo 1 carattere</li>
                                     <li id="max-char-surname">Massimo 15 caratteri</li>
@@ -119,7 +119,7 @@
                             <label id="lbl_register_datanascita" for="register_datanascita">Data di nascita</label>
                             <input id="register_datanascita" class="register_input" type="date" name="data" required data-msg-required="Inserisci la tua data di nascita">
                             <details open>
-                                <summary id="hints-date" class="hints" role="button" aria-expanded="false" aria-controls="hint-list-date">
+                                <summary id="hints-date" class="hints" aria-expanded="false" aria-controls="hint-list-date">
                                     Suggerimenti Data di Nascita
                                 </summary>
                                 <ul class="suggestions-list" id="hint-list-date">
@@ -132,7 +132,7 @@
                             <label id="lbl_register_email" for="register_email"><span lang="en">Email</span></label>
                             <input type="email" name="email" id="register_email"  data-msg-required="Inserisci la tua email" required data-msg-invalid="L'email inserita non Ã¨ corretta" placeholder="antonella.clerici@email.com">
                             <details open>
-                                <summary id="hints-email" class="hints" role="button" aria-expanded="false" aria-controls="hint-list-email">
+                                <summary id="hints-email" class="hints" aria-expanded="false" aria-controls="hint-list-email">
                                     Suggerimenti <span lang="en">Email</span>
                                 </summary>
                                 <ul class="suggestions-list" id="hint-list-email">
@@ -145,14 +145,14 @@
                             <label id="lbl_register_password" for="register_password"><span lang="en">Password</span></label>
                             <input type="password" name="password" id="register_password" required data-msg-required="Inserisci la tua password" placeholder="Password">
                             <details open>
-                                <summary id="hints-password" class="hints" role="button" aria-expanded="false" aria-controls="hint-list-password">
+                                <summary id="hints-password" class="hints" aria-expanded="false" aria-controls="hint-list-password">
                                     Suggerimenti Password
                                 </summary>
-                                <ul class="suggestions-list" id="hint-list-passord">
+                                <ul class="suggestions-list" id="hint-list-password">
                                     <li id="lowercase-letter-password">Almeno una lettera minuscola</li>
                                     <li id="uppercase-letter-password">Almeno una lettera maiuscola</li>
                                     <li id="number-password">Almeno un numero</li>
-                                    <li id="special-char-password">Almeno un carattere speciale (. , ! ? @ + \ - _ € $ % & ^ * < > # =)</li>
+                                    <li id="special-char-password">Almeno un carattere speciale ( &#46; &#44; &#33; &#63; &#64; &#43; &#92; &#45; &#95; &euro; &#36; &#37; &amp; &#94; &#42; &lt; &gt; &#35; &#61; )</li>
                                     <li id="min-letter-password">Almeno 8 caratteri</li>
                                     <li id="valid-password">Formato valido</li>
                                 </ul>
@@ -168,7 +168,7 @@
 
                     </fieldset>
                     <div id="to-login">
-                        <h3>Hai gi&agrave; un <span lang="en">Account</span>?</h3>
+                        <h4>Hai gi&agrave; un <span lang="en">Account</span>?</h4>
                         <p class="privacy-area">Se sei gi&agrave; registrato:</p> 
                         <p id="register"><a href="areariservata.html">ACCEDI AL TUO <span lang="en">ACCOUNT</span></a></p>
                     </div>

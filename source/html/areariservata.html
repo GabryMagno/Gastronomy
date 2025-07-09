@@ -60,11 +60,11 @@
             </nav>
 
             <h1 class="header_text">Cuochi per Caso</h1>
-            <p class="header_text">La tua Gastronomia di fiducia</p>
+            <h2 class="header_text">La tua Gastronomia di fiducia</h2>
                 
         </header>
         <main>
-            <h2 class="section-title">Accedi</h2>
+            <h3 class="section-title">Accedi</h3>
             <p class="section-descrizione">Riprendi il tuo viaggio gastronomico con noi!</p>
                 <form method="post" action="login.php" class="form-bianco" id="login-user">
                     <fieldset>
@@ -72,7 +72,7 @@
                             <label id="lbl_login_name" for="login_username" class="block"><span lang="en">Username</span></label>
                             <input type="text" name="name" id="login_username" required data-msg-required="Inserisci il tuo username" data-msg-invalid="Username inserito non valido" placeholder="Username" class="width"> 
                             <details>
-                                <summary id="hints-username" class="hints" role="button" aria-expanded="false" aria-controls="hint-list-username">
+                                <summary id="hints-username" class="hints" aria-expanded="false" aria-controls="hint-list-username">
                                     Suggerimenti Username
                                 </summary>
                                 <ul class="suggestions-list" id="hint-list-username">
@@ -87,18 +87,18 @@
                             <label id="lbl_login_password" for="login_password" class="block">Password</label>
                             <input type="password" name="password" id="login_password" required data-msg-required="Inserisci la tua password" placeholder="Password" class="width">
                             <details>
-                                <summary id="hints-password" class="hints" role="button" aria-expanded="false" aria-controls="hint-list-password">
+                                <summary id="hints-password" class="hints" aria-expanded="false" aria-controls="hint-list-password">
                                     Suggerimenti Password
                                 </summary>
                                 <ul class="suggestions-list" id="hint-list-password">
                                     <li id="lowercase-letter-password">Almeno una lettera minuscola</li>
                                     <li id="uppercase-letter-password">Almeno una lettera maiuscola</li>
                                     <li id="number-password">Almeno un numero</li>
-                                    <li id="special-char-password">Almeno un carattere speciale (. , ! ? @ + \ - _ € $ % & ^ * < > # =)</li>
+                                    <li id="special-char-password">Almeno un carattere speciale ( &#46; &#44; &#33; &#63; &#64; &#43; &#92; &#45; &#95; &euro; &#36; &#37; &amp; &#94; &#42; &lt; &gt; &#35; &#61; )</li>
                                     <li id="min-letter-password">Almeno 8 caratteri</li>
                                     <li id="valid-password">Formato valido</li>
                                 </ul>
-                        </details>
+                            </details>
                         </div>
 
                         <div class="button-container">
@@ -106,7 +106,7 @@
                         </div>
                     </fieldset>
                     <div id="to-register">
-                        <h3>Sei nuovo qui?</h3>
+                        <h4>Sei nuovo qui?</h4>
                         <p class="privacy-area">Se non hai ancora assaporato qualcosa di eccezionale della nostra gastronomia e desideri provare qualcosa di nuovo:</p> 
                         <p id="register"><a href="register.html">CREA UN NUOVO <span lang="en">ACCOUNT</span></a></p>
                     </div>
