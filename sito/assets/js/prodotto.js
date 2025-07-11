@@ -6,11 +6,9 @@ function validateUserComment() {
         resetHint("min-char-comment","Minimo 30 caratteri");
         resetHint("max-char-comment","Massimo 300 caratteri");
 
-        document.getElementById("una-stella").style.color = "#1a2c2c";
-        document.getElementById("due-stelle").style.color = "#1a2c2c";
-        document.getElementById("tre-stelle").style.color = "#1a2c2c";
-        document.getElementById("quattro-stelle").style.color = "#1a2c2c";
-        document.getElementById("cinque-stelle").style.color = "#1a2c2c";
+        document.getElementsByName("rating").forEach(star => {
+            star.checked = false;
+        });
         
         document.getElementById("submit-comment").classList.add("not-available");
 		document.getElementById("submit-comment").disabled = true;
@@ -18,7 +16,7 @@ function validateUserComment() {
         document.getElementById("reset-comment").classList.add("not-available");
 		document.getElementById("reset-comment").disabled = true;
         document.getElementById("user-comment").focus();
-    })
+    });
 
 	let form = document.getElementById("valutazione");
 
