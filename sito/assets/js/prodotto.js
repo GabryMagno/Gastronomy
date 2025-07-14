@@ -82,7 +82,6 @@ function validateDateOrder(){
 
     // Get today's date
     var todaysDate = new Date();
-    console.log(todaysDate);
 
     // call setHours to take the time out of the comparison
 

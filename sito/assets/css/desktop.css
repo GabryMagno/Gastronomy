@@ -1693,6 +1693,10 @@ p.degustazione-nondisponibile#degustazione-singola {
     margin-top: 1.5em;
 }
 
+input#data-prenotazione{
+    width: 100%;
+}
+
 form#prenotazione-degustazione #quantita{
     width: 100%;
 }
@@ -2098,7 +2102,8 @@ button#reset-comment.not-available,
 button#submit-comment.not-available,
 button#submit-order.not-available,
 button#reset-user-setting.not-available,
-button#reset-password-setting.not-available{
+button#reset-password-setting.not-available,
+button#submit-reservation.not-available{
     opacity: 0.6;
     cursor: not-allowed;
 }
