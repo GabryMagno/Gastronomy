@@ -39,3 +39,43 @@
 #menu.show {
     display: flex;
 }
+
+/*PAGINA PRODOTTI*/
+form.form-bianco#filter-content{
+    width: 100%;
+}
+
+html div#list-content{
+    flex-direction: column;
+}
+
+html div#list-content #first{
+    display: inline-flex;
+    justify-content: center;
+}
+
+html div#list-content #vertical{
+    flex-direction: row;
+    gap: 1em;
+    margin-bottom: 1em;
+}
+
+@media screen and (max-width: 480px) {
+    #vertical button {
+        width: 6em;
+    }
+    html div#list-content #vertical{
+        gap: 0.5em;
+    }
+    form#other-filters{
+        flex-direction: column;
+    }
+    li.product-brochure{
+        width: 100%;
+    }
+}
+
+html section#show-products{
+    width: 100%;
+    margin: 1em 0;
+}
