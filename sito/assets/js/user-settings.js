@@ -51,6 +51,7 @@ function validateUserPasswordSettings(){
 		resetHintPassword("special-char-","Almeno un carattere speciale (. , ! ? @ + \ - _ € $ % & ^ *<> # =)");
 		resetHintPassword("min-letter-","Almeno 8 caratteri");
 		resetHintPassword("valid-","Formato valido");
+		resetHint("equal-passwords","Le password coincidono")
 
 		document.getElementById("reset-password-setting").disabled = true;
 		document.getElementById("reset-password-setting").classList.add("not-available");
@@ -540,9 +541,10 @@ function validateRepeatPassword(){
 	var repeatPassword = document.forms['change-password-email']['confirm-new-password'].value;
 	checkCancelButtonPasswordSettings();
 	if(repeatPassword !== Password){
+		failHint("equal-passwords","Le password coincidono");
 		return checkInput("confirm-new-password", "repeat-password-error", "Le <span lang='en'>password</span> non coincidono.", 1, 2);
 	}
-
+    successHint("equal-passwords","Le password coincidono");
     var check = document.getElementById("repeat-password-error");
 	deleteError(check);
 	SecondFormUltimateCheck();

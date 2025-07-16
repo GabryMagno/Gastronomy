@@ -384,11 +384,12 @@ function validateRepeatPassword(){
 	var repeatPassword = document.forms['register-form']['register_password2'].value;
 
 	if(repeatPassword !== Password){
+		failHint("equal-passwords","Le password coincidono");
 		return checkInput("register_password2", "repeat-password-error", "Le <span lang='en'>password</span> non coincidono.", 1);
 	}
-
     var check = document.getElementById("repeat-password-error");
 	deleteError(check);
+	successHint("equal-passwords","Le password coincidono");
 	UltimateCheck();
 	return true;
 }

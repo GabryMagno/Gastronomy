@@ -161,6 +161,14 @@
                         <div>
                             <label id="lbl_register_password2" for="register_password2">Conferma <span lang="en">password</span></label>
                             <input type="password" name="password" id="register_password2" required data-msg-required="Reinserisci la tua password" placeholder="Conferma password">
+                            <details open>
+                                <summary id="hints-repeat-password" class="hints" aria-expanded="false" aria-controls="hint-list-repeat-password">
+                                    Suggerimenti Ripeti <span lang="en">Password</span>
+                                </summary>
+                                <ul class="suggestions-list" id="hint-list-repeat-password">
+                                    <li id="equal-passwords">Le <span lang="en">password</span> coincidono</li>
+                                </ul>
+                            </details>
                         </div>
                         <div class="button-container">
                             <button id="submit-register" class="bottoni-rossi" type="submit">Registrati</button>
