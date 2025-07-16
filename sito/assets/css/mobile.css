@@ -1,4 +1,11 @@
 
+/*GENERAL*/
+.button-container{
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+}
+
 /*  
     ===============================
                 MENU 
@@ -79,3 +86,69 @@ html section#show-products{
     width: 100%;
     margin: 1em 0;
 }
+
+/*PAGINA DEGUSTAZIONE*/
+.degustazione-card{
+    flex-direction: column;
+}
+
+.degustazione-card img{
+    width: 100%;
+    height: 25vh;
+}
+
+.degustazione-contenuto p{
+    text-align: center;
+}
+
+.degustazione-dettagli{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+
+
+/*PAGINA PRODOTTO*/
+
+.singleproduct-dettagli, .singleproduct-rating{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+#singleproduct-diete{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.singleproduct-dettagli dt, 
+.singleproduct-dettagli dd,
+.singleproduct-rating dt, 
+.singleproduct-rating dd,
+.degustazione-dettagli dt,
+.degustazione-dettagli dd{
+    text-align: center;
+    width: 100%;
+}
+
+.singleproduct-dettagli dd li{
+    list-style-position: inside;
+}
+
+form#valutazione,#prenotazione{
+    width: 100%;
+}
+
+#prenotazione fieldset, #valutazione fieldset{
+    gap: 1em;
+    text-align: center;
+}
+
+#user-comment{
+    width: 100%;
+    height: 30vh;
+}
+
+/*CHI SIAMO*/
