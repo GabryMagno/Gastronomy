@@ -1,40 +1,9 @@
+/*  
+    ===============================
+            GENERALE PAGINA
+    ===============================
+*/
 
-*,
-*::after,
-*::before {
-    padding: 0;
-    margin: 0;
-    font-family: 'Nunito', sans-serif;
-    line-height: 1.5;
-    box-sizing: border-box;
-}
-
-:root {
-    /*COLORI*/
-    --bgcolor: #FAF4ED;
-    --title_color: #FAF4ED;
-    --txtcolor: #2C1C18;
-    --errorcolor: #7C0A01;
-    --buttoncolor_arancio: #C65C45;
-    --buttoncolor_rosso: #73142F;
-    --buttoncolor_rosso_hover: #991d40;
-    
-    --buttoncolor_nero: #2C1C18;
-    --buttoncolor_nero_hover: #494140;
-
-    --herelinkcolor_hover: #0f1657;
-
-    --headerbgcolor: #73142F;
-
-    --hintsuccess: #105724;
-
-    --secondaryelementcolor: #B8D86C;
-    --herelinkcolor: #000638;
-    --linkcolor: #F3FF00;
-    --visitedcolor: #FF9900;
-}
-
-/*GENERAL*/
 .button-container{
     flex-direction: column-reverse;
     justify-content: center;
@@ -49,6 +18,19 @@ a{
 
 a:visited{
     color: var(--visitedcolor);
+}
+
+header h1{
+    font-size: 3.2em;
+    padding-top: 1.8em;
+    margin-bottom: -0.1em;
+}
+
+header h2.header_text{
+    font-size: 1.2em;
+    padding-bottom: 5.3em;
+    font-weight: normal;
+    margin: 0rem;
 }
 
 /*  
@@ -225,24 +207,6 @@ a:visited{
             BREADCRUMB 
     ===============================
 */
-
-#breadcrumb{
-    color: var(--title_color);
-    background-color: var(--headerbgcolor);
-
-    width: 100%;
-    position: relative;
-
-    border-top: 1px solid var(--title_color);
-
-    opacity: 0.9;
-}
-
-header #breadcrumb p{
-    padding-left: 1em;
-    padding-top: 0.2em;
-    padding-bottom: 0.2em;
-}
 
 /*PAGINA PRODOTTI*/
 form.form-bianco#filter-content{
