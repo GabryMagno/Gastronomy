@@ -1,9 +1,109 @@
 
+*,
+*::after,
+*::before {
+    padding: 0;
+    margin: 0;
+    font-family: 'Nunito', sans-serif;
+    line-height: 1.5;
+    box-sizing: border-box;
+}
+
+:root {
+    /*COLORI*/
+    --bgcolor: #FAF4ED;
+    --title_color: #FAF4ED;
+    --txtcolor: #2C1C18;
+    --errorcolor: #7C0A01;
+    --buttoncolor_arancio: #C65C45;
+    --buttoncolor_rosso: #73142F;
+    --buttoncolor_rosso_hover: #991d40;
+    
+    --buttoncolor_nero: #2C1C18;
+    --buttoncolor_nero_hover: #494140;
+
+    --herelinkcolor_hover: #0f1657;
+
+    --headerbgcolor: #73142F;
+
+    --hintsuccess: #105724;
+
+    --secondaryelementcolor: #B8D86C;
+    --herelinkcolor: #000638;
+    --linkcolor: #F3FF00;
+    --visitedcolor: #FF9900;
+}
+
 /*GENERAL*/
 .button-container{
     flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
+}
+
+a{
+    color:var(--linkcolor);
+    text-decoration: underline;
+    text-align: center;
+}
+
+a:visited{
+    color: var(--visitedcolor);
+}
+
+/*  
+    ===============================
+            TOP NAVBAR 
+    ===============================
+*/
+
+.navbar_top{
+    background-color: var(--headerbgcolor);
+    color: var(--title_color);
+    display: inline-flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    position: relative;
+
+    top: 0;
+    width: 100%;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+
+    opacity: 0.9;
+
+    margin-bottom: 0;
+
+    z-index: 9999;
+}
+
+/*  
+    ===============================
+            LOGO MENU 
+    ===============================
+*/
+
+.hidden {
+    text-indent: -999em;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.logo-accessibile{
+    background-image: url("../img/loghi/logo_colori_lato_scritta_bianca.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+
+    color: white;
+
+    margin-left: 0.5em;
+    width: 5em;
+    height: 2em;
+
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
 }
 
 /*  
@@ -12,7 +112,95 @@
     ===============================
 */
 
+.navbar_top #menu{
 
+    display: inline-block;
+
+    margin-left: 1em;
+    margin-right: 1em;
+
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+#menu li {
+    padding: 0.2em;
+    color: var(--linkcolor);
+    align-self: center;
+
+    margin-top: 0.2em;
+}
+
+#menu-button[data-hidden="false"] + #menu{
+    flex-direction: column;
+    
+    text-align: center;
+
+    /* padding-left: 0; */
+
+    z-index: 9999;
+}
+
+#menu-button[data-hidden="true"] + #menu{
+    position: absolute;
+
+    margin: -9999em;
+}
+
+#menu-button[data-hidden="false"] + #menu a{
+    pointer-events: auto;
+}
+
+#menu-button[data-hidden="true"] + #menu a{
+    pointer-events: none;
+}
+
+#menu-button[data-hidden="false"] + #menu a:visited{
+    color: var(--visitedcolor);
+}
+
+#menu-button[data-hidden="false"] + #menu li#here {
+    color: var(--title_color);
+    background-color: var(--herelinkcolor);
+
+    pointer-events: none;
+
+    text-decoration: none;
+
+    border-radius: 2em;
+    border: 1px solid var(--title_color);
+
+    padding: 0.4em 0.6em;
+}
+
+#menu-button .menu-button-1,
+#menu-button .menu-button-2,
+#menu-button .menu-button-3{
+    width: 2em;
+    height: 0.3em;
+
+    background-color: white;
+
+    border-radius: 1em;
+    margin: 0.4em 0;
+
+    transition: 0.4s;
+    display: block;
+}
+
+#menu-button[data-hidden="false"] .menu-button-1 {
+    transform: translate(0, 0.7em) rotate(-45deg);
+}
+  
+#menu-button[data-hidden="false"] > .menu-button-2 {
+    opacity: 0;
+}
+  
+#menu-button[data-hidden="false"] > .menu-button-3 {
+    transform: translate(0, -0.7em) rotate(45deg);
+}
+
+/*
 #menu-button {
     display: block;
     background: none;
@@ -45,6 +233,31 @@
 
 #menu.show {
     display: flex;
+}
+*/
+
+/*  
+    ===============================
+            BREADCRUMB 
+    ===============================
+*/
+
+#breadcrumb{
+    color: var(--title_color);
+    background-color: var(--headerbgcolor);
+
+    width: 100%;
+    position: relative;
+
+    border-top: 1px solid var(--title_color);
+
+    opacity: 0.9;
+}
+
+header #breadcrumb p{
+    padding-left: 1em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
 }
 
 /*PAGINA PRODOTTI*/
