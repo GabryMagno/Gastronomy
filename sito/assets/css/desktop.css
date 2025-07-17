@@ -259,7 +259,7 @@ button:focus-visible {
     background-color: var(--headerbgcolor);
 }
 
-#menu-button[data-hidden="false"]{
+#menu-button{
     position: absolute;
     margin: -9999em;
 }

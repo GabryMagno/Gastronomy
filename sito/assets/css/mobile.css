@@ -116,8 +116,8 @@ a:visited{
 
     display: inline-block;
 
-    margin-left: 1em;
-    margin-right: 1em;
+    margin-left: 2em;
+    margin-right: 2em;
 
     justify-content: space-between;
     cursor: pointer;
@@ -128,7 +128,28 @@ a:visited{
     color: var(--linkcolor);
     align-self: center;
 
-    margin-top: 0.2em;
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+}
+
+.navbar_top #menu-button{
+
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    margin-top: 1.5em;
+    margin-bottom: 0.2em;
+    margin-right: 1em;
+
+    padding: 0.5em 0.5em;
+
+    border: none;
+
+    display: inline-block;
+    justify-content: space-between;
+    cursor: pointer;
 }
 
 #menu-button[data-hidden="false"] + #menu{
@@ -143,7 +164,6 @@ a:visited{
 
 #menu-button[data-hidden="true"] + #menu{
     position: absolute;
-
     margin: -9999em;
 }
 
@@ -199,42 +219,6 @@ a:visited{
 #menu-button[data-hidden="false"] > .menu-button-3 {
     transform: translate(0, -0.7em) rotate(45deg);
 }
-
-/*
-#menu-button {
-    display: block;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    margin: 10px;
-    z-index: 999;
-}
-
-#menu-button span {
-    display: block;
-    width: 25px;
-    height: 3px;
-    margin: 5px auto;
-    background-color: #333;
-}
-
-#menu {
-    display: none;
-    flex-direction: column;
-    background-color: white;
-    position: absolute;
-    top: 60px;
-    right: 10px;
-    z-index: 998;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    padding: 1rem;
-}
-
-#menu.show {
-    display: flex;
-}
-*/
 
 /*  
     ===============================
