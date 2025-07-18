@@ -33,6 +33,14 @@ header h2.header_text{
     margin: 0rem;
 }
 
+form.form-bianco#login-user, 
+form.form-bianco#register-form, 
+form.form-bianco#change-personal-info, 
+form.form-bianco#change-password-email, 
+form.form-bianco#delete-account{
+    width: 95%;
+}
+
 /*  
     ===============================
             TOP NAVBAR 
