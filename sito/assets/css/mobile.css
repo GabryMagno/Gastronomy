@@ -37,7 +37,11 @@ form.form-bianco#login-user,
 form.form-bianco#register-form, 
 form.form-bianco#change-personal-info, 
 form.form-bianco#change-password-email, 
-form.form-bianco#delete-account{
+form.form-bianco#delete-account,
+#storia-old .testo,
+#storia-oggi .testo,
+#storia-old img, 
+#storia-oggi img {
     width: 95%;
 }
 
@@ -382,3 +386,11 @@ form#valutazione,#prenotazione{
             CHI SIAMO 
     ===============================
 */
+
+#storia-old, #storia-oggi{
+    flex-direction: column;
+}
+
+div .chef-content{
+    flex-direction: column;
+}
