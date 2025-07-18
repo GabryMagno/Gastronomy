@@ -394,3 +394,17 @@ form#valutazione,#prenotazione{
 div .chef-content{
     flex-direction: column;
 }
+
+#chisiamo-chef {
+    padding: 2em;
+}
+
+#chef-container{
+    margin: 0;
+}
+
+.chef-content a{
+    display: inline;
+    word-break: break-all;
+}
+ 
