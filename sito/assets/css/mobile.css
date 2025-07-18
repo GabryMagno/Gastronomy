@@ -195,6 +195,63 @@ header h2.header_text{
     transform: translate(0, -0.7em) rotate(45deg);
 }
 
+/*
+=====================================================================================================================================================
+===============================                           CONTENUTI PAGINE                            ===============================================
+=====================================================================================================================================================
+*/
+
+.section-divider {
+    border: none;
+    height: 2px;
+    background-color: black;
+    width: 100%;
+}
+
+.section-title{
+    text-align: center;
+    font-weight: bold;
+    font-size: 2em;
+    padding-top: 0.1em;
+}
+
+.section-descrizione{
+    font-size: 1.1em;
+    text-align: center;
+
+    padding-left: 1.8em;
+    padding-right: 1.8em;
+}
+
+/*  
+    ===============================
+            PAGINA HOME 
+    ===============================
+*/
+
+ul#best-products {
+    margin: 0rem 2rem 0rem 2rem;
+}
+
+/*
+    == SEZIONE ESPLORA RICETTE
+*/
+
+.promo-box{
+    padding: 1em 2em 2.5em 2em;
+}
+
+.promo-text p {
+    font-size: 1.2em;
+    margin-bottom: 1em;
+}
+
+.promo-text h3.promo-domanda{
+    margin: 0;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+    font-size: 1.8em;
+}
 
 /*  
     ===============================
