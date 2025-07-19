@@ -3,12 +3,13 @@
             GENERALE PAGINA
     ===============================
 */
-
+/*BOTTONI ANNULLA-CONFERMA*/
 .button-container{
-    flex-direction: column-reverse;
-    justify-content: center;
-    align-items: center;
+    gap: 0.5em;
+    width: 85%;
 }
+
+.button-container
 
 a{
     color:var(--linkcolor);
