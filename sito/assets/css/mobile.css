@@ -9,8 +9,6 @@
     width: 85%;
 }
 
-.button-container
-
 a{
     color:var(--linkcolor);
     text-decoration: underline;
