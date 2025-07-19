@@ -347,6 +347,23 @@ html section#show-products{
     text-align: center;
 }
 
+.singleproduct_main{
+    margin-top: 1em;
+}
+
+
+.singleproduct,
+.singledegustazione{
+    display: flex;
+
+    flex-wrap: wrap;
+    margin-top: 0.5em;
+    margin-left: 1.2em;
+    margin-right: 1.2em;
+
+    gap: 1em;
+}
+
 #singleproduct-diete{
     display: flex;
     align-items: center;
