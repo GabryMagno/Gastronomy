@@ -369,13 +369,17 @@ html section#show-products{
     justify-content: center;
 }
 
-.singleproduct-dettagli dt, 
-.singleproduct-dettagli dd,
-.singleproduct-rating dt, 
-.singleproduct-rating dd,
 .degustazione-dettagli dt,
 .degustazione-dettagli dd{
     text-align: center;
+    width: 100%;
+}
+
+.singleproduct-dettagli dt, 
+.singleproduct-dettagli dd,
+.singleproduct-rating dt, 
+.singleproduct-rating dd{
+    text-align: left;
     width: 100%;
 }
 
