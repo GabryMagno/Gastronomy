@@ -6,7 +6,6 @@
 /*BOTTONI ANNULLA-CONFERMA*/
 .button-container{
     gap: 0.5em;
-    width: 85%;
 }
 
 a{
@@ -339,6 +338,11 @@ html section#show-products{
     text-align: center;
 }
 
+.button-container#degustazione-visualprodotto{
+    justify-content: center;
+    align-items: center;
+}
+
 /*  
     ===============================
             PAGINA PRODOTTO 
@@ -431,5 +435,16 @@ div .chef-content{
 .chef-content a{
     display: inline;
     word-break: break-all;
+}
+
+/*  
+    ===============================
+            ERRORI 
+    ===============================
+*/
+
+.error_main img{
+    width: 90%;
+    height: auto;
 }
  
