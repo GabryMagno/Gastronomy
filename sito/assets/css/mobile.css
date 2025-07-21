@@ -321,7 +321,12 @@ html section#show-products{
 
 .degustazione-card img{
     width: 100%;
-    height: 25vh;
+    height: 30vh;
+}
+
+.degustazione-contenuto h3{
+    margin-top: 0em;
+    margin-bottom: 0em;
 }
 
 .degustazione-contenuto p{

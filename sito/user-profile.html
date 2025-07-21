@@ -65,7 +65,14 @@
         </header>
 
         <main id="user-profile-main">
-            <h3>BENTORNATO NOME+COGNOME UTENTE</h3>
+            <section>
+                <h3 class="section-title">Profilo Utente</h3>
+                <div id="user-profile-1">
+                    <p class="section-descrizione" id="user-profile-saluto">Ciao, <span>[Nome]</span></p>
+                    <p class="section-descrizione" id="user-profile-description">Questa &egrave; la tua pagina personale. In questa pagina potrai visualizzare un riepilogo dei tuoi dati personali, visualizzare i tuoi prodotti preferiti, le tue prenotazioni di prodotti e degustazioni e le recensioni da te inserite.</p>
+                </div>
+            </section>
+            <hr class="section-divider">
 
             <div id="user-info">
                 <img src="assets/img/Cuochi.png" alt="logo utente">
@@ -76,9 +83,35 @@
                 </div>
             </div>
             <div id="user-settings">
-                <a href="user-settings.html" id="profile-settings">VAI ALLE IMPOSTAZIONI</a>
+                <a href="user-settings.html" class="bottoni-link">Modifica Dati Profilo</a>
             </div>
-            <h4>I TUOI PRODOTTI PREFERITI</h4>
+
+            <hr class="section-divider">
+
+            <section>
+                <h3 class="section-title">I tuoi prodotti prefertiti</h3>
+            </section>
+
+            <hr class="section-divider">
+
+            <section>
+                <h3 class="section-title">Le tue degustazioni</h3>
+            </section>
+
+            <hr class="section-divider">
+
+            <section>
+                <h3 class="section-title">Le tue prenotazioni</h3>
+            </section>
+
+            <hr class="section-divider">
+
+            <section>
+                <h3 class="section-title">Le tue recensioni</h3>
+            </section>
+
+            <!--
+
             <div id="favorites">
                 <ul id="favorites-list">
                     <li id="product-1" class="product-brochure">
@@ -100,19 +133,22 @@
                         <a href="">Scheda del prodotto</a>
                     </li>
                 </ul>
+
                 <div id="product-pages">
                     <a href=""><img src="assets/img/icone/back.svg" alt="prodotti della pagina precedente" id="prev"></a>
                      <p id="current-page"> 1 / 10</p>
                     <a href=""><img src="assets/img/icone/next.svg" alt="prodotti della pagina successiva" id="next"></a>
                 </div>
             </div>
-            <div id="degustazioni">
-                <!--passate e prossime?-->
-                <h3>LE TUE DEGUSTAZIONI</h3>
-            </div>
+
+            -->
+
             <form id="logout" method="post" action="signout.php">
-                <button type="submit" id="logout-button" class="pay-attention"><span lang="en">LOGOUT</span></button>
+                <div class="button-container">
+                    <button type="submit" id="logout-button" class="bottoni-rossi"><span lang="en">Logout</span></button>
+                </div>
             </form>
+
         </main>
         <footer>
             <p class="torna-su"><a href="#return">Torna su</a></p>
