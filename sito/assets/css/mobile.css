@@ -372,6 +372,14 @@ html section#show-products{
     gap: 1em;
 }
 
+
+.singleproduct-img, 
+.singleproduct-descrizione, 
+.singledegustazione-img, 
+.singledegustazione-descrizione{
+    padding: 0.5em;
+}
+
 #singleproduct-diete{
     display: flex;
     align-items: center;
