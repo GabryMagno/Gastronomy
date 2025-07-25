@@ -763,56 +763,16 @@ a.categoria-box:visited{
     padding-top: 1rem;
 }
 
-.recensioni-wrapper{
-    position: relative;
-    max-width: 95%;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-
-    padding-left: 3rem;  
-    padding-right: 3rem;
-    padding-bottom: 1em;
-}
-
 .recensione-container {
-    flex-grow: 1;
     display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
+    justify-content: center;
     padding: 2.5rem 0 1rem 0;
-    
-    scroll-padding-left: 50%;
-    scrollbar-width: thin;               
-    scrollbar-color: #888 transparent;
-}
-
-.recensione-container::-webkit-scrollbar {
-    height: 12px;
-}
-
-.recensione-container::-webkit-scrollbar-track {
-    background: transparent;
-    border-radius: 6px;
-}
-
-.recensione-container::-webkit-scrollbar-thumb {
-    background-color: rgba(0,0,0,0.3);
-    border-radius: 6px;
-    border: 3px solid transparent;
-    background-clip: content-box;
-    transition: background-color 0.3s ease;
-}
-
-.recensione-container::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(0,0,0,0.6);
 }
 
 .recensione-card{
-flex-shrink: 0;
+    flex-shrink: 0;
     width: 300px;
     scroll-snap-align: start;
 
@@ -825,46 +785,8 @@ flex-shrink: 0;
     border: 1px solid #ccc;
     border-radius: 8px;
 
-    padding: 1rem;
+    padding: 1.5rem;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-}
-
-.scroll-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0,0,0,0.5);
-    border: none;
-    font-size: 1.8rem;
-    cursor: pointer;
-    user-select: none;
-    padding: 0.3rem 0.6rem;
-    border-radius: 4px;
-    transition: background-color 0.2s ease;
-    z-index: 9999;
-    color: white;
-}
-
-.scroll-btn:hover {
-    background-color: rgba(0,0,0,0.3);
-}
-
-.scroll-btn.left {
-    left: -1rem;
-    background-image: url("../img/icone/back-tri.svg");
-}
-
-.scroll-btn.right {
-    right: -1rem;
-    background-image: url("../img/icone/next-tri.svg");
-}
-
-.scroll-btn.left, .scroll-btn.right{
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    width: 50px;
-    height: 50px;
 }
 
 .singleproduct .recensione-container .recensione-card{
@@ -913,6 +835,8 @@ flex-shrink: 0;
     font-size: 1rem;
     line-height: 1.4;
     margin: 0.5rem 0;
+
+    overflow-wrap: break-word;
 }
 
 .recensione-prodotto{
@@ -1814,7 +1738,7 @@ form#prenotazione-degustazione #quantita{
 
     display: block;
 
-    border-radius: 4px;
+    border-radius: 0.72em;
     border: 1px solid var(--title_color);
 }
 

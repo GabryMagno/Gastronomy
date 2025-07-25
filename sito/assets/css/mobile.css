@@ -263,6 +263,25 @@ ul#best-products {
     font-size: 1.8em;
 }
 
+/* === BOX RECENSIONI CLIENTI === */
+.recensione-container {
+    gap: 1rem;
+    padding: 1rem 0 1rem 0;
+}
+
+.recensione-foto{
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.recensione-card{
+    padding: 0.5rem;
+}
+
 /*  
     ===============================
             PAGINA PRODOTTI 
