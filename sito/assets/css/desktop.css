@@ -1650,6 +1650,7 @@ form#prenotazione-degustazione #quantita{
     display: flex;
 
     flex-wrap: wrap;
+    flex-direction: column;
     margin-top: 0.5em;
     margin-left: 3em;
     margin-right: 3em;

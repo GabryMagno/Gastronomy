@@ -308,7 +308,7 @@ html div#list-content #vertical{
 }
 
 @media screen and (max-width: 480px) {
-    #vertical button {
+    #vertical button{
         width: 6em;
     }
     html div#list-content #vertical{
@@ -319,6 +319,21 @@ html div#list-content #vertical{
     }
     li.product-brochure{
         width: 100%;
+    }
+    .bottoni-neri, .bottoni-rossi, .bottoni-link{
+        width: 6.2em;
+    }
+    div.degustazione-prenota .bottoni-rossi{
+        width: 10em;
+    }
+    #elimina-valutazione div button{
+        width: 8.5em;
+    }
+}
+
+@media screen and (max-width: 338px){
+    article.singleproduct, article.singledegustazione{
+        margin-left: 0.6em;
     }
 }
 
