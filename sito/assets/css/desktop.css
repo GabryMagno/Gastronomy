@@ -60,6 +60,8 @@ header{
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
+
+    background-color: black;
 }
 
 header h1{
@@ -690,6 +692,8 @@ a.categoria-box:visited{
 
     color: var(--title_color);
     overflow: hidden;
+
+    background-color: var(--headerbgcolor);
 }
 
 #degustazioni-home::before{
@@ -1011,6 +1015,11 @@ div#product-pages{
     margin: 1.5em 0;
     gap: 1em;
 }
+
+div#product-pages a{
+    color: var(--txtcolor);
+}
+
 /*  
     ===============================
             PAGINA CHI SIAMO
@@ -1100,6 +1109,8 @@ div#product-pages{
     background-position: center;
     background-attachment: fixed;
 
+    background-color: var(--txtcolor);
+
     position: relative;
 
     display: flex;
@@ -1160,6 +1171,8 @@ div#product-pages{
     gap: 20px;
 
     flex-direction: row;
+
+    border: none;
 }
 
 .chef-content img {
@@ -1470,7 +1483,6 @@ ul#user-profile-prodotti {
     max-width: 1200px;
     margin: 0 auto;
 }
-
 
 #user-profile-prodotti h4.product-name{
     font-weight: bold;
@@ -1968,7 +1980,7 @@ label#order-label{
 
 .descrizione-quantita {
     font-size: 0.9em;
-    color: #666;
+    color: #4a4a4a;
 }
 
 
