@@ -243,6 +243,14 @@ ul#best-products {
     margin: 0rem 2rem 0rem 2rem;
 }
 
+#degustazioni-home p{
+    font-size: 1.1em;
+}
+
+#degustazioni-home ul li{
+    font-size: 1.1em;
+}   
+
 /*
     == SEZIONE ESPLORA RICETTE
 */
@@ -252,7 +260,7 @@ ul#best-products {
 }
 
 .promo-text p {
-    font-size: 1.2em;
+    font-size: 1.1em;
     margin-bottom: 1em;
 }
 
@@ -460,6 +468,10 @@ form#valutazione,#prenotazione{
 
 #storia-old, #storia-oggi{
     flex-direction: column;
+}
+
+#storia-old .testo p, #storia-oggi .testo p{
+    font-size: 1.1em;
 }
 
 div .chef-content{
