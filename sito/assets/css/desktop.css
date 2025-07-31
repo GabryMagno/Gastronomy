@@ -1620,6 +1620,14 @@ summary:focus{
     margin-top: 1.5em;
 }
 
+#elimination-buttons{
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+#elimination-buttons button{
+    width: 45%;
+}
 
 /*  
     ===============================

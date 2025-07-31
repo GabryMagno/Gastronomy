@@ -1,7 +1,7 @@
 <?php
 class Sanitizer {
 
-    private const allowedTags ='<em><strong><ul><li>';
+    private const ALLOWED_TAGS ='<em><strong><ul><li>';
     
     public static function SanitizeUsername($value) {
         $value = trim($value);
@@ -16,6 +16,7 @@ class Sanitizer {
         $value = htmlentities($value);
         return $value;
     }
+
     public static function SanitizeGenericInput($value) {
         $value = trim($value);
         $value = strip_tags($value);
@@ -25,7 +26,7 @@ class Sanitizer {
     
     public static function SanitizeText($value) {
         $value = trim($value);
-        $value = strip_tags($value, Sanitizer::allowedTags);
+        $value = strip_tags($value, Sanitizer::ALLOWED_TAGS);
         return $value;
     }
 
@@ -36,6 +37,15 @@ class Sanitizer {
             return 1; // default value
         }
         return $res;
+    }
+
+    public static function SanitizeEmail($value) {
+        $value = trim($value);
+        $value = filter_var($value, FILTER_SANITIZE_EMAIL);
+        if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
+            return '';
+        }
+        return $value;
     }
 }
 ?>

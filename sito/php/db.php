@@ -14,7 +14,7 @@ class DB {
         mysqli_report(MYSQLI_REPORT_STRICT);
         try{
             this->connection = mysqli_connect(self::DB_NAME, self::USERNAME, self::PASSWORD, self::HOST);
-        } catch(\ mysqli_sql_exception $error){//forse e al posto di error
+        } catch(\mysqli_sql_exception $error){//forse e al posto di error
             return false;
         }
         return true;

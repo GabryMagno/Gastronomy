@@ -211,6 +211,10 @@ form.form-bianco#delete-account,
 =====================================================================================================================================================
 */
 
+#elimination-buttons button {
+    width: 55%;
+}
+
 .section-divider {
     border: none;
     height: 2px;
@@ -337,6 +341,10 @@ html div#list-content #vertical{
     #elimina-valutazione div button{
         width: 8.5em;
     }
+    #elimination-buttons button {
+        width: 77%;
+    }
+
 }
 
 @media screen and (max-width: 338px){
