@@ -855,17 +855,6 @@ a.categoria-box:visited{
     margin-top: 0.5rem;
 }
 
-#recensioni-linkprodotti{
-   text-align: right;
-
-   margin-right: 40px;
-   padding-bottom: 15px;
-}
-
-#recensioni-linkprodotti a{
-    color: var(--txtcolor);
-}
-
 
 /*  
     ===============================
@@ -1487,7 +1476,6 @@ ul#user-profile-prodotti {
 #user-profile-prodotti h4.product-name{
     font-weight: bold;
     font-size: 1.2em;
-    margin-top: 1em;
     margin-bottom: 0.5em;
 
     padding: 0;
@@ -1529,6 +1517,11 @@ li.product-brochure:hover,li.new article:hover{
     transform: translate(0, -0.4em );
     box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.16),
                 0 0.2em 0.4em rgba(0, 0, 0, 0.24);
+}
+
+/* BOTTONI CARICA DI PIU' */
+.load-more {
+
 }
 
 /*  

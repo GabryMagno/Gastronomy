@@ -19,6 +19,7 @@
 
         <!--JS-->
         <script src="assets/js/toggle.js"></script>
+        <script src="assets/js/load-more.js"></script>
 
         <!-- FONT -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -91,32 +92,49 @@
             <section>
                 <h3 class="section-title">I tuoi prodotti prefertiti</h3>
                 <p class="nondisponibile">Nessun prodotto aggiunto ai preferiti.</p>
-                <ul class="list" id="user-profile-prodotti">
-                    <li class="product-brochure">
-                        <h4 class="product-name">Nome prodotto</h4>
-                        <a href="prodotto.html">Scheda del prodotto</a>
-                    </li>
-                    <li class="product-brochure">
-                        <h4 class="product-name">Nome prodotto</h4>
-                        <a href="prodotto.html">Scheda del prodotto</a>
-                    </li>
-                    <li class="product-brochure">
-                        <h4 class="product-name">Nome prodotto</h4>
-                        <a href="prodotto.html">Scheda del prodotto</a>
-                    </li>
-                    <li class="product-brochure">
-                        <h4 class="product-name">Nome prodotto</h4>
-                        <a href="prodotto.html">Scheda del prodotto</a>
-                    </li>
-                    <li class="product-brochure">
-                        <h4 class="product-name">Nome prodotto</h4>
-                        <a href="prodotto.html">Scheda del prodotto</a>
-                    </li>
-                    <li class="product-brochure">
-                        <h4 class="product-name">Nome prodotto</h4>
-                        <a href="prodotto.html">Scheda del prodotto</a>
-                    </li>
-                </ul>
+
+                <div class="data-container" id="dc-prodotti-preferiti" aria-live="polite">
+                    <ul class="list" id="user-profile-prodotti">
+                        <li class="product-brochure">
+                            <img src="assets/img/primo.png" alt="Nuovo prodotto">
+                            <h4 class="product-name">Nome prodotto</h4>
+                            <a href="prodotto.html">Scheda del prodotto</a>
+                        </li>
+                        <li class="product-brochure">
+                            <img src="assets/img/primo.png" alt="Nuovo prodotto">
+                            <h4 class="product-name">Nome prodotto</h4>
+                            <a href="prodotto.html">Scheda del prodotto</a>
+                        </li>
+                        <li class="product-brochure">
+                            <img src="assets/img/primo.png" alt="Nuovo prodotto">
+                            <h4 class="product-name">Nome prodotto</h4>
+                            <a href="prodotto.html">Scheda del prodotto</a>
+                        </li>
+                        <li class="product-brochure">
+                            <img src="assets/img/primo.png" alt="Nuovo prodotto">
+                            <h4 class="product-name">Nome prodotto</h4>
+                            <a href="prodotto.html">Scheda del prodotto</a>
+                        </li>
+                        <li class="product-brochure">
+                            <img src="assets/img/primo.png" alt="Nuovo prodotto">
+                            <h4 class="product-name">Nome prodotto</h4>
+                            <a href="prodotto.html">Scheda del prodotto</a>
+                        </li>
+                        <li class="product-brochure">
+                            <img src="assets/img/primo.png" alt="Nuovo prodotto">
+                            <h4 class="product-name">Nome prodotto</h4>
+                            <a href="prodotto.html">Scheda del prodotto</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="a11y-status sr-only nondisponibile" role="status" aria-live="polite"></div>
+
+                <div class="button-container">
+                    <button class="load-more bottoni-rossi" id="lm-prodotti-preferiti" aria-controls="data-container" aria-label="Carica più prodotti aggiunti ai preferiti">
+                        Carica di pi&ugrave;
+                    </button>
+                </div>
             </section>
 
             <hr class="section-divider">
