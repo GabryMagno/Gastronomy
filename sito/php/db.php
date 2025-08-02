@@ -13,7 +13,7 @@ class DB {
 
     private function OpenConnectionDB(): bool{
 
-        mysqli_report(MYSQLI_REPORT_STRICT);
+        mysqli_report(MYSQLI_REPORT_STRICT);//abilita il report degli errori per mysqli
         try{
             //connessione al database
             this->connection = mysqli_connect(self::DB_NAME, self::USERNAME, self::PASSWORD, self::HOST);
@@ -27,13 +27,13 @@ class DB {
 
     }
 
-    private function CloseConnectionDB(): void{
+    private function CloseConnectionDB(): void{//chiude la connessione al database
 
-        mysqli_close(this->connection);
+        mysqli_close(this->connection);//
 
     }
 
-    private function IsUserLog(): bool | string{
+    private function IsUserLog(): bool | string{//controlla se l'utente è loggato
 
         if(isset($_SESSION["logged_user"]) && $_SESSION != null) return $_SESSION["logged_user"];
         else return false;
@@ -45,7 +45,7 @@ class DB {
 
     public function RegisterNewUser($username, $name, $surname, $date, $email, $password): bool{//registrazione nuovo utente (da aggiungere nel corpo della funzione la data d'iscrizione)
 
-        $encriptedPassword = hash('sha256', $password);
+        $encriptedPassword = hash('sha256', $password);//crittografia della password
         $subscribe_date=date("Y-m-d h:m:s");
         $id //da creare un id unico per l'utente, ad esempio con un auto increment nella tabella utenti
         $newConnection = $this->OpenConnectionDB();
@@ -114,7 +114,7 @@ class DB {
                 if ($result->num_rows==1 && strcmp(mysqli_fetch_assoc($result)["username"],$username)==0) {
                     //se l'utente esiste, procedi con il login
                     $_SESSION["logged_user"] = $id;
-                    $result->free(); 
+                    $result->free();
                     return true;
 
                 } else {
@@ -197,6 +197,7 @@ class DB {
     public function GetProductInfo($product): array | string{}//ottenere informazioni su un prodotto
 
     public function GetTastingInfo($tasting): array | string{}//ottenere informazioni su una degustazione
+
     //OTTENERE INFO UTENTE
 
     public function GetUserFavoritesProducts(): array | string{}//ottenere prodotti preferiti
