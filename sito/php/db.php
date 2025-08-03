@@ -195,20 +195,66 @@ class DB {
     //OTTENERE INFO PRODOTTO E DEGUSTAZIONE
     
     public function GetProductInfo($product): array | string{}//ottenere informazioni su un prodotto
-
+    public function GetProductIngredients($product): array | string{}//ottenere ingredienti di un prodotto
+   
     public function GetTastingInfo($tasting): array | string{}//ottenere informazioni su una degustazione
 
     //OTTENERE INFO UTENTE
 
-    public function GetUserFavoritesProducts(): array | string{}//ottenere prodotti preferiti
+    public function GetUserFavoritesProducts($id,int $quantity = -1): array | string{//ottenere prodotti preferiti
+        $newConnection = $this->OpenConnectionDB();
+        $favorites = array();
+        if($newConnection){
+            //preparazione della query per ottenere i prodotti preferiti dell'utente
+            $userFavorites = this->connection->prepare( "SELECT prodotti.nome, prodotti.categoria, prodotto.prezzo, prodotti.url_immagine FROM prodotti, preferiti WHERE preferiti.nome_prodotto = prodotti.nome and preferiti.id_utente = ?");
+            $userFavorites->bind_param("i", $id);
+            try{
+                //esecuzione della query per ottenere i prodotti preferiti dell'utente
+                $userFavorites->execute();
+            }catch(\mysqli_sql_exception $error){
+                //se c'è un errore nell'esecuzione della query, ritorna false
+                $this->CloseConnectionDB();
+                $userFavorites->close();
+                return false;
+            }
+            //ottiene il risultato della query
+            $result = $userFavorites->get_result();
+            $this->CloseConnectionDB();
+            $userFavorites->close();
+            if($result->num_rows > 0){
+                if($quantity == -1){
+                    //se la quantità è -1, allora ritorna tutti i prodotti preferiti
+                    //se ci sono prodotti preferiti, li aggiunge all'array
+                    while($row = mysqli_fetch_assoc($result)){
+                        array_push($favorites, $row);
+                    }
+                }else{
+                    //se la quantità è diversa da -1, allora ritorna solo i primi $quantity prodotti preferiti
+                    while($quantity > 0 && $row = mysqli_fetch_assoc($result)){
+                        array_push($favorites, $row);
+                        $quantity--; //decrementa la quantità di prodotti preferiti da aggiungere
+                    }
+                }
+                //libera la memoria occupata dal risultato della query
+                $result->free();
+                return $favorites; //ritorna l'array dei prodotti preferiti
+            }else{
+                //se non ci sono prodotti preferiti
+                return "No favorite products found"; //nessun prodotto preferito trovato
+            }
+        }else{
+            return "Connection error"; //errore nella connessione al database
+        }
+    }
 
-    public function GetUserReservation(): array | string{}//ottenere prenotazione prodotti
+    public function GetUserReservation($id): array | string{}//ottenere prenotazione prodotti
 
-    public function GetUserTastings(): array | string{}//ottenere prenotazione degustazioni
+    public function GetUserTastings($id): array | string{}//ottenere prenotazione degustazioni
 
-    public function GetUserReviews(): array | string{}//ottenere recensioni scritte
+    public function GetUserReviews($id): array | string{}//ottenere recensioni scritte
+    public function GetUserReviewsProduct($id, $product): array | string{}//ottenere recensione scritta su un prodotto singolo
 
-    public function GetUserAdvices(): array | string{}//ottenere suggerimenti scritti
+    public function GetUserAdvices($id): array | string{}//ottenere suggerimenti scritti dall'utente
 
     //ELIMINAZIONI DA PARTE DELL'UTENTE
 
@@ -231,23 +277,106 @@ class DB {
     //AGGIUNTE DA PARTE DELL'UTENTE
     //Al posto di username->logged_user da isUserLog() (da scegliere)
 
-    public function AddAdvice($username, $advice): bool | string{}//Aggiunta da parte dell'utente di un suggerimento
+    public function AddAdvice($id, $advice): bool | string{}//Aggiunta da parte dell'utente di un suggerimento
 
-    public function AddReview($username, $comment, $grade, $product): bool | string{}//Aggiunta da parte dell'utente di un commento e valutazione di un prodotto
+    public function AddReview($id, $comment, $grade, $product): bool | string{}//Aggiunta da parte dell'utente di un commento e valutazione di un prodotto
 
-    public function AddFavoriteProduct($username,$product): bool | string{}//Aggiunta di un prodotto preferito da parte dell'utente
+    public function AddFavoriteProduct($id,$product): bool | string{}//Aggiunta di un prodotto preferito da parte dell'utente
 
-    public function AddReservation($username, $product, $quantity, $date): bool | string{}//Aggiunta da parte dell'utente di una prenotazione rispetto ad un prodotto indicando quantità dello stesso e quando (data) ritirarlo
+    public function AddReservation($id, $product, $quantity, $date): bool | string{}//Aggiunta da parte dell'utente di una prenotazione rispetto ad un prodotto indicando quantità dello stesso e quando (data) ritirarlo
 
-    public function AddTasting($username, $tasting, $people_number, $date): bool | string{}//Aggiunta di una prenotazione per una degustazione da parte dell'utente per un tot di persone e in una certa data
+    public function AddTasting($id, $tasting, $people_number, $date): bool | string{}//Aggiunta di una prenotazione per una degustazione da parte dell'utente per un tot di persone e in una certa data
 
     //CAMBIO DELLE IMPOSTAZIONI
 
-    public function ChangePassword($oldPassword, $newPassword): bool | string{}//Cambio password da parte dell'utente
+    public function ChangePassword($oldPassword, $newPassword): bool | string{//Cambio password da parte dell'utente
+        encriptedOldPassword = hash('sha256', $oldPassword);
+        encriptedNewPassword = hash('sha256', $newPassword);
+        isUserLogged = this->IsUserLog();
 
-    public function ChangeMainInfo($username, $name, $cognome, $date, $logo): bool | string{}//Cambio informazioni personali da parte dell'utente
+        if($isUserLogged == false){
+            //se l'utente non è loggato, ritorna un messaggio di errore
+            return "User is not logged in"; //l'utente non è loggato
+        }else{
+            $newConnection = this->OpenConnectionDB();
+            if($newConnection){
+                //preparazione della query per cambiare la password dell'utente
+                $changePassword = this->connection->prepare("UPDATE utenti SET password = ? WHERE id = ? AND password = ?");
+                $changePassword->bind_param("sis", encriptedNewPassword, isUserLogged, encriptedOldPassword);
+
+                try{
+                    //esecuzione della query per cambiare la password dell'utente
+                    $changePassword->execute();
+                }catch(\mysqli_sql_exception $error){
+                    //se c'è un errore nell'esecuzione della query, ritorna false
+                    $this->CloseConnectionDB();
+                    $changePassword->close();
+                    return false; //errore nell'esecuzione della query
+                }
+
+                if(mysqli_affected_rows(this->connection) == 1){
+                    //se la query ha cambiato una riga, allora la password è stata cambiata con successo
+                    $this->CloseConnectionDB();
+                    $changePassword->close();
+                    return true; //cambio password avvenuto con successo
+                }else{
+                    //se la query non ha cambiato nessuna riga, allora l'utente non esiste o c'è stato un errore
+                    $this->CloseConnectionDB();
+                    $changePassword->close();
+                    return "Password change failed"; //nessuna riga cambiata, errore nel cambio della password
+                }
+            }else{
+                return "Connection error"; //errore nella connessione al database
+            }
+        }
+    }
+
+    public function ChangeMainInfo($username, $name, $cognome, $date, $logo): bool | string{//Cambio informazioni personali da parte dell'utente
+        $isUserLogged = this->IsUserLog();
+
+        if($isUserLogged == false){
+            //se l'utente non è loggato, ritorna un messaggio di errore
+            return "User is not logged in"; //l'utente non è loggato
+        }else{
+            $newConnection = this->OpenConnectionDB();
+            if($newConnection){
+                //preparazione della query per cambiare le informazioni personali dell'utente
+                $changeInfo = this->connection->prepare("UPDATE utenti SET username = ?, nome = ?, cognome = ?, data_di_nascita = ?, logo = ? WHERE id = ?");
+                $changeInfo->bind_param("sssssi", $username, $name, $cognome, $date, $logo, $isUserLogged);
+
+                try{
+                    //esecuzione della query per cambiare le informazioni personali dell'utente
+                    $changeInfo->execute();
+                }catch(\mysqli_sql_exception $error){
+                    //se c'è un errore nell'esecuzione della query, ritorna false
+                    $this->CloseConnectionDB();
+                    $changeInfo->close();
+                    return false; //errore nell'esecuzione della query
+                }
+
+                if(mysqli_affected_rows(this->connection) == 1){
+                    //se la query ha cambiato una riga, allora le informazioni sono state cambiate con successo
+                    $this->CloseConnectionDB();
+                    $changeInfo->close();
+                    $_SESSION["logged_user_name"] = $username; //impostazione della sessione per l'utente loggato
+                    return true; //cambio informazioni avvenuto con successo
+                }else{
+                    //se la query non ha cambiato nessuna riga, allora l'utente non esiste o c'è stato un errore
+                    $this->CloseConnectionDB();
+                    $changeInfo->close();
+                    return "Information change failed"; //nessuna riga cambiata, errore nel cambio delle informazioni
+                }
+            }else{
+                return "Connection error"; //errore nella connessione al database
+            }
+        }
+    }
 
     //ALTRO
     public function AverageGradeProduct($product): int | string{}//Restituisce il voto medio del prodotto
+
+    public function ThisProductExists($product): bool | string{}//Controlla se un prodotto esiste
+
+    public function ThisTastingExists($tasting): bool | string{}//Controlla se una degustazione esiste
 }
 ?>
