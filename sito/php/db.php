@@ -284,6 +284,7 @@ class DB {
             }else{
                 return "Connection error"; //errore nella connessione al database
             }
+        }
     }
 
     public function DeleteOneFavoriteProduct($product): bool | string{//cancellare un singolo prodotto preferito --> da vedere cos'è product
