@@ -319,6 +319,7 @@ class DB {
             }else{
                 return "Connection error"; //errore nella connessione al database
             }
+        }
     }
 
     public function DeleteAllReservations(): bool | string {//cancellare tutte le prenotazioni dei prodotti
