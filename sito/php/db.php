@@ -258,21 +258,201 @@ class DB {
 
     //ELIMINAZIONI DA PARTE DELL'UTENTE
 
-    public function DeleteAllFavoritesProducts(): bool | string {}//cancellare tutti i prodotti preferiti
+    public function DeleteAllFavoritesProducts(): bool | string {//cancellare tutti i prodotti preferiti
+        $isUserLogged = this->IsUserLog();
+        if($isUserLogged == false){
+            //se l'utente non è loggato, ritorna un messaggio di errore
+            return "User is not logged in"; //l'utente non è loggato
+        }else{
+            $newConnection = this->OpenConnectionDB();
+            if($newConnection){
+                $deleteFavorites = this->connection->prepare("DELETE FROM preferiti WHERE id_utente = ?");
+                $deleteFavorites->bind_param("i", $isUserLogged);
+                try{
+                    //esecuzione della query per cancellare tutti i prodotti preferiti dell'utente
+                    $deleteFavorites->execute();
+                }catch(\mysqli_sql_exception $error){
+                    //se c'è un errore nell'esecuzione della query, ritorna false
+                    $this->CloseConnectionDB();
+                    $deleteFavorites->close();
+                    return false; //errore nell'esecuzione della query
+                }
+                this->CloseConnectionDB
+                $deleteFavorites->close();
+                return true; //cancellazione avvenuta con successo(volendo si può controllare se mysqli_affected_rows(this->connection) == 0 per vedere se non c'erano prodotti preferiti da cancellare)
 
-    public function DeleteOneFavoriteProduct($product): bool | string{}//cancellare un singolo prodotto preferito --> da vedere cos'è product
+            }else{
+                return "Connection error"; //errore nella connessione al database
+            }
+    }
 
-    public function DeleteAllReservations(): bool | string {}//cancellare tutte le prenotazioni dei prodotti
+    public function DeleteOneFavoriteProduct($product): bool | string{//cancellare un singolo prodotto preferito --> da vedere cos'è product
+        $isUserLogged = this->IsUserLog();
+        if($isUserLogged == false){
+            //se l'utente non è loggato, ritorna un messaggio di errore
+            return "User is not logged in"; //l'utente non è loggato
+        }else{
+            $newConnection = this->OpenConnectionDB();
+            if($newConnection){
+                $deleteFavorite = $this->connection->prepare("DELETE FROM preferiti WHERE id_utente = ? AND nome_prodotto = ?"); 
+                $deleteFavorite->bind_param("is", $isUserLogged, $product);
+                try{
+                    //esecuzione della query per cancellare un singolo prodotto preferito dell'utente
+                    $deleteFavorite->execute();
+                }catch(\mysqli_sql_exception $error){
+                    //se c'è un errore nell'esecuzione della query, ritorna false
+                    $this->CloseConnectionDB();
+                    $deleteFavorite->close();
+                    return false; //errore nell'esecuzione della query
+                }
+                $result = $deleteFavorite->affected_rows;
+                $this->CloseConnectionDB();
+                $deleteFavorite->close();
+                if($result == 1){
+                    //se la query ha cancellato una riga, allora il prodotto preferito è stato cancellato con successo
+                    return true; //cancellazione avvenuta con successo
+                }else{
+                    //se la query non ha cancellato nessuna riga, allora il prodotto preferito non esiste o c'è stato un errore
+                    return "Product not found or already deleted"; //nessuna riga cancellata, errore nella cancellazione del prodotto preferito
+                }
+            }else{
+                return "Connection error"; //errore nella connessione al database
+            }
+    }
 
-    public function DeleteOneReservation($reservation): bool | string{}//cancellare una singola prenotazione di un prodotto --> da vedere cos'è reservation
+    public function DeleteAllReservations(): bool | string {//cancellare tutte le prenotazioni dei prodotti
+        $isUserLogged = this->IsUserLog();
+        if($isUserLogged == false){
+            //se l'utente non è loggato, ritorna un messaggio di errore
+            return "User is not logged in"; //l'utente non è loggato
+        }else{
+            $newConnection = $this->OpenConnectionDB();
+            if($newConnection){
+                //preparazione della query per cancellare tutte le prenotazioni dei prodotti dell'utente
+                $deleteReservations = this->connection->prepare("DELETE FROM prenotazioni WHERE id_utente = ?");
+                $deleteReservations->bind_param("i", $isUserLogged);
+                try{
+                    //esecuzione della query per cancellare tutte le prenotazioni dei prodotti dell'utente
+                    $deleteReservations->execute();
+                }catch(\mysqli_sql_exception $error){
+                    //se c'è un errore nell'esecuzione della query, ritorna false
+                    $this->CloseConnectionDB();
+                    $deleteReservations->close();
+                    return false; //errore nell'esecuzione della query
+                }
+                this->CloseConnectionDB();
+                $deleteReservations->close();
+                return true; //cancellazione avvenuta con successo (volendo si può controllare se mysqli_affected_rows(this->connection) == 0 per vedere se non c'erano prenotazioni da cancellare) 
+            }else{
+                return "Connection error"; //errore nella connessione al database
+            }
+        }
+    }
 
-    public function DeleteAllTastings(): bool | string {}//cancellare tutte le degustazioni prenotate
+    public function DeleteOneReservation($reservation): bool | string{//cancellare una singola prenotazione di un prodotto --> da vedere cos'è reservation
+        $isUserLogged = this->IsUserLog();
+        if($isUserLogged == false){
+            //se l'utente non è loggato, ritorna un messaggio di errore
+            return "User is not logged in"; //l'utente non è loggato
+        }else{
+            $newConnection = $this->OpenConnectionDB();
+            if($newConnection){
+                //preparazione della query per cancellare una singola prenotazione di un prodotto dell'utente
+                $deleteReservation = this->connection->prepare("DELETE FROM prenotazioni WHERE id_utente = ? AND id_prodotto = ?");
+                $deleteReservation->bind_param("ii", $isUserLogged, $reservation);
+                try{
+                    //esecuzione della query per cancellare una singola prenotazione di un prodotto dell'utente
+                    $deleteReservation->execute();
+                }catch(\mysqli_sql_exception $error){
+                    //se c'è un errore nell'esecuzione della query, ritorna false
+                    $this->CloseConnectionDB();
+                    $deleteReservation->close();
+                    return false; //errore nell'esecuzione della query
+                }
+                $result = $deleteReservation->affected_rows;
+                $this->CloseConnectionDB();
+                $deleteReservation->close();
+                if($result == 1){
+                    //se la query ha cancellato una riga, allora la prenotazione del prodotto è stata cancellata con successo
+                    return true; //cancellazione avvenuta con successo
+                }else{
+                    //se la query non ha cancellato nessuna riga, allora la prenotazione del prodotto non esiste o c'è stato un errore
+                    return "Reservation not found or already deleted"; //nessuna riga cancellata, errore nella cancellazione della prenotazione del prodotto
+                }
+            }else{
+                return "Connection error"; //errore nella connessione al database
+            }
+        }
+    }
 
-    public function DeleteOneTasting($tasting): bool | string{}//cancellare una singola degustazione --> da vedere cos'è tasting
+    public function DeleteAllTastings(): bool | string {//cancellare tutte le degustazioni prenotate
+        $isUserLogged = this->IsUserLog();
+        if($isUserLogged == false){
+            //se l'utente non è loggato, ritorna un messaggio di errore
+            return "User is not logged in"; //l'utente non è loggato
+        }else{
+            $newConnection = $this->OpenConnectionDB();
+            if($newConnection){
+                //preparazione della query per cancellare tutte le degustazioni prenotate dell'utente
+                $deleteTastings = this->connection->prepare("DELETE FROM degustazioni WHERE id_utente = ?");
+                $deleteTastings->bind_param("i", $isUserLogged);
+                try{
+                    //esecuzione della query per cancellare tutte le degustazioni prenotate dell'utente
+                    $deleteTastings->execute();
+                }catch(\mysqli_sql_exception $error){
+                    //se c'è un errore nell'esecuzione della query, ritorna false
+                    $this->CloseConnectionDB();
+                    $deleteTastings->close();
+                    return false; //errore nell'esecuzione della query
+                }
+                this->CloseConnectionDB();
+                $deleteTastings->close();
+                return true; //cancellazione avvenuta con successo (volendo si può controllare se mysqli_affected_rows(this->connection) == 0 per vedere se non c'erano degustazioni da cancellare)
+            }else{
+                return "Connection error"; //errore nella connessione al database
+            }
+        }
+    }
+
+    public function DeleteOneTasting($tasting): bool | string{//cancellare una singola degustazione --> da vedere cos'è tasting
+        $isUserLogged = $this->IsUserLog();
+        if($isUserLogged == false){
+            //se l'utente non è loggato, ritorna un messaggio di errore
+            return "User is not logged in"; //l'utente non è loggato
+        }else{
+            $newConnection = $this->OpenConnectionDB();
+            if($newConnection){
+                //preparazione della query per cancellare una singola degustazione dell'utente
+                $deleteTasting = $this->connection->prepare("DELETE FROM degustazioni WHERE id_utente = ? AND id_degustazione = ?");
+                $deleteTasting->bind_param("ii", $isUserLogged, $tasting);
+                try{
+                    //esecuzione della query per cancellare una singola degustazione dell'utente
+                    $deleteTasting->execute();
+                }catch(\mysqli_sql_exception $error){
+                    //se c'è un errore nell'esecuzione della query, ritorna false
+                    $this->CloseConnectionDB();
+                    $deleteTasting->close();
+                    return false; //errore nell'esecuzione della query
+                }
+                $result = $deleteTasting->affected_rows;
+                $this->CloseConnectionDB();
+                $deleteTasting->close();
+                if($result == 1){
+                    //se la query ha cancellato una riga, allora la degustazione è stata cancellata con successo
+                    return true; //cancellazione avvenuta con successo
+                }else{
+                    //se la query non ha cancellato nessuna riga, allora la degustazione non esiste o c'è stato un errore
+                    return "Tasting not found or already deleted"; //nessuna riga cancellata, errore nella cancellazione della degustazione
+                }
+            }else{
+                return "Connection error"; //errore nella connessione al database
+            }
+        }
+    }
 
     public function DeleteAllReviews(): bool | string {}//cancellare tutte le recensioni
 
-    public function DeleteOneReview($review): bool | string{}//cancellare una singola recensione  --> da vedere cos'è review
+    public function DeleteOneReview($product): bool | string{}//cancellare una singola recensione  --> da vedere cos'è product
 
     //AGGIUNTE DA PARTE DELL'UTENTE
     //Al posto di username->logged_user da isUserLog() (da scegliere)
