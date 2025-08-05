@@ -39,6 +39,13 @@ class DB {
         else return false;
 
     }
+
+    private function UserUsername(): bool | string{//controlla se l'utente è loggato e ritorna il suo username
+
+        if(isset($_SESSION["logged_username"]) && $_SESSION != null) return $_SESSION["logged_username"];
+        else return false;
+
+    }
     
     //string per gli errori
     //AZIONI GENERALI
@@ -195,6 +202,7 @@ class DB {
     //OTTENERE INFO PRODOTTO E DEGUSTAZIONE
     
     public function GetProductInfo($product): array | string{}//ottenere informazioni su un prodotto
+    
     public function GetProductIngredients($product): array | string{}//ottenere ingredienti di un prodotto
    
     public function GetTastingInfo($tasting): array | string{}//ottenere informazioni su una degustazione
@@ -351,7 +359,7 @@ class DB {
         }
     }
 
-    public function DeleteOneReservation($reservation): bool | string{//cancellare una singola prenotazione di un prodotto --> da vedere cos'è reservation
+    public function DeleteOneReservation($reservation): bool | string{//cancellare una singola prenotazione di un prodotto --> da vedere cos'è reservation o se si può ottenere l'id della prenotazione
         $isUserLogged = this->IsUserLog();
         if($isUserLogged == false){
             //se l'utente non è loggato, ritorna un messaggio di errore
@@ -452,9 +460,70 @@ class DB {
         }
     }
 
-    public function DeleteAllReviews(): bool | string {}//cancellare tutte le recensioni
+    public function DeleteAllReviews(): bool | string {//cancellare tutte le recensioni
+        $isUserLogged = this->IsUserLog();
+        if($isUserLogged == false){
+            //se l'utente non è loggato, ritorna un messaggio di errore
+            return "User is not logged in"; //l'utente non è loggato
+        }else{
+            $newConnection = $this->OpenConnectionDB();
+            if($newConnection){
+                //preparazione della query per cancellare tutte le recensioni dell'utente
+                $deleteReviews = this->connection->prepare("DELETE FROM valutazioni WHERE id_utente = ?");
+                $deleteReviews->bind_param("i", $isUserLogged);
+                try{
+                    //esecuzione della query per cancellare tutte le recensioni dell'utente
+                    $deleteReviews->execute();
+                }catch(\mysqli_sql_exception $error){
+                    //se c'è un errore nell'esecuzione della query, ritorna false
+                    $this->CloseConnectionDB();
+                    $deleteReviews->close();
+                    return false; //errore nell'esecuzione della query
+                }
+                this->CloseConnectionDB();
+                $deleteReviews->close();
+                return true; //cancellazione avvenuta con successo (volendo si può controllare se mysqli_affected_rows(this->connection) == 0 per vedere se non c'erano recensioni da cancellare)
+            }else{
+                return "Connection error"; //errore nella connessione al database
+            }
+        }
+    }
 
-    public function DeleteOneReview($product): bool | string{}//cancellare una singola recensione  --> da vedere cos'è product
+    public function DeleteOneReview($product): bool | string{//cancellare una singola recensione  --> da vedere cos'è product
+        $isUserLogged = $this->IsUserLog();
+        if($isUserLogged == false){
+            //se l'utente non è loggato, ritorna un messaggio di errore
+            return "User is not logged in"; //l'utente non è loggato
+        }else{
+            $newConnection = $this->OpenConnectionDB();
+            if($newConnection){
+                //preparazione della query per cancellare una singola recensione dell'utente
+                $deleteReview = this->connection->prepare("DELETE FROM valutazioni WHERE id_utente = ? AND nome_prodotto = ?");
+                $deleteReview->bind_param("is", $isUserLogged, $product);
+                try{
+                    //esecuzione della query per cancellare una singola recensione dell'utente
+                    $deleteReview->execute();
+                }catch(\mysqli_sql_exception $error){
+                    //se c'è un errore nell'esecuzione della query, ritorna false
+                    $this->CloseConnectionDB();
+                    $deleteReview->close();
+                    return false; //errore nell'esecuzione della query
+                }
+                $result = $deleteReview->affected_rows;
+                $this->CloseConnectionDB();
+                $deleteReview->close();
+                if($result == 1){
+                    //se la query ha cancellato una riga, allora la recensione è stata cancellata con successo
+                    return true; //cancellazione avvenuta con successo
+                }else{
+                    //se la query non ha cancellato nessuna riga, allora la recensione non esiste o c'è stato un errore
+                    return "Review not found or already deleted"; //nessuna riga cancellata, errore nella cancellazione della recensione
+                }
+            }else{
+                return "Connection error"; //errore nella connessione al database
+            }
+        }
+    }
 
     //AGGIUNTE DA PARTE DELL'UTENTE
     //Al posto di username->logged_user da isUserLog() (da scegliere)
@@ -555,10 +624,149 @@ class DB {
     }
 
     //ALTRO
-    public function AverageGradeProduct($product): int | string{}//Restituisce il voto medio del prodotto
+    public function AverageGradeProduct($product): int | string{//Restituisce il voto medio del prodotto
+        $newConnection = $this->OpenConnectionDB();
+        if($newConnection){
+            //preparazione della query per ottenere il voto medio del prodotto
+            $averageGrade = this->connection->prepare("SELECT CAST(AVG(voto) AS DECIMAL (2,0)) AS media FROM valutazioni WHERE nome_prodotto = ?");
+            $averageGrade->bind_param("s", $product);
+            try{
+                //esecuzione della query per ottenere il voto medio del prodotto
+                $averageGrade->execute();
+            }catch(\mysqli_sql_exception $error){
+                //se c'è un errore nell'esecuzione della query, ritorna false
+                $this->CloseConnectionDB();
+                $averageGrade->close();
+                return false; //errore nell'esecuzione della query
+            }
+            //ottiene il risultato della query
+            $result = averageGrade->get_result();
+            this->CloseConnectionDB();
+            averageGrade->close();
+            if($result->num_rows == 1){
+                //se il prodotto ha almeno una recensione, ritorna il voto medio
+                $row = mysqli_fetch_assoc($result);
+                return $row["media"]; //ritorna il voto medio come intero
+            }else{
+                //se il prodotto non ha recensioni, ritorna 0
+                return "*"; //nessuna recensione trovata
+            }
+        }else{
+            return "Connection error"; //errore nella connessione al database
+        }
+    }
 
-    public function ThisProductExists($product): bool | string{}//Controlla se un prodotto esiste
+    public function ThisProductExists($product): bool | string{//Controlla se un prodotto esiste
+        $newConnection = $this->OpenConnectionDB();
+        $product = array();
+        if($newConnection){
+            $isProductExist = this->connection->prepare("SELECT nome FROM prodotti WHERE nome = ?");
+            $isProductExist->bind_param("s", $product);
+            try{
+                //esecuzione della query per verificare l'esistenza del prodotto
+                $isProductExist->execute();
+            }catch(\mysqli_sql_exception $error){
+                //se c'è un errore nell'esecuzione della query, ritorna false
+                $this->CloseConnectionDB();
+                $isProductExist->close();
+                return false; //errore nell'esecuzione della query
+            }
+            $product = isProductExist->get_result();
+            $this->CloseConnectionDB();
+            $isProductExist->close();
+            if($product->num_rows == 1){
+                //se il prodotto esiste, ritorna true
+                $product->free();
+                return true; //prodotto esistente
+            }else{
+                //se il prodotto non esiste, ritorna false
+                $product->free();
+                return false; //prodotto non esistente
+            }
+        }else{
+            return "Connection error"; //errore nella connessione al database
+        }
+    }
 
-    public function ThisTastingExists($tasting): bool | string{}//Controlla se una degustazione esiste
+    public function ThisTastingExists($tasting): bool | string{//Controlla se una degustazione esiste
+        $newConnection = $this->OpenConnectionDB();
+        if($newConnection){
+            //preparazione della query per verificare l'esistenza della degustazione
+            $isTastingExist = this->connection->prepare("SELECT id_degustazione FROM degustazioni WHERE id_degustazione = ?");//vedere se usare id o nome per la degustazione(anche come primary key)
+            $isTastingExist->bind_param("i", $tasting);
+            try{
+                //esecuzione della query per verificare l'esistenza della degustazione
+                $isTastingExist->execute();
+            }catch(\mysqli_sql_exception $error){
+                //se c'è un errore nell'esecuzione della query, ritorna false
+                $this->CloseConnectionDB();
+                $isTastingExist->close();
+                return false; //errore nell'esecuzione della query
+            }
+            $result = isTastingExist->get_result();
+            this->CloseConnectionDB();
+            isTastingExist->close();
+            if($result->num_rows == 1){
+                //se la degustazione esiste, ritorna true
+                $result->free();
+                return true; //degustazione esistente
+            }else{
+                //se la degustazione non esiste, ritorna false
+                $result->free();
+                return false; //degustazione non esistente
+            }
+        }else{
+            return "Connection error"; //errore nella connessione al database
+        }
+    }
+
+    public function GetProductComments($product, int $check = -1): array | string{//Restituisce i commenti di un prodotto
+        $newConnection = $this->OpenConnectionDB();
+        $id = -1; //inizializza l'id a -1 per evitare errori se non viene trovato l'utente loggato
+        if($this->IsUserLog() != false){
+            $id = $this->IsUserLog(); //ottiene l'id dell'utente loggato
+            $username = $this->UserUsername(); //ottiene lo username dell'utente loggato
+        }
+        if($newConnection){
+            //preparazione della query per ottenere i commenti del prodotto
+            $productComments = this->connection->prepare("SELECT utenti.username, valutazioni.data, valutazioni.voto, valutazioni.commento FROM valutazioni JOIN utenti ON valutazioni.id_utente = utenti.id WHERE valutazioni.nome_prodotto = ? AND valutazioni.id_utente <>?");
+            $productComments->bind_param("si", $product, $id);
+            try{
+                //esecuzione della query per ottenere i commenti del prodotto
+                $productComments->execute();
+            }catch(\mysqli_sql_exception $error){
+                //se c'è un errore nell'esecuzione della query, ritorna false
+                $this->CloseConnectionDB();
+                $productComments->close();
+                return false; //errore nell'esecuzione della query
+            }
+            //ottiene il risultato della query
+            $result = productComments->get_result();
+            this->CloseConnectionDB();
+            productComments->close();
+            if($result->num_rows > 0){
+                //se ci sono commenti, li aggiunge all'array
+                if($check == -1){
+                    //se il check è -1, allora ritorna tutti i commenti del prodotto
+                    while($row = mysqli_fetch_assoc($result)){
+                        array_push($comments, $row);
+                    }
+                }else{
+                    while($check > 0 && $row = mysqli_fetch_assoc($result)){
+                        //se il check è diverso da -1, allora ritorna solo i primi $check commenti del prodotto
+                        array_push($comments, $row);
+                        $check--; //decrementa il check per limitare il numero di commenti da aggiungere
+                    }
+                }
+                //libera la memoria occupata dal risultato della query
+                $result->free();
+                return $comments; //ritorna l'array dei commenti del prodotto
+            }else{
+                //se non ci sono commenti
+                return "No comments found"; //nessun commento trovato
+            }
+        }else{
+            return "Connection error"; //errore nella connessione al database
+        }
 }
 ?>
