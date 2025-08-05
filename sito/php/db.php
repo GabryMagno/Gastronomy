@@ -16,7 +16,7 @@ class DB {
         mysqli_report(MYSQLI_REPORT_STRICT);//abilita il report degli errori per mysqli
         try{
             //connessione al database
-            this->connection = mysqli_connect(self::DB_NAME, self::USERNAME, self::PASSWORD, self::HOST);
+            $this->connection = mysqli_connect(self::DB_NAME, self::USERNAME, self::PASSWORD, self::HOST);
 
         } catch(\mysqli_sql_exception $error){//forse e al posto di error
             //se c'è un errore nella connessione, ritorna false
@@ -29,7 +29,7 @@ class DB {
 
     private function CloseConnectionDB(): void{//chiude la connessione al database
 
-        mysqli_close(this->connection);//
+        mysqli_close($this->connection);//
 
     }
 
@@ -58,7 +58,7 @@ class DB {
         $newConnection = $this->OpenConnectionDB();
 
         if($newConnection){
-            $userInfo = this->connection->prepare("INSERT INTO utenti(id, email, username, password, nome, cognome, data_di_nascita, data_iscrizione) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            $userInfo = $this->connection->prepare("INSERT INTO utenti(id, email, username, password, nome, cognome, data_di_nascita, data_iscrizione) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             $userInfo->bind_params("isssssss", $id, $email, $username, $encriptedPassword, $name, $surname, $date, $subscribe_date,);
 
             try{
@@ -71,7 +71,7 @@ class DB {
 
             }
 
-            if(mysqli_affected_rows(this->connection) == 1){
+            if(mysqli_affected_rows($this->connection) == 1){
                 //se la query ha inserito una riga, allora l'utente è stato registrato con successo
                 $this->CloseConnectionDB();
                 $userInfo->close();
@@ -94,14 +94,14 @@ class DB {
 
     public function LoginUser($username, $password): bool | string{//login utente
 
-        if(this->IsUserLog() == false) {
+        if($this->IsUserLog() == false) {
             //se l'utente non è loggato, procedi con il login
             $encriptedPassword = hash('sha256', $password);
             $newConnection = $this->OpenConnectionDB();
 
             if($newConnection){
                 //preparazione della query per verificare l'esistenza dell'utente
-                isUserExist = this->connection->prepare("SELECT username FROM utenti WHERE nome = ? AND password = ?");
+                isUserExist = $this->connection->prepare("SELECT username FROM utenti WHERE nome = ? AND password = ?");
                 $isUserExist= bind_params("ss", username, encriptedPassword);
                 try{
                     isUserExist->execute();
@@ -114,7 +114,7 @@ class DB {
                 }
 
                 $info = isUserExist->get_result();
-                this->CloseConnectionDB();
+                $this->CloseConnectionDB();
                 isUserExist->close();
 
                 //Il server tecweb non controlla il case-sensitive per il database, quindi controllo che il risultato trovato corrisponda esattamente allo username inserito
@@ -156,15 +156,15 @@ class DB {
     }
 
     public function DeleteUser(): bool | string{//eliminazione utente
-        $isUserLogged = this->IsUserLog();
+        $isUserLogged = $this->IsUserLog();
         if($isUserLogged == false){
             //se l'utente non è loggato, ritorna un messaggio di errore
             return "User is not logged in"; //l'utente non è loggato
         }else{
-            $newConnection = this->OpenConnectionDB();
+            $newConnection = $this->OpenConnectionDB();
             if($newConnection){
                 //preparazione della query per eliminare l'utente
-                $deleteUser = this->connection->prepare("DELETE FROM utenti WHERE id = ?");
+                $deleteUser = $this->connection->prepare("DELETE FROM utenti WHERE id = ?");
                 $deleteUser->bind_param("i", $isUserLogged);
 
                 try{
@@ -201,11 +201,120 @@ class DB {
 
     //OTTENERE INFO PRODOTTO E DEGUSTAZIONE
     
-    public function GetProductInfo($product): array | string{}//ottenere informazioni su un prodotto
+    public function GetProductInfo($product): array | string{//ottenere informazioni su un prodotto
+        $newConnection = $this->OpenConnectionDB();
+        if($newConnection){
+            //preparazione della query per ottenere le informazioni su un prodotto
+            $productInfo = $this->connection->prepare("SELECT * FROM prodotti WHERE nome = ?");
+            $productInfo->bind_param("s", $product);
+            try{
+                //esecuzione della query per ottenere le informazioni su un prodotto
+                $productInfo->execute();
+            }catch(\mysqli_sql_exception $error){
+                //se c'è un errore nell'esecuzione della query, ritorna false
+                $this->CloseConnectionDB();
+                $productInfo->close();
+                return false; //errore nell'esecuzione della query
+            }
+            //ottiene il risultato della query
+            $result = $productInfo->get_result();
+            $this->CloseConnectionDB();
+            $productInfo->close();
+            if($result->num_rows == 1){
+                //se il prodotto esiste, ritorna le informazioni del prodotto
+                $info = mysqli_fetch_assoc($result);
+                $result->free();
+                return $info; //ritorna le informazioni del prodotto come array associativo
+            }else{
+                //se il prodotto non esiste, ritorna un messaggio di errore
+                return "Product not found"; //prodotto non trovato
+            }
+        }else{
+            return "Connection error"; //errore nella connessione al database
+        }
+    }
     
-    public function GetProductIngredients($product): array | string{}//ottenere ingredienti di un prodotto
+    public function GetProductIngredients($product): array | string{//ottenere ingredienti di un prodotto
+        $newConnection = $this->OpenConnectionDB();
+        if($newConnection){
+            $ingredients = $this->connection->prepare("SELECT * FROM prodotto_ingredienti WHERE prodotto = ?");
+            $ingredients->bind_param("s", $product);
+            try{
+                //esecuzione della query per ottenere gli ingredienti di un prodotto
+                $ingredients->execute();
+            }catch(\mysqli_sql_exception $error){
+                //se c'è un errore nell'esecuzione della query, ritorna false
+                $this->CloseConnectionDB();
+                $ingredients->close();
+                return false; //errore nell'esecuzione della query
+            }
+            //ottiene il risultato della query
+            $result = $ingredients->get_result();
+            $this->CloseConnectionDB();
+            $ingredients->close();
+            if($result->num_rows > 0){
+                //se ci sono ingredienti, li aggiunge all'array
+                $ingredientsArray = array();
+                while($row = mysqli_fetch_assoc($result)){
+                    array_push($ingredientsArray, $row);
+                }
+                //libera la memoria occupata dal risultato della query
+                $result->free();
+                return $ingredientsArray; //ritorna l'array degli ingredienti del prodotto
+            }else{
+                //se non ci sono ingredienti, ritorna un messaggio di errore
+                return "No ingredients found for this product"; //nessun ingrediente trovato per questo prodotto
+            }
+
+        }else{
+            return "Connection error"; //errore nella connessione al database
+        }
+    }
+
+    public function IsProductCeliac($product): bool | string{//verifica se un prodotto è senza glutine
+        
+    }
+
+    public function isProductVegetarian($product): bool | string{//verifica se un prodotto è vegetariano
+        
+    }
+
+    public function isProductVegan($product): bool | string{//verifica se un prodotto è vegano
+        
+    }
    
-    public function GetTastingInfo($tasting): array | string{}//ottenere informazioni su una degustazione
+    public function GetTastingInfo($tasting): array | string{//ottenere informazioni su una degustazione
+        $newConnection = $this->OpenConnectionDB();
+        if($newConnection){
+            //preparazione della query per ottenere le informazioni su una degustazione
+            $tastingInfo = $this->connection->prepare("SELECT nome_prodotto, descrizione, disponibilita_persone, data_inizio, data_fine, prezzo FROM degustazioni WHERE id_degustazione = ?");
+            $tastingInfo->bind_param("i", $tasting);
+            try{
+                //esecuzione della query per ottenere le informazioni su una degustazione
+                $tastingInfo->execute();
+            }catch(\mysqli_sql_exception $error){
+                //se c'è un errore nell'esecuzione della query, ritorna false
+                $this->CloseConnectionDB();
+                $tastingInfo->close();
+                return false; //errore nell'esecuzione della query
+            }
+            //ottiene il risultato della query
+            $result = $tastingInfo->get_result();
+            $this->CloseConnectionDB();
+            $tastingInfo->close();
+            if($result->num_rows == 1){
+                //se la degustazione esiste, ritorna le informazioni della degustazione
+                $info = mysqli_fetch_assoc($result);
+                $result->free();
+                return $info; //ritorna le informazioni della degustazione come array associativo
+            }else{
+                //se la degustazione non esiste, ritorna un messaggio di errore
+                return "Tasting not found"; //degustazione non trovata
+            }
+        }else{
+            return "Connection error"; //errore nella connessione al database
+        }
+    } 
 
     //OTTENERE INFO UTENTE
 
@@ -214,7 +323,7 @@ class DB {
         $favorites = array();
         if($newConnection){
             //preparazione della query per ottenere i prodotti preferiti dell'utente
-            $userFavorites = this->connection->prepare( "SELECT prodotti.nome, prodotti.categoria, prodotto.prezzo, prodotti.url_immagine FROM prodotti, preferiti WHERE preferiti.nome_prodotto = prodotti.nome and preferiti.id_utente = ?");
+            $userFavorites = $this->connection->prepare( "SELECT prodotti.nome, prodotti.categoria, prodotto.prezzo, prodotti.url_immagine FROM prodotti, preferiti WHERE preferiti.nome_prodotto = prodotti.nome and preferiti.id_utente = ?");
             $userFavorites->bind_param("i", $id);
             try{
                 //esecuzione della query per ottenere i prodotti preferiti dell'utente
@@ -255,26 +364,60 @@ class DB {
         }
     }
 
-    public function GetUserReservation($id): array | string{}//ottenere prenotazione prodotti
+    public function GetUserReservation($id): array | string{//ottenere prenotazione prodotti
+
+    }
 
     public function GetUserTastings($id): array | string{}//ottenere prenotazione degustazioni
 
-    public function GetUserReviews($id): array | string{}//ottenere recensioni scritte
-    public function GetUserReviewsProduct($id, $product): array | string{}//ottenere recensione scritta su un prodotto singolo
+    public function GetUserReviews($id): array | string{}//ottenere tutte le recensioni scritte dall'utente(vediamo se servirà)
+    public function GetUserReviewsProduct($id, $product): array | string{//ottenere recensione scritta su un prodotto singolo
+        $newConnection = $this->OpenConnectionDB();
+        if($newConnection){
+            $userComments = $this->connection->prepare("SELECT nome_prodotto, voto, commento FROM valutazioni WHERE id_utente = ? AND nome_prodotto = ?");
+            $userComments->bind_param("is", $id, $product);
+            try{
+                //esecuzione della query per ottenere le recensioni scritte dall'utente su un prodotto singolo
+                $userComments->execute();
+            }catch(\mysqli_sql_exception $error){
+                //se c'è un errore nell'esecuzione della query, ritorna false
+                $this->CloseConnectionDB();
+                $userComments->close();
+                return false; //errore nell'esecuzione della query
+            }
+            //ottiene il risultato della query
+            $result = $userComments->get_result();
+            $this->CloseConnectionDB();
+            $userComments->close();
+            if($result->num_rows == 1){
+                //se l'utente ha scritto una recensione su un prodotto singolo, la aggiunge all'array
+                $review = mysqli_fetch_assoc($result);
+                $result->free();
+                return $review; //ritorna la recensione scritta dall'utente su un prodotto singolo
+            } else {
+                //se non ci sono recensioni scritte dall'utente su un prodotto singolo
+                $result->free();
+                return "No reviews found for this product"; //nessuna recensione trovata per questo prodotto
+            }
 
-    public function GetUserAdvices($id): array | string{}//ottenere suggerimenti scritti dall'utente
+        }else{
+            return "Connection error"; //errore nella connessione al database
+        }
+    }
+
+    public function GetUserAdvices($id): array | string{}//ottenere suggerimenti scritti dall'utente(se serve)
 
     //ELIMINAZIONI DA PARTE DELL'UTENTE
 
     public function DeleteAllFavoritesProducts(): bool | string {//cancellare tutti i prodotti preferiti
-        $isUserLogged = this->IsUserLog();
+        $isUserLogged = $this->IsUserLog();
         if($isUserLogged == false){
             //se l'utente non è loggato, ritorna un messaggio di errore
             return "User is not logged in"; //l'utente non è loggato
         }else{
-            $newConnection = this->OpenConnectionDB();
+            $newConnection = $this->OpenConnectionDB();
             if($newConnection){
-                $deleteFavorites = this->connection->prepare("DELETE FROM preferiti WHERE id_utente = ?");
+                $deleteFavorites = $this->connection->prepare("DELETE FROM preferiti WHERE id_utente = ?");
                 $deleteFavorites->bind_param("i", $isUserLogged);
                 try{
                     //esecuzione della query per cancellare tutti i prodotti preferiti dell'utente
@@ -285,7 +428,7 @@ class DB {
                     $deleteFavorites->close();
                     return false; //errore nell'esecuzione della query
                 }
-                this->CloseConnectionDB
+                $this->CloseConnectionDB
                 $deleteFavorites->close();
                 return true; //cancellazione avvenuta con successo(volendo si può controllare se mysqli_affected_rows(this->connection) == 0 per vedere se non c'erano prodotti preferiti da cancellare)
 
@@ -296,12 +439,12 @@ class DB {
     }
 
     public function DeleteOneFavoriteProduct($product): bool | string{//cancellare un singolo prodotto preferito --> da vedere cos'è product
-        $isUserLogged = this->IsUserLog();
+        $isUserLogged = $this->IsUserLog();
         if($isUserLogged == false){
             //se l'utente non è loggato, ritorna un messaggio di errore
             return "User is not logged in"; //l'utente non è loggato
         }else{
-            $newConnection = this->OpenConnectionDB();
+            $newConnection = $this->OpenConnectionDB();
             if($newConnection){
                 $deleteFavorite = $this->connection->prepare("DELETE FROM preferiti WHERE id_utente = ? AND nome_prodotto = ?"); 
                 $deleteFavorite->bind_param("is", $isUserLogged, $product);
@@ -331,7 +474,7 @@ class DB {
     }
 
     public function DeleteAllReservations(): bool | string {//cancellare tutte le prenotazioni dei prodotti
-        $isUserLogged = this->IsUserLog();
+        $isUserLogged = $this->IsUserLog();
         if($isUserLogged == false){
             //se l'utente non è loggato, ritorna un messaggio di errore
             return "User is not logged in"; //l'utente non è loggato
@@ -339,7 +482,7 @@ class DB {
             $newConnection = $this->OpenConnectionDB();
             if($newConnection){
                 //preparazione della query per cancellare tutte le prenotazioni dei prodotti dell'utente
-                $deleteReservations = this->connection->prepare("DELETE FROM prenotazioni WHERE id_utente = ?");
+                $deleteReservations = $this->connection->prepare("DELETE FROM prenotazioni WHERE id_utente = ?");
                 $deleteReservations->bind_param("i", $isUserLogged);
                 try{
                     //esecuzione della query per cancellare tutte le prenotazioni dei prodotti dell'utente
@@ -350,7 +493,7 @@ class DB {
                     $deleteReservations->close();
                     return false; //errore nell'esecuzione della query
                 }
-                this->CloseConnectionDB();
+                $this->CloseConnectionDB();
                 $deleteReservations->close();
                 return true; //cancellazione avvenuta con successo (volendo si può controllare se mysqli_affected_rows(this->connection) == 0 per vedere se non c'erano prenotazioni da cancellare) 
             }else{
@@ -360,7 +503,7 @@ class DB {
     }
 
     public function DeleteOneReservation($reservation): bool | string{//cancellare una singola prenotazione di un prodotto --> da vedere cos'è reservation o se si può ottenere l'id della prenotazione
-        $isUserLogged = this->IsUserLog();
+        $isUserLogged = $this->IsUserLog();
         if($isUserLogged == false){
             //se l'utente non è loggato, ritorna un messaggio di errore
             return "User is not logged in"; //l'utente non è loggato
@@ -368,7 +511,7 @@ class DB {
             $newConnection = $this->OpenConnectionDB();
             if($newConnection){
                 //preparazione della query per cancellare una singola prenotazione di un prodotto dell'utente
-                $deleteReservation = this->connection->prepare("DELETE FROM prenotazioni WHERE id_utente = ? AND id_prodotto = ?");
+                $deleteReservation = $this->connection->prepare("DELETE FROM prenotazioni WHERE id_utente = ? AND id_prodotto = ?");
                 $deleteReservation->bind_param("ii", $isUserLogged, $reservation);
                 try{
                     //esecuzione della query per cancellare una singola prenotazione di un prodotto dell'utente
@@ -396,7 +539,7 @@ class DB {
     }
 
     public function DeleteAllTastings(): bool | string {//cancellare tutte le degustazioni prenotate
-        $isUserLogged = this->IsUserLog();
+        $isUserLogged = $this->IsUserLog();
         if($isUserLogged == false){
             //se l'utente non è loggato, ritorna un messaggio di errore
             return "User is not logged in"; //l'utente non è loggato
@@ -415,7 +558,7 @@ class DB {
                     $deleteTastings->close();
                     return false; //errore nell'esecuzione della query
                 }
-                this->CloseConnectionDB();
+                $this->CloseConnectionDB();
                 $deleteTastings->close();
                 return true; //cancellazione avvenuta con successo (volendo si può controllare se mysqli_affected_rows(this->connection) == 0 per vedere se non c'erano degustazioni da cancellare)
             }else{
@@ -461,7 +604,7 @@ class DB {
     }
 
     public function DeleteAllReviews(): bool | string {//cancellare tutte le recensioni
-        $isUserLogged = this->IsUserLog();
+        $isUserLogged = $this->IsUserLog();
         if($isUserLogged == false){
             //se l'utente non è loggato, ritorna un messaggio di errore
             return "User is not logged in"; //l'utente non è loggato
@@ -469,7 +612,7 @@ class DB {
             $newConnection = $this->OpenConnectionDB();
             if($newConnection){
                 //preparazione della query per cancellare tutte le recensioni dell'utente
-                $deleteReviews = this->connection->prepare("DELETE FROM valutazioni WHERE id_utente = ?");
+                $deleteReviews = $this->connection->prepare("DELETE FROM valutazioni WHERE id_utente = ?");
                 $deleteReviews->bind_param("i", $isUserLogged);
                 try{
                     //esecuzione della query per cancellare tutte le recensioni dell'utente
@@ -480,7 +623,7 @@ class DB {
                     $deleteReviews->close();
                     return false; //errore nell'esecuzione della query
                 }
-                this->CloseConnectionDB();
+                $this->CloseConnectionDB();
                 $deleteReviews->close();
                 return true; //cancellazione avvenuta con successo (volendo si può controllare se mysqli_affected_rows(this->connection) == 0 per vedere se non c'erano recensioni da cancellare)
             }else{
@@ -543,16 +686,16 @@ class DB {
     public function ChangePassword($oldPassword, $newPassword): bool | string{//Cambio password da parte dell'utente
         encriptedOldPassword = hash('sha256', $oldPassword);
         encriptedNewPassword = hash('sha256', $newPassword);
-        isUserLogged = this->IsUserLog();
+        isUserLogged = $this->IsUserLog();
 
         if($isUserLogged == false){
             //se l'utente non è loggato, ritorna un messaggio di errore
             return "User is not logged in"; //l'utente non è loggato
         }else{
-            $newConnection = this->OpenConnectionDB();
+            $newConnection = $this->OpenConnectionDB();
             if($newConnection){
                 //preparazione della query per cambiare la password dell'utente
-                $changePassword = this->connection->prepare("UPDATE utenti SET password = ? WHERE id = ? AND password = ?");
+                $changePassword = $this->connection->prepare("UPDATE utenti SET password = ? WHERE id = ? AND password = ?");
                 $changePassword->bind_param("sis", encriptedNewPassword, isUserLogged, encriptedOldPassword);
 
                 try{
@@ -565,7 +708,7 @@ class DB {
                     return false; //errore nell'esecuzione della query
                 }
 
-                if(mysqli_affected_rows(this->connection) == 1){
+                if(mysqli_affected_rows($this->connection) == 1){
                     //se la query ha cambiato una riga, allora la password è stata cambiata con successo
                     $this->CloseConnectionDB();
                     $changePassword->close();
@@ -589,10 +732,10 @@ class DB {
             //se l'utente non è loggato, ritorna un messaggio di errore
             return "User is not logged in"; //l'utente non è loggato
         }else{
-            $newConnection = this->OpenConnectionDB();
+            $newConnection = $this->OpenConnectionDB();
             if($newConnection){
                 //preparazione della query per cambiare le informazioni personali dell'utente
-                $changeInfo = this->connection->prepare("UPDATE utenti SET username = ?, nome = ?, cognome = ?, data_di_nascita = ?, logo = ? WHERE id = ?");
+                $changeInfo = $this->connection->prepare("UPDATE utenti SET username = ?, nome = ?, cognome = ?, data_di_nascita = ?, logo = ? WHERE id = ?");
                 $changeInfo->bind_param("sssssi", $username, $name, $cognome, $date, $logo, $isUserLogged);
 
                 try{
@@ -605,7 +748,7 @@ class DB {
                     return false; //errore nell'esecuzione della query
                 }
 
-                if(mysqli_affected_rows(this->connection) == 1){
+                if(mysqli_affected_rows($this->connection) == 1){
                     //se la query ha cambiato una riga, allora le informazioni sono state cambiate con successo
                     $this->CloseConnectionDB();
                     $changeInfo->close();
@@ -628,7 +771,7 @@ class DB {
         $newConnection = $this->OpenConnectionDB();
         if($newConnection){
             //preparazione della query per ottenere il voto medio del prodotto
-            $averageGrade = this->connection->prepare("SELECT CAST(AVG(voto) AS DECIMAL (2,0)) AS media FROM valutazioni WHERE nome_prodotto = ?");
+            $averageGrade = $this->connection->prepare("SELECT CAST(AVG(voto) AS DECIMAL (2,0)) AS media FROM valutazioni WHERE nome_prodotto = ?");
             $averageGrade->bind_param("s", $product);
             try{
                 //esecuzione della query per ottenere il voto medio del prodotto
@@ -641,7 +784,7 @@ class DB {
             }
             //ottiene il risultato della query
             $result = averageGrade->get_result();
-            this->CloseConnectionDB();
+            $this->CloseConnectionDB();
             averageGrade->close();
             if($result->num_rows == 1){
                 //se il prodotto ha almeno una recensione, ritorna il voto medio
@@ -660,7 +803,7 @@ class DB {
         $newConnection = $this->OpenConnectionDB();
         $product = array();
         if($newConnection){
-            $isProductExist = this->connection->prepare("SELECT nome FROM prodotti WHERE nome = ?");
+            $isProductExist = $this->connection->prepare("SELECT nome FROM prodotti WHERE nome = ?");
             $isProductExist->bind_param("s", $product);
             try{
                 //esecuzione della query per verificare l'esistenza del prodotto
@@ -692,7 +835,7 @@ class DB {
         $newConnection = $this->OpenConnectionDB();
         if($newConnection){
             //preparazione della query per verificare l'esistenza della degustazione
-            $isTastingExist = this->connection->prepare("SELECT id_degustazione FROM degustazioni WHERE id_degustazione = ?");//vedere se usare id o nome per la degustazione(anche come primary key)
+            $isTastingExist = $this->connection->prepare("SELECT id_degustazione FROM degustazioni WHERE id_degustazione = ?");//vedere se usare id o nome per la degustazione(anche come primary key)
             $isTastingExist->bind_param("i", $tasting);
             try{
                 //esecuzione della query per verificare l'esistenza della degustazione
@@ -704,7 +847,7 @@ class DB {
                 return false; //errore nell'esecuzione della query
             }
             $result = isTastingExist->get_result();
-            this->CloseConnectionDB();
+            $this->CloseConnectionDB();
             isTastingExist->close();
             if($result->num_rows == 1){
                 //se la degustazione esiste, ritorna true
@@ -729,7 +872,7 @@ class DB {
         }
         if($newConnection){
             //preparazione della query per ottenere i commenti del prodotto
-            $productComments = this->connection->prepare("SELECT utenti.username, valutazioni.data, valutazioni.voto, valutazioni.commento FROM valutazioni JOIN utenti ON valutazioni.id_utente = utenti.id WHERE valutazioni.nome_prodotto = ? AND valutazioni.id_utente <>?");
+            $productComments = $this->connection->prepare("SELECT utenti.username, valutazioni.data, valutazioni.voto, valutazioni.commento FROM valutazioni JOIN utenti ON valutazioni.id_utente = utenti.id WHERE valutazioni.nome_prodotto = ? AND valutazioni.id_utente <>?");
             $productComments->bind_param("si", $product, $id);
             try{
                 //esecuzione della query per ottenere i commenti del prodotto
@@ -742,7 +885,7 @@ class DB {
             }
             //ottiene il risultato della query
             $result = productComments->get_result();
-            this->CloseConnectionDB();
+            $this->CloseConnectionDB();
             productComments->close();
             if($result->num_rows > 0){
                 //se ci sono commenti, li aggiunge all'array
@@ -768,5 +911,6 @@ class DB {
         }else{
             return "Connection error"; //errore nella connessione al database
         }
+    }
 }
 ?>
