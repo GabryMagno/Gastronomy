@@ -350,19 +350,44 @@ class DB {
             return "Connection error"; //errore nella connessione al database
         }
     }
-
-    public function IsProductCeliac($product): bool | string{//verifica se un prodotto è senza glutine
+    
+    public function IsProductVeganVegetarianCeliac($product): bool | string{//verifica se un prodotto è senza glutine, vegano e/o vegetariano
+        $newConnection = $this->OpenConnectionDB();
+        if($newConnection){
+            //preparazione della query per verificare se un prodotto è vegano, vegetariano o senza glutine
+            $productType = $this->connection->prepare("SELECT MIN(ingredienti.vegano) AS vegano, MIN(ingredienti.vegetariano) AS vegetariano, MIN(ingredienti.celiaco) AS celiaco 
+            FROM prodotto_ingredienti 
+            JOIN ingredienti ON ingredienti.nome = prodotto_ingredienti.ingrediente
+            WHERE prodotto_ingredienti.prodotto = ?");
+            $productType->bind_param("s", $product);
+            try{
+                //esecuzione della query per verificare se un prodotto è vegano, vegetariano o senza glutine
+                $productType->execute();
+            }catch(\mysqli_sql_exception $error){
+                //se c'è un errore nell'esecuzione della query, ritorna false
+                $this->CloseConnectionDB();
+                $productType->close();
+                return false; //errore nell'esecuzione della query
+            }
+            //ottiene il risultato della query
+            $result = $productType->get_result();
+            $this->CloseConnectionDB();
+            $productType->close();
+            if($result->num_rows == 1){
+                //se il prodotto esiste, ritorna le informazioni del prodotto
+                $info = mysqli_fetch_assoc($result);
+                $result->free();
+                return $info; //ritorna le informazioni del prodotto come array associativo
+            }else{
+                //se il prodotto non esiste, ritorna un messaggio di errore
+                return "Product not found"; //prodotto non trovato
+            }
+        }else{
+            return "Connection error"; //errore nella connessione al database
+        }
         
     }
 
-    public function isProductVegetarian($product): bool | string{//verifica se un prodotto è vegetariano
-        
-    }
-
-    public function isProductVegan($product): bool | string{//verifica se un prodotto è vegano
-        
-    }
-   
     public function GetTastingInfo($tasting): array | string{//ottenere informazioni su una degustazione
         $newConnection = $this->OpenConnectionDB();
         if($newConnection){
@@ -445,12 +470,87 @@ class DB {
     }
 
     public function GetUserReservation($id): array | string{//ottenere prenotazione prodotti
+        $newConnection = $this->OpenConnectionDB();
+        $reservations = array();
+        if($newConnection){
+            //preparazione della query per ottenere le prenotazioni dei prodotti dell'utente
+            $userReservations = $this->connection->prepare("SELECT prodotti.nome, prodotti.categoria, prenotazioni.data_prenotazione, prenotazioni.quantita 
+            FROM prenotazioni 
+            JOIN prodotti ON prenotazioni.id_prodotto = prodotti.id
+            WHERE prenotazioni.id_utente = ?");
+            $userReservations->bind_param("i", $id);
+            try{
+                //esecuzione della query per ottenere le prenotazioni dei prodotti dell'utente
+                $userReservations->execute();
+            }catch(\mysqli_sql_exception $error){
+                //se c'è un errore nell'esecuzione della query, ritorna false
+                $this->CloseConnectionDB();
+                $userReservations->close();
+                return false; //errore nell'esecuzione della query
+            }
+            //ottiene il risultato della query
+            $result = $userReservations->get_result();
+            $this->CloseConnectionDB();
+            $userReservations->close();
+            if($result->num_rows > 0){
+                //se ci sono prenotazioni, le aggiunge all'array
+                while($row = mysqli_fetch_assoc($result)){
+                    array_push($reservations, $row);
+                }
+                //libera la memoria occupata dal risultato della query
+                $result->free();
+                return $reservations; //ritorna l'array delle prenotazioni dei prodotti dell'utente
+            }else{
+                //se non ci sono prenotazioni
+                $result->free();
+                return "No reservations found"; //nessuna prenotazione trovata
+            }
+        }else{
+            return "Connection error"; //errore nella connessione al database
+        }
 
     }
 
-    public function GetUserTastings($id): array | string{}//ottenere prenotazione degustazioni
-
-    public function GetUserReviews($id): array | string{}//ottenere tutte le recensioni scritte dall'utente(vediamo se servirà)
+    public function GetUserTastings($id): array | string{//ottenere prenotazione degustazioni
+        $newConnection = $this->OpenConnectionDB();
+        $tastings = array();
+        if($newConnection){
+            //preparazione della query per ottenere le degustazioni prenotate dall'utente
+            $userTastings = $this->connection->prepare("SELECT degustazioni.nome_prodotto, degustazioni.data_inizio, degustazioni.data_fine, degustazioni.prezzo 
+            FROM degustazioni 
+            JOIN utenti ON degustazioni.id_utente = utenti.id
+            WHERE utenti.id = ?");
+            $userTastings->bind_param("i", $id);
+            try{
+                //esecuzione della query per ottenere le degustazioni prenotate dall'utente
+                $userTastings->execute();
+            }catch(\mysqli_sql_exception $error){
+                //se c'è un errore nell'esecuzione della query, ritorna false
+                $this->CloseConnectionDB();
+                $userTastings->close();
+                return false; //errore nell'esecuzione della query
+            }
+            //ottiene il risultato della query
+            $result = $userTastings->get_result();
+            $this->CloseConnectionDB();
+            $userTastings->close();
+            if($result->num_rows > 0){
+                //se ci sono degustazioni, le aggiunge all'array
+                while($row = mysqli_fetch_assoc($result)){
+                    array_push($tastings, $row);
+                }
+                //libera la memoria occupata dal risultato della query
+                $result->free();
+                return $tastings; //ritorna l'array delle degustazioni prenotate dall'utente
+            }else{
+                //se non ci sono degustazioni prenotate dall'utente
+                $result->free();
+                return "No tastings found"; //nessuna degustazione trovata
+            }
+        }else{
+            return "Connection error"; //errore nella connessione al database
+        }
+    }
     
     public function GetUserReviewProduct($id, $product): array | string{//ottenere recensione scritta su un prodotto singolo
         $newConnection = $this->OpenConnectionDB();
@@ -486,7 +586,9 @@ class DB {
         }
     }
 
+    //FUNZIONI CHE NON SERVONO MA POSSONO SERVIRE IN FUTURO
     public function GetUserAdvices($id): array | string{}//ottenere suggerimenti scritti dall'utente(se serve)
+    public function GetUserReviews($id): array | string{}//ottenere tutte le recensioni scritte dall'utente(vediamo se servirà)
 
     //ELIMINAZIONI DA PARTE DELL'UTENTE
 
