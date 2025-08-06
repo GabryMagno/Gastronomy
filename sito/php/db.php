@@ -1,5 +1,12 @@
 <?php
-
+/*
+    * Classe per la gestione del database
+    * Contiene le funzioni per la registrazione, login, logout, eliminazione utente, ottenimento informazioni utente, prodotti e degustazioni
+    * 
+    * Alcuni controlli ulteriori potrebbero essere controllo maggiore su degustazioni(es data fine data inizio e data scelta dall'utente), vedere se un prodotto è disponibile, ecc...
+    * @version 1.0
+    */
+*/
 session_start();
 
 class DB {
@@ -199,6 +206,79 @@ class DB {
         }
     }
 
+    function GetUserInfo($id): array | string{//ottenere informazioni su un utente
+        $UserExist = $this->ThisIsUserExists($id);
+        if(!$UserExist){
+            //se l'utente non esiste, ritorna un messaggio di errore
+            return "User not found"; //utente non trovato
+        }else{
+            $newConnection = $this->OpenConnectionDB();
+            if($newConnection){
+                //preparazione della query per ottenere le informazioni su un utente
+                $userInfo = $this->connection->prepare("SELECT username, nome, cognome, data_iscrizione, url_immagine FROM utenti WHERE id = ?");
+                $userInfo->bind_param("i", $id);
+                try{
+                    //esecuzione della query per ottenere le informazioni su un utente
+                    $userInfo->execute();
+                }catch(\mysqli_sql_exception $error){
+                    //se c'è un errore nell'esecuzione della query, ritorna false
+                    $this->CloseConnectionDB();
+                    $userInfo->close();
+                    return false; //errore nell'esecuzione della query
+                }
+                //ottiene il risultato della query
+                $result = $userInfo->get_result();
+                $this->CloseConnectionDB();
+                $userInfo->close();
+                if($result->num_rows == 1){
+                    //se l'utente esiste, ritorna le informazioni dell'utente
+                    $info = mysqli_fetch_assoc($result);
+                    $result->free();
+                    return $info; //ritorna le informazioni dell'utente come array associativo
+                }else{
+                    //se l'utente non esiste, ritorna un messaggio di errore
+                    $result->free();
+                    return "User not found"; //utente non trovato
+                }
+            }else{
+                return "Connection error"; //errore nella connessione al database
+            }
+        }
+    }
+
+    function ThisIsUserExists($id): bool | string{//verifica se un utente esiste
+        $newConnection = $this->OpenConnectionDB();
+        if($newConnection){
+            //preparazione della query per verificare l'esistenza di un utente
+            $userExists = $this->connection->prepare("SELECT id FROM utenti WHERE id = ?");
+            $userExists->bind_param("i", $id);
+            try{
+                //esecuzione della query per verificare l'esistenza di un utente
+                $userExists->execute();
+            }catch(\mysqli_sql_exception $error){
+                //se c'è un errore nell'esecuzione della query, ritorna false
+                $this->CloseConnectionDB();
+                $userExists->close();
+                return false; //errore nell'esecuzione della query
+            }
+            //ottiene il risultato della query
+            $result = $userExists->get_result();
+            $this->CloseConnectionDB();
+            $userExists->close();
+            if($result->num_rows == 1){
+                //se l'utente esiste, ritorna true
+                $result->free();
+                return true; //utente esistente
+            }else{
+                //se l'utente non esiste, ritorna false
+                $result->free();
+                return false; //utente non trovato
+            }
+        }else{
+            return "Connection error"; //errore nella connessione al database
+        }
+    }
+
     //OTTENERE INFO PRODOTTO E DEGUSTAZIONE
     
     public function GetProductInfo($product): array | string{//ottenere informazioni su un prodotto
@@ -371,7 +451,8 @@ class DB {
     public function GetUserTastings($id): array | string{}//ottenere prenotazione degustazioni
 
     public function GetUserReviews($id): array | string{}//ottenere tutte le recensioni scritte dall'utente(vediamo se servirà)
-    public function GetUserReviewsProduct($id, $product): array | string{//ottenere recensione scritta su un prodotto singolo
+    
+    public function GetUserReviewProduct($id, $product): array | string{//ottenere recensione scritta su un prodotto singolo
         $newConnection = $this->OpenConnectionDB();
         if($newConnection){
             $userComments = $this->connection->prepare("SELECT nome_prodotto, voto, commento FROM valutazioni WHERE id_utente = ? AND nome_prodotto = ?");
@@ -669,17 +750,258 @@ class DB {
     }
 
     //AGGIUNTE DA PARTE DELL'UTENTE
-    //Al posto di username->logged_user da isUserLog() (da scegliere)
+    //Al posto di username -> logged_user da isUserLog() (da scegliere)
 
-    public function AddAdvice($id, $advice): bool | string{}//Aggiunta da parte dell'utente di un suggerimento
+    public function AddAdvice($id, $advice): bool | string {//Aggiunta da parte dell'utente di un suggerimento
+        $date = date("Y-m-d H:i:s"); //ottiene la data e l'ora attuale
+        $newConnection = $this->OpenConnectionDB();
+        if($newConnection){
+            //preparazione della query per aggiungere un suggerimento
+            $addAdvice = $this->connection->prepare("INSERT INTO suggerimenti (id_utente, data, suggerimento) VALUES (?, ?, ?)");
+            $addAdvice->bind_param("iss", $isUserLogged, $date, $advice);
 
-    public function AddReview($id, $comment, $grade, $product): bool | string{}//Aggiunta da parte dell'utente di un commento e valutazione di un prodotto
+            try{
+                //esecuzione della query per aggiungere un suggerimento
+                $addAdvice->execute();
+            }catch(\mysqli_sql_exception $error){
+                //se c'è un errore nell'esecuzione della query, ritorna false
+                $this->CloseConnectionDB();
+                $addAdvice->close();
+                return false; //errore nell'esecuzione della query
+            }
 
-    public function AddFavoriteProduct($id,$product): bool | string{}//Aggiunta di un prodotto preferito da parte dell'utente
+            if(mysqli_affected_rows($this->connection) == 1){
+                //se la query ha inserito una riga, allora il suggerimento è stato aggiunto con successo
+                $this->CloseConnectionDB();
+                $addAdvice->close();
+                return true; //aggiunta avvenuta con successo
+            }else{
+                //se la query non ha inserito nessuna riga, allora c'è stato un errore
+                $this->CloseConnectionDB();
+                $addAdvice->close();
+                return false; //nessuna riga inserita, errore nell'aggiunta del suggerimento
+            } 
+        }else{
+            return "Connection error"; //errore nella connessione al database
+        }
+    }
 
-    public function AddReservation($id, $product, $quantity, $date): bool | string{}//Aggiunta da parte dell'utente di una prenotazione rispetto ad un prodotto indicando quantità dello stesso e quando (data) ritirarlo
+    public function AddReview($id, $comment, $grade, $product): bool | string{//Aggiunta da parte dell'utente di un commento e valutazione di un prodotto(vedere se usare string o bool e basta per gli errori)
+        $isUserLogged = $this->IsUserLog();
+        if($isUserLogged == false){
+            //se l'utente non è loggato, ritorna un messaggio di errore
+            return "User is not logged in"; //l'utente non è loggato
+        }else{
+            $newConnection = $this->OpenConnectionDB();
+            $date = date("Y-m-d H:i:s"); //ottiene la data e l'ora attuale
+            if($newConnection){
+                $reviewExists = $this->GetUserReviewProduct($isUserLogged, $product);
+                if(is_array($reviewExists)){
+                    //se l'utente ha già scritto una recensione su questo prodotto, ritorna un messaggio di errore
+                    return "User has already reviewed this product"; //l'utente ha già recensito questo prodotto
+                }else if($reviewExists == "No reviews found for this product"){
+                    //se l'utente non ha ancora scritto una recensione su questo prodotto, allora può procedere con l'aggiunta della recensione
+                    //preparazione della query per aggiungere una recensione
+                    $addReview = $this->connection->prepare("INSERT INTO valutazioni (id_utente, nome_prodotto, data, voto, commento) VALUES (?, ?, ?, ?, ?)");
+                    $addReview->bind_param("issis", $isUserLogged, $product, $date, $grade, $comment);
+                    try{
+                        //esecuzione della query per aggiungere una recensione
+                        $addReview->execute();
+                    }catch(\mysqli_sql_exception $error){
+                        //se c'è un errore nell'esecuzione della query, ritorna false
+                        $this->CloseConnectionDB();
+                        $addReview->close();  
+                        return false; //errore nell'esecuzione della query
+                    }
+                    if(mysqli_affected_rows($this->connection) == 1){
+                        //se la query ha inserito una riga, allora la recensione è stata aggiunta con successo
+                        $this->CloseConnectionDB();
+                        $addReview->close();
+                        return true; //aggiunta avvenuta con successo
+                    }else{
+                        //se la query non ha inserito nessuna riga, allora c'è stato un errore
+                        $this->CloseConnectionDB();
+                        $addReview->close();
+                        return "Review addition failed"; //nessuna riga inserita, errore nell'aggiunta della recensione
+                    }
+                }
+            }else{
+                return "Connection error"; //errore nella connessione al database
+            }
+        }
+    }
 
-    public function AddTasting($id, $tasting, $people_number, $date): bool | string{}//Aggiunta di una prenotazione per una degustazione da parte dell'utente per un tot di persone e in una certa data
+    public function AddFavoriteProduct($id,$product): bool | string{//Aggiunta di un prodotto preferito da parte dell'utente
+        $isUserLogged = $this->IsUserLog();
+        if($isUserLogged == false){
+            //se l'utente non è loggato, ritorna un messaggio di errore
+            return "User is not logged in"; //l'utente non è loggato
+        }else{
+            $newConnection = $this->OpenConnectionDB();
+            if($newConnection){
+                //preparazione della query per aggiungere un prodotto preferito
+                $addFavorite = $this->connection->prepare("INSERT INTO preferiti (id_utente, nome_prodotto) VALUES (?, ?)");
+                $addFavorite->bind_param("is", $isUserLogged, $product);
+                try{
+                    //esecuzione della query per aggiungere un prodotto preferito
+                    $addFavorite->execute();
+                }catch(\mysqli_sql_exception $error){
+                    //se c'è un errore nell'esecuzione della query, ritorna false
+                    $this->CloseConnectionDB();
+                    $addFavorite->close();
+                    return false; //errore nell'esecuzione della query
+                }
+                if(mysqli_affected_rows($this->connection) == 1){
+                    //se la query ha inserito una riga, allora il prodotto preferito è stato aggiunto con successo
+                    $this->CloseConnectionDB();
+                    $addFavorite->close();
+                    return true; //aggiunta avvenuta con successo
+                }else{
+                    //se la query non ha inserito nessuna riga, allora il prodotto preferito esiste già o c'è stato un errore
+                    $this->CloseConnectionDB();
+                    $addFavorite->close();
+                    return "Product already exists in favorites"; //prodotto già presente nei preferiti
+                }
+            }else{
+                return "Connection error"; //errore nella connessione al database
+            }
+        }
+    }
+
+    public function AddReservation($id, $product, $quantity, $date): bool | string{//Aggiunta da parte dell'utente di una prenotazione rispetto ad un prodotto indicando quantità dello stesso e quando (data) ritirarlo
+        $isUserLogged = $this->IsUserLog();
+        if($isUserLogged == false){
+            //se l'utente non è loggato, ritorna un messaggio di errore
+            return "User is not logged in"; //l'utente non è loggato
+        }else{
+            $newConnection = $this->OpenConnectionDB();
+            if($newConnection){
+                //preparazione della query per aggiungere una prenotazione
+                $addReservation = $this->connection->prepare("INSERT INTO prenotazioni (id_utente, id_prodotto, quantita, data_ritiro) VALUES (?, ?, ?, ?)");
+                $addReservation->bind_param("iiis", $isUserLogged, $product, $quantity, $date);
+                try{
+                    //esecuzione della query per aggiungere una prenotazione
+                    $addReservation->execute();
+                }catch(\mysqli_sql_exception $error){
+                    //se c'è un errore nell'esecuzione della query, ritorna false
+                    $this->CloseConnectionDB();
+                    $addReservation->close();
+                    return false; //errore nell'esecuzione della query
+                }
+                if(mysqli_affected_rows($this->connection) == 1){
+                    //se la query ha inserito una riga, allora la prenotazione è stata aggiunta con successo
+                    $this->CloseConnectionDB();
+                    $addReservation->close();
+                    return true; //aggiunta avvenuta con successo
+                }else{
+                    //se la query non ha inserito nessuna riga, allora c'è stato un errore
+                    $this->CloseConnectionDB();
+                    $addReservation->close();
+                    return "Reservation addition failed"; //nessuna riga inserita, errore nell'aggiunta della prenotazione
+                }
+            }else{
+                return "Connection error"; //errore nella connessione al database
+            }
+        }
+    }
+
+    //DA CONTROLLARE LE PROSSIME DUE FUNZIONI : AddTasting e CheckTastingAvailability -> MOLTO IMPORTANTE
+
+    public function AddTasting($id, $tasting, $people_number, $date): bool | string{//Aggiunta di una prenotazione per una degustazione da parte dell'utente per un tot di persone e in una certa data
+        $isUserLogged = $this->IsUserLog();
+        if($isUserLogged == false){
+            //se l'utente non è loggato, ritorna un messaggio di errore
+            return "User is not logged in"; //l'utente non è loggato
+        }else{
+            $newConnection = $this->OpenConnectionDB();
+            $date2 = date("Y-m-d H:i:s"); //ottiene la data e l'ora attuale
+            if($newConnection){
+                //preparazione della query per aggiungere una prenotazione per una degustazione
+                if(!$this->CheckTastingAvailability($tasting, $people_number)){
+                    //se la degustazione non è disponibile per il numero di persone richiesto, ritorna un messaggio di errore
+                    return "Tasting not available for the requested number of people"; //degustazione non disponibile per il numero di persone richiesto
+                }
+                //preparazione della query per aggiungere una prenotazione per una degustazione
+                //inserisce una prenotazione per una degustazione con l'id della degustazione, l'id dell'utente, la data della prenotazione e la data della scelta
+                $addTasting = $this->connection->prepare("INSERT INTO prenotazioni_degustazioni (id_degustazione, id_cliente, data_prenotazione, data_scelta) VALUES (?, ?, ?, ?)");
+                $addTasting->bind_param("iiss", $tasting, $isUserLogged, $date2, $date);
+
+                //preparazione della query per aggiornare la disponibilità delle persone per la degustazione
+                //decrementa la disponibilità delle persone per la degustazione di un certo numero di persone
+                $changePeopleNumber = $this->connection->prepare("UPDATE degustazioni SET disponibilita_persone = disponibilita_persone - ? WHERE id_degustazione = ?");
+                $changePeopleNumber->bind_param("ii", $people_number, $tasting);
+                
+                try{
+                    //esecuzione della query per aggiungere una prenotazione per una degustazione
+                    $addTasting->execute();
+                }catch(\mysqli_sql_exception $error){
+                    //se c'è un errore nell'esecuzione della query, ritorna false
+                    $this->CloseConnectionDB();
+                    $addTasting->close();
+                    return false; //errore nell'esecuzione della query
+                }
+
+                try{
+                    //esecuzione della query per aggiornare la disponibilità delle persone per la degustazione
+                    $changePeopleNumber->execute();
+                }catch(\mysqli_sql_exception $error){
+                    //se c'è un errore nell'esecuzione della query, ritorna false
+                    $this->CloseConnectionDB();
+                    $changePeopleNumber->close();
+                    return false; //errore nell'esecuzione della query
+                }
+
+                if(mysqli_affected_rows($this->connection) == 1){
+                    //se la query ha inserito una riga, allora la prenotazione per la degustazione è stata aggiunta con successo
+                    $this->CloseConnectionDB();
+                    $addTasting->close();
+                    return true; //aggiunta avvenuta con successo
+                }else{
+                    //se la query non ha inserito nessuna riga, allora c'è stato un errore
+                    $this->CloseConnectionDB();
+                    $addTasting->close();
+                    return "Tasting addition failed"; //nessuna riga inserita, errore nell'aggiunta della prenotazione per la degustazione
+                }
+            }else{
+                return "Connection error"; //errore nella connessione al database
+            }
+        }
+    }
+
+    public function CheckTastingAvailability($tasting, $people_number): bool | string{//Controlla se una degustazione è disponibile per un certo numero di persone
+        $newConnection = $this->OpenConnectionDB();
+        if($newConnection){
+            //preparazione della query per controllare la disponibilità di una degustazione
+            $checkAvailability = $this->connection->prepare("SELECT disponibilita_persone FROM degustazioni WHERE id_degustazione = ?");
+            $checkAvailability->bind_param("i", $tasting);
+            try{
+                //esecuzione della query per controllare la disponibilità di una degustazione
+                $checkAvailability->execute();
+            }catch(\mysqli_sql_exception $error){
+                //se c'è un errore nell'esecuzione della query, ritorna false
+                $this->CloseConnectionDB();
+                $checkAvailability->close();
+                return false; //errore nell'esecuzione della query
+            }
+            //ottiene il risultato della query
+            $result = $checkAvailability->get_result();
+            $this->CloseConnectionDB();
+            $checkAvailability->close();
+            if($result->num_rows == 1){
+                //se la degustazione esiste, allora controlla la disponibilità
+                $row = mysqli_fetch_assoc($result);
+                if($row['disponibilita_persone'] >= $people_number){
+                    return true; //degustazione disponibile per il numero di persone richiesto
+                }else{
+                    return "Tasting not available for the requested number of people"; //degustazione non disponibile per il numero di persone richiesto
+                }
+            }else{
+                return "Tasting not found"; //degustazione non trovata
+            }
+        }else{
+            return "Connection error"; //errore nella connessione al database
+        }
+    }
 
     //CAMBIO DELLE IMPOSTAZIONI
 
