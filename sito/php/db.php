@@ -355,7 +355,7 @@ class DB {
         $newConnection = $this->OpenConnectionDB();
         if($newConnection){
             //preparazione della query per verificare se un prodotto è vegano, vegetariano o senza glutine
-            $productType = $this->connection->prepare("SELECT MIN(ingredienti.vegano) AS vegano, MIN(ingredienti.vegetariano) AS vegetariano, MIN(ingredienti.celiaco) AS celiaco 
+            $productType = $this->connection->prepare("SELECT MIN(ingredienti.isVegano) AS vegano, MIN(ingredienti.isVegetariano) AS vegetariano, MIN(ingredienti.isCeliaco) AS celiaco 
             FROM prodotto_ingredienti 
             JOIN ingredienti ON ingredienti.nome = prodotto_ingredienti.ingrediente
             WHERE prodotto_ingredienti.prodotto = ?");
