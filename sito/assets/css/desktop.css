@@ -1495,8 +1495,14 @@ ul#user-profile-prodotti {
     justify-content: center;
     padding: 1em;
 
-    max-width: 800px;
+    max-width: 1500px;
+
     margin: 0 auto;
+}
+
+#user-profile-prodotti li {
+    flex: 0 0 250px;
+    box-sizing: border-box;
 }
 
 #user-profile-prodotti h4.product-name{
@@ -1506,7 +1512,6 @@ ul#user-profile-prodotti {
 
     padding: 0;
 }
-
 
 #user-profile-prodotti li.product-brochure a{
     margin-top: 0.5em;
@@ -1612,10 +1617,12 @@ summary:focus{
 #elimination-buttons{
     flex-direction: column-reverse;
     align-items: center;
+
+    gap: 0;
 }
 
 #elimination-buttons button{
-    width: 45%;
+    width: 35%;
 }
 
 /*  

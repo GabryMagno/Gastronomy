@@ -5,8 +5,9 @@
     * 
     * Alcuni controlli ulteriori potrebbero essere controllo maggiore su degustazioni(es data fine data inizio e data scelta dall'utente), vedere se un prodotto è disponibile, ecc...
     * @version 1.0
-    */
+
 */
+
 session_start();
 
 class DB {
@@ -611,7 +612,7 @@ class DB {
                     $deleteFavorites->close();
                     return false; //errore nell'esecuzione della query
                 }
-                $this->CloseConnectionDB
+                $this->CloseConnectionDB();
                 $deleteFavorites->close();
                 return true; //cancellazione avvenuta con successo(volendo si può controllare se mysqli_affected_rows(this->connection) == 0 per vedere se non c'erano prodotti preferiti da cancellare)
 
