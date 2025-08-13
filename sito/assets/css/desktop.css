@@ -132,6 +132,10 @@ h4{
     text-align: center;
 }
 
+h4.left{
+    text-align: left;
+}
+
 p#title{
     margin-bottom: 2em;
     font-size: 1.3em;
@@ -1389,31 +1393,53 @@ p#register,p#login{
     font-weight: bold;
 }
 
-div#favorites, div#user-info{
+div#favorites{
     display: flex;
     margin: 1.5em 2em;
     justify-content: center;
     align-items: center;
 }
 
-div#user-info img{
-    box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.9),
-                0 0.2em 0.4em rgba(0, 0, 0, 0.9);
+#user-info{
+    display: flex;
+    align-items: center;
+
+    background: white;
+    padding: 15px 20px;
+
+    margin: 0 auto;
+
+    max-width: 500px;
+
+    border-radius: 0.5em;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+
+    border: 2px solid transparent;
 }
 
-div#user-info #general-info{
+.user-avatar{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+    border: 2px solid var(--buttoncolor_nero);
+}
+
+#general-info {
     display: flex;
     flex-direction: column;
-    margin-left: 1em;
+    gap: 5px;
 }
 
-#general-info{
-    height: 100%;
-    justify-content: space-between;
+.user-name {
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
-div#user-info img{
-    border-radius: 50%;
+.user-age,
+.user-date {
+    font-size: 1rem;
 }
 
 a#prev{
@@ -1457,19 +1483,19 @@ div#user-settings{
 
     color: var(--errorcolor);
 
-    margin-top: 0.5em;
-    margin-bottom: 1em;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
 }
 
 ul#user-profile-prodotti {
     display: flex;
     flex-wrap: wrap;
     gap: 1em;
-    justify-content: flex-start;
+
+    justify-content: center;
     padding: 1em;
-    background-color: var(--bgcolor);
-    width: 100%;
-    max-width: 1200px;
+
+    max-width: 800px;
     margin: 0 auto;
 }
 
@@ -1481,43 +1507,13 @@ ul#user-profile-prodotti {
     padding: 0;
 }
 
+
 #user-profile-prodotti li.product-brochure a{
-    background-color: var(--headerbgcolor);
-    width: 100%;
     margin-top: 0.5em;
-    border: 0;
-    border-bottom-left-radius: 0.72em;
-    border-bottom-right-radius: 0.72em;
-    height: 100%;
-    display: block;
-    text-align: center;
     bottom: 0;
 }
 
 /* DA AGGIORNARE */
-
-ul#user-profile-prodotti li.product-brochure {
-    display: flex;
-    flex-direction: column;
-    width: 20%;
-    margin: 0 0.5em 1em 0.5em;
-    padding: 0;
-    background-color: white;
-    justify-content: center;
-    align-items: center;
-    color: var(--txtcolor);
-    text-align: center;
-    border-radius: 0.9em;
-    transition: .4s;
-    box-shadow: 0 1em 1em rgba(0, 0, 0, 0.25),
-                0 0.8em 0.8em rgba(0, 0, 0, 0.22);
-}
-
-li.product-brochure:hover,li.new article:hover{
-    transform: translate(0, -0.4em );
-    box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.16),
-                0 0.2em 0.4em rgba(0, 0, 0, 0.24);
-}
 
 /* BOTTONI CARICA DI PIU' */
 .load-more {
