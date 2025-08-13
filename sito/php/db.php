@@ -5,9 +5,8 @@
     * 
     * Alcuni controlli ulteriori potrebbero essere controllo maggiore su degustazioni(es data fine data inizio e data scelta dall'utente), vedere se un prodotto è disponibile, ecc...
     * @version 1.0
-
+    */
 */
-
 session_start();
 
 class DB {
@@ -58,7 +57,7 @@ class DB {
     //string per gli errori
     //AZIONI GENERALI
 
-    public function RegisterNewUser($username, $name, $surname, $date, $email, $password): bool{//registrazione nuovo utente (da aggiungere nel corpo della funzione la data d'iscrizione)
+    public function RegisterNewUser($username, $name, $surname, $date, $email, $password): bool | string{//registrazione nuovo utente (da aggiungere nel corpo della funzione la data d'iscrizione)
 
         $encriptedPassword = hash('sha256', $password);//crittografia della password
         $subscribe_date=date("Y-m-d h:m:s");
@@ -95,7 +94,7 @@ class DB {
             }
         }else {
 
-            return false; //errore nella connessione al database
+            return "Connection error"; //errore nella connessione al database
 
         }
     }
@@ -612,7 +611,7 @@ class DB {
                     $deleteFavorites->close();
                     return false; //errore nell'esecuzione della query
                 }
-                $this->CloseConnectionDB();
+                $this->CloseConnectionDB
                 $deleteFavorites->close();
                 return true; //cancellazione avvenuta con successo(volendo si può controllare se mysqli_affected_rows(this->connection) == 0 per vedere se non c'erano prodotti preferiti da cancellare)
 
@@ -1008,7 +1007,7 @@ class DB {
         }
     }
 
-    //DA CONTROLLARE LE PROSSIME DUE FUNZIONI : AddTasting e CheckTastingAvailability -> MOLTO IMPORTANTE
+    //DA CONTROLLARE LE PROSSIME DUE FUNZIONI :AddTasting e CheckTastingAvailability -> MOLTO IMPORTANTE
 
     public function AddTasting($id, $tasting, $people_number, $date): bool | string{//Aggiunta di una prenotazione per una degustazione da parte dell'utente per un tot di persone e in una certa data
         $isUserLogged = $this->IsUserLog();
