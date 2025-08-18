@@ -206,7 +206,12 @@ class DB {
         }
     }
 
-    function GetUserInfo($id): array | string{//ottenere informazioni su un utente
+    function GetUserInfo(): array | string{//ottenere informazioni su un utente
+        $id = $this->IsUserLog(); 
+        if($id == false){
+            //se l'utente non è loggato, ritorna un messaggio di errore
+            return "User Is not logged"; //utente non loggato
+        }
         $UserExist = $this->ThisIsUserExists($id);
         if(!$UserExist){
             //se l'utente non esiste, ritorna un messaggio di errore
@@ -224,7 +229,7 @@ class DB {
                     //se c'è un errore nell'esecuzione della query, ritorna false
                     $this->CloseConnectionDB();
                     $userInfo->close();
-                    return false; //errore nell'esecuzione della query
+                    return "Execution error"; //errore nell'esecuzione della query
                 }
                 //ottiene il risultato della query
                 $result = $userInfo->get_result();
@@ -854,7 +859,7 @@ class DB {
     //AGGIUNTE DA PARTE DELL'UTENTE
     //Al posto di username -> logged_user da isUserLog() (da scegliere)
 
-    public function AddAdvice($id, $advice): bool | string {//Aggiunta da parte dell'utente di un suggerimento
+    public function AddAdvice($advice, $id =null): bool | string {//Aggiunta da parte dell'utente di un suggerimento
         $date = date("Y-m-d H:i:s"); //ottiene la data e l'ora attuale
         $newConnection = $this->OpenConnectionDB();
         if($newConnection){
