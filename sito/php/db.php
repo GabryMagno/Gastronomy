@@ -284,6 +284,79 @@ class DB {
         }
     }
 
+        public function ThisUsernameExists($username, $checkCaseSensitive = true): bool | string {//controlla se un username esiste nel database
+        $newConnection = $this->OpenConnectionDB();
+        if ($newConnection) {
+            $checkUsername=$this->connection->prepare("SELECT username FROM utenti WHERE username = ?");
+            $checkUsername->bind_param("s",$username);
+            try {
+                $checkUsername->execute();
+            } catch (\mysqli_sql_exception $e) {
+                $this->closeDBConnection();
+                $checkUsername->close();
+                return "Execution error"; //errore nell'esecuzione della query
+            }
+
+            $result=$checkUsername->get_result();
+            $this->closeDBConnection();
+            $checkUsername->close();
+
+            if ($result->num_rows==1) {
+                if($checkCaseSensitive) {
+                    if(strcmp(mysqli_fetch_assoc($result)["username"],$username)==0) {//se l'username esiste e corrisponde esattamente a quello inserito
+                        $result->free();
+                        return true;
+                    } else {
+                        $result->free();
+                        return false;
+                    }
+                } else {
+                    $result->free();
+                    return true;
+                }
+            } else {//se l'username non esiste
+                $result->free();
+                return false;
+            }
+        } else {
+            return "Connection error"; //errore nella connessione al database
+        }
+    }
+
+    public function ThisEmailExist($email){
+        $newConnection = $this->OpenConnectionDB();
+        if ($newConnection) {
+            $checkEmail = $this->connection->prepare("SELECT email FROM utenti WHERE email = ?");
+            $checkEmail->bind_param("s", $email);
+            try {
+                $checkEmail->execute();
+            } catch (\mysqli_sql_exception $e) {
+                $this->CloseConnectionDB();
+                $checkEmail->close();
+                return "Execution error"; //errore nell'esecuzione della query
+            }
+
+            $result = $checkEmail->get_result();
+            $this->CloseConnectionDB();
+            $checkEmail->close();
+
+            if ($result->num_rows == 1) {
+                if (strcmp(mysqli_fetch_assoc($result)["email"],$email)==0) {//se l'email esiste e corrisponde esattamente a quella inserita
+                    $result->free();
+                    return true;
+                } else {
+                    $result->free();
+                    return false;
+                }
+            } else {//se l'email non esiste
+                $result->free();
+                return false;
+            }
+        } else {
+            return "Connection error"; //errore nella connessione al database
+        }
+    }//Controlla se un'email esiste nel database
+
     //OTTENERE INFO PRODOTTO E DEGUSTAZIONE
     
     public function GetProductInfo($product): array | string{//ottenere informazioni su un prodotto

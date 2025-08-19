@@ -72,7 +72,7 @@ function validateUsername(){
 	var Username = document.forms['login-user']['login_username'].value;
 	const allowedChars = /^[a-zA-ZÀ-Ýß-ÿ0-9]{1,16}$/; //lettere maiuscole, lettere minuscole e numeri
 
-	if(Username === "user" || Username === "admin") {
+	if(Username === "user") {
         var check = document.getElementById("username-error");
 	    deleteError(check);
 		successHint("max-char-username","Massimo 16 caratteri");
@@ -172,7 +172,7 @@ function validatePassword(){
     var Password = document.forms['login-user']['login_password'].value;
 	//const allowedChars = /^(?=.*[a-zß-ÿ])(?=.*[A-ZÀ-Ý])(?=.*[\d])(?=.*[.,!?@+\-_€$%&^*<>]).{8,}$/;// --> .,!?@+\-_€$%&^*<> questi sono i caratteri speciali
 
-    if(Password === "user" || Password === "admin"){
+    if(Password === "user"){
         successHintPassword();
 		LoginFormUltimateCheck();
         return true;
