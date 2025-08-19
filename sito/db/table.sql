@@ -1,4 +1,4 @@
-USE [nomedatabase];
+USE gastronomia;
 
 DROP TABLE IF EXISTS prenotazioni;
 DROP TABLE IF EXISTS valutazioni;
@@ -27,8 +27,8 @@ CREATE TABLE prodotti (
     nome VARCHAR(30) PRIMARY KEY,
     categoria enum('antipasto', 'primo', 'secondo', 'contorno','dolce') NOT NULL,
     unita enum('porzione','vaschetta','kg', 'gr', 'pezzo') NOT NULL,
-    min_prenotabile SMALLINT CHECK(min_prenotabile > 0) NOT NULL,
-    max_prenotabile SMALLINT CHECK(max_prenotabile > min_prenotabile) NOT NULL,
+    min_prenotabile SMALLINT NOT NULL CHECK(min_prenotabile > 0),
+    max_prenotabile SMALLINT NOT NULL CHECK(max_prenotabile > min_prenotabile),
     descrizione TEXT NOT NULL,
     prezzo DECIMAL(10, 2) NOT NULL,
     isDisponibile BOOLEAN NOT NULL,
@@ -46,8 +46,8 @@ CREATE TABLE prodotto_ingredienti(
     prodotto VARCHAR(30) NOT NULL,
     ingrediente VARCHAR(30) NOT NULL,
     quanto_basta BOOLEAN NOT NULL,
-    quantita SMALLINT CHECK(quantita >= 0) NOT NULL,
-    unita_misura enum ('g', 'ml', 'num_el') NOT NULL,
+    quantita SMALLINT CHECK(quantita >= 0),
+    unita_misura enum ('g', 'ml', 'num_el'),
     CHECK((quanto_basta IS TRUE AND quantita IS NULL AND unita_misura IS NULL) OR (quanto_basta IS FALSE AND quantita IS NOT NULL AND unita_misura IS NOT NULL)),
     PRIMARY KEY(prodotto, ingrediente),
     FOREIGN KEY (prodotto) REFERENCES prodotti(nome) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -97,7 +97,7 @@ CREATE TABLE valutazioni (
     id_utente INT,
     nome_prodotto VARCHAR(30),
     data TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    voto INT CHECK (voto >= 1 AND voto <= 5) NOT NULL,
+    voto INT NOT NULL CHECK (voto >= 1 AND voto <= 5),
     commento TEXT NOT NULL CHECK (CHAR_LENGTH(commento) BETWEEN 30 AND 300),
     PRIMARY KEY (id_utente, nome_prodotto),
     FOREIGN KEY (id_utente) REFERENCES utenti(id) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -109,5 +109,5 @@ CREATE TABLE suggerimenti (
     id_utente INT,
     data_inserimento DATE NOT NULL,
     suggerimento TEXT NOT NULL CHECK (CHAR_LENGTH(suggerimento) BETWEEN 30 AND 300),
-    FOREIGN KEY (id_utente) REFERENCES utenti(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (id_utente) REFERENCES utenti(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
