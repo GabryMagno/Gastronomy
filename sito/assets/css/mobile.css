@@ -501,6 +501,19 @@ div .chef-content{
 
 /*  
     ===============================
+            USER PROFILE 
+    ===============================
+*/
+
+@media screen and (max-width: 768px){
+    #user-profile-prodotti li img{
+        max-width: 50%;
+        height: auto;
+    }
+}
+
+/*  
+    ===============================
             ERRORI 
     ===============================
 */

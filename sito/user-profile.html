@@ -77,9 +77,14 @@
             <div id="user-info">
                 <img src="assets/img/Cuochi.png" alt="Foto profilo di Nome Cognome" class="user-avatar">
                 <div id="general-info">
-                    <p class="user-name">Nome Cognome</p>
-                    <p class="user-age">Et&agrave;: <span aria-label="25 anni">25</span></p>
-                    <p class="user-date">Iscritto dal: <time datetime="2024-01-01">1 gennaio 2024</time></p>
+                    <dl>
+                        <dt>Nome e Cognome</dt>
+                        <dd id="user-name">[Nome Cognome]</dd>
+                        <dt>Et&agrave;</dt>
+                        <dd>[Eta]</dd>
+                        <dt>Iscritto dal</dt>
+                        <dd><time datetime="2024-01-01">[Data Iscrizione]</time></dd>
+                    </dl>
                 </div>
             </div>
 
@@ -87,53 +92,71 @@
                 <a href="user-settings.html" class="bottoni-link">Modifica Dati Profilo</a>
             </div>
 
+            <nav aria-label="Sommario per accesso veloce alle sezioni della pagina" id="user-profile-summary">
+                
+                <div class="info-sezione">
+                    <h3 id="user-profile-sezionipagina">Sezioni Pagina</h3>
+                </div>
+
+                <ul class="button-container">
+                    <li class="bottoni-link"><a href="#prodotti-preferiti">Prodotti Preferiti</a></li>
+                    <li class="bottoni-link"><a href="#prodotti-prenotati">Prodotti Prenotati</a></li>
+                    <li class="bottoni-link"><a href="#degustazioni-passate">Degustazioni Passate</a></li>
+                    <li class="bottoni-link"><a href="#degustazioni-prossime">Degustazioni Prossime</a></li>
+                    <li class="bottoni-link"><a href="#recensioni-prodotti">Recensioni Prodotti</a></li>
+                </ul>
+            </nav>
+
             <hr class="section-divider">
 
             <section>
+
+                <!-- PRODOTTI PREFERITI --> 
+
                 <h3 class="section-title" id="prodotti-preferiti">I tuoi prodotti prefertiti</h3>
-                <p class="section-descrizione">Visualizzi in questa sezione della pagina i prodotti che hai selezionato come preferiti.</p>
+                <p class="section-descrizione">In questa sezione della pagina puoi vedere i prodotti che hai contrassegnato come preferiti.</p>
                 <p class="nondisponibile">Nessun prodotto aggiunto ai preferiti.</p>
 
                 <div class="data-container" id="dc-prodotti-preferiti" aria-live="polite">
                     <ul class="list" id="user-profile-prodotti">
                         <li class="product-brochure">
                             <img src="assets/img/primo.png" alt="Nuovo prodotto">
-                            <h4 class="product-name">Nome prodotto</h4>
+                            <h4 class="product-name">[Nome prodotto]</h4>
                             <a href="prodotto.html">Scheda del prodotto</a>
                         </li>
                         <li class="product-brochure">
                             <img src="assets/img/primo.png" alt="Nuovo prodotto">
-                            <h4 class="product-name">Nome prodotto</h4>
+                            <h4 class="product-name">[Nome prodotto]</h4>
                             <a href="prodotto.html">Scheda del prodotto</a>
                         </li>
                         <li class="product-brochure">
                             <img src="assets/img/primo.png" alt="Nuovo prodotto">
-                            <h4 class="product-name">Nome prodotto</h4>
+                            <h4 class="product-name">[Nome prodotto]</h4>
                             <a href="prodotto.html">Scheda del prodotto</a>
                         </li>
                         <li class="product-brochure">
                             <img src="assets/img/primo.png" alt="Nuovo prodotto">
-                            <h4 class="product-name">Nome prodotto</h4>
+                            <h4 class="product-name">[Nome prodotto]</h4>
                             <a href="prodotto.html">Scheda del prodotto</a>
                         </li>
                         <li class="product-brochure">
                             <img src="assets/img/primo.png" alt="Nuovo prodotto">
-                            <h4 class="product-name">Nome prodotto</h4>
+                            <h4 class="product-name">[Nome prodotto]</h4>
                             <a href="prodotto.html">Scheda del prodotto</a>
                         </li>
                         <li class="product-brochure">
                             <img src="assets/img/primo.png" alt="Nuovo prodotto">
-                            <h4 class="product-name">Nome prodotto</h4>
+                            <h4 class="product-name">[Nome prodotto]</h4>
                             <a href="prodotto.html">Scheda del prodotto</a>
                         </li>
                         <li class="product-brochure">
                             <img src="assets/img/primo.png" alt="Nuovo prodotto">
-                            <h4 class="product-name">Nome prodotto</h4>
+                            <h4 class="product-name">[Nome prodotto]</h4>
                             <a href="prodotto.html">Scheda del prodotto</a>
                         </li>
                         <li class="product-brochure">
                             <img src="assets/img/primo.png" alt="Nuovo prodotto">
-                            <h4 class="product-name">Nome prodotto</h4>
+                            <h4 class="product-name">[Nome prodotto]</h4>
                             <a href="prodotto.html">Scheda del prodotto</a>
                         </li>
                     </ul>
@@ -142,32 +165,178 @@
                 <div class="a11y-status sr-only nondisponibile" role="status" aria-live="polite"></div>
 
                 <div class="button-container">
-                    <button class="load-more bottoni-rossi" id="lm-prodotti-preferiti" aria-controls="data-container" aria-label="Carica più prodotti aggiunti ai preferiti">
+                    <button class="load-more bottoni-rossi" id="lm-prodotti-preferiti" aria-controls="dc-prodotti-preferiti" aria-label="Carica più prodotti aggiunti ai preferiti">
                         Carica di pi&ugrave;
                     </button>
                     <a class="bottoni-rossi" href="#prodotti-preferiti">Torna su</a>
                 </div>
             </section>
 
+            <!-- PRODOTTI PRENOTATI -->
+
+            <hr class="section-divider">
+
+            <section>
+                <h3 class="section-title" id="prodotti-prenotati">Le tue prenotazioni</h3>
+                <p class="section-descrizione">In questa sezione della pagina puoi visualizzare i prodotti che hai prenotato sul nostro sito.</p>
+                <p class="nondisponibile">Nessuna prenotazione.</p>
+
+            </section>
+
             <hr class="section-divider">
 
             <section>
                 <h3 class="section-title">Le tue degustazioni</h3>
+                <p class="section-descrizione">In questa sezione della pagina puoi vedere le degustazioni passate e quelle future che hai prenotato.</p>
+                
+                <hr class="section-divider-small">
+
+                <!-- DEGUSTAZIONI PASSATE --> 
+
+                <h4 class="section-title-sub" id="degustazioni-passate">Degustazioni passate</h4>
+                <p class="nondisponibile">Nessuna degustazione passata.</p>
+
+                <div class="data-container" id="dc-degustazioni-passate" aria-live="polite">
+
+                    <ul class="list" id="user-profile-degustazioni-passate">
+                        <li class="degustazione-brochure">
+                            <div class="degustazione-brochure-content">
+                                <h5>[Nome degustazione]</h5>
+                                <dl>
+                                    <dt>Data</dt>
+                                    <dd class="data-passata">[dd-mm-yyyy]</dd>
+                                    <dt>Persone</dt>
+                                    <dd>[NP]</dd>
+                                    <dt>Prezzo</dt>
+                                    <dd class="degustazione-brochure-prezzo">[Prezzo]</dd>
+                                </dl>
+                            </div>
+                            <a href="degustazione.html">Dettagli degustazione</a>
+                        </li>
+
+                        <li class="degustazione-brochure">
+                            <div class="degustazione-brochure-content">
+                                <h5>[Nome degustazione]</h5>
+                                <dl>
+                                    <dt>Data</dt>
+                                    <dd class="data-passata">[dd-mm-yyyy]</dd>
+                                    <dt>Persone</dt>
+                                    <dd>[NP]</dd>
+                                    <dt>Prezzo</dt>
+                                    <dd class="degustazione-brochure-prezzo">[Prezzo]</dd>
+                                </dl>
+                            </div>
+                            <a href="degustazione.html">Dettagli degustazione</a>
+                        </li>
+
+                        <li class="degustazione-brochure">
+                            <div class="degustazione-brochure-content">
+                                <h5>[Nome degustazione]</h5>
+                                <dl>
+                                    <dt>Data</dt>
+                                    <dd class="data-passata">[dd-mm-yyyy]</dd>
+                                    <dt>Persone</dt>
+                                    <dd>[NP]</dd>
+                                    <dt>Prezzo</dt>
+                                    <dd class="degustazione-brochure-prezzo">[Prezzo]</dd>
+                                </dl>
+                            </div>
+                            <a href="degustazione.html">Dettagli degustazione</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="a11y-status sr-only nondisponibile" role="status" aria-live="polite"></div>
+
+                <div class="button-container">
+                    <button class="load-more bottoni-rossi" id="lm-degustazioni-passate" aria-controls="dc-degustazioni-passate" aria-label="Carica ulteriori degustazioni passate">
+                        Carica di pi&ugrave;
+                    </button>
+                    <a class="bottoni-rossi" href="#degustazioni-passate">Torna su</a>
+                </div>
+                
+                <hr class="section-divider-small">
+
+                <!-- DEGUSTAZIONI PROSSIME --> 
+
+                <h4 class="section-title-sub" id="degustazioni-prossime">Degustazioni prossime</h4>
                 <p class="nondisponibile">Nessuna degustazione prenotata.</p>
+                
+                <div class="data-container" id="dc-degustazioni-prossime" aria-live="polite">
+                    <ul class="list" id="user-profile-degustazioni-prossime">
+                        <li class="degustazione-brochure">
+                            <div class="degustazione-brochure-content">
+                                <h5>[Nome degustazione]</h5>
+                                <dl>
+                                    <dt>Data</dt>
+                                    <dd>[dd-mm-yyyy]</dd>
+                                    <dt>Persone</dt>
+                                    <dd>[NP]</dd>
+                                    <dt>Prezzo</dt>
+                                    <dd class="degustazione-brochure-prezzo">[Prezzo]</dd>
+                                </dl>
+                            </div>
+                            <div class="degustazione-brochure-links">
+                                <a href="degustazione.html" class="btn-dettagli">Dettagli</a>
+                                <a href="#" class="btn-elimina">Elimina</a>
+                            </div>
+                        </li>
+
+                        <li class="degustazione-brochure">
+                            <div class="degustazione-brochure-content">
+                                <h5>[Nome degustazione]</h5>
+                                <dl>
+                                    <dt>Data</dt>
+                                    <dd>[dd-mm-yyyy]</dd>
+                                    <dt>Persone</dt>
+                                    <dd>[NP]</dd>
+                                    <dt>Prezzo</dt>
+                                    <dd class="degustazione-brochure-prezzo">[Prezzo]</dd>
+                                </dl>
+                            </div>
+                            <div class="degustazione-brochure-links">
+                                <a href="degustazione.html" class="btn-dettagli">Dettagli</a>
+                                <a href="#" class="btn-elimina">Elimina</a>
+                            </div>
+                        </li>
+
+                        <li class="degustazione-brochure">
+                            <div class="degustazione-brochure-content">
+                                <h5>[Nome degustazione]</h5>
+                                <dl>
+                                    <dt>Data</dt>
+                                    <dd>[dd-mm-yyyy]</dd>
+                                    <dt>Persone</dt>
+                                    <dd>[NP]</dd>
+                                    <dt>Prezzo</dt>
+                                    <dd class="degustazione-brochure-prezzo">[Prezzo]</dd>
+                                </dl>
+                            </div>
+                            <div class="degustazione-brochure-links">
+                                <a href="degustazione.html" class="btn-dettagli">Dettagli</a>
+                                <a href="#" class="btn-elimina">Elimina</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="a11y-status sr-only nondisponibile" role="status" aria-live="polite"></div>
+
+                <div class="button-container">
+                    <button class="load-more bottoni-rossi" id="lm-degustazioni-prossime" aria-controls="dc-degustazioni-prossime" aria-label="Carica ulteriori prossime prenotate">
+                        Carica di pi&ugrave;
+                    </button>
+                    <a class="bottoni-rossi" href="#degustazioni-prossime">Torna su</a>
+                </div>
             </section>
 
             <hr class="section-divider">
 
             <section>
-                <h3 class="section-title">Le tue prenotazioni</h3>
-                <p class="nondisponibile">Nessuna prenotazione.</p>
-            </section>
-
-            <hr class="section-divider">
-
-            <section>
-                <h3 class="section-title">Le tue recensioni</h3>
+                <h3 class="section-title" id="recensioni-prodotti">Le tue recensioni</h3>
+                <p class="section-descrizione">In questa sezione della pagina puoi visualizzare le recensioni che hai scritto per i prodotti sul nostro sito.</p>
                 <p class="nondisponibile">Nessuna recensione inserita.</p>
+
             </section>
 
             <form id="logout" method="post" action="signout.php">

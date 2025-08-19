@@ -128,7 +128,7 @@ h2, h3{
 }
 
 h4{
-    font-size: 1.7em;
+    font-size: 1.6em;
     text-align: center;
 }
 
@@ -339,11 +339,27 @@ footer .torna-su {
     width: 100%;
 }
 
+.section-divider-small{
+    
+    margin: 0 auto;
+    margin-top: 2em;
+
+    height: 2px;
+    background-color: black;
+
+    width: 40%;
+}
+
 .section-title{
     text-align: center;
     font-weight: bold;
     font-size: 2em;
     padding-top: 0.1em;
+}
+
+.section-title-sub{
+    margin-top: 0.8em;
+    margin-bottom: 1rem;
 }
 
 .section-descrizione{
@@ -477,8 +493,10 @@ form.form-bianco#delete-account label::after{
 
     text-align: center;
 
+    display: flex;
     align-items: center;
     justify-content: center;
+    
 
     cursor: pointer;
 }
@@ -494,6 +512,7 @@ a.bottoni-rossi{
 
 .bottoni-rossi:hover{
     background-color: var(--buttoncolor_rosso_hover);
+    opacity: 0.9;
 }
 
 .bottoni-link{
@@ -505,6 +524,7 @@ a.bottoni-rossi{
 
 .bottoni-link:hover{
     background-color: var(--buttoncolor_rosso_hover);
+    opacity: 0.9;
 }
 
 .bottoni-neri{
@@ -515,6 +535,7 @@ a.bottoni-rossi{
 
 .bottoni-neri:hover{
     background-color: var(--buttoncolor_nero_hover);
+    opacity: 0.9;
 }
 
 .button-container{
@@ -558,6 +579,21 @@ a.bottoni-rossi{
 
 .promo-button#link-degustazione:hover{
     background-color: var(--herelinkcolor_hover);
+    opacity: 0.9;
+}
+
+/* === BOTTONI AVANTI INDIETRO === */
+a#prev{
+    float: left;
+}
+
+a#next{
+    float: right;
+}
+
+a#prev, a#next, img#prev, img#next{
+    width: 4em;
+    text-align: center;
 }
 
 /*  
@@ -966,20 +1002,25 @@ li.product-brochure {
                 0 0.8em 0.8em rgba(0, 0, 0, 0.22);
 }
 
-li.product-brochure:hover,li.new article:hover{
+li.product-brochure:hover,
+li.new article:hover,
+li.degustazione-brochure:hover{
     transform: translate(0, -0.4em );
     box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.16),
                 0 0.2em 0.4em rgba(0, 0, 0, 0.24);
 }
 
-li.product-brochure img,ul.products img,ul#best-products img{
+li.product-brochure img,
+ul.products img,
+ul#best-products img{
     max-width: 75%;
     height: auto;
     margin: 1em 0;
     border-radius: 0.72em;
 }
 
-li.product-brochure a, li.new article a{
+li.product-brochure a,
+li.new article a{
     background-color: var(--headerbgcolor);
     width: 100%;
     margin-top: 1.5em;
@@ -991,6 +1032,10 @@ li.product-brochure a, li.new article a{
     text-align: center;
     padding: 1em;
     bottom: 0;
+}
+
+li.product-brochure a:hover{
+    opacity: 0.9;
 }
 
 h3.product-name, h4.product-name{
@@ -1400,6 +1445,7 @@ div#favorites{
     align-items: center;
 }
 
+/* USER PROFILE - GENERAL INFO */
 #user-info{
     display: flex;
     align-items: center;
@@ -1433,27 +1479,49 @@ div#favorites{
     gap: 5px;
 }
 
-.user-name {
+#general-info dl{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#general-info dt,
+#general-info dd{
+    font-size: 1.1rem;
+}
+
+#general-info dt::after{
+    content: ": ";
+}
+
+#general-info dt:not(:first-of-type){
+    font-weight: bold;
+    width: 40%;
+}
+
+#general-info dd:not(:first-of-type){
+    width: 60%;
+}
+
+#general-info dl dt:first-of-type{
+    position: absolute;
+    text-indent: -999em;
+}
+
+#general-info dl dt:nth-of-type(2){
+    margin-top: 1em;
+}
+
+#general-info dl dd:nth-of-type(2){
+    margin-top: 1em;
+}
+
+#general-info dt dd{
+    display: inline-block;
+}
+
+#general-info dd#user-name {
     font-size: 1.5rem;
     font-weight: bold;
-}
-
-.user-age,
-.user-date {
-    font-size: 1rem;
-}
-
-a#prev{
-    float: left;
-}
-
-a#next{
-    float: right;
-}
-
-a#prev, a#next, img#prev, img#next{
-    width: 4em;
-    text-align: center;
 }
 
 div#favorites{
@@ -1484,10 +1552,32 @@ div#user-settings{
 
     color: var(--errorcolor);
 
-    margin-top: 1em;
-    margin-bottom: 0.5em;
+    margin-top: 0.2em;
+    margin-bottom: 0.7em;
 }
 
+/* USER PROFILE - SUMMARY */
+#user-profile-summary{
+    width: 80%;
+    margin: 0 auto 2em auto;
+
+    justify-content: center;
+    align-items: center;
+
+    display: flex;
+    flex-direction: column;
+
+    background-color: white;
+    
+    border: 2px solid black;
+    border-radius: 0.5em;
+}
+
+#user-profile-sezionipagina{
+    font-size: 1.2em;
+}
+
+/* USER PROFILE - PRODOTTI */
 ul#user-profile-prodotti {
     display: flex;
     flex-wrap: wrap;
@@ -1506,7 +1596,8 @@ ul#user-profile-prodotti {
     box-sizing: border-box;
 }
 
-#user-profile-prodotti h4.product-name{
+#user-profile-prodotti h4.product-name,
+.degustazione-brochure h5{
     font-weight: bold;
     font-size: 1.2em;
     margin-bottom: 0.5em;
@@ -1517,6 +1608,116 @@ ul#user-profile-prodotti {
 #user-profile-prodotti li.product-brochure a{
     margin-top: 0.5em;
     bottom: 0;
+}
+
+/* USER PROFILE - DEGUSTAZIONI */
+ul#user-profile-degustazioni-passate,
+ul#user-profile-degustazioni-prossime{
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+    align-items: center;
+
+    max-width: 1500px;
+
+    margin: 0 auto;
+
+    gap: 2em;
+
+    list-style-type: none;
+
+    padding-bottom: 2.8em;
+}
+
+.degustazione-brochure{
+    display: flex;
+    flex-direction: column;
+    
+    background: white;
+
+    border-radius: 0.9em;
+
+    width: 280px;
+
+    transition: .4s;
+    box-shadow: 0 1em 2em rgba(0, 0, 0, 0.25),
+                0 0.8em 0.8em rgba(0, 0, 0, 0.22);
+}
+
+.degustazione-brochure-content{
+    padding: 15px 20px;
+}
+
+.degustazione-brochure h5{
+    text-align: center;
+}
+
+.degustazione-brochure dl {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.degustazione-brochure dt {
+  font-weight: bold;
+  width: 40%;
+}
+
+.degustazione-brochure dd {
+    width: 60%;
+}
+
+.degustazione-brochure dt::after{
+    content: ":";
+}
+
+.degustazione-brochure a {
+    background-color: var(--headerbgcolor);
+    width: 100%;
+    border: 0;
+    border-bottom-left-radius: 0.72em;
+    border-bottom-right-radius: 0.72em;
+    height: 100%;
+    display: block;
+    text-align: center;
+    padding: 1em;
+    bottom: 0;
+}
+
+.degustazione-brochure a:hover{
+    opacity: 0.9;
+}
+
+.degustazione-brochure-links{
+    display: flex;
+    width: 100%;
+}
+
+.degustazione-brochure-links a{
+    flex: 1;
+    text-align: center;
+    padding: 1em;
+    display: block;
+}
+
+.degustazione-brochure-links .btn-dettagli {
+    border-bottom-left-radius: 0.72em;
+    border-bottom-right-radius: 0em;
+    border-right: 1px solid black;
+}
+
+.degustazione-brochure-links .btn-elimina {
+    border-bottom-left-radius: 0em;
+    border-bottom-right-radius: 0.72em;
+    border-left: 1px solid black;
+}
+
+.degustazione-brochure-links a:hover {
+    opacity: 0.9;
+}
+
+.data-passata{
+    color: var(--errorcolor);
 }
 
 /* DA AGGIORNARE */

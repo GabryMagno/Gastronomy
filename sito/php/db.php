@@ -5,8 +5,8 @@
     * 
     * Alcuni controlli ulteriori potrebbero essere controllo maggiore su degustazioni(es data fine data inizio e data scelta dall'utente), vedere se un prodotto è disponibile, ecc...
     * @version 1.0
-    */
 */
+
 session_start();
 
 class DB {
@@ -61,12 +61,11 @@ class DB {
 
         $encriptedPassword = hash('sha256', $password);//crittografia della password
         $subscribe_date=date("Y-m-d h:m:s");
-        $id //da creare un id unico per l'utente, ad esempio con un auto increment nella tabella utenti
         $newConnection = $this->OpenConnectionDB();
 
         if($newConnection){
-            $userInfo = $this->connection->prepare("INSERT INTO utenti(id, email, username, password, nome, cognome, data_di_nascita, data_iscrizione) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            $userInfo->bind_params("isssssss", $id, $email, $username, $encriptedPassword, $name, $surname, $date, $subscribe_date,);
+            $userInfo = $this->connection->prepare("INSERT INTO utenti(email, username, password, nome, cognome, data_di_nascita, data_iscrizione) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            $userInfo->bind_param("isssssss", $email, $username, $encriptedPassword, $name, $surname, $date, $subscribe_date,);
 
             try{
                 $userInfo->execute();
@@ -78,6 +77,7 @@ class DB {
 
             }
 
+            //!!! CONTROLLARE
             if(mysqli_affected_rows($this->connection) == 1){
                 //se la query ha inserito una riga, allora l'utente è stato registrato con successo
                 $this->CloseConnectionDB();
@@ -108,32 +108,32 @@ class DB {
 
             if($newConnection){
                 //preparazione della query per verificare l'esistenza dell'utente
-                isUserExist = $this->connection->prepare("SELECT username FROM utenti WHERE nome = ? AND password = ?");
-                $isUserExist= bind_params("ss", username, encriptedPassword);
+                $isUserExist = $this->connection->prepare("SELECT username FROM utenti WHERE nome = ? AND password = ?");
+                $isUserExist->bind_param("ss", $username, $encriptedPassword);
                 try{
-                    isUserExist->execute();
+                    $isUserExist->execute();
                 }catch(\mysqli_sql_exception $error){
 
                     $this->CloseConnectionDB();
-                    isUserExist->close();
+                    $isUserExist->close();
                     return false; //errore nell'esecuzione della query
 
                 }
 
-                $info = isUserExist->get_result();
+                $info = $isUserExist->get_result();
                 $this->CloseConnectionDB();
-                isUserExist->close();
+                $isUserExist->close();
 
                 //Il server tecweb non controlla il case-sensitive per il database, quindi controllo che il risultato trovato corrisponda esattamente allo username inserito
-                if ($result->num_rows==1 && strcmp(mysqli_fetch_assoc($result)["username"],$username)==0) {
+                if ($info->num_rows==1 && strcmp(mysqli_fetch_assoc($info)["username"],$username)==0) {
                     //se l'utente esiste, procedi con il login
                     $_SESSION["logged_user"] = $id;
-                    $result->free();
+                    $info->free();
                     return true;
 
                 } else {
                     //se l'utente non esiste, ritorna false
-                    $result->free();
+                    $info->free();
                     return false;
                 }
             }else{
@@ -186,7 +186,7 @@ class DB {
 
                 $result = $deleteUser->affected_rows;
                 $this->CloseConnectionDB();
-                deleteUser->close();
+                $deleteUser->close();
 
                 if($result == 1){
                     //se la query ha eliminato una riga, allora l'utente è stato eliminato con successo
@@ -592,8 +592,8 @@ class DB {
     }
 
     //FUNZIONI CHE NON SERVONO MA POSSONO SERVIRE IN FUTURO
-    public function GetUserAdvices($id): array | string{}//ottenere suggerimenti scritti dall'utente(se serve)
-    public function GetUserReviews($id): array | string{}//ottenere tutte le recensioni scritte dall'utente(vediamo se servirà)
+    //public function GetUserAdvices($id): array | string{}//ottenere suggerimenti scritti dall'utente(se serve)
+    //public function GetUserReviews($id): array | string{}//ottenere tutte le recensioni scritte dall'utente(vediamo se servirà)
 
     //ELIMINAZIONI DA PARTE DELL'UTENTE
 
@@ -735,7 +735,7 @@ class DB {
             $newConnection = $this->OpenConnectionDB();
             if($newConnection){
                 //preparazione della query per cancellare tutte le degustazioni prenotate dell'utente
-                $deleteTastings = this->connection->prepare("DELETE FROM degustazioni WHERE id_utente = ?");
+                $deleteTastings = $this->connection->prepare("DELETE FROM degustazioni WHERE id_utente = ?");
                 $deleteTastings->bind_param("i", $isUserLogged);
                 try{
                     //esecuzione della query per cancellare tutte le degustazioni prenotate dell'utente
@@ -829,7 +829,7 @@ class DB {
             $newConnection = $this->OpenConnectionDB();
             if($newConnection){
                 //preparazione della query per cancellare una singola recensione dell'utente
-                $deleteReview = this->connection->prepare("DELETE FROM valutazioni WHERE id_utente = ? AND nome_prodotto = ?");
+                $deleteReview = $this->connection->prepare("DELETE FROM valutazioni WHERE id_utente = ? AND nome_prodotto = ?");
                 $deleteReview->bind_param("is", $isUserLogged, $product);
                 try{
                     //esecuzione della query per cancellare una singola recensione dell'utente
@@ -862,6 +862,8 @@ class DB {
     public function AddAdvice($advice, $id =null): bool | string {//Aggiunta da parte dell'utente di un suggerimento
         $date = date("Y-m-d H:i:s"); //ottiene la data e l'ora attuale
         $newConnection = $this->OpenConnectionDB();
+        $isUserLogged = $this->IsUserLog(); //!!! CONTROLLARE
+
         if($newConnection){
             //preparazione della query per aggiungere un suggerimento
             $addAdvice = $this->connection->prepare("INSERT INTO suggerimenti (id_utente, data, suggerimento) VALUES (?, ?, ?)");
@@ -893,6 +895,7 @@ class DB {
         }
     }
 
+    //!!! CONTROLLARE
     public function AddReview($id, $comment, $grade, $product): bool | string{//Aggiunta da parte dell'utente di un commento e valutazione di un prodotto(vedere se usare string o bool e basta per gli errori)
         $isUserLogged = $this->IsUserLog();
         if($isUserLogged == false){
@@ -935,6 +938,7 @@ class DB {
             }else{
                 return "Connection error"; //errore nella connessione al database
             }
+            return "Connection error"; //!!! CONTROLLARE
         }
     }
 
@@ -1113,9 +1117,9 @@ class DB {
     //CAMBIO DELLE IMPOSTAZIONI
 
     public function ChangePassword($oldPassword, $newPassword): bool | string{//Cambio password da parte dell'utente
-        encriptedOldPassword = hash('sha256', $oldPassword);
-        encriptedNewPassword = hash('sha256', $newPassword);
-        isUserLogged = $this->IsUserLog();
+        $encriptedOldPassword = hash('sha256', $oldPassword);
+        $encriptedNewPassword = hash('sha256', $newPassword);
+        $isUserLogged = $this->IsUserLog();
 
         if($isUserLogged == false){
             //se l'utente non è loggato, ritorna un messaggio di errore
@@ -1125,7 +1129,7 @@ class DB {
             if($newConnection){
                 //preparazione della query per cambiare la password dell'utente
                 $changePassword = $this->connection->prepare("UPDATE utenti SET password = ? WHERE id = ? AND password = ?");
-                $changePassword->bind_param("sis", encriptedNewPassword, isUserLogged, encriptedOldPassword);
+                $changePassword->bind_param("sis", $encriptedNewPassword, $isUserLogged, $encriptedOldPassword);
 
                 try{
                     //esecuzione della query per cambiare la password dell'utente
@@ -1155,7 +1159,7 @@ class DB {
     }
 
     public function ChangeMainInfo($username, $name, $cognome, $date, $logo): bool | string{//Cambio informazioni personali da parte dell'utente
-        $isUserLogged = this->IsUserLog();
+        $isUserLogged = $this->IsUserLog();
 
         if($isUserLogged == false){
             //se l'utente non è loggato, ritorna un messaggio di errore
@@ -1212,9 +1216,9 @@ class DB {
                 return false; //errore nell'esecuzione della query
             }
             //ottiene il risultato della query
-            $result = averageGrade->get_result();
+            $result = $averageGrade->get_result();
             $this->CloseConnectionDB();
-            averageGrade->close();
+            $averageGrade->close();
             if($result->num_rows == 1){
                 //se il prodotto ha almeno una recensione, ritorna il voto medio
                 $row = mysqli_fetch_assoc($result);
@@ -1243,7 +1247,7 @@ class DB {
                 $isProductExist->close();
                 return false; //errore nell'esecuzione della query
             }
-            $product = isProductExist->get_result();
+            $product = $isProductExist->get_result();
             $this->CloseConnectionDB();
             $isProductExist->close();
             if($product->num_rows == 1){
@@ -1275,9 +1279,9 @@ class DB {
                 $isTastingExist->close();
                 return false; //errore nell'esecuzione della query
             }
-            $result = isTastingExist->get_result();
+            $result = $isTastingExist->get_result();
             $this->CloseConnectionDB();
-            isTastingExist->close();
+            $isTastingExist->close();
             if($result->num_rows == 1){
                 //se la degustazione esiste, ritorna true
                 $result->free();
@@ -1313,9 +1317,9 @@ class DB {
                 return false; //errore nell'esecuzione della query
             }
             //ottiene il risultato della query
-            $result = productComments->get_result();
+            $result = $productComments->get_result();
             $this->CloseConnectionDB();
-            productComments->close();
+            $productComments->close();
             if($result->num_rows > 0){
                 //se ci sono commenti, li aggiunge all'array
                 if($check == -1){
@@ -1349,7 +1353,7 @@ class DB {
             $registerUserStatement=$this->connection->prepare($query);
             $registerUserStatement->execute($params);
             $result = $registerUserStatement->get_result();
-            $this->closeDBConnection();
+            $this->CloseConnectionDB();
             $registerUserStatement->close();
             if ($result->num_rows > 0) {
                 $list = array();
@@ -1363,7 +1367,7 @@ class DB {
                 return null;
             } 
         } catch(\mysqli_sql_exception $e) {
-            $this->closeDBConnection();
+            $this->CloseConnectionDB();
             $registerUserStatement->close();
             echo $e->getMessage();
             return null;
