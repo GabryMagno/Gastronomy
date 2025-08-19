@@ -74,7 +74,7 @@ function validateUsername(){
 	var Username = document.forms['register-form']['register_username'].value;
 	const allowedChars = /^[a-zA-ZÀ-Ýß-ÿ0-9]{1,16}$/; //lettere maiuscole, lettere minuscole e numeri
 	// DA TOGLIERE UNA VOLTA AGGIUNTI USER E ADMIN
-	if(Username === "user" || Username === "admin") {
+	if(Username === "user") {
         var check = document.getElementById("username-error");
 	    deleteError(check);
 		successHint("max-char-username","Massimo 16 caratteri");
@@ -340,7 +340,7 @@ function validatePassword(){
 	validateRepeatPassword();
     
     //DA TOGLIERE UNA VOLTA AGGIUNTI ADMIN E USER
-	if(Password === "user" || Password === "admin"){
+	if(Password === "user"){
 		var check = document.getElementById("password-error");
 		deleteError(check);
 		successHintPassword();
