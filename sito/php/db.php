@@ -292,13 +292,13 @@ class DB {
             try {
                 $checkUsername->execute();
             } catch (\mysqli_sql_exception $e) {
-                $this->closeDBConnection();
+                $this->CloseConnectionDB();
                 $checkUsername->close();
                 return "Execution error"; //errore nell'esecuzione della query
             }
 
             $result=$checkUsername->get_result();
-            $this->closeDBConnection();
+            $this->CloseConnectionDB();
             $checkUsername->close();
 
             if ($result->num_rows==1) {
