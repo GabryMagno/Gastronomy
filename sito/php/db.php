@@ -152,7 +152,7 @@ class DB {
         $db = new DB();
         $isUserLogged = $db->IsUserLog();
 
-        if($isUserLogged = false){
+        if($isUserLogged == false){
             //se l'utente è loggato, procedi con il logout
             unset($_SESSION["logged_user"]); //rimuove la sessione dell'utente loggato
             return true; //logout avvenuto con successo
