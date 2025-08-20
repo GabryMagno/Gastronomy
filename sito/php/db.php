@@ -60,12 +60,12 @@ class DB {
     public function RegisterNewUser($username, $name, $surname, $date, $email, $password): bool | string{//registrazione nuovo utente (da aggiungere nel corpo della funzione la data d'iscrizione)
 
         $encriptedPassword = hash('sha256', $password);//crittografia della password
-        $subscribe_date=date("Y-m-d h:m:s");
+        $subscribe_date=date("Y-m-d H:i:s");
         $newConnection = $this->OpenConnectionDB();
 
         if($newConnection){
             $userInfo = $this->connection->prepare("INSERT INTO utenti(email, username, password, nome, cognome, data_di_nascita, data_iscrizione) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            $userInfo->bind_param("isssssss", $email, $username, $encriptedPassword, $name, $surname, $date, $subscribe_date,);
+            $userInfo->bind_param("sssssss", $email, $username, $encriptedPassword, $name, $surname, $date, $subscribe_date);
 
             try{
                 $userInfo->execute();
@@ -87,7 +87,7 @@ class DB {
                 return true; //registrazione avvenuta con successo
 
             } else {
-
+                
                 $this->CloseConnectionDB();
                 $userInfo->close();
                 return false; //nessuna riga inserita, errore nella registrazione
