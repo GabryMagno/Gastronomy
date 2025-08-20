@@ -40,7 +40,7 @@ class DB {
 
     }
 
-    private function IsUserLog(): bool | string{//controlla se l'utente è loggato
+    public function IsUserLog(): bool | string{//controlla se l'utente è loggato
 
         if(isset($_SESSION["logged_user"]) && $_SESSION != null) return $_SESSION["logged_user"];
         else return false;
