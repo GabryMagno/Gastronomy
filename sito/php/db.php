@@ -47,7 +47,7 @@ class DB {
 
     }
 
-    private function UserUsername(): bool | string{//controlla se l'utente è loggato e ritorna il suo username
+    public function UserUsername(): bool | string{//controlla se l'utente è loggato e ritorna il suo username
 
         if(isset($_SESSION["logged_username"]) && $_SESSION != null) return $_SESSION["logged_username"];
         else return false;
