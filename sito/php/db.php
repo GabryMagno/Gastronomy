@@ -40,14 +40,14 @@ class DB {
 
     }
 
-    private function IsUserLog(): bool | string{//controlla se l'utente è loggato
+    public function IsUserLog(): bool | string{//controlla se l'utente è loggato
 
         if(isset($_SESSION["logged_user"]) && $_SESSION != null) return $_SESSION["logged_user"];
         else return false;
 
     }
 
-    private function UserUsername(): bool | string{//controlla se l'utente è loggato e ritorna il suo username
+    public function UserUsername(): bool | string{//controlla se l'utente è loggato e ritorna il suo username
 
         if(isset($_SESSION["logged_username"]) && $_SESSION != null) return $_SESSION["logged_username"];
         else return false;
@@ -60,12 +60,12 @@ class DB {
     public function RegisterNewUser($username, $name, $surname, $date, $email, $password): bool | string{//registrazione nuovo utente (da aggiungere nel corpo della funzione la data d'iscrizione)
 
         $encriptedPassword = hash('sha256', $password);//crittografia della password
-        $subscribe_date=date("Y-m-d h:m:s");
+        $subscribe_date=date("Y-m-d H:i:s");
         $newConnection = $this->OpenConnectionDB();
 
         if($newConnection){
             $userInfo = $this->connection->prepare("INSERT INTO utenti(email, username, password, nome, cognome, data_di_nascita, data_iscrizione) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            $userInfo->bind_param("isssssss", $email, $username, $encriptedPassword, $name, $surname, $date, $subscribe_date,);
+            $userInfo->bind_param("sssssss", $email, $username, $encriptedPassword, $name, $surname, $date, $subscribe_date);
 
             try{
                 $userInfo->execute();
@@ -82,11 +82,12 @@ class DB {
                 //se la query ha inserito una riga, allora l'utente è stato registrato con successo
                 $this->CloseConnectionDB();
                 $userInfo->close();
-                $_SESSION["logged_user"] = $id; //impostazione della sessione per l'utente loggato
+                $id = $this->connection->insert_id; //ottiene l'id dell'utente appena registrato(insert_id è una proprietà di mysqli che restituisce l'id dell'ultima riga inserita)
+                $_SESSION["logged_user"] = $id; //impostazione della sessione per l'utente loggato, SERVE QUERY PER OTTENERE L'ID
                 return true; //registrazione avvenuta con successo
 
             } else {
-
+                
                 $this->CloseConnectionDB();
                 $userInfo->close();
                 return false; //nessuna riga inserita, errore nella registrazione
@@ -108,7 +109,7 @@ class DB {
 
             if($newConnection){
                 //preparazione della query per verificare l'esistenza dell'utente
-                $isUserExist = $this->connection->prepare("SELECT username FROM utenti WHERE nome = ? AND password = ?");
+                $isUserExist = $this->connection->prepare("SELECT id,username FROM utenti WHERE username = ? AND password = ?");
                 $isUserExist->bind_param("ss", $username, $encriptedPassword);
                 try{
                     $isUserExist->execute();
@@ -117,7 +118,6 @@ class DB {
                     $this->CloseConnectionDB();
                     $isUserExist->close();
                     return false; //errore nell'esecuzione della query
-
                 }
 
                 $info = $isUserExist->get_result();
@@ -127,7 +127,10 @@ class DB {
                 //Il server tecweb non controlla il case-sensitive per il database, quindi controllo che il risultato trovato corrisponda esattamente allo username inserito
                 if ($info->num_rows==1 && strcmp(mysqli_fetch_assoc($info)["username"],$username)==0) {
                     //se l'utente esiste, procedi con il login
-                    $_SESSION["logged_user"] = $id;
+                    $id = $info->fetch_assoc()["id"];//ottiene l'id dell'utente
+                    $username = $info->fetch_assoc()["username"];//ottiene lo username dell'utente
+                    $_SESSION["logged_user"] = $id;//METTERE QUERY
+                    $_SESSION["logged_username"] = $username;//impostazione della sessione per l'utente loggato
                     $info->free();
                     return true;
 
@@ -149,7 +152,7 @@ class DB {
         $db = new DB();
         $isUserLogged = $db->IsUserLog();
 
-        if($isUserLogged = false){
+        if($isUserLogged == false){
             //se l'utente è loggato, procedi con il logout
             unset($_SESSION["logged_user"]); //rimuove la sessione dell'utente loggato
             return true; //logout avvenuto con successo

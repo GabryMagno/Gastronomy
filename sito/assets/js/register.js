@@ -209,16 +209,16 @@ function validateSurname() {
 	}
 
 	if(Surname.length > 15){
-		 successHint("min-char-surname","Minimo 1 carattere");
+		successHint("min-char-surname","Minimo 1 carattere");
 		failHint("max-char-surname","Massimo 15 caratteri");
 
 		if(/\s{1,}/.test(Surname)) failHint("space-surname","Nessuno spazio consentito");
 	    else successHint("space-surname","Nessuno spazio consentito");
          
-		if (!(/^[a-zA-ZÀ-Ýß-ÿ]{1,}$/.test(Surname)) || Name == "") failHint("letter-surname", "Inserire solo lettere");
+		if (!(/^[a-zA-ZÀ-Ýß-ÿ]{1,}$/.test(Surname)) || Surname == "") failHint("letter-surname", "Inserire solo lettere");
 		else successHint("letter-surname","Inserire solo lettere");
 
-		return checkInput("register_cognome", "surname-error", "Il cognome non deve deve superare i 15 caratteri", 0);
+		return checkInput("register_cognome", "surname-error", "Il cognome non deve superare i 15 caratteri", 0);
 	}
 
 	if (Surname.search(/^[a-zA-ZÀ-Ýß-ÿ]{1,15}$/) != 0 || !allowedChars.test(Surname)) {
