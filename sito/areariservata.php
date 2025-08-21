@@ -1,10 +1,10 @@
 
 <?php
 
-require_once "db.php";
-require_once "sanitizer.php";
+require_once "php/db.php";
+require_once "php/sanitizer.php";
 
-$pagina=file_get_contents("../areariservata.html");
+$pagina=file_get_contents("html/areariservata.html");
 
 $username="";
 $psw="";

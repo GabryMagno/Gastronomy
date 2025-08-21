@@ -4,7 +4,7 @@ require_once "php/db.php";
 
 $db = new DB;
 
-$pagina = file_get_contents("../500.html");// Carica il template HTML della pagina 403
+$pagina = file_get_contents("html/500.html");// Carica il template HTML della pagina 403
 
 if($db->isUserLog()!=false) {
     echo str_replace("{{to-profile}}","<a href=\"user-profile.php\">PROFILO</a>",$pagina);//accesso profilo andrà messo in tutte le pagine al posto del link areariservata.html

@@ -1,12 +1,12 @@
 
 <?php
 
-require_once "db.php";
-require_once "sanitizer.php";
+require_once "php/db.php";
+require_once "php/sanitizer.php";
 
 $db = new DB;
 
-$pagina = file_get_contents("../chisiamo.html");
+$pagina = file_get_contents("html/chisiamo.html");
 $isUserLogged=$db->isUserLog();
 
 if(!isset($_POST["advice"])) {
