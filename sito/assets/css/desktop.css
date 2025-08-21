@@ -1018,6 +1018,7 @@ li.userprofile-brochure:hover{
 }
 
 li.product-brochure img,
+.userprofile-brochure-content img,
 ul.products img,
 ul#best-products img{
     max-width: 75%;
@@ -1617,8 +1618,7 @@ ul#user-profile-prodotti{
 }
 
 /* USER PROFILE - DEGUSTAZIONI */
-ul#user-profile-degustazioni-passate,
-ul#user-profile-degustazioni-prossime,
+ul#user-profile-degustazioni-prenotate,
 ul#user-profile-prodotti-prenotati{
     display: flex;
     flex-direction: row;
@@ -1654,10 +1654,6 @@ ul#user-profile-prodotti-prenotati{
 
 .userprofile-brochure-content{
     padding: 15px 20px;
-}
-
-.userprofile-brochure h5{
-    text-align: center;
 }
 
 .userprofile-brochure dl{
@@ -2343,6 +2339,10 @@ h3 + .singleproduct-rating {
     text-align: center;
     margin: 0.2em;
     font-weight: bold;
+}
+
+#sign-error{
+    font-size: 1.5em;
 }
 
 button#submit-register.not-available, 

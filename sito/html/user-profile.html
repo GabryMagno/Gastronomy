@@ -101,8 +101,7 @@
                 <ul class="button-container">
                     <li class="bottoni-link"><a href="#prodotti-preferiti">Prodotti Preferiti</a></li>
                     <li class="bottoni-link"><a href="#prodotti-prenotati">Prodotti Prenotati</a></li>
-                    <li class="bottoni-link"><a href="#degustazioni-passate">Degustazioni Passate</a></li>
-                    <li class="bottoni-link"><a href="#degustazioni-prossime">Degustazioni Prossime</a></li>
+                    <li class="bottoni-link"><a href="#degustazioni-prenotate">Degustazioni Prenotate</a></li>
                     <li class="bottoni-link"><a href="#recensioni-prodotti">Recensioni Prodotti</a></li>
                 </ul>
             </nav>
@@ -171,12 +170,13 @@
             <section>
                 <h3 class="section-title" id="prodotti-prenotati">Le tue prenotazioni</h3>
                 <p class="section-descrizione">In questa sezione della pagina puoi visualizzare i prodotti che hai prenotato sul nostro sito.</p>
-                <p class="nondisponibile">Nessuna prenotazione.</p>
+                <p class="nondisponibile">Nessun prodotto prenotato.</p>
 
                 <div class="data-container" id="dc-prodotti-prenotati" aria-live="polite">
                     <ul class="list" id="user-profile-prodotti-prenotati">
                         <li class="userprofile-brochure">
                             <div class="userprofile-brochure-content">
+                                <img src="assets/img/primo.png" alt="Nuovo prodotto">
                                 <h4>[Nome prodotto]</h5>
                                 <dl>
                                     <dt>Data ritiro</dt>
@@ -192,6 +192,7 @@
                         </li>
                         <li class="userprofile-brochure">
                             <div class="userprofile-brochure-content">
+                                <img src="assets/img/primo.png" alt="Nuovo prodotto">
                                 <h4>[Nome prodotto]</h5>
                                 <dl>
                                     <dt>Data ritiro</dt>
@@ -207,6 +208,7 @@
                         </li>
                         <li class="userprofile-brochure">
                             <div class="userprofile-brochure-content">
+                                <img src="assets/img/primo.png" alt="Nuovo prodotto">
                                 <h4>[Nome prodotto]</h5>
                                 <dl>
                                     <dt>Data ritiro</dt>
@@ -222,6 +224,7 @@
                         </li>
                         <li class="userprofile-brochure">
                             <div class="userprofile-brochure-content">
+                                <img src="assets/img/primo.png" alt="Nuovo prodotto">
                                 <h4>[Nome prodotto]</h5>
                                 <dl>
                                     <dt>Data ritiro</dt>
@@ -249,90 +252,20 @@
 
             </section>
 
+            <!-- DEGUSTAZIONI PROSSIME --> 
+
             <hr class="section-divider">
 
             <section>
-                <h3 class="section-title">Le tue degustazioni</h3>
-                <p class="section-descrizione">In questa sezione della pagina puoi vedere le degustazioni passate e quelle future che hai prenotato.</p>
-                
-                <hr class="section-divider-small">
-
-                <!-- DEGUSTAZIONI PASSATE --> 
-
-                <h4 class="section-title-sub" id="degustazioni-passate">Degustazioni passate</h4>
-                <p class="nondisponibile">Nessuna degustazione passata.</p>
-
-                <div class="data-container" id="dc-degustazioni-passate" aria-live="polite">
-
-                    <ul class="list" id="user-profile-degustazioni-passate">
-                        <li class="userprofile-brochure">
-                            <div class="userprofile-brochure-content">
-                                <h5>[Nome degustazione]</h5>
-                                <dl>
-                                    <dt>Data</dt>
-                                    <dd class="data-passata">[dd-mm-yyyy]</dd>
-                                    <dt>Persone</dt>
-                                    <dd>[NP]</dd>
-                                    <dt>Prezzo</dt>
-                                    <dd class="userprofile-brochure-prezzo">[Prezzo]</dd>
-                                </dl>
-                            </div>
-                            <a href="degustazione.html">Dettagli degustazione</a>
-                        </li>
-
-                        <li class="userprofile-brochure">
-                            <div class="userprofile-brochure-content">
-                                <h5>[Nome degustazione]</h5>
-                                <dl>
-                                    <dt>Data</dt>
-                                    <dd class="data-passata">[dd-mm-yyyy]</dd>
-                                    <dt>Persone</dt>
-                                    <dd>[NP]</dd>
-                                    <dt>Prezzo</dt>
-                                    <dd class="userprofile-brochure-prezzo">[Prezzo]</dd>
-                                </dl>
-                            </div>
-                            <a href="degustazione.html">Dettagli degustazione</a>
-                        </li>
-
-                        <li class="userprofile-brochure">
-                            <div class="userprofile-brochure-content">
-                                <h5>[Nome degustazione]</h5>
-                                <dl>
-                                    <dt>Data</dt>
-                                    <dd class="data-passata">[dd-mm-yyyy]</dd>
-                                    <dt>Persone</dt>
-                                    <dd>[NP]</dd>
-                                    <dt>Prezzo</dt>
-                                    <dd class="userprofile-brochure-prezzo">[Prezzo]</dd>
-                                </dl>
-                            </div>
-                            <a href="degustazione.html">Dettagli degustazione</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="a11y-status sr-only nondisponibile" role="status" aria-live="polite"></div>
-
-                <div class="button-container">
-                    <button class="load-more bottoni-rossi" id="lm-degustazioni-passate" aria-controls="dc-degustazioni-passate" aria-label="Carica ulteriori degustazioni passate">
-                        Carica di pi&ugrave;
-                    </button>
-                    <a class="bottoni-rossi" href="#degustazioni-passate">Torna su</a>
-                </div>
-                
-                <hr class="section-divider-small">
-
-                <!-- DEGUSTAZIONI PROSSIME --> 
-
-                <h4 class="section-title-sub" id="degustazioni-prossime">Degustazioni prossime</h4>
+                <h3 class="section-title" id="degustazioni-prenotate">Le tue degustazioni</h3>
+                <p class="section-descrizione">In questa sezione della pagina puoi vedere le degustazioni che hai prenotato.</p>
                 <p class="nondisponibile">Nessuna degustazione prenotata.</p>
                 
-                <div class="data-container" id="dc-degustazioni-prossime" aria-live="polite">
-                    <ul class="list" id="user-profile-degustazioni-prossime">
+                <div class="data-container" id="dc-degustazioni-prenotatee" aria-live="polite">
+                    <ul class="list" id="user-profile-degustazioni-prenotate">
                         <li class="userprofile-brochure">
                             <div class="userprofile-brochure-content">
-                                <h5>[Nome degustazione]</h5>
+                                <h4>[Nome degustazione]</h4>
                                 <dl>
                                     <dt>Data</dt>
                                     <dd>[dd-mm-yyyy]</dd>
@@ -350,7 +283,7 @@
 
                         <li class="userprofile-brochure">
                             <div class="userprofile-brochure-content">
-                                <h5>[Nome degustazione]</h5>
+                                <h4>[Nome degustazione]</h4>
                                 <dl>
                                     <dt>Data</dt>
                                     <dd>[dd-mm-yyyy]</dd>
@@ -368,7 +301,7 @@
 
                         <li class="userprofile-brochure">
                             <div class="userprofile-brochure-content">
-                                <h5>[Nome degustazione]</h5>
+                                <h4>[Nome degustazione]</h4>
                                 <dl>
                                     <dt>Data</dt>
                                     <dd>[dd-mm-yyyy]</dd>
@@ -389,10 +322,10 @@
                 <div class="a11y-status sr-only nondisponibile" role="status" aria-live="polite"></div>
 
                 <div class="button-container">
-                    <button class="load-more bottoni-rossi" id="lm-degustazioni-prossime" aria-controls="dc-degustazioni-prossime" aria-label="Carica ulteriori prossime prenotate">
+                    <button class="load-more bottoni-rossi" id="lm-degustazioni-prenotate" aria-controls="dc-degustazioni-prenotate" aria-label="Carica ulteriori degustazioni prenotate">
                         Carica di pi&ugrave;
                     </button>
-                    <a class="bottoni-rossi" href="#degustazioni-prossime">Torna su</a>
+                    <a class="bottoni-rossi" href="#degustazioni-prenotate">Torna su</a>
                 </div>
             </section>
 

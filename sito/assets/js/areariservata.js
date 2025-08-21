@@ -173,8 +173,11 @@ function validatePassword(){
 	//const allowedChars = /^(?=.*[a-zß-ÿ])(?=.*[A-ZÀ-Ý])(?=.*[\d])(?=.*[.,!?@+\-_€$%&^*<>]).{8,}$/;// --> .,!?@+\-_€$%&^*<> questi sono i caratteri speciali
 
     if(Password === "user"){
-        successHintPassword();
+		var check = document.getElementById("password-error");
+		deleteError(check);
+		successHintPassword();
 		LoginFormUltimateCheck();
+
         return true;
     } 
 
@@ -184,7 +187,7 @@ function validatePassword(){
 
 		checkHintPassword(Password);
 
-		return checkInput("new-password", "password-error", "La <span lang='en'>password</span> deve avere una lunghezza minima di 8 caratteri.", 1, 2);
+		return checkInput("login_password", "password-error", "La <span lang='en'>password</span> deve avere una lunghezza minima di 8 caratteri.", 1, 2);
 	}
 
 	if(Password.search(/^(?=.*[a-zß-ÿ])(?=.*[A-ZÀ-Ý])(?=.*[\d])(?=.*[.,=#!?@+\-_€$%&^*<>]).{8,}$/) != 0 || /\s{1,}/.test(Password)){
@@ -193,7 +196,7 @@ function validatePassword(){
         
 		checkHintPassword(Password);
 
-		return checkInput("new-password", "password-error", "La <span lang='en'>password</span> deve contenere almeno una lettera minuscola, una lettera maiuscola, un numero e un carattere speciale.", 1, 2);
+		return checkInput("login_password", "password-error", "La <span lang='en'>password</span> deve contenere almeno una lettera minuscola, una lettera maiuscola, un numero e un carattere speciale.", 1, 2);
 	}
 
     var check = document.getElementById("password-error");

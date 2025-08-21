@@ -512,6 +512,11 @@ div .chef-content{
     }
 }
 
+#user-profile-summary .button-container{
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 /*  
     ===============================
             ERRORI 

@@ -12,10 +12,11 @@ session_start();
 class DB {
     //Costanti per la connessione al database
     //DA MODIFICARE CON I DATI DEL PROPRIO DATABASE
-    private const DB_NAME = "";
-    private const USERNAME = "";
+    private const DB_NAME = "gastronomia";
+    private const USERNAME = "root";
     private const PASSWORD = "";
-    private const HOST = "";
+    private const HOST = "localhost";
+    private const PORT = 3306;
     private $connection;
 
     private function OpenConnectionDB(): bool{
@@ -23,7 +24,7 @@ class DB {
         mysqli_report(MYSQLI_REPORT_STRICT);//abilita il report degli errori per mysqli
         try{
             //connessione al database
-            $this->connection = mysqli_connect(self::DB_NAME, self::USERNAME, self::PASSWORD, self::HOST);
+            $this->connection = mysqli_connect(self::HOST, self::USERNAME, self::PASSWORD, self::DB_NAME, self::PORT);
 
         } catch(\mysqli_sql_exception $error){//forse e al posto di error
             //se c'è un errore nella connessione, ritorna false
@@ -40,7 +41,7 @@ class DB {
 
     }
 
-    public function IsUserLog(): bool | string{//controlla se l'utente è loggato
+    public function IsUserLog(): bool | int {//controlla se l'utente è loggato
 
         if(isset($_SESSION["logged_user"]) && $_SESSION != null) return $_SESSION["logged_user"];
         else return false;
@@ -935,15 +936,22 @@ class DB {
     //AGGIUNTE DA PARTE DELL'UTENTE
     //Al posto di username -> logged_user da isUserLog() (da scegliere)
 
-    public function AddAdvice($advice, $id =null): bool | string {//Aggiunta da parte dell'utente di un suggerimento
+    public function AddAdvice($advice, $id = null): bool | string {//Aggiunta da parte dell'utente di un suggerimento
         $date = date("Y-m-d H:i:s"); //ottiene la data e l'ora attuale
+
         $newConnection = $this->OpenConnectionDB();
+
         $isUserLogged = $this->IsUserLog(); //!!! CONTROLLARE
 
         if($newConnection){
             //preparazione della query per aggiungere un suggerimento
-            $addAdvice = $this->connection->prepare("INSERT INTO suggerimenti (id_utente, data, suggerimento) VALUES (?, ?, ?)");
-            $addAdvice->bind_param("iss", $isUserLogged, $date, $advice);
+            if (!$isUserLogged){
+                $addAdvice = $this->connection->prepare("INSERT INTO suggerimenti (data_inserimento, suggerimento) VALUES (?, ?)");
+                $addAdvice->bind_param("ss", $date, $advice);
+            } else {
+                $addAdvice = $this->connection->prepare("INSERT INTO suggerimenti (id_utente, data_inserimento, suggerimento) VALUES (?, ?, ?)");
+                $addAdvice->bind_param("iss", $isUserLogged, $date, $advice);
+            }
 
             try{
                 //esecuzione della query per aggiungere un suggerimento

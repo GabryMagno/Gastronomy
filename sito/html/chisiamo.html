@@ -13,13 +13,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- CSS -->
-        <link rel="stylesheet" href="assets/css/print.css" media="print">
-        <link rel="stylesheet" href="assets/css/desktop.css" media="screen ">
-        <link rel="stylesheet" href="assets/css/mobile.css" media="screen and (max-width: 767px)">
+        <link rel="stylesheet" href="../assets/css/print.css" media="print">
+        <link rel="stylesheet" href="../assets/css/desktop.css" media="screen ">
+        <link rel="stylesheet" href="../assets/css/mobile.css" media="screen and (max-width: 767px)">
 
         <!--JS-->
-        <script async src="assets/js/chi-siamo.js"></script>
-        <script src="assets/js/toggle.js"></script>
+        <script async src="../assets/js/chi-siamo.js"></script>
+        <script src="../assets/js/toggle.js"></script>
 
         <!-- FONT -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -76,7 +76,7 @@
                 <hr class="section-divider">
 
                 <article id="storia-old">
-                    <img src="assets/img/old-esterno-gastronomia.webp" alt="Facciata del primo e antico edificio della gastronomia Cuochi per Caso">
+                    <img src="../assets/img/old-esterno-gastronomia.webp" alt="Facciata del primo e antico edificio della gastronomia Cuochi per Caso">
                     <div class="testo">
                         <h4>La nostra vecchia storia</h4>
                         <p>
@@ -134,7 +134,7 @@
                 <h3 class="section-title">Hai un suggerimento?</h3>
                 <p class="section-descrizione">Dicci la tua! Che sia un complimento, un consiglio o un'idea brillante, siamo tutto orecchi. Compila il box qui sotto e aiutaci a rendere la nostra gastronomia ancora più gustosa!</p>
 
-                <form method="post" id="advice" class="form-bianco">
+                <form method="post" action="chisiamo.php" id="advice" class="form-bianco">
                     <fieldset>
                         <label for="user-advice" class="form-label">Scrivi qua il tuo suggerimento</label>
                         <details open>
@@ -147,6 +147,7 @@
                             </ul>
                         </details>
                         <textarea name="suggerimento" placeholder="Scrivi un suggerimento" id="user-advice" required minlength="30" maxlength="300"></textarea>
+                        <p>[comment-error]</p>
                     </fieldset>
                     <div class="button-container">
                         <button type="reset" class="bottoni-neri" id="reset-advice">Annulla</button>
