@@ -1023,7 +1023,9 @@ li.product-brochure a,
 li.new article a{
     background-color: var(--headerbgcolor);
     width: 100%;
+
     margin-top: 1.5em;
+
     border: 0;
     border-bottom-left-radius: 0.72em;
     border-bottom-right-radius: 0.72em;
@@ -1034,7 +1036,8 @@ li.new article a{
     bottom: 0;
 }
 
-li.product-brochure a:hover{
+li.product-brochure a:hover,
+li.new article a:hover{
     opacity: 0.9;
 }
 
@@ -1600,14 +1603,9 @@ ul#user-profile-prodotti {
 .degustazione-brochure h5{
     font-weight: bold;
     font-size: 1.2em;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.8em;
 
     padding: 0;
-}
-
-#user-profile-prodotti li.product-brochure a{
-    margin-top: 0.5em;
-    bottom: 0;
 }
 
 /* USER PROFILE - DEGUSTAZIONI */
@@ -1627,7 +1625,7 @@ ul#user-profile-degustazioni-prossime{
 
     list-style-type: none;
 
-    padding-bottom: 2.8em;
+    padding-bottom: 2.5em;
 }
 
 .degustazione-brochure{
@@ -1688,31 +1686,37 @@ ul#user-profile-degustazioni-prossime{
     opacity: 0.9;
 }
 
-.degustazione-brochure-links{
+.brochure-links{
     display: flex;
     width: 100%;
 }
 
-.degustazione-brochure-links a{
+.brochure-links a{
     flex: 1;
     text-align: center;
+
     padding: 1em;
+
     display: block;
 }
 
-.degustazione-brochure-links .btn-dettagli {
+.brochure-links .btn-dettagli {
     border-bottom-left-radius: 0.72em;
     border-bottom-right-radius: 0em;
     border-right: 1px solid black;
+
+    margin-top: 0em;
 }
 
-.degustazione-brochure-links .btn-elimina {
+.brochure-links .btn-elimina {
     border-bottom-left-radius: 0em;
     border-bottom-right-radius: 0.72em;
     border-left: 1px solid black;
+
+    margin-top: 0em;
 }
 
-.degustazione-brochure-links a:hover {
+.brochure-links a:hover {
     opacity: 0.9;
 }
 
