@@ -291,7 +291,7 @@ class DB {
         }
     }
 
-        public function ThisUsernameExists($username, $checkCaseSensitive = true): bool | string {//controlla se un username esiste nel database
+    public function ThisUsernameExists($username, $checkCaseSensitive = true): bool | string {//controlla se un username esiste nel database
         $newConnection = $this->OpenConnectionDB();
         if ($newConnection) {
             $checkUsername=$this->connection->prepare("SELECT username FROM utenti WHERE username = ?");

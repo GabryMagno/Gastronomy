@@ -1,5 +1,15 @@
-ErrorDocument 403 /403.html
-ErrorDocument 404 /404.html
-ErrorDocument 500 /500.html
+# Pagine di errore personalizzate
+ErrorDocument 403 403.php
+ErrorDocument 404 404.php
+ErrorDocument 500 500.php
+
+# Attivazione riscrittura
+RewriteEngine On
+
+# Se refer vuoto e si vuole accedere ad /assets/
 
 RewriteCond %{HTTP_REFERER} ^$
+RewriteRule ^assets/ - [F,L]
+
+#Redirect dei file html ai file php corrispondenti
+RewriteRule ^chisiamo.html$ chisiamo.php [L,R=301]
