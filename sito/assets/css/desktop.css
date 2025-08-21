@@ -2337,7 +2337,7 @@ h3 + .singleproduct-rating {
     color: var(--errorcolor);
     display: block;
     text-align: center;
-    margin: 0.2em;
+    margin: 0.5em;
     font-weight: bold;
 }
 
