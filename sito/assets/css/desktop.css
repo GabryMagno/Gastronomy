@@ -324,6 +324,7 @@ footer img {
 footer .torna-su {
     display: block;
     margin-top: 0.5em;
+    margin-bottom: 0.5em;
 }
 
 /*
@@ -489,8 +490,6 @@ form.form-bianco#delete-account label::after{
     margin: 10px 0 10px 0;
     padding: 0.5em 1em;
 
-    width: 10em;
-
     text-align: center;
 
     display: flex;
@@ -546,6 +545,14 @@ a.bottoni-rossi{
 
     text-align: center;
     gap: 1em;
+}
+
+.button-container button,
+.button-container .bottoni-link,
+.button-container .bottoni-neri,
+.button-container .bottoni-rossi{
+    width: 8.5em;
+    min-width: 8.5em;
 }
 
 /* Container Bottoni pagina prodotti */
@@ -1004,7 +1011,7 @@ li.product-brochure {
 
 li.product-brochure:hover,
 li.new article:hover,
-li.degustazione-brochure:hover{
+li.userprofile-brochure:hover{
     transform: translate(0, -0.4em );
     box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.16),
                 0 0.2em 0.4em rgba(0, 0, 0, 0.24);
@@ -1581,7 +1588,7 @@ div#user-settings{
 }
 
 /* USER PROFILE - PRODOTTI */
-ul#user-profile-prodotti {
+ul#user-profile-prodotti{
     display: flex;
     flex-wrap: wrap;
     gap: 1em;
@@ -1594,13 +1601,14 @@ ul#user-profile-prodotti {
     margin: 0 auto;
 }
 
-#user-profile-prodotti li {
+#user-profile-prodotti li{
     flex: 0 0 250px;
     box-sizing: border-box;
 }
 
 #user-profile-prodotti h4.product-name,
-.degustazione-brochure h5{
+.userprofile-brochure h5,
+.userprofile-brochure-content h4{
     font-weight: bold;
     font-size: 1.2em;
     margin-bottom: 0.8em;
@@ -1610,7 +1618,8 @@ ul#user-profile-prodotti {
 
 /* USER PROFILE - DEGUSTAZIONI */
 ul#user-profile-degustazioni-passate,
-ul#user-profile-degustazioni-prossime{
+ul#user-profile-degustazioni-prossime,
+ul#user-profile-prodotti-prenotati{
     display: flex;
     flex-direction: row;
 
@@ -1628,7 +1637,7 @@ ul#user-profile-degustazioni-prossime{
     padding-bottom: 2.5em;
 }
 
-.degustazione-brochure{
+.userprofile-brochure{
     display: flex;
     flex-direction: column;
     
@@ -1643,33 +1652,33 @@ ul#user-profile-degustazioni-prossime{
                 0 0.8em 0.8em rgba(0, 0, 0, 0.22);
 }
 
-.degustazione-brochure-content{
+.userprofile-brochure-content{
     padding: 15px 20px;
 }
 
-.degustazione-brochure h5{
+.userprofile-brochure h5{
     text-align: center;
 }
 
-.degustazione-brochure dl {
+.userprofile-brochure dl{
   display: flex;
   flex-wrap: wrap;
 }
 
-.degustazione-brochure dt {
+.userprofile-brochure dt{
   font-weight: bold;
   width: 40%;
 }
 
-.degustazione-brochure dd {
+.userprofile-brochure dd{
     width: 60%;
 }
 
-.degustazione-brochure dt::after{
+.userprofile-brochure dt::after{
     content: ":";
 }
 
-.degustazione-brochure a {
+.userprofile-brochure a {
     background-color: var(--headerbgcolor);
     width: 100%;
     border: 0;
@@ -1682,7 +1691,7 @@ ul#user-profile-degustazioni-prossime{
     bottom: 0;
 }
 
-.degustazione-brochure a:hover{
+.userprofile-brochure a:hover{
     opacity: 0.9;
 }
 
