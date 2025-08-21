@@ -1210,6 +1210,7 @@ class DB {
 
         if($isUserLogged == false){
             //se l'utente non è loggato, ritorna un messaggio di errore
+            echo "Utente non loggato";
             return "User is not logged in"; //l'utente non è loggato
         }else{
             $newConnection = $this->OpenConnectionDB();
@@ -1225,6 +1226,7 @@ class DB {
                     //se c'è un errore nell'esecuzione della query, ritorna false
                     $this->CloseConnectionDB();
                     $changePassword->close();
+                    echo "Errore Query";
                     return false; //errore nell'esecuzione della query
                 }
 
@@ -1232,6 +1234,7 @@ class DB {
                     //se la query ha cambiato una riga, allora la password è stata cambiata con successo
                     $this->CloseConnectionDB();
                     $changePassword->close();
+                    echo "Password cambiata";
                     return true; //cambio password avvenuto con successo
                 }else{
                     //se la query non ha cambiato nessuna riga, allora l'utente non esiste o c'è stato un errore

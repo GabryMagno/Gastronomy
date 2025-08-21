@@ -78,7 +78,7 @@
                 <fieldset>
                     <div>
                         <label for="change-username">Modifica Username</label>
-                        <input type="text" name="new-username" id="change-username">
+                        <input type="text" name="new-username" id="change-username" value="[username]">
                         <details>
                             <summary id="hints-username" class="hints" aria-expanded="false" aria-controls="hint-list-username">
                                 Suggerimenti Username
@@ -90,11 +90,12 @@
                                 <li id="space-username">Nessuno spazio consentito</li>
                             </ul>
                         </details>
+                        [username-error]
                     </div>
 
                     <div>
                         <label for="change-name">Modifica Nome</label>
-                        <input type="text" name="new-name" id="change-name">
+                        <input type="text" name="new-name" id="change-name" value="[nome]">
                         <details>
                             <summary id="hints-name" class="hints" aria-expanded="false" aria-controls="hint-list-name">
                                 Suggerimenti Nome
@@ -106,11 +107,12 @@
                                 <li id="space-name">Nessuno spazio consentito</li>
                             </ul>
                         </details>
+                        [name-error]
                     </div>
 
                     <div>
                         <label for="change-surname">Modifica Cognome</label>
-                        <input type="text" name="new-surname" id="change-surname">
+                        <input type="text" name="new-surname" id="change-surname" value="[cognome]">
                         <details>
                             <summary id="hints-surname" class="hints" aria-expanded="false" aria-controls="hint-list-surname">
                                 Suggerimenti Cognome
@@ -122,11 +124,12 @@
                                 <li id="space-surname">Nessuno spazio consentito</li>
                             </ul>
                         </details>
+                        [surname-error]
                     </div>
 
                     <div>
                         <label for="change-date">Modifica Data di Nascita</label>
-                        <input type="date" name="new-date" id="change-date">
+                        <input type="date" name="new-date" id="change-date" value="[data-nascita]">
                         <details>
                             <summary id="hints-date" class="hints" aria-expanded="false" aria-controls="hint-list-date">
                                 Suggerimenti Data di Nascita
@@ -136,6 +139,7 @@
                                 <li id="max-date">Sono accettate solo le date successive al 1 gennaio 1900</li>
                             </ul>
                         </details>
+                        [data-error]
                     </div>
 
                     <div id="new-logo">
@@ -151,6 +155,7 @@
                             </ul>
                         </details>
                         <img id="new-image" src="assets/img/Cuochi.png" alt="logo utente">
+                        [logo-error]
                     </div>
 
                 </fieldset>
@@ -182,6 +187,7 @@
                                 <li id="valid-old">Formato valido</li>
                             </ul>
                         </details>
+                        [old-password-error]
                     </div>
 
                     <div>
@@ -200,6 +206,7 @@
                                 <li id="valid-new">Formato valido</li>
                             </ul>
                         </details>
+                        [new-password-error]
                     </div>
 
                     <div>
@@ -213,6 +220,7 @@
                                 <li id="equal-passwords">Le <span lang="en">password</span> coincidono</li>
                             </ul>
                         </details>
+                        [repeat-password-error]
                     </div>
                 </fieldset>
 
