@@ -1,11 +1,9 @@
 <?php
 
-require_once "db.php";
-require_once "sanitizer.php";
-use DB;
-use Sanitizer;
+require_once "php/db.php";
+require_once "php/sanitizer.php";
 
-$pagina = file_get_contents("./html/user-edit.html");
+$pagina = file_get_contents("html/user-settings.html");
 $username = "";
 $userInfo = array();
 
@@ -15,7 +13,7 @@ $isLogged_first = $db->isUserLog();//controllo se l'utente è loggato
 $isLogged = $db->UserUsername();//recupero l'username dell'utente loggato
 
 if ((is_bool($isLogged_first) && $isLogged_first == false)||(is_bool($isLogged) && $isLogged == false)) {//controllo se l'utente non è loggato(sia con id che con username)
-    header('Location: areariservata.php');
+    header('Location: login.php');
     exit();
 }
 
@@ -27,10 +25,10 @@ $isProfileImageChanged = false;//variabile che indica se l'immagine del profilo 
 $hasProfileImageBeenDeleted = false;//variabile che indica se l'immagine del profilo è stata eliminata
 
 if (is_string($userInfo) && (strcmp($userInfo,"Execution error") == 0 || strcmp($userInfo,"Connection error") == 0)) {
-    header('Location: 500-err.php');
+    header('Location: 500.php');
     exit();
 } elseif (is_string($userInfo) && (strcmp($userInfo,"User is not logged") == 0 || strcmp($userInfo,"User not found") == 0)) {
-    header('Location: sign-in.php');
+    header('Location: login.php');
     exit();
 }
 
@@ -55,20 +53,22 @@ if(!isset($_POST["submit-user-settings"]) && !isset($_POST["submit-password-sett
     } else {
         $pagina = str_replace("{{nome}}","",$pagina);
     }
-    echo str_replace("{{name-error}}","",$pagina);
+    $pagina = str_replace("{{name-error}}","",$pagina);
 
     if ($userInfo["cognome"]) {//controllo se il cognome è presente
         $pagina = str_replace("{{cognome}}",$userInfo["cognome"],$pagina);//{{nome}} presente nell'input nome viene sostituito con il nome dell'utente
     } else {
         $pagina = str_replace("{{cognome}}","",$pagina);
     }
-    echo str_replace("{{surname-error}}","",$pagina);
+    $pagina = str_replace("{{surname-error}}","",$pagina);
 
     if ($userInfo["data_nascita"]) {//controllo se la data di nascita è presente
         $pagina = str_replace("{{data-nascita}}",$userInfo["data_nascita"],$pagina);//{{data-nascita}} presente nell'input data viene sostituito con la data di nascita dell'utente
     } else {
         $pagina = str_replace("{{data-nascita}}","",$pagina);
     }
+
+    echo $pagina;
 
 } elseif(isset($_POST["submit-user-settings"])) {//controllo se l'utente ha inviato il form per le informazioni utente
     $errorFound = false;

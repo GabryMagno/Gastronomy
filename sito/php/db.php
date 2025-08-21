@@ -58,15 +58,16 @@ class DB {
     //string per gli errori
     //AZIONI GENERALI
 
-    public function RegisterNewUser($username, $name, $surname, $date, $email, $password): bool | string{//registrazione nuovo utente (da aggiungere nel corpo della funzione la data d'iscrizione)
+    public function RegisterNewUser($username, $name, $surname, $date, $email, $password): bool | string{//registrazione nuovo utente
 
         $encriptedPassword = hash('sha256', $password);//crittografia della password
-        $subscribe_date=date("Y-m-d H:i:s");
         $newConnection = $this->OpenConnectionDB();
 
+        $formattedDate = $date instanceof \DateTime ? $date->format("Y-m-d") : $date;
+
         if($newConnection){
-            $userInfo = $this->connection->prepare("INSERT INTO utenti(email, username, password, nome, cognome, data_di_nascita, data_iscrizione) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            $userInfo->bind_param("sssssss", $email, $username, $encriptedPassword, $name, $surname, $date, $subscribe_date);
+            $userInfo = $this->connection->prepare("INSERT INTO utenti(email, username, password, nome, cognome, data_nascita) VALUES (?, ?, ?, ?, ?, ?)");
+            $userInfo->bind_param("ssssss", $email, $username, $encriptedPassword, $name, $surname, $formattedDate);
 
             try{
                 $userInfo->execute();
@@ -81,23 +82,22 @@ class DB {
             //!!! CONTROLLARE
             if(mysqli_affected_rows($this->connection) == 1){
                 //se la query ha inserito una riga, allora l'utente è stato registrato con successo
-                $this->CloseConnectionDB();
-                $userInfo->close();
                 $id = $this->connection->insert_id; //ottiene l'id dell'utente appena registrato(insert_id è una proprietà di mysqli che restituisce l'id dell'ultima riga inserita)
                 $_SESSION["logged_user"] = $id; //impostazione della sessione per l'utente loggato, SERVE QUERY PER OTTENERE L'ID
+                
+                $userInfo->close();
+                $this->CloseConnectionDB();
+                
                 return true; //registrazione avvenuta con successo
-
             } else {
                 
-                $this->CloseConnectionDB();
                 $userInfo->close();
+                $this->CloseConnectionDB();
                 return false; //nessuna riga inserita, errore nella registrazione
 
             }
         }else {
-
             return "Connection error"; //errore nella connessione al database
-
         }
     }
 
@@ -126,15 +126,18 @@ class DB {
                 $isUserExist->close();
 
                 //Il server tecweb non controlla il case-sensitive per il database, quindi controllo che il risultato trovato corrisponda esattamente allo username inserito
-                if ($info->num_rows==1 && strcmp(mysqli_fetch_assoc($info)["username"],$username)==0) {
-                    //se l'utente esiste, procedi con il login
-                    $id = $info->fetch_assoc()["id"];//ottiene l'id dell'utente
-                    $username = $info->fetch_assoc()["username"];//ottiene lo username dell'utente
-                    $_SESSION["logged_user"] = $id;//METTERE QUERY
-                    $_SESSION["logged_username"] = $username;//impostazione della sessione per l'utente loggato
-                    $info->free();
-                    return true;
+                if ($info->num_rows == 1){
+                    $row = $info->fetch_assoc();
 
+                    if(strcmp($row["username"], $username)== 0){
+                        $_SESSION["logged_user"] = $row["id"];
+                        $_SESSION["logged_username"] = $row["username"];
+                        $info->free();
+                        return true;
+                    }
+
+                    $info->free();
+                    return false;
                 } else {
                     //se l'utente non esiste, ritorna false
                     $info->free();
@@ -224,7 +227,7 @@ class DB {
             $newConnection = $this->OpenConnectionDB();
             if($newConnection){
                 //preparazione della query per ottenere le informazioni su un utente
-                $userInfo = $this->connection->prepare("SELECT username, nome, cognome, data_iscrizione, url_immagine FROM utenti WHERE id = ?");
+                $userInfo = $this->connection->prepare("SELECT email, username, nome, cognome, data_nascita, data_iscrizione, url_immagine FROM utenti WHERE id = ?");
                 $userInfo->bind_param("i", $id);
                 try{
                     //esecuzione della query per ottenere le informazioni su un utente

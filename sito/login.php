@@ -4,7 +4,7 @@
 require_once "php/db.php";
 require_once "php/sanitizer.php";
 
-$pagina=file_get_contents("html/areariservata.html");
+$pagina=file_get_contents("html/login.html");
 
 $username="";
 $psw="";
@@ -58,7 +58,7 @@ if (isset($_POST['submit-login'])) {
             header("Location: ".$link);
             exit();
         }
-        header("Location: user-profile.php");
+        header("Location: user-settings.php");
         exit();
     }
     if (mb_strlen($password) == 0) {// controllo se la password è vuota
@@ -73,9 +73,6 @@ if (isset($_POST['submit-login'])) {
     }
 
     if($error == false){
-
-        echo "Non ci sono errori";
-
         $result = $db->LoginUser($username,$password);
 
         if ($result==true && is_bool($result)) {
@@ -86,7 +83,7 @@ if (isset($_POST['submit-login'])) {
                 header("Location: ".$link);
                 exit();
             }
-            header("Location: user-profile.php");
+            header("Location: user-settings.php");
             exit();
         } else if ($result == false) {
             $pagina = str_replace("[username-error]","",$pagina);
@@ -94,7 +91,7 @@ if (isset($_POST['submit-login'])) {
             echo str_replace("[error]",'<p role="alert" class="error" id="sign-error">Le credenziali inserite non sono corrette!</p>',$pagina);// se le credenziali non sono corrette
         } else if (strcmp($result,"User already logged in") == 0) {// se l'utente è già loggato
             $_POST = null;
-            header('Location: user-profile.php');
+            header('Location: user-settings.php');
             exit();
         } else {// in caso di errore nel database
             $_POST = null;

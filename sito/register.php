@@ -1,10 +1,8 @@
 
 <?php
 
-require_once "db.php";
-require_once "sanitizer.php";
-use DB;
-use Sanitizer;
+require_once "php/db.php";
+require_once "php/sanitizer.php";
 
 $username="";
 $categoria="";
@@ -19,7 +17,7 @@ if ($isLogged!=false) {
     exit();
 }
 
-$pagina=file_get_contents("./html/register.html");
+$pagina=file_get_contents("html/register.html");
 
 if(isset($_GET["ref"])) {
     $pagina=str_replace("{{ref-value}}",'?ref='.$_GET["ref"],$pagina);

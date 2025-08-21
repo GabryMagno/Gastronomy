@@ -319,7 +319,7 @@ function validateSurname() {
 		if(/\s{1,}/.test(Surname)) failHint("space-surname","Nessuno spazio consentito");
 	    else successHint("space-surname","Nessuno spazio consentito");
          
-		if (!(/^[a-zA-ZÀ-Ýß-ÿ]{1,}$/.test(Surname)) || Name == "") failHint("letter-surname", "Inserire solo lettere");
+		if (!(/^[a-zA-ZÀ-Ýß-ÿ]{1,}$/.test(Surname)) || Surname == "") failHint("letter-surname", "Inserire solo lettere");
 		else successHint("letter-surname","Inserire solo lettere");
 
 		return checkInput("change-surname", "surname-error", "Il cognome non deve deve superare i 15 caratteri", 0);
@@ -574,6 +574,7 @@ function checkCancelButtonPasswordSettings(){
         GESTIONE CARICAMENTO PAGINA
     ===================================
 */
+
 const listeners = {
 	"change-name" : ["input", validateName ],
 	"change-surname" : ["input", validateSurname ],
