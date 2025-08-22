@@ -467,7 +467,7 @@ form.form-bianco label{
 }
 
 form.form-bianco label::after{
-    content: ":";
+    content: "";
 }
 
 /* === BOTTONI === */
