@@ -42,10 +42,9 @@ VALUES
 ('Cassata Siciliana', 'dolce', 'porzione', 1, 6, 'Dolce tipico con ricotta, pan di spagna e canditi', 5.00, TRUE, 'img/cassata.jpg'),
 ('Crostata alla Marmellata', 'dolce', 'pezzo', 1, 8, 'Frolla con confettura di albicocca', 3.00, TRUE, 'img/crostata.jpg'),
 ('Bignè alla Crema', 'dolce', 'pezzo', 2, 12, 'Pasta choux ripiena di crema pasticcera', 1.50, TRUE, 'img/bigne.jpg'),
-('Cheesecake ai Frutti Rossi', 'dolce', 'porzione', 1, 6, 'Cheesecake con topping ai frutti rossi', 4.50, TRUE, 'img/cheesecake.jpg');
+('Cheesecake ai Frutti Rossi', 'dolce', 'porzione', 1, 6, 'Cheesecake con topping ai frutti rossi', 4.50, TRUE, 'img/cheesecake.jpg'),
 
 -- PRODOTTI A PESO (KG)
 ('Arrosto di Maiale', 'secondo', 'kg', 1, 5, 'Arrosto di maiale cotto lentamente, prezzo al kg', 24.00, TRUE, 'img/arrosto_maiale_kg.jpg'),
-('Caponata Siciliana', 'contorno', 'kg', 1, 5, 'Caponata siciliana di melanzane e verdure, prezzo al kg', 14.50, TRUE, 'img/caponata_kg.jpg'),
 ('Biscotti Artigianali', 'dolce', 'kg', 1, 3, 'Selezione di biscotti di frolla artigianali, prezzo al kg', 22.00, TRUE, 'img/biscotti_kg.jpg'),
 ('Insalata di Farro', 'contorno', 'kg', 1, 4, 'Insalata di farro con verdure di stagione, prezzo al kg', 15.00, TRUE, 'img/insalata_farro_kg.jpg');

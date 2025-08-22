@@ -1,10 +1,8 @@
 <?php
 
-require_once("db.php");
-require_once("sanitizer.php");
+require_once("php/db.php");
+require_once("php/sanitizer.php");
 
-use Utilities\DB;
-use Utilities\Sanitizer;
 
 class ChangePageProducts
 {
@@ -175,6 +173,24 @@ class ChangePageProducts
     public function GetParamList(): array // Restituisce la lista dei filtri applicati
     {
         return $this->filter_list;
+    }
+
+    public function CreateButtons(): string
+    {
+        return $this->CreatePageButtons($this->current_page, $this->pages, $this->filter_list);
+    }
+
+    private function CreatePageButtons(int $currentPage, int $totalPages, $filters_list): string
+    {
+        $previous_button = ($currentPage > 1) ? '<button id="previous-page" name="page" value="' . max(1,min($currentPage - 1, $totalPages)) . '">Pagina precedente</button>' : "";
+        $next_button = ($currentPage < $totalPages) ? '<button id="next-page" name="page" value="' . max(1,min($currentPage + 1, $totalPages)). '">Pagina successiva</button>' : "";
+        $TEMPLATE = $previous_button ."<p id=\"current-page\">" . $currentPage . ' <abbr title="su">/</abbr> ' . $totalPages . " </p>" . $next_button;
+        $HIDDEN = "";
+        while ($value = current($filters_list)) {
+            $HIDDEN .= "<input type=\"hidden\" name=" . key($filters_list) . " value=\"" . $value . "\"/>";// crea un input hidden per ogni filtro applicato
+            next($filters_list);
+        }
+        return $TEMPLATE . $HIDDEN;
     }
 
     //SERVIRA' UNA FUNZIONE PER CAMBIARE LA PAGINA CORRENTE E RENDERIZZARE I BOTTONI DI PAGINAZIONE
