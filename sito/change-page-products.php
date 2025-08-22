@@ -87,7 +87,7 @@ class ChangePageProducts
 
             foreach ($this->specialization as $filter) {
                 if(isset($colMap[$filter])) {
-                    $col = $colMap[$filter];
+                    //$col = $colMap[$filter];
                     $havingPart[] = "MIN(i." . $colMap[$filter] . ") = 1";// Aggiunge la condizione per il filtro
                     $this->filter_list[$filter] = $filter; // Aggiunge il filtro alla lista dei filtri
                 }
@@ -139,16 +139,16 @@ class ChangePageProducts
             break;
 
             case 'voto_basso':
-                $order_query .= "p.voto ASC";
+                $order_query .= "v.voto ASC";
             break;
                 
 
             case 'voto_alto':
-                $order_query .= "p.voto DESC";
+                $order_query .= "v.voto DESC";
             break;
 
             default:
-                $order_query .= "p.voto DESC";
+                $order_query .= "v.voto DESC";
                         break;
         }
 

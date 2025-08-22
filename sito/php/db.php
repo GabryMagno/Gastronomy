@@ -1433,11 +1433,22 @@ class DB {
         }
     }
 
-    public function GetProducts($query, $params): array | null{
+    public function GetProducts($query, $params): array | bool{
         $newConnection = $this->OpenConnectionDB();
         if($newConnection){
             try {
             $registerUserStatement=$this->connection->prepare($query);
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                    die("Errore nella prepare(): " . $this->connection->error);
+            }
+            try{
+                $registerUserStatement->execute($params);
+            }catch(\mysqli_sql_exception $error){
+                $this->CloseConnectionDB();
+                $registerUserStatement->close();
+                return false; //errore nell'esecuzione della query
+            }
             $registerUserStatement->execute($params);
             $result = $registerUserStatement->get_result();
             $this->CloseConnectionDB();
@@ -1451,13 +1462,13 @@ class DB {
                 return $list;
             } else {
                 $result->free_result();
-                return null;
+                return [];
             } 
         } catch(\mysqli_sql_exception $e) {
             $this->CloseConnectionDB();
             $registerUserStatement->close();
             echo $e->getMessage();
-            return null;
+            return [];
         }
         }else{
             header('Location: 500.php'); //errore nella connessione al database, reindirizza alla pagina di errore
