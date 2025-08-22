@@ -94,7 +94,7 @@ class ChangePageProducts
             }
 
             if(!empty($havingPart)) {
-                $query .= " and prodotti.id IN (
+                $query .= " and p.nome IN (
                     SELECT pi.prodotto FROM prodotto_ingredienti as pi
                     JOIN ingredienti as i ON pi.ingrediente = i.nome
                     GROUP BY pi.prodotto

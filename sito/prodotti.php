@@ -68,13 +68,11 @@ foreach (['Vegano', 'Vegetariano', 'Celiaco'] as $spec) {
         );
     }
 }
-for ($i = 1; $i <= $grade; $i++) {
-    $pagina = str_replace(
-        'id="star'.$i.'"',
-        'id="star'.$i.'" checked',
-        $pagina
-    );
-}
+$pagina = str_replace(
+    'value="'.$grade.'"',
+    'value="'.$grade.'" checked',
+    $pagina
+);
 $pagina = str_replace("value=\"" . $order . "\"", "value=\"" . $order . "\" selected", $pagina);
 $pagina = str_replace("id=\"searching-bar\"", "id=\"searching-bar\" value=\"" . $productName . "\"", $pagina);
 $pagina = str_replace("id=\"price\"", "id=\"price\" value=\"" . $cost . "\"", $pagina);
