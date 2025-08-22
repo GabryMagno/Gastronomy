@@ -7,9 +7,9 @@ $db = new DB;
 $pagina = file_get_contents("html/403.html");// Carica il template HTML della pagina 403
 
 if($db->isUserLog()!=false) {
-    echo str_replace("{{to-profile}}","<a href=\"user-profile.php\">PROFILO</a>",$pagina);//accesso profilo andrà messo in tutte le pagine al posto del link areariservata.html
+    echo str_replace("[to-profile]","<a href=\"user-profile.php\">Profilo</a>",$pagina);
 } else {
-    echo str_replace("{{to-profile}}","<a href=\"areariservata.php\"><span lang=\"en\">LOGIN</span></a>",$pagina); 
+    echo str_replace("[to-profile]","<a href=\"login.php\"><span lang=\"en\">Login</span></a>",$pagina); 
 }
 
 ?>

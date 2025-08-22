@@ -10,8 +10,9 @@ $pagina = file_get_contents("html/chisiamo.html");
 $isUserLogged=$db->isUserLog();
 
 if(!isset($_POST["advice"])) {
+
     if ($isUserLogged!=false) {//se l'utente è loggato, mostra il suo profilo
-        $pagina=str_replace("{{to-profile}}","<a href=\"user-profile.php\">Profilo</a>",$pagina);//se l'utente è loggato, mostra il link al suo profilo
+        $pagina=str_replace("[to-profile]","<a href=\"user-profile.php\">Profilo</a>",$pagina);//se l'utente è loggato, mostra il link al suo profilo
         $userInfo=$db->getUserInfo();//ottiene le informazioni dell'utente loggato
         if (is_string($userInfo) && (strcmp($userInfo,"Execution error")==0 || strcmp($userInfo,"User not found")==0 || strcmp($userInfo,"Connection error")==0)) {//se c'è un errore nell'ottenere le informazioni dell'utente, reindirizza alla pagina di errore
             header('Location: 500-err.php');
@@ -21,7 +22,7 @@ if(!isset($_POST["advice"])) {
             exit();
         }
     } else {//se l'utente non è loggato, mostra il link per il login
-        $pagina=str_replace("{{to-profile}}","<a href=\"areariservata.php\"><span lang=\"en\">Login</span></a>",$pagina);
+        $pagina=str_replace("[to-profile]","<a href=\"login.php\"><span lang=\"en\">Login</span></a>",$pagina);
     }
 
     if(isset($_SESSION["adviceError"])) {//se c'è un errore nella sessione, lo mostra
