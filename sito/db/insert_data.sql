@@ -11,14 +11,16 @@ VALUES
 ('Insalata Russa', 'antipasto', 'kg', 1, 5, 'Insalata russa classica, prezzo al kg', 12.90, TRUE, 'assets/img/prodotti/insalata_russa.webp'),
 
 -- PRIMI
-('Lasagna alla Bolognese', 'primo', 'porzione', 1, 6, 'Sfoglia fresca con ragù di carne, besciamella e parmigiano', 7.50, TRUE, 'img/lasagna.jpg'),
-('Risotto ai Funghi', 'primo', 'porzione', 1, 6, 'Riso carnaroli con funghi porcini freschi', 8.00, TRUE, 'img/risotto_funghi.jpg'),
-('Trofie al Pesto', 'primo', 'porzione', 1, 6, 'Pasta fresca con pesto genovese e patate', 7.00, TRUE, 'img/trofie_pesto.jpg'),
-('Canneloni Ricotta e Spinaci', 'primo', 'porzione', 1, 6, 'Crespelle ripiene di ricotta fresca e spinaci', 7.50, TRUE, 'img/cannelloni.jpg'),
-('Spaghetti Carbonara', 'primo', 'porzione', 1, 6, 'Pasta con guanciale, uova e pecorino romano', 6.50, TRUE, 'img/carbonara.jpg'),
-('Gnocchi Sorrentina', 'primo', 'porzione', 1, 6, 'Gnocchi al forno con pomodoro e mozzarella', 7.00, TRUE, 'img/gnocchi_sorrentina.jpg'),
+('Lasagna alla Bolognese', 'primo', 'porzione', 1, 6, 'Sfoglia fresca con ragù di carne, besciamella e parmigiano', 7.50, TRUE, 'assets/img/prodotti/lasagna.webp'),
+('Risotto ai Funghi', 'primo', 'porzione', 1, 6, 'Riso carnaroli con funghi porcini freschi', 8.00, TRUE, 'assets/img/prodotti/risotto_funghi.webp'),
+('Trofie al Pesto', 'primo', 'porzione', 1, 6, 'Pasta fresca con pesto genovese e patate', 7.00, TRUE, 'assets/img/prodotti/trofie_pesto.webp'),
+('Canneloni Ricotta e Spinaci', 'primo', 'porzione', 1, 6, 'Crespelle ripiene di ricotta fresca e spinaci', 7.50, TRUE, 'assets/img/prodotti/cannelloni.webp'),
+('Spaghetti Carbonara', 'primo', 'porzione', 1, 6, 'Pasta con guanciale, uova e pecorino romano', 6.50, TRUE, 'assets/img/prodotti/carbonara.webp'),
+('Gnocchi Sorrentina', 'primo', 'porzione', 1, 6, 'Gnocchi al forno con pomodoro e mozzarella', 7.00, TRUE, 'assets/img/prodotti/gnocchi_sorrentina.webp'),
 
 -- SECONDI
+
+
 ('Pollo Arrosto', 'secondo', 'pezzo', 1, 4, 'Pollo intero arrosto con erbe aromatiche', 12.00, TRUE, 'img/pollo_arrosto.jpg'),
 ('Scaloppine al Limone', 'secondo', 'porzione', 1, 6, 'Fettine di vitello al limone', 9.00, TRUE, 'img/scaloppine.jpg'),
 ('Baccalà alla Vicentina', 'secondo', 'porzione', 1, 6, 'Filetto di baccalà stufato con cipolle e latte', 11.00, TRUE, 'img/baccala.jpg'),
@@ -40,11 +42,10 @@ VALUES
 ('Cassata Siciliana', 'dolce', 'porzione', 1, 6, 'Dolce tipico con ricotta, pan di spagna e canditi', 5.00, TRUE, 'img/cassata.jpg'),
 ('Crostata alla Marmellata', 'dolce', 'pezzo', 1, 8, 'Frolla con confettura di albicocca', 3.00, TRUE, 'img/crostata.jpg'),
 ('Bignè alla Crema', 'dolce', 'pezzo', 2, 12, 'Pasta choux ripiena di crema pasticcera', 1.50, TRUE, 'img/bigne.jpg'),
-('Cheesecake ai Frutti Rossi', 'dolce', 'porzione', 1, 6, 'Cheesecake con topping ai frutti rossi', 4.50, TRUE, 'img/cheesecake.jpg'),
+('Cheesecake ai Frutti Rossi', 'dolce', 'porzione', 1, 6, 'Cheesecake con topping ai frutti rossi', 4.50, TRUE, 'img/cheesecake.jpg');
 
 -- PRODOTTI A PESO (KG)
-('Lasagna al Ragu (al kg)', 'primo', 'kg', 1, 4, 'Lasagna al ragu in teglia, prezzo al kg', 18.00, TRUE, 'img/lasagna_kg.jpg'),
-('Arrosto di Maiale (al kg)', 'secondo', 'kg', 1, 5, 'Arrosto di maiale cotto lentamente, prezzo al kg', 24.00, TRUE, 'img/arrosto_maiale_kg.jpg'),
-('Caponata Siciliana (al kg)', 'contorno', 'kg', 1, 5, 'Caponata siciliana di melanzane e verdure, prezzo al kg', 14.50, TRUE, 'img/caponata_kg.jpg'),
-('Biscotti Artigianali (al kg)', 'dolce', 'kg', 1, 3, 'Selezione di biscotti di frolla artigianali, prezzo al kg', 22.00, TRUE, 'img/biscotti_kg.jpg'),
-('Insalata di Farro (al kg)', 'contorno', 'kg', 1, 4, 'Insalata di farro con verdure di stagione, prezzo al kg', 15.00, TRUE, 'img/insalata_farro_kg.jpg');
+('Arrosto di Maiale', 'secondo', 'kg', 1, 5, 'Arrosto di maiale cotto lentamente, prezzo al kg', 24.00, TRUE, 'img/arrosto_maiale_kg.jpg'),
+('Caponata Siciliana', 'contorno', 'kg', 1, 5, 'Caponata siciliana di melanzane e verdure, prezzo al kg', 14.50, TRUE, 'img/caponata_kg.jpg'),
+('Biscotti Artigianali', 'dolce', 'kg', 1, 3, 'Selezione di biscotti di frolla artigianali, prezzo al kg', 22.00, TRUE, 'img/biscotti_kg.jpg'),
+('Insalata di Farro', 'contorno', 'kg', 1, 4, 'Insalata di farro con verdure di stagione, prezzo al kg', 15.00, TRUE, 'img/insalata_farro_kg.jpg');
