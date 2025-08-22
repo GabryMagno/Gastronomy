@@ -1256,11 +1256,11 @@ div#product-pages a{
     justify-content: center;
 }
 
-form#advice{
+form#advice-form{
     margin-top: 2em;
 }
 
-form#advice textarea{
+form#advice-form textarea{
     height: 20vh;
 }
 
