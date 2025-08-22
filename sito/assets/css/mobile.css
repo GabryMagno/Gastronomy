@@ -535,4 +535,16 @@ div .chef-content{
 .error-description{
     font-size: 1.2em;
 }
+
+/*  
+    ===============================
+            FORM 
+    ===============================
+*/
+
+#to-register,
+#to-login{
+    padding-left: 5px;
+    padding-right: 5px;
+}
  
