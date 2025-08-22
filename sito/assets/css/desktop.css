@@ -461,20 +461,12 @@ form.form-bianco#filter-content{
     width: 90%;
 }
 
-form.form-bianco#login-user label,
-form.form-bianco#register-form label,
-form.form-bianco#change-personal-info label,
-form.form-bianco#change-password-email label,
-form.form-bianco#delete-account label{
+form.form-bianco label{
     text-align: center;
     font-weight: bold;
 }
 
-form.form-bianco#login-user label::after,
-form.form-bianco#register-form label::after,
-form.form-bianco#change-personal-info label::after,
-form.form-bianco#change-password-email label::after,
-form.form-bianco#delete-account label::after{
+form.form-bianco label::after{
     content: ":";
 }
 
@@ -2349,18 +2341,7 @@ h3 + .singleproduct-rating {
     font-size: 1.5em;
 }
 
-button#submit-register.not-available, 
-button#submit-user-setting.not-available, 
-button#submit-password-setting.not-available,
-button#submit-login.not-available,
-button#submit-advice.not-available,
-button#reset-advice.not-available,
-button#reset-comment.not-available,
-button#submit-comment.not-available,
-button#submit-order.not-available,
-button#reset-user-setting.not-available,
-button#reset-password-setting.not-available,
-button#submit-reservation.not-available{
+button.not-available{
     opacity: 0.6;
     cursor: not-allowed;
 }

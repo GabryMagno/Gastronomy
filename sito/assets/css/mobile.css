@@ -470,7 +470,7 @@ form#valutazione,#prenotazione{
 
 /*  
     ===============================
-            CHI SIAMO 
+            PAGINA CHI SIAMO 
     ===============================
 */
 
@@ -488,6 +488,10 @@ div .chef-content{
 
 #chisiamo-chef {
     padding: 2em;
+}
+
+#chef-section-title{
+    padding-bottom: 0.5em;
 }
 
 #chef-container{

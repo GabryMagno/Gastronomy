@@ -26,7 +26,7 @@ CREATE TABLE utenti (
 CREATE TABLE prodotti (
     nome VARCHAR(30) PRIMARY KEY,
     categoria enum('antipasto', 'primo', 'secondo', 'contorno','dolce') NOT NULL,
-    unita enum('porzione','vaschetta','kg', 'gr', 'pezzo') NOT NULL,
+    unita enum('porzione','vaschetta','kg', 'pezzo') NOT NULL,
     min_prenotabile SMALLINT NOT NULL CHECK(min_prenotabile > 0),
     max_prenotabile SMALLINT NOT NULL CHECK(max_prenotabile > min_prenotabile),
     descrizione TEXT NOT NULL,

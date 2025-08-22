@@ -151,22 +151,19 @@ class DB {
         }
     }
 
-    public function LogoutUser(): bool | string{//logout utente
+    public function LogoutUser(): bool | string {
 
-        $db = new DB();
-        $isUserLogged = $db->IsUserLog();
+        $isUserLogged = $this->IsUserLog(); // Controlla se l'utente è loggato
 
-        if($isUserLogged == false){
-            //se l'utente è loggato, procedi con il logout
-            unset($_SESSION["logged_user"]); //rimuove la sessione dell'utente loggato
-            return true; //logout avvenuto con successo
-
-        }else{
-            //se l'utente non è loggato, ritorna un messaggio di errore
-            return "User is not logged in"; //l'utente non è loggato
-
+        if ($isUserLogged !== false) {
+            // L'utente è loggato, procedi con il logout
+            unset($_SESSION["logged_user"]); // rimuove la sessione dell'utente loggato
+            session_destroy(); // distrugge la sessione
+            return true; // logout avvenuto con successo
+        } else {
+            // L'utente non è loggato
+            return "Utente non loggato";
         }
-
     }
 
     public function DeleteUser(): bool | string{//eliminazione utente
