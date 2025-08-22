@@ -527,4 +527,12 @@ div .chef-content{
     width: 90%;
     height: auto;
 }
+
+.error_main h3{
+    font-size: 2.2em;
+}
+
+.error-description{
+    font-size: 1.2em;
+}
  

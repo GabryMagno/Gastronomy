@@ -1,13 +1,12 @@
 # Pagine di errore personalizzate
-ErrorDocument 403 403.php
-ErrorDocument 404 404.php
-ErrorDocument 500 500.php
+ErrorDocument 403 /gastronomia/sito/403.php
+ErrorDocument 404 /gastronomia/sito/404.php
+ErrorDocument 500 /gastronomia/sito/500.php
 
 # Attivazione riscrittura
 RewriteEngine On
 
 # Se refer vuoto e si vuole accedere ad /assets/
-
 RewriteCond %{HTTP_REFERER} ^$
 RewriteRule ^assets/ - [F,L]
 
