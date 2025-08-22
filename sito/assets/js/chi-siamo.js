@@ -13,7 +13,7 @@ function validateUserAdvice() {
         document.getElementById("user-advice").focus();
     })
 
-	let form = document.getElementById("advice");
+	let form = document.getElementById("advice-form");
 
 	form.addEventListener("submit", function (event) {
 		if (! (validateAdvice()) ) {
@@ -62,7 +62,7 @@ function deleteError(p){
 }
 
 function validateAdvice(){
-    const Advice = document.forms['advice']['user-advice'].value;
+    const Advice = document.forms['advice-form']['user-advice'].value;
     if(Advice.length < 1){
         document.getElementById("submit-advice").classList.add("not-available");
 		document.getElementById("submit-advice").disabled = true;

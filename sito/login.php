@@ -25,8 +25,6 @@ if(isset($_GET["ref"])) {
 }
 
 if (isset($_POST['submit-login'])) {
-
-    echo "Sono entrato";
     
     //CONTROLLO USERNAME
     $username = $_POST["username"];
