@@ -91,8 +91,8 @@ function CreateProductBrochure(string $img, string $title, int $grade, int $cost
                     <img loading="lazy" src="'. $img . '" alt=""/>
                     <h4 class="product-name">' . $title . '</h4>
                    
-                    <p>Valutazione:  '. $grade .'<abbr title="su">/</abbr> 5</p>
-                    <p>Prezzo:  '. $cost . '&euro;</p>
+                    <p>Valutazione: '. $db->AverageGradeProduct($title) .' su 5</p>
+                    <p>Prezzo: '. $cost . '&euro;</p>
                     
                     <a href="./prodotto.php?prodotto='. urlencode($title) . '" title="vai al prodotto ' . $title . '">Scheda del prodotto</a>
                 </li>';

@@ -1053,16 +1053,36 @@ h3.product-name, h4.product-name{
     padding: 0 1em;
 }
 
-div#product-pages{
+form#product-pages{
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 1.5em 0;
-    gap: 1em;
+    gap: 1.5em;
 }
 
-div#product-pages a{
+form#product-pages button{
+    width: 5em;
+    height: 5em;
+    background-size: contain;
+    border: 0;
+    border-radius: 50%;
+    text-indent: -9999rem;
+    transition: transform .2s;
+    cursor: pointer;
+}
+
+form#product-pages button#prev{
+    background-image: url(../img/icone/back.svg);
+}
+
+form#product-pages button#next{
+    background-image: url(../img/icone/next.svg);
+}
+
+form#product-pages p{
     color: var(--txtcolor);
+    font-size: 1.5em;
 }
 
 /*  

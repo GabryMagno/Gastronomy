@@ -112,7 +112,7 @@ class ChangePageProducts
         $query .= "GROUP BY p.nome ";
 
         if ($this->grade) {// Filtra per voto del prodotto
-            $query .= " HAVING AVG(coalesce(v.voto,5)) >= ? ";
+            $query .= " HAVING AVG(coalesce(v.voto,3)) >= ? ";
             $params[] = $this->grade;
             $this->filter_list["rating"] = $this->grade; // //rating è il name degli input per il voto(da 1 a 5 stelle)
         }
@@ -182,8 +182,8 @@ class ChangePageProducts
 
     private function CreatePageButtons(int $currentPage, int $totalPages, $filters_list): string
     {
-        $previous_button = ($currentPage > 1) ? '<button id="previous-page" name="page" value="' . max(1,min($currentPage - 1, $totalPages)) . '">Pagina precedente</button>' : "";
-        $next_button = ($currentPage < $totalPages) ? '<button id="next-page" name="page" value="' . max(1,min($currentPage + 1, $totalPages)). '">Pagina successiva</button>' : "";
+        $previous_button = ($currentPage > 1) ? '<button id="prev" name="page" value="' . max(1,min($currentPage - 1, $totalPages)) . '">Pagina precedente</button>' : "";
+        $next_button = ($currentPage < $totalPages) ? '<button id="next" name="page" value="' . max(1,min($currentPage + 1, $totalPages)). '">Pagina successiva</button>' : "";
         $TEMPLATE = $previous_button ."<p id=\"current-page\">" . $currentPage . ' <abbr title="su">/</abbr> ' . $totalPages . " </p>" . $next_button;
         $HIDDEN = "";
         while ($value = current($filters_list)) {
@@ -193,6 +193,5 @@ class ChangePageProducts
         return $TEMPLATE . $HIDDEN;
     }
 
-    //SERVIRA' UNA FUNZIONE PER CAMBIARE LA PAGINA CORRENTE E RENDERIZZARE I BOTTONI DI PAGINAZIONE
 }
 ?>
