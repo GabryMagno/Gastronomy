@@ -42,7 +42,7 @@ $products = $pageSystem->GetCurrentPage($currentPage);// prendi i prodotti della
 $d_products = "";// stringa che conterrà i prodotti da mostrare
 if ($products != null) {// se ci sono prodotti, crea le brochure per ogni prodotto
     foreach ($products as $product) {// per ogni prodotto
-        $d_products .= CreateProductBrochure($product["url_immagine"], $product["nome"], $product["voto"], $product["prezzo"]);
+        $d_products .= CreateProductBrochure($product["url_immagine"], $product["nome"], $product["prezzo"]);
     }
 } else {// altrimenti mostra un messaggio di errore
     $d_products = "<p>Non abbiamo nessun prodotto che soddisfi i criteri di ricerca</p>";
@@ -84,7 +84,7 @@ $pagina = str_replace("[PRODUCTS]", $d_products, $pagina);
 $pagina = str_replace("[BUTTONS]", $pageSystem->CreateButtons(), $pagina);
 echo $pagina;
 
-function CreateProductBrochure(string $img, string $title, int $grade, int $cost): string{
+function CreateProductBrochure(string $img, string $title, int $cost): string{
     global $db;
     
     $TEMPLATE = '<li class="product-brochure">

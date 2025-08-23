@@ -15,10 +15,10 @@ if(!isset($_POST["advice"])) {
         $pagina=str_replace("[to-profile]","<a href=\"user-profile.php\">Profilo</a>",$pagina);//se l'utente è loggato, mostra il link al suo profilo
         $userInfo=$db->getUserInfo();//ottiene le informazioni dell'utente loggato
         if (is_string($userInfo) && (strcmp($userInfo,"Execution error")==0 || strcmp($userInfo,"User not found")==0 || strcmp($userInfo,"Connection error")==0)) {//se c'è un errore nell'ottenere le informazioni dell'utente, reindirizza alla pagina di errore
-            header('Location: 500-err.php');
+            header('Location: 500.php');
             exit();
         } else if(is_string($userInfo) && strcmp($userInfo,"User Is not logged")==0) {
-            header('Location: areariservata.php');
+            header('Location: login.php');
             exit();
         }
     } else {//se l'utente non è loggato, mostra il link per il login

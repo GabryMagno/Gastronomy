@@ -2315,6 +2315,25 @@ h3 + .singleproduct-rating {
     border-radius: 0.5em;
 }
 
+
+/*  
+    =================================================================
+            PAGINE AUSILIARIE(CONFERMA-SCELTA E RINGRAZIAMENTI 
+    =================================================================
+*/
+
+div#return{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    justify-content: center;
+    align-items: center;
+    margin: 1em 0;
+}
+div#return a{
+    width: 15em;
+}
+
 /*  
     ===============================
             PAGINE ERRORI 
