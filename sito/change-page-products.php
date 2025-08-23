@@ -112,7 +112,7 @@ class ChangePageProducts
         $query .= "GROUP BY p.nome ";
 
         if ($this->grade) {// Filtra per voto del prodotto
-            $query .= " HAVING AVG(coalesce(v.voto,3)) >= ? ";
+            $query .= " HAVING AVG(coalesce(v.voto,5)) >= ? ";
             $params[] = $this->grade;
             $this->filter_list["rating"] = $this->grade; // //rating è il name degli input per il voto(da 1 a 5 stelle)
         }
