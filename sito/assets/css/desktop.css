@@ -1649,7 +1649,10 @@ ul#user-profile-prodotti-prenotati{
 }
 
 .userprofile-brochure-content{
-    padding: 15px 20px;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .userprofile-brochure dl{
