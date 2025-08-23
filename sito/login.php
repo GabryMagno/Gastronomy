@@ -81,7 +81,7 @@ if (isset($_POST['submit-login'])) {
                 header("Location: ".$link);
                 exit();
             }
-            header("Location: user-settings.php");
+            header("Location: user-profile.php");
             exit();
         } else if ($result == false) {
             $pagina = str_replace("[username-error]","",$pagina);
@@ -89,7 +89,7 @@ if (isset($_POST['submit-login'])) {
             echo str_replace("[error]",'<p role="alert" class="error" id="sign-error">Le credenziali inserite non sono corrette!</p>',$pagina);// se le credenziali non sono corrette
         } else if (strcmp($result,"User already logged in") == 0) {// se l'utente è già loggato
             $_POST = null;
-            header('Location: user-settings.php');
+            header('Location: user-profile.php');
             exit();
         } else {// in caso di errore nel database
             $_POST = null;
