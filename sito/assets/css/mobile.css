@@ -510,8 +510,9 @@ div .chef-content{
 */
 
 @media screen and (max-width: 768px){
-    #user-profile-prodotti li img{
-        max-width: 50%;
+    #user-profile-prodotti li img,
+    .userprofile-brochure-content img{
+        max-width: 60%;
         height: auto;
     }
 }
@@ -519,6 +520,45 @@ div .chef-content{
 #user-profile-summary .button-container{
     flex-wrap: wrap;
     justify-content: center;
+}
+
+#user-info{
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 10px 15px;
+
+    max-width: 90%;
+}
+
+.user-avatar{
+    width: 40%;
+    height: 40%;
+
+    margin: 0 0 15px 0;
+}
+
+#general-info {
+    gap: 8px;
+}
+
+#general-info dl{
+    flex-direction: column;
+    align-items: center;
+}
+
+#general-info dl dt:not(:first-of-type){
+    width: auto;
+    margin-top: 0.5em;
+}
+
+#general-info dl dd:not(:first-of-type){
+    width: auto;
+    margin-top: 0.2em;
+}
+
+#general-info dl dd#user-name {
+    font-size: 1.3rem;
 }
 
 /*  
