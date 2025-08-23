@@ -19,8 +19,8 @@ $specialization = array_filter([isset($_GET['Vegano']) ? Sanitizer::SanitizeUser
                     isset($_GET['Vegetariano']) ? Sanitizer::SanitizeUserInput($_GET["Vegetariano"]) : null,
                     isset($_GET['Celiaco']) ? Sanitizer::SanitizeUserInput($_GET["Celiaco"]) : null
                     ]);
-$grade = isset($_GET['rating']) ? Sanitizer::SanitizeGenericInput(Sanitizer::IntFilter($_GET['rating'])) : 1;// voto minimo
-$cost = isset($_GET['price']) ? Sanitizer::SanitizeGenericInput(Sanitizer::IntFilter($_GET['price'])) : 25;// costo massimo
+$grade = isset($_GET['rating']) ? Sanitizer::SanitizeGenericInput(Sanitizer::IntFilter($_GET['rating'])) : 0;// voto minimo
+$cost = isset($_GET['price']) ? Sanitizer::SanitizeGenericInput(Sanitizer::IntFilter($_GET['price'])) : 100;// costo massimo
 $order = isset($_GET['ordina']) ? Sanitizer::SanitizeGenericInput($_GET['ordina']) : null;// ordine (per prezzo, per voto)
 
 
