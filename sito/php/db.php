@@ -776,8 +776,8 @@ class DB {
             $newConnection = $this->OpenConnectionDB();
             if($newConnection){
                 //preparazione della query per cancellare una singola prenotazione di un prodotto dell'utente
-                $deleteReservation = $this->connection->prepare("DELETE FROM prenotazioni WHERE id_utente = ? AND id_prodotto = ?");
-                $deleteReservation->bind_param("ii", $isUserLogged, $reservation);
+                $deleteReservation = $this->connection->prepare("DELETE FROM prenotazioni WHERE id_utente = ? AND nome_prodotto = ?");
+                $deleteReservation->bind_param("is", $isUserLogged, $reservation);
                 try{
                     //esecuzione della query per cancellare una singola prenotazione di un prodotto dell'utente
                     $deleteReservation->execute();
@@ -812,7 +812,7 @@ class DB {
             $newConnection = $this->OpenConnectionDB();
             if($newConnection){
                 //preparazione della query per cancellare tutte le degustazioni prenotate dell'utente
-                $deleteTastings = $this->connection->prepare("DELETE FROM degustazioni WHERE id_utente = ?");
+                $deleteTastings = $this->connection->prepare("DELETE FROM prenotazioni_degustazioni WHERE id_cliente = ?");
                 $deleteTastings->bind_param("i", $isUserLogged);
                 try{
                     //esecuzione della query per cancellare tutte le degustazioni prenotate dell'utente
@@ -821,7 +821,7 @@ class DB {
                     //se c'è un errore nell'esecuzione della query, ritorna false
                     $this->CloseConnectionDB();
                     $deleteTastings->close();
-                    return false; //errore nell'esecuzione della query
+                    return "Execution error"; //errore nell'esecuzione della query
                 }
                 $this->CloseConnectionDB();
                 $deleteTastings->close();
@@ -841,7 +841,7 @@ class DB {
             $newConnection = $this->OpenConnectionDB();
             if($newConnection){
                 //preparazione della query per cancellare una singola degustazione dell'utente
-                $deleteTasting = $this->connection->prepare("DELETE FROM degustazioni WHERE id_utente = ? AND id_degustazione = ?");
+                $deleteTasting = $this->connection->prepare("DELETE FROM prenotazioni_degustazioni WHERE id_cliente = ? AND id_degustazione = ?");
                 $deleteTasting->bind_param("ii", $isUserLogged, $tasting);
                 try{
                     //esecuzione della query per cancellare una singola degustazione dell'utente

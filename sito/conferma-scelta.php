@@ -84,7 +84,8 @@ if(isset($_GET["delete"])) {;
         header('Location: 500.php');
         exit();
     }
-} elseif(isset($_GET["delete-favorites"])) {
+
+} elseif(isset($_GET["delete-favorites"])) {//Eliminazione prodotti favoriti
     $action=$_GET["delete-favorites"];
     unset($_GET["delete-favorites"]);
     if(strcmp($action,"true") != 0) {
@@ -100,7 +101,8 @@ if(isset($_GET["delete"])) {;
         header('Location: 500.php');
         exit();
     }
-} elseif(isset($_GET["delete-tastings"])) {
+
+} elseif(isset($_GET["delete-tastings"])) {//Eliminazione degustazioni
     $action=$_GET["delete-tastings"];
     unset($_GET["delete-tastings"]);
     if(strcmp($action,"true") != 0) {
@@ -113,10 +115,11 @@ if(isset($_GET["delete"])) {;
         header('Location: user-profile.php');
         exit();
     } else{
-        header('Location: 500.php');
+        header('Location: 404.php');
         exit();
     }
-} elseif(isset($_GET["delete-reservations"])) {
+
+} elseif(isset($_GET["delete-reservations"])) {//Eliminazione prenotazioni
     $action=$_GET["delete-reservations"];
     unset($_GET["delete-reservations"]);
     if(strcmp($action,"true") != 0) {
@@ -129,7 +132,7 @@ if(isset($_GET["delete"])) {;
         header('Location: user-profile.php');
         exit();
     } else {
-        header('Location: user-settings.php');
+        header('Location: 500.php');
         exit();
     }
 
