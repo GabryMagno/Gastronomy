@@ -1255,7 +1255,7 @@ class DB {
             $newConnection = $this->OpenConnectionDB();
             if($newConnection){
                 //preparazione della query per cambiare le informazioni personali dell'utente
-                $changeInfo = $this->connection->prepare("UPDATE utenti SET username = ?, nome = ?, cognome = ?, data_di_nascita = ?, logo = ? WHERE id = ?");
+                $changeInfo = $this->connection->prepare("UPDATE utenti SET username = ?, nome = ?, cognome = ?, data_nascita = ?, url_immagine = ? WHERE id = ?");
                 $changeInfo->bind_param("sssssi", $username, $name, $cognome, $date, $logo, $isUserLogged);
 
                 try{
@@ -1309,10 +1309,10 @@ class DB {
             if($result->num_rows == 1){
                 //se il prodotto ha almeno una recensione, ritorna il voto medio
                 $row = mysqli_fetch_assoc($result);
-                return $row["media"]; //ritorna il voto medio come intero
+                return $row["media"] == null ? "X" : $row["media"] ; //ritorna il voto medio come intero
             }else{
-                //se il prodotto non ha recensioni, ritorna 0
-                return "*"; //nessuna recensione trovata
+                //se il prodotto non ha recensioni, ritorna 1
+                return 1; //nessuna recensione trovata
             }
         }else{
             return "Connection error"; //errore nella connessione al database

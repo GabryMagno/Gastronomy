@@ -1053,6 +1053,10 @@ h3.product-name, h4.product-name{
     padding: 0 1em;
 }
 
+/*abbr{
+    text-decoration: none;
+}*/
+
 form#product-pages{
     display: flex;
     justify-content: center;
