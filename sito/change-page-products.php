@@ -50,11 +50,11 @@ class ChangePageProducts
 
         if (!empty($this->productCategory)) {// Filtra per categoria del prodotto (bisogna farne uno per ogni categoria)
             $colMap = [
-                "Antipasto" => "antipasto",
-                "Primo" => "primo",
-                "Secondo" => "secondo",
-                "Contorno" => "contorno",
-                "Dolce" => "dolce",
+                "Antipasto" => "Antipasto",
+                "Primo" => "Primo",
+                "Secondo" => "Secondo",
+                "Contorno" => "Contorno",
+                "Dolce" => "Dolce",
             ];
 
             $placeholders = array();
