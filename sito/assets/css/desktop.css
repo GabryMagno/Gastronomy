@@ -2324,13 +2324,22 @@ h3 + .singleproduct-rating {
 
 div#return{
     display: flex;
-    flex-direction: column;
     gap: 1em;
     justify-content: center;
     align-items: center;
     margin: 1em 0;
 }
 div#return a{
+    width: 15em;
+}
+
+form#delete-choice{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form#delete-choice button{
     width: 15em;
 }
 
