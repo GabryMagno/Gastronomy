@@ -230,7 +230,7 @@
                 </div>
             </form>
 
-            <form method="post" id="delete-account" class="form-bianco" action="conferma-scelta.php">
+            <form method="get" id="delete-account" class="form-bianco" action="conferma-scelta.php">
                 <div class="info-sezione">
                     <h3>Zona Eliminazioni</h3>
                 </div>
@@ -238,10 +238,10 @@
                 <input type="hidden" name="id_utente" value="[id_utente]">
 
                 <div class="button-container" id="elimination-buttons">
-                    <button type="submit" class="bottoni-rossi" id="delete-user-account">Elimina&nbsp;<span lang="en">Account</span></button>
-                    <button type="submit" class="bottoni-rossi" id="delete-user-favorites">Elimina Preferiti</button>
-                    <button type="submit" class="bottoni-rossi" id="delete-user-tastings">Elimina Degustazioni</button>
-                    <button type="submit" class="bottoni-rossi" id="delete-user-reservations">Elimina Prenotazioni</button>
+                    <button type="submit" class="bottoni-rossi" id="delete-user-account" name="delete" value="delete-account">Elimina&nbsp;<span lang="en">Account</span></button>
+                    <button type="submit" class="bottoni-rossi" id="delete-user-favorites" name="delete" value="delete-favorites">Elimina Preferiti</button>
+                    <button type="submit" class="bottoni-rossi" id="delete-user-tastings" name="delete" value="delete-tastings">Elimina Degustazioni</button>
+                    <button type="submit" class="bottoni-rossi" id="delete-user-reservations" name="delete" value="delete-reservations">Elimina Prenotazioni</button>
                 </div>
             </form>
 

@@ -2322,13 +2322,18 @@ h3 + .singleproduct-rating {
     =================================================================
 */
 
-div#return{
+div#return,div#information-delete{
     display: flex;
     gap: 1em;
     justify-content: center;
     align-items: center;
     margin: 1em 0;
 }
+
+div#information-delete{
+    flex-direction: column;
+}
+
 div#return a{
     width: 15em;
 }
