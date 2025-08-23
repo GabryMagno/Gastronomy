@@ -12,7 +12,7 @@ $db = new DB;
 $isLogged_first = $db->isUserLog();//controllo se l'utente è loggato
 $isLogged = $db->UserUsername();//recupero l'username dell'utente loggato
 
-if ((is_bool($isLogged_first) && $isLogged_first == false)||(is_bool($isLogged) && $isLogged == false)) {//controllo se l'utente non è loggato(sia con id che con username)
+if ((is_bool($isLogged_first) && $isLogged_first == false)) {//controllo se l'utente non è loggato(sia con id che con username)
     header('Location: login.php');
     exit();
 }
@@ -226,17 +226,22 @@ if(!isset($_POST["submit-user-settings"]) && !isset($_POST["submit-password-sett
         if(strcmp($username,$isLogged) != 0 || strcmp($name,$userInfo["nome"]) != 0 
         || strcmp($surname,$userInfo["cognome"]) != 0 || strcmp($birthday,$userInfo["data_nascita"]) != 0 
         || $isProfileImageChanged == true || $hasProfileImageBeenDeleted == true) {
+
             $changeResult = false;
             $imagedef = "";
+
             if($userInfo["url_immagine"] || $isProfileImageChanged==true) {//controllo se l'utente ha un'immagine profilo o se l'ha cambiata
+
             	$imagedef = scandir($userBasePath.$userPath);//recupero i file presenti nella cartella dell'utente
 		        $info = new SplFileInfo($imagedef[2]);//creo un oggetto SplFileInfo per ottenere le informazioni sul file
 		        $extension = pathinfo($info->getFilename(), PATHINFO_EXTENSION);//ottiene l'estensione del file
 		        $imagedef = "./user_profiles/".$username.'/'.$username.".".$extension;//imagedef sarà il percorso dell'immagine profilo dell'utente
+
                 if(is_dir($userBasePath.$userPath) && strcmp($username,$isLogged)!=0) {//controllo se la cartella dell'utente esiste e se l'username è diverso da quello attuale
                     rename($userBasePath.$userPath.$username.".".$extension,$userBasePath.$userPath.$username.".".$extension); //rinomina immagine con il nuovo username dell'utente
                     rename($userBasePath.$userPath,"./user_profiles/".$username.'/'); //rinomina la cartella dell'utente    
                 }
+
                 if($userInfo["url_immagine"] && $hasProfileImageBeenDeleted==true) {//controlla se l'utente ha eliminato l'immagine profilo
                     $files = glob($userBasePath.$userPath.'*'); //cancella tutti i file già presenti
                     foreach($files as $file){ //rimuove tutti i file presenti
@@ -247,17 +252,25 @@ if(!isset($_POST["submit-user-settings"]) && !isset($_POST["submit-password-sett
                     $imagedef = NULL;
                 }
 
-                $changeResult=$db->ChangeMainInfo($username,$name,$surname,$birthday,$imagedef);
+                $changeResult = $db->ChangeMainInfo($username,$name,$surname,$birthday,$imagedef);
                 if(is_bool($changeResult) && $changeResult == true) {//controllo se la modifica delle informazioni è andata a buon fine
                     header('Location: user-profile.php');//reindirizza alla pagina delle informazioni utente
                     exit();
-                } else {
+                } else { 
                     header('Location: user-profile.php');
+                    echo "2";
                     exit();
                 }
             } else {
-                header('Location: user-profile.php');
-                exit();
+                $changeResult = $db->ChangeMainInfo($username,$name,$surname,$birthday,"assets/img/Cuochi.png");
+                if(is_bool($changeResult) && $changeResult == true) {//controllo se la modifica delle informazioni è andata a buon fine
+                    header('Location: user-profile.php');//reindirizza alla pagina delle informazioni utente
+                    exit();
+                } else { 
+                    header('Location: user-profile.php');
+                    echo "2";
+                    exit();
+                }
             }
         }
     }
@@ -335,8 +348,7 @@ if(!isset($_POST["submit-user-settings"]) && !isset($_POST["submit-password-sett
     }
 
     $result = $db->ChangePassword($oldPassword,$newPassword);//chiamata alla funzione per cambiare la password
-    if(is_string($result) && strcmp($result,"Password change failed")==0) {//controllo se la modifica della password è fallita
-        echo "Sono arrivato qua";
+    if(is_string($result) && strcmp($result,"Password change failed") == 0) {//controllo se la modifica della password è fallita
         $pagina = str_replace("[old-password-error]",'<p role="alert" class="error" id="old-password-error">La <span lang="en">password</span> attuale inserita non è corretta</p>',$pagina);
         echo $pagina;
         exit();
