@@ -56,7 +56,7 @@ if (isset($_POST['submit-login'])) {
             header("Location: ".$link);
             exit();
         }
-        header("Location: user-settings.php");
+        header("Location: user-profile.php");
         exit();
     }
     if (mb_strlen($password) == 0) {// controllo se la password è vuota
