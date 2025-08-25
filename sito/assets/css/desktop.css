@@ -1583,7 +1583,7 @@ div#user-settings{
 
     color: var(--errorcolor);
 
-    margin-top: 0.2em;
+    margin-top: 0.5em;
     margin-bottom: 0.7em;
 }
 
@@ -1639,7 +1639,8 @@ ul#user-profile-prodotti{
 
 /* USER PROFILE - DEGUSTAZIONI */
 ul#user-profile-degustazioni-prenotate,
-ul#user-profile-prodotti-prenotati{
+ul#user-profile-prodotti-prenotati,
+ul#user-profile-recensioni {
     display: flex;
     flex-direction: row;
 

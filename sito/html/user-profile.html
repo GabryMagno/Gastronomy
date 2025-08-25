@@ -261,7 +261,7 @@
                 <p class="section-descrizione">In questa sezione della pagina puoi vedere le degustazioni che hai prenotato.</p>
                 <p class="nondisponibile">Nessuna degustazione prenotata.</p>
                 
-                <div class="data-container" id="dc-degustazioni-prenotatee" aria-live="polite">
+                <div class="data-container" id="dc-degustazioni-prenotate" aria-live="polite">
                     <ul class="list" id="user-profile-degustazioni-prenotate">
                         <li class="userprofile-brochure">
                             <div class="userprofile-brochure-content">
@@ -335,6 +335,58 @@
                 <h3 class="section-title" id="recensioni-prodotti">Le tue recensioni</h3>
                 <p class="section-descrizione">In questa sezione della pagina puoi visualizzare le recensioni che hai scritto per i prodotti sul nostro sito.</p>
                 <p class="nondisponibile">Nessuna recensione inserita.</p>
+                
+                <div class="data-container" id="dc-recensioni" aria-live="polite">
+                    <ul class="list" id="user-profile-recensioni">
+                        <li class="userprofile-brochure">
+                            <div class="userprofile-brochure-content">
+                                <h4>[Nome prodotto]</h4>
+                                <dl>
+                                    <dt>Data</dt>
+                                    <dd>[dd-mm-yyyy]</dd>
+                                    <dt>Valutazione</dt>
+                                    <dd aria-label="Valutazione: 4 su 5 stelle">[Valutazione]</dd>
+                                </dl>
+                            </div>
+                            <a href="prodotto.html#valutazione">Visualizza</a>
+                        </li>
+
+                        <li class="userprofile-brochure">
+                            <div class="userprofile-brochure-content">
+                                <h4>[Nome prodotto]</h4>
+                                <dl>
+                                    <dt>Data</dt>
+                                    <dd>[dd-mm-yyyy]</dd>
+                                    <dt>Valutazione</dt>
+                                    <dd aria-label="Valutazione: 4 su 5 stelle">[Valutazione]</dd>
+                                </dl>
+                            </div>
+                            <a href="prodotto.html#valutazione">Visualizza</a>
+                        </li>
+
+                        <li class="userprofile-brochure">
+                            <div class="userprofile-brochure-content">
+                                <h4>[Nome prodotto]</h4>
+                                <dl>
+                                    <dt>Data</dt>
+                                    <dd>[dd-mm-yyyy]</dd>
+                                    <dt>Valutazione</dt>
+                                    <dd aria-label="Valutazione: 4 su 5 stelle">[Valutazione]</dd>
+                                </dl>
+                            </div>
+                            <a href="prodotto.html#valutazione">Visualizza</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="a11y-status sr-only nondisponibile" role="status" aria-live="polite"></div>
+
+                <div class="button-container">
+                    <button class="load-more bottoni-rossi" id="lm-recensioni" aria-controls="dc-recensioni" aria-label="Carica ulteriori recensioni da te scritte.">
+                        Carica di pi&ugrave;
+                    </button>
+                    <a class="bottoni-rossi" href="#degustazioni-prenotate">Torna su</a>
+                </div>
 
             </section>
 
