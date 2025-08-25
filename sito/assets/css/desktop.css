@@ -1526,11 +1526,11 @@ div#favorites{
 
 #general-info dt:not(:first-of-type){
     font-weight: bold;
-    width: 40%;
+    width: 50%;
 }
 
 #general-info dd:not(:first-of-type){
-    width: 60%;
+    width: 50%;
 }
 
 #general-info dl dt:first-of-type{
@@ -1553,6 +1553,8 @@ div#favorites{
 #general-info dd#user-name {
     font-size: 1.5rem;
     font-weight: bold;
+
+    width: 100%;
 }
 
 div#favorites{

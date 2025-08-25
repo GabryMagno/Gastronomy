@@ -1,5 +1,6 @@
 USE gastronomia;
 
+-- Elimina tabelle in ordine per evitare vincoli interrotti
 DROP TABLE IF EXISTS prenotazioni;
 DROP TABLE IF EXISTS valutazioni;
 DROP TABLE IF EXISTS preferiti;
@@ -24,7 +25,8 @@ CREATE TABLE utenti (
 );
 
 CREATE TABLE prodotti (
-    nome VARCHAR(30) PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY, 
+    nome VARCHAR(30) NOT NULL UNIQUE,
     categoria enum('antipasto', 'primo', 'secondo', 'contorno','dolce') NOT NULL,
     unita enum('porzione','vaschetta','kg', 'pezzo') NOT NULL,
     min_prenotabile SMALLINT NOT NULL CHECK(min_prenotabile > 0),
@@ -43,26 +45,26 @@ CREATE TABLE ingredienti (
 );
 
 CREATE TABLE prodotto_ingredienti(
-    prodotto VARCHAR(30) NOT NULL,
+    id_prodotto INT NOT NULL,
     ingrediente VARCHAR(30) NOT NULL,
     quanto_basta BOOLEAN NOT NULL,
-    quantita SMALLINT CHECK(quantita >= 0),
+    quantita SMALLINT CHECK(quantita > 0),
     unita_misura enum ('g', 'ml', 'num_el'),
     CHECK((quanto_basta IS TRUE AND quantita IS NULL AND unita_misura IS NULL) OR (quanto_basta IS FALSE AND quantita IS NOT NULL AND unita_misura IS NOT NULL)),
-    PRIMARY KEY(prodotto, ingrediente),
-    FOREIGN KEY (prodotto) REFERENCES prodotti(nome) ON DELETE CASCADE ON UPDATE CASCADE,
+    PRIMARY KEY(id_prodotto, ingrediente),
+    FOREIGN KEY (id_prodotto) REFERENCES prodotti(id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (ingrediente) REFERENCES ingredienti(nome) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE degustazioni (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nome_prodotto VARCHAR(30) NOT NULL,
+    id_prodotto INT NOT NULL,
     descrizione TEXT NOT NULL,
     disponibilita_persone INT NOT NULL,
     data_inizio DATE NOT NULL,
     data_fine DATE NOT NULL,
     prezzo DECIMAL(10, 2) NOT NULL,
-    FOREIGN KEY (nome_prodotto) REFERENCES prodotti(nome) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (id_prodotto) REFERENCES prodotti(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE prenotazioni_degustazioni (
@@ -77,31 +79,31 @@ CREATE TABLE prenotazioni_degustazioni (
 
 CREATE TABLE preferiti (
     id_utente INT,
-    nome_prodotto VARCHAR(30),
-    PRIMARY KEY (id_utente, nome_prodotto),
+    id_prodotto INT,
+    PRIMARY KEY (id_utente, id_prodotto),
     FOREIGN KEY (id_utente) REFERENCES utenti(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (nome_prodotto) REFERENCES prodotti(nome) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (id_prodotto) REFERENCES prodotti(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE prenotazioni (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_utente INT NOT NULL,
-    nome_prodotto VARCHAR(30) NOT NULL,
+    id_prodotto INT NOT NULL,
     quantita INT NOT NULL,
     data_ritiro DATE NOT NULL,
     FOREIGN KEY (id_utente) REFERENCES utenti(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (nome_prodotto) REFERENCES prodotti(nome) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (id_prodotto) REFERENCES prodotti(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE valutazioni (
     id_utente INT,
-    nome_prodotto VARCHAR(30),
+    id_prodotto INT,
     data TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     voto INT NOT NULL CHECK (voto >= 1 AND voto <= 5),
     commento TEXT NOT NULL CHECK (CHAR_LENGTH(commento) BETWEEN 30 AND 300),
-    PRIMARY KEY (id_utente, nome_prodotto),
+    PRIMARY KEY (id_utente, id_prodotto),
     FOREIGN KEY (id_utente) REFERENCES utenti(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (nome_prodotto) REFERENCES prodotti(nome) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (id_prodotto) REFERENCES prodotti(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE suggerimenti (
