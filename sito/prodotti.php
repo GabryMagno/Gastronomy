@@ -42,7 +42,7 @@ $products = $pageSystem->GetCurrentPage($currentPage);// prendi i prodotti della
 $d_products = "";// stringa che conterrà i prodotti da mostrare
 if ($products != null) {// se ci sono prodotti, crea le brochure per ogni prodotto
     foreach ($products as $product) {// per ogni prodotto
-        $d_products .= CreateProductBrochure($product["url_immagine"], $product["nome"], $product["prezzo"], product["id"]);
+        $d_products .= CreateProductBrochure($product["url_immagine"], $product["nome"], $product["prezzo"], $product["id"]);
     }
 } else {// altrimenti mostra un messaggio di errore
     $d_products = "<p>Non abbiamo nessun prodotto che soddisfi i criteri di ricerca</p>";
@@ -94,7 +94,7 @@ function CreateProductBrochure(string $img, string $title, int $cost, int $id): 
                     <p>Valutazione: '. $db->AverageGradeProduct($id) .' su 5</p>
                     <p>Prezzo: '. $cost . '&euro;</p>
                     
-                    <a href="./prodotto.php?prodotto='. urlencode($id) . '" title="vai al prodotto ' . $title . '">Scheda del prodotto</a>
+                    <a href="./prodotto.php?prodotto='. urlencode($id) . '" title="vai al prodotto ' . Sanitizer::SanitizeGenericInput($title) . '">Scheda del prodotto</a>
                 </li>';
     return $TEMPLATE;
 }
