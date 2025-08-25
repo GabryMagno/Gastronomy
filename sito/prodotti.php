@@ -6,7 +6,7 @@ require_once "change-page-products.php";
 
 $db = new DB;
 
-$productName = isset($_GET['name']) ? Sanitizer::SanitizeGenericInput($_GET['name']) : null;
+$productName = isset($_GET['nome']) ? Sanitizer::SanitizeGenericInput($_GET['nome']) : null;
 //Con productCategory array delle varie scelte per il tipo di prodotto (antipasto, primo, secondo, contorno, dolce)
 $productCategory = [isset($_GET['Antipasto']) ? Sanitizer::SanitizeUserInput($_GET["Antipasto"]) : null,
                     isset($_GET['Primo']) ? Sanitizer::SanitizeUserInput($_GET["Primo"]) : null,
@@ -31,7 +31,7 @@ $pagina = file_get_contents("html/prodotti.html");
 
 if($db->isUserLog() != false) {// Se l'utente è loggato, mostra il link al profilo, altrimenti mostra il link per il login
     $pagina=str_replace("[to-profile]","<a href=\"user-profile.php\">Profilo</a>",$pagina);//se l'utente è loggato, mostra il link al suo profilo
-} else {//altrimenti mostra il link per il login
+} else {//altrimenti mostra il link per il login 
     $pagina = str_replace("[to-profile]","<a href=\"login.php\"><span lang=\"en\">Login</span></a>",$pagina);
 }
 
@@ -82,6 +82,7 @@ $pagina = str_replace("id=\"select-for\" name=\"ordina\"", "id=\"select-for\" na
 $pagina = str_replace("[HIDDEN]", CreateOrderChanger($pageSystem->GetParamList()), $pagina);
 $pagina = str_replace("[PRODUCTS]", $d_products, $pagina);
 $pagina = str_replace("[BUTTONS]", $pageSystem->CreateButtons(), $pagina);
+
 echo $pagina;
 
 function CreateProductBrochure(string $img, string $title, float $cost, int $id): string{
