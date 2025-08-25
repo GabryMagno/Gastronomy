@@ -1,5 +1,5 @@
 <?php
-require_once "php/db.php";
+require_once "db.php";
 
 $db = new DB;
 
@@ -9,6 +9,6 @@ echo "Sono entrato in logout";
 $db->LogoutUser();
 
 // Reindirizza alla pagina di login
-header('Location: login.php');
+header('Location: ../login.php');
 exit();
 ?>

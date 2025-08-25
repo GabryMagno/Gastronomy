@@ -25,7 +25,7 @@ CREATE TABLE utenti (
 );
 
 CREATE TABLE prodotti (
-    id INT AUTO_INCREMENT PRIMARY KEY, 
+    id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(30) NOT NULL UNIQUE,
     categoria enum('antipasto', 'primo', 'secondo', 'contorno','dolce') NOT NULL,
     unita enum('porzione','vaschetta','kg', 'pezzo') NOT NULL,

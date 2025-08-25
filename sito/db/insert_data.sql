@@ -37,10 +37,10 @@ VALUES
 ('Insalata di Farro', 'contorno', 'kg', 1, 4, 'Insalata di farro con verdure di stagione', 15.00, TRUE, 'assets/img/insalata_farro.webp'),
 
 -- DOLCI
-('Tiramisù', 'dolce', 'porzione', 1, 6, 'Classico dolce al cucchiaio con savoiardi, caffè e mascarpone', 4.50, TRUE, 'assets/img/tiramisu.webp'),
+('Tiramis&ugrave;', 'dolce', 'porzione', 1, 6, 'Classico dolce al cucchiaio con savoiardi, caffè e mascarpone', 4.50, TRUE, 'assets/img/tiramisu.webp'),
 ('Panna Cotta', 'dolce', 'porzione', 1, 6, 'Panna cotta con topping di frutti di bosco', 4.00, TRUE, 'assets/img/pannacotta.webp'),
 ('Cassata Siciliana', 'dolce', 'porzione', 1, 6, 'Dolce tipico con ricotta, pan di spagna e canditi', 5.00, TRUE, 'assets/img/cassata.webp'),
 ('Crostata alla Marmellata', 'dolce', 'pezzo', 1, 8, 'Frolla con confettura di albicocca', 3.00, TRUE, 'assets/img/crostata.webp'),
-('Bignè alla Crema', 'dolce', 'pezzo', 2, 12, 'Pasta choux ripiena di crema pasticcera', 1.50, TRUE, 'assets/img/bigne.webp'),
+('Bign&egrave; alla Crema', 'dolce', 'pezzo', 2, 12, 'Pasta <span lang="fr">choux</span> ripiena di crema pasticcera', 1.50, TRUE, 'assets/img/bigne.webp'),
 ('Biscotti Artigianali', 'dolce', 'kg', 1, 3, 'Selezione di biscotti di frolla artigianali', 18.00, TRUE, 'assets/img/biscotti.webp'),
-('Cheesecake ai Frutti Rossi', 'dolce', 'porzione', 1, 6, 'Cheesecake con topping ai frutti rossi', 4.50, TRUE, 'assets/img/cheesecake.webp');
+('<span lang="en">Cheesecake</span> ai Frutti Rossi', 'dolce', 'porzione', 1, 6, '<span lang="en">Cheesecake</span> con topping ai frutti rossi', 4.50, TRUE, 'assets/img/cheesecake.webp');
