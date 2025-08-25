@@ -70,7 +70,7 @@
 
             <h3 class="section-title">Impostazioni</h3>
 
-            <form method="post" id="change-personal-info" class="form-bianco">
+            <form method="post" id="change-personal-info" class="form-bianco" enctype="multipart/form-data">
                 <div class="info-sezione">
                     <h3>Modifica Dati Personali</h3>
                 </div>
@@ -154,7 +154,7 @@
                                 <li id="type-file">Solo formati png, jpeg o jpg</li>
                             </ul>
                         </details>
-                        <img id="new-image" src="assets/img/Cuochi.png" alt="logo utente">
+                        <img id="new-image" [profile-image] alt="logo utente">
                         [logo-error]
                     </div>
 

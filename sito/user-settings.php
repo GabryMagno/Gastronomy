@@ -17,8 +17,8 @@ if ((is_bool($isLogged_first) && $isLogged_first == false)) {//controllo se l'ut
     exit();
 }
 
-$userBasePath="./images/";//percorso base per le immagini profilo degli utenti
-$userPath=$isLogged."/";//percorso per le immagini profilo dell'utente loggato
+$userBasePath="assets/img/users_logos";//percorso base per le immagini profilo degli utenti
+//$userPath=$isLogged."/";//percorso per le immagini profilo dell'utente loggato
 $image="";
 $userInfo = $db->GetUserInfo();//recupero le informazioni dell'utente loggato
 $isProfileImageChanged = false;//variabile che indica se l'immagine del profilo è stata cambiata
@@ -43,9 +43,9 @@ if(!isset($_POST["submit-user-settings"]) && !isset($_POST["submit-password-sett
     $pagina = str_replace("[surname-error]","",$pagina);
 
     if ($userInfo["url_immagine"]) {//controllo se l'utente ha un'immagine profilo
-        $pagina = str_replace("[profile-pic]",$userInfo["url_immagine"],$pagina);
+        $pagina = str_replace("[profile-image]",$userInfo["url_immagine"],$pagina);
     } else {
-        $pagina = str_replace("[profile-pic]","./img/default.webp",$pagina);//immagine di default
+        $pagina = str_replace("[profile-image]","./img/default.webp",$pagina);//immagine di default
     }
 
     if ($userInfo["username"]) {//controllo se lo username è presente
@@ -97,10 +97,10 @@ if(!isset($_POST["submit-user-settings"]) && !isset($_POST["submit-password-sett
     } else {
         $username = Sanitizer::SanitizeUsername($username);
         $isUserPresent = $db->ThisUsernameExists($username);
-        if (strcmp($isUserPresent,"Execution error") != 0 && strcmp($isUserPresent,"Connection error") != 0 && $isUserPresent == true && strcmp($username,$isLogged) != 0) {
+        /*if (strcmp($isUserPresent,"Execution error") != 0 && strcmp($isUserPresent,"Connection error") != 0 && $isUserPresent == true && strcmp($username,$isLogged) != 0) {
             $errorFound = true;
-            $pagina = str_replace("[username-error]",'<p role="alert" class="error" id="username-error">Lo <span lang="en">username</span> inserito non può essere utilizzato</p>',$pagina);
-        } else if (strcmp($isUserPresent,"Execution error") == 0 || strcmp($isUserPresent,"Connection error") == 0) {
+            $pagina = str_replace("[username-error]",'<p role="alert" class="error" id="username-error">Lo <span lang="en">username</span> inserito non può essere utilizzato</p>',$pagina);*/
+         if (strcmp($isUserPresent,"Execution error") == 0 || strcmp($isUserPresent,"Connection error") == 0) {
             $_POST = null;
             header('Location: 500.php');
             exit();
@@ -154,38 +154,44 @@ if(!isset($_POST["submit-user-settings"]) && !isset($_POST["submit-password-sett
     }
 
     if($hasProfileImageBeenDeleted==false && isset($_FILES["new-logo"]) && $_FILES["new-logo"]["error"]==0) {//controlla se l'utente ha caricato un'immagine profilo
-        $tmpFile = '/tmp//'.$_FILES["new-logo"]["name"];//crea un file temporaneo per l'immagine
-        rename($_FILES["profile-img-edit"]["tmp_name"],'/tmp//'.$_FILES["new-logo"]["name"]);//sposta il file temporaneo nella cartella /tmp
+        $tmpFile = 'assets/tmp/'.$_FILES["new-logo"]["name"];//crea un file temporaneo per l'immagine
+        rename($_FILES["new-logo"]["tmp_name"],'assets/tmp/'.$_FILES["new-logo"]["name"]);//sposta il file temporaneo nella cartella /tmp
         $info = new SplFileInfo($tmpFile);//crea un oggetto SplFileInfo per ottenere le informazioni sul file
         $extension = pathinfo($info->getFilename(), PATHINFO_EXTENSION);//ottiene l'estensione del file
         $extensionArray = array("jpg","jpeg","png");//array delle estensioni supportate
 
         if(mb_strlen($extension) == 0 || !in_array($extension,$extensionArray)) {//controllo se l'estensione del file è supportata
+            echo "1";
             $errorFound=true;
             $pagina = str_replace("[logo-error]",'<p role="alert" id="logo-error" class="error">L\'estensione dell\'immagine caricata non è corretta</p>',$pagina);
         } elseif($info->isExecutable()) {//controllo se il file è eseguibile
+            echo "2";
             $errorFound=true;
             $pagina = str_replace("[logo-error]",'<p role="alert" id="logo-error" class="error">Il <span lang="en">file</span> caricato non è supportato</p>',$pagina);
         } elseif($info->getSize() > 2097152) {//controllo se la dimensione del file è superiore a 2MB
+            echo "3";
             $errorFound=true;
             $pagina = str_replace("[logo-error]",'<p role="alert" id="logo-error" class="error">Sono accettati solo immagini di dimensione inferiore a 2<span lang="en" abbr="megabyte">MB</span></p>',$pagina);
         } elseif(strcmp(mime_content_type($tmpFile),"image/jpeg") != 0 && strcmp(mime_content_type($tmpFile),"image/png")!=0) {//
+            echo "4";
             $errorFound=true;
             $pagina = str_replace("[logo-error]",'<p role="alert" id="logo-error" class="error">Il <span lang="en">file</span> caricato è un formato non supportato</p>',$pagina);
         } else {
             if(!is_dir($userBasePath)) {//controllo se la cartella base per le immagini profilo esiste
-                mkdir($userBasePath);//crea la cartella base se non esiste
+                echo "5";
+                mkdir($userBasePath,0755,true);//crea la cartella base se non esiste
             }
-            if(!is_dir($userBasePath.$userPath)) {//controllo se la cartella per l'utente esiste
-                mkdir($userBasePath.$userPath);//crea la cartella per l'utente se non esiste
-            }
+            /*if(!is_dir($userBasePath)) {//controllo se la cartella per l'utente esiste
+                echo "6";
+                mkdir($userBasePath);//crea la cartella per l'utente se non esiste
+            }*/
 
-            $files = glob($userBasePath.$userPath.'*'); //cancello tutti i file già presenti
+            /*$files = glob($userBasePath.'*'); //cancello tutti i file già presenti
             foreach($files as $file){// rimuovo tutti i file presenti
                 if(is_file($file)) {// controllo se il file è un file
                     unlink($file);// rimuovo il file
                 }
-            }
+            }*/
 
             switch (mime_content_type($tmpFile)) {//controllo il tipo di file
                 case 'image/jpeg'://controllo se il file è un'immagine jpeg
@@ -201,7 +207,7 @@ if(!isset($_POST["submit-user-settings"]) && !isset($_POST["submit-password-sett
                     break;
             }
 
-            imagewebp($img,$userBasePath.$userPath.$isLogged.".webp");//converte l'immagine in formato webp e la salva nella cartella dell'utente
+            imagewebp($img,$userBasePath.'/'.$isLogged_first.".png");//converte l'immagine in formato webp e la salva nella cartella dell'utente
             unset($_FILES["new-logo"]);//rimuove il file temporaneo
             $isProfileImageChanged = true;
             $pagina = str_replace("[logo-error]","",$pagina);            
@@ -230,16 +236,15 @@ if(!isset($_POST["submit-user-settings"]) && !isset($_POST["submit-password-sett
             $changeResult = false;
             $imagedef = "";
 
-            if($userInfo["url_immagine"] || $isProfileImageChanged==true) {//controllo se l'utente ha un'immagine profilo o se l'ha cambiata
+            if($userInfo["url_immagine"] || $isProfileImageChanged == true) {//controllo se l'utente ha un'immagine profilo o se l'ha cambiata
 
-            	$imagedef = scandir($userBasePath.$userPath);//recupero i file presenti nella cartella dell'utente
 		        $info = new SplFileInfo($imagedef[2]);//creo un oggetto SplFileInfo per ottenere le informazioni sul file
 		        $extension = pathinfo($info->getFilename(), PATHINFO_EXTENSION);//ottiene l'estensione del file
-		        $imagedef = "./user_profiles/".$username.'/'.$username.".".$extension;//imagedef sarà il percorso dell'immagine profilo dell'utente
+		        $imagedef = "assets/img/users_logos/".$isLogged_first.".png";//imagedef sarà il percorso dell'immagine profilo dell'utente
 
                 if(is_dir($userBasePath.$userPath) && strcmp($username,$isLogged)!=0) {//controllo se la cartella dell'utente esiste e se l'username è diverso da quello attuale
-                    rename($userBasePath.$userPath.$username.".".$extension,$userBasePath.$userPath.$username.".".$extension); //rinomina immagine con il nuovo username dell'utente
-                    rename($userBasePath.$userPath,"./user_profiles/".$username.'/'); //rinomina la cartella dell'utente    
+                    rename($userBasePath.$userPath.$username.".".$extension, $userBasePath.$userPath.$isLogged_first.".".$extension); //rinomina immagine con id dell'utente
+                    //rename($userBasePath.$userPath,"assests/img/users_logos/".$isLogged_first.'/'); //rinomina la cartella dell'utente    
                 }
 
                 if($userInfo["url_immagine"] && $hasProfileImageBeenDeleted==true) {//controlla se l'utente ha eliminato l'immagine profilo
