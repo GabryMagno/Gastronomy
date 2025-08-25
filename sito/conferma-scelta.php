@@ -32,7 +32,7 @@ if(isset($_GET["delete"])) {;
     } elseif (strcmp($action,"delete-favorites") == 0) {
         $pagina = str_replace("[SCELTA]","preferiti",$pagina);
         $pagina = str_replace("[DELETE]","delete-favorites",$pagina);
-        $pagina = str_replace("[TITOLO]","ELIMINA <span lang=\"en\">ACCOUNT</span>",$pagina);
+        $pagina = str_replace("[TITOLO]","ELIMINA PREFERITI",$pagina);
         $pagina = str_replace("[MESSAGGIO DI AVVISO]","Sei sicuro di voler eliminare tutti i prodotti che hai salvato come preferiti?",$pagina);
         $pagina = str_replace("[MESSAGGIO DI CANCELLAZIONE]","Se cliccherai sul tasto conferma cancellerai tutti i prodotti che hai salvato come preferiti",$pagina);
         echo $pagina;
@@ -40,7 +40,7 @@ if(isset($_GET["delete"])) {;
     } elseif (strcmp($action,"delete-tastings") == 0) {
         $pagina = str_replace("[SCELTA]","degustazioni",$pagina);
         $pagina = str_replace("[DELETE]","delete-tastings",$pagina);
-        $pagina = str_replace("[TITOLO]","ELIMINA <span lang=\"en\">ACCOUNT</span>",$pagina);
+        $pagina = str_replace("[TITOLO]","ELIMINA DEGUSTAZIONI",$pagina);
         $pagina = str_replace("[MESSAGGIO DI AVVISO]","Sei sicuro di voler eliminare tutte le tue degustazioni?",$pagina);
         $pagina = str_replace("[MESSAGGIO DI CANCELLAZIONE]","Se cliccherai sul tasto conferma cancellerai tutte le degustazioni da te prenotate",$pagina);
         echo $pagina;
