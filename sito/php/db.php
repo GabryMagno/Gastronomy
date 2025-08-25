@@ -367,8 +367,8 @@ class DB {
         $newConnection = $this->OpenConnectionDB();
         if($newConnection){
             //preparazione della query per ottenere le informazioni su un prodotto
-            $productInfo = $this->connection->prepare("SELECT * FROM prodotti WHERE nome = ?");
-            $productInfo->bind_param("s", $product);
+            $productInfo = $this->connection->prepare("SELECT * FROM prodotti WHERE id = ?");
+            $productInfo->bind_param("i", $product);
             try{
                 //esecuzione della query per ottenere le informazioni su un prodotto
                 $productInfo->execute();
@@ -400,7 +400,7 @@ class DB {
         $newConnection = $this->OpenConnectionDB();
         if($newConnection){
             $ingredients = $this->connection->prepare("SELECT * FROM prodotto_ingredienti WHERE prodotto = ?");
-            $ingredients->bind_param("s", $product);
+            $ingredients->bind_param("i", $product);
             try{
                 //esecuzione della query per ottenere gli ingredienti di un prodotto
                 $ingredients->execute();
@@ -440,8 +440,8 @@ class DB {
             $productType = $this->connection->prepare("SELECT MIN(ingredienti.isVegano) AS vegano, MIN(ingredienti.isVegetariano) AS vegetariano, MIN(ingredienti.isCeliaco) AS celiaco 
             FROM prodotto_ingredienti 
             JOIN ingredienti ON ingredienti.nome = prodotto_ingredienti.ingrediente
-            WHERE prodotto_ingredienti.prodotto = ?");
-            $productType->bind_param("s", $product);
+            WHERE prodotto_ingredienti.id_prodotto = ?");
+            $productType->bind_param("i", $product);
             try{
                 //esecuzione della query per verificare se un prodotto è vegano, vegetariano o senza glutine
                 $productType->execute();
@@ -510,7 +510,7 @@ class DB {
         $favorites = array();
         if($newConnection){
             //preparazione della query per ottenere i prodotti preferiti dell'utente
-            $userFavorites = $this->connection->prepare( "SELECT prodotti.nome, prodotti.categoria, prodotto.prezzo, prodotti.url_immagine FROM prodotti, preferiti WHERE preferiti.nome_prodotto = prodotti.nome and preferiti.id_utente = ?");
+            $userFavorites = $this->connection->prepare( "SELECT prodotti.nome, prodotti.categoria, prodotto.prezzo, prodotti.url_immagine FROM prodotti, preferiti WHERE preferiti.id_prodotto = prodotti.id and preferiti.id_utente = ?");
             $userFavorites->bind_param("i", $id);
             try{
                 //esecuzione della query per ottenere i prodotti preferiti dell'utente
@@ -637,8 +637,8 @@ class DB {
     public function GetUserReviewProduct($id, $product): array | string{//ottenere recensione scritta su un prodotto singolo
         $newConnection = $this->OpenConnectionDB();
         if($newConnection){
-            $userComments = $this->connection->prepare("SELECT nome_prodotto, voto, commento FROM valutazioni WHERE id_utente = ? AND nome_prodotto = ?");
-            $userComments->bind_param("is", $id, $product);
+            $userComments = $this->connection->prepare("SELECT nome_prodotto, voto, commento FROM valutazioni WHERE id_utente = ? AND id_prodotto = ?");
+            $userComments->bind_param("ii", $id, $product);
             try{
                 //esecuzione della query per ottenere le recensioni scritte dall'utente su un prodotto singolo
                 $userComments->execute();
@@ -711,8 +711,8 @@ class DB {
         }else{
             $newConnection = $this->OpenConnectionDB();
             if($newConnection){
-                $deleteFavorite = $this->connection->prepare("DELETE FROM preferiti WHERE id_utente = ? AND nome_prodotto = ?"); 
-                $deleteFavorite->bind_param("is", $isUserLogged, $product);
+                $deleteFavorite = $this->connection->prepare("DELETE FROM preferiti WHERE id_utente = ? AND id_prodotto = ?"); 
+                $deleteFavorite->bind_param("ii", $isUserLogged, $product);
                 try{
                     //esecuzione della query per cancellare un singolo prodotto preferito dell'utente
                     $deleteFavorite->execute();
@@ -776,8 +776,8 @@ class DB {
             $newConnection = $this->OpenConnectionDB();
             if($newConnection){
                 //preparazione della query per cancellare una singola prenotazione di un prodotto dell'utente
-                $deleteReservation = $this->connection->prepare("DELETE FROM prenotazioni WHERE id_utente = ? AND nome_prodotto = ?");
-                $deleteReservation->bind_param("is", $isUserLogged, $reservation);
+                $deleteReservation = $this->connection->prepare("DELETE FROM prenotazioni WHERE id_utente = ? AND id_prodotto = ?");
+                $deleteReservation->bind_param("ii", $isUserLogged, $reservation);
                 try{
                     //esecuzione della query per cancellare una singola prenotazione di un prodotto dell'utente
                     $deleteReservation->execute();
@@ -906,8 +906,8 @@ class DB {
             $newConnection = $this->OpenConnectionDB();
             if($newConnection){
                 //preparazione della query per cancellare una singola recensione dell'utente
-                $deleteReview = $this->connection->prepare("DELETE FROM valutazioni WHERE id_utente = ? AND nome_prodotto = ?");
-                $deleteReview->bind_param("is", $isUserLogged, $product);
+                $deleteReview = $this->connection->prepare("DELETE FROM valutazioni WHERE id_utente = ? AND id_prodotto = ?");
+                $deleteReview->bind_param("ii", $isUserLogged, $product);
                 try{
                     //esecuzione della query per cancellare una singola recensione dell'utente
                     $deleteReview->execute();
@@ -996,8 +996,8 @@ class DB {
                 }else if($reviewExists == "No reviews found for this product"){
                     //se l'utente non ha ancora scritto una recensione su questo prodotto, allora può procedere con l'aggiunta della recensione
                     //preparazione della query per aggiungere una recensione
-                    $addReview = $this->connection->prepare("INSERT INTO valutazioni (id_utente, nome_prodotto, data, voto, commento) VALUES (?, ?, ?, ?, ?)");
-                    $addReview->bind_param("issis", $isUserLogged, $product, $date, $grade, $comment);
+                    $addReview = $this->connection->prepare("INSERT INTO valutazioni (id_utente, id_prodotto, data, voto, commento) VALUES (?, ?, ?, ?, ?)");
+                    $addReview->bind_param("iisis", $isUserLogged, $product, $date, $grade, $comment);
                     try{
                         //esecuzione della query per aggiungere una recensione
                         $addReview->execute();
@@ -1035,8 +1035,8 @@ class DB {
             $newConnection = $this->OpenConnectionDB();
             if($newConnection){
                 //preparazione della query per aggiungere un prodotto preferito
-                $addFavorite = $this->connection->prepare("INSERT INTO preferiti (id_utente, nome_prodotto) VALUES (?, ?)");
-                $addFavorite->bind_param("is", $isUserLogged, $product);
+                $addFavorite = $this->connection->prepare("INSERT INTO preferiti (id_utente, id_prodotto) VALUES (?, ?)");
+                $addFavorite->bind_param("ii", $isUserLogged, $product);
                 try{
                     //esecuzione della query per aggiungere un prodotto preferito
                     $addFavorite->execute();
@@ -1291,8 +1291,8 @@ class DB {
         $newConnection = $this->OpenConnectionDB();
         if($newConnection){
             //preparazione della query per ottenere il voto medio del prodotto
-            $averageGrade = $this->connection->prepare("SELECT CAST(AVG(voto) AS DECIMAL (2,0)) AS media FROM valutazioni WHERE nome_prodotto = ?");
-            $averageGrade->bind_param("s", $product);
+            $averageGrade = $this->connection->prepare("SELECT CAST(AVG(voto) AS DECIMAL (2,0)) AS media FROM valutazioni WHERE id_prodotto = ?");
+            $averageGrade->bind_param("i", $product);
             try{
                 //esecuzione della query per ottenere il voto medio del prodotto
                 $averageGrade->execute();

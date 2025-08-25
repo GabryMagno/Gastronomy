@@ -37,8 +37,8 @@ class ChangePageProducts
 
     public function GetCurrentPage(int $page): array{// Prende la pagina corrente di prodotti in base ai filtri e alla pagina richiesta,
     //  coalesce serve per evitare errori se non ci sono valutazioni, ceiling serve per arrotondare il voto medio
-        $query = "SELECT p.url_immagine,p.nome,CEILING(AVG(coalesce(v.voto,5))) as voto,p.categoria,p.prezzo
-                FROM prodotti as p LEFT JOIN valutazioni as v ON p.nome = v.nome_prodotto
+        $query = "SELECT p.id, p.url_immagine, p.nome, CEILING(AVG(coalesce(v.voto,5))) as voto, p.categoria, p.prezzo
+                FROM prodotti as p LEFT JOIN valutazioni as v ON p.id = v.id_prodotto
                 WHERE 1=1 ";
         $params = [];
 
@@ -94,10 +94,10 @@ class ChangePageProducts
             }
 
             if(!empty($havingPart)) {
-                $query .= " and p.nome IN (
-                    SELECT pi.prodotto FROM prodotto_ingredienti as pi
+                $query .= " and p.id IN (
+                    SELECT pi.id_prodotto FROM prodotto_ingredienti as pi
                     JOIN ingredienti as i ON pi.ingrediente = i.nome
-                    GROUP BY pi.prodotto
+                    GROUP BY pi.id_prodotto
                     HAVING " . implode(" AND ", $havingPart) . "
                 )";
             }
