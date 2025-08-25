@@ -20,7 +20,7 @@ $specialization = array_filter([isset($_GET['Vegano']) ? Sanitizer::SanitizeUser
                     isset($_GET['Celiaco']) ? Sanitizer::SanitizeUserInput($_GET["Celiaco"]) : null
                     ]);
 $grade = isset($_GET['rating']) ? Sanitizer::SanitizeGenericInput(Sanitizer::IntFilter($_GET['rating'])) : 0;// voto minimo
-$cost = isset($_GET['price']) ? Sanitizer::SanitizeGenericInput(Sanitizer::IntFilter($_GET['price'])) : 100;// costo massimo
+$cost = isset($_GET['price']) ? Sanitizer::SanitizeGenericInput(Sanitizer::FloatFilter($_GET['price'])) : 100;// costo massimo
 $order = isset($_GET['ordina']) ? Sanitizer::SanitizeGenericInput($_GET['ordina']) : null;// ordine (per prezzo, per voto)
 
 
@@ -84,7 +84,7 @@ $pagina = str_replace("[PRODUCTS]", $d_products, $pagina);
 $pagina = str_replace("[BUTTONS]", $pageSystem->CreateButtons(), $pagina);
 echo $pagina;
 
-function CreateProductBrochure(string $img, string $title, int $cost, int $id): string{
+function CreateProductBrochure(string $img, string $title, float $cost, int $id): string{
     global $db;
     
     $TEMPLATE = '<li class="product-brochure">

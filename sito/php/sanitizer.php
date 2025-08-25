@@ -39,6 +39,15 @@ class Sanitizer {
         return $res;
     }
 
+    public static function FloatFilter($value) {
+        $res = filter_var($value, FILTER_VALIDATE_FLOAT,
+           array('options' => array('min_range' => 1)));
+        if(!$res) {
+            return 1; // default value
+        }
+        return $res;
+    }
+
     public static function SanitizeEmail($value) {
         $value = trim($value);
         $value = filter_var($value, FILTER_SANITIZE_EMAIL);

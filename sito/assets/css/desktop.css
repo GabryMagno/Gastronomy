@@ -1017,8 +1017,14 @@ li.product-brochure img,
 .userprofile-brochure-content img,
 ul.products img,
 ul#best-products img{
-    max-width: 75%;
-    height: auto;
+    max-width: 65%;
+    max-height: 65%;
+
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+
+    aspect-ratio: 1;
+
     margin: 1em 0;
     border-radius: 0.72em;
 }
