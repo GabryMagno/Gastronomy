@@ -1,8 +1,19 @@
 function FilterForm(){
     let reset_button = document.getElementById("reset-filters");
-    reset_button.addEventListener("click", () =>{
+    reset_button.addEventListener("click", (e) =>{
+        e.preventDefault();
+
+        const checkbox = document.querySelectorAll('input[type="checkbox"]');
+        checkbox.forEach(cb => cb.checked = false);
+
+        document.getElementsByName("rating").forEach(star => {
+            star.checked = false;
+        });
+
         document.getElementById("price").value = 100;
-        document.getElementById("text-price").innerText =   "100 €";
+        document.getElementById("text-price").innerText = cost + " €";
+
+        document.getElementById("filter-content").submit();
     });
     var cost =  document.getElementById("price").value;
     document.getElementById("text-price").innerText = cost + " €";
