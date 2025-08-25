@@ -43,9 +43,6 @@ $pagina = str_replace(
     $pagina
 );
 
-echo print_r($userInfo);
-
-
 echo $pagina;
 
 ?>
