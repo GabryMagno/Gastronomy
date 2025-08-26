@@ -23,6 +23,15 @@ if ($isUserLogged!=false) {//se l'utente è loggato, mostra il suo profilo
     $pagina=str_replace("[to-profile]","<a href=\"login.php\"><span lang=\"en\">Login</span></a>",$pagina);
 }
 
+$tastings = $db->GetTastings();
+if($tastings === false){
+    header('Location: 500.php');
+} elseif (empty($tastings)){
+    $pagina=str_replace("[Degustazioni]","<p class=\"nondisponibile\" id=\"nodegustazioni\">Nessuna degustazione da visualizzare!</p>",$pagina);
+}
+
+print_r($db->GetTastings());
+
 echo $pagina;
 
 ?>

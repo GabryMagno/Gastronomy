@@ -1437,43 +1437,91 @@ class DB {
         $newConnection = $this->OpenConnectionDB();
         if($newConnection){
             try {
-            $registerUserStatement=$this->connection->prepare($query);
-            $stmt = $this->connection->prepare($query);
-            if (!$stmt) {
-                    die("Errore nella prepare(): " . $this->connection->error);
-            }
-            try{
+                $registerUserStatement=$this->connection->prepare($query);
+                $stmt = $this->connection->prepare($query);
+                if (!$stmt) {
+                        die("Errore nella prepare(): " . $this->connection->error);
+                }
+
+                try{
+                    $registerUserStatement->execute($params);
+                } catch(\mysqli_sql_exception $error){
+                    $this->CloseConnectionDB();
+                    $registerUserStatement->close();
+                    return false; //errore nell'esecuzione della query
+                }
+
                 $registerUserStatement->execute($params);
-            }catch(\mysqli_sql_exception $error){
+                $result = $registerUserStatement->get_result();
                 $this->CloseConnectionDB();
                 $registerUserStatement->close();
-                return false; //errore nell'esecuzione della query
-            }
-            $registerUserStatement->execute($params);
-            $result = $registerUserStatement->get_result();
-            $this->CloseConnectionDB();
-            $registerUserStatement->close();
-            if ($result->num_rows > 0) {
-                $list = array();
-                while ($row = $result->fetch_assoc()) { // prende solo una riga
-                    $list[] = $row;
-                }
-                $result->free_result();
-                return $list;
-            } else {
-                $result->free_result();
+
+                if ($result->num_rows > 0) {
+                    $list = array();
+                    while ($row = $result->fetch_assoc()) { // prende solo una riga
+                        $list[] = $row;
+                    }
+                    $result->free_result();
+                    return $list;
+                } else {
+                    $result->free_result();
+                    return [];
+                    } 
+            } catch(\mysqli_sql_exception $e) {
+                $this->CloseConnectionDB();
+                $registerUserStatement->close();
+                echo $e->getMessage();
                 return [];
-            } 
-        } catch(\mysqli_sql_exception $e) {
-            $this->CloseConnectionDB();
-            $registerUserStatement->close();
-            echo $e->getMessage();
-            return [];
-        }
-        }else{
+            }
+        } else{
             header('Location: 500.php'); //errore nella connessione al database, reindirizza alla pagina di errore
             exit();
+        }
+    }
 
+    public function GetTastings(): array | bool {
+        $newConnection = $this->OpenConnectionDB();
+        if (!$newConnection) {
+            header('Location: 500.php'); //errore nella connessione al database, reindirizza alla pagina di errore
+            exit(); 
+        }
+
+        $getTastings = null;
+
+        try {
+            $query = "SELECT 
+                        d.id AS id_degustazione,
+                        d.descrizione AS descrizione_degustazione,
+                        d.disponibilita_persone,
+                        d.data_inizio,
+                        d.data_fine,
+                        d.prezzo AS prezzo_degustazione,
+                        p.nome AS nome_prodotto,
+                        p.url_immagine
+                    FROM degustazioni d
+                    INNER JOIN prodotti p ON d.id_prodotto = p.id;";
+
+            $getTastings = $this->connection->prepare($query);
+
+            if (!$getTastings) {
+                throw new \mysqli_sql_exception("Errore prepare(): " . $this->connection->error);
+            }
+
+            $getTastings->execute();
+
+            $result = $getTastings->get_result();
+            $tastings = $result->fetch_all(MYSQLI_ASSOC);
+
+            return $tastings;
+
+        } catch (\mysqli_sql_exception $e) {
+            echo "Errore SQL: " . $e->getMessage();
+            return false;
+        } finally {
+            if ($getTastings) {
+                $getTastings->close();
+            }
+            $this->CloseConnectionDB();
         }
     }
 }
