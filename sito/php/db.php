@@ -1575,5 +1575,60 @@ class DB {
         }
         
     }
+
+    public function GetBestComments(): array | string{// funzione per ottenere i 4 migliori commenti da mostrare nella home
+        $newConnection = $this->OpenConnectionDB();
+        if($newConnection){
+            try{
+                $bestComments = $this->connection->prepare
+                ("SELECT v.id_utente, u.username, u.url_immagine, v.id_prodotto, v.voto, v.commento, v.data, p.nome AS nome_prodotto
+                FROM valutazioni v
+                JOIN utenti u ON v.id_utente = u.id
+                JOIN prodotti p ON v.id_prodotto = p.id
+                JOIN (SELECT  id_utente, MIN(id_prodotto) AS min_prodotto_id
+                    FROM valutazioni
+                    WHERE voto = (SELECT MAX(voto) FROM valutazioni as v2 WHERE v2.id_utente = valutazioni.id_utente)
+                    GROUP BY id_utente) AS selezione ON v.id_utente = selezione.id_utente AND v.id_prodotto = selezione.min_prodotto_id
+                ORDER BY v.voto DESC, v.data DESC
+                LIMIT 4;
+                ");
+                if (!$bestComments) {
+                    die("Errore nella prepare(): " . $this->connection->error);
+                }
+
+                try{
+                    $bestComments->execute();
+                } catch(\mysqli_sql_exception $error){
+                    $bestComments->close();
+                    $this->CloseConnectionDB();
+                    return false; //errore nell'esecuzione della query
+                }
+                $result = $bestComments->get_result();
+                $bestComments->close();
+                $this->CloseConnectionDB();
+
+                if ($result->num_rows > 0) {
+                    $list = array();
+                    while ($row = $result->fetch_assoc()) { // prende solo una riga
+                        $list[] = $row;
+                    }
+                    $result->free_result();
+                    return $list;
+                } else {
+                    $result->free_result();
+                    return [];
+                } 
+            }catch (\mysqli_sql_exception $error){
+                $bestComments->close();
+                $this->CloseConnectionDB();
+                echo $error->getMessage();
+                return [];
+
+            }
+        }else{
+            return "Connection error";        
+        }
+
+    }
 }
 ?>

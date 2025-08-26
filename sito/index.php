@@ -15,17 +15,48 @@ if($db->isUserLog()!=false) {
 $products = $db->GetBestProducts();// prendi i prodotti della pagina corrente
 
 $d_products = "";// stringa che conterrà i prodotti da mostrare
-if ($products != null) {// se ci sono prodotti, crea le brochure per ogni prodotto
+if ($products != null && count($products) > 0) {// se ci sono prodotti, crea le brochure per ogni prodotto
     foreach ($products as $product) {// per ogni prodotto
         $d_products .= CreateBestProductBrochure($product["url_immagine"], $product["nome"], $product["prezzo"], $product["id"]);
     }
 } else {// altrimenti mostra un messaggio di errore
-    $d_products = "<p id=\"evidenza-nondisponibile\">Non abbiamo prodotti in evidenza</p>";
+    $d_products = "<p id=\"evidenza-nondisponibile\" class=\"error\">Non abbiamo prodotti in evidenza</p>";
+}
+
+$comments = $db->GetBestComments();// prendi i prodotti della pagina corrente
+
+$b_comments = "";// stringa che conterrà i prodotti da mostrare
+if ($comments != null && count($comments) > 0) {// se ci sono prodotti, crea le brochure per ogni prodotto
+    foreach ($comments as $comment) {// per ogni prodotto
+        $b_comments .= createBestCommentTemplate($comment["username"], $comment["url_immagine"], $comment["voto"], $comment["commento"], $comment["nome_prodotto"], $comment["data"]);
+    }
+} else {// altrimenti mostra un messaggio di errore
+    $b_comments = "<p id=\"evidenza-nondisponibile\" class=\"error\">Al momento non sono presenti recensioni da mostrare</p>";
 }
 
 $pagina = str_replace("[BEST PRODUCTS]", $d_products, $pagina);
+$pagina = str_replace("[BEST COMMENTS]", $b_comments, $pagina);
 
 echo $pagina;
+
+function createBestCommentTemplate($username, $immagine, $voto, $commento, $prodotto, $data){
+    global $db;
+     
+    $TEMPLATE = '<div class="recensione-card">
+                    <div class="recensione-foto">
+                        <img loading="lazy" src="'. $immagine . '" alt="Foto profilo di ". $username/>
+                    </div>
+                    <div class="recensione-contenuto">
+                        <h4 class="recensione-cliente">' . $username . '</h4>
+                        <span class="recensione-data">' . $data . '</span>
+                        <p class="recensione-testo">' . $commento . '</p>
+                        <p class="recensione-prodotto">Prodotto: ' . $prodotto . '</p>
+                        <p class="recensione-valutazione">Voto: ' . $voto . '</p>
+                    </div>
+                </div>';
+    return $TEMPLATE;
+
+}
 
 function CreateBestProductBrochure(string $img, string $title, float $cost, int $id): string{
     global $db;
