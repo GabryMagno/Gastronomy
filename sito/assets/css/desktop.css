@@ -1598,7 +1598,7 @@ div#user-settings{
 .nondisponibile#nodegustazioni{
     margin-top: 4em;
     margin-bottom: 4em;
-}   
+}
 
 /* USER PROFILE - SUMMARY */
 #user-profile-summary{
@@ -1946,6 +1946,10 @@ p.degustazione-nondisponibile#degustazione-singola {
 
 .singledegustazione-descrizione .degustazione-dettagli{
     margin-top: 2.5em;
+}
+
+.persone-nondisponibile{
+    color: var(--errorcolor);
 }
 
 /* === CONTENUTO DEGUSTAZIONE === 

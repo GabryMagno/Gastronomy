@@ -53,15 +53,21 @@ function CreaDegustazioneBrochure(int $id, string $img, string $nomeProdotto, st
                     <p>' . $descrizione . '</p>
                     
                     <dl class="degustazione-dettagli">
-                        <dt class="degustazione-persone">Disponibilit&agrave;</dt>
-                        <dd>Disponibile per <span class="degustazione-bold">' . $numeroPersone . '</span> persone</dd>
+                        <dt class="degustazione-persone">Disponibilit&agrave;</dt>';
+
+            if ($numeroPersone < 1){
+                $TEMPLATE .= '<dd><span class="persone-nondisponibile degustazione-bold">Non disponibile</span></dd>';
+            } else{
+                $TEMPLATE.= '<dd>Disponibile per <span class="degustazione-bold">' . $numeroPersone . '</span> persone</dd>';
+            }
+                    
+        $TEMPLATE.= '
+                <dt class="degustazione-prenotazione">Prenotazioni</dt>
+                <dd>Prenotabile dal <span class="degustazione-bold">' . $dataInizio->format("d/m/Y") . '</span> al <span class="degustazione-bold">' . $dataFine->format("d/m/Y") . '</span></dd>
                         
-                        <dt class="degustazione-prenotazione">Prenotazioni</dt>
-                        <dd>Prenotabile dal <span class="degustazione-bold">' . $dataInizio->format("d/m/Y") . '</span> al <span class="degustazione-bold">' . $dataFine->format("d/m/Y") . '</span></dd>
-                        
-                        <dt class="degustazione-prezzo">Prezzo</dt>
-                        <dd class="prodotto-prezzo-testo">' . number_format($prezzo, 2, ',', '.') . ' €</dd>
-                    </dl>';
+                <dt class="degustazione-prezzo">Prezzo</dt>
+                <dd class="prodotto-prezzo-testo">' . number_format($prezzo, 2, ',', '.') . ' €</dd>
+            </dl>';
 
         if ($numeroPersone < 1) {
             $TEMPLATE .= '<p class="degustazione-nondisponibile">Prenotazione non disponibile!</p>';
