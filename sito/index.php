@@ -35,7 +35,7 @@ function CreateBestProductBrochure(string $img, string $title, float $cost, int 
                         <img loading="lazy" src="'. $img . '" alt=""/>
                         <h4 class="product-name">' . $title . '</h4>
                     
-                        <p>Valutazione: '. $db->AverageGradeProduct($id) .' su 5</p>
+                        <p>Voto: '. $db->AverageGradeProduct($id) .' su 5</p>
                         <p>Prezzo: '. $cost . '&euro;</p>
                         
                         <a href="./prodotto.php?prodotto='. urlencode($id) . '" title="vai al prodotto ' . Sanitizer::SanitizeGenericInput($title) . '">Scheda del prodotto</a>
