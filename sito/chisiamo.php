@@ -62,7 +62,7 @@ if(!isset($_POST["advice"])) {
         header('Location: 500.php');
         exit();
     } else {// se il suggerimento è stato aggiunto correttamente, reindirizza alla pagina di ringraziamento
-        header('Location: chisiamo.php');//faremo una pagina di ringraziamento
+        header('Location: ringraziamenti.php');//faremo una pagina di ringraziamento
         exit();
     }
 }
