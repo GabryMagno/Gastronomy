@@ -41,10 +41,10 @@ function CreaDegustazioneBrochure(int $id, string $img, string $nomeProdotto, st
     $oggi = new DateTime("today");
 
     if ($oggi < $dataInizio || $oggi > $dataFine){
-        //Prenotazione NON DISPONIBILE - non visualizzato
+        //Prenotazione NON DISPONIBILE - non visualizzato perchè data odierna non compresa nell'intervallo di possibilità prenotazione
         return '';
     } else {
-        //Prenotazione DISPONIBILE - viene visualizzato
+        //Prenotazione DISPONIBILE - viene visualizzato perchè data odierna compresa nell'intervallo di possibilità prenotazione
         $TEMPLATE = '
             <div class="degustazione-card">
                 <img src="' . $img . '" alt="Immagine del prodotto ' . $nomeProdotto . '">
