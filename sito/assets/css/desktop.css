@@ -2203,6 +2203,7 @@ form#prenotazione-degustazione #quantita{
 }
 
 #prodotto-nondisponibile,
+#evidenza-nondisponibile,
 .degustazione-nondisponibile
 {
     text-align: center;

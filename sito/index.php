@@ -20,7 +20,7 @@ if ($products != null) {// se ci sono prodotti, crea le brochure per ogni prodot
         $d_products .= CreateBestProductBrochure($product["url_immagine"], $product["nome"], $product["prezzo"], $product["id"]);
     }
 } else {// altrimenti mostra un messaggio di errore
-    $d_products = "<p class=\"error\">Non abbiamo prodotti in evidenza</p>";
+    $d_products = "<p id=\"evidenza-nondisponibile\">Non abbiamo prodotti in evidenza</p>";
 }
 
 $pagina = str_replace("[BEST PRODUCTS]", $d_products, $pagina);
