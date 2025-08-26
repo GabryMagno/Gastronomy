@@ -1440,7 +1440,7 @@ class DB {
                 $registerUserStatement=$this->connection->prepare($query);
                 $stmt = $this->connection->prepare($query);
                 if (!$stmt) {
-                        die("Errore nella prepare(): " . $this->connection->error);
+                    die("Errore nella prepare(): " . $this->connection->error);
                 }
 
                 try{
@@ -1466,7 +1466,7 @@ class DB {
                 } else {
                     $result->free_result();
                     return [];
-                    } 
+                } 
             } catch(\mysqli_sql_exception $e) {
                 $this->CloseConnectionDB();
                 $registerUserStatement->close();
@@ -1523,6 +1523,57 @@ class DB {
             }
             $this->CloseConnectionDB();
         }
+    }
+
+    public function GetBestProducts(): array | string{// funzione per ottenere i quattro migliori prodotti per la home(index)
+        $newConnection = $this->OpenConnectionDB();
+        if($newConnection){
+            try{
+                $bestProducts = $this->connection->prepare
+                ("SELECT p.id, p.nome, p.url_immagine, p.prezzo, AVG(v.voto) AS voto_medio, COUNT(v.id_utente) AS numero_valutazioni
+                FROM prodotti p
+                JOIN valutazioni v ON p.id = v.id_prodotto
+                GROUP BY p.id, p.nome, p.prezzo, p.url_immagine
+                ORDER BY voto_medio DESC, numero_valutazioni DESC
+                LIMIT 4;
+                ");
+                if (!$bestProducts) {
+                    die("Errore nella prepare(): " . $this->connection->error);
+                }
+
+                try{
+                    $bestProducts->execute();
+                } catch(\mysqli_sql_exception $error){
+                    $bestProducts->close();
+                    $this->CloseConnectionDB();
+                    return false; //errore nell'esecuzione della query
+                }
+                $result = $bestProducts->get_result();
+                $bestProducts->close();
+                $this->CloseConnectionDB();
+
+                if ($result->num_rows > 0) {
+                    $list = array();
+                    while ($row = $result->fetch_assoc()) { // prende solo una riga
+                        $list[] = $row;
+                    }
+                    $result->free_result();
+                    return $list;
+                } else {
+                    $result->free_result();
+                    return [];
+                } 
+            }catch (\mysqli_sql_exception $error){
+                $bestProducts->close();
+                $this->CloseConnectionDB();
+                echo $error->getMessage();
+                return [];
+
+            }
+        }else{
+            return "Connection error";
+        }
+        
     }
 }
 ?>

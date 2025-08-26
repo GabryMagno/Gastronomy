@@ -5,7 +5,7 @@ require_once "php/db.php";//
 $db = new DB;
 
 $pagina = file_get_contents("html/conferma-scelta.html");
-$isUserLogged=$db->isUserLog();
+$isUserLogged = $db->isUserLog();
 
 if($isUserLogged){
     $pagina = str_replace("[to-profile]","<a href=\"user-profile.php\">Profilo</a>",$pagina);
@@ -65,14 +65,9 @@ if(isset($_GET["delete"])) {;
         exit();
     }
 
-    $userPath="./user_profiles/".$_SESSION["logged_user"].'/';//eliminazione del logo dell'utente
-	if(is_dir($userPath)) {
-		$imagedef=scandir($userPath);
-		$info = new SplFileInfo($imagedef[2]);
-		$extension = pathinfo($info->getFilename(), PATHINFO_EXTENSION);
-		$imagedef="./user_profiles/".$_SESSION["logged_user"].'/'.$_SESSION["logged_user"].".".$extension;
-		unlink($imagedef);
-        rmdir($userPath);
+    $userPath = $db->GetUserInfo()["url_immagine"];//eliminazione del logo dell'utente
+	if(file_exists($userPath)) {
+		unlink($userPath);
     }
     
     $result = $db->deleteUser();//dovrebbe a cascata eliminare tutto ciò che riguarda l'utente
