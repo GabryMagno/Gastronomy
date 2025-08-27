@@ -63,7 +63,7 @@ function CreaDegustazioneBrochure(int $id, string $img, string $nomeProdotto, st
                     
         $TEMPLATE.= '
                 <dt class="degustazione-prenotazione">Prenotazioni</dt>
-                <dd>Prenotabile dal <span class="degustazione-bold">' . $dataInizio->format("d/m/Y") . '</span> al <span class="degustazione-bold">' . $dataFine->format("d/m/Y") . '</span></dd>
+                <dd>Prenotabile dal <span class="degustazione-bold"><time datetime="'.$dataInizio->format("Y-m-d") . '">' . $dataInizio->format("d/m/Y") . '</time></span> al <span class="degustazione-bold"><time datetime="'.$dataFine->format("Y-m-d") . '">' . $dataFine->format("d/m/Y") . '</time></span></dd>
                         
                 <dt class="degustazione-prezzo">Prezzo</dt>
                 <dd class="prodotto-prezzo-testo">' . number_format($prezzo, 2, ',', '.') . ' €</dd>
