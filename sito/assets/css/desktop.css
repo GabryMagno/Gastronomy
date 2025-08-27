@@ -622,23 +622,41 @@ ul#best-products{
 }
 
 li.new{
-    flex: 0 0 25%;
+    flex: 1 1 calc(25% - 1em);
+    min-width: 255px;
+    max-width: 40%;
     display: flex;
     flex-direction: column;
 }
 
 li.new article{
+    flex: 1;
     margin: 1em;
     display: flex;
     flex-direction: column;
     background-color: white;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     color: var(--txtcolor);
     border-radius: 0.9em;
     transition: .4s;
+    gap: 1em;
     box-shadow: 0 1em 2em rgba(0, 0, 0, 0.25),
                 0 0.8em 0.8em rgba(0, 0, 0, 0.22);
+}
+
+li.new article a{
+    display: block;
+    text-align: center;
+    padding: 1em;
+    border: 0;
+    border-bottom-left-radius: 0.72em;
+    border-bottom-right-radius: 0.72em;
+    background-color: var(--headerbgcolor);
+    width: 100%;
+    flex: 1 0 auto;
+    margin-top: auto;
+    flex-shrink: 0;
 }
 
 /* === BOX PROMOZIONALE CON BOTTONE === */
@@ -1029,8 +1047,7 @@ ul#best-products img{
     border-radius: 0.72em;
 }
 
-li.product-brochure a,
-li.new article a{
+li.product-brochure a{
     background-color: var(--headerbgcolor);
     width: 100%;
 
