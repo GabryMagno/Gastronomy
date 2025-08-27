@@ -720,7 +720,7 @@ class DB {
                     //se c'è un errore nell'esecuzione della query, ritorna false
                     $this->CloseConnectionDB();
                     $deleteFavorite->close();
-                    return false; //errore nell'esecuzione della query
+                    return "Execution error"; //errore nell'esecuzione della query
                 }
                 $result = $deleteFavorite->affected_rows;
                 $this->CloseConnectionDB();
@@ -1036,7 +1036,7 @@ class DB {
             if($newConnection){
                 //preparazione della query per aggiungere un prodotto preferito
                 $addFavorite = $this->connection->prepare("INSERT INTO preferiti (id_utente, id_prodotto) VALUES (?, ?)");
-                $addFavorite->bind_param("ii", $isUserLogged, $product);
+                $addFavorite->bind_param("ii", $id, $product);
                 try{
                     //esecuzione della query per aggiungere un prodotto preferito
                     $addFavorite->execute();
@@ -1044,7 +1044,7 @@ class DB {
                     //se c'è un errore nell'esecuzione della query, ritorna false
                     $this->CloseConnectionDB();
                     $addFavorite->close();
-                    return false; //errore nell'esecuzione della query
+                    return "Execution error"; //errore nell'esecuzione della query
                 }
                 if(mysqli_affected_rows($this->connection) == 1){
                     //se la query ha inserito una riga, allora il prodotto preferito è stato aggiunto con successo
@@ -1433,7 +1433,7 @@ class DB {
         }
     }
 
-    public function GetProducts($query, $params): array | bool{
+    public function GetProducts($query, $params): array | bool{//Ottiene i prodotti filtrati tramite $query e $params
         $newConnection = $this->OpenConnectionDB();
         if($newConnection){
             try {

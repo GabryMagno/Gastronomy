@@ -191,12 +191,12 @@ const listeners = {
 };
 
 window.addEventListener('load', () => {
-	document.getElementById("submit-comment").disabled = true;
-	document.getElementById("submit-comment").classList.add("not-available");
-    document.getElementById("reset-comment").classList.add("not-available");
-	document.getElementById("reset-comment").disabled = true;
-    document.getElementById("submit-order").disabled = true;
-	document.getElementById("submit-order").classList.add("not-available");
+	if(document.getElementById("submit-comment")) document.getElementById("submit-comment").disabled = true;
+	if(document.getElementById("submit-comment")) document.getElementById("submit-comment").classList.add("not-available");
+    if(document.getElementById("reset-comment")) document.getElementById("reset-comment").classList.add("not-available");
+	if(document.getElementById("reset-comment")) document.getElementById("reset-comment").disabled = true;
+    if(document.getElementById("submit-order")) document.getElementById("submit-order").disabled = true;
+	if(document.getElementById("submit-order")) document.getElementById("submit-order").classList.add("not-available");
     ValidateUserOrder();
     checkComment();
 	validateUserComment();
