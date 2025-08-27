@@ -9,10 +9,10 @@ $pagina = file_get_contents("html/ringraziamenti.html");// Carica il template HT
 if($db->isUserLog() != false) {
     $userInfo = $db->GetUserInfo();
     $pagina = str_replace("[to-profile]","<a href=\"user-profile.php\">Profilo</a>",$pagina);
-    $pagina = str_replace("[USERNAME]",$userInfo['username'],$pagina);
+    $pagina = str_replace("[Nome]",$userInfo['nome'],$pagina);
 } else {
     $pagina = str_replace("[to-profile]","<a href=\"login.php\"><span lang=\"en\">Login</span></a>",$pagina); 
-    $pagina = str_replace("[USERNAME]","",$pagina);
+    $pagina = str_replace("[Nome]","",$pagina);
 }
 echo $pagina;
 
