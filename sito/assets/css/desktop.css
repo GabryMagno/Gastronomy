@@ -1867,7 +1867,7 @@ summary:focus{
 }
 
 #elimination-buttons{
-    flex-direction: column-reverse;
+    flex-direction: column;
     align-items: center;
 
     gap: 0;
