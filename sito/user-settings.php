@@ -43,9 +43,9 @@ if(!isset($_POST["submit-user-settings"]) && !isset($_POST["submit-password-sett
     $pagina = str_replace("[surname-error]","",$pagina);
 
     if ($userInfo["url_immagine"]) {//controllo se l'utente ha un'immagine profilo
-        $pagina = str_replace("[profile-image]",$userInfo["url_immagine"],$pagina);
+        $pagina = str_replace("[profile-image]", "src=".$userInfo["url_immagine"],$pagina);
     } else {
-        $pagina = str_replace("[profile-image]","./img/default.webp",$pagina);//immagine di default
+        $pagina = str_replace("[profile-image]","assets/img/default.webp",$pagina);//immagine di default
     }
 
     if ($userInfo["username"]) {//controllo se lo username è presente
@@ -178,11 +178,9 @@ if(!isset($_POST["submit-user-settings"]) && !isset($_POST["submit-password-sett
             $pagina = str_replace("[logo-error]",'<p role="alert" id="logo-error" class="error">Il <span lang="en">file</span> caricato è un formato non supportato</p>',$pagina);
         } else {
             if(!is_dir($userBasePath)) {//controllo se la cartella base per le immagini profilo esiste
-                echo "5";
                 mkdir($userBasePath,0755,true);//crea la cartella base se non esiste
             }
             /*if(!is_dir($userBasePath)) {//controllo se la cartella per l'utente esiste
-                echo "6";
                 mkdir($userBasePath);//crea la cartella per l'utente se non esiste
             }*/
 
@@ -202,12 +200,20 @@ if(!isset($_POST["submit-user-settings"]) && !isset($_POST["submit-password-sett
                     $img = imagecreatefrompng($tmpFile);
                     break;
                 
+                case 'image/jpg'://controllo se il file è un'immagine jpg
+                    $img = imagecreatefromjpeg($tmpFile);
+                    break;
+                
                 default://controllo se il file è un tipo di file non supportato
                     header("Location : 500.php");
                     break;
             }
 
-            imagewebp($img,$userBasePath.'/'.$isLogged_first.".png");//converte l'immagine in formato webp e la salva nella cartella dell'utente
+            imagewebp($img,$userBasePath.'/'.$isLogged_first.".webp");//converte l'immagine in formato webp e la salva nella cartella dell'utente
+            imagedestroy($img);
+            if(file_exists($tmpFile)){
+                unlink($tmpFile);
+            }
             unset($_FILES["new-logo"]);//rimuove il file temporaneo
             $isProfileImageChanged = true;
             $pagina = str_replace("[logo-error]","",$pagina);            
@@ -234,17 +240,18 @@ if(!isset($_POST["submit-user-settings"]) && !isset($_POST["submit-password-sett
         || $isProfileImageChanged == true || $hasProfileImageBeenDeleted == true) {
 
             $changeResult = false;
-            $imagedef = "";
+            //$imagedef = "";
+            $UserPathDefault = "assets/img/assets/default.webp";
 
             if($userInfo["url_immagine"] || $isProfileImageChanged == true) {//controllo se l'utente ha un'immagine profilo o se l'ha cambiata
 
 		        $info = new SplFileInfo($imagedef[2]);//creo un oggetto SplFileInfo per ottenere le informazioni sul file
 		        $extension = pathinfo($info->getFilename(), PATHINFO_EXTENSION);//ottiene l'estensione del file
-		        $imagedef = "assets/img/users_logos/".$isLogged_first.".png";//imagedef sarà il percorso dell'immagine profilo dell'utente
+		        $imagedef = "assets/img/users_logos/".$isLogged_first.".webp";//imagedef sarà il percorso dell'immagine profilo dell'utente
 
                 if(is_dir($userBasePath.$userPath) && strcmp($username,$isLogged)!=0) {//controllo se la cartella dell'utente esiste e se l'username è diverso da quello attuale
                     rename($userBasePath.$userPath.$username.".".$extension, $userBasePath.$userPath.$isLogged_first.".".$extension); //rinomina immagine con id dell'utente
-                    //rename($userBasePath.$userPath,"assests/img/users_logos/".$isLogged_first.'/'); //rinomina la cartella dell'utente    
+                    //rename($userBasePath.$userPath,"assets/img/users_logos/".$isLogged_first.'/'); //rinomina la cartella dell'utente    
                 }
 
                 if($userInfo["url_immagine"] && $hasProfileImageBeenDeleted==true) {//controlla se l'utente ha eliminato l'immagine profilo

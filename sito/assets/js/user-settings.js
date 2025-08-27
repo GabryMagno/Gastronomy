@@ -426,6 +426,7 @@ function chargeNewLogo() {
 
 					document.getElementById("reset-user-setting").disabled = true;
 		            document.getElementById("reset-user-setting").classList.add("not-available");
+					FirstFormUltimateCheck();
 				}else{
 					if(Byte > 2048 ) failHint("max-size-file","Dimensione massima a 2MB");
 					else successHint("max-size-file","Dimensione massima a 2MB");
