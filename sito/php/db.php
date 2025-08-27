@@ -1630,5 +1630,37 @@ class DB {
         }
 
     }
+
+    public function ThisIsAlreadyFavoriteProduct($product, $id){
+        $newConnection = $this->OpenConnectionDB();
+        if($newConnection){
+            $isProductAlreadyFavorite = $this->connection->prepare("SELECT 1 FROM preferiti WHERE id_prodotto = ? AND id_utente = ?");
+            $isProductAlreadyFavorite->bind_param("ii", $product, $id);
+            try{
+                //esecuzione della query per verificare che il prodotto sia tra i preferiti dell'utente
+                $isProductAlreadyFavorite->execute();
+            }catch(\mysqli_sql_exception $error){
+                //se c'è un errore nell'esecuzione della query, ritorna false
+                $this->CloseConnectionDB();
+                $isProductAlreadyFavorite->close();
+                return "Execution error"; //errore nell'esecuzione della query
+            }
+            $product = $isProductAlreadyFavorite->get_result();
+            $this->CloseConnectionDB();
+            $isProductAlreadyFavorite->close();
+            if($product->num_rows == 1){
+                //se il prodotto è tra i preferiti dell'utente, ritorna true
+                $product->free();
+                return true; //prodotto preferito
+            }else{
+                //se il prodotto non è tra i preferiti dell'utente, ritorna false
+                $product->free();
+                return false; //prodotto non preferito
+            }
+        }else{
+            return "Connection error"; //errore nella connessione al database
+        }
+
+    }
 }
 ?>
