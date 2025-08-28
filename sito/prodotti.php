@@ -90,7 +90,7 @@ function CreateProductBrochure(string $img, string $title, float $cost, int $id)
     
     $TEMPLATE = '<li class="product-brochure">
                     <img loading="lazy" src="'. $img . '" alt=""/>
-                    <h4 class="product-name">' . $title . '</h4>
+                    <h3 class="product-name">' . $title . '</h3>
                    
                     <p>Voto: '. $db->AverageGradeProduct($id) .' su 5</p>
                     <p>Prezzo: '. $cost . '&euro;</p>
