@@ -556,10 +556,18 @@ class DB {
         $reservations = array();
         if($newConnection){
             //preparazione della query per ottenere le prenotazioni dei prodotti dell'utente
-            $userReservations = $this->connection->prepare("SELECT prodotti.nome, prodotti.categoria, prenotazioni.data_prenotazione, prenotazioni.quantita 
-            FROM prenotazioni 
-            JOIN prodotti ON prenotazioni.id_prodotto = prodotti.id
-            WHERE prenotazioni.id_utente = ?");
+            $userReservations = $this->connection->prepare("
+            SELECT 
+                pr.id AS id_prenotazione,
+                p.nome AS nome_prodotto,
+                pr.data_ritiro,
+                pr.quantita,
+                p.unita,
+                p.id AS id_prodotto
+            FROM prenotazioni pr
+            JOIN prodotti p ON pr.id_prodotto = p.id
+            WHERE pr.id_utente = ?;
+            ");
             $userReservations->bind_param("i", $id);
             try{
                 //esecuzione della query per ottenere le prenotazioni dei prodotti dell'utente
@@ -585,10 +593,10 @@ class DB {
             }else{
                 //se non ci sono prenotazioni
                 $result->free();
-                return "No reservations found"; //nessuna prenotazione trovata
+                return false; //nessuna prenotazione trovata
             }
         }else{
-            return "Connection error"; //errore nella connessione al database
+            return false; //errore nella connessione al database
         }
 
     }

@@ -92,7 +92,7 @@ function CreaVisualizzaPreferito(int $idProdotto, string $nomeProdotto, string $
             <img src="'.$url_immagine.'" alt="Immagine del prodotto ' . Sanitizer::SanitizeGenericInput($nomeProdotto) . '">
                 <h4 class="product-name">'.Sanitizer::SanitizeGenericInput($nomeProdotto).'</h4>
                     <div class="brochure-links">
-                        <a href="prodotto.php?prodotto='. urlencode($idProdotto) . '" title="Vai alla scheda prodotto ' . Sanitizer::SanitizeGenericInput($nomeProdotto) . '" class="btn-dettagli">Dettagli</a>
+                        <a href="prodotto.php?prodotto='. urlencode($idProdotto) . '" title="Vai alla scheda del prodotto ' . Sanitizer::SanitizeGenericInput($nomeProdotto) . '" class="btn-dettagli">Dettagli</a>
                         <a href="#" class="btn-elimina">Rimuovi</a>
                     </div>
             </li>
@@ -104,30 +104,84 @@ function CreaVisualizzaPreferito(int $idProdotto, string $nomeProdotto, string $
 
 
 // Prenotazioni
-$pagina = str_replace('[Prodotti Prenotati]','<p class="nondisponibile">Nessun prodotto prenotato.</p>',$pagina);
+$prenotazioni = $db->GetUserReservation($id);
+
+if($prenotazioni === false){
+    header('Location: 500.php');
+} elseif (empty($prenotazioni)){
+    $pagina = str_replace('[Prodotti Prenotati]','<p class="nondisponibile">Nessun prodotto prenotato.</p>',$pagina);
+} else {
+    $pagina=str_replace("[Prodotti Prenotati]",VisualizzaPrenotazione($prenotazioni),$pagina);           
+}
+
+function VisualizzaPrenotazione(array $prenotazioni): string {
+    $prenotazioni_html = '<div class="data-container" id="dc-prodotti-prenotati" aria-live="polite">
+                            <ul class="list" id="user-profile-prodotti-prenotati">';
+
+    /*
+                pr.id AS id_prenotazione,
+                p.nome AS nome_prodotto,
+                pr.data_ritiro,
+                pr.quantita,
+                p.unita,
+                p.id AS id_prodotto
+    */
+
+    foreach ($prenotazioni as $value){
+        $prenotazioni_html.= CreaVisualizzaPrenotazione(
+            $value['id_prenotazione'],
+            $value['nome_prodotto'],
+            new DateTime($value['data_ritiro']),
+            $value['quantita'],
+            $value['unita'],
+            $value['id_prodotto']
+        );
+    }
+
+    $prenotazioni_html.= '</ul></div>';
+
+    return $prenotazioni_html;
+}
+
+function CreaVisualizzaPrenotazione(int $idPrenotazione, string $nomeProdotto, DateTime $dataRitiro, int $quantita, string $unita, int $idProdotto){
+
+    $TEMPLATE = '
+            <li class="userprofile-brochure">
+                <div class="userprofile-brochure-content">
+                    <h4>'.$nomeProdotto.'</h4>
+                    <dl>
+                        <dt>Data ritiro</dt>
+                            <dd><time datetime="' . $dataRitiro->format("Y-m-d") . '">' . $dataRitiro->format("d/m/Y") . '</time></dd>
+                        <dt>Quantit&agrave;</dt>
+                            <dd>'.$quantita.' '.($quantita > 1 || $unita == "kg" ? TipoUnita($unita) : $unita).'</dd>
+                    </dl>
+                </div>
+                <div class="brochure-links">
+                    <a href="prodotto.php?prodotto='. urlencode($idProdotto) . '" title="Vai alla scheda del prodotto ' . Sanitizer::SanitizeGenericInput($nomeProdotto) . '" class="btn-dettagli">Dettagli</a>
+                    <a href="#" class="btn-elimina">Elimina</a>
+                </div>
+            </li>
+        ';
+
+    return $TEMPLATE;
+}
+
+function TipoUnita(string $unita): string {
+    switch ($unita) {
+        case "porzione":
+            return "porzioni";
+        case "vaschetta":
+            return "vaschette";
+        case "pezzo":
+            return "pezzi";
+        case "kg":
+            return '<abbr title="Chilogrammi">kg</abbr>';
+        default:
+            return "";
+    }
+}
 
 /*
-                <div class="data-container" id="dc-prodotti-prenotati" aria-live="polite">
-                    <ul class="list" id="user-profile-prodotti-prenotati">
-                        <li class="userprofile-brochure">
-                            <div class="userprofile-brochure-content">
-                                <img src="assets/img/primo.png" alt="Nuovo prodotto">
-                                <h4>[Nome prodotto]</h5>
-                                <dl>
-                                    <dt>Data ritiro</dt>
-                                    <dd>[dd-mm-yyyy]</dd>
-                                    <dt>Quantit&agrave;</dt>
-                                    <dd>[qta] [unita]</dd>
-                                </dl>
-                            </div>
-                            <div class="brochure-links">
-                                <a href="prodotto.php" class="btn-dettagli">Dettagli</a>
-                                <a href="#" class="btn-elimina">Elimina</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
                 <div class="a11y-status sr-only nondisponibile" role="status" aria-live="polite"></div>
 
                 <div class="button-container">
@@ -185,7 +239,7 @@ function CreaVisualizzaDegustazione(int $idDegustazione, string $nomeProdotto, D
                         </dl>
                 </div>
                 <div class="brochure-links">
-                    <a href="degustazione.php?degustazione='.$idDegustazione.'" class="btn-dettagli">Dettagli</a>
+                    <a href="degustazione.php?degustazione='. urlencode($idDegustazione) . '" title="Vai alla scheda degustazione del prodotto ' . Sanitizer::SanitizeGenericInput($nomeProdotto) . '" class="btn-dettagli">Dettagli</a>
                     <a href="#" class="btn-elimina">Elimina</a>
                 </div>
             </li>
@@ -256,7 +310,7 @@ function CreaVisualizzaRecensioni(int $idProdotto, string $nomeProdotto, DateTim
     }
 
     $TEMPLATE .= '</dl></div>
-                        <a href="prodotto.php?prodotto='.$idProdotto.'#valutazione">Visualizza</a>
+                        <a href="prodotto.php?prodotto='. urlencode($idProdotto) . '" title="Visualizza valutazione inserita per il prodotto ' . Sanitizer::SanitizeGenericInput($nomeProdotto) . '" class="btn-dettagli">Visualizza</a>
                 </li>';
 
     return $TEMPLATE;
