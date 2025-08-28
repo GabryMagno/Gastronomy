@@ -32,6 +32,12 @@ $isUserLogged = $db->IsUserLog();
 
 if(is_bool($isUserLogged) && $isUserLogged == false){
     $pagina = str_replace("[to-profile]","<a href=\"login.php\"><span lang=\"en\">Login</span></a>",$pagina);
+    $pagina = str_replace("<form method=\"post\" id=\"modifica-preferiti\">
+                            <input type=\"hidden\" name=\"id_utente\" value=\"[id_utente]\">
+                            <input type=\"hidden\" name=\"nome_prodotto\" value=\"[nome_prodotto]\">
+
+                            [PREFERITO]
+                        </form>","",$pagina);
     $pagina = str_replace("[COMMENT]","<p>Se desideri commentare questo prodotto, cosa aspetti fai il <a href=\"login.php\"><span lang=\"en\">LOGIN</span></a> oppure <a href=\"register.php\"> REGISTRATI</a></p>",$pagina);
     $pagina = str_replace("[RESERVATION]","<p>Se desideri prenotare questo prodotto, cosa aspetti fai il <a href=\"login.php\"><span lang=\"en\">LOGIN</span></a> oppure <a href=\"register.php\"> REGISTRATI</a></p>",$pagina);
 }else{
