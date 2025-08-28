@@ -117,7 +117,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
 
                             <label for=\"quantita\" class=\"form-label\">Quantità da prenotare</label>
                             <div id=\"quantita-unita\">
-                                <input type=\"number\" id=\"quantita\" name=\"quantita\" min=\"1\" max=\"10\" value=\"[quantita-ordine]\"required>
+                                <input type=\"number\" id=\"quantita\" name=\"quantita\" min=\"1\" max=\"".(int)$productInfo["max_prenotabile"]."\" value=\"[quantita-ordine]\"required>
                                 <span class=\"unita\">[Unita]</span>
                                 
                             </div>
@@ -255,16 +255,13 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
         if($errorFound == true){//ci sono stati errori
             $pagina = str_replace("[quantita-ordine]",$quantity, $pagina);
             $pagina = str_replace("[data-ordine]",$date_reservation, $pagina); 
-            echo "1";
         }else{
             $addReservation = $db->AddReservation($productInfo["id"], $quantity, $date_reservation);
             if(is_bool($addReservation) && $addReservation == true) {//controllo se la modifica delle informazioni è andata a buon fine
                 header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');//reindirizza alla pagina delle informazioni utente
-                echo "2";
                 exit();
             } else { 
                 header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');
-                echo "3";
                 exit();
             }
         }
@@ -272,8 +269,6 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
     }
     //FORM COMMENTO
     //SEZIONE COMMENTI ALTRI UTENTI
-    $pagina = str_replace("[quantity-error]","",$pagina);
-    $pagina = str_replace("[date-error]","",$pagina);
     echo $pagina;
 }
 
