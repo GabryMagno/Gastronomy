@@ -25,6 +25,10 @@ if (is_string($userInfo) && (strcmp($userInfo,"Execution error") == 0 || strcmp(
     exit();
 }
 
+//Immagine Utente
+//<img src="assets/img/Cuochi.png" alt="Foto profilo di Nome Cognome" class="user-avatar">
+$pagina = str_replace("[ImmagineProfilo]",'<img src="'.$userInfo['url_immagine'].'" alt="Foto profilo di '.$userInfo['nome']." ".$userInfo['cognome'].'" class="user-avatar">',$pagina);
+
 //Sostituzione di eventuali Nome e Nome Cognome nella pagina
 $pagina = str_replace("[Nome]",$userInfo['nome'],$pagina);
 $pagina = str_replace("[Nome Cognome]",$userInfo['nome']." ".$userInfo['cognome'],$pagina);
@@ -93,19 +97,6 @@ function CreaVisualizzaPreferito(int $idProdotto, string $nomeProdotto, string $
 }
 
 /*
-                <div class="data-container" id="dc-prodotti-preferiti" aria-live="polite">
-                    <ul class="list" id="user-profile-prodotti">
-                        <li class="product-brochure">
-                            <img src="assets/img/primo.png" alt="Nuovo prodotto">
-                            <h4 class="product-name">[Nome prodotto]</h4>
-                            <div class="brochure-links">
-                                <a href="prodotto.php" class="btn-dettagli">Dettagli</a>
-                                <a href="#" class="btn-elimina">Rimuovi</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
                 <div class="a11y-status sr-only nondisponibile" role="status" aria-live="polite"></div>
 
                 <div class="button-container">

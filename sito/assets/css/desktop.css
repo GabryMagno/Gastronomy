@@ -1521,6 +1521,7 @@ div#favorites{
 .user-avatar{
     width: 150px;
     height: 150px;
+    aspect-ratio: 1;
     border-radius: 50%;
     object-fit: cover;
     margin-right: 20px;
