@@ -262,7 +262,7 @@ function CreaVisualizzaDegustazione(int $idDegustazione, string $nomeProdotto, D
 */
 
 // Recensioni
-$recensioni = $db->GetUserReview($id);
+$recensioni = $db->GetUserReviews($id);
 
 if($recensioni === false){
     header('Location: 500.php');

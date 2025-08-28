@@ -652,7 +652,7 @@ class DB {
         }
     }
 
-    public function GetUserReview($id): array | string { //ottenere tutte le recensioni scritte da un utente
+    public function GetUserReviews($id): array | string { //ottenere tutte le recensioni scritte da un utente
         $newConnection = $this->OpenConnectionDB();
         $reviews = array();
         if($newConnection){
@@ -735,7 +735,6 @@ class DB {
 
     //FUNZIONI CHE NON SERVONO MA POSSONO SERVIRE IN FUTURO
     //public function GetUserAdvices($id): array | string{}//ottenere suggerimenti scritti dall'utente(se serve)
-    //public function GetUserReviews($id): array | string{}//ottenere tutte le recensioni scritte dall'utente(vediamo se servirà)
 
     //ELIMINAZIONI DA PARTE DELL'UTENTE
 
