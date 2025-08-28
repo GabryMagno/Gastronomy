@@ -46,79 +46,6 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
     $pagina = str_replace("[RESERVATION]","<p>Se desideri prenotare questo prodotto, cosa aspetti fai il <a href=\"login.php\"><span lang=\"en\">LOGIN</span></a> oppure <a href=\"register.php\"> REGISTRATI</a></p>",$pagina);
 }else{
     $pagina = str_replace("[to-profile]","<a href=\"user-profile.php\">Profilo</a>",$pagina);
-    $pagina = str_replace("[COMMENT]",
-                "<form method=\"post\" id=\"valutazione\" class=\"form-bianco\">
-                    <fieldset>
-                        <legend>La tua valutazione del prodotto</legend>
-                        <h5 class=\"form-label\">Valutazione</h5>
-                        <div class=\"rating\" role=\"radiogroup\" aria-label=\"Valutazione da 1 a 5 stelle\">
-                            <input type=\"radio\" name=\"rating\" id=\"star1\" value=\"1\">
-                            <label for=\"star1\" title=\"1 stella\" id=\"una-stella\">&#9733;</label>
-
-                            <input type=\"radio\" name=\"rating\" id=\"star2\" value=\"2\">
-                            <label for=\"star2\" title=\"2 stelle\" id=\"due-stelle\">&#9733;</label>
-
-                            <input type=\"radio\" name=\"rating\" id=\"star3\" value=\"3\">
-                            <label for=\"star3\" title=\"3 stelle\" id=\"tre-stelle\">&#9733;</label>
-
-                            <input type=\"radio\" name=\"rating\" id=\"star4\" value=\"4\">
-                            <label for=\"star4\" title=\"4 stelle\" id=\"quattro-stelle\">&#9733;</label>
-
-                            <input type=\"radio\" name=\"rating\" id=\"star5\" value=\"5\">
-                            <label for=\"star5\" title=\"5 stelle\" id=\"cinque-stelle\">&#9733;</label>
-                        </div>
-                        <small class=\"descrizione-quantita\">Esprimi la tua valutazione del prodotto selezionando da 1 a 5 stelle.</small>
-
-                        <label for=\"user-comment\" class=\"form-label\">Scrivi qui il tuo commento</label>
-                        <details open>
-                            <summary id=\"hints-comment\" class=\"hints\" role=\"button\" aria-expanded=\"false\" aria-controls=\"hint-list-comment\">
-                                Suggerimenti Commento
-                            </summary>
-                            <ul class=\"suggestions-list\" id=\"hint-list-comment\">
-                                <li id=\"min-char-comment\">Minimo 30 caratteri</li>
-                                <li id=\"max-char-comment\">Massimo 300 caratteri</li>
-                            </ul>
-                        </details>
-                        <textarea name=\"commento\" placeholder=\"Scrivi qui il tuo commento sul prodotto.\" id=\"user-comment\" required minlength=\"30\" maxlength=\"300\"></textarea>
-                        
-                    </fieldset>
-                    <div class=\"button-container\">
-                        <button type=\"reset\" class=\"bottoni-neri\" id=\"reset-comment\">Annulla</button>
-                        <button type=\"submit\" class=\"bottoni-rossi\" id=\"submit-comment\">Conferma</button>
-                    </div>
-                </form>",
-    $pagina);
-
-    $pagina = str_replace("[RESERVATION]",
-    "<form method=\"post\" id=\"prenotazione\" class=\"form-bianco\">
-                        <fieldset>
-                            <legend>Prenotazione Prodotto</legend>
-
-                            <input type=\"hidden\" name=\"id_utente\" value=\"[id_utente]\">
-                            <input type=\"hidden\" name=\"nome_prodotto\" value=\"[nome_prodotto]\">
-
-                            <label for=\"quantita\" class=\"form-label\">Quantità da prenotare</label>
-                            <div id=\"quantita-unita\">
-                                <input type=\"number\" id=\"quantita\" name=\"quantita\" min=\"1\" max=\"10\" required>
-                                <span class=\"unita\">[Unita]</span>
-                            </div>
-                            <small class=\"descrizione-quantita\">Puoi prenotare da [min_prenotabile] a [max_prenotabile] unit&agrave;.</small>
-
-                            <div>
-                                <label for=\"data-ritiro\" class=\"form-label\" id=\"order-label\">Data di ritiro</label>
-                                <input type=\"date\" id=\"data-ritiro\" name=\"data_ritiro\" required>
-                            </div>
-
-                            <div class=\"button-container\">
-                                <button type=\"submit\" aria-label=\"Prenota Prodotto\" class=\"bottoni-rossi\" id=\"submit-order\">Prenota</button>
-                            </div>
-                        </fieldset>
-                    </form>",
-    $pagina);
-    
-    $pagina = str_replace("[Unita]",$productInfo["unita"],$pagina);
-    $pagina = str_replace("[min_prenotabile]",$productInfo["min_prenotabile"],$pagina);
-    $pagina = str_replace("[max_prenotabile]",$productInfo["max_prenotabile"],$pagina);
 
     //GESTIONE PRODOTTO PREFERITO
 
@@ -173,8 +100,124 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
         header("Location: prodotto.php?prodotto=" . $productInfo["id"]);
         exit();
     }
-}
-echo $pagina;
 
+    //CONTROLLO PRODOTTO DISPONIBILE PER PRENOTAZIONE
+
+    if($productInfo["isDisponibile"]){//SE IL PRODOTTO E' DISPONIBILE
+        $pagina = str_replace("<p id=\"prodotto-nondisponibile\">NON DISPONIBILE</p>","",$pagina);
+        $pagina = str_replace("[RESERVATION]",
+    "<form method=\"post\" id=\"prenotazione\" class=\"form-bianco\">
+                        <fieldset>
+                            <legend>Prenotazione Prodotto</legend>
+
+                            <input type=\"hidden\" name=\"id_utente\" value=\"[id_utente]\">
+                            <input type=\"hidden\" name=\"nome_prodotto\" value=\"[nome_prodotto]\">
+
+                            <label for=\"quantita\" class=\"form-label\">Quantità da prenotare</label>
+                            <div id=\"quantita-unita\">
+                                <input type=\"number\" id=\"quantita\" name=\"quantita\" min=\"1\" max=\"10\" required>
+                                <span class=\"unita\">[Unita]</span>
+                            </div>
+                            <small class=\"descrizione-quantita\">Puoi prenotare da [min_prenotabile] a [max_prenotabile] unit&agrave;.</small>
+
+                            <div>
+                                <label for=\"data-ritiro\" class=\"form-label\" id=\"order-label\">Data di ritiro</label>
+                                <input type=\"date\" id=\"data-ritiro\" name=\"data_ritiro\" required>
+                            </div>
+
+                            <div class=\"button-container\">
+                                <button type=\"submit\" aria-label=\"Prenota Prodotto\" class=\"bottoni-rossi\" id=\"submit-order\">Prenota</button>
+                            </div>
+                        </fieldset>
+                    </form>",
+    $pagina);
+    
+    $pagina = str_replace("[Unita]",$productInfo["unita"],$pagina);
+    $pagina = str_replace("[min_prenotabile]",$productInfo["min_prenotabile"],$pagina);
+    $pagina = str_replace("[max_prenotabile]",$productInfo["max_prenotabile"],$pagina);
+    }else{//SE IL PRODOTTO NON E' DISPONIBILE
+        $pagina = str_replace("[RESERVATION]","",$pagina);
+    }
+
+    //GESTIONE COMMENTO
+
+    $isUserCommented = $db->GetUserReviewProduct($isUserLogged,$productInfo["id"]);
+
+    if(is_string($isUserCommented) && ($isUserCommented == "Connection error"|| $isUserCommented == "Execution error")){
+        header("Location: 500.php");
+        exit();
+    }elseif (is_string($isUserCommented) && $isUserCommented == "No reviews found for this product"){
+        $pagina = str_replace("[COMMENT]",
+                "<form method=\"post\" id=\"valutazione\" class=\"form-bianco\">
+                    <fieldset>
+                        <legend>La tua valutazione del prodotto</legend>
+                        <h5 class=\"form-label\">Valutazione</h5>
+                        <div class=\"rating\" role=\"radiogroup\" aria-label=\"Valutazione da 1 a 5 stelle\">
+                            <input type=\"radio\" name=\"rating\" id=\"star1\" value=\"1\">
+                            <label for=\"star1\" title=\"1 stella\" id=\"una-stella\">&#9733;</label>
+
+                            <input type=\"radio\" name=\"rating\" id=\"star2\" value=\"2\">
+                            <label for=\"star2\" title=\"2 stelle\" id=\"due-stelle\">&#9733;</label>
+
+                            <input type=\"radio\" name=\"rating\" id=\"star3\" value=\"3\">
+                            <label for=\"star3\" title=\"3 stelle\" id=\"tre-stelle\">&#9733;</label>
+
+                            <input type=\"radio\" name=\"rating\" id=\"star4\" value=\"4\">
+                            <label for=\"star4\" title=\"4 stelle\" id=\"quattro-stelle\">&#9733;</label>
+
+                            <input type=\"radio\" name=\"rating\" id=\"star5\" value=\"5\">
+                            <label for=\"star5\" title=\"5 stelle\" id=\"cinque-stelle\">&#9733;</label>
+                        </div>
+                        <small class=\"descrizione-quantita\">Esprimi la tua valutazione del prodotto selezionando da 1 a 5 stelle.</small>
+
+                        <label for=\"user-comment\" class=\"form-label\">Scrivi qui il tuo commento</label>
+                        <details open>
+                            <summary id=\"hints-comment\" class=\"hints\" role=\"button\" aria-expanded=\"false\" aria-controls=\"hint-list-comment\">
+                                Suggerimenti Commento
+                            </summary>
+                            <ul class=\"suggestions-list\" id=\"hint-list-comment\">
+                                <li id=\"min-char-comment\">Minimo 30 caratteri</li>
+                                <li id=\"max-char-comment\">Massimo 300 caratteri</li>
+                            </ul>
+                        </details>
+                        <textarea name=\"commento\" placeholder=\"Scrivi qui il tuo commento sul prodotto.\" id=\"user-comment\" required minlength=\"30\" maxlength=\"300\"></textarea>
+                        
+                    </fieldset>
+                    <div class=\"button-container\">
+                        <button type=\"reset\" class=\"bottoni-neri\" id=\"reset-comment\">Annulla</button>
+                        <button type=\"submit\" class=\"bottoni-rossi\" id=\"submit-comment\">Conferma</button>
+                    </div>
+                </form>",
+    $pagina);
+
+    $pagina = str_replace("
+                <dl class=\"singleproduct-rating\">
+                    <dt>Data</dt>
+                    <dd>[Data Valutazione]</dd>
+                    <dt>Valutazione</dt>
+                    <dd class=\"rating-stars\" aria-label=\"Valutazione: [voto] su 5 stelle\">
+                        <span aria-hidden=\"true\"></span>
+                    </dd>
+                    <dt>Commento</dt>
+                    <dd>[Commento]</dd>
+                </dl>",
+            "",$pagina);
+
+    $pagina = str_replace("<form method=\"post\" id=\"elimina-valutazione\">
+                    <input type=\"hidden\" name=\"id_utente\" value=\"[id_utente]\">
+                    <input type=\"hidden\" name=\"nome_prodotto\" value=\"[nome_prodotto]\">
+
+                    <div class=\"button-container\">
+                        <button type=\"submit\" aria-label=\"Elimina Valutazione\" class=\"bottoni-rossi\">Elimina Valutazione</button>
+                    </div>
+                </form>","",$pagina);
+    }else {
+        $pagina = str_replace("<h4 class=\"no-print left\">Inserisci Valutazione e Commento</h4>[COMMENT]","",$pagina);
+        $pagina = str_replace("[Data Valutazione]",$isUserCommented["data"],$pagina);
+        $pagina = str_replace("[Commento]",$isUserCommented["commento"],$pagina);
+        $pagina = str_replace("[Data Valutazione]",$isUserCommented["data"],$pagina);
+    }
+    echo $pagina;
+}
 
 ?>
