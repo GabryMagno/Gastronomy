@@ -1,14 +1,16 @@
 # Pagine di errore personalizzate
-ErrorDocument 403 /gastronomia/sito/403.php
-ErrorDocument 404 /gastronomia/sito/404.php
-ErrorDocument 500 /gastronomia/sito/500.php
+ErrorDocument 403 http://localhost/gastronomia/sito/403.php
+ErrorDocument 404 http://localhost/gastronomia/sito/404.php
+ErrorDocument 500 http://localhost/gastronomia/sito/500.php
 
 # Attivazione riscrittura
 RewriteEngine On
 
-# Se refer vuoto e si vuole accedere ad /assets/
+# Blocco accesso diretto a cartelle sensibili se referer vuoto
 RewriteCond %{HTTP_REFERER} ^$
 RewriteRule ^assets/ - [F,L]
+RewriteRule ^php/ - [F,L]
+RewriteRule ^html/ - [F,L]
 
-#Redirect dei file html ai file php corrispondenti
-RewriteRule ^chisiamo.html$ chisiamo.php [L,R=301]
+# Redirect dei file HTML ai corrispondenti PHP (senza R=301, rewrite interno)
+RewriteRule ^chisiamo.html$ chisiamo.php [L]

@@ -558,10 +558,18 @@ class DB {
         $reservations = array();
         if($newConnection){
             //preparazione della query per ottenere le prenotazioni dei prodotti dell'utente
-            $userReservations = $this->connection->prepare("SELECT prodotti.nome, prodotti.categoria, prenotazioni.data_ritiro, prenotazioni.quantita 
-            FROM prenotazioni 
-            JOIN prodotti ON prenotazioni.id_prodotto = prodotti.id
-            WHERE prenotazioni.id_utente = ?");
+            $userReservations = $this->connection->prepare("
+            SELECT 
+                pr.id AS id_prenotazione,
+                p.nome AS nome_prodotto,
+                pr.data_ritiro,
+                pr.quantita,
+                p.unita,
+                p.id AS id_prodotto
+            FROM prenotazioni pr
+            JOIN prodotti p ON pr.id_prodotto = p.id
+            WHERE pr.id_utente = ?;
+            ");
             $userReservations->bind_param("i", $id);
             try{
                 //esecuzione della query per ottenere le prenotazioni dei prodotti dell'utente
@@ -587,10 +595,10 @@ class DB {
             }else{
                 //se non ci sono prenotazioni
                 $result->free();
-                return "No reservations found"; //nessuna prenotazione trovata
+                return false; //nessuna prenotazione trovata
             }
         }else{
-            return "Connection error"; //errore nella connessione al database
+            return false; //errore nella connessione al database
         }
 
     }
@@ -600,10 +608,18 @@ class DB {
         $tastings = array();
         if($newConnection){
             //preparazione della query per ottenere le degustazioni prenotate dall'utente
-            $userTastings = $this->connection->prepare("SELECT degustazioni.nome_prodotto, degustazioni.data_inizio, degustazioni.data_fine, degustazioni.prezzo 
-            FROM degustazioni 
-            JOIN utenti ON degustazioni.id_utente = utenti.id
-            WHERE utenti.id = ?");
+            $userTastings = $this->connection->prepare("
+            SELECT 
+                p.nome AS nome_prodotto,
+                pd.data_scelta,
+                pd.numero_persone,
+                d.prezzo,
+                d.id AS id_degustazione
+            FROM prenotazioni_degustazioni pd
+            JOIN degustazioni d ON pd.id_degustazione = d.id
+            JOIN prodotti p ON d.id_prodotto = p.id
+            WHERE pd.id_cliente = ?;
+            ");
             $userTastings->bind_param("i", $id);
             try{
                 //esecuzione della query per ottenere le degustazioni prenotate dall'utente
@@ -633,6 +649,53 @@ class DB {
             }
         }else{
             return "Connection error"; //errore nella connessione al database
+        }
+    }
+
+    public function GetUserReview($id): array | string { //ottenere tutte le recensioni scritte da un utente
+        $newConnection = $this->OpenConnectionDB();
+        $reviews = array();
+        if($newConnection){
+            //preparazione della query per ottenere le recensioni inserite dall'utente
+            $userReviews = $this->connection->prepare("
+            SELECT 
+                p.nome AS nome_prodotto,
+                v.data AS data_recensione,
+                v.voto AS valutazione,
+                v.id_prodotto
+            FROM valutazioni v
+            JOIN prodotti p ON v.id_prodotto = p.id
+            WHERE v.id_utente = ?;
+            ");
+            $userReviews->bind_param("i", $id);
+            try{
+                //esecuzione della query per ottenere le recensioni inserite dall'utente
+                $userReviews->execute();
+            }catch(\mysqli_sql_exception $error){
+                //se c'è un errore nell'esecuzione della query, ritorna false
+                $this->CloseConnectionDB();
+                $userReviews->close();
+                return false; //errore nell'esecuzione della query
+            }
+            //ottiene il risultato della query
+            $result = $userReviews->get_result();
+            $this->CloseConnectionDB();
+            $userReviews->close();
+            if($result->num_rows > 0){
+                //se ci sono recensioni, le aggiunge all'array
+                while($row = mysqli_fetch_assoc($result)){
+                    array_push($reviews, $row);
+                }
+                //libera la memoria occupata dal risultato della query
+                $result->free();
+                return $reviews; //ritorna l'array delle recensioni inserite dall'utente
+            }else{
+                //se non ci sono recensioni inserite dall'utente
+                $result->free();
+                return false; //nessuna recensione trovata
+            }
+        }else{
+            return false; //errore nella connessione al database
         }
     }
     
