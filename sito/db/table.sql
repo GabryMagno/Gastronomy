@@ -70,6 +70,7 @@ CREATE TABLE degustazioni (
 CREATE TABLE prenotazioni_degustazioni (
     id_degustazione INT,
     id_cliente INT,
+    numero_persone INT NOT NULL,
     data_prenotazione DATE NOT NULL,
     data_scelta DATE NOT NULL,
     PRIMARY KEY(id_degustazione, id_cliente),

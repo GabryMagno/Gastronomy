@@ -55,10 +55,10 @@ $pagina = str_replace(
 
 
 //SEZIONI PAGINA
-// Prodotti Preferiti
 
 $id = $db->IsUserLog();
 
+// Prodotti Preferiti
 $preferiti = $db->GetUserFavoritesProducts($id);
 
 if($preferiti === false){
@@ -101,17 +101,6 @@ function CreaVisualizzaPreferito(int $idProdotto, string $nomeProdotto, string $
     return $TEMPLATE;
 }
 
-/*
-                <div class="a11y-status sr-only nondisponibile" role="status" aria-live="polite"></div>
-
-                <div class="button-container">
-                    <button class="load-more bottoni-rossi" id="lm-prodotti-preferiti" aria-controls="dc-prodotti-preferiti" aria-label="Carica più prodotti aggiunti ai preferiti">
-                        Carica di pi&ugrave;
-                    </button>
-                    <a class="bottoni-rossi" href="#prodotti-preferiti">Torna a inizio sezione</a>
-                </div>
-*/
-
 
 
 // Prenotazioni
@@ -151,31 +140,61 @@ $pagina = str_replace('[Prodotti Prenotati]','<p class="nondisponibile">Nessun p
 
 
 // Degustazioni
-$pagina = str_replace('[Degustazioni Prossime]','<p class="nondisponibile">Nessuna degustazione prenotata.</p>',$pagina);
+$degustazioni = $db->GetUserTastings($id);
+
+if($degustazioni === false){
+    header('Location: 500.php');
+} elseif (empty($degustazioni)){
+    $pagina = str_replace('[Degustazioni Prossime]','<p class="nondisponibile">Nessuna degustazione prenotata.</p>',$pagina);
+} else {
+    $pagina=str_replace("[Degustazioni Prossime]",VisualizzaDegustazione($degustazioni),$pagina);           
+}
+
+function VisualizzaDegustazione(array $degustazioni): string {
+    $degustazione_html = '<div class="data-container" id="dc-degustazioni-prenotate" aria-live="polite">
+                            <ul class="list" id="user-profile-degustazioni-prenotate">';
+
+    foreach ($degustazioni as $value){
+        $degustazione_html.= CreaVisualizzaDegustazione(
+            $value['id_degustazione'],
+            $value['nome_prodotto'],
+            new DateTime($value['data_scelta']),
+            $value['prezzo'],
+            $value['numero_persone']
+        );
+    }
+
+    $degustazione_html.= '</ul></div>';
+
+    return $degustazione_html;
+}
+
+function CreaVisualizzaDegustazione(int $idDegustazione, string $nomeProdotto, DateTime $dataScelta, float $prezzo, int $numeroPersone){
+
+    $TEMPLATE = '
+            <li class="userprofile-brochure">
+                <div class="userprofile-brochure-content">
+                    <h4>'.$nomeProdotto.'</h4>
+                        <dl>
+                            <dt>Data Scelta</dt>
+                                <dd><time datetime="' . $dataScelta->format("Y-m-d") . '">' . $dataScelta->format("d/m/Y") . '</time></dd>
+                            <dt>Persone</dt>
+                                <dd>'.$numeroPersone.' '.($numeroPersone == 1 ? 'persona' : 'persone').'</dd>
+                            <dt>Prezzo</dt>
+                                <dd class="userprofile-brochure-prezzo">'.number_format($prezzo, 2, ',', '.') . ' €</dd>
+                        </dl>
+                </div>
+                <div class="brochure-links">
+                    <a href="degustazione.php?degustazione='.$idDegustazione.'" class="btn-dettagli">Dettagli</a>
+                    <a href="#" class="btn-elimina">Elimina</a>
+                </div>
+            </li>
+        ';
+
+    return $TEMPLATE;
+}
 
 /*
-                <div class="data-container" id="dc-degustazioni-prenotate" aria-live="polite">
-                    <ul class="list" id="user-profile-degustazioni-prenotate">
-                        <li class="userprofile-brochure">
-                            <div class="userprofile-brochure-content">
-                                <h4>[Nome degustazione]</h4>
-                                <dl>
-                                    <dt>Data</dt>
-                                    <dd>[dd-mm-yyyy]</dd>
-                                    <dt>Persone</dt>
-                                    <dd>[NP]</dd>
-                                    <dt>Prezzo</dt>
-                                    <dd class="userprofile-brochure-prezzo">[Prezzo]</dd>
-                                </dl>
-                            </div>
-                            <div class="brochure-links">
-                                <a href="degustazione.php" class="btn-dettagli">Dettagli</a>
-                                <a href="#" class="btn-elimina">Elimina</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
                 <div class="a11y-status sr-only nondisponibile" role="status" aria-live="polite"></div>
 
                 <div class="button-container">
@@ -187,26 +206,63 @@ $pagina = str_replace('[Degustazioni Prossime]','<p class="nondisponibile">Nessu
 */
 
 // Recensioni
-$pagina = str_replace('[Recensioni Prodotti]','<p class="nondisponibile">Nessuna recensione inserita.</p>',$pagina);
+$recensioni = $db->GetUserReview($id);
+
+if($recensioni === false){
+    header('Location: 500.php');
+} elseif (empty($recensioni)){
+    $pagina = str_replace('[Recensioni Prodotti]','<p class="nondisponibile">Nessuna recensione inserita.</p>',$pagina);
+} else {
+    $pagina=str_replace("[Recensioni Prodotti]",VisualizzaRecensione($recensioni),$pagina);           
+}
+
+function VisualizzaRecensione(array $recensioni): string {
+    $recensione_html = '<div class="data-container" id="dc-recensioni" aria-live="polite">
+                        <ul class="list" id="user-profile-recensioni">';
+
+    foreach ($recensioni as $value){
+        $recensione_html.= CreaVisualizzaRecensioni(
+            $value['id_prodotto'],
+            $value['nome_prodotto'],
+            new DateTime($value['data_recensione']),
+            $value['valutazione']
+        );
+    }
+
+    $recensione_html.= '</ul></div>';
+
+    return $recensione_html;
+}
+
+function CreaVisualizzaRecensioni(int $idProdotto, string $nomeProdotto, DateTime $dataRecensione, int $valutazione){
+
+    $TEMPLATE = '
+        <li class="userprofile-brochure">
+            <div class="userprofile-brochure-content">
+                <h4>'.$nomeProdotto.'</h4>
+                    <dl>
+                        <dt>Data</dt>
+                            <dd><time datetime="' . $dataRecensione->format("Y-m-d") . '">' . $dataRecensione->format("d/m/Y") . '</time></dd>
+                        <dt>Valutazione</dt>
+                            <dd aria-label="Valutazione: '.$valutazione.' su 5 stelle">';
+    
+    
+    for ($i=0; $i < $valutazione; $i++) { 
+        $TEMPLATE .= '★';
+    }
+
+    for ($i=$valutazione; $i < 5; $i++) { 
+        $TEMPLATE .= '☆';
+    }
+
+    $TEMPLATE .= '</dl></div>
+                        <a href="prodotto.php?prodotto='.$idProdotto.'#valutazione">Visualizza</a>
+                </li>';
+
+    return $TEMPLATE;
+}
 
 /*
-                <div class="data-container" id="dc-recensioni" aria-live="polite">
-                    <ul class="list" id="user-profile-recensioni">
-                        <li class="userprofile-brochure">
-                            <div class="userprofile-brochure-content">
-                                <h4>[Nome prodotto]</h4>
-                                <dl>
-                                    <dt>Data</dt>
-                                    <dd>[dd-mm-yyyy]</dd>
-                                    <dt>Valutazione</dt>
-                                    <dd aria-label="Valutazione: 4 su 5 stelle">[Valutazione]</dd>
-                                </dl>
-                            </div>
-                            <a href="prodotto.php#valutazione">Visualizza</a>
-                        </li>
-                    </ul>
-                </div>
-
                 <div class="a11y-status sr-only nondisponibile" role="status" aria-live="polite"></div>
 
                 <div class="button-container">
