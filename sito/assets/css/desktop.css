@@ -2212,7 +2212,7 @@ form#prenotazione-degustazione #quantita{
 
     color: var(--errorcolor);
 
-    margin-top: 1em;
+    margin-top: 0.8em;
 }
 
 #aggiungi-prenotazione{
@@ -2369,6 +2369,31 @@ form#delete-choice button{
 
 /*  
     ===============================
+        PAGINA RINGRAZIAMENTO 
+    ===============================
+*/
+
+.ringraziamento h3{
+    color: var(--hintsuccess);
+
+    text-align: center;
+    font-weight: bold;
+    font-size: 3em;
+    padding-top: 0.2em;
+}
+
+.ringraziamento h4{
+    color: var(--hintsuccess);
+
+    text-align: center;
+    font-weight: bold;
+    font-size: 2em;
+
+    margin: 1rem;
+}
+
+/*  
+    ===============================
             PAGINE ERRORI 
     ===============================
 */
@@ -2392,7 +2417,8 @@ form#delete-choice button{
     margin: 1rem;
 }
 
-.error_main img{
+.error_main img,
+.ringraziamento img{
     display: block;
     margin: 0 auto;
 

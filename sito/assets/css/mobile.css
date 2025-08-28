@@ -563,16 +563,18 @@ div .chef-content{
 
 /*  
     ===============================
-            ERRORI 
+        ERRORI e RINGRAZIAMENTO 
     ===============================
 */
 
-.error_main img{
+.error_main img,
+.ringraziamento img {
     width: 90%;
     height: auto;
 }
 
-.error_main h3{
+.error_main h3,
+.ringraziamento h3{
     font-size: 2.2em;
 }
 
