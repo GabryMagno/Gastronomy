@@ -118,15 +118,6 @@ function VisualizzaPrenotazione(array $prenotazioni): string {
     $prenotazioni_html = '<div class="data-container" id="dc-prodotti-prenotati" aria-live="polite">
                             <ul class="list" id="user-profile-prodotti-prenotati">';
 
-    /*
-                pr.id AS id_prenotazione,
-                p.nome AS nome_prodotto,
-                pr.data_ritiro,
-                pr.quantita,
-                p.unita,
-                p.id AS id_prodotto
-    */
-
     foreach ($prenotazioni as $value){
         $prenotazioni_html.= CreaVisualizzaPrenotazione(
             $value['id_prenotazione'],
