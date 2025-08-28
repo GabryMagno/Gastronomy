@@ -1135,7 +1135,7 @@ class DB {
         }else{
             $newConnection = $this->OpenConnectionDB();
             if($newConnection){
-                if(!$this->CheckProductReservationAvailability($product, $quantity)){
+                if(!$this->CheckProductReservationAvailability($product, $quantity, $newConnection)){
                     //se la degustazione non è disponibile per il numero di persone richiesto, ritorna un messaggio di errore
                     return "Reservation not available for the requested quantity"; //degustazione non disponibile per il numero di persone richiesto
                 }
@@ -1144,14 +1144,14 @@ class DB {
                 $addReservation->bind_param("iiis", $isUserLogged, $product, $quantity, $date);
 
                 //preparazione della query per aggiornare la quantità massima di prodotto che può essere prenotato
-                $changeQuantityNumber = $this->connection->prepare("UPDATE prodotti SET max_disponibile = max_disponibile - ? WHERE id_prodotto = ?");
+                $changeQuantityNumber = $this->connection->prepare("UPDATE prodotti SET max_prenotabile = max_prenotabile - ? WHERE id = ?");
                 $changeQuantityNumber->bind_param("ii", $quantity, $product);
                 try{
                     $this->connection->begin_transaction();
                     //esecuzione della query per aggiungere una prenotazione
                     $insert = $addReservation->execute();
                     $change = $changeQuantityNumber->execute();
-                    if($insert && $change && $addReservation->affected_rows == 1 && $changeQuantityNumber->affected_rows == 1){//La transazione è andata a buon fine
+                    if($insert && $change && $addReservation->affected_rows == 1){//La transazione è andata a buon fine
                         $this->connection->commit();
                         $addReservation->close();
                         $changeQuantityNumber->close();
@@ -1177,11 +1177,10 @@ class DB {
         }
     }
 
-    public function CheckProductReservationAvailability($product, $quantity): bool | string{
-         $newConnection = $this->OpenConnectionDB();
+    public function CheckProductReservationAvailability($product, $quantity, $newConnection): bool | string{
         if($newConnection){
             //preparazione della query per controllare se un prodotto può essere prenotato
-            $checkAvailability = $this->connection->prepare("SELECT max_prenotabile, min_prenotabile FROM prodotti WHERE id_prodotto = ?");
+            $checkAvailability = $this->connection->prepare("SELECT max_prenotabile, min_prenotabile FROM prodotti WHERE id = ?");
             $checkAvailability->bind_param("i", $product);
             try{
                 //esecuzione della query per controllare la disponibilità di una degustazione
@@ -1194,7 +1193,6 @@ class DB {
             }
             //ottiene il risultato della query
             $result = $checkAvailability->get_result();
-            $this->CloseConnectionDB();
             $checkAvailability->close();
             if($result->num_rows == 1){
                 //se il prodotto esiste, allora ne controlla la disponibilità
@@ -1211,7 +1209,6 @@ class DB {
             return "Connection error"; //errore nella connessione al database
         }
     }
-
     //DA CONTROLLARE LE PROSSIME DUE FUNZIONI :AddTasting e CheckTastingAvailability -> MOLTO IMPORTANTE
 
     public function AddTasting($id, $tasting, $people_number, $date): bool | string{//Aggiunta di una prenotazione per una degustazione da parte dell'utente per un tot di persone e in una certa data

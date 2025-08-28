@@ -21,25 +21,27 @@ function validateUserComment() {
 	let form = document.getElementById("valutazione");
 
 	form.addEventListener("submit", function (event) {
-		if (! (validateDateOrder()) ) {
+		if (! ((validateComment)) ) {
 			event.preventDefault();
 			document.getElementById("submit-comment").classList.add("not-available");
 			document.getElementById("submit-comment").disabled = true;
 		}
 	});
-}
+}//validateDateOrder
 
 function ValidateUserOrder(){
     let form = document.getElementById("prenotazione");
 
 	form.addEventListener("submit", function (event) {
-		if (! (validateComment()) ) {
+		if (! (validateDateOrder()) ) {
 			event.preventDefault();
 			document.getElementById("submit-order").classList.add("not-available");
 			document.getElementById("submit-order").disabled = true;
-		}
+		}else{
+            document.getElementById("submit-order").classList.remove("not-available");
+			document.getElementById("submit-order").disabled = false;
+        }
 	});
-
 }
 
 
