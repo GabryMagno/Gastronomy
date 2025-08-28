@@ -14,6 +14,10 @@ $date_reservation = null;
 $pagina = file_get_contents("html/prodotto.html");
 if(isset($_GET["prodotto"])){
     $productInfo = $db->GetProductInfo($_GET["prodotto"]);
+    IF(is_string($productInfo) && $productInfo == "Product not found") {
+        header("Location: 404.php");
+        exit();
+    }
     unset($_GET["prodotto"]);
 
     $pagina = str_replace("[IMAGE]","<img src=". $productInfo["url_immagine"] ." alt=\"\">",$pagina);
@@ -115,6 +119,8 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
     $pagina = str_replace("[Unita]",$productInfo["unita"],$pagina);
     $pagina = str_replace("[min_prenotabile]",$productInfo["min_prenotabile"],$pagina);
     $pagina = str_replace("[max_prenotabile]",$productInfo["max_prenotabile"],$pagina);
+
+    //GESTIONE PRODOTTO PREFERITO
 
     $isProductFavorite = $db->ThisIsAlreadyFavoriteProduct($productInfo["id"],$isUserLogged);
 
