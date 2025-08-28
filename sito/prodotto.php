@@ -11,6 +11,8 @@ $grade = null;
 $quantity_reservation = null;
 $date_reservation = null;
 
+//GESTIONE GENERALE
+
 $pagina = file_get_contents("html/prodotto.html");
 if(isset($_GET["prodotto"])){
     $productInfo = $db->GetProductInfo($_GET["prodotto"]);
@@ -115,18 +117,21 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
 
                             <label for=\"quantita\" class=\"form-label\">Quantità da prenotare</label>
                             <div id=\"quantita-unita\">
-                                <input type=\"number\" id=\"quantita\" name=\"quantita\" min=\"1\" max=\"10\" required>
+                                <input type=\"number\" id=\"quantita\" name=\"quantita\" min=\"1\" max=\"10\" value=\"[quantita-ordine]\"required>
                                 <span class=\"unita\">[Unita]</span>
+                                
                             </div>
                             <small class=\"descrizione-quantita\">Puoi prenotare da [min_prenotabile] a [max_prenotabile] unit&agrave;.</small>
+                            [quantity-error]
 
                             <div>
                                 <label for=\"data-ritiro\" class=\"form-label\" id=\"order-label\">Data di ritiro</label>
-                                <input type=\"date\" id=\"data-ritiro\" name=\"data_ritiro\" required>
+                                <input type=\"date\" id=\"data-ritiro\" name=\"data_ritiro\" value=\"[data-ordine]\" required>
+                                [date-error]
                             </div>
 
                             <div class=\"button-container\">
-                                <button type=\"submit\" aria-label=\"Prenota Prodotto\" class=\"bottoni-rossi\" id=\"submit-order\">Prenota</button>
+                                <button type=\"submit\" aria-label=\"Prenota Prodotto\" class=\"bottoni-rossi\" id=\"submit-order\" name=\"submit-reservation\">Prenota</button>
                             </div>
                         </fieldset>
                     </form>",
@@ -139,7 +144,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
         $pagina = str_replace("[RESERVATION]","",$pagina);
     }
 
-    //GESTIONE COMMENTO
+    //GESTIONE COMMENTO SE GIA' ESISTENTE O MENO
 
     $isUserCommented = $db->GetUserReviewProduct($isUserLogged,$productInfo["id"]);
 
@@ -217,6 +222,57 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
         $pagina = str_replace("[Commento]",$isUserCommented["commento"],$pagina);
         $pagina = str_replace("[Data Valutazione]",$isUserCommented["data"],$pagina);
     }
+
+    //FORM PRENOTAZIONE
+    if(isset($_POST["submit-reservation"])){
+        $errorFound = false;
+        $pagina = str_replace("[date-error]","",$pagina);
+        $pagina = str_replace("[quantity-error]","",$pagina);
+
+        $quantity = (int)$_POST["quantita"];
+        if($quantity < $productInfo["min_prenotabile"]){
+            $errorFound = true; 
+            $pagina = str_replace("[quantity-error]","<p class=\"error\" id=\"quantity-error\">La quantità di prodotto che puoi prenotare deve essere superiore o uguale a ".$productInfo["min_prenotabile"]." ".$productInfo["unita"]."</p>",$pagina);
+        }elseif($quantity > $productInfo["max_prenotabile"]){
+            $errorFound = true; 
+            $pagina = str_replace("[quantity-error]","<p class=\"error\" id=\"quantity-error\">La quantità di prodotto che puoi prenotare deve essere inferiore o uguale a ".$productInfo["max_prenotabile"]." ".$productInfo["unita"]."</p>",$pagina);
+        }else{
+            $pagina = str_replace("[quantity-error]","",$pagina);
+        }
+
+
+        $date_reservation = $_POST["data_ritiro"];
+        $today = new DateTime();
+        $tomorrow = (clone $today)->modify('+1 day');
+        $reservationDate = new DateTime($date_reservation);
+        if($reservationDate < $tomorrow){
+            $errorFound = true; 
+            $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">L'ordine può essere ritirato solo nei giorni successivi ad oggi: ". $today->format("Y-m-d")."</p>", $pagina);
+        }else{
+            $pagina = str_replace("[date-error]","",$pagina);
+        }
+
+        if($errorFound == true){//ci sono stati errori
+            $pagina = str_replace("[quantita-ordine]",$quantity, $pagina);
+            $pagina = str_replace("[data-ordine]",$date_reservation, $pagina); 
+        }else{
+            $addReservation = $db->AddReservation($productInfo["id"], $quantity, $date_reservation);
+            if(is_bool($addReservation) && $addReservation == true) {//controllo se la modifica delle informazioni è andata a buon fine
+                header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');//reindirizza alla pagina delle informazioni utente
+                $pagina = str_replace("[quantita-ordine]",$quantity, $pagina);
+                $pagina = str_replace("[data-ordine]",$date_reservation, $pagina); 
+                exit();
+            } else { 
+                header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');
+                exit();
+            }
+        }
+
+    }
+    //FORM COMMENTO
+    //SEZIONE COMMENTI ALTRI UTENTI
+    $pagina = str_replace("[quantity-error]","",$pagina);
+    $pagina = str_replace("[date-error]","",$pagina);
     echo $pagina;
 }
 

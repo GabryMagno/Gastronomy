@@ -87,12 +87,12 @@ if(!isset($_POST["submit-user-settings"]) && !isset($_POST["submit-password-sett
     $username = $_POST["new-username"];
     if (mb_strlen($username) < 4) {
         $pagina = str_replace("[username-error]",'<p role="alert" class="error" id="username-error">Lo <span lang="en">username</span> deve avere una lunghezza minima di 4 caratteri</p>',$pagina);
-        $errorFound=true;
+        $errorFound = true;
     } elseif (mb_strlen($username) > 16) {
         $pagina = str_replace("[username-error]",'<p role="alert" class="error" id="username-error">Lo <span lang="en">username</span> non deve superare i 16 caratteri</p>',$pagina);
-        $errorFound=true;
+        $errorFound = true;
     } elseif (preg_match("/^[a-zA-ZÀ-Ýß-ÿ0-9]+$/",$username) == 0) {
-        $errorFound=true;
+        $errorFound = true;
         $pagina = str_replace("[username-error]",'<p role="alert" class="error" id="username-error"><span lang="en">Username</span> non valido, usa solo lettere o numeri.',$pagina);
     } else {
         $username = Sanitizer::SanitizeUsername($username);
@@ -112,12 +112,12 @@ if(!isset($_POST["submit-user-settings"]) && !isset($_POST["submit-password-sett
     $name = $_POST["new-name"];
     if(mb_strlen($name) == 0){
         $pagina = str_replace("[name-error]",'<p role="alert" class="error" id="name-error">Se vuoi modificare il nome devi inserire almeno un carattere</p>',$pagina);
-        $errorFound=true;
+        $errorFound = true;
     } elseif(mb_strlen($name) > 15) {
         $pagina = str_replace("[name-error]",'<p role="alert" class="error" id="name-error">Il nome non deve superare i 15 caratteri</p>',$pagina);
-        $errorFound=true;
+        $errorFound = true;
     } elseif (preg_match("/^[a-zA-ZÀ-Ýß-ÿ]+$/",$name) == 0) {
-        $errorFound=true;
+        $errorFound = true;
         $pagina = str_replace("[name-error]",'<p role="alert" class="error" id="name-error">Nome non valido, usa solo lettere.</p>',$pagina);
     } else {
         $name = Sanitizer::SanitizeUsername($name);
@@ -267,7 +267,6 @@ if(!isset($_POST["submit-user-settings"]) && !isset($_POST["submit-password-sett
                     exit();
                 } else { 
                     header('Location: user-profile.php');
-                    echo "2";
                     exit();
                 }
             } else {
@@ -277,7 +276,6 @@ if(!isset($_POST["submit-user-settings"]) && !isset($_POST["submit-password-sett
                     exit();
                 } else { 
                     header('Location: user-profile.php');
-                    echo "2";
                     exit();
                 }
             }
