@@ -101,6 +101,17 @@ function CreaVisualizzaPreferito(int $idProdotto, string $nomeProdotto, string $
     return $TEMPLATE;
 }
 
+/*
+    <div class="a11y-status sr-only nondisponibile" role="status" aria-live="polite"></div>
+
+    <div class="button-container">
+        <button class="load-more bottoni-rossi" id="lm-prodotti-preferiti" aria-controls="dc-prodotti-preferiti" aria-label="Carica più prodotti selezionati come preferiti">
+            Carica di pi&ugrave;
+        </button>
+        <a class="bottoni-rossi" href="#prodotti-preferiti">Torna a inizio sezione</a>
+    </div>
+*/
+
 
 
 // Prenotazioni
