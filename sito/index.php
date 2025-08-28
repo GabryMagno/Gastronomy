@@ -41,6 +41,7 @@ echo $pagina;
 
 function createBestCommentTemplate($username, $immagine, $voto, $commento, $prodotto, $data){
     global $db;
+    if($immagine == null || $immagine == "") $immagine = "assets/img/users_logos/default.webp";
      
     $TEMPLATE = '<div class="recensione-card">
                     <div class="recensione-foto">
