@@ -1065,7 +1065,7 @@ class DB {
         }
     }
 
-    public function AddReservation($id, $product, $quantity, $date): bool | string{//Aggiunta da parte dell'utente di una prenotazione rispetto ad un prodotto indicando quantità dello stesso e quando (data) ritirarlo
+    public function AddReservation($product, $quantity, $date): bool | string{//Aggiunta da parte dell'utente di una prenotazione rispetto ad un prodotto indicando quantità dello stesso e quando (data) ritirarlo
         $isUserLogged = $this->IsUserLog();
         if($isUserLogged == false){
             //se l'utente non è loggato, ritorna un messaggio di errore
@@ -1073,32 +1073,80 @@ class DB {
         }else{
             $newConnection = $this->OpenConnectionDB();
             if($newConnection){
+                if(!$this->CheckProductReservationAvailability($product, $quantity)){
+                    //se la degustazione non è disponibile per il numero di persone richiesto, ritorna un messaggio di errore
+                    return "Reservation not available for the requested quantity"; //degustazione non disponibile per il numero di persone richiesto
+                }
                 //preparazione della query per aggiungere una prenotazione
                 $addReservation = $this->connection->prepare("INSERT INTO prenotazioni (id_utente, id_prodotto, quantita, data_ritiro) VALUES (?, ?, ?, ?)");
                 $addReservation->bind_param("iiis", $isUserLogged, $product, $quantity, $date);
+
+                //preparazione della query per aggiornare la quantità massima di prodotto che può essere prenotato
+                $changeQuantityNumber = $this->connection->prepare("UPDATE prodotti SET max_disponibile = max_disponibile - ? WHERE id_prodotto = ?");
+                $changeQuantityNumber->bind_param("ii", $quantity, $product);
                 try{
+                    $this->connection->begin_transaction();
                     //esecuzione della query per aggiungere una prenotazione
-                    $addReservation->execute();
+                    $insert = $addReservation->execute();
+                    $change = $changeQuantityNumber->execute();
+                    if($insert && $change && $addReservation->affected_rows == 1 && $changeQuantityNumber->affected_rows == 1){//La transazione è andata a buon fine
+                        $this->connection->commit();
+                        $addReservation->close();
+                        $changeQuantityNumber->close();
+                        $this->CloseConnectionDB();
+                        return true;
+                    }else{
+                        $this->connection->rollback();
+                        $addReservation->close();
+                        $changeQuantityNumber->close();
+                        $this->CloseConnectionDB();
+                        return false;
+                    }
                 }catch(\mysqli_sql_exception $error){
                     //se c'è un errore nell'esecuzione della query, ritorna false
-                    $this->CloseConnectionDB();
                     $addReservation->close();
-                    return false; //errore nell'esecuzione della query
-                }
-                if(mysqli_affected_rows($this->connection) == 1){
-                    //se la query ha inserito una riga, allora la prenotazione è stata aggiunta con successo
+                    $changeQuantityNumber->close();
                     $this->CloseConnectionDB();
-                    $addReservation->close();
-                    return true; //aggiunta avvenuta con successo
-                }else{
-                    //se la query non ha inserito nessuna riga, allora c'è stato un errore
-                    $this->CloseConnectionDB();
-                    $addReservation->close();
-                    return "Reservation addition failed"; //nessuna riga inserita, errore nell'aggiunta della prenotazione
+                    return "Execution error"; //errore nell'esecuzione della query
                 }
             }else{
                 return "Connection error"; //errore nella connessione al database
             }
+        }
+    }
+
+    public function CheckProductReservationAvailability($product, $quantity): bool | string{
+         $newConnection = $this->OpenConnectionDB();
+        if($newConnection){
+            //preparazione della query per controllare se un prodotto può essere prenotato
+            $checkAvailability = $this->connection->prepare("SELECT max_prenotabile, min_prenotabile FROM prodotti WHERE id_prodotto = ?");
+            $checkAvailability->bind_param("i", $product);
+            try{
+                //esecuzione della query per controllare la disponibilità di una degustazione
+                $checkAvailability->execute();
+            }catch(\mysqli_sql_exception $error){
+                //se c'è un errore nell'esecuzione della query, ritorna false
+                $this->CloseConnectionDB();
+                $checkAvailability->close();
+                return "Execution error"; //errore nell'esecuzione della query
+            }
+            //ottiene il risultato della query
+            $result = $checkAvailability->get_result();
+            $this->CloseConnectionDB();
+            $checkAvailability->close();
+            if($result->num_rows == 1){
+                //se il prodotto esiste, allora ne controlla la disponibilità
+                $row = mysqli_fetch_assoc($result);
+                if($row['max_prenotabile'] >= $quantity && $row['min_prenotabile'] <= $quantity){
+                    return true; //prenotazione disponibile per la quantità di prodotto richiesto
+                }else{
+                    return "Reservation not available for the requested quantity"; //prenotazione non disponibile per la quantità di prodotto richiesto
+                }
+            }else{
+                return "Product not found"; //prodotto non trovato
+            }
+        }else{
+            return "Connection error"; //errore nella connessione al database
         }
     }
 
