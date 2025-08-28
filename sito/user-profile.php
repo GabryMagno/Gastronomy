@@ -26,8 +26,12 @@ if (is_string($userInfo) && (strcmp($userInfo,"Execution error") == 0 || strcmp(
 }
 
 //Immagine Utente
-//<img src="assets/img/Cuochi.png" alt="Foto profilo di Nome Cognome" class="user-avatar">
-$pagina = str_replace("[ImmagineProfilo]",'<img src="'.$userInfo['url_immagine'].'" alt="Foto profilo di '.$userInfo['nome']." ".$userInfo['cognome'].'" class="user-avatar">',$pagina);
+if ($userInfo["url_immagine"]) {//controllo se l'utente ha un'immagine profilo
+    $pagina = str_replace("[ImmagineProfilo]",'<img src="'.$userInfo['url_immagine'].'" alt="Foto profilo di '.$userInfo['nome']." ".$userInfo['cognome'].'" class="user-avatar">',$pagina);
+} else {
+    //immagine di default
+    $pagina = str_replace("[ImmagineProfilo]",'<img src="assets/img/users_logos/default.webp" alt="Foto profilo di '.$userInfo['nome']." ".$userInfo['cognome'].'" class="user-avatar">',$pagina);
+}
 
 //Sostituzione di eventuali Nome e Nome Cognome nella pagina
 $pagina = str_replace("[Nome]",$userInfo['nome'],$pagina);
