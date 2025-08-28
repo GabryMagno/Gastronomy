@@ -226,8 +226,6 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
     //FORM PRENOTAZIONE
     if(isset($_POST["submit-reservation"])){
         $errorFound = false;
-        $pagina = str_replace("[date-error]","",$pagina);
-        $pagina = str_replace("[quantity-error]","",$pagina);
 
         $quantity = (int)$_POST["quantita"];
         if($quantity < $productInfo["min_prenotabile"]){
