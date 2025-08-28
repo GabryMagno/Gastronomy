@@ -186,11 +186,11 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
                             </ul>
                         </details>
                         <textarea name=\"commento\" placeholder=\"Scrivi qui il tuo commento sul prodotto.\" id=\"user-comment\" required minlength=\"30\" maxlength=\"300\"></textarea>
-                        
+                        [comment-error]
                     </fieldset>
                     <div class=\"button-container\">
                         <button type=\"reset\" class=\"bottoni-neri\" id=\"reset-comment\">Annulla</button>
-                        <button type=\"submit\" class=\"bottoni-rossi\" id=\"submit-comment\">Conferma</button>
+                        <button type=\"submit\" class=\"bottoni-rossi\" id=\"submit-comment\" name=\"submit-user-comment\">Conferma</button>
                     </div>
                 </form>",
     $pagina);
@@ -265,7 +265,25 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
         }
 
     }
+
     //FORM COMMENTO
+    if(isset($_POST["submit-user-comment"])){
+        $grade = isset($_GET['rating']) ? Sanitizer::SanitizeGenericInput(Sanitizer::IntFilter($_GET['rating'])) : 0;// voto minimo
+        $comment = isset($_GET['commento']) ? Sanitizer::SanitizeGenericInput(Sanitizer::SanitizeText($_GET['comment'])) :'';
+        unset($_POST['commento']);
+        if(mb_strlen($newAdvice)<30) {//controlla la lunghezza minima del commento
+            $pagina =str_replace("[comment-error]","<p role=\"alert\" class=\"error\" id=\"comment-error\">La lunghezza minima del commento non deve essere inferiore ai 30 caratteri</p>",$pagina);
+            header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');
+        exit();
+        }else if(mb_strlen($newAdvice)>300){//controlla la lunghezza massima del messaggio
+           $pagina = str_replace("[comment-error]","<p role=\"alert\" class=\"error\" id=\"comment-error\">La lunghezza massima del commento non deve superare i 300 caratteri</p>",$pagina);
+            header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');
+            exit();
+        }
+
+
+    }
+
     //SEZIONE COMMENTI ALTRI UTENTI
     echo $pagina;
 }

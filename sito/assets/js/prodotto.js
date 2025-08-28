@@ -138,7 +138,7 @@ function validateComment(){
         var check = document.getElementById("comment-error");
         deleteError(check);
         var p = messageError("comment-error");
-        p.innerText = "La lunghezza minima del messaggio non deve essere inferiore ai 30 caratteri";
+        p.innerText = "La lunghezza minima del commento non deve essere inferiore ai 30 caratteri";
         document.getElementById("submit-comment").classList.add("not-available");
 		document.getElementById("submit-comment").disabled = true;
         document.getElementById("reset-comment").classList.remove("not-available");
@@ -152,7 +152,7 @@ function validateComment(){
         var check = document.getElementById("comment-error");
         deleteError(check);
         var p = messageError("comment-error");
-        p.innerText = "La lunghezza minima del messaggio non deve essere inferiore ai 30 caratteri";
+        p.innerText = "La lunghezza minima del commento non deve essere inferiore ai 30 caratteri";
         document.getElementById("submit-comment").classList.add("not-available");
 		document.getElementById("submit-comment").disabled = true;
         document.getElementById("reset-comment").classList.remove("not-available");
@@ -164,7 +164,7 @@ function validateComment(){
         var check = document.getElementById("comment-error");
         deleteError(check);
         var p = messageError("comment-error");
-        p.innerText = "La lunghezza massima del messaggio non deve superare i 300 caratteri";
+        p.innerText = "La lunghezza massima del commento non deve superare i 300 caratteri";
         document.getElementById("submit-comment").classList.add("not-available");
 		document.getElementById("submit-comment").disabled = true;
         document.getElementById("reset-comment").classList.remove("not-available");
