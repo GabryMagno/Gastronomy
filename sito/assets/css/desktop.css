@@ -2443,7 +2443,8 @@ form#delete-choice button{
     height: 400px;
 }
 
-.error-description{
+.error-description,
+#ringraziamento-description{
     color: var(--txtcolor);
     margin-left: 5%;
     margin-right: 5%;

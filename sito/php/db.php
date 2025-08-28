@@ -510,7 +510,7 @@ class DB {
         $favorites = array();
         if($newConnection){
             //preparazione della query per ottenere i prodotti preferiti dell'utente
-            $userFavorites = $this->connection->prepare( "SELECT prodotti.nome, prodotti.categoria, prodotto.prezzo, prodotti.url_immagine FROM prodotti, preferiti WHERE preferiti.id_prodotto = prodotti.id and preferiti.id_utente = ?");
+            $userFavorites = $this->connection->prepare( "SELECT prodotti.id, prodotti.nome, prodotti.url_immagine FROM prodotti, preferiti WHERE preferiti.id_prodotto = prodotti.id and preferiti.id_utente = ?");
             $userFavorites->bind_param("i", $id);
             try{
                 //esecuzione della query per ottenere i prodotti preferiti dell'utente
@@ -544,10 +544,10 @@ class DB {
                 return $favorites; //ritorna l'array dei prodotti preferiti
             }else{
                 //se non ci sono prodotti preferiti
-                return "No favorite products found"; //nessun prodotto preferito trovato
+                return false; //nessun prodotto preferito trovato
             }
         }else{
-            return "Connection error"; //errore nella connessione al database
+            return false; //errore nella connessione al database
         }
     }
 

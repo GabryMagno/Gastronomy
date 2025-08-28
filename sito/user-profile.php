@@ -46,7 +46,50 @@ $pagina = str_replace(
 
 //SEZIONI PAGINA
 // Prodotti Preferiti
-$pagina = str_replace('[Prodotti Preferiti]','<p class="nondisponibile">Nessun prodotto aggiunto ai preferiti.</p>',$pagina);
+
+$id = $db->IsUserLog();
+
+$preferiti = $db->GetUserFavoritesProducts($id);
+
+if($preferiti === false){
+    header('Location: 500.php');
+} elseif (empty($preferiti)){
+    $pagina = str_replace('[Prodotti Preferiti]','<p class="nondisponibile">Nessun prodotto aggiunto ai preferiti.</p>',$pagina);
+} else {
+    $pagina=str_replace("[Prodotti Preferiti]",VisualizzaPreferito($preferiti),$pagina);           
+}
+
+function VisualizzaPreferito(array $preferiti): string {
+    $preferito_html = '<div class="data-container" id="dc-prodotti-preferiti" aria-live="polite">
+                        <ul class="list" id="user-profile-prodotti">';
+
+    foreach ($preferiti as $value){
+        $preferito_html.= CreaVisualizzaPreferito(
+            $value['id'],
+            $value['nome'],
+            $value['url_immagine']
+        );
+    }
+
+    $preferito_html.= '</ul></div>';
+
+    return $preferito_html;
+}
+
+function CreaVisualizzaPreferito(int $idProdotto, string $nomeProdotto, string $url_immagine){
+    $TEMPLATE = '
+        <li class="product-brochure">
+            <img src="'.$url_immagine.'" alt="Immagine del prodotto ' . $nomeProdotto . '">
+                <h4 class="product-name">'.$nomeProdotto.'</h4>
+                    <div class="brochure-links">
+                        <a href="prodotto.php" class="btn-dettagli">Dettagli</a>
+                        <a href="#" class="btn-elimina">Rimuovi</a>
+                    </div>
+            </li>
+    ';
+
+    return $TEMPLATE;
+}
 
 /*
                 <div class="data-container" id="dc-prodotti-preferiti" aria-live="polite">
