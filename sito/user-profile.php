@@ -34,6 +34,7 @@ if ($userInfo["url_immagine"]) {//controllo se l'utente ha un'immagine profilo
 }
 
 //Sostituzione di eventuali Nome e Nome Cognome nella pagina
+$pagina = str_replace("[USERNAME]",$userInfo['username'],$pagina);
 $pagina = str_replace("[Nome]",$userInfo['nome'],$pagina);
 $pagina = str_replace("[Nome Cognome]",$userInfo['nome']." ".$userInfo['cognome'],$pagina);
 
