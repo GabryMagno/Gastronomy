@@ -645,10 +645,10 @@ class DB {
             }else{
                 //se non ci sono degustazioni prenotate dall'utente
                 $result->free();
-                return "No tastings found"; //nessuna degustazione trovata
+                return false; //nessuna degustazione trovata
             }
         }else{
-            return "Connection error"; //errore nella connessione al database
+            return false; //errore nella connessione al database
         }
     }
 
@@ -711,7 +711,7 @@ class DB {
                 //se c'è un errore nell'esecuzione della query, ritorna false
                 $this->CloseConnectionDB();
                 $userComments->close();
-                return "Execution error"; //errore nell'esecuzione della query
+                return false; //errore nell'esecuzione della query
             }
             //ottiene il risultato della query
             $result = $userComments->get_result();  
@@ -725,11 +725,11 @@ class DB {
             } else {
                 //se non ci sono recensioni scritte dall'utente su un prodotto singolo
                 $result->free();
-                return "No reviews found for this product"; //nessuna recensione trovata per questo prodotto
+                return false; //nessuna recensione trovata per questo prodotto
             }
 
         }else{
-            return "Connection error"; //errore nella connessione al database
+            return false; //errore nella connessione al database
         }
     }
 
