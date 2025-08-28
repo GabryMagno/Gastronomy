@@ -45,7 +45,7 @@ if(!isset($_POST["submit-user-settings"]) && !isset($_POST["submit-password-sett
     if ($userInfo["url_immagine"]) {//controllo se l'utente ha un'immagine profilo
         $pagina = str_replace("[profile-image]", "src=".$userInfo["url_immagine"],$pagina);
     } else {
-        $pagina = str_replace("[profile-image]","assets/img/default.webp",$pagina);//immagine di default
+        $pagina = str_replace("[profile-image]","assets/img/users_logos/default.webp",$pagina);//immagine di default
     }
 
     if ($userInfo["username"]) {//controllo se lo username è presente
@@ -161,19 +161,16 @@ if(!isset($_POST["submit-user-settings"]) && !isset($_POST["submit-password-sett
         $extensionArray = array("jpg","jpeg","png");//array delle estensioni supportate
 
         if(mb_strlen($extension) == 0 || !in_array($extension,$extensionArray)) {//controllo se l'estensione del file è supportata
-            echo "1";
             $errorFound=true;
             $pagina = str_replace("[logo-error]",'<p role="alert" id="logo-error" class="error">L\'estensione dell\'immagine caricata non è corretta</p>',$pagina);
         } elseif($info->isExecutable()) {//controllo se il file è eseguibile
-            echo "2";
+    
             $errorFound=true;
             $pagina = str_replace("[logo-error]",'<p role="alert" id="logo-error" class="error">Il <span lang="en">file</span> caricato non è supportato</p>',$pagina);
         } elseif($info->getSize() > 2097152) {//controllo se la dimensione del file è superiore a 2MB
-            echo "3";
             $errorFound=true;
             $pagina = str_replace("[logo-error]",'<p role="alert" id="logo-error" class="error">Sono accettati solo immagini di dimensione inferiore a 2<span lang="en" abbr="megabyte">MB</span></p>',$pagina);
         } elseif(strcmp(mime_content_type($tmpFile),"image/jpeg") != 0 && strcmp(mime_content_type($tmpFile),"image/png")!=0) {//
-            echo "4";
             $errorFound=true;
             $pagina = str_replace("[logo-error]",'<p role="alert" id="logo-error" class="error">Il <span lang="en">file</span> caricato è un formato non supportato</p>',$pagina);
         } else {

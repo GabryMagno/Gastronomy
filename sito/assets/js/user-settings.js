@@ -427,6 +427,7 @@ function chargeNewLogo() {
 					document.getElementById("reset-user-setting").disabled = true;
 		            document.getElementById("reset-user-setting").classList.add("not-available");
 					FirstFormUltimateCheck();
+					enableButton("reset-user-setting");
 				}else{
 					if(Byte > 2048 ) failHint("max-size-file","Dimensione massima a 2MB");
 					else successHint("max-size-file","Dimensione massima a 2MB");
@@ -588,10 +589,10 @@ const listeners = {
 };
 
 window.addEventListener('load', () => {
-	document.getElementById("submit-user-setting").disabled = true;
-	document.getElementById("submit-user-setting").classList.add("not-available");
-	document.getElementById("submit-password-setting").disabled = true;
-	document.getElementById("submit-password-setting").classList.add("not-available");
+	disableButton("submit-user-setting");
+	disableButton("reset-user-setting");
+	disableButton("submit-password-setting");
+	disableButton("reset-password-setting");
 	checkCancelButtonPrivateSettings();
 	checkCancelButtonPasswordSettings();
 	checkSettings();

@@ -151,7 +151,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
         exit();
     }
 
-    if(isset($_POST["remove-favorite"])){
+    if(isset($_POST["remove-favorite"])){//Se l'utente ha cliccato il bottone per rimuovere il prodotto dai preferiti
         $result = $db->DeleteOneFavoriteProduct($productInfo["id"]);
         if(is_string($result) && ($result == "Execution error" || $result == "Connection error")){
             header("Location: 500.php");
