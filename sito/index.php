@@ -50,9 +50,9 @@ function createBestCommentTemplate($username, $immagine, $voto, $commento, $prod
                 <h4 class="recensione-cliente">' . $username . '</h4>
                 <p class="recensione-data">
                     <time datetime="' . $data->format("Y-m-d") . '">' . $data->format("d/m/Y") . '</time>
-                </p> 
+                </p>
+                <p class="recensione-prodotto">'. $prodotto . '</p>
                 <p class="recensione-testo">' . $commento . '</p>
-                <p class="recensione-prodotto">Prodotto: ' . $prodotto . '</p>
                 <p class="recensione-valutazione">Voto: ' . $voto . '</p>
             </div>
         </div>';
