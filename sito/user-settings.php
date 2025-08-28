@@ -45,7 +45,7 @@ if(!isset($_POST["submit-user-settings"]) && !isset($_POST["submit-password-sett
     if ($userInfo["url_immagine"]) {//controllo se l'utente ha un'immagine profilo
         $pagina = str_replace("[profile-image]", "src=".$userInfo["url_immagine"],$pagina);
     } else {
-        $pagina = str_replace("[profile-image]","assets/img/users_logos/default.webp",$pagina);//immagine di default
+        $pagina = str_replace("[profile-image]","src=\"assets/img/users_logos/default.webp\"",$pagina);//immagine di default
     }
 
     if ($userInfo["username"]) {//controllo se lo username è presente
