@@ -1,6 +1,7 @@
 <?php
 
 require_once "php/db.php";
+require_once "php/sanitizer.php";
 
 $db = new DB;
 
@@ -82,7 +83,7 @@ function CreaVisualizzaPreferito(int $idProdotto, string $nomeProdotto, string $
             <img src="'.$url_immagine.'" alt="Immagine del prodotto ' . $nomeProdotto . '">
                 <h4 class="product-name">'.$nomeProdotto.'</h4>
                     <div class="brochure-links">
-                        <a href="prodotto.php" class="btn-dettagli">Dettagli</a>
+                        <a href="prodotto.php?prodotto='. urlencode($idProdotto) . '" title="Vai alla scheda prodotto ' . Sanitizer::SanitizeGenericInput($nomeProdotto) . '" class="btn-dettagli">Dettagli</a>
                         <a href="#" class="btn-elimina">Rimuovi</a>
                     </div>
             </li>
