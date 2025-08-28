@@ -1,16 +1,16 @@
 USE gastronomia;
 
 -- Elimina tabelle in ordine per evitare vincoli interrotti
+DROP TABLE IF EXISTS prenotazioni_degustazioni;
 DROP TABLE IF EXISTS prenotazioni;
 DROP TABLE IF EXISTS valutazioni;
 DROP TABLE IF EXISTS preferiti;
-DROP TABLE IF EXISTS degustazioni;
 DROP TABLE IF EXISTS prodotto_ingredienti;
-DROP TABLE IF EXISTS ingredienti;
-DROP TABLE IF EXISTS prodotti;
-DROP TABLE IF EXISTS utenti;
-DROP TABLE IF EXISTS prenotazioni_degustazioni;
 DROP TABLE IF EXISTS suggerimenti;
+DROP TABLE IF EXISTS degustazioni;
+DROP TABLE IF EXISTS prodotti;
+DROP TABLE IF EXISTS ingredienti;
+DROP TABLE IF EXISTS utenti;
 
 CREATE TABLE utenti (
     id INT AUTO_INCREMENT PRIMARY KEY,
