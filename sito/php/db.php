@@ -329,7 +329,7 @@ class DB {
         }
     }
 
-    public function ThisEmailExist($email){
+    public function ThisEmailExist($email){//Controlla se un'email esiste nel database
         $newConnection = $this->OpenConnectionDB();
         if ($newConnection) {
             $checkEmail = $this->connection->prepare("SELECT email FROM utenti WHERE email = ?");
@@ -361,7 +361,7 @@ class DB {
         } else {
             return "Connection error"; //errore nella connessione al database
         }
-    }//Controlla se un'email esiste nel database
+    }
 
     //OTTENERE INFO PRODOTTO E DEGUSTAZIONE
     
@@ -652,7 +652,7 @@ class DB {
         }
     }
 
-    public function GetUserReviews($id): array | string { //ottenere tutte le recensioni scritte da un utente
+    public function GetUserReviews($id): array | string {//ottenere tutte le recensioni scritte da un utente
         $newConnection = $this->OpenConnectionDB();
         $reviews = array();
         if($newConnection){
@@ -699,8 +699,7 @@ class DB {
         }
     }
     
-    public function GetUserReviewProduct($id, $product): array | string{//ottenere recensione scritta su un prodotto singolo
-        $newConnection = $this->OpenConnectionDB();
+    public function GetUserReviewProduct($id, $product, $newConnection): array | string{//ottenere recensione scritta su un prodotto singolo
         if($newConnection){
             $userComments = $this->connection->prepare("SELECT voto, commento, data FROM valutazioni WHERE id_utente = ? AND id_prodotto = ?");
             $userComments->bind_param("ii", $id, $product);
@@ -711,11 +710,10 @@ class DB {
                 //se c'è un errore nell'esecuzione della query, ritorna false
                 $this->CloseConnectionDB();
                 $userComments->close();
-                return false; //errore nell'esecuzione della query
+                return "Execution error"; //errore nell'esecuzione della query
             }
             //ottiene il risultato della query
             $result = $userComments->get_result();  
-            $this->CloseConnectionDB();
             $userComments->close();
             if($result->num_rows == 1){
                 //se l'utente ha scritto una recensione su un prodotto singolo, la aggiunge all'array
@@ -729,8 +727,15 @@ class DB {
             }
 
         }else{
-            return false; //errore nella connessione al database
+            return "Connection error"; //errore nella connessione al database
         }
+    }
+
+    public function GetReview($id,$product): array | string{
+        $newConnection = $this->OpenConnectionDB();
+        $comment = $this->GetUserReviewProduct($id,$product,$newConnection);
+        $this->CloseConnectionDB();
+        return $comment;
     }
 
     //FUNZIONI CHE NON SERVONO MA POSSONO SERVIRE IN FUTURO
@@ -979,7 +984,7 @@ class DB {
                     //se c'è un errore nell'esecuzione della query, ritorna false
                     $this->CloseConnectionDB();
                     $deleteReview->close();
-                    return false; //errore nell'esecuzione della query
+                    return "Execution error"; //errore nell'esecuzione della query
                 }
                 $result = $deleteReview->affected_rows;
                 $this->CloseConnectionDB();
@@ -1044,49 +1049,50 @@ class DB {
     }
 
     //!!! CONTROLLARE
-    public function AddReview($id, $comment, $grade, $product): bool | string{//Aggiunta da parte dell'utente di un commento e valutazione di un prodotto(vedere se usare string o bool e basta per gli errori)
+    public function AddReview($comment, $grade, $product): bool | string{//Aggiunta da parte dell'utente di un commento e valutazione di un prodotto(vedere se usare string o bool e basta per gli errori)
         $isUserLogged = $this->IsUserLog();
         if($isUserLogged == false){
             //se l'utente non è loggato, ritorna un messaggio di errore
             return "User is not logged in"; //l'utente non è loggato
-        }else{
-            $newConnection = $this->OpenConnectionDB();
-            $date = date("Y-m-d H:i:s"); //ottiene la data e l'ora attuale
-            if($newConnection){
-                $reviewExists = $this->GetUserReviewProduct($isUserLogged, $product);
-                if(is_array($reviewExists)){
-                    //se l'utente ha già scritto una recensione su questo prodotto, ritorna un messaggio di errore
-                    return "User has already reviewed this product"; //l'utente ha già recensito questo prodotto
-                }else if($reviewExists == "No reviews found for this product"){
-                    //se l'utente non ha ancora scritto una recensione su questo prodotto, allora può procedere con l'aggiunta della recensione
-                    //preparazione della query per aggiungere una recensione
-                    $addReview = $this->connection->prepare("INSERT INTO valutazioni (id_utente, id_prodotto, data, voto, commento) VALUES (?, ?, ?, ?, ?)");
-                    $addReview->bind_param("iisis", $isUserLogged, $product, $date, $grade, $comment);
-                    try{
-                        //esecuzione della query per aggiungere una recensione
-                        $addReview->execute();
-                    }catch(\mysqli_sql_exception $error){
-                        //se c'è un errore nell'esecuzione della query, ritorna false
-                        $this->CloseConnectionDB();
-                        $addReview->close();  
-                        return false; //errore nell'esecuzione della query
-                    }
-                    if(mysqli_affected_rows($this->connection) == 1){
-                        //se la query ha inserito una riga, allora la recensione è stata aggiunta con successo
-                        $this->CloseConnectionDB();
-                        $addReview->close();
-                        return true; //aggiunta avvenuta con successo
-                    }else{
-                        //se la query non ha inserito nessuna riga, allora c'è stato un errore
-                        $this->CloseConnectionDB();
-                        $addReview->close();
-                        return "Review addition failed"; //nessuna riga inserita, errore nell'aggiunta della recensione
-                    }
+        }
+
+        $newConnection = $this->OpenConnectionDB();
+        $date = date("Y-m-d H:i:s"); //ottiene la data e l'ora attuale
+        if($newConnection){
+            $reviewExists = $this->GetUserReviewProduct($isUserLogged, $product, $newConnection);
+            if(is_array($reviewExists)){
+                //se l'utente ha già scritto una recensione su questo prodotto, ritorna un messaggio di errore
+                return "User has already reviewed this product"; //l'utente ha già recensito questo prodotto
+            }else if($reviewExists == "No reviews found for this product"){
+                //se l'utente non ha ancora scritto una recensione su questo prodotto, allora può procedere con l'aggiunta della recensione
+                //preparazione della query per aggiungere una recensione
+                $addReview = $this->connection->prepare("INSERT INTO valutazioni (id_utente, id_prodotto, data, voto, commento) VALUES (?, ?, ?, ?, ?)");
+                $addReview->bind_param("iisis", $isUserLogged, $product, $date, $grade, $comment);
+                try{
+                    //esecuzione della query per aggiungere una recensione
+                    $addReview->execute();
+                }catch(\mysqli_sql_exception $error){
+                    //se c'è un errore nell'esecuzione della query, ritorna false
+                    $this->CloseConnectionDB();
+                    $addReview->close();  
+                    return "Execution error"; //errore nell'esecuzione della query
                 }
-            }else{
-                return "Connection error"; //errore nella connessione al database
+                if(mysqli_affected_rows($this->connection) == 1){
+                    //se la query ha inserito una riga, allora la recensione è stata aggiunta con successo
+                    $this->CloseConnectionDB();
+                    $addReview->close();
+                    return true; //aggiunta avvenuta con successo
+                }else{
+                    //se la query non ha inserito nessuna riga, allora c'è stato un errore
+                    $this->CloseConnectionDB();
+                    $addReview->close();
+                    return "Execution error"; //nessuna riga inserita, errore nell'aggiunta della recensione
+                }
+                return true;
             }
-            return "Connection error"; //!!! CONTROLLARE
+            return true;
+        }else{
+            return "Connection error"; //errore nella connessione al database
         }
     }
 
@@ -1098,6 +1104,7 @@ class DB {
         }else{
             $newConnection = $this->OpenConnectionDB();
             if($newConnection){
+
                 //preparazione della query per aggiungere un prodotto preferito
                 $addFavorite = $this->connection->prepare("INSERT INTO preferiti (id_utente, id_prodotto) VALUES (?, ?)");
                 $addFavorite->bind_param("ii", $id, $product);
@@ -1125,6 +1132,7 @@ class DB {
                 return "Connection error"; //errore nella connessione al database
             }
         }
+            
     }
 
     public function AddReservation($product, $quantity, $date): bool | string{//Aggiunta da parte dell'utente di una prenotazione rispetto ad un prodotto indicando quantità dello stesso e quando (data) ritirarlo

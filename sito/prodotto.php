@@ -145,8 +145,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
     }
 
     //GESTIONE COMMENTO SE GIA' ESISTENTE O MENO
-
-    $isUserCommented = $db->GetUserReviewProduct($isUserLogged,$productInfo["id"]);
+    $isUserCommented = $db->GetReview($isUserLogged,$productInfo["id"]);
 
     if(is_bool($isUserCommented) && !$isUserCommented){
         header("Location: 500.php");
@@ -158,20 +157,20 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
                         <legend>La tua valutazione del prodotto</legend>
                         <h5 class=\"form-label\">Valutazione</h5>
                         <div class=\"rating\" role=\"radiogroup\" aria-label=\"Valutazione da 1 a 5 stelle\">
-                            <input type=\"radio\" name=\"rating\" id=\"star1\" value=\"1\">
-                            <label for=\"star1\" title=\"1 stella\" id=\"una-stella\">&#9733;</label>
-
-                            <input type=\"radio\" name=\"rating\" id=\"star2\" value=\"2\">
-                            <label for=\"star2\" title=\"2 stelle\" id=\"due-stelle\">&#9733;</label>
-
-                            <input type=\"radio\" name=\"rating\" id=\"star3\" value=\"3\">
-                            <label for=\"star3\" title=\"3 stelle\" id=\"tre-stelle\">&#9733;</label>
+                            <input type=\"radio\" name=\"rating\" id=\"star5\" value=\"5\">
+                            <label for=\"star5\" title=\"5 stelle\" id=\"cinque-stelle\">&#9733;</label>
 
                             <input type=\"radio\" name=\"rating\" id=\"star4\" value=\"4\">
                             <label for=\"star4\" title=\"4 stelle\" id=\"quattro-stelle\">&#9733;</label>
 
-                            <input type=\"radio\" name=\"rating\" id=\"star5\" value=\"5\">
-                            <label for=\"star5\" title=\"5 stelle\" id=\"cinque-stelle\">&#9733;</label>
+                            <input type=\"radio\" name=\"rating\" id=\"star3\" value=\"3\">
+                            <label for=\"star3\" title=\"3 stelle\" id=\"tre-stelle\">&#9733;</label>
+
+                            <input type=\"radio\" name=\"rating\" id=\"star2\" value=\"2\">
+                            <label for=\"star2\" title=\"2 stelle\" id=\"due-stelle\">&#9733;</label>
+
+                            <input type=\"radio\" name=\"rating\" id=\"star1\" value=\"1\">
+                            <label for=\"star1\" title=\"1 stella\" id=\"una-stella\">&#9733;</label>
                         </div>
                         <small class=\"descrizione-quantita\">Esprimi la tua valutazione del prodotto selezionando da 1 a 5 stelle.</small>
 
@@ -205,15 +204,14 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
                     </dd>
                     <dt>Commento</dt>
                     <dd>[Commento]</dd>
-                </dl>",
-            "",$pagina);
+                </dl>","",$pagina);
 
     $pagina = str_replace("<form method=\"post\" id=\"elimina-valutazione\">
                     <input type=\"hidden\" name=\"id_utente\" value=\"[id_utente]\">
                     <input type=\"hidden\" name=\"nome_prodotto\" value=\"[nome_prodotto]\">
 
                     <div class=\"button-container\">
-                        <button type=\"submit\" aria-label=\"Elimina Valutazione\" class=\"bottoni-rossi\">Elimina Valutazione</button>
+                        <button type=\"submit\" aria-label=\"Elimina Valutazione\" class=\"bottoni-rossi\" name=\"delete-review\">Elimina Valutazione</button>
                     </div>
                 </form>","",$pagina);
     }else {
@@ -268,23 +266,59 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
 
     //FORM COMMENTO
     if(isset($_POST["submit-user-comment"])){
-        $grade = isset($_GET['rating']) ? Sanitizer::SanitizeGenericInput(Sanitizer::IntFilter($_GET['rating'])) : 0;// voto minimo
-        $comment = isset($_GET['commento']) ? Sanitizer::SanitizeGenericInput(Sanitizer::SanitizeText($_GET['comment'])) :'';
-        unset($_POST['commento']);
-        if(mb_strlen($newAdvice)<30) {//controlla la lunghezza minima del commento
+        $errorFound = false;
+        $grade = isset($_POST["rating"]) ? Sanitizer::SanitizeGenericInput(Sanitizer::IntFilter($_POST["rating"])) : 0;// voto minimo
+        $comment = isset($_POST["commento"]) ? Sanitizer::SanitizeGenericInput(Sanitizer::SanitizeText($_POST["commento"])) :'';
+        unset($_POST["commento"]);
+
+        if(mb_strlen($comment)<30) {//controlla la lunghezza minima del commento
+            $errorFound = true;
             $pagina =str_replace("[comment-error]","<p role=\"alert\" class=\"error\" id=\"comment-error\">La lunghezza minima del commento non deve essere inferiore ai 30 caratteri</p>",$pagina);
-            header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');
-        exit();
-        }else if(mb_strlen($newAdvice)>300){//controlla la lunghezza massima del messaggio
-           $pagina = str_replace("[comment-error]","<p role=\"alert\" class=\"error\" id=\"comment-error\">La lunghezza massima del commento non deve superare i 300 caratteri</p>",$pagina);
-            header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');
-            exit();
+        }else if(mb_strlen($comment)>300){//controlla la lunghezza massima del messaggio
+            $errorFound = true;
+            $pagina = str_replace("[comment-error]","<p role=\"alert\" class=\"error\" id=\"comment-error\">La lunghezza massima del commento non deve superare i 300 caratteri</p>",$pagina);
+        }else{
+            $pagina = str_replace("[comment-error]","",$pagina);
         }
 
-
+        if($errorFound == false) {//non ci sono errori
+            $addReview = $db->AddReview($comment, $grade, $productInfo['id']);
+            if(is_bool($addReview) && $addReview == true) {//controllo se l'aggiunta della recensione è andata a buon fine
+                header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');//reindirizza alla pagina del prodotto
+                exit();
+            } else if(is_string($addReview) && ($addReview == "Execution error" || $addReview == "Connection error")){ 
+                header('Location: 500.php');
+                exit();
+            }else if(is_string($addReview) && $addReview == "User has already reviewed this product"){
+                header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');//reindirizza alla pagina del prodotto
+                exit();
+            }
+        }else{//ci sono errori
+            $pagina = str_replace("Scrivi qui il tuo commento sul prodotto.",$comment,$pagina);
+        }
     }
 
+    if(isset($_POST["delete-review"])){
+        $deleteReview = $db->DeleteOneReview($productInfo["id"]);
+        if(is_bool($deleteReview) && $deleteReview == true) {
+            header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');//reindirizza alla pagina del prodotto
+            exit();
+        }elseif(is_string($deleteReview) && ($deleteReview == "Connection error"|| $deleteReview == "Execution error")){
+            header('Location: 500.php');
+            exit();
+        }elseif(is_string($deleteReview) && $deleteReview == "User is not logged in"){
+            header('Location: login.php');
+            exit();
+        }
+    }
     //SEZIONE COMMENTI ALTRI UTENTI
+
+    if(!isset($_POST['submit-user-comment']) || !isset($_POST['submit-reservation'])){
+        $pagina = str_replace("[comment-error]","",$pagina);
+        $pagina = str_replace("[quantity-error]","",$pagina);
+        $pagina = str_replace("[date-error]","",$pagina);
+    }
+
     echo $pagina;
 }
 
