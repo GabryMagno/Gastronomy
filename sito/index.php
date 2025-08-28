@@ -40,6 +40,7 @@ $pagina = str_replace("[BEST COMMENTS]", $b_comments, $pagina);
 echo $pagina;
 
 function createBestCommentTemplate($username, $immagine, $voto, $commento, $prodotto, DateTime $data){
+    if($immagine == null || $immagine == "") $immagine = "assets/img/users_logos/default.webp";
     
     $TEMPLATE = '
         <div class="recensione-card">
