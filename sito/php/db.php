@@ -558,7 +558,7 @@ class DB {
         $reservations = array();
         if($newConnection){
             //preparazione della query per ottenere le prenotazioni dei prodotti dell'utente
-            $userReservations = $this->connection->prepare("SELECT prodotti.nome, prodotti.categoria, prenotazioni.data_prenotazione, prenotazioni.quantita 
+            $userReservations = $this->connection->prepare("SELECT prodotti.nome, prodotti.categoria, prenotazioni.data_ritiro, prenotazioni.quantita 
             FROM prenotazioni 
             JOIN prodotti ON prenotazioni.id_prodotto = prodotti.id
             WHERE prenotazioni.id_utente = ?");
@@ -1100,7 +1100,7 @@ class DB {
                         $addReservation->close();
                         $changeQuantityNumber->close();
                         $this->CloseConnectionDB();
-                        return false;
+                        return "Execution error";
                     }
                 }catch(\mysqli_sql_exception $error){
                     //se c'è un errore nell'esecuzione della query, ritorna false
