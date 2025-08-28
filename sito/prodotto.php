@@ -148,7 +148,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
 
     $isUserCommented = $db->GetUserReviewProduct($isUserLogged,$productInfo["id"]);
 
-    if(is_string($isUserCommented) && ($isUserCommented == "Connection error"|| $isUserCommented == "Execution error")){
+    if(is_bool($isUserCommented) && !$isUserCommented){
         header("Location: 500.php");
         exit();
     }elseif (is_string($isUserCommented) && $isUserCommented == "No reviews found for this product"){
@@ -255,15 +255,16 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
         if($errorFound == true){//ci sono stati errori
             $pagina = str_replace("[quantita-ordine]",$quantity, $pagina);
             $pagina = str_replace("[data-ordine]",$date_reservation, $pagina); 
+            echo "1";
         }else{
             $addReservation = $db->AddReservation($productInfo["id"], $quantity, $date_reservation);
             if(is_bool($addReservation) && $addReservation == true) {//controllo se la modifica delle informazioni è andata a buon fine
                 header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');//reindirizza alla pagina delle informazioni utente
-                $pagina = str_replace("[quantita-ordine]",$quantity, $pagina);
-                $pagina = str_replace("[data-ordine]",$date_reservation, $pagina); 
+                echo "2";
                 exit();
             } else { 
                 header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');
+                echo "3";
                 exit();
             }
         }

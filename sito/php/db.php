@@ -725,7 +725,7 @@ class DB {
             } else {
                 //se non ci sono recensioni scritte dall'utente su un prodotto singolo
                 $result->free();
-                return false; //nessuna recensione trovata per questo prodotto
+                return "No reviews found for this product"; //nessuna recensione trovata per questo prodotto
             }
 
         }else{
@@ -1135,78 +1135,39 @@ class DB {
         }else{
             $newConnection = $this->OpenConnectionDB();
             if($newConnection){
-                if(!$this->CheckProductReservationAvailability($product, $quantity, $newConnection)){
-                    //se la degustazione non è disponibile per il numero di persone richiesto, ritorna un messaggio di errore
-                    return "Reservation not available for the requested quantity"; //degustazione non disponibile per il numero di persone richiesto
-                }
+                
                 //preparazione della query per aggiungere una prenotazione
                 $addReservation = $this->connection->prepare("INSERT INTO prenotazioni (id_utente, id_prodotto, quantita, data_ritiro) VALUES (?, ?, ?, ?)");
                 $addReservation->bind_param("iiis", $isUserLogged, $product, $quantity, $date);
 
                 //preparazione della query per aggiornare la quantità massima di prodotto che può essere prenotato
-                $changeQuantityNumber = $this->connection->prepare("UPDATE prodotti SET max_prenotabile = max_prenotabile - ? WHERE id = ?");
-                $changeQuantityNumber->bind_param("ii", $quantity, $product);
+                
                 try{
-                    $this->connection->begin_transaction();
+                    
                     //esecuzione della query per aggiungere una prenotazione
                     $insert = $addReservation->execute();
-                    $change = $changeQuantityNumber->execute();
-                    if($insert && $change && $addReservation->affected_rows == 1){//La transazione è andata a buon fine
+                    
+                    if($insert && $addReservation->affected_rows == 1){//La transazione è andata a buon fine
                         $this->connection->commit();
                         $addReservation->close();
-                        $changeQuantityNumber->close();
+                        
                         $this->CloseConnectionDB();
                         return true;
                     }else{
                         $this->connection->rollback();
                         $addReservation->close();
-                        $changeQuantityNumber->close();
                         $this->CloseConnectionDB();
                         return "Execution error";
                     }
                 }catch(\mysqli_sql_exception $error){
                     //se c'è un errore nell'esecuzione della query, ritorna false
                     $addReservation->close();
-                    $changeQuantityNumber->close();
                     $this->CloseConnectionDB();
                     return "Execution error"; //errore nell'esecuzione della query
                 }
             }else{
                 return "Connection error"; //errore nella connessione al database
             }
-        }
-    }
-
-    public function CheckProductReservationAvailability($product, $quantity, $newConnection): bool | string{
-        if($newConnection){
-            //preparazione della query per controllare se un prodotto può essere prenotato
-            $checkAvailability = $this->connection->prepare("SELECT max_prenotabile, min_prenotabile FROM prodotti WHERE id = ?");
-            $checkAvailability->bind_param("i", $product);
-            try{
-                //esecuzione della query per controllare la disponibilità di una degustazione
-                $checkAvailability->execute();
-            }catch(\mysqli_sql_exception $error){
-                //se c'è un errore nell'esecuzione della query, ritorna false
-                $this->CloseConnectionDB();
-                $checkAvailability->close();
-                return "Execution error"; //errore nell'esecuzione della query
-            }
-            //ottiene il risultato della query
-            $result = $checkAvailability->get_result();
-            $checkAvailability->close();
-            if($result->num_rows == 1){
-                //se il prodotto esiste, allora ne controlla la disponibilità
-                $row = mysqli_fetch_assoc($result);
-                if($row['max_prenotabile'] >= $quantity && $row['min_prenotabile'] <= $quantity){
-                    return true; //prenotazione disponibile per la quantità di prodotto richiesto
-                }else{
-                    return "Reservation not available for the requested quantity"; //prenotazione non disponibile per la quantità di prodotto richiesto
-                }
-            }else{
-                return "Product not found"; //prodotto non trovato
-            }
-        }else{
-            return "Connection error"; //errore nella connessione al database
         }
     }
     //DA CONTROLLARE LE PROSSIME DUE FUNZIONI :AddTasting e CheckTastingAvailability -> MOLTO IMPORTANTE
