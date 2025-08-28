@@ -89,10 +89,10 @@ function VisualizzaPreferito(array $preferiti): string {
 function CreaVisualizzaPreferito(int $idProdotto, string $nomeProdotto, string $url_immagine){
     $TEMPLATE = '
         <li class="product-brochure">
-            <img src="'.$url_immagine.'" alt="Immagine del prodotto ' . Sanitizer::SanitizeGenericInput($nomeProdotto) . '">
-                <h4 class="product-name">'.Sanitizer::SanitizeGenericInput($nomeProdotto).'</h4>
+            <img src="'.$url_immagine.'" alt="Immagine del prodotto ' . $nomeProdotto . '">
+                <h4 class="product-name">'.$nomeProdotto.'</h4>
                     <div class="brochure-links">
-                        <a href="prodotto.php?prodotto='. urlencode($idProdotto) . '" title="Vai alla scheda del prodotto ' . Sanitizer::SanitizeGenericInput($nomeProdotto) . '" class="btn-dettagli">Dettagli</a>
+                        <a href="prodotto.php?prodotto='. urlencode($idProdotto) . '" title="Vai alla scheda del prodotto ' . $nomeProdotto . '" class="btn-dettagli">Dettagli</a>
                         <a href="#" class="btn-elimina">Rimuovi</a>
                     </div>
             </li>
@@ -310,6 +310,8 @@ function CreaVisualizzaRecensioni(int $idProdotto, string $nomeProdotto, DateTim
     for ($i=$valutazione; $i < 5; $i++) { 
         $TEMPLATE .= '☆';
     }
+
+    //$TEMPLATE .= '<small> ('.$valutazione.' su 5)</small>';
 
     $TEMPLATE .= '</dl></div>
                         <a href="prodotto.php?prodotto='. urlencode($idProdotto) . '" title="Visualizza valutazione inserita per il prodotto ' . Sanitizer::SanitizeGenericInput($nomeProdotto) . '" class="btn-dettagli">Visualizza</a>
