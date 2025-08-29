@@ -31,7 +31,7 @@ if(isset($_GET["prodotto"])){
     if(is_string($ingredients) && $ingredients == "No ingredients found for this product") $ingredients = "";
     else{
         foreach($ingredients as $ingredient){
-            $ingredientsHTML .= "<li>". $ingredient["quantita"] ." ". $ingredient["unita_misura"] ." ". $ingredient["ingrediente"] ."</li>";
+            $ingredientsHTML .= "<li>". $ingredient["quantita"] . (($ingredient["unita_misura"] == "num_el" || $ingredient["unita_misura"] == null)? "" : $ingredient["unita_misura"]. " di") ."  ". $ingredient["ingrediente"] ."</li>";
         }
     }
 
