@@ -2031,6 +2031,20 @@ form#prenotazione-degustazione #quantita{
     gap: 1em;
 }
 
+p#comment-log,p#reservation-log{
+    margin: 1em 0;
+    text-align: center;
+}
+
+p#comment-log a,p#reservation-log a{
+    color: var(--headerbgcolor);
+}
+
+p#comment-log a:visited,p#reservation-log a:visited{
+    color: var(--herelinkcolor);
+}
+
+
 .singleproduct-intestazione,
 .singledegustazione-intestazione{
     display: flex;

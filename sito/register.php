@@ -19,6 +19,14 @@ if ($isLogged!=false) {
 
 $pagina=file_get_contents("html/register.html");
 
+$isUserLogged = $db->isUserLog();
+if ($isUserLogged == false) {
+    $pagina = str_replace("[to-profile]","<a href=\"login.php\"><span lang=\"en\">Login</span></a>",$pagina);
+} else {
+    header('Location: user-profile.php');
+    exit();
+}
+
 if(isset($_GET["ref"])) {
     $pagina=str_replace("[ref-value]",'?ref='.$_GET["ref"],$pagina);
 } else {
