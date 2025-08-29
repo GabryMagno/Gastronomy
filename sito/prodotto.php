@@ -22,12 +22,26 @@ if(isset($_GET["prodotto"])){
     }
     unset($_GET["prodotto"]);
 
+    $ingredients = $db->GetProductIngredients($productInfo["id"]);
+    $ingredientsHTML = "";
+    if(is_string($ingredients) && ($ingredients == "Execution error" || $ingredients == "Connection error")) {
+        header('Location: 500.php');
+        exit();
+    }
+    if(is_string($ingredients) && $ingredients == "No ingredients found for this product") $ingredients = "";
+    else{
+        foreach($ingredients as $ingredient){
+            $ingredientsHTML .= "<li>". $ingredient["quantita"] ." ". $ingredient["unita_misura"] ." ". $ingredient["ingrediente"] ."</li>";
+        }
+    }
+
     $pagina = str_replace("[IMAGE]","<img src=". $productInfo["url_immagine"] ." alt=\"\">",$pagina);
     $pagina = str_replace("[Nome Prodotto]",$productInfo["nome"],$pagina);
     $pagina = str_replace("[Categoria]",ucfirst($productInfo["categoria"]),$pagina);
     $pagina = str_replace("[Valutazione]",$db->AverageGradeProduct($productInfo["id"]),$pagina);
     $pagina = str_replace("[Prezzo]",$productInfo["prezzo"],$pagina);
     $pagina = str_replace("[Descrizione]",$productInfo["descrizione"],$pagina);
+    $pagina = str_replace("[INGREDIENTI]",$ingredientsHTML,$pagina);
 
 }else{
     header("Location: prodotti.php");
@@ -259,11 +273,12 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
 
         $date_reservation = $_POST["data_ritiro"];
         $today = new DateTime();
+        $today1 = new DateTime();
         $tomorrow = (clone $today)->modify('+1 day');
         $reservationDate = new DateTime($date_reservation);
-        if($reservationDate < $tomorrow){
+        if($reservationDate <= $today){
             $errorFound = true; 
-            $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">L'ordine può essere ritirato solo nei giorni successivi ad oggi: ". $today->format("Y-m-d")."</p>", $pagina);
+            $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">L'ordine può essere ritirato solo nei giorni successivi ad oggi: ". $today1->format("d-m-Y")."</p>", $pagina);
         }else{
             $pagina = str_replace("[date-error]","",$pagina);
         }

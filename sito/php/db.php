@@ -401,7 +401,7 @@ class DB {
     public function GetProductIngredients($product): array | string{//ottenere ingredienti di un prodotto
         $newConnection = $this->OpenConnectionDB();
         if($newConnection){
-            $ingredients = $this->connection->prepare("SELECT * FROM prodotto_ingredienti WHERE prodotto = ?");
+            $ingredients = $this->connection->prepare("SELECT * FROM prodotto_ingredienti WHERE id_prodotto = ?");
             $ingredients->bind_param("i", $product);
             try{
                 //esecuzione della query per ottenere gli ingredienti di un prodotto
@@ -410,7 +410,7 @@ class DB {
                 //se c'è un errore nell'esecuzione della query, ritorna false
                 $this->CloseConnectionDB();
                 $ingredients->close();
-                return false; //errore nell'esecuzione della query
+                return "Execution error"; //errore nell'esecuzione della query
             }
             //ottiene il risultato della query
             $result = $ingredients->get_result();
