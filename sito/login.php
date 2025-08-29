@@ -18,10 +18,15 @@ if ($isLogged!=false) {
     exit();
 }
 
-if(isset($_GET["ref"])) {
-    $pagina=str_replace("{{ref-value}}",'?ref='.$_GET["ref"],$pagina);
+if(isset($_GET["reference-product"])) {
+    $pagina=str_replace("[reference-product]",'?reference-product='.$_GET["reference-product"],$pagina);
 } else {
-    $pagina=str_replace("{{ref-value}}","",$pagina);
+    $pagina=str_replace("[reference-product]","",$pagina);
+}
+if(isset($_GET["reference-tasting"])) {
+    $pagina=str_replace("[reference-tasting]",'?reference-tasting='.$_GET["reference-tasting"],$pagina);
+} else {
+    $pagina=str_replace("[reference-tasting]","",$pagina);
 }
 
 if (isset($_POST['submit-login'])) {
@@ -75,9 +80,14 @@ if (isset($_POST['submit-login'])) {
 
         if ($result==true && is_bool($result)) {
             $_POST = null;
-            if(isset($_GET["ref"])) {//se voglio commentare un prodotto, prima eseguo il login e poi torno alla pagina del prodotto
-                $link = "prodotto.php?prodotto=".$_GET["ref"]."#login-needed";// crea il link per tornare alla pagina del prodotto
-                unset($_GET["ref"]);//elimino il parametro ref dalla query string
+            if(isset($_GET["reference-product"])) {//se voglio commentare un prodotto, prima eseguo il login e poi torno alla pagina del prodotto
+                $link = "prodotto.php?prodotto=".$_GET["reference-product"];// crea il link per tornare alla pagina del prodotto
+                unset($_GET["reference-product"]);//elimino il parametro ref dalla query string
+                header("Location: ".$link);
+                exit();
+            }else if(isset($_GET["reference-tasting"])) {//se voglio commentare un prodotto, prima eseguo il login e poi torno alla pagina del prodotto
+                $link = "degustazione.php?degustazione=".$_GET["reference-tasting"];// crea il link per tornare alla pagina del prodotto
+                unset($_GET["reference-tasting"]);//elimino il parametro ref dalla query string
                 header("Location: ".$link);
                 exit();
             }

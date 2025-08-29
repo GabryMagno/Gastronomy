@@ -15,6 +15,7 @@ $date_reservation = null;
 
 $pagina = file_get_contents("html/prodotto.html");
 if(isset($_GET["prodotto"])){
+    $product = $_GET["prodotto"];
     $productInfo = $db->GetProductInfo($_GET["prodotto"]);
     IF(is_string($productInfo) && $productInfo == "Product not found") {
         header("Location: 404.php");
@@ -76,8 +77,8 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
                         <button type=\"submit\" aria-label=\"Elimina Valutazione\" class=\"bottoni-rossi\" name=\"delete-review\">Elimina Valutazione</button>
                     </div>
                 </form>","",$pagina);           
-    $pagina = str_replace("[COMMENT]","<p id=\"comment-log\">Se desideri commentare questo prodotto, cosa aspetti fai il <a href=\"login.php\"><span lang=\"en\">LOGIN</span></a> oppure <a href=\"register.php\"> REGISTRATI</a></p>",$pagina);
-    $pagina = str_replace("[RESERVATION]","<p id=\"reservation-log\">Se desideri prenotare questo prodotto, cosa aspetti fai il <a href=\"login.php\"><span lang=\"en\">LOGIN</span></a> oppure <a href=\"register.php\"> REGISTRATI</a></p>",$pagina);
+    $pagina = str_replace("[COMMENT]","<p id=\"comment-log\">Se desideri commentare questo prodotto, cosa aspetti fai il <a href=\"login.php?reference-product=".urldecode($product)."\"><span lang=\"en\">LOGIN</span></a> oppure <a href=\"register.php?reference-product=".urldecode($product)."\"> REGISTRATI</a></p>",$pagina);
+    $pagina = str_replace("[RESERVATION]","<p id=\"reservation-log\">Se desideri prenotare questo prodotto, cosa aspetti fai il <a href=\"login.php?reference-product=".urldecode($product)."\"><span lang=\"en\">LOGIN</span></a> oppure <a href=\"register.php?reference-product=".urldecode($product)."\"> REGISTRATI</a></p>",$pagina);
 }else{
     $pagina = str_replace("[to-profile]","<a href=\"user-profile.php\">Profilo</a>",$pagina);
 
@@ -247,9 +248,9 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
                     </div>
                 </form>","",$pagina);
     }else {
-        //$data = new DateTime($isUserCommented["data"]);
+        $data = new DateTime($isUserCommented["data"]);
         $pagina = str_replace("<h4 class=\"no-print left\">Inserisci Valutazione e Commento</h4>[COMMENT]","",$pagina);
-        $pagina = str_replace("[Data Valutazione]",$isUserCommented["data"],$pagina);
+        $pagina = str_replace("[Data Valutazione]",$data->format("d/m/Y"),$pagina);
         $pagina = str_replace("[Commento]",$isUserCommented["commento"],$pagina);
         $pagina = str_replace("[voto]",$isUserCommented["voto"],$pagina);
         $pagina = str_replace("[Valutazione]",$isUserCommented["voto"],$pagina);
