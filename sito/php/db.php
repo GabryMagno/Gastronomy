@@ -435,7 +435,7 @@ class DB {
         }
     }
     
-    public function IsProductVeganVegetarianCeliac($product): bool | string{//verifica se un prodotto è senza glutine, vegano e/o vegetariano
+    public function IsProductVeganVegetarianCeliac($product): array | string{//verifica se un prodotto è senza glutine, vegano e/o vegetariano
         $newConnection = $this->OpenConnectionDB();
         if($newConnection){
             //preparazione della query per verificare se un prodotto è vegano, vegetariano o senza glutine
@@ -451,7 +451,7 @@ class DB {
                 //se c'è un errore nell'esecuzione della query, ritorna false
                 $this->CloseConnectionDB();
                 $productType->close();
-                return false; //errore nell'esecuzione della query
+                return "Execution error"; //errore nell'esecuzione della query
             }
             //ottiene il risultato della query
             $result = $productType->get_result();

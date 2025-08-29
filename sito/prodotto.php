@@ -233,10 +233,12 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
                     </div>
                 </form>","",$pagina);
     }else {
+        //$data = new DateTime($isUserCommented["data"]);
         $pagina = str_replace("<h4 class=\"no-print left\">Inserisci Valutazione e Commento</h4>[COMMENT]","",$pagina);
         $pagina = str_replace("[Data Valutazione]",$isUserCommented["data"],$pagina);
         $pagina = str_replace("[Commento]",$isUserCommented["commento"],$pagina);
-        $pagina = str_replace("[Data Valutazione]",$isUserCommented["data"],$pagina);
+        $pagina = str_replace("[voto]",$isUserCommented["voto"],$pagina);
+        $pagina = str_replace("[Valutazione]",$isUserCommented["voto"],$pagina);
     }
 
     //FORM PRENOTAZIONE
@@ -316,7 +318,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
         }
     }
 
-    if(isset($_POST["delete-review"])){
+    if(isset($_POST["delete-review"])){//Se l'utente intende eliminare la propria recensione
         $deleteReview = $db->DeleteOneReview($productInfo["id"]);
         if(is_bool($deleteReview) && $deleteReview == true) {
             header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');//reindirizza alla pagina del prodotto
@@ -335,6 +337,31 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
         $pagina = str_replace("[comment-error]","",$pagina);
         $pagina = str_replace("[quantity-error]","",$pagina);
         $pagina = str_replace("[date-error]","",$pagina);
+    }
+
+    //CONTROLLO VEGANO/VEGETARIANO/CELICACO
+    $infoGenreProduct = $db->IsProductVeganVegetarianCeliac($productInfo["id"]);
+    if(is_string($infoGenreProduct) && ($infoGenreProduct == "Execution error" || $infoGenreProduct == "Connection error")) {
+        header('Location: 500.php');
+        exit();
+    }else if(is_string($infoGenreProduct) && $infoGenreProduct == "Product not found"){
+        header("Location: 404.php");
+        exit();
+    }else{
+        if($infoGenreProduct["vegano"] == 0){
+            $pagina = str_replace("<img src=\"assets/img/icone/vegano-verde.svg\" alt=\"icona verde con indicazione prodotto vegano\">
+                        <span class=\"diet-label\">Vegano</span>","",$pagina);
+        }
+
+        if($infoGenreProduct["vegetariano"] == 0){
+            $pagina = str_replace(" <img src=\"assets/img/icone/vegetariano-verde.svg\" alt=\"icona verde con indicazione prodotto vegetariano\">
+                        <span class=\"diet-label\">Vegetariano</span>","",$pagina);
+        }
+
+        if($infoGenreProduct["celiaco"] == 0){
+            $pagina = str_replace("<img src=\"assets/img/icone/celiaco-verde.svg\" alt=\"icona verde con indicazione prodotto per persone celiache\">
+                        <span class=\"diet-label\">Celiaco</span>","",$pagina);
+        }
     }
 }
 
