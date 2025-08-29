@@ -1718,6 +1718,7 @@ ul#user-profile-recensioni {
 .userprofile-brochure dl{
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .userprofile-brochure dt{
