@@ -1466,12 +1466,11 @@ class DB {
         $id = -1; //inizializza l'id a -1 per evitare errori se non viene trovato l'utente loggato
         if($this->IsUserLog() != false){
             $id = $this->IsUserLog(); //ottiene l'id dell'utente loggato
-            $username = $this->UserUsername(); //ottiene lo username dell'utente loggato
         }
         if($newConnection){
             //preparazione della query per ottenere i commenti del prodotto
-            $productComments = $this->connection->prepare("SELECT utenti.username, valutazioni.data, valutazioni.voto, valutazioni.commento FROM valutazioni JOIN utenti ON valutazioni.id_utente = utenti.id WHERE valutazioni.nome_prodotto = ? AND valutazioni.id_utente <>?");
-            $productComments->bind_param("si", $product, $id);
+            $productComments = $this->connection->prepare("SELECT utenti.id as utente, utenti.url_immagine as url_immagine, utenti.username as username, valutazioni.data as data, valutazioni.voto as voto, valutazioni.commento as commento FROM valutazioni JOIN utenti ON valutazioni.id_utente = utenti.id WHERE valutazioni.id_prodotto = ? AND valutazioni.id_utente <>?");
+            $productComments->bind_param("ii", $product, $id);
             try{
                 //esecuzione della query per ottenere i commenti del prodotto
                 $productComments->execute();
@@ -1479,8 +1478,9 @@ class DB {
                 //se c'è un errore nell'esecuzione della query, ritorna false
                 $this->CloseConnectionDB();
                 $productComments->close();
-                return false; //errore nell'esecuzione della query
+                return "Execution error"; //errore nell'esecuzione della query
             }
+            $comments = array();
             //ottiene il risultato della query
             $result = $productComments->get_result();
             $this->CloseConnectionDB();

@@ -44,6 +44,61 @@ if(isset($_GET["prodotto"])){
     $pagina = str_replace("[Descrizione]",$productInfo["descrizione"],$pagina);
     $pagina = str_replace("[INGREDIENTI]",$ingredientsHTML,$pagina);
 
+    $max_comment = 4;
+    $comments = $db->GetProductComments($productInfo["id"], $max_comment + 1);
+    if(is_string($comments) && $comments == "No comments found"){//se non ci sono commenti sul prodotto
+        $paginaHtml = str_replace("[OTHER COMMENTS]","<p class=\"error\">Per ora non ci sono commenti riguardo questo prodotto</p>",$paginaHtml);
+        $paginaHtml = str_replace("[COMMENTS BUTTONS]","",$paginaHtml);
+    } else {
+        $commentNumber = 0;
+        $commentList = "";
+        foreach($comments as $comment) {
+            if($commentNumber < $max_comment){
+
+                $otherUser = $db->GetUserInfo($comment["utente"]);
+                if(is_string($otherUser)) {
+                    header('Location: 500.php');
+                    exit();
+                }
+                if($comment["url_immagine"] == null) {
+                    $otherUser["url_immagine"] = "assets/img/users_logos/default.webp";
+                }
+                if($commentNumber == $max_comment-5) {
+                    $commentList .= "<div id=\"return-comment\" class=\"recensione-card\">";
+                } else {
+                    $commentList.="<div class=\"recensione-card\">";
+                }
+                $commentList .= "<div class=\"recensione-foto\">
+                                <img src=".$otherUser["url_immagine"]. " alt=\"Foto profilo di".$comment["username"]."\">
+                            </div>";
+                $date = new DateTime($comment["data"]);
+                $commentList .= "<div class=\"recensione-contenuto\">
+                                <h5 class=\"recensione-cliente\">".$comment["username"]."</h5>
+                                <span class=\"recensione-data\">".($date->format("d-m-Y"))."</span>
+                                <p class=\"recensione-testo\">
+                                    ".$comment["commento"]."
+                                </p>
+                                <p class=\"recensione-valutazione\">Valutazione: ".$comment["voto"]." su 5</p>
+                            </div>
+                        </div>";//potrebbe essere necessario inserire datetime
+                $commentNumber = $commentNumber+1;
+            }
+        }
+        $pagina = str_replace("[OTHER COMMENTS]",$commentList,$pagina);
+        $moreCommentsForm = "";
+        if($commentNumber < count($comments)) {
+            $moreCommentsForm = '<form action="prodotto.php#return-comment" method="get">';
+            $moreCommentsForm .= '"<button type="submit" class="bottoni-rossi">Carica più recensioni</button></form>';
+        }
+
+        if($commentNumber>1) {
+            $moreCommentsForm.='<a href="#recensione-container" id="pin-comment" class="bottone-link">Torna al primo commento</a>';
+        }
+
+        $paginaHtml=str_replace("[[COMMENTS BUTTONS]]",$moreCommentsForm,$pagina);
+    }
+
+
 }else{
     header("Location: prodotti.php");
     exit();
@@ -51,7 +106,7 @@ if(isset($_GET["prodotto"])){
 
 $isUserLogged = $db->IsUserLog();
 
-if(is_bool($isUserLogged) && $isUserLogged == false){
+if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggato
     $pagina = str_replace("[to-profile]","<a href=\"login.php\"><span lang=\"en\">Login</span></a>",$pagina);
     $pagina = str_replace("<form method=\"post\" id=\"modifica-preferiti\">
                             <input type=\"hidden\" name=\"id_utente\" value=\"[id_utente]\">
@@ -79,7 +134,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
                 </form>","",$pagina);           
     $pagina = str_replace("[COMMENT]","<p id=\"comment-log\">Se desideri commentare questo prodotto, cosa aspetti fai il <a href=\"login.php?reference-product=".urldecode($product)."\"><span lang=\"en\">LOGIN</span></a> oppure <a href=\"register.php?reference-product=".urldecode($product)."\"> REGISTRATI</a></p>",$pagina);
     $pagina = str_replace("[RESERVATION]","<p id=\"reservation-log\">Se desideri prenotare questo prodotto, cosa aspetti fai il <a href=\"login.php?reference-product=".urldecode($product)."\"><span lang=\"en\">LOGIN</span></a> oppure <a href=\"register.php?reference-product=".urldecode($product)."\"> REGISTRATI</a></p>",$pagina);
-}else{
+}else{//L'utente è loggato
     $pagina = str_replace("[to-profile]","<a href=\"user-profile.php\">Profilo</a>",$pagina);
 
     //GESTIONE PRODOTTO PREFERITO
@@ -183,7 +238,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
     if(is_bool($isUserCommented) && !$isUserCommented){
         header("Location: 500.php");
         exit();
-    }elseif (is_string($isUserCommented) && $isUserCommented == "No reviews found for this product"){
+    }elseif (is_string($isUserCommented) && $isUserCommented == "No reviews found for this product"){//Se non c'è ancora una recensione dell'utente
         $pagina = str_replace("[COMMENT]",
                 "<form method=\"post\" id=\"valutazione\" class=\"form-bianco\">
                     <fieldset>
@@ -226,6 +281,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
                     </div>
                 </form>",
     $pagina);
+    
 
     $pagina = str_replace("
                 <dl class=\"singleproduct-rating\">
@@ -247,8 +303,31 @@ if(is_bool($isUserLogged) && $isUserLogged == false){
                         <button type=\"submit\" aria-label=\"Elimina Valutazione\" class=\"bottoni-rossi\" name=\"delete-review\">Elimina Valutazione</button>
                     </div>
                 </form>","",$pagina);
-    }else {
+
+    $pagina = str_replace("[OLD_COMMENT]","",$pagina);
+
+    }else{//Se l'utente ha già lasciato una recensione
+
         $data = new DateTime($isUserCommented["data"]);
+        $pagina = str_replace("[OLD_COMMENT]", "<dl class=\"singleproduct-rating\">
+                    <dt>Data</dt>
+                    <dd>[Data Valutazione]</dd>
+                    <dt>Valutazione</dt>
+                    <dd class=\"rating-stars\" aria-label=\"Valutazione: [voto] su 5 stelle\">
+                        [Valutazione] su 5
+                    </dd>
+                    <dt>Commento</dt>
+                    <dd>[Commento]</dd>
+                </dl>
+
+                <form method=\"post\" id=\"elimina-valutazione\">
+                    <input type=\"hidden\" name=\"id_utente\" value=\"[id_utente]\">
+                    <input type=\"hidden\" name=\"nome_prodotto\" value=\"[nome_prodotto]\">
+
+                    <div class=\"button-container\">
+                        <button type=\"submit\" aria-label=\"Elimina Valutazione\" class=\"bottoni-rossi\" name=\"delete-review\">Elimina Valutazione</button>
+                    </div>
+                </form>", $pagina);
         $pagina = str_replace("<h4 class=\"no-print left\">Inserisci Valutazione e Commento</h4>[COMMENT]","",$pagina);
         $pagina = str_replace("[Data Valutazione]",$data->format("d/m/Y"),$pagina);
         $pagina = str_replace("[Commento]",$isUserCommented["commento"],$pagina);
