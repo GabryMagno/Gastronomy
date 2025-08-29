@@ -47,6 +47,11 @@ VALUES
 
 -- INGREDIENTI
 INSERT INTO ingredienti VALUES 
+("Semi di Sesamo",1,1,1),
+("Noci",1,1,1),
+("Finocchio",1,1,1),
+("Succo di Limone",1,1,1),
+("Mele",1,1,1),
 ("Patata Rossa",1,1,1),
 ("Uova",1,0,1),
 ("Semola",0,1,1),
@@ -71,4 +76,9 @@ INSERT INTO prodotto_ingredienti VALUES
 (13,"Basilico",0,6,"num_el"),
 (13,"Olio EVO",1,null,null),
 (13,"Mozzarella",0,250,"g"),
-(13,"Parmiggiano Reggiano DOP",0,70,"g");
+(13,"Parmiggiano Reggiano DOP",0,70,"g"),
+(23,"Noci",0,8,"num_el"),
+(23,"Finocchio",0,1,"num_el"),
+(23,"Mele",0,2,"num_el"),
+(23,"Semi di Sesamo",0,30,"g"),
+(23,"Succo di limone",1,null,null);
