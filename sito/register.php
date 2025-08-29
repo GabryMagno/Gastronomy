@@ -27,10 +27,15 @@ if ($isUserLogged == false) {
     exit();
 }
 
-if(isset($_GET["ref"])) {
-    $pagina=str_replace("[ref-value]",'?ref='.$_GET["ref"],$pagina);
+if(isset($_GET["reference-product"])) {
+    $pagina=str_replace("[reference-product]",'?reference-product='.$_GET["reference-product"],$pagina);
 } else {
-    $pagina=str_replace("[ref-value]","",$pagina);
+    $pagina=str_replace("[reference-product]","",$pagina);
+}
+if(isset($_GET["reference-tasting"])) {
+    $pagina=str_replace("[reference-tasting]",'?reference-tasting='.$_GET["reference-tasting"],$pagina);
+} else {
+    $pagina=str_replace("[reference-tasting]","",$pagina);
 }
 
 if (isset($_POST['submit-sign-up'])) {
@@ -174,9 +179,14 @@ if (isset($_POST['submit-sign-up'])) {
         $result=$db->RegisterNewUser($username, $name, $surname, $date, $email, $password);
         if($result) {
             $_POST = null;
-            if(isset($_GET["ref"])) {
-                $link="prodotto.php?prodotto=".$_GET["ref"]."#eval-section";
-                unset($_GET["ref"]);
+            if(isset($_GET["reference-product"])) {
+                $link="prodotto.php?prodotto=".$_GET["reference-product"];
+                unset($_GET["reference-product"]);
+                header("Location: ".$link);
+                exit();
+            }elseif(isset($_GET["reference-tasting"])) {
+                $link="degustazione.php?degustazione=".$_GET["reference-tasting"];
+                unset($_GET["reference-tasting"]);
                 header("Location: ".$link);
                 exit();
             }
