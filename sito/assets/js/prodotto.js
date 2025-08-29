@@ -1,4 +1,12 @@
 function validateUserComment() {
+    let star_buttons = document.getElementsByName("rating");
+    star_buttons.forEach(star => {
+        star.addEventListener("click", () =>{
+            document.getElementById("reset-comment").classList.remove("not-available");
+		    document.getElementById("reset-comment").disabled = false;
+        })
+    })
+
     let reset_button = document.getElementById("reset-comment");
     reset_button.addEventListener("click", () =>{
         var check = document.getElementById("comment-error");
@@ -19,6 +27,7 @@ function validateUserComment() {
     });
 
 	let form = document.getElementById("valutazione");
+
 
 	form.addEventListener("submit", function (event) {
 		if (! ((validateComment)) ) {
