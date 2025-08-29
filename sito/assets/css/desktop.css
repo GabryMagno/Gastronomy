@@ -1726,10 +1726,6 @@ ul#user-profile-recensioni {
   width: 40%;
 }
 
-.userprofile-brochure dd{
-    width: 60%;
-}
-
 .userprofile-brochure dt::after{
     content: ":";
 }
