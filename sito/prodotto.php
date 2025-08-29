@@ -47,8 +47,8 @@ if(isset($_GET["prodotto"])){
     $max_comment = 4;
     $comments = $db->GetProductComments($productInfo["id"], $max_comment + 1);
     if(is_string($comments) && $comments == "No comments found"){//se non ci sono commenti sul prodotto
-        $paginaHtml = str_replace("[OTHER COMMENTS]","<p class=\"error\">Per ora non ci sono commenti riguardo questo prodotto</p>",$paginaHtml);
-        $paginaHtml = str_replace("[COMMENTS BUTTONS]","",$paginaHtml);
+        $pagina = str_replace("[OTHER COMMENTS]","<p class=\"error\">Per ora non ci sono commenti riguardo questo prodotto</p>",$pagina);
+        $pagina = str_replace("[COMMENTS BUTTONS]","",$pagina);
     } else {
         $commentNumber = 0;
         $commentList = "";
