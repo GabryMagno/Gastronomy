@@ -7,21 +7,21 @@ $db = new DB;
 $pagina = file_get_contents("html/conferma-scelta.html");
 $isUserLogged = $db->isUserLog();
 
-if($isUserLogged){
+if ($isUserLogged){
     $pagina = str_replace("[to-profile]","<a href=\"user-profile.php\">Profilo</a>",$pagina);
-}elseif (is_string($userInfo) && (strcmp($userInfo,"Execution error")==0 || strcmp($userInfo,"User not found")==0 || strcmp($userInfo,"Connection error")==0)) {//se c'è un errore nell'ottenere le informazioni dell'utente, reindirizza alla pagina di errore
+}elseif (is_string($isUserLogged) && (strcmp($isUserLogged,"Execution error")==0 || strcmp($isUserLogged,"User not found")==0 || strcmp($isUserLogged,"Connection error")==0)) {//se c'è un errore nell'ottenere le informazioni dell'utente, reindirizza alla pagina di errore
     header('Location: 500.php');
     exit();
-} else if(is_string($userInfo) && strcmp($userInfo,"User Is not logged")==0) {
+} else if (is_string($isUserLogged) && strcmp($isUserLogged,"User Is not logged")==0) {
     header('Location: login.php');
     exit();
 }
 
-if(isset($_GET["delete"])) {;
+if (isset($_GET["delete"])) {
     $action = $_GET["delete"];
     unset($_GET["delete"]);
 
-    if(strcmp($action,"delete-account") == 0) {
+    if (strcmp($action,"delete-account") == 0) {
         $pagina = str_replace("[SCELTA]","account",$pagina);
         $pagina = str_replace("[DELETE]","delete-account",$pagina);
         $pagina = str_replace("[TITOLO]","ELIMINA <span lang=\"en\">ACCOUNT</span>",$pagina);
@@ -52,15 +52,24 @@ if(isset($_GET["delete"])) {;
         $pagina = str_replace("[MESSAGGIO DI AVVISO]","Sei sicuro di voler eliminare tutte le tue prenotazioni?",$pagina);
         echo $pagina;
 
+    }elseif (strcmp($action,"logout-button")== 0) {
+        $pagina = str_replace("eliminazione [SCELTA]","logout",$pagina);
+        $pagina = str_replace("[DELETE]","logout",$pagina);
+        $pagina = str_replace("[TITOLO]","LOGOUT",$pagina);
+        $pagina = str_replace("ELIMINA","CONFERMA",$pagina);
+        $pagina = str_replace("[MESSAGGIO DI AVVISO]","Sei sicuro di voler effettuare il logout?",$pagina);
+        $pagina = str_replace("[MESSAGGIO DI CANCELLAZIONE]","Se cliccherai sul tasto conferma verrai disconnesso dal tuo profilo",$pagina);
+        echo $pagina;
+
     } else {
         header('Location: 500.php');
         exit();
     }
 
-} elseif(isset($_GET["delete-account"])) {
-    $action=$_GET["delete-account"];
-    unset($_GET["delete-account"]);
-    if(strcmp($action,"true") != 0) {
+} elseif (isset($_GET["delete-account"])) {
+    $action = $_GET["delete-account"];
+    unset ($_GET["delete-account"]);
+    if (strcmp($action,"true") != 0) {
         header('Location: 500.php');
         exit();
     }
@@ -72,7 +81,7 @@ if(isset($_GET["delete"])) {;
     
     $result = $db->deleteUser();//dovrebbe a cascata eliminare tutto ciò che riguarda l'utente
 
-    if(is_bool($result) && $result==true) {
+    if (is_bool($result) && $result==true) {
         header('Location: index.php');
         exit();
     } else {
@@ -80,16 +89,16 @@ if(isset($_GET["delete"])) {;
         exit();
     }
 
-} elseif(isset($_GET["delete-favorites"])) {//Eliminazione prodotti favoriti
-    $action=$_GET["delete-favorites"];
-    unset($_GET["delete-favorites"]);
+} elseif (isset($_GET["delete-favorites"])) {//Eliminazione prodotti favoriti
+    $action = $_GET["delete-favorites"];
+    unset ($_GET["delete-favorites"]);
     if(strcmp($action,"true") != 0) {
         header('Location: 500.php');
         exit();
     }
 
     $result = $db->DeleteAllFavoritesProducts();
-    if(is_bool($result) && $result == true) {
+    if( is_bool($result) && $result == true) {
         header('Location: user-profile.php');
         exit();
     } else {
@@ -97,7 +106,7 @@ if(isset($_GET["delete"])) {;
         exit();
     }
 
-} elseif(isset($_GET["delete-tastings"])) {//Eliminazione degustazioni
+} elseif (isset($_GET["delete-tastings"])) {//Eliminazione degustazioni
     $action=$_GET["delete-tastings"];
     unset($_GET["delete-tastings"]);
     if(strcmp($action,"true") != 0) {
@@ -114,7 +123,7 @@ if(isset($_GET["delete"])) {;
         exit();
     }
 
-} elseif(isset($_GET["delete-reservations"])) {//Eliminazione prenotazioni
+} elseif (isset($_GET["delete-reservations"])) {//Eliminazione prenotazioni
     $action=$_GET["delete-reservations"];
     unset($_GET["delete-reservations"]);
     if(strcmp($action,"true") != 0) {
@@ -131,6 +140,23 @@ if(isset($_GET["delete"])) {;
         exit();
     }
 
+   
+}elseif (isset($_GET["logout"])){
+    $action=$_GET["logout"];
+    unset($_GET["logout"]);
+    if(strcmp($action,"true") != 0) {
+        header('Location: 500.php');
+        exit();
+    }
+
+    $result = $db->LogoutUser();
+    if(is_bool($result) && $result == true) {
+        header('Location: index.php');
+        exit();
+    } else {
+        header('Location: 500.php');
+        exit();
+    }
 } else {
     header('Location: 500.php');
     exit();

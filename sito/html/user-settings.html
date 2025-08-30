@@ -245,7 +245,8 @@
                 </div>
             </form>
 
-            <form id="logout-form" method="post" action="php/logout.php">
+            <form id="logout-form" method="get" action="conferma-scelta.php">
+                <input type="hidden" name="delete" value="logout-button">
                 <div class="button-container">
                     <button type="submit" id="logout-button" class="bottoni-rossi">
                         <span lang="en">Logout Account</span>
