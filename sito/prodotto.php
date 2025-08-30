@@ -63,7 +63,7 @@ if(isset($_GET["prodotto"])){
                 }
                 if($comment['url_immagine'] == null) {
                     $otherUser['url_immagine'] = "assets/img/users_logos/default.webp";
-                }
+                } else $otherUser['url_immagine'] = $comment['url_immagine'];
                 if($commentNumber == 0) {
                     $commentList .= "<div id=\"return-comment\" class=\"recensione-card\">";
                 } else {
