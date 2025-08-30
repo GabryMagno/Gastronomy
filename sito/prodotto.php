@@ -90,7 +90,7 @@ if(isset($_GET["prodotto"])){
         $moreCommentsForm = "";
         if(count($comments) >= $max_comment + $offset ) {
             $nextOffset = $offset + $max_comment;
-            $moreCommentsForm = '<form action="" method="get">';
+            $moreCommentsForm = '<form action="#return-comment" id="more-comments" method="get">';
             $moreCommentsForm .= '<input type="hidden" name="prodotto" value="'.$productInfo["id"].'">';
             $moreCommentsForm .= '<input type="hidden" name="offset" value="'.$nextOffset.'">';
             $moreCommentsForm .= '<button type="submit" class="bottoni-rossi">Carica più recensioni</button></form>';

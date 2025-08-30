@@ -548,7 +548,7 @@ a.bottoni-rossi{
 .button-container .bottoni-neri,
 .button-container .bottoni-rossi{
     width: 8.5em;
-    min-width: 8.5em;
+    min-width: 6.7em;
 }
 
 /* Container Bottoni pagina prodotti */
@@ -839,7 +839,7 @@ a.categoria-box:visited{
 
 .recensione-card{
     flex-shrink: 0;
-    width: 300px;
+    width: 23%;
     scroll-snap-align: start;
 
     display: flex;
@@ -2368,7 +2368,14 @@ a#pin-comment{
     background-color: var(--headerbgcolor);
     margin: 1em;
     border-radius: 0.72em;
-    padding: 0.5em;
+    padding: 0.5em 1em;
+}
+
+#more-comments{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1em 0;
 }
 
 /*  
