@@ -21,6 +21,13 @@ if(isset($_GET["degustazione"])){
     }elseif(is_string($tastingInfo) && $tastingInfo == "Execution error" || $tastingInfo == "Connection error") {
         header("Location: 500.php");
         exit();
+    }else{
+        $start_date = new DateTime($tastingInfo["data_inizio"]);
+        $end_date = new DateTime($tastingInfo["data_fine"]);
+        if($start_date >= $end_date) {
+            header("Location: 403.php");
+            exit();
+        }
     }
     $productInfo = $db->GetProductInfo($tastingInfo["id_prodotto"]);
     unset($_GET["degustazione"]);
@@ -33,6 +40,37 @@ if(isset($_GET["degustazione"])){
     $pagina = str_replace("[Data_Fine]",$end_date->format("d-m-Y"),$pagina);
     $pagina = str_replace("[Prezzo]",$tastingInfo["prezzo"]." &euro;",$pagina);
     $pagina = str_replace("[Numero_Persone]",$tastingInfo["disponibilita_persone"],$pagina);
+    $pagina = str_replace("[PRODOTTO]","prodotto.php?prodotto=".$productInfo["id"],$pagina);
+
+    if($tastingInfo["disponibilita_persone"] == 0){//Se la disponibilità è 0
+        $pagina = str_replace("<form method=\"post\" id=\"prenotazione-degustazione\" class=\"form-bianco\">
+                        <fieldset>
+                            <legend>Prenotazione Degustazione</legend>
+
+                            <input type=\"hidden\" name=\"id_utente\" value=\"[id_utente]\">
+                            <input type=\"hidden\" name=\"id_degustazione\" value=\"[id_degustazione]\">
+
+                            <label for=\"quantita\" class=\"form-label\">Numero persone</label>
+                            <div id=\"quantita-unita\">
+                                <input type=\"number\" id=\"quantita\" name=\"quantita\" min=\"1\" max=\"10\" required>
+                                <span class=\"unita\">persona/e</span>
+                            </div>
+                            <small class=\"descrizione-quantita\">Disponibile per un massimo di [Numero_Persone] Persona/e.</small>
+
+                            <div>
+                                <label for=\"data-prenotazione\" class=\"form-label\" id=\"order-label\">Data prenotazione</label>
+                                <input type=\"date\" id=\"data-prenotazione\" name=\"data_ritiro\" required>
+                            </div>
+                            <small class=\"descrizione-quantita\">Prenotabile dal [Data_Inizio] al [Data_Fine].</small>
+
+                            <div class=\"button-container\">
+                                <button type=\"submit\" aria-label=\"Prenota Prodotto\" class=\"bottoni-rossi\" id=\"submit-reservation\">Prenota</button>
+                            </div>
+                        </fieldset>
+                    </form>","",$pagina);
+    }else{
+        $pagina = str_replace("<p class=\"degustazione-nondisponibile\" id=\"degustazione-singola\">Prenotazione non disponibile!</p>","",$pagina);
+    }
 
     $isUserLogged = $db->IsUserLog();
 
