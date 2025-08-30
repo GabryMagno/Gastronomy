@@ -2368,9 +2368,13 @@ h3 + .singleproduct-rating {
 
 a#pin-comment{
     background-color: var(--headerbgcolor);
-    margin: 1em;
+    margin: 1em auto;
     border-radius: 0.72em;
     padding: 0.5em 1em;
+    overflow-wrap: break-word;
+    display: block;
+    text-align: center;
+    max-width: min(80%, 15em);
 }
 
 #more-comments{
