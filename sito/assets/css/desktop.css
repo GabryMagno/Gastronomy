@@ -2364,6 +2364,13 @@ h3 + .singleproduct-rating {
 }
 
 
+a#pin-comment{
+    background-color: var(--headerbgcolor);
+    margin: 1em;
+    border-radius: 0.72em;
+    padding: 0.5em;
+}
+
 /*  
     =================================================================
             PAGINE AUSILIARIE(CONFERMA-SCELTA E RINGRAZIAMENTI 

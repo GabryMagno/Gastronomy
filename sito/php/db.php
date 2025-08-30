@@ -1461,7 +1461,7 @@ class DB {
         }
     }
 
-    public function GetProductComments($product, int $check = -1): array | string{//Restituisce i commenti di un prodotto
+    public function GetProductComments($product, int $limit = -1): array | string{//Restituisce i commenti di un prodotto
         $newConnection = $this->OpenConnectionDB();
         $id = -1; //inizializza l'id a -1 per evitare errori se non viene trovato l'utente loggato
         if($this->IsUserLog() != false){
@@ -1469,8 +1469,21 @@ class DB {
         }
         if($newConnection){
             //preparazione della query per ottenere i commenti del prodotto
-            $productComments = $this->connection->prepare("SELECT utenti.id as utente, utenti.url_immagine as url_immagine, utenti.username as username, valutazioni.data as data, valutazioni.voto as voto, valutazioni.commento as commento FROM valutazioni JOIN utenti ON valutazioni.id_utente = utenti.id WHERE valutazioni.id_prodotto = ? AND valutazioni.id_utente <>?");
-            $productComments->bind_param("ii", $product, $id);
+            $sql = "SELECT utenti.id as utente, utenti.url_immagine as url_immagine, utenti.username as username, valutazioni.data as data, valutazioni.voto as voto, valutazioni.commento as commento 
+            FROM valutazioni 
+            JOIN utenti ON valutazioni.id_utente = utenti.id 
+            WHERE valutazioni.id_prodotto = ? AND valutazioni.id_utente <>?
+            ORDER BY valutazioni.data DESC";
+            
+            if($limit > 0){
+                $sql .= " LIMIT ?";
+                $productComments = $this->connection->prepare($sql);
+                $productComments->bind_param("iii", $product, $id, $limit);
+            }else{
+                $productComments = $this->connection->prepare($sql);
+                $productComments->bind_param("ii", $product, $id);
+            }
+
             try{
                 //esecuzione della query per ottenere i commenti del prodotto
                 $productComments->execute();
@@ -1480,24 +1493,15 @@ class DB {
                 $productComments->close();
                 return "Execution error"; //errore nell'esecuzione della query
             }
+
             $comments = array();
             //ottiene il risultato della query
             $result = $productComments->get_result();
             $this->CloseConnectionDB();
             $productComments->close();
             if($result->num_rows > 0){
-                //se ci sono commenti, li aggiunge all'array
-                if($check == -1){
-                    //se il check è -1, allora ritorna tutti i commenti del prodotto
-                    while($row = mysqli_fetch_assoc($result)){
-                        array_push($comments, $row);
-                    }
-                }else{
-                    while($check > 0 && $row = mysqli_fetch_assoc($result)){
-                        //se il check è diverso da -1, allora ritorna solo i primi $check commenti del prodotto
-                        array_push($comments, $row);
-                        $check--; //decrementa il check per limitare il numero di commenti da aggiungere
-                    }
+                while($row = mysqli_fetch_assoc($result)){
+                    array_push($comments, $row);
                 }
                 //libera la memoria occupata dal risultato della query
                 $result->free();

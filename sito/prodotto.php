@@ -45,31 +45,32 @@ if(isset($_GET["prodotto"])){
     $pagina = str_replace("[INGREDIENTI]",$ingredientsHTML,$pagina);
 
     $max_comment = 4;
-    $comments = $db->GetProductComments($productInfo["id"], $max_comment + 1);
+    $offset = isset($_GET['offset']) ? (int)$_GET['offset'] : 0;
+    $comments = $db->GetProductComments($productInfo["id"], $max_comment + $offset);
     if(is_string($comments) && $comments == "No comments found"){//se non ci sono commenti sul prodotto
         $pagina = str_replace("[OTHER COMMENTS]","<p class=\"error\">Per ora non ci sono commenti riguardo questo prodotto</p>",$pagina);
         $pagina = str_replace("[COMMENTS BUTTONS]","",$pagina);
     } else {
         $commentNumber = 0;
         $commentList = "";
-        foreach($comments as $comment) {
-            if($commentNumber < $max_comment){
 
+        foreach($comments as $comment) {
+            if($commentNumber <  $max_comment + $offset){
                 $otherUser = $db->GetUserInfo($comment["utente"]);
                 if(is_string($otherUser)) {
                     header('Location: 500.php');
                     exit();
                 }
-                if($comment["url_immagine"] == null) {
-                    $otherUser["url_immagine"] = "assets/img/users_logos/default.webp";
+                if($comment['url_immagine'] == null) {
+                    $otherUser['url_immagine'] = "assets/img/users_logos/default.webp";
                 }
-                if($commentNumber == $max_comment-5) {
+                if($commentNumber == 0) {
                     $commentList .= "<div id=\"return-comment\" class=\"recensione-card\">";
                 } else {
-                    $commentList.="<div class=\"recensione-card\">";
+                    $commentList .= "<div class=\"recensione-card\">";
                 }
                 $commentList .= "<div class=\"recensione-foto\">
-                                <img src=".$otherUser["url_immagine"]. " alt=\"Foto profilo di".$comment["username"]."\">
+                                <img src=".$otherUser['url_immagine']. " alt=\"Foto profilo di".$comment["username"]."\">
                             </div>";
                 $date = new DateTime($comment["data"]);
                 $commentList .= "<div class=\"recensione-contenuto\">
@@ -81,21 +82,25 @@ if(isset($_GET["prodotto"])){
                                 <p class=\"recensione-valutazione\">Valutazione: ".$comment["voto"]." su 5</p>
                             </div>
                         </div>";//potrebbe essere necessario inserire datetime
-                $commentNumber = $commentNumber+1;
-            }
+                $commentNumber++;
+            }          
         }
         $pagina = str_replace("[OTHER COMMENTS]",$commentList,$pagina);
+
         $moreCommentsForm = "";
-        if($commentNumber < count($comments)) {
-            $moreCommentsForm = '<form action="prodotto.php#return-comment" method="get">';
-            $moreCommentsForm .= '"<button type="submit" class="bottoni-rossi">Carica più recensioni</button></form>';
+        if(count($comments) >= $max_comment + $offset ) {
+            $nextOffset = $offset + $max_comment;
+            $moreCommentsForm = '<form action="" method="get">';
+            $moreCommentsForm .= '<input type="hidden" name="prodotto" value="'.$productInfo["id"].'">';
+            $moreCommentsForm .= '<input type="hidden" name="offset" value="'.$nextOffset.'">';
+            $moreCommentsForm .= '<button type="submit" class="bottoni-rossi">Carica più recensioni</button></form>';
         }
 
         if($commentNumber>1) {
-            $moreCommentsForm.='<a href="#recensione-container" id="pin-comment" class="bottone-link">Torna al primo commento</a>';
+            $moreCommentsForm .= '<a href="#recensione-container" id="pin-comment" class="bottone-link">Torna al primo commento</a>';
         }
 
-        $paginaHtml=str_replace("[[COMMENTS BUTTONS]]",$moreCommentsForm,$pagina);
+        $pagina = str_replace("[COMMENTS BUTTONS]",$moreCommentsForm,$pagina);
     }
 
 
