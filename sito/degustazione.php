@@ -25,13 +25,26 @@ if(isset($_GET["degustazione"])){
     $productInfo = $db->GetProductInfo($tastingInfo["id_prodotto"]);
     unset($_GET["degustazione"]);
     $pagina = str_replace("[Nome Prodotto]",$productInfo["nome"],$pagina);
-}
-$isUserLogged = $db->IsUserLog();
+    $pagina = str_replace("[IMMAGINE]","<img src=".$productInfo["url_immagine"]." alt=Immagine del prodotto".$productInfo["nome"].">",$pagina);
+    $pagina = str_replace("[DESCRIZIONE]",$tastingInfo["descrizione"],$pagina);
+    $start_date = new DateTime($tastingInfo["data_inizio"]);
+    $end_date = new DateTime($tastingInfo["data_fine"]);
+    $pagina = str_replace("[Data_Inizio]",$start_date->format("d-m-Y"),$pagina);
+    $pagina = str_replace("[Data_Fine]",$end_date->format("d-m-Y"),$pagina);
+    $pagina = str_replace("[Prezzo]",$tastingInfo["prezzo"]." &euro;",$pagina);
+    $pagina = str_replace("[Numero_Persone]",$tastingInfo["disponibilita_persone"],$pagina);
 
-if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggato
-    $pagina = str_replace("[to-profile]","<a href=\"login.php\"><span lang=\"en\">Login</span></a>",$pagina);
+    $isUserLogged = $db->IsUserLog();
+
+    if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggato
+        $pagina = str_replace("[to-profile]","<a href=\"login.php\"><span lang=\"en\">Login</span></a>",$pagina);
+    }else{
+        $pagina = str_replace("[to-profile]","<a href=\"user-profile.php\">Profilo</a>",$pagina);
+    }
+    //GESTIONE PRENOTAZIONE DEGUSTAZIONE
 }else{
-    $pagina = str_replace("[to-profile]","<a href=\"user-profile.php\">Profilo</a>",$pagina);
+    header("Location: degustazioni.php");
+    exit();
 }
 
 echo $pagina;
