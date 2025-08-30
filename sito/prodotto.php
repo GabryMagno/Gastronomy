@@ -20,6 +20,9 @@ if(isset($_GET["prodotto"])){
     IF(is_string($productInfo) && $productInfo == "Product not found") {
         header("Location: 404.php");
         exit();
+    }else if(is_string($productInfo) && $productInfo == "Connection error" || $productInfo == "Execution error") {
+        header("Location: 500.php");
+        exit();
     }
     unset($_GET["prodotto"]);
 
@@ -29,7 +32,7 @@ if(isset($_GET["prodotto"])){
         header('Location: 500.php');
         exit();
     }
-    if(is_string($ingredients) && $ingredients == "No ingredients found for this product") $ingredients = "";
+    if(is_string($ingredients) && $ingredients == "No ingredients found for this product") $ingredientsHTML = "Nessun ingrediente disponibile";
     else{
         foreach($ingredients as $ingredient){
             $ingredientsHTML .= "<li>". $ingredient["quantita"] . (($ingredient["unita_misura"] == "num_el" || $ingredient["unita_misura"] == null)? "" : $ingredient["unita_misura"]. " di") ."  ". $ingredient["ingrediente"] ."</li>";

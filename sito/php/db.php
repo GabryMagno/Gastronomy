@@ -378,7 +378,7 @@ class DB {
                 //se c'è un errore nell'esecuzione della query, ritorna false
                 $this->CloseConnectionDB();
                 $productInfo->close();
-                return false; //errore nell'esecuzione della query
+                return "Execution error"; //errore nell'esecuzione della query
             }
             //ottiene il risultato della query
             $result = $productInfo->get_result();
@@ -476,7 +476,7 @@ class DB {
         $newConnection = $this->OpenConnectionDB();
         if($newConnection){
             //preparazione della query per ottenere le informazioni su una degustazione
-            $tastingInfo = $this->connection->prepare("SELECT nome_prodotto, descrizione, disponibilita_persone, data_inizio, data_fine, prezzo FROM degustazioni WHERE id_degustazione = ?");
+            $tastingInfo = $this->connection->prepare("SELECT id_prodotto, descrizione, disponibilita_persone, data_inizio, data_fine, prezzo FROM degustazioni WHERE id = ?");
             $tastingInfo->bind_param("i", $tasting);
             try{
                 //esecuzione della query per ottenere le informazioni su una degustazione
@@ -485,7 +485,7 @@ class DB {
                 //se c'è un errore nell'esecuzione della query, ritorna false
                 $this->CloseConnectionDB();
                 $tastingInfo->close();
-                return false; //errore nell'esecuzione della query
+                return "Execution error"; //errore nell'esecuzione della query
             }
             //ottiene il risultato della query
             $result = $tastingInfo->get_result();
