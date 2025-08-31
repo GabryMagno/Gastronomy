@@ -38,7 +38,30 @@ if(isset($_GET["prodotto"])){
             $ingredientsHTML .= "<li>". $ingredient["quantita"] . (($ingredient["unita_misura"] == "num_el" || $ingredient["unita_misura"] == null)? "" : $ingredient["unita_misura"]. " di") ."  ". $ingredient["ingrediente"] ."</li>";
         }
     }
+    //CONTROLLO VEGANO/VEGETARIANO/CELICACO
+    $infoGenreProduct = $db->IsProductVeganVegetarianCeliac($productInfo["id"]);
+    if(is_string($infoGenreProduct) && ($infoGenreProduct == "Execution error" || $infoGenreProduct == "Connection error")) {
+        header('Location: 500.php');
+        exit();
+    }else if(is_string($infoGenreProduct) && $infoGenreProduct == "Product not found"){
+        header("Location: 404.php");
+        exit();
+    }else{
+        if($infoGenreProduct["vegano"] == 0){
+            $pagina = str_replace("<img src=\"assets/img/icone/vegano-verde.svg\" alt=\"icona verde con indicazione prodotto vegano\">
+                        <span class=\"diet-label\">Vegano</span>","",$pagina);
+        }
 
+        if($infoGenreProduct["vegetariano"] == 0){
+            $pagina = str_replace(" <img src=\"assets/img/icone/vegetariano-verde.svg\" alt=\"icona verde con indicazione prodotto vegetariano\">
+                        <span class=\"diet-label\">Vegetariano</span>","",$pagina);
+        }
+
+        if($infoGenreProduct["celiaco"] == 0){
+            $pagina = str_replace("<img src=\"assets/img/icone/celiaco-verde.svg\" alt=\"icona verde con indicazione prodotto per persone celiache\">
+                        <span class=\"diet-label\">Celiaco</span>","",$pagina);
+        }
+    }
     $pagina = str_replace("[IMAGE]","<img src=". $productInfo["url_immagine"] ." alt=\"\">",$pagina);
     $pagina = str_replace("[Nome Prodotto]",$productInfo["nome"],$pagina);
     $pagina = str_replace("[Categoria]",ucfirst($productInfo["categoria"]),$pagina);
@@ -457,31 +480,6 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
         $pagina = str_replace("[comment-error]","",$pagina);
         $pagina = str_replace("[quantity-error]","",$pagina);
         $pagina = str_replace("[date-error]","",$pagina);
-    }
-
-    //CONTROLLO VEGANO/VEGETARIANO/CELICACO
-    $infoGenreProduct = $db->IsProductVeganVegetarianCeliac($productInfo["id"]);
-    if(is_string($infoGenreProduct) && ($infoGenreProduct == "Execution error" || $infoGenreProduct == "Connection error")) {
-        header('Location: 500.php');
-        exit();
-    }else if(is_string($infoGenreProduct) && $infoGenreProduct == "Product not found"){
-        header("Location: 404.php");
-        exit();
-    }else{
-        if($infoGenreProduct["vegano"] == 0){
-            $pagina = str_replace("<img src=\"assets/img/icone/vegano-verde.svg\" alt=\"icona verde con indicazione prodotto vegano\">
-                        <span class=\"diet-label\">Vegano</span>","",$pagina);
-        }
-
-        if($infoGenreProduct["vegetariano"] == 0){
-            $pagina = str_replace(" <img src=\"assets/img/icone/vegetariano-verde.svg\" alt=\"icona verde con indicazione prodotto vegetariano\">
-                        <span class=\"diet-label\">Vegetariano</span>","",$pagina);
-        }
-
-        if($infoGenreProduct["celiaco"] == 0){
-            $pagina = str_replace("<img src=\"assets/img/icone/celiaco-verde.svg\" alt=\"icona verde con indicazione prodotto per persone celiache\">
-                        <span class=\"diet-label\">Celiaco</span>","",$pagina);
-        }
     }
 }
 
