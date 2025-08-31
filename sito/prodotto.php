@@ -20,7 +20,7 @@ if(isset($_GET["prodotto"])){
     IF(is_string($productInfo) && $productInfo == "Product not found") {
         header("Location: 404.php");
         exit();
-    }else if(is_string($productInfo) && $productInfo == "Connection error" || $productInfo == "Execution error") {
+    }else if(is_string($productInfo) && ($productInfo == "Connection error" || $productInfo == "Execution error")) {
         header("Location: 500.php");
         exit();
     }
@@ -46,6 +46,7 @@ if(isset($_GET["prodotto"])){
     $pagina = str_replace("[Prezzo]",$productInfo["prezzo"],$pagina);
     $pagina = str_replace("[Descrizione]",$productInfo["descrizione"],$pagina);
     $pagina = str_replace("[INGREDIENTI]",$ingredientsHTML,$pagina);
+    $pagina = str_replace("[Unita]",$productInfo["unita"],$pagina);
 
     $max_comment = 4;
     $offset = isset($_GET['offset']) ? (int)$_GET['offset'] : 0;
