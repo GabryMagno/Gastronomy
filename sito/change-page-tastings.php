@@ -38,7 +38,7 @@ class ChangePageTastings{
             break;    
 
             case 'degustazioni_attuali':
-                $query .= "AND d.data_fine >= NOW() ORDER BY d.data_inizio ASC, p.nome ASC";
+                $query .= "AND d.data_inizio<= NOW() AND d.data_fine >= NOW() ORDER BY d.data_inizio ASC, p.nome ASC";
             break;
 
             case 'degustazioni_future':
