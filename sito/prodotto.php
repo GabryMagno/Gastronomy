@@ -97,7 +97,14 @@ if(isset($_GET["prodotto"])){
         $pagina = str_replace("[OTHER COMMENTS]",$commentList,$pagina);
 
         $moreCommentsForm = "";
-        if(count($comments) >= $max_comment + $offset ) {
+        if($db->IsUserLog()){
+            $UserCommented = $db->GetReview($db->IsUserLog(),$productInfo["id"]);
+            if(is_string($UserCommented) && ($UserCommented == "Connection error" || $UserCommented == "Execution error")){
+                header('Location: 500.php');
+                exit();
+            }
+        }
+        if((!($db->IsUserLog())  || $UserCommented == "No reviews found for this product")? (count($comments) >= $max_comment + $offset) : (count($comments) > $max_comment + $offset )) {
             $nextOffset = $offset + $max_comment;
             $moreCommentsForm = '<form action="#return-comment" id="more-comments" method="get">';
             $moreCommentsForm .= '<input type="hidden" name="prodotto" value="'.$productInfo["id"].'">';
@@ -148,6 +155,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
                 </form>","",$pagina);           
     $pagina = str_replace("[COMMENT]","<p id=\"comment-log\">Se desideri commentare questo prodotto, cosa aspetti fai il <a href=\"login.php?reference-product=".urldecode($product)."\"><span lang=\"en\">LOGIN</span></a> oppure <a href=\"register.php?reference-product=".urldecode($product)."\"> REGISTRATI</a></p>",$pagina);
     $pagina = str_replace("[OLD_COMMENT]","",$pagina);
+    $pagina = str_replace("<p id=\"prodotto-nondisponibile\">NON DISPONIBILE</p>","",$pagina);
     $pagina = str_replace("[RESERVATION]","<p id=\"reservation-log\">Se desideri prenotare questo prodotto, cosa aspetti fai il <a href=\"login.php?reference-product=".urldecode($product)."\"><span lang=\"en\">LOGIN</span></a> oppure <a href=\"register.php?reference-product=".urldecode($product)."\"> REGISTRATI</a></p>",$pagina);
 }else{//L'utente è loggato
     $pagina = str_replace("[to-profile]","<a href=\"user-profile.php\">Profilo</a>",$pagina);
@@ -348,6 +356,8 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
         $pagina = str_replace("[Commento]",$isUserCommented["commento"],$pagina);
         $pagina = str_replace("[voto]",$isUserCommented["voto"],$pagina);
         $pagina = str_replace("[Valutazione]",$isUserCommented["voto"],$pagina);
+        $pagina = str_replace("<h4 class=\"no-print left\">Inserisci Valutazione e Commento</h4>","",$pagina);
+        $pagina = str_replace("[COMMENT]","",$pagina);
     }
 
     //FORM PRENOTAZIONE
