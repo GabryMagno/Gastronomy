@@ -1988,7 +1988,7 @@ p.degustazione-nondisponibile#degustazione-singola {
     background-image: url('../img/icone/calendario-nero.svg');
 }
 
-.degustazione-prezzo::before{
+.degustazione-prezzo::before, #prodotto-prezzo::before{
     background-image: url('../img/icone/costo-nero.svg');
 }
 
