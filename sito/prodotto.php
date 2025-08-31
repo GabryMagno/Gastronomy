@@ -61,13 +61,18 @@ if(isset($_GET["prodotto"])){
         foreach($comments as $comment) {
             if($commentNumber <  $max_comment + $offset){
                 $otherUser = $db->GetUserInfo($comment["utente"]);
-                if(is_string($otherUser)) {
-                    header('Location: 500.php');
-                    exit();
+                if(!is_array($otherUser)) {
+                    // Utente non loggato o non trovato → utente di default
+                    $otherUser = [
+                        'username' => $comment['username'] ?? 'Utente sconosciuto',
+                        'url_immagine' => 'assets/img/users_logos/default.webp'
+                    ];
                 }
-                if($comment['url_immagine'] == null) {
-                    $otherUser['url_immagine'] = "assets/img/users_logos/default.webp";
-                } else $otherUser['url_immagine'] = $comment['url_immagine'];
+
+                // Sovrascrive l'immagine con quella del commento se presente
+                if(!empty($comment['url_immagine'])) {
+                    $otherUser['url_immagine'] = $comment['url_immagine'];
+                }else $otherUser['url_immagine'] = "assets/img/users_logos/default.webp";
                 if($commentNumber == 0) {
                     $commentList .= "<div id=\"return-comment\" class=\"recensione-card\">";
                 } else {
