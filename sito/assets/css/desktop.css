@@ -2505,4 +2505,8 @@ button.not-available{
     cursor: not-allowed;
 }
 
+.error-left{
+    text-align: left;
+}
+
 /* ================================================= */

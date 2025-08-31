@@ -31,17 +31,7 @@ if(isset($_GET["degustazione"])){
     }
     $productInfo = $db->GetProductInfo($tastingInfo["id_prodotto"]);
     unset($_GET["degustazione"]);
-    $pagina = str_replace("[Nome Prodotto]",$productInfo["nome"],$pagina);
-    $pagina = str_replace("[IMMAGINE]","<img src=".$productInfo["url_immagine"]." alt=Immagine del prodotto".$productInfo["nome"].">",$pagina);
-    $pagina = str_replace("[DESCRIZIONE]",$tastingInfo["descrizione"],$pagina);
-    $start_date = new DateTime($tastingInfo["data_inizio"]);
-    $end_date = new DateTime($tastingInfo["data_fine"]);
-    $pagina = str_replace("[Data_Inizio]",$start_date->format("d-m-Y"),$pagina);
-    $pagina = str_replace("[Data_Fine]",$end_date->format("d-m-Y"),$pagina);
-    $pagina = str_replace("[Prezzo]",$tastingInfo["prezzo"]." &euro;",$pagina);
-    $pagina = str_replace("[Numero_Persone]",$tastingInfo["disponibilita_persone"],$pagina);
-    $pagina = str_replace("[PRODOTTO]","prodotto.php?prodotto=".$productInfo["id"],$pagina);
-
+    
     if($tastingInfo["disponibilita_persone"] == 0){//Se la disponibilità è 0
         $pagina = str_replace("<form method=\"post\" id=\"prenotazione-degustazione\" class=\"form-bianco\">
                         <fieldset>
@@ -71,6 +61,18 @@ if(isset($_GET["degustazione"])){
     }else{
         $pagina = str_replace("<p class=\"degustazione-nondisponibile\" id=\"degustazione-singola\">Prenotazione non disponibile!</p>","",$pagina);
     }
+
+    $pagina = str_replace("[Nome Prodotto]",$productInfo["nome"],$pagina);
+    $pagina = str_replace("[IMMAGINE]","<img src=".$productInfo["url_immagine"]." alt=Immagine del prodotto".$productInfo["nome"].">",$pagina);
+    $pagina = str_replace("[DESCRIZIONE]",$tastingInfo["descrizione"],$pagina);
+    $start_date = new DateTime($tastingInfo["data_inizio"]);
+    $end_date = new DateTime($tastingInfo["data_fine"]);
+    $pagina = str_replace("[Data_Inizio]",$start_date->format("d-m-Y"),$pagina);
+    $pagina = str_replace("[Data_Fine]",$end_date->format("d-m-Y"),$pagina);
+    $pagina = str_replace("[Prezzo]",$tastingInfo["prezzo"]." &euro;",$pagina);
+    $pagina = str_replace("<dd>Disponibile per <span class=\"degustazione-bold\">[Numero_Persone]</span> Persone</dd>",
+                        $tastingInfo["disponibilita_persone"] == 0 ? "<dd class=\"error error-left\">Non disponibile</dd>" : "<dd>Disponibile per <span class=\"degustazione-bold\">". $tastingInfo["disponibilita_persone"]. "</span> Persone</dd>",$pagina);
+    $pagina = str_replace("[PRODOTTO]","prodotto.php?prodotto=".$productInfo["id"],$pagina);
 
     $isUserLogged = $db->IsUserLog();
 

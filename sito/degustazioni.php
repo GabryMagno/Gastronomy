@@ -66,6 +66,7 @@ echo $pagina;
 
 
 function CreaDegustazioneBrochure( string $img, string $nomeProdotto, float $prezzo, int $id,string $descrizione,int $numeroPersone, DateTime $dataInizio, DateTime $dataFine): string{
+    $today =  new DateTime("now");
     
     //Prenotazione DISPONIBILE - viene visualizzato perchè data odierna compresa nell'intervallo di possibilità prenotazione
     $TEMPLATE = '
@@ -78,7 +79,7 @@ function CreaDegustazioneBrochure( string $img, string $nomeProdotto, float $pre
                 <dl class="degustazione-dettagli">
                     <dt class="degustazione-persone">Disponibilit&agrave;</dt>';
 
-    if ($numeroPersone < 1){
+    if ($numeroPersone < 1 || $today > $dataFine) {
         $TEMPLATE .= '<dd><span class="persone-nondisponibile degustazione-bold">Non disponibile</span></dd>';
     } else{
         $TEMPLATE.= '<dd>Disponibile per <span class="degustazione-bold">' . $numeroPersone . '</span> persone</dd>';
