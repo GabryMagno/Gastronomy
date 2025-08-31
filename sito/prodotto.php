@@ -73,7 +73,7 @@ if(isset($_GET["prodotto"])){
 
     $max_comment = 4;
     $offset = isset($_GET['offset']) ? (int)$_GET['offset'] : 0;
-    $comments = $db->GetProductComments($productInfo["id"], $max_comment + $offset);
+    $comments = $db->GetProductComments($productInfo["id"], $max_comment + $offset + 1);
     if(is_string($comments) && $comments == "No comments found"){//se non ci sono commenti sul prodotto
         $pagina = str_replace("[OTHER COMMENTS]","<p class=\"error\">Per ora non ci sono commenti riguardo questo prodotto</p>",$pagina);
         $pagina = str_replace("[COMMENTS BUTTONS]","",$pagina);
@@ -127,7 +127,7 @@ if(isset($_GET["prodotto"])){
                 exit();
             }
         }
-        if((!($db->IsUserLog())  || $UserCommented == "No reviews found for this product")? (count($comments) >= $max_comment + $offset) : (count($comments) > $max_comment + $offset )) {
+        if(count($comments) > $max_comment + $offset) {
             $nextOffset = $offset + $max_comment;
             $moreCommentsForm = '<form action="#return-comment" id="more-comments" method="get">';
             $moreCommentsForm .= '<input type="hidden" name="prodotto" value="'.$productInfo["id"].'">';
@@ -135,7 +135,7 @@ if(isset($_GET["prodotto"])){
             $moreCommentsForm .= '<button type="submit" class="bottoni-rossi">Carica più recensioni</button></form>';
         }
 
-        if($commentNumber>1) {
+        if($commentNumber>4) {
             $moreCommentsForm .= '<a href="#recensione-container" id="pin-comment" class="bottone-link">Torna al primo commento</a>';
         }
 
@@ -456,6 +456,8 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
                 header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');//reindirizza alla pagina del prodotto
                 exit();
             }
+            header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');
+            exit();
         }else{//ci sono errori
             $pagina = str_replace("Scrivi qui il tuo commento sul prodotto.",$comment,$pagina);
         }
@@ -473,6 +475,8 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
             header('Location: login.php');
             exit();
         }
+        header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');
+        exit();
     }
     //SEZIONE COMMENTI ALTRI UTENTI
 
