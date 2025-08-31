@@ -2029,7 +2029,12 @@ form#prenotazione-degustazione #quantita{
 
     gap: 1em;
 }
-
+#single-product-info{
+    margin-bottom: 1em;
+}
+#reserve-this-product{
+    margin-top: 0.5em;
+}
 p#comment-log,p#reservation-log{
     margin: 1em 0;
     text-align: center;
