@@ -92,33 +92,11 @@
                     </dd>
                     </dl>
 
+                    <hr class="section-divider section-singleproduct">
+                    
+                    <h4 class="no-print left" id="reserve-this-product">Prenota Questa Degustazione</h4>
                     <p class="degustazione-nondisponibile" id="degustazione-singola">Prenotazione non disponibile!</p>
-
-                    <form method="post" id="prenotazione-degustazione" class="form-bianco">
-                        <fieldset>
-                            <legend>Prenotazione Degustazione</legend>
-
-                            <input type="hidden" name="id_utente" value="[id_utente]">
-                            <input type="hidden" name="id_degustazione" value="[id_degustazione]">
-
-                            <label for="quantita" class="form-label">Numero persone</label>
-                            <div id="quantita-unita">
-                                <input type="number" id="quantita" name="quantita" min="1" max="10" required>
-                                <span class="unita">persona/e</span>
-                            </div>
-                            <small class="descrizione-quantita">Disponibile per un massimo di [Numero_Persone] Persona/e.</small>
-
-                            <div>
-                                <label for="data-prenotazione" class="form-label" id="order-label">Data prenotazione</label>
-                                <input type="date" id="data-prenotazione" name="data_ritiro" required>
-                            </div>
-                            <small class="descrizione-quantita">Prenotabile dal [Data_Inizio] al [Data_Fine].</small>
-
-                            <div class="button-container">
-                                <button type="submit" aria-label="Prenota Prodotto" class="bottoni-rossi" id="submit-reservation">Prenota</button>
-                            </div>
-                        </fieldset>
-                    </form>
+                    [FORM PRENOTAZIONE]
 
                 </div>
                 

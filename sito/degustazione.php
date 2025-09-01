@@ -34,14 +34,16 @@ if(isset($_GET["degustazione"])){
     }
     $productInfo = $db->GetProductInfo($tastingInfo["id_prodotto"]);
     unset($_GET["degustazione"]);
-    
+    $isUserLogged = $db->IsUserLog();
+
     if($tastingInfo["disponibilita_persone"] == 0){//Se la disponibilità è 0
-        $pagina = str_replace("<form method=\"post\" id=\"prenotazione-degustazione\" class=\"form-bianco\">
+        $pagina = str_replace("[FORM PRENOTAZIONE]","",$pagina);
+    }elseif((is_bool($isUserLogged) && $isUserLogged == false)){
+        $pagina = str_replace("[FORM PRENOTAZIONE]","<p id=\"reservation-log\">Devi essere loggato per prenotare una degustazione! <a href=\"login.php\"><span lang=\"en\">Login</span></a> oppure <a href=\"register.php\"><span lang=\"en\">Registrati</span></a></p>",$pagina);
+    }else{
+        $pagina = str_replace("[FORM PRENOTAZIONE]","<form method=\"post\" id=\"prenotazione-degustazione\" class=\"form-bianco\">
                         <fieldset>
                             <legend>Prenotazione Degustazione</legend>
-
-                            <input type=\"hidden\" name=\"id_utente\" value=\"[id_utente]\">
-                            <input type=\"hidden\" name=\"id_degustazione\" value=\"[id_degustazione]\">
 
                             <label for=\"quantita\" class=\"form-label\">Numero persone</label>
                             <div id=\"quantita-unita\">
@@ -62,8 +64,10 @@ if(isset($_GET["degustazione"])){
                                 <button type=\"submit\" aria-label=\"Prenota Prodotto\" class=\"bottoni-rossi\" id=\"submit-reservation\">Prenota</button>
                             </div>
                         </fieldset>
-                    </form>","",$pagina);
-    }else{
+                    </form>",$pagina);
+    }
+
+    if($tastingInfo["disponibilita_persone"] > 0){//Se la disponibilità è 0
         $pagina = str_replace("<p class=\"degustazione-nondisponibile\" id=\"degustazione-singola\">Prenotazione non disponibile!</p>","",$pagina);
     }
 
@@ -79,60 +83,59 @@ if(isset($_GET["degustazione"])){
                         $tastingInfo["disponibilita_persone"] == 0 ? "<dd class=\"error error-left\">Non disponibile</dd>" : "<dd>Disponibile per <span class=\"degustazione-bold\">". $tastingInfo["disponibilita_persone"]. "</span> Persone</dd>",$pagina);
     $pagina = str_replace("[PRODOTTO]","prodotto.php?prodotto=".$productInfo["id"],$pagina);
     $pagina = str_replace("[Numero_Persone]",$tastingInfo["disponibilita_persone"],$pagina);
-
+   
     $isUserLogged = $db->IsUserLog();
-
     if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggato
         $pagina = str_replace("[to-profile]","<a href=\"login.php\"><span lang=\"en\">Login</span></a>",$pagina);
     }else{
-        $pagina = str_replace("[to-profile]","<a href=\"user-profile.php\">Profilo</a>",$pagina);
-    }
-    //GESTIONE PRENOTAZIONE DEGUSTAZIONE
+        //GESTIONE PRENOTAZIONE DEGUSTAZIONE
     //FORM PRENOTAZIONE
-    if(isset($_POST["submit-reservation"])){
-        $errorFound = false;
+        if(isset($_POST["submit-reservation"])){
+            $errorFound = false;
 
-        $people = (int)$_POST["quantita"];
-        if($people < 1){
-            $errorFound = true; 
-            $pagina = str_replace("[quantity-error]","<p class=\"error\" id=\"quantity-error\">Il numero di persone per cui prenotare questa degustazione deve essere superiore o uguale a una persona</p>",$pagina);
-        }elseif($quantity > $tastingInfo["disponibilità_persone"]){
-            $errorFound = true; 
-            $pagina = str_replace("[quantity-error]","<p class=\"error\" id=\"quantity-error\">Il numero di persone per cui prenotare prenotare questa degustazione deve essere inferiore o uguale a ".$tastingInfo["disponibilità_persone"].$tastingInfo["disponibilità_persone"] == 1 ? " persona</p>" : "persone</p>",$pagina);
-        }else{
-            $pagina = str_replace("[quantity-error]","",$pagina);
-        }
-
-
-        $date_reservation = $_POST["data_ritiro"];
-        $today = new DateTime();
-        $today1 = new DateTime();
-        $tomorrow = (clone $today)->modify('+1 day');
-        $reservationDate = new DateTime($date_reservation);
-        if($reservationDate < $tastingInfo["data_inizio"]){
-            $errorFound = true; 
-            $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">La prenotazione di questai: ". $today1->format("d-m-Y")."</p>", $pagina);
-        }else if($reservationDate > $tastingInfo["data_fine"]){
-            $errorFound = true; 
-            $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">L'ordine può essere ritirato solo nei giorni successivi ad oggi: ". $today1->format("d-m-Y")."</p>", $pagina);
-        }else{
-            $pagina = str_replace("[date-error]","",$pagina);
-        }
-
-        if($errorFound == true){//ci sono stati errori
-            $pagina = str_replace("[quantita-ordine]",$quantity, $pagina);
-            $pagina = str_replace("[data-ordine]",$date_reservation, $pagina); 
-        }else{
-            $addReservation = $db->AddReservation($productInfo["id"], $quantity, $date_reservation);
-            if(is_bool($addReservation) && $addReservation == true) {//controllo se la modifica delle informazioni è andata a buon fine
-                header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');//reindirizza alla pagina delle informazioni utente
-                exit();
-            } else { 
-                header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');
-                exit();
+            $people = (int)$_POST["quantita"];
+            if($people < 1){
+                $errorFound = true; 
+                $pagina = str_replace("[quantity-error]","<p class=\"error\" id=\"quantity-error\">Il numero di persone per cui prenotare questa degustazione deve essere superiore o uguale a una persona</p>",$pagina);
+            }elseif($quantity > $tastingInfo["disponibilità_persone"]){
+                $errorFound = true; 
+                $pagina = str_replace("[quantity-error]","<p class=\"error\" id=\"quantity-error\">Il numero di persone per cui prenotare prenotare questa degustazione deve essere inferiore o uguale a ".$tastingInfo["disponibilità_persone"].$tastingInfo["disponibilità_persone"] == 1 ? " persona</p>" : "persone</p>",$pagina);
+            }else{
+                $pagina = str_replace("[quantity-error]","",$pagina);
             }
-        }
 
+
+            $date_reservation = $_POST["data_ritiro"];
+            $today = new DateTime();
+            $today1 = new DateTime();
+            $tomorrow = (clone $today)->modify('+1 day');
+            $reservationDate = new DateTime($date_reservation);
+            if($reservationDate < $tastingInfo["data_inizio"]){
+                $errorFound = true; 
+                $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">La prenotazione di questai: ". $today1->format("d-m-Y")."</p>", $pagina);
+            }else if($reservationDate > $tastingInfo["data_fine"]){
+                $errorFound = true; 
+                $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">L'ordine può essere ritirato solo nei giorni successivi ad oggi: ". $today1->format("d-m-Y")."</p>", $pagina);
+            }else{
+                $pagina = str_replace("[date-error]","",$pagina);
+            }
+
+            if($errorFound == true){//ci sono stati errori
+                $pagina = str_replace("[quantita-ordine]",$quantity, $pagina);
+                $pagina = str_replace("[data-ordine]",$date_reservation, $pagina); 
+            }else{
+                $addReservation = $db->AddReservation($productInfo["id"], $quantity, $date_reservation);
+                if(is_bool($addReservation) && $addReservation == true) {//controllo se la modifica delle informazioni è andata a buon fine
+                    header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');//reindirizza alla pagina delle informazioni utente
+                    exit();
+                } else { 
+                    header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');
+                    exit();
+                }
+            }
+
+        }
+        $pagina = str_replace("[to-profile]","<a href=\"user-profile.php\">Profilo</a>",$pagina);
     }
 }else{
     header("Location: degustazioni.php");
