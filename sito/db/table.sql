@@ -68,12 +68,12 @@ CREATE TABLE degustazioni (
 );
 
 CREATE TABLE prenotazioni_degustazioni (
-    id_degustazione INT,
-    id_cliente INT,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_degustazione INT NOT NULL,
+    id_cliente INT NOT NULL,
     numero_persone INT NOT NULL,
     data_prenotazione DATE NOT NULL,
     data_scelta DATE NOT NULL,
-    PRIMARY KEY(id_degustazione, id_cliente),
     FOREIGN KEY (id_cliente) REFERENCES utenti(id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (id_degustazione) REFERENCES degustazioni(id) ON DELETE CASCADE ON UPDATE CASCADE
 );

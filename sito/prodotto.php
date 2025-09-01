@@ -417,10 +417,10 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
         }else{
             $addReservation = $db->AddReservation($productInfo["id"], $quantity, $date_reservation);
             if(is_bool($addReservation) && $addReservation == true) {//controllo se la modifica delle informazioni è andata a buon fine
-                header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');//reindirizza alla pagina delle informazioni utente
+                header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');
                 exit();
             } else { 
-                header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');
+                header('Location: 500.php');
                 exit();
             }
         }

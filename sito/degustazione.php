@@ -61,7 +61,7 @@ if(isset($_GET["degustazione"])){
                             [date-error]
 
                             <div class=\"button-container\">
-                                <button type=\"submit\" aria-label=\"Prenota Prodotto\" class=\"bottoni-rossi\" id=\"submit-reservation\">Prenota</button>
+                                <button type=\"submit\" aria-label=\"Prenota Prodotto\" class=\"bottoni-rossi\" id=\"submit-reservation\" name=\"submit-reservation\">Prenota</button>
                             </div>
                         </fieldset>
                     </form>",$pagina);
@@ -97,45 +97,54 @@ if(isset($_GET["degustazione"])){
             if($people < 1){
                 $errorFound = true; 
                 $pagina = str_replace("[quantity-error]","<p class=\"error\" id=\"quantity-error\">Il numero di persone per cui prenotare questa degustazione deve essere superiore o uguale a una persona</p>",$pagina);
-            }elseif($quantity > $tastingInfo["disponibilità_persone"]){
+            }elseif($people > $tastingInfo["disponibilita_persone"]){
                 $errorFound = true; 
-                $pagina = str_replace("[quantity-error]","<p class=\"error\" id=\"quantity-error\">Il numero di persone per cui prenotare prenotare questa degustazione deve essere inferiore o uguale a ".$tastingInfo["disponibilità_persone"].$tastingInfo["disponibilità_persone"] == 1 ? " persona</p>" : "persone</p>",$pagina);
+                $pagina = str_replace("[quantity-error]","<p class=\"error\" id=\"quantity-error\">Il numero di persone per cui prenotare prenotare questa degustazione deve essere inferiore o uguale a ".$tastingInfo["disponibilita_persone"].($tastingInfo["disponibilita_persone"] == 1 ? " persona</p>" : " persone</p>"),$pagina);
             }else{
                 $pagina = str_replace("[quantity-error]","",$pagina);
             }
 
 
             $date_reservation = $_POST["data_ritiro"];
+            $start = $tastingInfo["data_inizio"];
+            $end = $tastingInfo["data_fine"];
             $today = new DateTime();
-            $today1 = new DateTime();
-            $tomorrow = (clone $today)->modify('+1 day');
             $reservationDate = new DateTime($date_reservation);
-            if($reservationDate < $tastingInfo["data_inizio"]){
+            $start_date = new DateTime($start);
+            $end_date = new DateTime($end);
+            if($reservationDate < $start_date){//controllo che la data sia successiva o uguale a quella di inizio della degustazione
                 $errorFound = true; 
-                $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">La prenotazione di questai: ". $today1->format("d-m-Y")."</p>", $pagina);
-            }else if($reservationDate > $tastingInfo["data_fine"]){
+                $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">La prenotazione può essere effettuata solo nei giorni successivi al : ". $start_date->format("d-m-Y")."</p>", $pagina);
+            }elseif($reservationDate < $today){//controllo che la data sia successiva o uguale a quella di oggi(non ha senso prenotare nel passato)
+                $errorFound = true;
+                $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">La prenotazione può essere effettuata oggi : ". $today->format("d-m-Y")." e nei giorni precedenti al : ". $end_date->format("d-m-Y")."</p>", $pagina);
+            }else if($reservationDate > $end_date){//controllo che la data sia precedente o uguale a quella di fine degustazione
                 $errorFound = true; 
-                $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">L'ordine può essere ritirato solo nei giorni successivi ad oggi: ". $today1->format("d-m-Y")."</p>", $pagina);
+                $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">L'ordine può essere ritirato solo nei giorni precedenti al : ". $end_date->format("d-m-Y")."</p>", $pagina);
             }else{
                 $pagina = str_replace("[date-error]","",$pagina);
             }
 
             if($errorFound == true){//ci sono stati errori
-                $pagina = str_replace("[quantita-ordine]",$quantity, $pagina);
-                $pagina = str_replace("[data-ordine]",$date_reservation, $pagina); 
-            }else{
-                $addReservation = $db->AddReservation($productInfo["id"], $quantity, $date_reservation);
+                $pagina = str_replace("[quantita]",$people, $pagina);
+                $pagina = str_replace("[data_ritiro]",$date_reservation, $pagina); 
+            }else{//se ci sono errori
+                echo $tasting;
+                $addReservation = $db->AddTasting($tasting, $people, $date_reservation);
                 if(is_bool($addReservation) && $addReservation == true) {//controllo se la modifica delle informazioni è andata a buon fine
-                    header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');//reindirizza alla pagina delle informazioni utente
+                    header('Location: degustazione.php?degustazione='. $tasting . '');
                     exit();
-                } else { 
-                    header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');
-                    exit();
+                } else { //se ci sono stati errori l'utente viene reindirizzato alla pagina di errore 500
+                   echo $addReservation;
                 }
             }
 
         }
         $pagina = str_replace("[to-profile]","<a href=\"user-profile.php\">Profilo</a>",$pagina);
+        if(!isset($_POST["submit-reservation"])){
+            $pagina = str_replace("[quantity-error]","",$pagina);
+            $pagina = str_replace("[date-error]","",$pagina);
+        }
     }
 }else{
     header("Location: degustazioni.php");

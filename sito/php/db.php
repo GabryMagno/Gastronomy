@@ -1180,60 +1180,52 @@ class DB {
     }
     //DA CONTROLLARE LE PROSSIME DUE FUNZIONI :AddTasting e CheckTastingAvailability -> MOLTO IMPORTANTE
 
-    public function AddTasting($id, $tasting, $people_number, $date): bool | string{//Aggiunta di una prenotazione per una degustazione da parte dell'utente per un tot di persone e in una certa data
+    public function AddTasting($tasting, $people_number, $date): bool | string{//Aggiunta di una prenotazione per una degustazione da parte dell'utente per un tot di persone e in una certa data
         $isUserLogged = $this->IsUserLog();
         if($isUserLogged == false){
             //se l'utente non è loggato, ritorna un messaggio di errore
             return "User is not logged in"; //l'utente non è loggato
         }else{
             $newConnection = $this->OpenConnectionDB();
-            $date2 = date("Y-m-d H:i:s"); //ottiene la data e l'ora attuale
+            $date2 = date("Y-m-d"); //ottiene la data e l'ora attuale
             if($newConnection){
                 //preparazione della query per aggiungere una prenotazione per una degustazione
-                if(!$this->CheckTastingAvailability($tasting, $people_number)){
+                if($this->CheckTastingAvailability($newConnection, $tasting, $people_number) !== true){
                     //se la degustazione non è disponibile per il numero di persone richiesto, ritorna un messaggio di errore
-                    return "Tasting not available for the requested number of people"; //degustazione non disponibile per il numero di persone richiesto
+                    return $this->CheckTastingAvailability($newConnection, $tasting, $people_number); //degustazione non disponibile per il numero di persone richiesto
                 }
                 //preparazione della query per aggiungere una prenotazione per una degustazione
                 //inserisce una prenotazione per una degustazione con l'id della degustazione, l'id dell'utente, la data della prenotazione e la data della scelta
-                $addTasting = $this->connection->prepare("INSERT INTO prenotazioni_degustazioni (id_degustazione, id_cliente, data_prenotazione, data_scelta) VALUES (?, ?, ?, ?)");
-                $addTasting->bind_param("iiss", $tasting, $isUserLogged, $date2, $date);
+                $addTasting = $this->connection->prepare("INSERT INTO prenotazioni_degustazioni (id_degustazione, id_cliente, numero_persone, data_prenotazione, data_scelta) VALUES (?, ?, ?, ?, ?)");
+                $addTasting->bind_param("iiiss", $tasting, $isUserLogged, $people_number, $date2, $date);
 
                 //preparazione della query per aggiornare la disponibilità delle persone per la degustazione
                 //decrementa la disponibilità delle persone per la degustazione di un certo numero di persone
-                $changePeopleNumber = $this->connection->prepare("UPDATE degustazioni SET disponibilita_persone = disponibilita_persone - ? WHERE id_degustazione = ?");
-                $changePeopleNumber->bind_param("ii", $people_number, $tasting);
-                
-                try{
-                    //esecuzione della query per aggiungere una prenotazione per una degustazione
+                $changePeopleNumber = $this->connection->prepare("UPDATE degustazioni SET disponibilita_persone = disponibilita_persone - ? WHERE id = ? AND disponibilita_persone >= ?");
+                $changePeopleNumber->bind_param("iii", $people_number, $tasting, $people_number);
+
+                $this->connection->begin_transaction();
+
+                try {
                     $addTasting->execute();
-                }catch(\mysqli_sql_exception $error){
-                    //se c'è un errore nell'esecuzione della query, ritorna false
-                    $this->CloseConnectionDB();
-                    $addTasting->close();
-                    return false; //errore nell'esecuzione della query
-                }
-
-                try{
-                    //esecuzione della query per aggiornare la disponibilità delle persone per la degustazione
                     $changePeopleNumber->execute();
-                }catch(\mysqli_sql_exception $error){
-                    //se c'è un errore nell'esecuzione della query, ritorna false
-                    $this->CloseConnectionDB();
-                    $changePeopleNumber->close();
-                    return false; //errore nell'esecuzione della query
-                }
 
-                if(mysqli_affected_rows($this->connection) == 1){
-                    //se la query ha inserito una riga, allora la prenotazione per la degustazione è stata aggiunta con successo
-                    $this->CloseConnectionDB();
+                    if ($addTasting->affected_rows !== 1 || $changePeopleNumber->affected_rows !== 1) {
+                        return "Tasting addition failed or not enough availability";
+                    }
+
+                    $this->connection->commit();
                     $addTasting->close();
-                    return true; //aggiunta avvenuta con successo
-                }else{
-                    //se la query non ha inserito nessuna riga, allora c'è stato un errore
+                    $changePeopleNumber->close();
                     $this->CloseConnectionDB();
+                    return true;
+
+                } catch (\Exception $error) {
+                    $this->connection->rollback();
                     $addTasting->close();
-                    return "Tasting addition failed"; //nessuna riga inserita, errore nell'aggiunta della prenotazione per la degustazione
+                    $changePeopleNumber->close();
+                    $this->CloseConnectionDB();
+                    return $error->getMessage();
                 }
             }else{
                 return "Connection error"; //errore nella connessione al database
@@ -1241,11 +1233,10 @@ class DB {
         }
     }
 
-    public function CheckTastingAvailability($tasting, $people_number): bool | string{//Controlla se una degustazione è disponibile per un certo numero di persone
-        $newConnection = $this->OpenConnectionDB();
+    private function CheckTastingAvailability($newConnection ,$tasting, $people_number): bool | string{//Controlla se una degustazione è disponibile per un certo numero di persone
         if($newConnection){
             //preparazione della query per controllare la disponibilità di una degustazione
-            $checkAvailability = $this->connection->prepare("SELECT disponibilita_persone FROM degustazioni WHERE id_degustazione = ?");
+            $checkAvailability = $this->connection->prepare("SELECT disponibilita_persone FROM degustazioni WHERE id = ?");
             $checkAvailability->bind_param("i", $tasting);
             try{
                 //esecuzione della query per controllare la disponibilità di una degustazione
@@ -1258,7 +1249,6 @@ class DB {
             }
             //ottiene il risultato della query
             $result = $checkAvailability->get_result();
-            $this->CloseConnectionDB();
             $checkAvailability->close();
             if($result->num_rows == 1){
                 //se la degustazione esiste, allora controlla la disponibilità
