@@ -8,23 +8,25 @@ function validateUserComment() {
     })
 
     let reset_button = document.getElementById("reset-comment");
-    reset_button.addEventListener("click", () =>{
-        var check = document.getElementById("comment-error");
-        deleteError(check);
-        resetHint("min-char-comment","Minimo 30 caratteri");
-        resetHint("max-char-comment","Massimo 300 caratteri");
+    if(reset_button){
+        reset_button.addEventListener("click", () =>{
+            var check = document.getElementById("comment-error");
+            deleteError(check);
+            resetHint("min-char-comment","Minimo 30 caratteri");
+            resetHint("max-char-comment","Massimo 300 caratteri");
 
-        document.getElementsByName("rating").forEach(star => {
-            star.checked = false;
+            document.getElementsByName("rating").forEach(star => {
+                star.checked = false;
+            });
+            
+            document.getElementById("submit-comment").classList.add("not-available");
+            document.getElementById("submit-comment").disabled = true;
+            document.getElementById("user-comment").value = "";
+            document.getElementById("reset-comment").classList.add("not-available");
+            document.getElementById("reset-comment").disabled = true;
+            document.getElementById("user-comment").focus();
         });
-        
-        document.getElementById("submit-comment").classList.add("not-available");
-		document.getElementById("submit-comment").disabled = true;
-        document.getElementById("user-comment").value = "";
-        document.getElementById("reset-comment").classList.add("not-available");
-		document.getElementById("reset-comment").disabled = true;
-        document.getElementById("user-comment").focus();
-    });
+    }
 
 	let form = document.getElementById("valutazione");
 

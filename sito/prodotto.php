@@ -137,7 +137,7 @@ if(isset($_GET["prodotto"])){
         }
 
         if($commentNumber>4) {
-            $moreCommentsForm .= '<a href="#recensione-container" id="pin-comment" class="bottone-link">Torna al primo commento</a>';
+            $moreCommentsForm .= '<a href="#return-comment" id="pin-comment" class="bottone-link">Torna al primo commento</a>';
         }
 
         $pagina = str_replace("[COMMENTS BUTTONS]",$moreCommentsForm,$pagina);
