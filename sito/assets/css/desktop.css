@@ -2034,10 +2034,12 @@ form#prenotazione-degustazione #quantita{
 }
 #reserve-this-product{
     margin-top: 0.5em;
+    margin-bottom: 0.5em;
 }
 p#comment-log,p#reservation-log{
-    margin: 1em 0;
+    margin: 2em 0;
     text-align: center;
+    font-size: 1.1em;
 }
 
 p#comment-log a,p#reservation-log a{

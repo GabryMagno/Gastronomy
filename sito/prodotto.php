@@ -75,7 +75,7 @@ if(isset($_GET["prodotto"])){
     $offset = isset($_GET['offset']) ? (int)$_GET['offset'] : 0;
     $comments = $db->GetProductComments($productInfo["id"], $max_comment + $offset + 1);
     if(is_string($comments) && $comments == "No comments found"){//se non ci sono commenti sul prodotto
-        $pagina = str_replace("[OTHER COMMENTS]","<p class=\"error\">Per ora non ci sono commenti riguardo questo prodotto</p>",$pagina);
+        $pagina = str_replace("[OTHER COMMENTS]","<p class=\"nondisponibile\">Per ora non ci sono altri commenti su questo prodotto</p>",$pagina);
         $pagina = str_replace("[COMMENTS BUTTONS]","",$pagina);
     } else {
         $commentNumber = 0;
@@ -176,10 +176,10 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
                         <button type=\"submit\" aria-label=\"Elimina Valutazione\" class=\"bottoni-rossi\" name=\"delete-review\">Elimina Valutazione</button>
                     </div>
                 </form>","",$pagina);           
-    $pagina = str_replace("[COMMENT]","<p id=\"comment-log\">Se desideri commentare questo prodotto, cosa aspetti fai il <a href=\"login.php?reference-product=".urldecode($product)."\"><span lang=\"en\">LOGIN</span></a> oppure <a href=\"register.php?reference-product=".urldecode($product)."\"> REGISTRATI</a></p>",$pagina);
+    $pagina = str_replace("[COMMENT]","<p id=\"comment-log\">Vuoi dire la tua su questo prodotto? <a href=\"login.php?reference-product=".urldecode($product)."\"><span lang=\"en\">ACCEDI</span></a> o <a href=\"register.php?reference-product=".urldecode($product)."\"> REGISTRATI</a> e lascia subito un commento!</p>",$pagina);
     $pagina = str_replace("[OLD_COMMENT]","",$pagina);
     $pagina = str_replace("<p id=\"prodotto-nondisponibile\">NON DISPONIBILE</p>","",$pagina);
-    $pagina = str_replace("[RESERVATION]","<p id=\"reservation-log\">Se desideri prenotare questo prodotto, cosa aspetti fai il <a href=\"login.php?reference-product=".urldecode($product)."\"><span lang=\"en\">LOGIN</span></a> oppure <a href=\"register.php?reference-product=".urldecode($product)."\"> REGISTRATI</a></p>",$pagina);
+    $pagina = str_replace("[RESERVATION]","<p id=\"reservation-log\">Non lasciarti sfuggire questa bont&agrave;! Fai il <a href=\"login.php?reference-product=".urldecode($product)."\"><span lang=\"en\">LOGIN</span></a> o <a href=\"register.php?reference-product=".urldecode($product)."\"> REGISTRATI</a> per prenotarla!</p>",$pagina);
 }else{//L'utente è loggato
     $pagina = str_replace("[to-profile]","<a href=\"user-profile.php\">Profilo</a>",$pagina);
 

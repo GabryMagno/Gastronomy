@@ -93,7 +93,7 @@ function CreaDegustazioneBrochure( string $img, string $nomeProdotto, float $pre
             <dd class="prodotto-prezzo-testo">' . number_format($prezzo, 2, ',', '.') . ' €</dd>
         </dl>';
 
-    if ($numeroPersone < 1) {
+    if ($numeroPersone < 1 || $dataInizio > $today || $dataFine < $today) {
         $TEMPLATE .= '<p class="degustazione-nondisponibile">Prenotazione non disponibile!</p>';
     } else {
         $TEMPLATE.= '<div class="button-container degustazione-prenota">
