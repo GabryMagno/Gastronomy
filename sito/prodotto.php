@@ -32,7 +32,7 @@ if(isset($_GET["prodotto"])){
         header('Location: 500.php');
         exit();
     }
-    if(is_string($ingredients) && $ingredients == "No ingredients found for this product") $ingredientsHTML = "Nessun ingrediente disponibile";
+    if(is_string($ingredients) && $ingredients == "No ingredients found for this product") $ingredientsHTML = "<span class=\"persone-nondisponibile\">Ingredienti non inseriti</span>";
     else{
         foreach($ingredients as $ingredient){
             $ingredientsHTML .= "<li>". $ingredient["quantita"] . (($ingredient["unita_misura"] == "num_el" || $ingredient["unita_misura"] == null)? "" : $ingredient["unita_misura"]. " di") ."  ". $ingredient["ingrediente"] ."</li>";
