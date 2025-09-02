@@ -45,6 +45,7 @@ VALUES
 ('Biscotti Artigianali', 'dolce', 'kg', 1, 3, 'Selezione di biscotti di frolla artigianali', 18.00, TRUE, 'assets/img/prodotti/biscotti.webp'),
 ('<span lang="en">Cheesecake</span> ai Frutti Rossi', 'dolce', 'porzione', 1, 6, '<span lang="en">Cheesecake</span> con topping ai frutti rossi', 4.50, TRUE, 'assets/img/prodotti/cheesecake.webp');
 
+
 -- INGREDIENTI
 INSERT INTO ingredienti VALUES 
 ("Semi di Sesamo",1,1,1),
@@ -60,9 +61,9 @@ INSERT INTO ingredienti VALUES
 ("Passata di pomodoro",1,1,1),
 ("Aglio",1,1,1),
 ("Basilico",1,1,1),
-("Olio EVO",1,1,1),
+("Olio <abbr title=\"Extra Vergine di Oliva\">EVO</abbr>",1,1,1),
 ("Mozzarella",1,0,1),
-("Parmiggiano Reggiano DOP",1,0,0);
+("Parmiggiano Reggiano <abbr title=\"Denominazione di Origine Protetta\">DOP</abbr>",1,0,0);
 
 -- PRODOTTI_INGREDIENTI
 INSERT INTO prodotto_ingredienti VALUES
@@ -74,9 +75,9 @@ INSERT INTO prodotto_ingredienti VALUES
 (13,"Passata di pomodoro",0,600,"g"),
 (13,"Aglio",0,1,"num_el"),
 (13,"Basilico",0,6,"num_el"),
-(13,"Olio EVO",1,null,null),
+(13,"Olio <abbr title=\"Extra Vergine di Oliva\">EVO</abbr>",1,null,null),
 (13,"Mozzarella",0,250,"g"),
-(13,"Parmiggiano Reggiano DOP",0,70,"g"),
+(13,"Parmiggiano Reggiano <abbr title=\"Denominazione di Origine Protetta\">DOP</abbr>",0,70,"g"),
 (23,"Noci",0,8,"num_el"),
 (23,"Finocchio",0,1,"num_el"),
 (23,"Mele",0,2,"num_el"),
