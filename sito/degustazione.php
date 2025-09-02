@@ -76,8 +76,8 @@ if(isset($_GET["degustazione"])){
     $pagina = str_replace("[DESCRIZIONE]",$tastingInfo["descrizione"],$pagina);
     $start_date = new DateTime($tastingInfo["data_inizio"]);
     $end_date = new DateTime($tastingInfo["data_fine"]);
-    $pagina = str_replace("[Data_Inizio]",$start_date->format("d-m-Y"),$pagina);
-    $pagina = str_replace("[Data_Fine]",$end_date->format("d-m-Y"),$pagina);
+    $pagina = str_replace("[Data_Inizio]",'<time datetime="'.$start_date->format("Y-m-d"). '">'.$start_date->format("d/m/Y").'</time>',$pagina);
+    $pagina = str_replace("[Data_Fine]",'<time datetime="'.$end_date->format("Y-m-d"). '">'.$end_date->format("d/m/Y").'</time>',$pagina);
     $pagina = str_replace("[Prezzo]",$tastingInfo["prezzo"]." &euro;",$pagina);
     $pagina = str_replace("<dd>Disponibile per <span class=\"degustazione-bold\">[Numero_Persone]</span> Persone</dd>",
                         $tastingInfo["disponibilita_persone"] == 0 ? "<dd class=\"error error-left\">Non disponibile</dd>" : "<dd>Disponibile per <span class=\"degustazione-bold\">". $tastingInfo["disponibilita_persone"]. "</span> Persone</dd>",$pagina);

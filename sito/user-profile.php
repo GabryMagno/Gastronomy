@@ -314,7 +314,7 @@ function CreaVisualizzaRecensioni(int $idProdotto, string $nomeProdotto, DateTim
     //$TEMPLATE .= '<small> ('.$valutazione.' su 5)</small>';
 
     $TEMPLATE .= '</dl></div>
-                        <a href="prodotto.php?prodotto='. urlencode($idProdotto) . '" title="Visualizza valutazione inserita per il prodotto ' . Sanitizer::SanitizeGenericInput($nomeProdotto) . '" class="btn-dettagli">Visualizza</a>
+                        <a href="prodotto.php?prodotto='. urlencode($idProdotto) . '#valutazione" title="Visualizza valutazione inserita per il prodotto ' . Sanitizer::SanitizeGenericInput($nomeProdotto) . '" class="btn-dettagli">Visualizza</a>
                 </li>';
 
     return $TEMPLATE;

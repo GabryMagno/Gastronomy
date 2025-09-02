@@ -105,15 +105,15 @@ if(isset($_GET["prodotto"])){
                                 <img src=".$otherUser['url_immagine']. " alt=\"Foto profilo di".$comment["username"]."\">
                             </div>";
                 $date = new DateTime($comment["data"]);
-                $commentList .= "<div class=\"recensione-contenuto\">
-                                <h5 class=\"recensione-cliente\">".$comment["username"]."</h5>
-                                <span class=\"recensione-data\">".($date->format("d-m-Y"))."</span>
-                                <p class=\"recensione-testo\">
-                                    ".$comment["commento"]."
-                                </p>
-                                <p class=\"recensione-valutazione\">Valutazione: ".$comment["voto"]." su 5</p>
-                            </div>
-                        </div>";//potrebbe essere necessario inserire datetime
+
+                $commentList .= '<div class="recensione-contenuto">
+                                    <h5 class="recensione-cliente">' . htmlspecialchars($comment["username"]) . '</h5>
+                                    <span class="recensione-data">
+                                        <time datetime="' . $date->format("Y-m-d") . '">' . $date->format("d/m/Y") . '</time>
+                                    </span>
+                                    <p class="recensione-testo">' . htmlspecialchars($comment["commento"]) . '</p>
+                                    <p class="recensione-valutazione">Valutazione: ' . htmlspecialchars($comment["voto"]) . ' su 5</p>
+                                </div>';
                 $commentNumber++;
             }          
         }
@@ -375,7 +375,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
                     </div>
                 </form>", $pagina);
         $pagina = str_replace("<h4 class=\"no-print left\">Inserisci Valutazione e Commento</h4>[COMMENT]","",$pagina);
-        $pagina = str_replace("[Data Valutazione]",$data->format("d/m/Y"),$pagina);
+        $pagina = str_replace("[Data Valutazione]",'<time datetime="'.$data->format("Y-m-d"). '">'.$data->format("d/m/Y").'</time>',$pagina);
         $pagina = str_replace("[Commento]",$isUserCommented["commento"],$pagina);
         $pagina = str_replace("[voto]",$isUserCommented["voto"],$pagina);
         $pagina = str_replace("[Valutazione]",$isUserCommented["voto"],$pagina);
