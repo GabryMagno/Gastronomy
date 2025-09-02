@@ -75,7 +75,7 @@ if(isset($_GET["prodotto"])){
     $offset = isset($_GET['offset']) ? (int)$_GET['offset'] : 0;
     $comments = $db->GetProductComments($productInfo["id"], $max_comment + $offset + 1);
     if(is_string($comments) && $comments == "No comments found"){//se non ci sono commenti sul prodotto
-        $pagina = str_replace("[OTHER COMMENTS]","<p class=\"nondisponibile\">Per ora non ci sono altri commenti su questo prodotto</p>",$pagina);
+        $pagina = str_replace("[OTHER COMMENTS]","<p class=\"nondisponibile\">Per ora non ci sono commenti di altri utenti su questo prodotto!</p>",$pagina);
         $pagina = str_replace("[COMMENTS BUTTONS]","",$pagina);
     } else {
         $commentNumber = 0;
