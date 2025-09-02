@@ -113,7 +113,8 @@ if(isset($_GET["prodotto"])){
                                     </span>
                                     <p class="recensione-testo">' . htmlspecialchars($comment["commento"]) . '</p>
                                     <p class="recensione-valutazione">Valutazione: ' . htmlspecialchars($comment["voto"]) . ' su 5</p>
-                                </div>';
+                                </div>
+                            </div>';
                 $commentNumber++;
             }          
         }
