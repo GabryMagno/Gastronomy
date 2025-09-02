@@ -43,16 +43,18 @@ function validateUserComment() {
 function ValidateUserOrder(){
     let form = document.getElementById("prenotazione");
 
-	form.addEventListener("submit", function (event) {
-		if (! (validateDateOrder()) ) {
-			event.preventDefault();
-			document.getElementById("submit-order").classList.add("not-available");
-			document.getElementById("submit-order").disabled = true;
-		}else{
-            document.getElementById("submit-order").classList.remove("not-available");
-			document.getElementById("submit-order").disabled = false;
-        }
-	});
+    if(form){
+        form.addEventListener("submit", function (event) {
+            if (! (validateDateOrder()) ) {
+                event.preventDefault();
+                document.getElementById("submit-order").classList.add("not-available");
+                document.getElementById("submit-order").disabled = true;
+            }else{
+                document.getElementById("submit-order").classList.remove("not-available");
+                document.getElementById("submit-order").disabled = false;
+            }
+        });
+    }
 }
 
 
