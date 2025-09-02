@@ -2516,4 +2516,9 @@ button.not-available{
     text-align: left;
 }
 
+#delete-choice-warning{
+    text-align: center;
+    margin: 1em;
+}
+
 /* ================================================= */
