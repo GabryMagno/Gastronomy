@@ -242,6 +242,8 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
 
     if($productInfo["isDisponibile"]){//SE IL PRODOTTO E' DISPONIBILE
         $pagina = str_replace("<p id=\"prodotto-nondisponibile\">NON DISPONIBILE</p>","",$pagina);
+        $now = new DateTime();
+        $prox = (clone $now)->modify('+1 day');
         $pagina = str_replace("[RESERVATION]",
     "<form method=\"post\" id=\"prenotazione\" class=\"form-bianco\">
                         <fieldset>
@@ -252,7 +254,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
 
                             <label for=\"quantita\" class=\"form-label\">Quantità da prenotare</label>
                             <div id=\"quantita-unita\">
-                                <input type=\"number\" id=\"quantita\" name=\"quantita\" min=\"1\" max=\"".(int)$productInfo["max_prenotabile"]."\" value=\"[quantita-ordine]\"required>
+                                <input type=\"number\" id=\"quantita\" name=\"quantita\" min=\"1\" max=\"".(int)$productInfo["max_prenotabile"]."\" required>
                                 <span class=\"unita\">[Unita]</span>
                                 
                             </div>
@@ -261,7 +263,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
 
                             <div>
                                 <label for=\"data-ritiro\" class=\"form-label\" id=\"order-label\">Data di ritiro</label>
-                                <input type=\"date\" id=\"data-ritiro\" name=\"data_ritiro\" value=\"[data-ordine]\" required>
+                                <input type=\"date\" id=\"data-ritiro\" name=\"data_ritiro\" min=\"".$prox->format("Y-m-d")."\" required>
                                 [date-error]
                             </div>
 
@@ -413,8 +415,8 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
         }
 
         if($errorFound == true){//ci sono stati errori
-            $pagina = str_replace("[quantita-ordine]",$quantity, $pagina);
-            $pagina = str_replace("[data-ordine]",$date_reservation, $pagina); 
+            $pagina = str_replace("min=\"1\"","min=\"1\" value=\"".$quantity."\"", $pagina);
+            $pagina = str_replace("name=\"data_ritiro\"","name=\"data_ritiro\" value=\"".$date_reservation."\"", $pagina); 
         }else{
             $addReservation = $db->AddReservation($productInfo["id"], $quantity, $date_reservation);
             if(is_bool($addReservation) && $addReservation == true) {//controllo se la modifica delle informazioni è andata a buon fine
