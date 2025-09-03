@@ -1799,6 +1799,10 @@ ul#user-profile-recensioni {
         PAGINA IMPOSTAZIONI UTENTE
     ===================================
 */
+#legend-personal-info,#legend-password-info{
+    margin: -2em;
+}
+
 details {
     margin-top: 0.2em;
     border: 1px solid #ccc;
