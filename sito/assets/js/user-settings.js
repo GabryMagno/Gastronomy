@@ -1,3 +1,5 @@
+let originalLogo = null;
+
 function validateUserPersonalSettings() {
 
 	let reset_button = document.getElementById("reset-user-setting");
@@ -21,6 +23,8 @@ function validateUserPersonalSettings() {
 
 		DefaultValue("change-username");
 		disableButton("reset-user-setting");
+		document.getElementById("new-image").setAttribute("src", originalLogo);
+		disableButton("submit-user-setting");
 	});
 
 	let form = document.getElementById("change-personal-info");
@@ -401,6 +405,9 @@ function chargeNewLogo() {
     const imageOutput = document.getElementById("new-image");
     const img = document.getElementById("new-image");
 	var src = img.getAttribute("src");
+
+	if(!originalLogo) originalLogo = src;
+
     resetLogo(img,src);
     inputImage.addEventListener("change", async () => {
         let [file] = inputImage.files;
@@ -590,11 +597,11 @@ const listeners = {
 
 window.addEventListener('load', () => {
 	disableButton("submit-user-setting");
-	disableButton("reset-user-setting");
 	disableButton("submit-password-setting");
 	disableButton("reset-password-setting");
 	checkCancelButtonPrivateSettings();
 	checkCancelButtonPasswordSettings();
+	disableButton("reset-user-setting");
 	checkSettings();
 	validateUserPersonalSettings();
 	validateUserPasswordSettings();
