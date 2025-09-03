@@ -176,10 +176,10 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
                         <button type=\"submit\" aria-label=\"Elimina Valutazione\" class=\"bottoni-rossi\" name=\"delete-review\">Elimina Valutazione</button>
                     </div>
                 </form>","",$pagina);           
-    $pagina = str_replace("[COMMENT]","<p id=\"comment-log\">Vuoi dire la tua su questo prodotto? <a href=\"login.php?reference-product=".urldecode($product)."\"><span lang=\"en\">ACCEDI</span></a> o <a href=\"register.php?reference-product=".urldecode($product)."\"> REGISTRATI</a> e lascia subito un commento!</p>",$pagina);
+    $pagina = str_replace("[COMMENT]","<p id=\"comment-log\">Vuoi dire la tua su questo prodotto? <a href=\"login.php?reference-product=".urldecode($product)."\">ACCEDI</a> o <a href=\"register.php?reference-product=".urldecode($product)."\"> REGISTRATI</a> e lascia subito un commento!</p>",$pagina);
     $pagina = str_replace("[OLD_COMMENT]","",$pagina);
     $pagina = str_replace("<p id=\"prodotto-nondisponibile\">NON DISPONIBILE</p>","",$pagina);
-    $pagina = str_replace("[RESERVATION]","<p id=\"reservation-log\">Non lasciarti sfuggire questa bont&agrave;! Fai il <a href=\"login.php?reference-product=".urldecode($product)."\"><span lang=\"en\">LOGIN</span></a> o <a href=\"register.php?reference-product=".urldecode($product)."\"> REGISTRATI</a> per prenotarla!</p>",$pagina);
+    $pagina = str_replace("[RESERVATION]","<p id=\"reservation-log\">Non lasciarti sfuggire questa bont&agrave;! <a href=\"login.php?reference-product=".urldecode($product)."\">ACCEDI</a> o <a href=\"register.php?reference-product=".urldecode($product)."\"> REGISTRATI</a> per prenotarla!</p>",$pagina);
 }else{//L'utente è loggato
     $pagina = str_replace("[to-profile]","<a href=\"user-profile.php\">Profilo</a>",$pagina);
 
