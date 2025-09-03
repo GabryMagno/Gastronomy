@@ -2100,7 +2100,7 @@ p#comment-log a:visited,p#reservation-log a:visited{
 }
 
 .singleproduct h4:not(#reserve-this-product)::before,
-.singledegustazione h4::before{
+.singledegustazione h4:not(#reserve-this-degustazione)::before{
     background-size: contain;
 
     background-image: url('../img/icone/valutazione-nero.svg');
