@@ -335,6 +335,10 @@ html div#list-content #vertical{
     #elimination-buttons button {
         width: 77%;
     }
+    form#product-pages button#prev, form#product-pages button#next{
+        width: 3em;
+        height: 3em;
+    }
 
 }
 
