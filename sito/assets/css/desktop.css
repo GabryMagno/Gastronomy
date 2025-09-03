@@ -2036,10 +2036,8 @@ form#prenotazione-degustazione #quantita{
 #single-product-info{
     margin-bottom: 1em;
 }
-#reserve-this-product{
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-}
+
+
 p#comment-log,p#reservation-log{
     margin: 2em 0;
     text-align: center;
@@ -2098,7 +2096,10 @@ p#comment-log a:visited,p#reservation-log a:visited{
     margin-right: 0.3em;
     width: 20px;
     height: 20px;
+}
 
+.singleproduct h4:not(#reserve-this-product)::before,
+.singledegustazione h4::before{
     background-size: contain;
 
     background-image: url('../img/icone/valutazione-nero.svg');
