@@ -41,6 +41,7 @@ if(isset($_GET["degustazione"])){
     }elseif((is_bool($isUserLogged) && $isUserLogged == false)){
         $pagina = str_replace("[FORM PRENOTAZIONE]","<p id=\"reservation-log\">Devi essere loggato per prenotare una degustazione! <a href=\"login.php\"><span lang=\"en\">Login</span></a> oppure <a href=\"register.php\"><span lang=\"en\">Registrati</span></a></p>",$pagina);
     }else{
+        $tomorrow = (new DateTime())->modify("+1 day");
         $pagina = str_replace("[FORM PRENOTAZIONE]","<form method=\"post\" id=\"prenotazione-degustazione\" class=\"form-bianco\">
                         <fieldset>
                             <legend>Prenotazione Degustazione</legend>
@@ -55,7 +56,7 @@ if(isset($_GET["degustazione"])){
 
                             <div>
                                 <label for=\"data-prenotazione\" class=\"form-label\" id=\"order-label\">Data prenotazione</label>
-                                <input type=\"date\" id=\"data-prenotazione\" name=\"data_ritiro\" required>
+                                <input type=\"date\" id=\"data-prenotazione\" name=\"data_ritiro\" min=\"".$tomorrow->format("Y-m-d")."\" required>
                             </div>
                             <small class=\"descrizione-quantita\">Prenotabile dal [Data_Inizio] al [Data_Fine].</small>
                             [date-error]
