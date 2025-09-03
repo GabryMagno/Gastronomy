@@ -874,7 +874,7 @@ class DB {
         }
     }
 
-    public function DeleteAllTastings(): bool | string {//cancellare tutte le degustazioni prenotate
+    public function DeleteOneTasting($reservation_tasting): bool | string{//Eliminazione di una prenotazione per una degustazione da parte dell'utente
         $isUserLogged = $this->IsUserLog();
         if($isUserLogged == false){
             //se l'utente non è loggato, ritorna un messaggio di errore
@@ -882,28 +882,68 @@ class DB {
         }else{
             $newConnection = $this->OpenConnectionDB();
             if($newConnection){
-                //preparazione della query per cancellare tutte le degustazioni prenotate dell'utente
-                $deleteTastings = $this->connection->prepare("DELETE FROM prenotazioni_degustazioni WHERE id_cliente = ?");
-                $deleteTastings->bind_param("i", $isUserLogged);
+                $getReservation = $this->connection->prepare("SELECT id_degustazione, numero_persone, id_cliente FROM prenotazioni_degustazioni WHERE id = ?");
+                $getReservation->bind_param("i", $reservation_tasting);
                 try{
-                    //esecuzione della query per cancellare tutte le degustazioni prenotate dell'utente
-                    $deleteTastings->execute();
+                    $getReservation->execute();
                 }catch(\mysqli_sql_exception $error){
-                    //se c'è un errore nell'esecuzione della query, ritorna false
                     $this->CloseConnectionDB();
-                    $deleteTastings->close();
+                    $getReservation->close();
                     return "Execution error"; //errore nell'esecuzione della query
                 }
-                $this->CloseConnectionDB();
-                $deleteTastings->close();
-                return true; //cancellazione avvenuta con successo (volendo si può controllare se mysqli_affected_rows(this->connection) == 0 per vedere se non c'erano degustazioni da cancellare)
+
+                $result = $getReservation->get_result()->fetch_assoc();
+                $getReservation->close();
+
+                if(!$result){
+                    $this->CloseConnectionDB();
+                    return "Reservation not found"; //nessuna prenotazione trovata
+                }
+
+                if($result["id_cliente"] !== $isUserLogged){
+                    $this->CloseConnectionDB();
+                    return "User not authorized to delete this reservation"; //l'utente non è autorizzato a cancellare questa prenotazione
+                }
+
+                $tastingId = $result["id_degustazione"];
+                $peopleNumber = $result["numero_persone"];
+
+                $deleteReservation = $this->connection->prepare("DELETE FROM prenotazioni_degustazioni WHERE id = ?");
+                $deleteReservation->bind_param("i", $reservation_tasting);
+
+                $updateAvailability = $this->connection->prepare("UPDATE degustazioni SET disponibilita_persone = disponibilita_persone + ? WHERE id = ?");
+                $updateAvailability->bind_param("ii", $peopleNumber, $tastingId);
+
+                $this->connection->begin_transaction();
+
+                try {
+                    $deleteReservation->execute();
+                    $updateAvailability->execute();
+
+                    if ($deleteReservation->affected_rows !== 1 || $updateAvailability->affected_rows !== 1) {
+                        return "Tasting deletion failed or not enough availability";
+                    }
+
+                    $this->connection->commit();
+                    $deleteReservation->close();
+                    $updateAvailability->close();
+                    $this->CloseConnectionDB();
+                    return true;
+
+                } catch (\Exception $error) {
+                    $this->connection->rollback();
+                    $deleteReservation->close();
+                    $updateAvailability->close();
+                    $this->CloseConnectionDB();
+                    return $error->getMessage();
+                }
             }else{
                 return "Connection error"; //errore nella connessione al database
             }
         }
     }
 
-    public function DeleteOneTasting($tasting): bool | string{//cancellare una singola degustazione --> da vedere cos'è tasting
+    public function DeleteAllTastings(): bool | string{//Eliminazione di una prenotazione per una degustazione da parte dell'utente
         $isUserLogged = $this->IsUserLog();
         if($isUserLogged == false){
             //se l'utente non è loggato, ritorna un messaggio di errore
@@ -911,33 +951,54 @@ class DB {
         }else{
             $newConnection = $this->OpenConnectionDB();
             if($newConnection){
-                //preparazione della query per cancellare una singola degustazione dell'utente
-                $deleteTasting = $this->connection->prepare("DELETE FROM prenotazioni_degustazioni WHERE id_cliente = ? AND id_degustazione = ?");
-                $deleteTasting->bind_param("ii", $isUserLogged, $tasting);
+                $getReservation = $this->connection->prepare("SELECT id, id_degustazione, numero_persone FROM prenotazioni_degustazioni WHERE id_cliente = ?");
+                $getReservation->bind_param("i", $isUserLogged);
                 try{
-                    //esecuzione della query per cancellare una singola degustazione dell'utente
-                    $deleteTasting->execute();
+                    $getReservation->execute();
                 }catch(\mysqli_sql_exception $error){
-                    //se c'è un errore nell'esecuzione della query, ritorna false
                     $this->CloseConnectionDB();
-                    $deleteTasting->close();
-                    return false; //errore nell'esecuzione della query
+                    $getReservation->close();
+                    return "Execution error"; //errore nell'esecuzione della query
                 }
-                $result = $deleteTasting->affected_rows;
+
+                $result = $getReservation->get_result()->fetch_all(MYSQLI_ASSOC);
+                $getReservation->close();
+
+                if(!$result){
+                    $this->CloseConnectionDB();
+                    return "Reservation not found"; //nessuna prenotazione trovata
+                }
+
+                $this->connection->begin_transaction();
+
+                try {
+                    foreach($result as $reservation){
+                        $deleteReservation = $this->connection->prepare("DELETE FROM prenotazioni_degustazioni WHERE id = ?");
+                        $deleteReservation->bind_param("i", $reservation["id"]);
+                        $deleteReservation->execute();
+                        $deleteReservation->close();
+
+                        $updateAvailability = $this->connection->prepare("UPDATE degustazioni SET disponibilita_persone = disponibilita_persone + ? WHERE id = ?");
+                        $updateAvailability->bind_param("ii", $reservation["numero_persone"], $reservation["id_degustazione"]);
+                        $updateAvailability->execute();
+                        $updateAvailability->close();
+                    }
+
+                $this->connection->commit();
                 $this->CloseConnectionDB();
-                $deleteTasting->close();
-                if($result == 1){
-                    //se la query ha cancellato una riga, allora la degustazione è stata cancellata con successo
-                    return true; //cancellazione avvenuta con successo
-                }else{
-                    //se la query non ha cancellato nessuna riga, allora la degustazione non esiste o c'è stato un errore
-                    return "Tasting not found or already deleted"; //nessuna riga cancellata, errore nella cancellazione della degustazione
+                return true;
+                    
+                } catch (\Exception $error) {
+                    $this->connection->rollback();
+                    $this->CloseConnectionDB();
+                    return $error->getMessage();
                 }
             }else{
                 return "Connection error"; //errore nella connessione al database
             }
         }
     }
+
 
     public function DeleteAllReviews(): bool | string {//cancellare tutte le recensioni
         $isUserLogged = $this->IsUserLog();
