@@ -18,6 +18,9 @@ if ($isLogged!=false) {
 }
 
 $pagina=file_get_contents("html/register.html");
+$now = new DateTime();
+$maxDate = (clone $now)->modify('-18 years');
+$pagina = str_replace("[max-date]",$maxDate->format("Y-m-d"),$pagina);
 
 $isUserLogged = $db->isUserLog();
 if ($isUserLogged == false) {
