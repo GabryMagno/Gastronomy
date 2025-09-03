@@ -38,7 +38,7 @@ CREATE TABLE prodotti (
 );
 
 CREATE TABLE ingredienti (
-    nome VARCHAR(60) PRIMARY KEY,
+    nome VARCHAR(100) PRIMARY KEY,
     isCeliaco BOOLEAN NOT NULL,
     isVegano BOOLEAN NOT NULL,
     isVegetariano BOOLEAN NOT NULL
@@ -46,7 +46,7 @@ CREATE TABLE ingredienti (
 
 CREATE TABLE prodotto_ingredienti(
     id_prodotto INT NOT NULL,
-    ingrediente VARCHAR(60) NOT NULL,
+    ingrediente VARCHAR(100) NOT NULL,
     quanto_basta BOOLEAN NOT NULL,
     quantita SMALLINT CHECK(quantita > 0),
     unita_misura enum ('g', 'ml', 'num_el'),
