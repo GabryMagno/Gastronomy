@@ -1099,6 +1099,7 @@ form#product-pages button{
     text-indent: -9999rem;
     transition: transform .2s;
     cursor: pointer;
+    background-repeat: no-repeat;
 }
 
 form#product-pages button#prev{
