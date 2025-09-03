@@ -23,6 +23,9 @@ $image="";
 $userInfo = $db->GetUserInfo();//recupero le informazioni dell'utente loggato
 $isProfileImageChanged = false;//variabile che indica se l'immagine del profilo è stata cambiata
 $hasProfileImageBeenDeleted = false;//variabile che indica se l'immagine del profilo è stata eliminata
+$now = new DateTime();
+$maxDate = (clone $now)->modify('-18 years');
+$pagina = str_replace("[max-date]",$maxDate->format("Y-m-d"),$pagina);
 
 if (is_string($userInfo) && (strcmp($userInfo,"Execution error") == 0 || strcmp($userInfo,"Connection error") == 0)) {
     header('Location: 500.php');

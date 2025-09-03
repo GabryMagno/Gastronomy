@@ -1,13 +1,14 @@
 function ValidateUserReservation(){
     let form = document.getElementById("prenotazione-degustazione");
-
-	form.addEventListener("submit", function (event) {
-		if (! (validateDateReservation()) ) {
-			event.preventDefault();
-			document.getElementById("submit-reservation").classList.add("not-available");
-			document.getElementById("submit-reservation").disabled = true;
-		}
-	});
+    if(form){
+		form.addEventListener("submit", function (event) {
+			if (! (validateDateReservation()) ) {
+				event.preventDefault();
+				document.getElementById("submit-reservation").classList.add("not-available");
+				document.getElementById("submit-reservation").disabled = true;
+			}
+		});
+	}
 }
 
 function messageError(id){
@@ -63,8 +64,10 @@ const listeners = {
 };
 
 window.addEventListener('load', () => {
-	document.getElementById("submit-reservation").classList.add("not-available");
-    document.getElementById("submit-reservation").disabled = true;
+	if(document.getElementById("submit-reservation")){
+		document.getElementById("submit-reservation").classList.add("not-available");
+        document.getElementById("submit-reservation").disabled = true;
+	}
     ValidateUserReservation();
     checkReservation();
 });

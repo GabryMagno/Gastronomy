@@ -120,7 +120,7 @@
                         </div>
                         <div>    
                             <label id="lbl_register_datanascita" for="register_datanascita">Data di nascita</label>
-                            <input id="register_datanascita" class="register_input" type="date" name="data" required data-msg-required="Inserisci la tua data di nascita">
+                            <input id="register_datanascita" class="register_input" type="date" name="data" min="1900-01-01" max="[max-date]" required data-msg-required="Inserisci la tua data di nascita">
                             <details open>
                                 <summary id="hints-date" class="hints" aria-expanded="false" aria-controls="hint-list-date">
                                     Suggerimenti Data di Nascita

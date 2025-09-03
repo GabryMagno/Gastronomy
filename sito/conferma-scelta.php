@@ -50,6 +50,7 @@ if (isset($_GET["delete"])) {
         $pagina = str_replace("[DELETE]","delete-reservations",$pagina);
         $pagina = str_replace("[TITOLO]","ELIMINA TUTTE LE PRENOTAZIONI",$pagina);
         $pagina = str_replace("[MESSAGGIO DI AVVISO]","Sei sicuro di voler eliminare tutte le tue prenotazioni?",$pagina);
+        $pagina = str_replace("[MESSAGGIO DI CANCELLAZIONE]","Se cliccherai sul tasto conferma cancellerai tutte i prodotti da te prenotati",$pagina);
         echo $pagina;
 
     }elseif (strcmp($action,"logout-button")== 0) {

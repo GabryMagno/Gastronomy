@@ -76,6 +76,7 @@
                 </div>
                 
                 <fieldset>
+                    <legend class="hidden" id="legend-personal-info">Informazioni anagrafiche e immagine profilo</legend>
                     <div>
                         <label for="change-username">Modifica Username</label>
                         <input type="text" name="new-username" id="change-username" value="[username]">
@@ -129,7 +130,7 @@
 
                     <div>
                         <label for="change-date">Modifica Data di Nascita</label>
-                        <input type="date" name="new-date" id="change-date" value="[data-nascita]">
+                        <input type="date" name="new-date" id="change-date" min="1900-01-01" max="[max-date]" value="[data-nascita]">
                         <details>
                             <summary id="hints-date" class="hints" aria-expanded="false" aria-controls="hint-list-date">
                                 Suggerimenti Data di Nascita
@@ -154,7 +155,7 @@
                                 <li id="type-file">Solo formati png, jpeg o jpg</li>
                             </ul>
                         </details>
-                        <img class="user-avatar" id="new-image" [profile-image] alt="logo utente">
+                        <img class="user-avatar" id="new-image" [profile-image] alt="immagine profilo">
                         [logo-error]
                     </div>
 
@@ -171,12 +172,13 @@
                 </div>
 
                 <fieldset>
+                    <legend class="hidden" id="legend-password-info">Gestione <span lang="en">password</span></legend>
                     <div>
                         <label for="old-password">Vecchia <span lang="en">Password</span></label>
                         <input type="password" name="old-password" id="old-password">
                         <details>
                             <summary id="hints-old-password" class="hints" aria-expanded="false" aria-controls="hint-list-old-password">
-                                Suggerimenti Password
+                                Suggerimenti <span lang="en">Password</span>
                             </summary>
                             <ul class="suggestions-list" id="hint-list-old-password">
                                 <li id="lowercase-letter-old">Almeno una lettera minuscola</li>
@@ -195,7 +197,7 @@
                         <input type="password" name="new-password" id="new-password">
                         <details>
                             <summary id="hints-new-password" class="hints" aria-expanded="false" aria-controls="hint-list-new-password">
-                                Suggerimenti Password
+                                Suggerimenti <span lang="en">Password</span>
                             </summary>
                             <ul class="suggestions-list" id="hint-list-new-password">
                                 <li id="lowercase-letter-new">Almeno una lettera minuscola</li>
