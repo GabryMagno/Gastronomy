@@ -358,7 +358,9 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
     }else{//Se l'utente ha già lasciato una recensione
 
         $data = new DateTime($isUserCommented["data"]);
-        $pagina = str_replace("[OLD_COMMENT]", "<dl class=\"singleproduct-rating\">
+        $pagina = str_replace("[OLD_COMMENT]", "
+                <h5 id=\"tua-rating\">La tua valutazione</h5>
+                <dl class=\"singleproduct-rating\">
                     <dt>Data</dt>
                     <dd>[Data Valutazione]</dd>
                     <dt>Valutazione</dt>

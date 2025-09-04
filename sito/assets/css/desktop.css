@@ -136,6 +136,10 @@ h4.left{
     text-align: left;
 }
 
+h5 {
+    font-size: 1.4em;
+}
+
 p#title{
     margin-bottom: 2em;
     font-size: 1.3em;
@@ -2194,6 +2198,10 @@ p#comment-log a:visited,p#reservation-log a:visited{
     grid-gap: 1.5em;
 
     align-items: baseline;
+}
+
+#tua-rating::after{
+    content: ":";
 }
 
 #prodotto-ingredienti::before,
