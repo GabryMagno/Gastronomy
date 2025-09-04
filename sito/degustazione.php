@@ -36,6 +36,8 @@ if(isset($_GET["degustazione"])){
     unset($_GET["degustazione"]);
     $isUserLogged = $db->IsUserLog();
 
+
+
     if($tastingInfo["disponibilita_persone"] == 0){//Se la disponibilità è 0
         $pagina = str_replace("[FORM PRENOTAZIONE]","",$pagina);
     }elseif((is_bool($isUserLogged) && $isUserLogged == false)){
@@ -56,7 +58,7 @@ if(isset($_GET["degustazione"])){
 
                             <div>
                                 <label for=\"data-prenotazione\" class=\"form-label\" id=\"order-label\">Data prenotazione</label>
-                                <input type=\"date\" id=\"data-prenotazione\" name=\"data_ritiro\" min=\"".$tomorrow->format("Y-m-d")."\" required>
+                                <input type=\"date\" id=\"data-prenotazione\" name=\"data_ritiro\" min=\"".$tomorrow->format("Y-m-d")."\" max=\"".$end_date->format("Y-m-d")."\" required>
                             </div>
                             <small class=\"descrizione-quantita\">Prenotabile dal [Data_Inizio] al [Data_Fine].</small>
                             [date-error]
