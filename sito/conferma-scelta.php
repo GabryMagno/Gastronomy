@@ -120,7 +120,8 @@ if (isset($_GET["delete"])) {
         header('Location: user-profile.php');
         exit();
     } else{
-        echo $result;
+        header('Location: 500.php');
+        exit();
     }
 
 } elseif (isset($_GET["delete-reservations"])) {//Eliminazione prenotazioni
