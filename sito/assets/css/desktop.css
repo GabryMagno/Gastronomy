@@ -1053,7 +1053,8 @@ ul#best-products img{
     border-radius: 0.72em;
 }
 
-li.product-brochure a{
+li.product-brochure a,
+li.product-brochure form button{
     background-color: var(--headerbgcolor);
     width: 100%;
 
@@ -1759,13 +1760,28 @@ ul#user-profile-recensioni {
     width: 100%;
 }
 
-.brochure-links a{
+.brochure-links a,
+.brochure-links form {
     flex: 1;
-    text-align: center;
+}
 
+.brochure-links a,
+.brochure-links form button {
+    display: flex;          
+    justify-content: center;
+    align-items: center;
     padding: 1em;
+    text-align: center;
+    height: 100%;
+    box-sizing: border-box;
+}
 
-    display: block;
+.brochure-links form{
+    margin: 0;
+}
+
+.brochure-links form button{
+    width: 100%;
 }
 
 .brochure-links .btn-dettagli {
@@ -1784,7 +1800,8 @@ ul#user-profile-recensioni {
     margin-top: 0em;
 }
 
-.brochure-links a:hover {
+.brochure-links a:hover,
+.brochure-links form button:hover {
     opacity: 0.9;
 }
 

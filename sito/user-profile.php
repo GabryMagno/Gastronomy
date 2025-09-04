@@ -66,18 +66,19 @@ if($preferiti === false){
 } elseif (empty($preferiti)){
     $pagina = str_replace('[Prodotti Preferiti]','<p class="nondisponibile">Nessun prodotto aggiunto ai preferiti.</p>',$pagina);
 } else {
-    $pagina=str_replace("[Prodotti Preferiti]",VisualizzaPreferito($preferiti),$pagina);           
+    $pagina=str_replace("[Prodotti Preferiti]",VisualizzaPreferito($preferiti, $id),$pagina);           
 }
 
-function VisualizzaPreferito(array $preferiti): string {
-    $preferito_html = '<div class="data-container" id="dc-prodotti-preferiti" aria-live="polite">
+function VisualizzaPreferito(array $preferiti, int $id): string {
+        $preferito_html = '<div class="data-container" id="dc-prodotti-preferiti" aria-live="polite">
                         <ul class="list" id="user-profile-prodotti">';
 
     foreach ($preferiti as $value){
         $preferito_html.= CreaVisualizzaPreferito(
             $value['id'],
             $value['nome'],
-            $value['url_immagine']
+            $value['url_immagine'],
+            $id
         );
     }
 
@@ -86,14 +87,18 @@ function VisualizzaPreferito(array $preferiti): string {
     return $preferito_html;
 }
 
-function CreaVisualizzaPreferito(int $idProdotto, string $nomeProdotto, string $url_immagine){
+function CreaVisualizzaPreferito(int $idProdotto, string $nomeProdotto, string $url_immagine, int $idUtente){
     $TEMPLATE = '
         <li class="product-brochure">
-            <img src="'.$url_immagine.'" alt="Immagine del prodotto ' . $nomeProdotto . '">
+            <img src="'.$url_immagine.'" alt="Immagine del prodotto ' . Sanitizer::SanitizeGenericInput($nomeProdotto) . '">
                 <h4 class="product-name">'.$nomeProdotto.'</h4>
                     <div class="brochure-links">
-                        <a href="prodotto.php?prodotto='. urlencode($idProdotto) . '" title="Vai alla scheda del prodotto ' . $nomeProdotto . '" class="btn-dettagli">Dettagli</a>
-                        <a href="#" class="btn-elimina">Rimuovi</a>
+                        <a href="prodotto.php?prodotto='. urlencode($idProdotto) . '" title="Vai alla scheda del prodotto ' . Sanitizer::SanitizeGenericInput($nomeProdotto) . '" class="btn-dettagli">Dettagli</a>
+                        <form method="post" id="up-rimuovi-preferiti">
+                            <button type="submit" class="btn-elimina" id="up-rimuovi-preferiti" title="Rimuovi '.Sanitizer::SanitizeGenericInput($nomeProdotto).' dai preferiti" aria-label="Rimuovi '.Sanitizer::SanitizeGenericInput($nomeProdotto).' dai preferiti">Rimuovi</button>
+                                <input type="hidden" name="id_utente" value="'.$idUtente.'">
+                                <input type="hidden" name="id_prodotto" value="'.$idProdotto.'">
+                        </form>
                     </div>
             </li>
     ';
