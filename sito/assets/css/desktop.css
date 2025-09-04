@@ -1679,6 +1679,10 @@ ul#user-profile-prodotti{
     font-size: 1.2em;
     margin-bottom: 0.8em;
 
+    min-height: 3em;
+    display: flex;
+    align-items: center;
+
     padding: 0;
 }
 
