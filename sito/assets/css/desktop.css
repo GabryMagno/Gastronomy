@@ -1798,8 +1798,11 @@ ul#user-profile-recensioni {
     border-bottom-left-radius: 0em;
     border-bottom-right-radius: 0.72em;
     border-left: 1px solid black;
-
+    color: var(--linkcolor);
     margin-top: 0em;
+    cursor: pointer;
+    font-size: 1em;
+    text-decoration: underline;
 }
 
 .brochure-links a:hover,
