@@ -558,12 +558,13 @@ div .chef-content{
 
 /*  
     ===============================
-        ERRORI e RINGRAZIAMENTO 
+    ERRORI, RINGRAZIAMENTO e CONFERMA
     ===============================
 */
 
 .error_main img,
-.ringraziamento img {
+.ringraziamento img,
+#confirm-section img {
     width: 90%;
     height: auto;
 }
