@@ -843,7 +843,7 @@ a.categoria-box:visited{
 }
 
 .recensione-card{
-    flex: 0 1 30%;
+    flex: 0 1 260px;
     min-width: 230px;
     scroll-snap-align: start;
 
