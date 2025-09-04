@@ -2403,12 +2403,32 @@ a#pin-comment{
     =================================================================
 */
 
-div#return,div#information-delete{
+div#return,
+div#information-delete{
     display: flex;
     gap: 1em;
     justify-content: center;
     align-items: center;
     margin: 1em 0;
+}
+
+div#information-delete h3{
+    color: var(--txtcolor);
+
+    text-align: center;
+    font-weight: bold;
+    font-size: 3em;
+    padding-top: 0.2em;
+}
+
+.ringraziamento h4{
+    color: var(--hintsuccess);
+
+    text-align: center;
+    font-weight: bold;
+    font-size: 2em;
+
+    margin: 1rem;
 }
 
 div#information-delete{
@@ -2489,7 +2509,8 @@ form#delete-choice button{
 }
 
 .error-description,
-#ringraziamento-description{
+#ringraziamento-description,
+#delete-choice-warning{
     color: var(--txtcolor);
     margin-left: 5%;
     margin-right: 5%;
