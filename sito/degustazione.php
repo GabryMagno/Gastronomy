@@ -36,9 +36,9 @@ if(isset($_GET["degustazione"])){
     unset($_GET["degustazione"]);
     $isUserLogged = $db->IsUserLog();
 
+    
 
-
-    if($tastingInfo["disponibilita_persone"] == 0){//Se la disponibilità è 0
+    if($tastingInfo["disponibilita_persone"] == 0 || $tastingInfo["data_inizio"] > date("Y-m-d")){//Se la disponibilità è 0
         $pagina = str_replace("[FORM PRENOTAZIONE]","",$pagina);
     }elseif((is_bool($isUserLogged) && $isUserLogged == false)){
         $pagina = str_replace("[FORM PRENOTAZIONE]","<p id=\"reservation-log\">Devi aver effettuato l'accesso per prenotare una degustazione! <a href=\"login.php\">ACCEDI</a> oppure <a href=\"register.php\">REGISTRATI</a></p>",$pagina);
@@ -70,7 +70,7 @@ if(isset($_GET["degustazione"])){
                     </form>",$pagina);
     }
 
-    if($tastingInfo["disponibilita_persone"] > 0){//Se la disponibilità è 0
+    if($tastingInfo["disponibilita_persone"] > 0 && $tastingInfo["data_inizio"] <= date("Y-m-d")){//Se la disponibilità è 0
         $pagina = str_replace("<p class=\"degustazione-nondisponibile\" id=\"degustazione-singola\">Prenotazione non disponibile!</p>","",$pagina);
     }
 
