@@ -39,7 +39,7 @@ if(isset($_GET["degustazione"])){
     if($tastingInfo["disponibilita_persone"] == 0){//Se la disponibilità è 0
         $pagina = str_replace("[FORM PRENOTAZIONE]","",$pagina);
     }elseif((is_bool($isUserLogged) && $isUserLogged == false)){
-        $pagina = str_replace("[FORM PRENOTAZIONE]","<p id=\"reservation-log\">Devi essere loggato per prenotare una degustazione! <a href=\"login.php\"><span lang=\"en\">Login</span></a> oppure <a href=\"register.php\"><span lang=\"en\">Registrati</span></a></p>",$pagina);
+        $pagina = str_replace("[FORM PRENOTAZIONE]","<p id=\"reservation-log\">Devi essere loggato per prenotare una degustazione! <a href=\"login.php\">ACCEDI</a> o <a href=\"register.php\">REGISTRATI</a></p>",$pagina);
     }else{
         $tomorrow = (new DateTime())->modify("+1 day");
         $pagina = str_replace("[FORM PRENOTAZIONE]","<form method=\"post\" id=\"prenotazione-degustazione\" class=\"form-bianco\">
