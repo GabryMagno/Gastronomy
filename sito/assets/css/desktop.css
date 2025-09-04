@@ -1683,7 +1683,7 @@ ul#user-profile-prodotti{
     display: flex;
     align-items: center;
 
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     justify-content: space-evenly;
 
     padding: 0;
