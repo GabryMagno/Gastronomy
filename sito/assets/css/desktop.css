@@ -1019,7 +1019,7 @@ li.product-brochure {
     margin: 0 0.5em 1em 0.5em;
     padding: 0;
     background-color: white;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     color: var(--txtcolor);
     text-align: center;
