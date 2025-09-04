@@ -49,17 +49,20 @@ if(isset($_GET["prodotto"])){
     }else{
         if($infoGenreProduct["vegano"] == 0){
             $pagina = str_replace("<img src=\"assets/img/icone/vegano-verde.svg\" alt=\"icona verde con indicazione prodotto vegano\">
-                        <span class=\"diet-label\">Vegano</span>","",$pagina);
+                        <span class=\"diet-label\">Vegano</span>","<img src=\"assets/img/icone/vegano-rosso.svg\" alt=\"icona rossa con indicazione prodotto non vegano\">
+                        <span class=\"diet-label\">Non vegano</span>",$pagina);
         }
 
         if($infoGenreProduct["vegetariano"] == 0){
             $pagina = str_replace(" <img src=\"assets/img/icone/vegetariano-verde.svg\" alt=\"icona verde con indicazione prodotto vegetariano\">
-                        <span class=\"diet-label\">Vegetariano</span>","",$pagina);
+                        <span class=\"diet-label\">Vegetariano</span>","<img src=\"assets/img/icone/vegetariano-rosso.svg\" alt=\"icona rossa con indicazione prodotto non vegetariano\">
+                        <span class=\"diet-label\">Non vegetariano</span>",$pagina);
         }
 
         if($infoGenreProduct["celiaco"] == 0){
             $pagina = str_replace("<img src=\"assets/img/icone/celiaco-verde.svg\" alt=\"icona verde con indicazione prodotto per persone celiache\">
-                        <span class=\"diet-label\">Celiaco</span>","",$pagina);
+                        <span class=\"diet-label\">Celiaco</span>","<img src=\"assets/img/icone/celiaco-rosso.svg\" alt=\"icona rossa con indicazione prodotto non adatto a persone celiache\">
+                        <span class=\"diet-label\">Non celiaco</span>",$pagina);
         }
     }
     $pagina = str_replace("[IMAGE]","<img src=". $productInfo["url_immagine"] ." alt=\"\">",$pagina);
@@ -70,6 +73,8 @@ if(isset($_GET["prodotto"])){
     $pagina = str_replace("[Descrizione]",$productInfo["descrizione"],$pagina);
     $pagina = str_replace("[INGREDIENTI]",$ingredientsHTML,$pagina);
     $pagina = str_replace("[Unita]",$productInfo["unita"],$pagina);
+    
+    //GESTIONE COMMENTI ALTRI UTENTI
 
     $max_comment = 4;
     $offset = isset($_GET['offset']) ? (int)$_GET['offset'] : 0;
@@ -483,7 +488,6 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
         header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');
         exit();
     }
-    //SEZIONE COMMENTI ALTRI UTENTI
 
     if(!isset($_POST['submit-user-comment']) || !isset($_POST['submit-reservation'])){
         $pagina = str_replace("[comment-error]","",$pagina);
