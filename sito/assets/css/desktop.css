@@ -1778,6 +1778,7 @@ ul#user-profile-recensioni {
 
 .brochure-links form{
     margin: 0;
+    max-width: 50%;
 }
 
 .brochure-links form button{
@@ -1790,6 +1791,7 @@ ul#user-profile-recensioni {
     border-right: 1px solid black;
 
     margin-top: 0em;
+    max-width: 50%;
 }
 
 .brochure-links .btn-elimina {

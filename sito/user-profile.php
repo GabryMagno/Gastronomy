@@ -58,6 +58,15 @@ $pagina = str_replace(
 
 $id = $db->IsUserLog();
 
+// Se utente ha cliccato il bottone per rimuovere un prodotto dai preferiti
+if (isset($_POST["up-rimuovi-preferiti"])){
+    $result = $db->DeleteOneFavoriteProduct($_POST['id_prodotto']);
+    if(is_string($result) && ($result == "Execution error" || $result == "Connection error")){
+        header("Location: 500.php");
+        exit();
+    }
+}
+
 // Prodotti Preferiti
 $preferiti = $db->GetUserFavoritesProducts($id);
 
@@ -94,10 +103,9 @@ function CreaVisualizzaPreferito(int $idProdotto, string $nomeProdotto, string $
                 <h4 class="product-name">'.$nomeProdotto.'</h4>
                     <div class="brochure-links">
                         <a href="prodotto.php?prodotto='. urlencode($idProdotto) . '" title="Vai alla scheda del prodotto ' . Sanitizer::SanitizeGenericInput($nomeProdotto) . '" class="btn-dettagli">Dettagli</a>
-                        <form method="post" id="up-rimuovi-preferiti">
-                            <button type="submit" class="btn-elimina" id="up-rimuovi-preferiti" title="Rimuovi '.Sanitizer::SanitizeGenericInput($nomeProdotto).' dai preferiti" aria-label="Rimuovi '.Sanitizer::SanitizeGenericInput($nomeProdotto).' dai preferiti">Rimuovi</button>
-                                <input type="hidden" name="id_utente" value="'.$idUtente.'">
-                                <input type="hidden" name="id_prodotto" value="'.$idProdotto.'">
+                        <form method="post">
+                            <input type="hidden" name="id_prodotto" value="'.$idProdotto.'">
+                            <button type="submit" name="up-rimuovi-preferiti" class="btn-elimina" title="Rimuovi '.Sanitizer::SanitizeGenericInput($nomeProdotto).' dai preferiti" aria-label="Rimuovi '.Sanitizer::SanitizeGenericInput($nomeProdotto).' dai preferiti">Rimuovi</button>
                         </form>
                     </div>
             </li>
