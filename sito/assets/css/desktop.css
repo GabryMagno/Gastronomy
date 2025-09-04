@@ -2440,7 +2440,7 @@ form#delete-choice{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 }
 
 form#delete-choice button{
