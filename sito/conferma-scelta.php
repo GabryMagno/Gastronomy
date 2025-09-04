@@ -24,7 +24,7 @@ if (isset($_GET["delete"])) {
     if (strcmp($action,"delete-account") == 0) {
         $pagina = str_replace("[SCELTA]","account",$pagina);
         $pagina = str_replace("[DELETE]","delete-account",$pagina);
-        $pagina = str_replace("[TITOLO]","ELIMINA <span lang=\"en\">ACCOUNT</span>",$pagina);
+        $pagina = str_replace("[TITOLO]","Elimina <span lang=\"en\">Account</span>",$pagina);
         $pagina = str_replace("[MESSAGGIO DI AVVISO]","Sei sicuro di voler eliminare il tuo profilo?",$pagina);
         $pagina = str_replace("[MESSAGGIO DI CANCELLAZIONE]","Se cliccherai sul tasto conferma cancellerai il tuo profilo in modo permanente: le tue degustazioni prenotate, i tuoi prodotti prenotati, i prodotti salvati e tutti i tuoi dati personali saranno eliminati immediatamente e non potranno più essere recuperati!",$pagina);
         echo $pagina;
@@ -32,34 +32,34 @@ if (isset($_GET["delete"])) {
     } elseif (strcmp($action,"delete-favorites") == 0) {
         $pagina = str_replace("[SCELTA]","preferiti",$pagina);
         $pagina = str_replace("[DELETE]","delete-favorites",$pagina);
-        $pagina = str_replace("[TITOLO]","ELIMINA PREFERITI",$pagina);
+        $pagina = str_replace("[TITOLO]","Elimina Preferiti",$pagina);
         $pagina = str_replace("[MESSAGGIO DI AVVISO]","Sei sicuro di voler eliminare tutti i prodotti che hai salvato come preferiti?",$pagina);
-        $pagina = str_replace("[MESSAGGIO DI CANCELLAZIONE]","Se cliccherai sul tasto conferma cancellerai tutti i prodotti che hai salvato come preferiti",$pagina);
+        $pagina = str_replace("[MESSAGGIO DI CANCELLAZIONE]","Se cliccherai sul tasto conferma cancellerai tutti i prodotti che hai salvato come preferiti.",$pagina);
         echo $pagina;
 
     } elseif (strcmp($action,"delete-tastings") == 0) {
         $pagina = str_replace("[SCELTA]","degustazioni",$pagina);
         $pagina = str_replace("[DELETE]","delete-tastings",$pagina);
-        $pagina = str_replace("[TITOLO]","ELIMINA DEGUSTAZIONI",$pagina);
+        $pagina = str_replace("[TITOLO]","Elimina Degustazioni",$pagina);
         $pagina = str_replace("[MESSAGGIO DI AVVISO]","Sei sicuro di voler eliminare tutte le tue degustazioni?",$pagina);
-        $pagina = str_replace("[MESSAGGIO DI CANCELLAZIONE]","Se cliccherai sul tasto conferma cancellerai tutte le degustazioni da te prenotate",$pagina);
+        $pagina = str_replace("[MESSAGGIO DI CANCELLAZIONE]","Se cliccherai sul tasto conferma cancellerai tutte le degustazioni da te prenotate.",$pagina);
         echo $pagina;
 
     } elseif (strcmp($action,"delete-reservations") == 0) {
         $pagina = str_replace("[SCELTA]","prenotazioni",$pagina);
         $pagina = str_replace("[DELETE]","delete-reservations",$pagina);
-        $pagina = str_replace("[TITOLO]","ELIMINA TUTTE LE PRENOTAZIONI",$pagina);
+        $pagina = str_replace("[TITOLO]","Elimina Prenotazioni",$pagina);
         $pagina = str_replace("[MESSAGGIO DI AVVISO]","Sei sicuro di voler eliminare tutte le tue prenotazioni?",$pagina);
-        $pagina = str_replace("[MESSAGGIO DI CANCELLAZIONE]","Se cliccherai sul tasto conferma cancellerai tutte i prodotti da te prenotati",$pagina);
+        $pagina = str_replace("[MESSAGGIO DI CANCELLAZIONE]","Se cliccherai sul tasto conferma cancellerai tutte i prodotti da te prenotati.",$pagina);
         echo $pagina;
 
     }elseif (strcmp($action,"logout-button")== 0) {
-        $pagina = str_replace("eliminazione [SCELTA]","logout",$pagina);
+        $pagina = str_replace("eliminazione [SCELTA]","<span lang=\"en\">logout</span>",$pagina);
         $pagina = str_replace("[DELETE]","logout",$pagina);
-        $pagina = str_replace("[TITOLO]","LOGOUT",$pagina);
+        $pagina = str_replace("[TITOLO]","<span lang=\"en\">Logout</span>",$pagina);
         $pagina = str_replace("ELIMINA","CONFERMA",$pagina);
-        $pagina = str_replace("[MESSAGGIO DI AVVISO]","Sei sicuro di voler effettuare il logout?",$pagina);
-        $pagina = str_replace("[MESSAGGIO DI CANCELLAZIONE]","Se cliccherai sul tasto conferma verrai disconnesso dal tuo profilo",$pagina);
+        $pagina = str_replace("[MESSAGGIO DI AVVISO]","Sei sicuro di voler effettuare il <span lang=\"en\">logout</span>?",$pagina);
+        $pagina = str_replace("[MESSAGGIO DI CANCELLAZIONE]","Se cliccherai sul tasto conferma verrai disconnesso dal tuo profilo.",$pagina);
         echo $pagina;
 
     } else {

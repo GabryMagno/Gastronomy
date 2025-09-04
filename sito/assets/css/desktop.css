@@ -2399,31 +2399,28 @@ a#pin-comment{
 
 /*  
     =================================================================
-            PAGINE AUSILIARIE(CONFERMA-SCELTA E RINGRAZIAMENTI 
+            PAGINE AUSILIARIE (CONFERMA-SCELTA E RINGRAZIAMENTI) 
     =================================================================
 */
-
-div#return,
-div#information-delete{
-    display: flex;
-    gap: 1em;
-    justify-content: center;
-    align-items: center;
-    margin: 1em 0;
+#confirm-section h3{
+    color: var(--txtcolor);
 }
 
-div#information-delete h3{
-    color: var(--txtcolor);
+.ringraziamento h4{
+    color: var(--hintsuccess);
+}
 
+
+#confirm-section h3,
+.ringraziamento h3{
     text-align: center;
     font-weight: bold;
     font-size: 3em;
     padding-top: 0.2em;
 }
 
+#confirm-section h4,
 .ringraziamento h4{
-    color: var(--hintsuccess);
-
     text-align: center;
     font-weight: bold;
     font-size: 2em;
@@ -2435,7 +2432,7 @@ div#information-delete{
     flex-direction: column;
 }
 
-div#return a{
+div#button-return a{
     width: 15em;
 }
 
@@ -2443,6 +2440,7 @@ form#delete-choice{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 2em;
 }
 
 form#delete-choice button{
@@ -2500,7 +2498,8 @@ form#delete-choice button{
 }
 
 .error_main img,
-.ringraziamento img{
+.ringraziamento img,
+#confirm-section img{
     display: block;
     margin: 0 auto;
 
