@@ -386,7 +386,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
                 </form>", $pagina);
         $pagina = str_replace("<h4 class=\"no-print left\">Inserisci Valutazione e Commento</h4>[COMMENT]","",$pagina);
         $pagina = str_replace("[Data Valutazione]",'<time datetime="'.$data->format("Y-m-d"). '">'.$data->format("d/m/Y").'</time>',$pagina);
-        $pagina = str_replace("[Commento]",$isUserCommented["commento"],$pagina);
+        $pagina = str_replace("[Commento]",htmlspecialchars($isUserCommented["commento"]),$pagina);
         $pagina = str_replace("[voto]",$isUserCommented["voto"],$pagina);
         $pagina = str_replace("[Valutazione]",$isUserCommented["voto"],$pagina);
         $pagina = str_replace("<h4 class=\"no-print left\">Inserisci Valutazione e Commento</h4>","",$pagina);
@@ -440,8 +440,8 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
     //FORM COMMENTO
     if(isset($_POST["submit-user-comment"])){
         $errorFound = false;
-        $grade = isset($_POST["rating"]) ? Sanitizer::SanitizeGenericInput(Sanitizer::IntFilter($_POST["rating"])) : 0;// voto minimo
-        $comment = isset($_POST["commento"]) ? Sanitizer::SanitizeGenericInput(Sanitizer::SanitizeText($_POST["commento"])) :'';
+        $grade = isset($_POST["rating"]) ? (Sanitizer::IntFilter($_POST["rating"])) : 0;// voto minimo
+        $comment = isset($_POST["commento"]) ? (Sanitizer::SanitizeText($_POST["commento"])) :'';
         unset($_POST["commento"]);
 
         if(mb_strlen($comment)<30) {//controlla la lunghezza minima del commento
@@ -455,7 +455,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
         }
 
         if($errorFound == false) {//non ci sono errori
-            $addReview = $db->AddReview($comment, $grade, $productInfo['id']);
+            $addReview = $db->AddReview(Sanitizer::SanitizeText($comment), Sanitizer::IntFilter($grade), $productInfo['id']);
             if(is_bool($addReview) && $addReview == true) {//controllo se l'aggiunta della recensione è andata a buon fine
                 header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');//reindirizza alla pagina del prodotto
                 exit();
