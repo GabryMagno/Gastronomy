@@ -1076,9 +1076,15 @@ li.new article a:hover{
 }
 
 h3.product-name, h4.product-name{
+
+    display: flex;
+    align-items: center;
+
     font-weight: bold;
     font-size: 1.2em;
     margin-bottom: 0.5em;
+
+    min-height: 3em;
 
     padding: 0 1em;
 }
