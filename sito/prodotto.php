@@ -49,17 +49,20 @@ if(isset($_GET["prodotto"])){
     }else{
         if($infoGenreProduct["vegano"] == 0){
             $pagina = str_replace("<img src=\"assets/img/icone/vegano-verde.svg\" alt=\"icona verde con indicazione prodotto vegano\">
-                        <span class=\"diet-label\">Vegano</span>","",$pagina);
+                        <span class=\"diet-label\">Vegano</span>","<img src=\"assets/img/icone/vegano-rosso.svg\" alt=\"icona rossa con indicazione prodotto non vegano\">
+                        <span class=\"diet-label\">Non vegano</span>",$pagina);
         }
 
         if($infoGenreProduct["vegetariano"] == 0){
             $pagina = str_replace(" <img src=\"assets/img/icone/vegetariano-verde.svg\" alt=\"icona verde con indicazione prodotto vegetariano\">
-                        <span class=\"diet-label\">Vegetariano</span>","",$pagina);
+                        <span class=\"diet-label\">Vegetariano</span>","<img src=\"assets/img/icone/vegetariano-rosso.svg\" alt=\"icona rossa con indicazione prodotto non vegetariano\">
+                        <span class=\"diet-label\">Non vegetariano</span>",$pagina);
         }
 
         if($infoGenreProduct["celiaco"] == 0){
             $pagina = str_replace("<img src=\"assets/img/icone/celiaco-verde.svg\" alt=\"icona verde con indicazione prodotto per persone celiache\">
-                        <span class=\"diet-label\">Celiaco</span>","",$pagina);
+                        <span class=\"diet-label\">Celiaco</span>","<img src=\"assets/img/icone/celiaco-rosso.svg\" alt=\"icona rossa con indicazione prodotto non adatto a persone celiache\">
+                        <span class=\"diet-label\">Non celiaco</span>",$pagina);
         }
     }
     $pagina = str_replace("[IMAGE]","<img src=". $productInfo["url_immagine"] ." alt=\"\">",$pagina);
@@ -70,6 +73,8 @@ if(isset($_GET["prodotto"])){
     $pagina = str_replace("[Descrizione]",$productInfo["descrizione"],$pagina);
     $pagina = str_replace("[INGREDIENTI]",$ingredientsHTML,$pagina);
     $pagina = str_replace("[Unita]",$productInfo["unita"],$pagina);
+    
+    //GESTIONE COMMENTI ALTRI UTENTI
 
     $max_comment = 4;
     $offset = isset($_GET['offset']) ? (int)$_GET['offset'] : 0;
@@ -381,7 +386,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
                 </form>", $pagina);
         $pagina = str_replace("<h4 class=\"no-print left\">Inserisci Valutazione e Commento</h4>[COMMENT]","",$pagina);
         $pagina = str_replace("[Data Valutazione]",'<time datetime="'.$data->format("Y-m-d"). '">'.$data->format("d/m/Y").'</time>',$pagina);
-        $pagina = str_replace("[Commento]",$isUserCommented["commento"],$pagina);
+        $pagina = str_replace("[Commento]",htmlspecialchars($isUserCommented["commento"]),$pagina);
         $pagina = str_replace("[voto]",$isUserCommented["voto"],$pagina);
         $pagina = str_replace("[Valutazione]",$isUserCommented["voto"],$pagina);
         $pagina = str_replace("<h4 class=\"no-print left\">Inserisci Valutazione e Commento</h4>","",$pagina);
@@ -435,8 +440,8 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
     //FORM COMMENTO
     if(isset($_POST["submit-user-comment"])){
         $errorFound = false;
-        $grade = isset($_POST["rating"]) ? Sanitizer::SanitizeGenericInput(Sanitizer::IntFilter($_POST["rating"])) : 0;// voto minimo
-        $comment = isset($_POST["commento"]) ? Sanitizer::SanitizeGenericInput(Sanitizer::SanitizeText($_POST["commento"])) :'';
+        $grade = isset($_POST["rating"]) ? (Sanitizer::IntFilter($_POST["rating"])) : 0;// voto minimo
+        $comment = isset($_POST["commento"]) ? (Sanitizer::SanitizeText($_POST["commento"])) :'';
         unset($_POST["commento"]);
 
         if(mb_strlen($comment)<30) {//controlla la lunghezza minima del commento
@@ -450,7 +455,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
         }
 
         if($errorFound == false) {//non ci sono errori
-            $addReview = $db->AddReview($comment, $grade, $productInfo['id']);
+            $addReview = $db->AddReview(Sanitizer::SanitizeText($comment), Sanitizer::IntFilter($grade), $productInfo['id']);
             if(is_bool($addReview) && $addReview == true) {//controllo se l'aggiunta della recensione è andata a buon fine
                 header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');//reindirizza alla pagina del prodotto
                 exit();
@@ -483,7 +488,6 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
         header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');
         exit();
     }
-    //SEZIONE COMMENTI ALTRI UTENTI
 
     if(!isset($_POST['submit-user-comment']) || !isset($_POST['submit-reservation'])){
         $pagina = str_replace("[comment-error]","",$pagina);
