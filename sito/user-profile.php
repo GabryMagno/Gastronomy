@@ -59,12 +59,16 @@ $pagina = str_replace(
 $id = $db->IsUserLog();
 
 // Se utente ha cliccato il bottone per rimuovere un prodotto dai preferiti
-if (isset($_POST["up-rimuovi-preferiti"])){
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["up-rimuovi-preferiti"])) {
     $result = $db->DeleteOneFavoriteProduct($_POST['id_prodotto']);
-    if(is_string($result) && ($result == "Execution error" || $result == "Connection error")){
+    if (is_string($result) && ($result == "Execution error" || $result == "Connection error")) {
         header("Location: 500.php");
         exit();
     }
+
+    // Redirect per evitare il problema del reinvio del form
+    header("Location: ".$_SERVER['PHP_SELF']);
+    exit();
 }
 
 // Prodotti Preferiti
@@ -249,8 +253,8 @@ function CreaVisualizzaDegustazione(int $idDegustazione, string $nomeProdotto, D
                                 <dd><time datetime="' . $dataScelta->format("Y-m-d") . '">' . $dataScelta->format("d/m/Y") . '</time></dd>
                             <dt>Persone</dt>
                                 <dd>'.$numeroPersone.' '.($numeroPersone == 1 ? 'persona' : 'persone').'</dd>
-                            <dt>Prezzo</dt>
-                                <dd class="userprofile-brochure-prezzo">'.number_format($prezzo, 2, ',', '.') . ' €</dd>
+                            <dt>Prezzo Totale</dt>
+                                <dd class="userprofile-brochure-prezzo">'.number_format($prezzo*$numeroPersone, 2, ',', '.') . ' €</dd>
                         </dl>
                 </div>
                 <div class="brochure-links">
