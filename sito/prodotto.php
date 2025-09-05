@@ -72,7 +72,7 @@ if(isset($_GET["prodotto"])){
     $pagina = str_replace("[Prezzo]",$productInfo["prezzo"],$pagina);
     $pagina = str_replace("[Descrizione]",$productInfo["descrizione"],$pagina);
     $pagina = str_replace("[INGREDIENTI]",$ingredientsHTML,$pagina);
-    $pagina = str_replace("[Unita]",$productInfo["unita"],$pagina);
+    $pagina = str_replace("[Unita]",($productInfo["unita"]=="kg"? '<abbr title="chilogrammo">kg</abbr>':$productInfo["unita"]),$pagina);
     
     //GESTIONE COMMENTI ALTRI UTENTI
 
@@ -280,7 +280,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
                     </form>",
     $pagina);
     
-    $pagina = str_replace("[Unita]",$productInfo["unita"],$pagina);
+    $pagina = str_replace("[Unita]",($productInfo["unita"]=="kg"? '<abbr title="chilogrammo">kg</abbr>':$productInfo["unita"]),$pagina);
     $pagina = str_replace("[min_prenotabile]",$productInfo["min_prenotabile"],$pagina);
     $pagina = str_replace("[max_prenotabile]",$productInfo["max_prenotabile"],$pagina);
     }else{//SE IL PRODOTTO NON E' DISPONIBILE
