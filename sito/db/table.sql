@@ -92,6 +92,7 @@ CREATE TABLE prenotazioni (
     id_prodotto INT NOT NULL,
     quantita INT NOT NULL,
     data_ritiro DATE NOT NULL,
+    data_prenotazione DATE NOT NULL,
     FOREIGN KEY (id_utente) REFERENCES utenti(id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (id_prodotto) REFERENCES prodotti(id) ON DELETE CASCADE ON UPDATE CASCADE
 );

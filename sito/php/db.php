@@ -1205,11 +1205,12 @@ class DB {
             return "User is not logged in"; //l'utente non è loggato
         }else{
             $newConnection = $this->OpenConnectionDB();
+            $date2 = date("Y-m-d");
             if($newConnection){
                 
                 //preparazione della query per aggiungere una prenotazione
-                $addReservation = $this->connection->prepare("INSERT INTO prenotazioni (id_utente, id_prodotto, quantita, data_ritiro) VALUES (?, ?, ?, ?)");
-                $addReservation->bind_param("iiis", $isUserLogged, $product, $quantity, $date);
+                $addReservation = $this->connection->prepare("INSERT INTO prenotazioni (id_utente, id_prodotto, quantita, data_ritiro, data_prenotazione) VALUES (?, ?, ?, ?, ?)");
+                $addReservation->bind_param("iiiss", $isUserLogged, $product, $quantity, $date, $date2);
 
                 //preparazione della query per aggiornare la quantità massima di prodotto che può essere prenotato
                 
