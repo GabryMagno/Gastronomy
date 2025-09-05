@@ -179,8 +179,8 @@ function CreaVisualizzaPrenotazione(int $idPrenotazione, string $nomeProdotto, D
                     <a href="prodotto.php?prodotto='. urlencode($idProdotto) . '" title="Vai alla scheda del prodotto ' . Sanitizer::SanitizeGenericInput($nomeProdotto) . '" class="btn-dettagli">Dettagli</a>
                     <form method="get" action="conferma-scelta.php">
                         <input type="hidden" name="delete" value="delete-prodotto">
-                        <input type="hidden" name="id-prodotto" value="'.$idPrenotazione.'">
-                        <button type="submit" class="btn-elimina" title="Elimina prenotazione del prodotto '.$nomeProdotto.'" aria-label="Elimina prenotazione degustazione">Elimina</button>
+                        <input type="hidden" name="id-prodotto" value="'.urlencode($idProdotto).'">
+                        <button type="submit" class="btn-elimina" title="Elimina prenotazione del prodotto '.Sanitizer::SanitizeGenericInput($nomeProdotto).'" aria-label="Elimina prenotazione degustazione">Elimina</button>
                     </form>
                 </div>
             </li>
@@ -265,7 +265,7 @@ function CreaVisualizzaDegustazione(int $idDegustazione, string $nomeProdotto, D
                     <a href="degustazione.php?degustazione='. urlencode($idDegustazione) . '" title="Vai alla scheda degustazione del prodotto ' . Sanitizer::SanitizeGenericInput($nomeProdotto) . '" class="btn-dettagli">Dettagli</a>
                     <form method="get" action="conferma-scelta.php">
                         <input type="hidden" name="delete" value="delete-degustazione">
-                        <input type="hidden" name="id-degustazione" value="'.$idDegustazione.'">
+                        <input type="hidden" name="id-degustazione" value="'.urlencode($idDegustazione).'">
                         <button type="submit" class="btn-elimina" title="Elimina prenotazione degustazione" aria-label="Elimina prenotazione degustazione">Elimina</button>
                     </form>
                 </div>
