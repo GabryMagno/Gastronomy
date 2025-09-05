@@ -22,39 +22,39 @@ if (isset($_GET["delete"])) {
     unset($_GET["delete"]);
 
     if (strcmp($action,"delete-account") == 0) {
-        $pagina = str_replace("[SCELTA]","account",$pagina);
+        $pagina = str_replace("[SCELTA]","Cancella account",$pagina);
         $pagina = str_replace("[DELETE]","delete-account",$pagina);
         $pagina = str_replace("[TITOLO]","Elimina <span lang=\"en\">Account</span>",$pagina);
         $pagina = str_replace("[MESSAGGIO DI AVVISO]","Sei sicuro di voler eliminare il tuo profilo?",$pagina);
-        $pagina = str_replace("[MESSAGGIO DI CANCELLAZIONE]","Se cliccherai sul tasto conferma cancellerai il tuo profilo in modo permanente: le tue degustazioni prenotate, i tuoi prodotti prenotati, i prodotti salvati e tutti i tuoi dati personali saranno eliminati immediatamente e non potranno più essere recuperati!",$pagina);
+        $pagina = str_replace("[MESSAGGIO DI CANCELLAZIONE]","Se cliccherai sul tasto elimina cancellerai il tuo profilo in modo permanente: le tue degustazioni prenotate, i tuoi prodotti prenotati, i prodotti salvati e tutti i tuoi dati personali saranno eliminati immediatamente e non potranno più essere recuperati!",$pagina);
         echo $pagina;
 
     } elseif (strcmp($action,"delete-favorites") == 0) {
-        $pagina = str_replace("[SCELTA]","preferiti",$pagina);
+        $pagina = str_replace("[SCELTA]","Elimina preferiti",$pagina);
         $pagina = str_replace("[DELETE]","delete-favorites",$pagina);
         $pagina = str_replace("[TITOLO]","Elimina Preferiti",$pagina);
         $pagina = str_replace("[MESSAGGIO DI AVVISO]","Sei sicuro di voler eliminare tutti i prodotti che hai salvato come preferiti?",$pagina);
-        $pagina = str_replace("[MESSAGGIO DI CANCELLAZIONE]","Se cliccherai sul tasto conferma cancellerai tutti i prodotti che hai salvato come preferiti.",$pagina);
+        $pagina = str_replace("[MESSAGGIO DI CANCELLAZIONE]","Se cliccherai sul tasto elimina cancellerai tutti i prodotti che hai salvato come preferiti.",$pagina);
         echo $pagina;
 
     } elseif (strcmp($action,"delete-tastings") == 0) {
-        $pagina = str_replace("[SCELTA]","degustazioni",$pagina);
+        $pagina = str_replace("[SCELTA]","Elimina degustazioni",$pagina);
         $pagina = str_replace("[DELETE]","delete-tastings",$pagina);
         $pagina = str_replace("[TITOLO]","Elimina Degustazioni",$pagina);
         $pagina = str_replace("[MESSAGGIO DI AVVISO]","Sei sicuro di voler eliminare tutte le tue degustazioni?",$pagina);
-        $pagina = str_replace("[MESSAGGIO DI CANCELLAZIONE]","Se cliccherai sul tasto conferma cancellerai tutte le degustazioni da te prenotate.",$pagina);
+        $pagina = str_replace("[MESSAGGIO DI CANCELLAZIONE]","Se cliccherai sul tasto elimina cancellerai tutte le degustazioni da te prenotate.",$pagina);
         echo $pagina;
 
     } elseif (strcmp($action,"delete-reservations") == 0) {
-        $pagina = str_replace("[SCELTA]","prenotazioni",$pagina);
+        $pagina = str_replace("[SCELTA]","Elimina prenotazioni",$pagina);
         $pagina = str_replace("[DELETE]","delete-reservations",$pagina);
         $pagina = str_replace("[TITOLO]","Elimina Prenotazioni",$pagina);
         $pagina = str_replace("[MESSAGGIO DI AVVISO]","Sei sicuro di voler eliminare tutte le tue prenotazioni?",$pagina);
-        $pagina = str_replace("[MESSAGGIO DI CANCELLAZIONE]","Se cliccherai sul tasto conferma cancellerai tutte i prodotti da te prenotati.",$pagina);
+        $pagina = str_replace("[MESSAGGIO DI CANCELLAZIONE]","Se cliccherai sul tasto elimina cancellerai tutti i prodotti da te prenotati.",$pagina);
         echo $pagina;
 
     }elseif (strcmp($action,"logout-button")== 0) {
-        $pagina = str_replace("eliminazione [SCELTA]","<span lang=\"en\">logout</span>",$pagina);
+        $pagina = str_replace("[SCELTA]","<span lang=\"en\">Logout</span>",$pagina);
         $pagina = str_replace("[DELETE]","logout",$pagina);
         $pagina = str_replace("[TITOLO]","<span lang=\"en\">Logout</span>",$pagina);
         $pagina = str_replace("ELIMINA","CONFERMA",$pagina);
@@ -62,14 +62,24 @@ if (isset($_GET["delete"])) {
         $pagina = str_replace("[MESSAGGIO DI CANCELLAZIONE]","Se cliccherai sul tasto conferma verrai disconnesso dal tuo profilo.",$pagina);
         echo $pagina;
 
+    } elseif (strcmp($action,"delete-degustazione")==0){
+        $pagina = str_replace("[SCELTA]","Elimina prenotazione degustazione",$pagina);
+        $pagina = str_replace("[DELETE]","delete-degustazione",$pagina);
+        $pagina = str_replace("[TITOLO]","Elimina Prenotazione Degustazione",$pagina);
+        $pagina = str_replace("[MESSAGGIO DI AVVISO]","Sei sicuro di voler eliminare la degustazione prenotata?",$pagina);
+        $pagina = str_replace("[VALORE-NASCOSTO]",$_GET["id-degustazione"],$pagina);
+        $pagina = str_replace("[MESSAGGIO DI CANCELLAZIONE]","Se cliccherai sul tasto elimina cancellerai la prenotazione della degustazione precedentemente selezionata e prenotata.",$pagina);
+
+        echo $pagina;
+    
     } else {
         header('Location: 500.php');
         exit();
     }
 
-} elseif (isset($_GET["delete-account"])) {
-    $action = $_GET["delete-account"];
-    unset ($_GET["delete-account"]);
+} elseif (isset($_POST["delete-account"])) {
+    $action = $_POST["delete-account"];
+    unset ($_POST["delete-account"]);
     if (strcmp($action,"true") != 0) {
         header('Location: 500.php');
         exit();
@@ -90,9 +100,9 @@ if (isset($_GET["delete"])) {
         exit();
     }
 
-} elseif (isset($_GET["delete-favorites"])) {//Eliminazione prodotti favoriti
-    $action = $_GET["delete-favorites"];
-    unset ($_GET["delete-favorites"]);
+} elseif (isset($_POST["delete-favorites"])) {//Eliminazione prodotti favoriti
+    $action = $_POST["delete-favorites"];
+    unset ($_POST["delete-favorites"]);
     if(strcmp($action,"true") != 0) {
         header('Location: 500.php');
         exit();
@@ -107,9 +117,9 @@ if (isset($_GET["delete"])) {
         exit();
     }
 
-} elseif (isset($_GET["delete-tastings"])) {//Eliminazione degustazioni
-    $action=$_GET["delete-tastings"];
-    unset($_GET["delete-tastings"]);
+} elseif (isset($_POST["delete-tastings"])) {//Eliminazione degustazioni
+    $action=$_POST["delete-tastings"];
+    unset($_POST["delete-tastings"]);
     if(strcmp($action,"true") != 0) {
         header('Location: 500.php');
         exit();
@@ -124,9 +134,9 @@ if (isset($_GET["delete"])) {
         exit();
     }
 
-} elseif (isset($_GET["delete-reservations"])) {//Eliminazione prenotazioni
-    $action=$_GET["delete-reservations"];
-    unset($_GET["delete-reservations"]);
+} elseif (isset($_POST["delete-reservations"])) {//Eliminazione prenotazioni
+    $action=$_POST["delete-reservations"];
+    unset($_POST["delete-reservations"]);
     if(strcmp($action,"true") != 0) {
         header('Location: 500.php');
         exit();
@@ -142,9 +152,9 @@ if (isset($_GET["delete"])) {
     }
 
    
-}elseif (isset($_GET["logout"])){
-    $action=$_GET["logout"];
-    unset($_GET["logout"]);
+} elseif (isset($_POST["logout"])){
+    $action=$_POST["logout"];
+    unset($_POST["logout"]);
     if(strcmp($action,"true") != 0) {
         header('Location: 500.php');
         exit();
@@ -158,6 +168,26 @@ if (isset($_GET["delete"])) {
         header('Location: 500.php');
         exit();
     }
+} else if (isset($_POST['delete-degustazione'])){ //Eliminazione della singola degustazione
+    $action = $_POST['delete-degustazione'];
+    $id = $_POST['int-value'];
+    unset($_POST);
+
+    if(strcmp($action,"true") != 0) {
+        header('Location: 500.php');
+        exit();
+    }
+
+    $result = $db->DeleteOneTasting($id);
+
+    if(is_bool($result) && $result == true) {
+        header('Location: user-profile.php');
+        exit();
+    } else {
+        header('Location: 500.php');
+        exit();
+    }
+
 } else {
     header('Location: 500.php');
     exit();

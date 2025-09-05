@@ -574,6 +574,10 @@ div .chef-content{
     font-size: 2.2em;
 }
 
+#confirm-section h3, .ringraziamento h3{
+    font-size: 2.7em;
+}
+
 .error-description{
     font-size: 1.2em;
 }

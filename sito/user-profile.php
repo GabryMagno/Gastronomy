@@ -112,7 +112,7 @@ function CreaVisualizzaPreferito(int $idProdotto, string $nomeProdotto, string $
                             <button type="submit" name="up-rimuovi-preferiti" class="btn-elimina" title="Rimuovi '.Sanitizer::SanitizeGenericInput($nomeProdotto).' dai preferiti" aria-label="Rimuovi '.Sanitizer::SanitizeGenericInput($nomeProdotto).' dai preferiti">Rimuovi</button>
                         </form>
                     </div>
-            </li>
+        </li>
     ';
 
     return $TEMPLATE;
@@ -259,7 +259,11 @@ function CreaVisualizzaDegustazione(int $idDegustazione, string $nomeProdotto, D
                 </div>
                 <div class="brochure-links">
                     <a href="degustazione.php?degustazione='. urlencode($idDegustazione) . '" title="Vai alla scheda degustazione del prodotto ' . Sanitizer::SanitizeGenericInput($nomeProdotto) . '" class="btn-dettagli">Dettagli</a>
-                    <a href="#" class="btn-elimina">Elimina</a>
+                    <form method="get" action="conferma-scelta.php">
+                        <input type="hidden" name="delete" value="delete-degustazione">
+                        <input type="hidden" name="id-degustazione" value="'.$idDegustazione.'">
+                        <button type="submit" class="btn-elimina" title="Elimina prenotazione degustazione" aria-label="Elimina prenotazione degustazione">Elimina</button>
+                    </form>
                 </div>
             </li>
         ';

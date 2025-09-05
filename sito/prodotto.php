@@ -69,7 +69,12 @@ if(isset($_GET["prodotto"])){
     $pagina = str_replace("[Nome Prodotto]",$productInfo["nome"],$pagina);
     $pagina = str_replace("[Categoria]",ucfirst($productInfo["categoria"]),$pagina);
     $media = $db->AverageGradeProduct($productInfo["id"]);
-    $pagina = str_replace("[Valutazione]",$media == 0 ? "X" : number_format($media,1),$pagina);
+    if (is_numeric($media) && $media != 0) {
+        $valutazione = number_format((float)$media, 1);
+    } else {
+        $valutazione = "X";
+    }
+    $pagina = str_replace("[Valutazione]", $valutazione, $pagina);
     $pagina = str_replace("[Prezzo]",$productInfo["prezzo"],$pagina);
     $pagina = str_replace("[Descrizione]",$productInfo["descrizione"],$pagina);
     $pagina = str_replace("[INGREDIENTI]",$ingredientsHTML,$pagina);

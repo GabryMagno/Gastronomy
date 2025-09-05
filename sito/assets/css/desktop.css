@@ -1755,7 +1755,8 @@ ul#user-profile-recensioni {
     content: ":";
 }
 
-.userprofile-brochure a {
+.userprofile-brochure a,
+.userprofile-brochure button {
     background-color: var(--headerbgcolor);
     width: 100%;
     border: 0;
@@ -1768,7 +1769,8 @@ ul#user-profile-recensioni {
     bottom: 0;
 }
 
-.userprofile-brochure a:hover{
+.userprofile-brochure a:hover,
+.userprofile-brochure button:hover{
     opacity: 0.9;
 }
 

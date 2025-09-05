@@ -882,8 +882,8 @@ class DB {
         }else{
             $newConnection = $this->OpenConnectionDB();
             if($newConnection){
-                $getReservation = $this->connection->prepare("SELECT id_degustazione, numero_persone, id_cliente FROM prenotazioni_degustazioni WHERE id = ?");
-                $getReservation->bind_param("i", $reservation_tasting);
+                $getReservation = $this->connection->prepare("SELECT id_degustazione, numero_persone, id_cliente FROM prenotazioni_degustazioni WHERE id_degustazione = ? AND id_cliente = ?");
+                $getReservation->bind_param("ii", $reservation_tasting, $isUserLogged);
                 try{
                     $getReservation->execute();
                 }catch(\mysqli_sql_exception $error){
@@ -908,8 +908,8 @@ class DB {
                 $tastingId = $result["id_degustazione"];
                 $peopleNumber = $result["numero_persone"];
 
-                $deleteReservation = $this->connection->prepare("DELETE FROM prenotazioni_degustazioni WHERE id = ?");
-                $deleteReservation->bind_param("i", $reservation_tasting);
+                $deleteReservation = $this->connection->prepare("DELETE FROM prenotazioni_degustazioni WHERE id_degustazione = ? AND id_cliente = ?");
+                $deleteReservation->bind_param("ii", $tastingId, $isUserLogged);
 
                 $updateAvailability = $this->connection->prepare("UPDATE degustazioni SET disponibilita_persone = disponibilita_persone + ? WHERE id = ?");
                 $updateAvailability->bind_param("ii", $peopleNumber, $tastingId);
