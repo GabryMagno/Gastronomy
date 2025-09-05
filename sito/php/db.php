@@ -1207,7 +1207,26 @@ class DB {
             $newConnection = $this->OpenConnectionDB();
             $date2 = date("Y-m-d");
             if($newConnection){
+                $checkReservation = $this->connection->prepare("SELECT id FROM prenotazioni WHERE id_utente = ? AND id_prodotto = ? AND data_ritiro = ?");
+                $checkReservation->bind_param("iis", $isUserLogged, $product, $date);
                 
+                try{
+                    //esecuzione della query per controllare se l'utente ha già una prenotazione per lo stesso prodotto nella stessa data
+                    $checkReservation->execute();
+                }catch(\mysqli_sql_exception $error){
+                    //se c'è un errore nell'esecuzione della query, ritorna false
+                    $this->CloseConnectionDB();
+                    $checkReservation->close();
+                    return "Execution error";
+                } 
+
+                $result = $checkReservation->get_result();
+                $checkReservation->close();
+
+                if($result && $result->num_rows > 0){
+                    $this->CloseConnectionDB();
+                    return "User already has a reservation for this product on the selected date"; //l'utente ha già una prenotazione per questo prodotto nella stessa data
+                }
                 //preparazione della query per aggiungere una prenotazione
                 $addReservation = $this->connection->prepare("INSERT INTO prenotazioni (id_utente, id_prodotto, quantita, data_ritiro, data_prenotazione) VALUES (?, ?, ?, ?, ?)");
                 $addReservation->bind_param("iiiss", $isUserLogged, $product, $quantity, $date, $date2);

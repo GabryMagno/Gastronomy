@@ -427,22 +427,28 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
         $today = new DateTime();
         $today1 = new DateTime();
         $tomorrow = (clone $today)->modify('+1 day');
+        $limit_date = (clone $today)->modify('+14 day');
         $reservationDate = new DateTime($date_reservation);
         if($reservationDate <= $today){
             $errorFound = true; 
             $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">L'ordine può essere ritirato solo nei giorni successivi ad oggi: ". $today1->format("d-m-Y")."</p>", $pagina);
-        }else{
-            $pagina = str_replace("[date-error]","",$pagina);
+        }else if($reservationDate > $limit_date){
+            $errorFound = true; 
+            $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">L'ordine può essere ritirato solo dal ". $tomorrow->format("d-m-Y")." al ".$limit_date->format("d-m-Y")."</p>", $pagina);         
         }
 
         if($errorFound == true){//ci sono stati errori
             $pagina = str_replace("min=\"1\"","min=\"1\" value=\"".$quantity."\"", $pagina);
             $pagina = str_replace("name=\"data_ritiro\"","name=\"data_ritiro\" value=\"".$date_reservation."\"", $pagina); 
+            header('Location: prodotto.php?prodotto='. $productInfo["id"] . '#prenotazione');
         }else{
             $addReservation = $db->AddReservation($productInfo["id"], $quantity, $date_reservation);
             if(is_bool($addReservation) && $addReservation == true) {//controllo se la modifica delle informazioni è andata a buon fine
+                $pagina = str_replace("[date-error]","", $pagina);
                 header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');
                 exit();
+            }elseif(is_string($addReservation) && $addReservation == "User already has a reservation for this product on the selected date"){
+                $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">È già presente una prenotazione per questo prodotto nella data selezionata: ".$date_reservation."</p>",$pagina);
             } else { 
                 header('Location: 500.php');
                 exit();
