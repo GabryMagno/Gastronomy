@@ -117,9 +117,19 @@ if(isset($_GET["prodotto"])){
                                         <time datetime="' . $date->format("Y-m-d") . '">' . $date->format("d/m/Y") . '</time>
                                     </span>
                                     <p class="recensione-testo">' . htmlspecialchars($comment["commento"]) . '</p>
-                                    <p class="recensione-valutazione">Valutazione: ' . htmlspecialchars($comment["voto"]) . ' su 5</p>
-                                </div>
-                            </div>';
+                                    <p class="recensione-valutazione">Valutazione: <span aria-hidden="true">';
+
+                for ($i=0; $i < $comment["voto"]; $i++) { 
+                    $commentList .= '★';
+                }
+
+                for ($i=$comment["voto"]; $i < 5; $i++) { 
+                    $commentList .= '☆';
+                }
+
+                $commentList.= '</span> ('.$comment["voto"].' su 5)
+                                </p></div></div>';
+
                 $commentNumber++;
             }          
         }
