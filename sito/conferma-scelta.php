@@ -68,7 +68,7 @@ if (isset($_GET["delete"])) {
         $pagina = str_replace("[DELETE]","delete-degustazione",$pagina);
         $pagina = str_replace("[TITOLO]","Elimina Prenotazione Degustazione",$pagina);
         $pagina = str_replace("[MESSAGGIO DI AVVISO]","Sei sicuro di voler eliminare la degustazione prenotata?",$pagina);
-        $pagina = str_replace("[VALORE-NASCOSTO]",Sanitizer::IntFilter($_GET['id-degustazione']),$pagina);
+        $pagina = str_replace("[VALORE-NASCOSTO]",Sanitizer::IntFilter($_GET['id-prenotazione']),$pagina);
         $pagina = str_replace("[MESSAGGIO DI CANCELLAZIONE]","Cliccando sul tasto Elimina verrà annullata la prenotazione della degustazione precedentemente selezionata.",$pagina);
 
         echo $pagina;
@@ -195,8 +195,9 @@ if (isset($_GET["delete"])) {
         header('Location: user-profile.php');
         exit();
     } else {
-        header('Location: 500.php');
-        exit();
+        //header('Location: 500.php');
+        echo $result;
+        //exit();
     }
 
 } else if (isset($_POST['delete-prodotto'])){ //Eliminazione del singolo prodotto prenotato

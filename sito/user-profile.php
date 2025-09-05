@@ -234,6 +234,7 @@ function VisualizzaDegustazione(array $degustazioni): string {
     foreach ($degustazioni as $value){
         $degustazione_html.= CreaVisualizzaDegustazione(
             $value['id_degustazione'],
+            $value['id_prenotazione'],
             $value['nome_prodotto'],
             new DateTime($value['data_scelta']),
             $value['prezzo'],
@@ -246,7 +247,7 @@ function VisualizzaDegustazione(array $degustazioni): string {
     return $degustazione_html;
 }
 
-function CreaVisualizzaDegustazione(int $idDegustazione, string $nomeProdotto, DateTime $dataScelta, float $prezzo, int $numeroPersone){
+function CreaVisualizzaDegustazione(int $idDegustazione,int $idPrenotazione, string $nomeProdotto, DateTime $dataScelta, float $prezzo, int $numeroPersone){
 
     $TEMPLATE = '
             <li class="userprofile-brochure">
@@ -265,7 +266,7 @@ function CreaVisualizzaDegustazione(int $idDegustazione, string $nomeProdotto, D
                     <a href="degustazione.php?degustazione='. urlencode($idDegustazione) . '" title="Vai alla scheda degustazione del prodotto ' . Sanitizer::SanitizeGenericInput($nomeProdotto) . '" class="btn-dettagli">Dettagli</a>
                     <form method="get" action="conferma-scelta.php">
                         <input type="hidden" name="delete" value="delete-degustazione">
-                        <input type="hidden" name="id-degustazione" value="'.urlencode($idDegustazione).'">
+                        <input type="hidden" name="id-prenotazione" value="'.urlencode($idPrenotazione).'">
                         <button type="submit" class="btn-elimina" title="Elimina prenotazione degustazione" aria-label="Elimina prenotazione degustazione">Elimina</button>
                     </form>
                 </div>

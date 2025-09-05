@@ -612,6 +612,7 @@ class DB {
             //preparazione della query per ottenere le degustazioni prenotate dall'utente
             $userTastings = $this->connection->prepare("
             SELECT 
+                pd.id AS id_prenotazione,
                 p.nome AS nome_prodotto,
                 pd.data_scelta,
                 pd.numero_persone,
@@ -885,7 +886,7 @@ class DB {
         }else{
             $newConnection = $this->OpenConnectionDB();
             if($newConnection){
-                $getReservation = $this->connection->prepare("SELECT id_degustazione, numero_persone, id_cliente FROM prenotazioni_degustazioni WHERE id_degustazione = ? AND id_cliente = ?");
+                $getReservation = $this->connection->prepare("SELECT id_degustazione, numero_persone, id_cliente FROM prenotazioni_degustazioni WHERE id = ? AND id_cliente = ?");
                 $getReservation->bind_param("ii", $reservation_tasting, $isUserLogged);
                 try{
                     $getReservation->execute();
@@ -911,8 +912,8 @@ class DB {
                 $tastingId = $result["id_degustazione"];
                 $peopleNumber = $result["numero_persone"];
 
-                $deleteReservation = $this->connection->prepare("DELETE FROM prenotazioni_degustazioni WHERE id_degustazione = ? AND id_cliente = ?");
-                $deleteReservation->bind_param("ii", $tastingId, $isUserLogged);
+                $deleteReservation = $this->connection->prepare("DELETE FROM prenotazioni_degustazioni WHERE id = ?");
+                $deleteReservation->bind_param("i", $reservation_tasting);
 
                 $updateAvailability = $this->connection->prepare("UPDATE degustazioni SET disponibilita_persone = disponibilita_persone + ? WHERE id = ?");
                 $updateAvailability->bind_param("ii", $peopleNumber, $tastingId);
@@ -923,7 +924,7 @@ class DB {
                     $deleteReservation->execute();
                     $updateAvailability->execute();
 
-                    if ($deleteReservation->affected_rows !== 1 || $updateAvailability->affected_rows !== 1) {
+                    if ($deleteReservation->affected_rows !== 1) {
                         return "Tasting deletion failed or not enough availability";
                     }
 
