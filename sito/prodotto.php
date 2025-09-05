@@ -249,6 +249,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
         $pagina = str_replace("<p id=\"prodotto-nondisponibile\">NON DISPONIBILE</p>","",$pagina);
         $now = new DateTime();
         $prox = (clone $now)->modify('+1 day');
+        $next = (clone $prox)->modify('+14 day');
         $pagina = str_replace("[RESERVATION]",
     "<form method=\"post\" id=\"prenotazione\" class=\"form-bianco\">
                         <fieldset>
@@ -268,7 +269,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
 
                             <div>
                                 <label for=\"data-ritiro\" class=\"form-label\" id=\"order-label\">Data di ritiro</label>
-                                <input type=\"date\" id=\"data-ritiro\" name=\"data_ritiro\" min=\"".$prox->format("Y-m-d")."\" required>
+                                <input type=\"date\" id=\"data-ritiro\" name=\"data_ritiro\" min=\"".$prox->format("Y-m-d")."\" max=\"".$next->format("Y-m-d")."\" required>
                                 [date-error]
                             </div>
 
