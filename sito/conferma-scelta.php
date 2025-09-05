@@ -78,7 +78,7 @@ if (isset($_GET["delete"])) {
         $pagina = str_replace("[DELETE]","delete-prodotto",$pagina);
         $pagina = str_replace("[TITOLO]","Elimina Prenotazione Prodotto",$pagina);
         $pagina = str_replace("[MESSAGGIO DI AVVISO]","Sei sicuro di voler eliminare il prodotto prenotato?",$pagina);
-        $pagina = str_replace("[VALORE-NASCOSTO]",Sanitizer::IntFilter($_GET['id-prodotto']),$pagina);
+        $pagina = str_replace("[VALORE-NASCOSTO]",Sanitizer::IntFilter($_GET['id-prenotazione']),$pagina);
         $pagina = str_replace("[MESSAGGIO DI CANCELLAZIONE]","Cliccando sul tasto Elimina verrà annullata la prenotazione del prodotto precedentemente selezionato.",$pagina);
 
         echo $pagina;
@@ -215,8 +215,9 @@ if (isset($_GET["delete"])) {
         header('Location: user-profile.php');
         exit();
     } else {
-        header('Location: 500.php');
-        exit();
+        //header('Location: 500.php');
+        //exit();
+        echo $result;
     }
 
 } else {
