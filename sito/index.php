@@ -54,9 +54,19 @@ function createBestCommentTemplate($username, $immagine, $voto, $commento, $prod
                 </p>
                 <p class="recensione-prodotto">'. $prodotto . '</p>
                 <p class="recensione-testo">' . $commento . '</p>
-                <p class="recensione-valutazione">Voto: ' . $voto . '</p>
-            </div>
-        </div>';
+                <p class="recensione-valutazione">Voto: <span aria-hidden="true">';
+
+    for ($i=0; $i < $voto; $i++) { 
+        $TEMPLATE .= '★';
+    }
+
+    for ($i=$voto; $i < 5; $i++) { 
+        $TEMPLATE .= '☆';
+    }
+
+    $TEMPLATE .= '</span> ('.$voto.' su 5)';
+
+    $TEMPLATE .= '</p></div></div>';
     return $TEMPLATE;
 }
 

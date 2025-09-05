@@ -2276,10 +2276,6 @@ p#comment-log a:visited,p#reservation-log a:visited{
     background-image: url('../img/icone/star.svg');
 }
 
-#prodotto-valutazione-testo::after{
-    content: " / 5 stelle";
-}
-
 #prodotto-prezzo-testo, .prodotto-prezzo-testo{
     font-size: 1.5em;
     font-weight: bold;

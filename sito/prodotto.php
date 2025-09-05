@@ -168,7 +168,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
                     <dt>Data</dt>
                     <dd>[Data Valutazione]</dd>
                     <dt>Valutazione</dt>
-                    <dd class=\"rating-stars\" aria-label=\"Valutazione: [voto] su 5 stelle\">
+                    <dd class=\"rating-stars\">
                         <span aria-hidden=\"true\"></span>
                     </dd>
                     <dt>Commento</dt>
@@ -342,7 +342,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
                     <dt>Data</dt>
                     <dd>[Data Valutazione]</dd>
                     <dt>Valutazione</dt>
-                    <dd class=\"rating-stars\" aria-label=\"Valutazione: [voto] su 5 stelle\">
+                    <dd class=\"rating-stars\">
                         <span aria-hidden=\"true\"></span>
                     </dd>
                     <dt>Commento</dt>
@@ -369,8 +369,8 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
                     <dt>Data</dt>
                     <dd>[Data Valutazione]</dd>
                     <dt>Valutazione</dt>
-                    <dd class=\"rating-stars\" aria-label=\"Valutazione: [voto] su 5 stelle\">
-                        [Valutazione] su 5
+                    <dd class=\"rating-stars\">
+                        [Valutazione]
                     </dd>
                     <dt>Commento</dt>
                     <dd>[Commento]</dd>
@@ -388,9 +388,22 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
         $pagina = str_replace("[Data Valutazione]",'<time datetime="'.$data->format("Y-m-d"). '">'.$data->format("d/m/Y").'</time>',$pagina);
         $pagina = str_replace("[Commento]",htmlspecialchars($isUserCommented["commento"]),$pagina);
         $pagina = str_replace("[voto]",$isUserCommented["voto"],$pagina);
-        $pagina = str_replace("[Valutazione]",$isUserCommented["voto"],$pagina);
         $pagina = str_replace("<h4 class=\"no-print left\">Inserisci Valutazione e Commento</h4>","",$pagina);
         $pagina = str_replace("[COMMENT]","",$pagina);
+
+        $templateValutazione = '<span aria-hidden="true">';
+
+        for ($i=0; $i < $isUserCommented["voto"]; $i++) { 
+            $templateValutazione .= '★';
+        }
+
+        for ($i=$isUserCommented["voto"]; $i < 5; $i++) { 
+            $templateValutazione .= '☆';
+        }
+
+        $templateValutazione.= '</span> ('.$isUserCommented["voto"].' su 5)';
+
+        $pagina = str_replace("[Valutazione]",$templateValutazione,$pagina);
     }
 
     //FORM PRENOTAZIONE
