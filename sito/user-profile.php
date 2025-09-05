@@ -313,7 +313,7 @@ function CreaVisualizzaRecensioni(int $idProdotto, string $nomeProdotto, DateTim
                         <dt>Data</dt>
                             <dd><time datetime="' . $dataRecensione->format("Y-m-d") . '">' . $dataRecensione->format("d/m/Y") . '</time></dd>
                         <dt>Valutazione</dt>
-                            <dd aria-label="Valutazione: '.$valutazione.' su 5 stelle">';
+                            <dd><span aria-hidden="true">';
     
     
     for ($i=0; $i < $valutazione; $i++) { 
@@ -324,7 +324,7 @@ function CreaVisualizzaRecensioni(int $idProdotto, string $nomeProdotto, DateTim
         $TEMPLATE .= '☆';
     }
 
-    //$TEMPLATE .= '<small> ('.$valutazione.' su 5)</small>';
+    $TEMPLATE .= '</span><small> ('.$valutazione.' su 5)</small>';
 
     $TEMPLATE .= '</dl></div>
                         <a href="prodotto.php?prodotto='. urlencode($idProdotto) . '#valutazione" title="Visualizza valutazione inserita per il prodotto ' . Sanitizer::SanitizeGenericInput($nomeProdotto) . '" class="btn-dettagli">Visualizza</a>

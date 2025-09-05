@@ -2440,6 +2440,10 @@ a#pin-comment{
     margin: 1em 0;
 }
 
+.nondisponibile.singolo-prodotto{
+    margin-top: -1.5em;
+}
+
 /*  
     =================================================================
             PAGINE AUSILIARIE (CONFERMA-SCELTA E RINGRAZIAMENTI) 
