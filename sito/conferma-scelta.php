@@ -195,9 +195,8 @@ if (isset($_GET["delete"])) {
         header('Location: user-profile.php');
         exit();
     } else {
-        //header('Location: 500.php');
-        echo $result;
-        //exit();
+        header('Location: 500.php');
+        exit();
     }
 
 } else if (isset($_POST['delete-prodotto'])){ //Eliminazione del singolo prodotto prenotato
