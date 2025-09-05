@@ -132,13 +132,13 @@ if(isset($_GET["degustazione"])){
                 $pagina = str_replace("[quantita]",$people, $pagina);
                 $pagina = str_replace("[data_ritiro]",$date_reservation, $pagina); 
             }else{//se ci sono errori
-                echo $tasting;
                 $addReservation = $db->AddTasting($tasting, $people, $date_reservation);
                 if(is_bool($addReservation) && $addReservation == true) {//controllo se la modifica delle informazioni è andata a buon fine
                     header('Location: degustazione.php?degustazione='. $tasting . '');
                     exit();
                 } else { //se ci sono stati errori l'utente viene reindirizzato alla pagina di errore 500
-                   echo $addReservation;
+                   header("Location: 500.php"); 
+                   exit();
                 }
             }
 
