@@ -215,9 +215,8 @@ if (isset($_GET["delete"])) {
         header('Location: user-profile.php');
         exit();
     } else {
-        //header('Location: 500.php');
-        //exit();
-        echo $result;
+        header('Location: 500.php');
+        exit();
     }
 
 } else {
