@@ -1209,7 +1209,7 @@ class DB {
             if($newConnection){
                 $checkReservation = $this->connection->prepare("SELECT id FROM prenotazioni WHERE id_utente = ? AND id_prodotto = ? AND data_ritiro = ?");
                 $checkReservation->bind_param("iis", $isUserLogged, $product, $date);
-                
+
                 try{
                     //esecuzione della query per controllare se l'utente ha già una prenotazione per lo stesso prodotto nella stessa data
                     $checkReservation->execute();
@@ -1438,11 +1438,11 @@ class DB {
     }
 
     //ALTRO
-    public function AverageGradeProduct($product): int | string{//Restituisce il voto medio del prodotto
+    public function AverageGradeProduct($product): float | string{//Restituisce il voto medio del prodotto
         $newConnection = $this->OpenConnectionDB();
         if($newConnection){
             //preparazione della query per ottenere il voto medio del prodotto
-            $averageGrade = $this->connection->prepare("SELECT CAST(AVG(voto) AS DECIMAL (2,0)) AS media FROM valutazioni WHERE id_prodotto = ?");
+            $averageGrade = $this->connection->prepare("SELECT CAST(AVG(voto) AS DECIMAL (2,1)) AS media FROM valutazioni WHERE id_prodotto = ?");
             $averageGrade->bind_param("i", $product);
             try{
                 //esecuzione della query per ottenere il voto medio del prodotto

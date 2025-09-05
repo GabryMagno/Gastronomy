@@ -68,7 +68,8 @@ if(isset($_GET["prodotto"])){
     $pagina = str_replace("[IMAGE]","<img src=". $productInfo["url_immagine"] ." alt=\"\">",$pagina);
     $pagina = str_replace("[Nome Prodotto]",$productInfo["nome"],$pagina);
     $pagina = str_replace("[Categoria]",ucfirst($productInfo["categoria"]),$pagina);
-    $pagina = str_replace("[Valutazione]",(number_format((float)$db->AverageGradeProduct($productInfo["id"]),1) == 0 ? "X" : number_format((float)$db->AverageGradeProduct($productInfo["id"]),1)),$pagina);
+    $media = $db->AverageGradeProduct($productInfo["id"]);
+    $pagina = str_replace("[Valutazione]",$media == 0 ? "X" : number_format($media,1),$pagina);
     $pagina = str_replace("[Prezzo]",$productInfo["prezzo"],$pagina);
     $pagina = str_replace("[Descrizione]",$productInfo["descrizione"],$pagina);
     $pagina = str_replace("[INGREDIENTI]",$ingredientsHTML,$pagina);
