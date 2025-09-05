@@ -44,8 +44,8 @@ class ChangePageProducts
 
         if ($this->productName) {// Filtra per nome del prodotto
             $query .= " and REPLACE(p.nome, \" \", \"\") LIKE REPLACE(?, \" \", \"\") ";// query per evitare errori con gli spazi
-            $params[] = "%" . $this->productName . "%";
-            $this->filter_list["name"] = $this->productName;
+            $params[] = "%" . (urldecode($this->productName)) . "%";
+            $this->filter_list["name"] = urldecode($this->productName);
         }
 
         if (!empty($this->productCategory)) {// Filtra per categoria del prodotto (bisogna farne uno per ogni categoria)
@@ -120,7 +120,7 @@ class ChangePageProducts
         
         if ($this->productName) {
             $order_query .= "LOCATE(?, p.nome),";
-            $params[] = $this->productName;
+            $params[] = urldecode($this->productName);
         }
         
         
