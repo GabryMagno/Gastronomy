@@ -124,18 +124,20 @@ if(isset($_GET["degustazione"])){
             }else if($reservationDate > $end_date){//controllo che la data sia precedente o uguale a quella di fine degustazione
                 $errorFound = true; 
                 $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">L'ordine può essere ritirato solo nei giorni precedenti al : ". $end_date->format("d-m-Y")."</p>", $pagina);
-            }else{
-                $pagina = str_replace("[date-error]","",$pagina);
             }
 
             if($errorFound == true){//ci sono stati errori
                 $pagina = str_replace("[quantita]",$people, $pagina);
                 $pagina = str_replace("[data_ritiro]",$date_reservation, $pagina); 
             }else{//se ci sono errori
+
                 $addReservation = $db->AddTasting($tasting, $people, $date_reservation);
                 if(is_bool($addReservation) && $addReservation == true) {//controllo se la modifica delle informazioni è andata a buon fine
+                    $pagina = str_replace("[date-error]","",$pagina);
                     header('Location: degustazione.php?degustazione='. $tasting . '');
                     exit();
+                }elseif(is_string($addReservation) && $addReservation == "User already has a reservation for this tasting on the selected date"){//se l'utente ha già una prenotazione per questa degustazione in quella data
+                    $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">Hai già una prenotazione per questa degustazione in questa data : ". $reservationDate->format("d-m-Y") ."</p>", $pagina);
                 } else { //se ci sono stati errori l'utente viene reindirizzato alla pagina di errore 500
                    header("Location: 500.php"); 
                    exit();

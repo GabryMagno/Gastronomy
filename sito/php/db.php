@@ -569,8 +569,7 @@ class DB {
             FROM prenotazioni pr
             JOIN prodotti p ON pr.id_prodotto = p.id
             WHERE pr.id_utente = ?
-            AND pr.data_ritiro >= NOW()
-            ORDER BY pr.data_ritiro;
+            AND pr.data_ritiro >= NOW();
             ");
             $userReservations->bind_param("i", $id);
             try{
@@ -621,8 +620,7 @@ class DB {
             JOIN degustazioni d ON pd.id_degustazione = d.id
             JOIN prodotti p ON d.id_prodotto = p.id
             WHERE pd.id_cliente = ?
-            AND pd.data_scelta >= NOW()
-            ORDER BY pd.data_scelta;
+            AND pd.data_scelta >= NOW();
             ");
             $userTastings->bind_param("i", $id);
             try{
@@ -669,8 +667,7 @@ class DB {
                 v.id_prodotto
             FROM valutazioni v
             JOIN prodotti p ON v.id_prodotto = p.id
-            WHERE v.id_utente = ?
-            ORDER BY data_recensione DESC;
+            WHERE v.id_utente = ?;
             ");
             $userReviews->bind_param("i", $id);
             try{
@@ -1279,6 +1276,22 @@ class DB {
                 if($this->CheckTastingAvailability($newConnection, $tasting, $people_number) !== true){
                     //se la degustazione non è disponibile per il numero di persone richiesto, ritorna un messaggio di errore
                     return $this->CheckTastingAvailability($newConnection, $tasting, $people_number); //degustazione non disponibile per il numero di persone richiesto
+                }
+                $userAlreadyReserved = $this->connection->prepare("SELECT id FROM prenotazioni_degustazioni WHERE id_degustazione = ? AND id_cliente = ? AND data_scelta = ?");
+                $userAlreadyReserved->bind_param("iis", $tasting, $isUserLogged, $date);
+                try{
+                    //esecuzione della query per controllare se l'utente ha già una prenotazione per la stessa degustazione nella stessa data
+                    $userAlreadyReserved->execute();
+                }catch(\mysqli_sql_exception $error){   
+                    $userAlreadyReserved->close();
+                    $this->CloseConnectionDB();
+                    return "Execution error";
+                }
+                $result = $userAlreadyReserved->get_result();
+                $userAlreadyReserved->close();
+                if($result && $result->num_rows > 0){
+                    $this->CloseConnectionDB();
+                    return "User already has a reservation for this tasting on the selected date"; //l'utente ha già una prenotazione per questa degustazione nella stessa data
                 }
                 //preparazione della query per aggiungere una prenotazione per una degustazione
                 //inserisce una prenotazione per una degustazione con l'id della degustazione, l'id dell'utente, la data della prenotazione e la data della scelta
