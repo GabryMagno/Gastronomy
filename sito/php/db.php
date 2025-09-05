@@ -838,7 +838,7 @@ class DB {
         }
     }
 
-    public function DeleteOneReservation($reservation): bool | string{//cancellare una singola prenotazione di un prodotto --> da vedere cos'è reservation o se si può ottenere l'id della prenotazione
+    public function DeleteOneReservation($reservation): bool | string{//cancellare una singola prenotazione di un prodotto
         $isUserLogged = $this->IsUserLog();
         if($isUserLogged == false){
             //se l'utente non è loggato, ritorna un messaggio di errore
@@ -847,7 +847,7 @@ class DB {
             $newConnection = $this->OpenConnectionDB();
             if($newConnection){
                 //preparazione della query per cancellare una singola prenotazione di un prodotto dell'utente
-                $deleteReservation = $this->connection->prepare("DELETE FROM prenotazioni WHERE id_utente = ? AND id_prodotto = ?");
+                $deleteReservation = $this->connection->prepare("DELETE FROM prenotazioni WHERE id_utente = ? AND id = ?");
                 $deleteReservation->bind_param("ii", $isUserLogged, $reservation);
                 try{
                     //esecuzione della query per cancellare una singola prenotazione di un prodotto dell'utente

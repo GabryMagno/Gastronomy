@@ -1,6 +1,7 @@
 <?php
 
-require_once "php/db.php";//
+require_once "php/db.php";
+require_once "php/sanitizer.php";
 
 $db = new DB;
 
@@ -67,8 +68,18 @@ if (isset($_GET["delete"])) {
         $pagina = str_replace("[DELETE]","delete-degustazione",$pagina);
         $pagina = str_replace("[TITOLO]","Elimina Prenotazione Degustazione",$pagina);
         $pagina = str_replace("[MESSAGGIO DI AVVISO]","Sei sicuro di voler eliminare la degustazione prenotata?",$pagina);
-        $pagina = str_replace("[VALORE-NASCOSTO]",$_GET["id-degustazione"],$pagina);
-        $pagina = str_replace("[MESSAGGIO DI CANCELLAZIONE]","Se cliccherai sul tasto elimina cancellerai la prenotazione della degustazione precedentemente selezionata e prenotata.",$pagina);
+        $pagina = str_replace("[VALORE-NASCOSTO]",Sanitizer::IntFilter($_GET['id-degustazione']),$pagina);
+        $pagina = str_replace("[MESSAGGIO DI CANCELLAZIONE]","Cliccando sul tasto Elimina verrà annullata la prenotazione della degustazione precedentemente selezionata.",$pagina);
+
+        echo $pagina;
+    
+    } elseif (strcmp($action,"delete-prodotto")==0){
+        $pagina = str_replace("[SCELTA]","Elimina prenotazione prodotto",$pagina);
+        $pagina = str_replace("[DELETE]","delete-prodotto",$pagina);
+        $pagina = str_replace("[TITOLO]","Elimina Prenotazione Prodotto",$pagina);
+        $pagina = str_replace("[MESSAGGIO DI AVVISO]","Sei sicuro di voler eliminare il prodotto prenotato?",$pagina);
+        $pagina = str_replace("[VALORE-NASCOSTO]",Sanitizer::IntFilter($_GET['id-prodotto']),$pagina);
+        $pagina = str_replace("[MESSAGGIO DI CANCELLAZIONE]","Cliccando sul tasto Elimina verrà annullata la prenotazione del prodotto precedentemente selezionato.",$pagina);
 
         echo $pagina;
     
@@ -170,7 +181,7 @@ if (isset($_GET["delete"])) {
     }
 } else if (isset($_POST['delete-degustazione'])){ //Eliminazione della singola degustazione
     $action = $_POST['delete-degustazione'];
-    $id = $_POST['int-value'];
+    $id = Sanitizer::IntFilter($_POST['int-value']);
     unset($_POST);
 
     if(strcmp($action,"true") != 0) {
@@ -179,6 +190,26 @@ if (isset($_GET["delete"])) {
     }
 
     $result = $db->DeleteOneTasting($id);
+
+    if(is_bool($result) && $result == true) {
+        header('Location: user-profile.php');
+        exit();
+    } else {
+        header('Location: 500.php');
+        exit();
+    }
+
+} else if (isset($_POST['delete-prodotto'])){ //Eliminazione del singolo prodotto prenotato
+    $action = $_POST['delete-prodotto'];
+    $id = Sanitizer::IntFilter($_POST['int-value']);
+    unset($_POST);
+
+    if(strcmp($action,"true") != 0) {
+        header('Location: 500.php');
+        exit();
+    }
+
+    $result = $db->DeleteOneReservation($id);
 
     if(is_bool($result) && $result == true) {
         header('Location: user-profile.php');

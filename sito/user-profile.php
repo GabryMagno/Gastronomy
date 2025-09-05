@@ -177,7 +177,11 @@ function CreaVisualizzaPrenotazione(int $idPrenotazione, string $nomeProdotto, D
                 </div>
                 <div class="brochure-links">
                     <a href="prodotto.php?prodotto='. urlencode($idProdotto) . '" title="Vai alla scheda del prodotto ' . Sanitizer::SanitizeGenericInput($nomeProdotto) . '" class="btn-dettagli">Dettagli</a>
-                    <a href="#" class="btn-elimina">Elimina</a>
+                    <form method="get" action="conferma-scelta.php">
+                        <input type="hidden" name="delete" value="delete-prodotto">
+                        <input type="hidden" name="id-prodotto" value="'.$idPrenotazione.'">
+                        <button type="submit" class="btn-elimina" title="Elimina prenotazione del prodotto '.$nomeProdotto.'" aria-label="Elimina prenotazione degustazione">Elimina</button>
+                    </form>
                 </div>
             </li>
         ';
