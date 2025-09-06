@@ -1,3 +1,8 @@
+DELETE FROM prodotto_ingredienti;
+DELETE FROM ingredienti;
+DELETE FROM degustazioni;
+DELETE FROM prodotti;
+
 ALTER TABLE prodotti AUTO_INCREMENT = 1;
 ALTER TABLE valutazioni AUTO_INCREMENT = 1;
 ALTER TABLE degustazioni AUTO_INCREMENT = 1;
@@ -56,6 +61,7 @@ VALUES
 -- INGREDIENTI
 INSERT INTO ingredienti VALUES 
 ("Semi di Sesamo",1,1,1),
+("Farro",0,1,1),
 ("Noci",1,1,1),
 ("Finocchio",1,1,1),
 ("Succo di Limone",1,1,1),
@@ -116,7 +122,7 @@ INSERT INTO ingredienti VALUES
 ("Aceto",1,1,1),
 ("Panna fresca",1,0,1),
 ("Savoiardi",0,0,1),
-("Caffè espresso",0,0,0),
+("Caffè espresso",1,1,1),
 ("Mascarpone",1,0,1),
 ("Frutti di bosco misti",1,1,1),
 ("Ricotta",1,0,1),
@@ -145,6 +151,9 @@ INSERT INTO ingredienti VALUES
 ("Fagiolini",1,1,1),
 ("Crespelle",0,0,1),
 ("Spaghetti",0,1,1),
+("Lonza di maiale",1,0,0),
+("Cacao amaro in polvere",1,1,1),
+("Gelatina in fogli",1,0,0),
 ("Origano",1,1,1);
 
 -- PRODOTTI_INGREDIENTI
@@ -266,14 +275,159 @@ INSERT INTO prodotto_ingredienti VALUES
 (14,"Olio <abbr title=\"Extra Vergine di Oliva\">EVO</abbr>",1,null,null),
 (14,"Sale grosso",1,null,null),
 (14,"Pepe nero",1,null,null),
+-- Scaloppine al Limone
+(15,"Fettine di vitello",0,150,"g"),
+(15,"Limone",1,null,null),
+(15,"Burro",0,20,"g"),
+(15,"Olio <abbr title=\"Extra Vergine di Oliva\">EVO</abbr>",1,null,null),
+(15,"Prezzemolo",1,null,null),
+(15,"Sale fino",1,null,null),
+(15,"Pepe nero",1,null,null),
+-- Baccalà alla Vicentina
+(16,"Filetto di baccalà",0,200,"g"),
+(16,"Cipolle",0,100,"g"),
+(16,"Latte intero",0,200,"ml"),
+(16,"Olio <abbr title=\"Extra Vergine di Oliva\">EVO</abbr>",1,null,null),
+(16,"Prezzemolo",1,null,null),
+(16,"Sale fino",1,null,null),
+(16,"Pepe nero",1,null,null),
+-- Involtini di Carne
+(17,"Carne di vitello",0,150,"g"),
+(17,"Prosciutto crudo",0,50,"g"),
+(17,"Parmiggiano Reggiano <abbr title=\"Denominazione di Origine Protetta\">DOP</abbr>",0,30,"g"),
+(17,"Pane casereccio",0,50,"g"),
+(17,"Uova",0,1,"num_el"),
+(17,"Farina 00",0,50,"g"),
+(17,"Olio <abbr title=\"Extra Vergine di Oliva\">EVO</abbr>",1,null,null),
+(17,"Sale fino",1,null,null),
+(17,"Pepe nero",1,null,null),
+-- Arrosto di Tacchino
+(18,"Fettine di tacchino",0,150,"g"),
+(18,"Erbe aromatiche miste",1,null,null),
+(18,"Olio <abbr title=\"Extra Vergine di Oliva\">EVO</abbr>",1,null,null),
+(18,"Sale grosso",1,null,null),
+(18,"Pepe nero",1,null,null),
+-- Polpette al Sugo
+(19,"Carne macinata mista",0,100,"g"),
+(19,"Uova",0,1,"num_el"),
+(19,"Pane casereccio",0,50,"g"),
+(19,"Parmiggiano Reggiano <abbr title=\"Denominazione di Origine Protetta\">DOP</abbr>",0,30,"g"),
+(19,"Passata di pomodoro",0,200,"g"),
+(19,"Aglio",0,1,"num_el"),
+(19,"Basilico",1,null,null),
+(19,"Olio <abbr title=\"Extra Vergine di Oliva\">EVO</abbr>",1,null,null),
+(19,"Sale fino",1,null,null),
+(19,"Pepe nero",1,null,null),
+-- Arrosto di Maiale
+(20,"Lonza di maiale",0,1000,"g"),
+(20,"Erbe aromatiche miste",1,null,null),
+(20,"Olio <abbr title=\"Extra Vergine di Oliva\">EVO</abbr>",1,null,null),
+(20,"Sale grosso",1,null,null),
+(20,"Pepe nero",1,null,null),
+-- Patate al Forno
+(21,"Patate novelle",0,300,"g"),
+(21,"Rosmarino",1,null,null),
+(21,"Olio <abbr title=\"Extra Vergine di Oliva\">EVO</abbr>",1,null,null),
+(21,"Sale grosso",1,null,null),
+(21,"Pepe nero",1,null,null),
+-- Verdure Grigliate
+(22,"Zucchine",0,100,"g"),
+(22,"Melanzane",0,100,"g"),
+(22,"Pomodori",0,100,"g"),
+(22,"Asparagi",0,100,"g"),
+(22,"Peperoni",0,100,"g"),
+(22,"Olio <abbr title=\"Extra Vergine di Oliva\">EVO</abbr>",1,null,null),
+(22,"Sale fino",1,null,null),
+(22,"Pepe nero",1,null,null),
 -- Insalata Mista
 (23,"Noci",0,8,"num_el"),
 (23,"Finocchio",0,1,"num_el"),
 (23,"Mele",0,2,"num_el"),
 (23,"Semi di Sesamo",0,30,"g"),
-(23,"Succo di limone",1,null,null);
+(23,"Succo di limone",1,null,null),
+(23,"Olio <abbr title=\"Extra Vergine di Oliva\">EVO</abbr>",1,null,null),
+(23,"Sale fino",1,null,null),
+(23,"Pepe nero",1,null,null),
+-- Spinaci al Burro
+(24,"Spinaci",0,200,"g"),
+(24,"Burro",0,20,"g"),
+(24,"Aglio",0,1,"num_el"),
+(24,"Sale fino",1,null,null),
+(24,"Pepe nero",1,null,null),
+-- Caponata Siciliana
+(25,"Melanzane",0,200,"g"),
+(25,"Peperoni",0,100,"g"),
+(25,"Cipolle",0,100,"g"),
+(25,"Aceto",0,50,"ml"),
+(25,"Zucchero",0,20,"g"),
+(25,"Olio <abbr title=\"Extra Vergine di Oliva\">EVO</abbr>",1,null,null),
+(25,"Sale fino",1,null,null),
+(25,"Pepe nero",1,null,null),
+-- Zucchine Trifolate
+(26,"Zucchine",0,200,"g"),
+(26,"Aglio",0,1,"num_el"),
+(26,"Prezzemolo",1,null,null),
+(26,"Olio <abbr title=\"Extra Vergine di Oliva\">EVO</abbr>",1,null,null),
+(26,"Sale fino",1,null,null),
+(26,"Pepe nero",1,null,null),
+-- Insalata di Farro
+(27,"Farro",0,200,"g"),
+(27,"Pomodori",0,100,"g"),
+(27,"Cetrioli",0,100,"g"),
+(27,"Peperoni",0,100,"g"),
+(27,"Olio <abbr title=\"Extra Vergine di Oliva\">EVO</abbr>",1,null,null),
+(27,"Succo di limone",1,null,null),
+(27,"Sale fino",1,null,null),
+(27,"Pepe nero",1,null,null),
+-- Tiramisù
+(28,"Savoiardi",0,100,"g"),
+(28,"Caffè espresso",0,100,"ml"),
+(28,"Mascarpone",0,150,"g"),
+(28,"Uova",0,2,"num_el"),
+(28,"Zucchero",0,50,"g"),
+(28,"Cacao amaro in polvere",1,null,null),
+-- Panna Cotta
+(29,"Panna fresca",0,200,"ml"),
+(29,"Zucchero",0,50,"g"),
+(29,"Vaniglia",1,null,null),
+(29,"Gelatina in fogli",0,5,"g"),
+(29,"Frutti di bosco misti",0,100,"g"),
+-- Cassata Siciliana
+(30,"Ricotta",0,200,"g"),
+(30,"Zucchero",0,100,"g"),
+(30,"Pan di spagna",0,150,"g"),
+(30,"Canditi misti",0,50,"g"),
+(30,"Cioccolato fondente",0,50,"g"),
+(30,"Vaniglia",1,null,null),
+-- Crostata alla Marmellata
+(31,"Frolla artigianale",0,200,"g"),
+(31,"Confettura di albicocca",0,100,"g"),
+(31,"Uova",0,1,"num_el"),
+(31,"Zucchero",0,50,"g"),
+(31,"Burro",0,50,"g"),
+-- Bignè alla Crema
+(32,"Frolla artigianale",0,100,"g"),
+(32,"Crema pasticcera",0,150,"g"),
+(32,"Zucchero",0,20,"g"),
+(32,"Burro",0,30,"g"),
+(32,"Uova",0,1,"num_el"),
+-- Biscotti Artigianali
+(33,"Frolla artigianale",0,300,"g"),
+(33,"Zucchero",0,100,"g"),
+(33,"Burro",0,100,"g"),
+(33,"Uova",0,1,"num_el"),
+(33,"Vaniglia",1,null,null),
+-- Cheesecake ai Frutti Rossi
+(34,"Frolla artigianale",0,300,"g"),
+(34,"Formaggio spalmabile",0,200,"g"),
+(34,"Panna fresca",0,100,"ml"),
+(34,"Zucchero",0,100,"g"),
+(34,"Uova",0,2,"num_el"),
+(34,"Burro",0,50,"g"),
+(34,"Frutti di bosco misti",0,100,"g"),
+(34,"Vaniglia",1,null,null);
 
-
+-- DEGUSTAZIONI
 INSERT INTO degustazioni 
 (id_prodotto, descrizione, disponibilita_persone, data_inizio, data_fine, prezzo) 
 VALUES
