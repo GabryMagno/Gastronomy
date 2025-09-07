@@ -2,6 +2,7 @@ DELETE FROM prodotto_ingredienti;
 DELETE FROM ingredienti;
 DELETE FROM degustazioni;
 DELETE FROM prodotti;
+DELETE FROM utenti;
 
 ALTER TABLE prodotti AUTO_INCREMENT = 1;
 ALTER TABLE valutazioni AUTO_INCREMENT = 1;
@@ -9,6 +10,7 @@ ALTER TABLE degustazioni AUTO_INCREMENT = 1;
 ALTER TABLE prenotazioni_degustazioni AUTO_INCREMENT = 1;
 ALTER TABLE suggerimenti AUTO_INCREMENT = 1;
 ALTER TABLE prenotazioni AUTO_INCREMENT = 1;
+ALTER TABLE utenti AUTO_INCREMENT = 1;
 
 INSERT INTO prodotti 
 (nome, categoria, unita, min_prenotabile, max_prenotabile, descrizione, prezzo, isDisponibile, url_immagine) 
@@ -443,3 +445,7 @@ VALUES
 
 -- PASSATE
 (29, 'Panna Cotta con frutti di bosco: una degustazione dedicata a chi ama i dolci freschi e delicati, con la possibilità di scoprire abbinamenti sorprendenti. Comprende bevanda calda o fresca.', 0, '2025-07-18', '2025-08-18', 12.00);
+
+-- UTENTI
+INSERT INTO utenti ( email, username, password, nome, cognome, data_nascita, data_iscrizione) VALUES
+("gabry@magno.it", "Gabry", "e790a542941d6263f18a53159c106a135cf908e8159732f10a7fd7553ab61294", "Gabriele", "Magnoni", "2001-12-06", "2025-09-01");
