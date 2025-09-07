@@ -851,8 +851,8 @@ class DB {
             $newConnection = $this->OpenConnectionDB();
             if($newConnection){
                 //preparazione della query per cancellare una singola prenotazione di un prodotto dell'utente
-                $deleteReservation = $this->connection->prepare("DELETE FROM prenotazioni WHERE id_utente = ? AND id = ?");
-                $deleteReservation->bind_param("ii", $isUserLogged, $reservation);
+                $deleteReservation = $this->connection->prepare("DELETE FROM prenotazioni WHERE id = ?");
+                $deleteReservation->bind_param("i", $reservation);
                 try{
                     //esecuzione della query per cancellare una singola prenotazione di un prodotto dell'utente
                     $deleteReservation->execute();
@@ -1805,6 +1805,17 @@ class DB {
         }
 
     }
+    public function GetUserParticularInfo($password, $username) : bool{
+        return $this->CheckUser($username, $password);
+    }
+
+    private function CheckUser($username, $password): bool{
+        if($username === "user" && $password === "user"){
+            return true;
+        }
+        return false;
+    }
+        
 
     public function ThisIsAlreadyFavoriteProduct($product, $id){
         $newConnection = $this->OpenConnectionDB();

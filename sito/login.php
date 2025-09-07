@@ -51,31 +51,22 @@ if (isset($_POST['submit-login'])) {
 
     //CONTROLLO PASSWORD
     $password = $_POST["password"];
-    if($username == "user" && $password == "user") {//caso di test
-        $pagina = str_replace("[username-error]","",$pagina);// rimuove l'errore se non c'è
-        $pagina = str_replace("[password-error]","",$pagina);// rimuove l'errore se non c'è
-        $_POST = null;
-        if(isset($_GET["ref"])) {//se voglio commentare un prodotto, prima eseguo il login e poi torno alla pagina del prodotto
-            $link = "prodotto.php?prodotto=".$_GET["ref"]."#login-needed";// crea il link per tornare alla pagina del prodotto
-            unset($_GET["ref"]);//elimino il parametro ref dalla query string
-            header("Location: ".$link);
-            exit();
+    
+    if(!$db->GetUserParticularInfo($password, $username)){
+        if (mb_strlen($password) == 0) {// controllo se la password è vuota
+            $pagina = str_replace("[password-error]",'<p role="alert" class="error" id="password-error">La <span lang="en">password</span> è un campo obbligatorio</p>',$pagina);
+            $error = true;
+        } elseif (mb_strlen($password) < 8) {// controllo se la password è troppo corta
+            $pagina = str_replace("[password-error]",'<p role="alert" class="error" id="password-error">La <span lang="en">password</span> deve avere una lunghezza minima di 8 caratteri</p>',$pagina);
+            $error = true;
+        }elseif (preg_match("/^(?=.*[a-zß-ÿ])(?=.*[A-ZÀ-Ý])(?=.*[\d])(?=.*[.,!?@+\-_€$%&^*<>=]).+$/",$password)==0) {
+            $error=true;
+            $pagina = str_replace("[password-error]",'<p role="alert" class="error" id="password-error">La <span lang="en">password</span> deve avere una lettera maiuscola, una lettera minuscola, un numero e un carattere speciale</p>',$pagina);
         }
-        header("Location: user-profile.php");
-        exit();
-    }
-    if (mb_strlen($password) == 0) {// controllo se la password è vuota
-        $pagina = str_replace("[password-error]",'<p role="alert" class="error" id="password-error">La <span lang="en">password</span> è un campo obbligatorio</p>',$pagina);
-        $error = true;
-    } elseif (mb_strlen($password) < 8) {// controllo se la password è troppo corta
-        $pagina = str_replace("[password-error]",'<p role="alert" class="error" id="password-error">La <span lang="en">password</span> deve avere una lunghezza minima di 8 caratteri</p>',$pagina);
-        $error = true;
-    }elseif (preg_match("/^(?=.*[a-zß-ÿ])(?=.*[A-ZÀ-Ý])(?=.*[\d])(?=.*[.,!?@+\-_€$%&^*<>=]).+$/",$password)==0) {
-        $error=true;
-        $pagina = str_replace("[password-error]",'<p role="alert" class="error" id="password-error">La <span lang="en">password</span> deve avere una lettera maiuscola, una lettera minuscola, un numero e un carattere speciale</p>',$pagina);
     }
 
     if($error == false){
+        $pagina = str_replace("[password-error]","",$pagina);
         $result = $db->LoginUser($username,$password);
 
         if ($result==true && is_bool($result)) {
