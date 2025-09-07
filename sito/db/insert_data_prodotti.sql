@@ -448,4 +448,6 @@ VALUES
 
 -- UTENTI
 INSERT INTO utenti ( email, username, password, nome, cognome, data_nascita, data_iscrizione) VALUES
+("user@user.com","user","04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb","User", "User", "2000-01-01", "2025-08-31"),
+("Licu@lica.com", "Lica04", "1bed7160e8125ec75d6fd2abcaa165f0266e4dbea81e42725006967aec0eb5d7", "Angy", "Licola", "2004-12-10", "2025-09-04"),
 ("gabry@magno.it", "Gabry", "e790a542941d6263f18a53159c106a135cf908e8159732f10a7fd7553ab61294", "Gabriele", "Magnoni", "2001-12-06", "2025-09-01");
