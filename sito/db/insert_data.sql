@@ -1,5 +1,10 @@
 DELETE FROM prodotto_ingredienti;
 DELETE FROM ingredienti;
+DELETE FROM preferiti;
+DELETE FROM valutazioni;
+DELETE FROM suggerimenti;
+DELETE FROM prenotazioni_degustazioni;
+DELETE FROM prenotazioni;
 DELETE FROM degustazioni;
 DELETE FROM prodotti;
 DELETE FROM utenti;
@@ -448,6 +453,64 @@ VALUES
 
 -- UTENTI
 INSERT INTO utenti ( email, username, password, nome, cognome, data_nascita, data_iscrizione) VALUES
-("user@user.com","user","04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb","User", "User", "2000-01-01", "2025-08-31"),
-("Licu@lica.com", "Lica04", "1bed7160e8125ec75d6fd2abcaa165f0266e4dbea81e42725006967aec0eb5d7", "Angy", "Licola", "2004-12-10", "2025-09-04"),
-("gabry@magno.it", "Gabry", "e790a542941d6263f18a53159c106a135cf908e8159732f10a7fd7553ab61294", "Gabriele", "Magnoni", "2001-12-06", "2025-09-01");
+("user@user.com","user","04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb","User", "User", "2000-01-01", "2025-02-01"),
+("Licu@lica.com", "Lica04", "1bed7160e8125ec75d6fd2abcaa165f0266e4dbea81e42725006967aec0eb5d7", "Angy", "Licola", "2004-12-10", "2025-01-01"),
+("gabry@magno.it", "Gabry", "e790a542941d6263f18a53159c106a135cf908e8159732f10a7fd7553ab61294", "Gabriele", "Magnoni", "2001-12-06", "2024-12-31");
+
+-- PRENOTAZIONI PRODOTTI
+INSERT INTO prenotazioni (id_utente, id_prodotto, quantita, data_prenotazione) VALUES
+(1, 8, 2, '2025-09-01'),
+(2, 15, 1, '2025-09-05'),
+(3, 12, 1, '2025-09-03'),
+(1, 1, 2, '2025-08-15'),
+(2, 2, 3, '2025-08-20'),
+(3, 3, 1, '2025-08-18'),
+(1, 4, 2, '2025-07-10'),
+(2, 5, 1, '2025-07-15'),
+(3, 6, 1, '2025-07-12');
+
+-- PRENOTAZIONI DEGUSTAZIONI
+INSERT INTO prenotazioni_degustazioni (id_cliente, id_degustazione, numero_persone, data_prenotazione) VALUES
+(1, 2, 2, '2025-08-04'),
+(2, 1, 4, '2025-08-29'),
+(3, 2, 1, '2025-08-18'),
+(1, 3, 2, '2025-08-17'),
+(2, 4, 4, '2025-08-26'),
+(3, 5, 1, '2025-08-15'),
+(1, 7, 2, '2025-08-12'),
+(2, 6, 4, '2025-08-21'),
+(3, 4, 1, '2025-08-11');
+
+-- PREFERITI
+INSERT INTO preferiti (id_utente, id_prodotto) VALUES
+(1, 8),
+(2, 15),
+(3, 12),
+(1, 1),
+(2, 2),
+(3, 3),
+(1, 4),
+(2, 5),
+(3, 6),
+(1, 7),
+(2, 8),
+(3, 9);
+
+
+-- VALUTAZIONI
+INSERT INTO valutazioni (id_utente, id_prodotto, voto, commento, data) VALUES
+(1, 8, 5, "La lasagna era deliziosa, con un ragù ricco e saporito. La porzione era abbondante e il servizio eccellente.", "2025-09-15"),
+(2, 15, 4, "Le scaloppine erano tenere e ben condite, anche se avrei preferito un po' più di salsa al limone.", "2025-09-10"),
+(3, 28, 5, "Il tiramisù era perfetto: cremoso e con il giusto equilibrio di sapori. Un vero piacere per il palato!", "2025-09-12"),
+(1, 2, 4, "Il tagliere di salumi era vario e di buona qualità. Il pane fresco ha fatto la differenza.", "2025-09-20"),
+(2, 9, 5, "Il risotto ai funghi era eccezionale, con funghi freschi e una consistenza cremosa. Lo consiglio vivamente!", "2025-09-18"),
+(3, 18, 3, "L'arrosto di tacchino era buono ma un po' asciutto. Forse un po' più di salsa avrebbe migliorato il piatto.", "2025-09-22");
+
+-- SUGGERIMENTI
+INSERT INTO suggerimenti (id_utente, suggerimento, data_inserimento) VALUES
+(null, "Sarebbe utile inserire un menù digitale aggiornato quotidianamente con foto dei piatti disponibili.", "2025-08-31"),
+(1, "Sarebbe interessante aggiungere una funzione carrello online per facilitare gli ordini e renderli più veloci.","2025-08-31"),
+(null, "Ottima scelta di salumi e formaggi, sarebbe utile indicare meglio la provenienza.","2025-09-05"),
+(null, "Prezzi nella media, ma proporrei offerte o menù combinati per il pranzo.","2025-07-22"),
+(3, "Ottima varietà di piatti pronti, ma aggiungerei più opzioni vegetariane e vegane","2025-09-03"),
+(2, "Servizio cordiale e veloce, ma migliorerei l’esposizione dei prodotti al banco.","2025-08-16");
