@@ -34,13 +34,30 @@ if(isset($_GET["prodotto"])){
     }
     if(is_string($ingredients) && $ingredients == "No ingredients found for this product") $ingredientsHTML = "<span class=\"persone-nondisponibile\">Ingredienti non inseriti</span>";
     else{
-        foreach($ingredients as $ingredient){
-            if($ingredient["unita_misura"] == "g") $ingredient["unita_misura"] = "<abbr title=\"grammi\">g</abbr>";
-            else if($ingredient["unita_misura"] == "kg") $ingredient["unita_misura"] = "<abbr title=\"chilogrammi\">kg</abbr>";
-            else if($ingredient["unita_misura"] == "ml") $ingredient["unita_misura"] = "<abbr title=\"millilitri\">ml</abbr>";
-            else if($ingredient["unita_misura"] == "l") $ingredient["unita_misura"] = "<abbr title=\"litri\">l</abbr>";
-            $ingredientsHTML .= "<li>". $ingredient["quantita"] . (($ingredient["unita_misura"] == "num_el" || $ingredient["unita_misura"] == null)? "" : $ingredient["unita_misura"]. " di") ."  ". $ingredient["ingrediente"] ."</li>";
-        }
+        foreach ($ingredients as $ingredient) {
+    switch ($ingredient["unita_misura"]) {
+        case "g":
+            $ingredient["unita_misura"] = "<abbr title=\"grammi\">g</abbr>";
+            break;
+        case "kg":
+            $ingredient["unita_misura"] = "<abbr title=\"chilogrammi\">kg</abbr>";
+            break;
+        case "ml":
+            $ingredient["unita_misura"] = "<abbr title=\"millilitri\">ml</abbr>";
+            break;
+        case "l":
+            $ingredient["unita_misura"] = "<abbr title=\"litri\">l</abbr>";
+            break;
+    }
+
+    $ingredientsHTML .= "<li>" .
+        $ingredient["quantita"] .
+        (($ingredient["unita_misura"] == "num_el" || $ingredient["unita_misura"] == null)
+            ? ""
+            : " " . $ingredient["unita_misura"] . " di") .
+        " " . $ingredient["ingrediente"] .
+        "</li>";
+}
     }
     //CONTROLLO VEGANO/VEGETARIANO/CELICACO
     $infoGenreProduct = $db->IsProductVeganVegetarianCeliac($productInfo["id"]);
