@@ -93,7 +93,8 @@ if(isset($_GET["prodotto"])){
     if (is_numeric($media) && $media != 0) {
         $valutazione = number_format((float)$media, 1);
     } else {
-        $valutazione = "X";
+        $valutazione = "<span class=\"persone-nondisponibile\">Valutazione media non disponibile</span>";
+        $pagina = str_replace(" su 5 stelle", "", $pagina);
     }
     $pagina = str_replace("[Valutazione]", $valutazione, $pagina);
     $pagina = str_replace("[Prezzo]",$productInfo["prezzo"],$pagina);
