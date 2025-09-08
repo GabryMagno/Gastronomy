@@ -30,7 +30,7 @@
         inset: 8pt,
         table.cell(colspan: 2, stroke: none)[*AUTORI* \ \ ],
         [Gabriele Magnelli], [2075542],
-        [Nicolò Bolzon], [Numero di matricola],
+        [Nicolò Bolzon], [2075521],
       ),
     )
   ]
