@@ -1097,11 +1097,6 @@ li.product-brochure form button{
     bottom: 0;
 }
 
-li.product-brochure a:hover,
-li.new article a:hover{
-    opacity: 0.9;
-}
-
 h3.product-name, h4.product-name{
 
     display: flex;
@@ -1109,16 +1104,20 @@ h3.product-name, h4.product-name{
 
     font-weight: bold;
     font-size: 1.2em;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.8em;
 
     min-height: 3em;
 
     padding: 0 1em;
 }
 
-/*abbr{
-    text-decoration: none;
-}*/
+.product-brochure-bold{
+    font-weight: bold;
+}
+
+.product-brochure-bold::after{
+    content: ":";
+}
 
 form#product-pages{
     display: flex;
