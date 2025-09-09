@@ -276,6 +276,29 @@ button:focus-visible {
     position: absolute;
     margin: -9999em;
 }
+/*
+#menu a.visited-link::after {
+  content: "✓";
+  margin-left: 3px;
+  color: var(--visitedcolor);
+}
+
+@media screen and (max-width: 950px) {
+    #menu {
+        margin-left: 0;
+        justify-content: center;
+    }
+
+    nav.navbar_top {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5em;
+    }
+
+    #menu li {
+        padding: 0.5em 0;
+    }
+}*/
 
 /*  
     ===============================
