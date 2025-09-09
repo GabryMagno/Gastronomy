@@ -45,7 +45,7 @@ if ($products != null) {// se ci sono prodotti, crea le brochure per ogni prodot
         $d_products .= CreateProductBrochure($product["url_immagine"], $product["nome"], $product["prezzo"], $product["id"]);
     }
 } else {// altrimenti mostra un messaggio di errore
-    $d_products = "<p>Non abbiamo nessun prodotto che soddisfi i criteri di ricerca</p>";
+    $d_products = "<p class=\"error\">Non abbiamo nessun prodotto che soddisfi i criteri di ricerca!</p>";
 }
 
 foreach (['Antipasto', 'Primo', 'Secondo', 'Contorno', 'Dolce'] as $category) {
