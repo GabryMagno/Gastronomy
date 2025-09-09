@@ -80,6 +80,10 @@ form.form-bianco#delete-account,
     overflow: hidden;
 }
 
+nav.navbar_top{
+    align-items: normal;
+}
+
 .logo-accessibile{
     background-image: url("../img/loghi/logo_colori_lato_scritta_bianca.png");
     background-repeat: no-repeat;
