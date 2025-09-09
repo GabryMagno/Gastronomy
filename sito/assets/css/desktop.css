@@ -1774,6 +1774,12 @@ ul#user-profile-recensioni {
     opacity: 0.9;
 }
 
+.userprofile-brochure.urgent{
+    border-left: 6px solid #f48361;
+    box-shadow: 0 1em 2em rgba(244, 162, 97, 0.35),
+                0 0.8em 0.8em rgba(244, 162, 97, 0.25);
+}
+
 .brochure-links{
     display: flex;
     width: 100%;

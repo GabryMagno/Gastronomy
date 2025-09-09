@@ -569,7 +569,7 @@ class DB {
             FROM prenotazioni pr
             JOIN prodotti p ON pr.id_prodotto = p.id
             WHERE pr.id_utente = ?
-            AND pr.data_ritiro >= NOW()
+            AND pr.data_ritiro >= CURDATE()
             ORDER BY pr.data_ritiro;
             ");
             $userReservations->bind_param("i", $id);
@@ -622,7 +622,7 @@ class DB {
             JOIN degustazioni d ON pd.id_degustazione = d.id
             JOIN prodotti p ON d.id_prodotto = p.id
             WHERE pd.id_cliente = ?
-            AND pd.data_scelta >= NOW()
+            AND pd.data_scelta >= CURDATE()
             ORDER BY pd.data_scelta;
             ");
             $userTastings->bind_param("i", $id);

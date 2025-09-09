@@ -164,8 +164,16 @@ function VisualizzaPrenotazione(array $prenotazioni): string {
 
 function CreaVisualizzaPrenotazione(int $idPrenotazione, string $nomeProdotto, DateTime $dataRitiro, int $quantita, string $unita, int $idProdotto){
 
-    $TEMPLATE = '
-            <li class="userprofile-brochure">
+    $oggi = new DateTime("today");
+    $domani = new DateTime("tomorrow");
+
+    if ($dataRitiro == $oggi || $dataRitiro == $domani){
+        $TEMPLATE = '<li class="userprofile-brochure urgent">';
+    } else{
+        $TEMPLATE = '<li class="userprofile-brochure">';
+    }
+    
+    $TEMPLATE .= '
                 <div class="userprofile-brochure-content">
                     <h4>'.$nomeProdotto.'</h4>
                     <dl>
@@ -249,8 +257,17 @@ function VisualizzaDegustazione(array $degustazioni): string {
 
 function CreaVisualizzaDegustazione(int $idDegustazione,int $idPrenotazione, string $nomeProdotto, DateTime $dataScelta, float $prezzo, int $numeroPersone){
 
-    $TEMPLATE = '
-            <li class="userprofile-brochure">
+    $oggi = new DateTime("today");
+    $domani = new DateTime("tomorrow");
+
+    if ($dataScelta == $oggi || $dataScelta == $domani){
+        $TEMPLATE = '<li class="userprofile-brochure urgent">';
+    } else{
+        $TEMPLATE = '<li class="userprofile-brochure">';
+    }
+    
+
+    $TEMPLATE .= '
                 <div class="userprofile-brochure-content">
                     <h4>'.$nomeProdotto.'</h4>
                         <dl>
