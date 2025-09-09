@@ -29,8 +29,12 @@
 
     --secondaryelementcolor: #B8D86C;
     --herelinkcolor: #000638;
-    --linkcolor: #F3FF00;
+    --linkcolor: #FAF4ED;
+    --visitedcolor: #F3FF00;
+    /*
+    
     --visitedcolor: #FF9900;
+    */
 }
 
 /*  
@@ -1775,7 +1779,7 @@ ul#user-profile-recensioni {
 }
 
 .userprofile-brochure.urgent{
-    border-left: 6px solid #f56a33;
+    border-left: 6px solid #f36f3b;
     box-shadow: 0 1em 2em rgba(244, 162, 97, 0.35),
                 0 0.8em 0.8em rgba(244, 162, 97, 0.25);
 }

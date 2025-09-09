@@ -83,7 +83,10 @@ if($preferiti === false){
 }
 
 function VisualizzaPreferito(array $preferiti, int $id): string {
-        $preferito_html = '<div class="data-container" id="dc-prodotti-preferiti" aria-live="polite">
+
+    $conteggio = 0;
+
+    $preferito_html = '<div class="data-container" id="dc-prodotti-preferiti" aria-live="polite">
                         <ul class="list" id="user-profile-prodotti">';
 
     foreach ($preferiti as $value){
@@ -93,9 +96,18 @@ function VisualizzaPreferito(array $preferiti, int $id): string {
             $value['url_immagine'],
             $id
         );
+
+        $conteggio++;
     }
 
     $preferito_html.= '</ul></div>';
+
+    if ($conteggio >= 4){
+        $preferito_html.=
+        '<div class="button-container">
+            <a class="bottoni-link" href="#prodotti-preferiti">Torna a inizio sezione</a>
+        </div>';
+    }
 
     return $preferito_html;
 }
@@ -118,19 +130,6 @@ function CreaVisualizzaPreferito(int $idProdotto, string $nomeProdotto, string $
     return $TEMPLATE;
 }
 
-/*
-    <div class="a11y-status sr-only nondisponibile" role="status" aria-live="polite"></div>
-
-    <div class="button-container">
-        <button class="load-more bottoni-rossi" id="lm-prodotti-preferiti" aria-controls="dc-prodotti-preferiti" aria-label="Carica più prodotti selezionati come preferiti">
-            Carica di pi&ugrave;
-        </button>
-        <a class="bottoni-rossi" href="#prodotti-preferiti">Torna a inizio sezione</a>
-    </div>
-*/
-
-
-
 // Prenotazioni
 $prenotazioni = $db->GetUserReservation($id);
 
@@ -143,6 +142,8 @@ if($prenotazioni === false){
 }
 
 function VisualizzaPrenotazione(array $prenotazioni): string {
+    $conteggio = 0;
+
     $prenotazioni_html = '<div class="data-container" id="dc-prodotti-prenotati" aria-live="polite">
                             <ul class="list" id="user-profile-prodotti-prenotati">';
 
@@ -155,9 +156,18 @@ function VisualizzaPrenotazione(array $prenotazioni): string {
             $value['unita'],
             $value['id_prodotto']
         );
+
+        $conteggio++;
     }
 
     $prenotazioni_html.= '</ul></div>';
+
+    if ($conteggio >= 4){
+        $prenotazioni_html.=
+        '<div class="button-container">
+            <a class="bottoni-link" href="#prodotti-prenotati">Torna a inizio sezione</a>
+        </div>';
+    }
 
     return $prenotazioni_html;
 }
@@ -212,17 +222,6 @@ function TipoUnita(string $unita): string {
     }
 }
 
-/*
-                <div class="a11y-status sr-only nondisponibile" role="status" aria-live="polite"></div>
-
-                <div class="button-container">
-                    <button class="load-more bottoni-rossi" id="lm-prodotti-prenotati" aria-controls="dc-prodotti-prenotati" aria-label="Carica più prodotti prenotati">
-                        Carica di pi&ugrave;
-                    </button>
-                    <a class="bottoni-rossi" href="#prodotti-prenotati">Torna a inizio sezione</a>
-                </div>
-*/
-
 
 // Degustazioni
 $degustazioni = $db->GetUserTastings($id);
@@ -236,6 +235,8 @@ if($degustazioni === false){
 }
 
 function VisualizzaDegustazione(array $degustazioni): string {
+    $conteggio = 0;
+    
     $degustazione_html = '<div class="data-container" id="dc-degustazioni-prenotate" aria-live="polite">
                             <ul class="list" id="user-profile-degustazioni-prenotate">';
 
@@ -248,9 +249,18 @@ function VisualizzaDegustazione(array $degustazioni): string {
             $value['prezzo'],
             $value['numero_persone']
         );
+
+        $conteggio++;
     }
 
     $degustazione_html.= '</ul></div>';
+
+    if ($conteggio >= 4){
+        $degustazione_html.=
+        '<div class="button-container">
+            <a class="bottoni-link" href="#degustazioni-prenotate">Torna a inizio sezione</a>
+        </div>';
+    }
 
     return $degustazione_html;
 }
@@ -275,7 +285,7 @@ function CreaVisualizzaDegustazione(int $idDegustazione,int $idPrenotazione, str
                                 <dd><time datetime="' . $dataScelta->format("Y-m-d") . '">' . $dataScelta->format("d/m/Y") . '</time></dd>
                             <dt>Persone</dt>
                                 <dd>'.$numeroPersone.' '.($numeroPersone == 1 ? 'persona' : 'persone').'</dd>
-                            <dt>Prezzo Totale</dt>
+                            <dt>Totale</dt>
                                 <dd class="userprofile-brochure-prezzo">'.number_format($prezzo*$numeroPersone, 2, ',', '.') . ' €</dd>
                         </dl>
                 </div>
@@ -293,17 +303,6 @@ function CreaVisualizzaDegustazione(int $idDegustazione,int $idPrenotazione, str
     return $TEMPLATE;
 }
 
-/*
-                <div class="a11y-status sr-only nondisponibile" role="status" aria-live="polite"></div>
-
-                <div class="button-container">
-                    <button class="load-more bottoni-rossi" id="lm-degustazioni-prenotate" aria-controls="dc-degustazioni-prenotate" aria-label="Carica ulteriori degustazioni prenotate">
-                        Carica di pi&ugrave;
-                    </button>
-                    <a class="bottoni-rossi" href="#degustazioni-prenotate">Torna a inizio sezione</a>
-                </div>
-*/
-
 // Recensioni
 $recensioni = $db->GetUserReviews($id);
 
@@ -316,6 +315,8 @@ if($recensioni === false){
 }
 
 function VisualizzaRecensione(array $recensioni): string {
+    $conteggio = 0;
+    
     $recensione_html = '<div class="data-container" id="dc-recensioni" aria-live="polite">
                         <ul class="list" id="user-profile-recensioni">';
 
@@ -326,9 +327,18 @@ function VisualizzaRecensione(array $recensioni): string {
             new DateTime($value['data_recensione']),
             $value['valutazione']
         );
+
+        $conteggio++;
     }
 
     $recensione_html.= '</ul></div>';
+
+    if ($conteggio >= 4){
+        $recensione_html.=
+        '<div class="button-container">
+            <a class="bottoni-link" href="#recensioni-prodotti">Torna a inizio sezione</a>
+        </div>';
+    }
 
     return $recensione_html;
 }
@@ -362,17 +372,6 @@ function CreaVisualizzaRecensioni(int $idProdotto, string $nomeProdotto, DateTim
 
     return $TEMPLATE;
 }
-
-/*
-                <div class="a11y-status sr-only nondisponibile" role="status" aria-live="polite"></div>
-
-                <div class="button-container">
-                    <button class="load-more bottoni-rossi" id="lm-recensioni" aria-controls="dc-recensioni" aria-label="Carica ulteriori recensioni da te scritte.">
-                        Carica di pi&ugrave;
-                    </button>
-                    <a class="bottoni-rossi" href="#recensioni-prodotti">Torna a inizio sezione</a>
-                </div>
-*/
 
 echo $pagina;
 
