@@ -64,7 +64,7 @@ if(isset($_GET["degustazione"])){
                             [date-error]
 
                             <div class=\"button-container\">
-                                <button type=\"submit\" aria-label=\"Prenota Prodotto\" class=\"bottoni-rossi\" id=\"submit-reservation\" name=\"submit-reservation\">Prenota</button>
+                                <button type=\"submit\" aria-label=\"Prenota Prodotto\" class=\"bottoni-link\" id=\"submit-reservation\" name=\"submit-reservation\">Prenota</button>
                             </div>
                         </fieldset>
                     </form>",$pagina);

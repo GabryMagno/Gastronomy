@@ -97,7 +97,7 @@ function CreaDegustazioneBrochure( string $img, string $nomeProdotto, float $pre
         $TEMPLATE .= '<p class="degustazione-nondisponibile">Prenotazione non disponibile!</p>';
     } else {
         $TEMPLATE.= '<div class="button-container degustazione-prenota">
-                        <a href="degustazione.php?degustazione='.$id.'" class="bottoni-rossi">Prenota ora la degustazione</a>
+                        <a href="degustazione.php?degustazione='.$id.'" class="bottoni-link">Prenota ora la degustazione</a>
                     </div>';
     }
 
@@ -106,25 +106,5 @@ function CreaDegustazioneBrochure( string $img, string $nomeProdotto, float $pre
     return $TEMPLATE;
 
 }
-
-/*function VisualizzaDegustazioni(array $tastings): string
-{
-    $tastings_html = "";
-
-    foreach ($tastings as $value) {
-        $tastings_html .= CreaDegustazioneBrochure(
-            $value['id_degustazione'],
-            $value['url_immagine'],
-            $value['nome_prodotto'],
-            $value['descrizione_degustazione'],
-            (int) $value['disponibilita_persone'],
-            new DateTime($value['data_inizio']),
-            new DateTime($value['data_fine']),
-            (float) $value['prezzo_degustazione']
-        );
-    }
-
-    return $tastings_html;
-}*/
 
 ?>
