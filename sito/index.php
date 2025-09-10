@@ -45,7 +45,7 @@ function createBestCommentTemplate($username, $immagine, $voto, $commento, $prod
     $TEMPLATE = '
         <div class="recensione-card">
             <div class="recensione-foto">
-                <img loading="lazy" src="' . $immagine . '" alt="Foto profilo di ' . $username . '"/>
+                <img loading="lazy" src="' . $immagine . '" alt="Foto profilo di ' . $username . '">
             </div>
             <div class="recensione-contenuto">
                 <h4 class="recensione-cliente">' . $username . '</h4>
@@ -75,7 +75,7 @@ function CreateBestProductBrochure(string $img, string $title, float $cost, int 
     
     $TEMPLATE = '<li class="new">
                     <article>
-                        <img loading="lazy" src="'. $img . '" alt=""/>
+                        <img loading="lazy" src="'. $img . '" alt="">
                         <h4 class="product-name">' . $title . '</h4>
 
                         <p><span class="product-brochure-bold">Voto</span> '. (number_format((float)$db->AverageGradeProduct($id),1) == 0 ? "X" : number_format((float)$db->AverageGradeProduct($id),1)) .' su 5</p>

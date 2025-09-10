@@ -95,7 +95,7 @@ function CreateProductBrochure(string $img, string $title, float $cost, int $id)
                     <p><span class="product-brochure-bold">Voto</span> '. (number_format((float)$db->AverageGradeProduct($id),1) == 0 ? "X" : number_format((float)$db->AverageGradeProduct($id),1)) .' su 5</p>
                     <p><span class="product-brochure-bold">Prezzo</span> '. $cost . '&euro;</p>
                     
-                    <a href="./prodotto.php?prodotto='. urlencode($id) . '" title="vai al prodotto ' . Sanitizer::SanitizeGenericInput($title) . '">Scheda del prodotto</a>
+                    <a href="./prodotto.php?prodotto='. urlencode($id) . '" title="vai al prodotto ' . Sanitizer::SanitizeText($title) . '">Scheda del prodotto</a>
                 </li>';
     return $TEMPLATE;
 }

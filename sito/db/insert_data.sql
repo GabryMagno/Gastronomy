@@ -62,7 +62,7 @@ VALUES
 ('Crostata alla Marmellata', 'dolce', 'pezzo', 1, 8, 'Frolla con confettura di albicocca', 3.00, TRUE, 'assets/img/prodotti/crostata.webp'),
 ('Bign&egrave; alla Crema', 'dolce', 'pezzo', 2, 12, 'Pasta <span lang="fr">choux</span> ripiena di crema pasticcera', 1.50, TRUE, 'assets/img/prodotti/bigne.webp'),
 ('Biscotti Artigianali', 'dolce', 'kg', 1, 3, 'Selezione di biscotti di frolla artigianali', 18.00, TRUE, 'assets/img/prodotti/biscotti.webp'),
-('<span lang="en">Cheesecake</span> ai Frutti Rossi', 'dolce', 'porzione', 1, 6, '<span lang="en">Cheesecake</span> con topping ai frutti rossi', 4.50, TRUE, 'assets/img/prodotti/cheesecake.webp');
+('<span lang="en">Cheesecake</span>', 'dolce', 'porzione', 1, 6, '<span lang="en">Cheesecake</span> con topping ai frutti rossi', 4.50, TRUE, 'assets/img/prodotti/cheesecake.webp');
 
 
 -- INGREDIENTI
