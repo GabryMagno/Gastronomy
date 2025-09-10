@@ -64,7 +64,7 @@ function createBestCommentTemplate($username, $immagine, $voto, $commento, $prod
         $TEMPLATE .= '☆';
     }
 
-    $TEMPLATE .= '</span> ('.$voto.' su 5)';
+    $TEMPLATE .= '</span><p class="hidden_testo"> ('.$voto.' su 5)'.'</p>';
 
     $TEMPLATE .= '</p></div></div>';
     return $TEMPLATE;
