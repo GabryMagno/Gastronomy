@@ -67,13 +67,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["up-rimuovi-preferiti"
     }
 
     // Redirect per evitare il problema del reinvio del form
-    header("Location: ".$_SERVER['PHP_SELF']);
+    $filter = ObtainFilter();
+    $filter = array_filter($filter, fn($value) => $value != null);//toglie i valori nulli dall'array associativo
+    if(isset($fiter['offset-prefers'])){
+        $offsetPrefer = $filter['offset-prefers'];
+        unset($filter['offset-prefers']);
+        $filter['offset-prefers'] = $offsetPrefer;
+    }
+    $query = '';
+    if($filter){
+        $query = '?'.http_build_query($filter);
+    }
+    header("Location: ".$_SERVER['PHP_SELF'].$query);
     exit();
+    
 }
 
 // Prodotti Preferiti
 $max_preferiti = 5;
-$offset = isset($_GET['offset']) ? (int)$_GET['offset'] : 0;
+$offset_prefers = isset($_GET['offset-prefers']) ? (int)$_GET['offset-prefers'] : 0;
 $preferiti = $db->GetUserFavoritesProducts($id);
 
 if($preferiti === false){
@@ -81,18 +93,18 @@ if($preferiti === false){
 } elseif (empty($preferiti)){
     $pagina = str_replace('[Prodotti Preferiti]','<p class="nondisponibile">Nessun prodotto aggiunto ai preferiti.</p>',$pagina);
 } else {
-    $pagina=str_replace("[Prodotti Preferiti]",VisualizzaPreferito($preferiti, $id, $offset, $max_preferiti),$pagina);
+    $pagina=str_replace("[Prodotti Preferiti]",VisualizzaPreferito($preferiti, $id, $offset_prefers, $max_preferiti),$pagina);
 }
 
-function VisualizzaPreferito(array $preferiti, int $id, $offset, $max_preferiti): string {
+function VisualizzaPreferito(array $preferiti, int $id, $offset_prefers, $max_preferiti): string {
 
     $conteggio = 0;
-    $toShow = $max_preferiti + $offset;
+    $toShow = $max_preferiti + $offset_prefers;
 
     $preferito_html = '<div class="data-container" id="dc-prodotti-preferiti" aria-live="polite">
                         <ul class="list" id="user-profile-prodotti">';
     
-    foreach ($preferiti as $index => $value) {
+    foreach ($preferiti as $index => $value){
         if($index < $toShow){
             $preferito_html.= CreaVisualizzaPreferito(
                 $value['id'],
@@ -109,15 +121,23 @@ function VisualizzaPreferito(array $preferiti, int $id, $offset, $max_preferiti)
     $preferito_html.= '</ul></div>';
     $button_html = '';
 
-    if ($offset > 0 || count($preferiti) > $max_preferiti){
+    if ($offset_prefers > 0 || count($preferiti) > $max_preferiti){
         $button_html.=
         '<a class="bottoni-link" href="#prodotti-preferiti">Torna a inizio sezione</a>';
     }
 
-    if(count($preferiti) > $offset + $max_preferiti){
-        $nextOffset = $offset + $max_preferiti;
+    if(count($preferiti) > $offset_prefers + $max_preferiti){
+        $nextOffset = $offset_prefers + $max_preferiti;
+        $filter = ObtainFilter();
+        $filter = array_filter($filter, fn($value) => $value != null);
+        $filter["offset-prefers"] = $nextOffset;
+        $inputHidden = "";
+        foreach($filter as $key => $value){
+            $inputHidden .= '<input type="hidden" name="'.htmlspecialchars($key).'" value="'.htmlspecialchars($value).'">';
+        }
+
         $button_html .= "<form action=\"#dc-prodotti-preferiti\" method=\"get\">
-                            <input type=\"hidden\" name=\"offset\" value=\"$nextOffset\">
+                            $inputHidden
                             <button type=\"submit\" class=\"bottoni-rossi\">Carica più preferiti</button>
                         </form>";
 
@@ -151,6 +171,8 @@ function CreaVisualizzaPreferito(int $idProdotto, string $nomeProdotto, string $
 }
 
 // Prenotazioni
+$max_prenotazioni = 4;
+$offset_reservations = isset($_GET['offset-reservations']) ? (int)$_GET['offset-reservations'] : 0;
 $prenotazioni = $db->GetUserReservation($id);
 
 if($prenotazioni === false){
@@ -158,42 +180,67 @@ if($prenotazioni === false){
 } elseif (empty($prenotazioni)){
     $pagina = str_replace('[Prodotti Prenotati]','<p class="nondisponibile">Nessun prodotto prenotato.</p>',$pagina);
 } else {
-    $pagina=str_replace("[Prodotti Prenotati]",VisualizzaPrenotazione($prenotazioni),$pagina);           
+    $pagina=str_replace("[Prodotti Prenotati]",VisualizzaPrenotazione($prenotazioni,$offset_reservations, $max_prenotazioni),$pagina);           
 }
 
-function VisualizzaPrenotazione(array $prenotazioni): string {
+function VisualizzaPrenotazione(array $prenotazioni, $offset_reservations, $max_prenotazioni): string {
     $conteggio = 0;
+    $toShow = $max_prenotazioni + $offset_reservations;
 
     $prenotazioni_html = '<div class="data-container" id="dc-prodotti-prenotati" aria-live="polite">
                             <ul class="list" id="user-profile-prodotti-prenotati">';
 
-    foreach ($prenotazioni as $value){
-        $prenotazioni_html.= CreaVisualizzaPrenotazione(
-            $value['id_prenotazione'],
-            $value['nome_prodotto'],
-            new DateTime($value['data_ritiro']),
-            $value['quantita'],
-            $value['unita'],
-            $value['id_prodotto']
-        );
+    foreach ($prenotazioni as $index => $value){
+        if($index < $toShow){
+            $prenotazioni_html.= CreaVisualizzaPrenotazione(
+                $value['id_prenotazione'],
+                $value['nome_prodotto'],
+                new DateTime($value['data_ritiro']),
+                $value['quantita'],
+                $value['unita'],
+                $value['id_prodotto']
+            );
+        }
 
         $conteggio++;
     }
 
     $prenotazioni_html.= '</ul></div>';
+    $button_html = '';
 
-    if ($conteggio >= 4){
-        $prenotazioni_html.=
-        '<div class="button-container">
-            <a class="bottoni-link" href="#prodotti-prenotati">Torna a inizio sezione</a>
-        </div>';
+    if ($offset_reservations > 0 || count($prenotazioni) > $max_prenotazioni){
+        $button_html.=
+        '<a class="bottoni-link" href="#prodotti-prenotati">Torna a inizio sezione</a>';
+    }
+
+    if(count($prenotazioni) > $offset_reservations + $max_prenotazioni){
+        $nextOffset = $offset_reservations + $max_prenotazioni;
+        $filter = ObtainFilter();
+        $filter = array_filter($filter, fn($value) => $value != null);
+        $filter["offset-reservations"] = $nextOffset;
+        $inputHidden = "";
+        foreach($filter as $key => $value){
+            $inputHidden .= '<input type="hidden" name="'.htmlspecialchars($key).'" value="'.htmlspecialchars($value).'">';
+        }
+        $button_html .= "<form action=\"#dc-prodotti-prenotati\" method=\"get\">
+                            $inputHidden
+                            <button type=\"submit\" class=\"bottoni-rossi\">Carica più prenotazioni</button>
+                        </form>";
+
+    }
+
+    if ($button_html){
+        $prenotazioni_html.= '<div class="button-container">
+                            '.$button_html.'
+                        </div>';
     }
 
     return $prenotazioni_html;
+
 }
 
 function CreaVisualizzaPrenotazione(int $idPrenotazione, string $nomeProdotto, DateTime $dataRitiro, int $quantita, string $unita, int $idProdotto){
-
+   
     $oggi = new DateTime("today");
     $domani = new DateTime("tomorrow");
 
@@ -244,6 +291,8 @@ function TipoUnita(string $unita): string {
 
 
 // Degustazioni
+$max_degustazioni = 4;
+$offset_tastings = isset($_GET['offset-tastings']) ? (int)$_GET['offset-tastings'] : 0;
 $degustazioni = $db->GetUserTastings($id);
 
 if($degustazioni === false){
@@ -251,38 +300,63 @@ if($degustazioni === false){
 } elseif (empty($degustazioni)){
     $pagina = str_replace('[Degustazioni Prossime]','<p class="nondisponibile">Nessuna degustazione prenotata.</p>',$pagina);
 } else {
-    $pagina=str_replace("[Degustazioni Prossime]",VisualizzaDegustazione($degustazioni),$pagina);           
+    $pagina=str_replace("[Degustazioni Prossime]",VisualizzaDegustazione($degustazioni,$offset_tastings, $max_degustazioni),$pagina);           
 }
 
-function VisualizzaDegustazione(array $degustazioni): string {
+function VisualizzaDegustazione(array $degustazioni, $offset_tastings, $max_degustazioni): string {
     $conteggio = 0;
+    $toShow = $offset_tastings + $max_degustazioni;
     
     $degustazione_html = '<div class="data-container" id="dc-degustazioni-prenotate" aria-live="polite">
                             <ul class="list" id="user-profile-degustazioni-prenotate">';
 
-    foreach ($degustazioni as $value){
+    foreach ($degustazioni as $index => $value){
+        if($index < $toShow){
         $degustazione_html.= CreaVisualizzaDegustazione(
-            $value['id_degustazione'],
-            $value['id_prenotazione'],
-            $value['nome_prodotto'],
-            new DateTime($value['data_scelta']),
-            $value['prezzo'],
-            $value['numero_persone']
-        );
+                $value['id_degustazione'],
+                $value['id_prenotazione'],
+                $value['nome_prodotto'],
+                new DateTime($value['data_scelta']),
+                $value['prezzo'],
+                $value['numero_persone']
+            );
+        }
 
         $conteggio++;
     }
 
     $degustazione_html.= '</ul></div>';
+    $button_html = '';
 
-    if ($conteggio >= 4){
-        $degustazione_html.=
-        '<div class="button-container">
-            <a class="bottoni-link" href="#degustazioni-prenotate">Torna a inizio sezione</a>
-        </div>';
+    if ($offset_tastings > 0 || count($degustazioni) > $max_degustazioni){
+        $button_html.=
+        '<a class="bottoni-link" href="#degustazioni-prenotate">Torna a inizio sezione</a>';
+    }
+
+    if(count($degustazioni) > $offset_tastings + $max_degustazioni){
+        $nextOffset = $offset_tastings + $max_degustazioni;
+        $filter = ObtainFilter();
+        $filter = array_filter($filter, fn($value) => $value != null);
+        $filter["offset-tastings"] = $nextOffset;
+        $inputHidden = "";
+        foreach($filter as $key => $value){
+            $inputHidden .= '<input type="hidden" name="'.htmlspecialchars($key).'" value="'.htmlspecialchars($value).'">';
+        }
+        $button_html .= "<form action=\"#dc-degustazioni-prenotate\" method=\"get\">
+                            $inputHidden
+                            <button type=\"submit\" class=\"bottoni-rossi\">Carica più degustazioni</button>
+                        </form>";
+
+    }
+
+    if ($button_html){
+        $degustazione_html.= '<div class="button-container">
+                            '.$button_html.'
+                        </div>';
     }
 
     return $degustazione_html;
+
 }
 
 function CreaVisualizzaDegustazione(int $idDegustazione,int $idPrenotazione, string $nomeProdotto, DateTime $dataScelta, float $prezzo, int $numeroPersone){
@@ -295,7 +369,6 @@ function CreaVisualizzaDegustazione(int $idDegustazione,int $idPrenotazione, str
     } else{
         $TEMPLATE = '<li class="userprofile-brochure">';
     }
-    
 
     $TEMPLATE .= '
                 <div class="userprofile-brochure-content">
@@ -324,6 +397,8 @@ function CreaVisualizzaDegustazione(int $idDegustazione,int $idPrenotazione, str
 }
 
 // Recensioni
+$max_recensioni = 4;
+$offset_reviews = isset($_GET['offset-reviews']) ? (int)$_GET['offset-reviews'] : 0;
 $recensioni = $db->GetUserReviews($id);
 
 if($recensioni === false){
@@ -331,33 +406,57 @@ if($recensioni === false){
 } elseif (empty($recensioni)){
     $pagina = str_replace('[Recensioni Prodotti]','<p class="nondisponibile">Nessuna recensione inserita.</p>',$pagina);
 } else {
-    $pagina=str_replace("[Recensioni Prodotti]",VisualizzaRecensione($recensioni),$pagina);           
+    $pagina=str_replace("[Recensioni Prodotti]",VisualizzaRecensione($recensioni, $offset_reviews, $max_recensioni),$pagina);           
 }
 
-function VisualizzaRecensione(array $recensioni): string {
+function VisualizzaRecensione(array $recensioni, $offset_reviews, $max_recensioni): string {
     $conteggio = 0;
+    $toShow = $offset_reviews + $max_recensioni;
     
     $recensione_html = '<div class="data-container" id="dc-recensioni" aria-live="polite">
                         <ul class="list" id="user-profile-recensioni">';
 
-    foreach ($recensioni as $value){
-        $recensione_html.= CreaVisualizzaRecensioni(
-            $value['id_prodotto'],
-            $value['nome_prodotto'],
-            new DateTime($value['data_recensione']),
-            $value['valutazione']
-        );
+    foreach ($recensioni as $index => $value){
+        if($index < $toShow){
+            $recensione_html.= CreaVisualizzaRecensioni(
+                $value['id_prodotto'],
+                $value['nome_prodotto'],
+                new DateTime($value['data_recensione']),
+                $value['valutazione']
+            );
 
-        $conteggio++;
+            $conteggio++;
+        }
     }
 
     $recensione_html.= '</ul></div>';
+    $button_html = '';
 
-    if ($conteggio >= 4){
-        $recensione_html.=
-        '<div class="button-container">
-            <a class="bottoni-link" href="#recensioni-prodotti">Torna a inizio sezione</a>
-        </div>';
+    if ($offset_reviews > 0 || count($recensioni) > $max_recensioni){
+        $button_html.=
+        '<a class="bottoni-link" href="#recensioni-prodotti">Torna a inizio sezione</a>';
+    }
+
+    if(count($recensioni) > $offset_reviews + $max_recensioni){
+        $nextOffset = $offset_reviews + $max_recensioni;
+        $filter = ObtainFilter();
+        $filter = array_filter($filter, fn($value) => $value != null);
+        $filter["offset-reviews"] = $nextOffset;
+        $inputHidden = "";
+        foreach($filter as $key => $value){
+            $inputHidden .= '<input type="hidden" name="'.htmlspecialchars($key).'" value="'.htmlspecialchars($value).'">';
+        }
+        $button_html .= "<form action=\"#dc-recensioni-prodotti\" method=\"get\">
+                            $inputHidden
+                            <button type=\"submit\" class=\"bottoni-rossi\">Carica più commenti</button>
+                        </form>";
+
+    }
+
+    if ($button_html){
+        $recensione_html.= '<div class="button-container">
+                            '.$button_html.'
+                        </div>';
     }
 
     return $recensione_html;
@@ -391,6 +490,15 @@ function CreaVisualizzaRecensioni(int $idProdotto, string $nomeProdotto, DateTim
                 </li>';
 
     return $TEMPLATE;
+}
+
+function ObtainFilter() : array | bool{
+    $filters = array();
+    (isset($_GET['offset-prefers'])) ?  (int)$filters["offset-prefers"] = $_GET['offset-prefers'] : null;
+    (isset($_GET['offset-reservations'])) ?  (int)$filters["offset-reservations"] = $_GET['offset-reservations'] : null;
+    (isset($_GET['offset-tastings'])) ?  (int)$filters["offset-tastings"] = $_GET['offset-tastings'] : null;
+    (isset($_GET['offset-reviews'])) ?  (int)$filters["offset-reviews"] = $_GET['offset-reviews'] : null;
+    return $filters;
 }
 
 echo $pagina;
