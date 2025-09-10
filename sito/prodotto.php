@@ -473,12 +473,25 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
         }else if($reservationDate > $limit_date){
             $errorFound = true; 
             $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">L'ordine può essere ritirato solo dal ". $tomorrow->format("d-m-Y")." al ".$limit_date->format("d-m-Y")."</p>", $pagina);         
-        }
+        }else{
+                $UserReserved = $db->userAlreadyReservedProduct($productInfo["id"], $date_reservation);
+                if(is_string($UserReserved) && ($UserReserved == "Connection error" || $UserReserved == "Execution error")){
+                    header("Location: 500.php"); 
+                    exit();
+                }elseif(is_string($UserReserved) && $UserReserved == "User is not logged in"){
+                    header("Location: login.php"); 
+                    exit();
+                }elseif(is_bool($UserReserved) && $UserReserved == true){
+                    $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">Hai già una prenotazione per questa degustazione in questa data : ". $reservationDate->format("d-m-Y") ."</p>", $pagina);
+                }else{
+                    $pagina = str_replace("[date-error]","", $pagina);
+                }
+
+            }
 
         if($errorFound == true){//ci sono stati errori
             $pagina = str_replace("min=\"1\"","min=\"1\" value=\"".$quantity."\"", $pagina);
             $pagina = str_replace("name=\"data_ritiro\"","name=\"data_ritiro\" value=\"".$date_reservation."\"", $pagina); 
-            header('Location: prodotto.php?prodotto='. $productInfo["id"] . '#prenotazione');
         }else{
             $addReservation = $db->AddReservation($productInfo["id"], $quantity, $date_reservation);
             if(is_bool($addReservation) && $addReservation == true) {//controllo se la modifica delle informazioni è andata a buon fine
