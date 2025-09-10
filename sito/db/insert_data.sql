@@ -458,28 +458,28 @@ INSERT INTO utenti ( email, username, password, nome, cognome, data_nascita, dat
 ("gabry@magno.it", "Gabry", "e790a542941d6263f18a53159c106a135cf908e8159732f10a7fd7553ab61294", "Gabriele", "Magnoni", "2001-12-06", "2024-12-31");
 
 -- PRENOTAZIONI PRODOTTI
-INSERT INTO prenotazioni (id_utente, id_prodotto, quantita, data_prenotazione) VALUES
-(1, 8, 2, '2025-09-01'),
-(2, 15, 1, '2025-09-05'),
-(3, 12, 1, '2025-09-03'),
-(1, 1, 2, '2025-08-15'),
-(2, 2, 3, '2025-08-20'),
-(3, 3, 1, '2025-08-18'),
-(1, 4, 2, '2025-07-10'),
-(2, 5, 1, '2025-07-15'),
-(3, 6, 1, '2025-07-12');
+INSERT INTO prenotazioni (id_utente, id_prodotto, quantita, data_prenotazione, data_ritiro) VALUES
+(1, 8, 2, '2025-09-01', '2025-09-20'),
+(2, 15, 1, '2025-09-05', '2025-09-20'),
+(3, 12, 1, '2025-09-03', '2025-09-20'),
+(1, 1, 2, '2025-08-15', '2025-09-20'),
+(2, 2, 3, '2025-08-20', '2025-09-20'),
+(3, 3, 1, '2025-08-18', '2025-09-20'),
+(1, 4, 2, '2025-07-10', '2025-09-20'),
+(2, 5, 1, '2025-07-15', '2025-09-20'),
+(3, 6, 1, '2025-07-12', '2025-09-20');
 
 -- PRENOTAZIONI DEGUSTAZIONI
-INSERT INTO prenotazioni_degustazioni (id_cliente, id_degustazione, numero_persone, data_prenotazione) VALUES
-(1, 2, 2, '2025-08-04'),
-(2, 1, 4, '2025-08-29'),
-(3, 2, 1, '2025-08-18'),
-(1, 3, 2, '2025-08-17'),
-(2, 4, 4, '2025-08-26'),
-(3, 5, 1, '2025-08-15'),
-(1, 7, 2, '2025-08-12'),
-(2, 6, 4, '2025-08-21'),
-(3, 4, 1, '2025-08-11');
+INSERT INTO prenotazioni_degustazioni (id_cliente, id_degustazione, numero_persone, data_prenotazione, data_scelta) VALUES
+(1, 2, 2, '2025-08-20','2025-09-20'),
+(2, 1, 4, '2025-08-29', '2025-09-18'),
+(3, 2, 1, '2025-08-18', '2025-09-15'),
+(1, 3, 2, '2025-08-17', '2025-09-16'),
+(2, 4, 4, '2025-08-26', '2025-09-25'),
+(3, 5, 1, '2025-08-15', '2025-09-13'),
+(1, 7, 2, '2025-08-12', '2025-09-11'),
+(2, 6, 4, '2025-08-21', '2025-09-21'),
+(3, 4, 1, '2025-08-11', '2025-09-09');
 
 -- PREFERITI
 INSERT INTO preferiti (id_utente, id_prodotto) VALUES
