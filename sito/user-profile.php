@@ -72,6 +72,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["up-rimuovi-preferiti"
 }
 
 // Prodotti Preferiti
+$max_preferiti = 5;
+$offset = isset($_GET['offset']) ? (int)$_GET['offset'] : 0;
 $preferiti = $db->GetUserFavoritesProducts($id);
 
 if($preferiti === false){
@@ -79,34 +81,52 @@ if($preferiti === false){
 } elseif (empty($preferiti)){
     $pagina = str_replace('[Prodotti Preferiti]','<p class="nondisponibile">Nessun prodotto aggiunto ai preferiti.</p>',$pagina);
 } else {
-    $pagina=str_replace("[Prodotti Preferiti]",VisualizzaPreferito($preferiti, $id),$pagina);           
+    $pagina=str_replace("[Prodotti Preferiti]",VisualizzaPreferito($preferiti, $id, $offset, $max_preferiti),$pagina);
 }
 
-function VisualizzaPreferito(array $preferiti, int $id): string {
+function VisualizzaPreferito(array $preferiti, int $id, $offset, $max_preferiti): string {
 
     $conteggio = 0;
+    $toShow = $max_preferiti + $offset;
 
     $preferito_html = '<div class="data-container" id="dc-prodotti-preferiti" aria-live="polite">
                         <ul class="list" id="user-profile-prodotti">';
+    
+    foreach ($preferiti as $index => $value) {
+        if($index < $toShow){
+            $preferito_html.= CreaVisualizzaPreferito(
+                $value['id'],
+                $value['nome'],
+                $value['url_immagine'],
+                $id
+            );
 
-    foreach ($preferiti as $value){
-        $preferito_html.= CreaVisualizzaPreferito(
-            $value['id'],
-            $value['nome'],
-            $value['url_immagine'],
-            $id
-        );
-
-        $conteggio++;
+            $conteggio++;
+        }
     }
+    
 
     $preferito_html.= '</ul></div>';
+    $button_html = '';
 
-    if ($conteggio >= 4){
-        $preferito_html.=
-        '<div class="button-container">
-            <a class="bottoni-link" href="#prodotti-preferiti">Torna a inizio sezione</a>
-        </div>';
+    if ($offset > 0 || count($preferiti) > $max_preferiti){
+        $button_html.=
+        '<a class="bottoni-link" href="#prodotti-preferiti">Torna a inizio sezione</a>';
+    }
+
+    if(count($preferiti) > $offset + $max_preferiti){
+        $nextOffset = $offset + $max_preferiti;
+        $button_html .= "<form action=\"#dc-prodotti-preferiti\" method=\"get\">
+                            <input type=\"hidden\" name=\"offset\" value=\"$nextOffset\">
+                            <button type=\"submit\" class=\"bottoni-rossi\">Carica più preferiti</button>
+                        </form>";
+
+    }
+
+    if ($button_html){
+        $preferito_html.= '<div class="button-container">
+                            '.$button_html.'
+                        </div>';
     }
 
     return $preferito_html;
