@@ -70,20 +70,20 @@ if(isset($_GET["prodotto"])){
     }else{
         if($infoGenreProduct["vegano"] == 0){
             $pagina = str_replace("<img src=\"assets/img/icone/vegano-verde.svg\" alt=\"icona verde con indicazione prodotto vegano\">
-                        <span class=\"diet-label\">Vegano</span>","<img src=\"assets/img/icone/vegano-rosso.svg\" alt=\"icona rossa con indicazione prodotto non vegano\">
-                        <span class=\"diet-label\">Non vegano</span>",$pagina);
+                        <span class=\"diet-label\">Prodotto adatto ai vegani</span>","<img src=\"assets/img/icone/vegano-rosso.svg\" alt=\"icona rossa con indicazione prodotto non vegano\">
+                        <span class=\"diet-label\">Prodotto non adatto ai vegani</span>",$pagina);
         }
 
         if($infoGenreProduct["vegetariano"] == 0){
             $pagina = str_replace(" <img src=\"assets/img/icone/vegetariano-verde.svg\" alt=\"icona verde con indicazione prodotto vegetariano\">
-                        <span class=\"diet-label\">Vegetariano</span>","<img src=\"assets/img/icone/vegetariano-rosso.svg\" alt=\"icona rossa con indicazione prodotto non vegetariano\">
-                        <span class=\"diet-label\">Non vegetariano</span>",$pagina);
+                        <span class=\"diet-label\">Prodotto adatto ai vegetariani</span>","<img src=\"assets/img/icone/vegetariano-rosso.svg\" alt=\"icona rossa con indicazione prodotto non vegetariano\">
+                        <span class=\"diet-label\">Prodotto non adatto ai vegetariani</span>",$pagina);
         }
 
         if($infoGenreProduct["celiaco"] == 0){
             $pagina = str_replace("<img src=\"assets/img/icone/celiaco-verde.svg\" alt=\"icona verde con indicazione prodotto per persone celiache\">
-                        <span class=\"diet-label\">Celiaco</span>","<img src=\"assets/img/icone/celiaco-rosso.svg\" alt=\"icona rossa con indicazione prodotto non adatto a persone celiache\">
-                        <span class=\"diet-label\">Non celiaco</span>",$pagina);
+                        <span class=\"diet-label\">Prodotto adatto ai celiaci</span>","<img src=\"assets/img/icone/celiaco-rosso.svg\" alt=\"icona rossa con indicazione prodotto non adatto a persone celiache\">
+                        <span class=\"diet-label\">Prodotto non adatto ai celiaci</span>",$pagina);
         }
     }
     $pagina = str_replace("[IMAGE]","<img src=". $productInfo["url_immagine"] ." alt=\"\">",$pagina);
@@ -360,7 +360,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
                             <summary id=\"hints-comment\" class=\"hints\" role=\"button\" aria-expanded=\"false\" aria-controls=\"hint-list-comment\">
                                 Suggerimenti Commento
                             </summary>
-                            <ul class=\"suggestions-list\" id=\"hint-list-comment\">
+                            <ul class=\"suggestions-list\" id=\"hint-list-comment\" aria-labelledby=\"hints-comment\">
                                 <li id=\"min-char-comment\">Minimo 30 caratteri</li>
                                 <li id=\"max-char-comment\">Massimo 300 caratteri</li>
                             </ul>
