@@ -89,7 +89,7 @@ function CreateProductBrochure(string $img, string $title, float $cost, int $id)
     global $db;
     
     $TEMPLATE = '<li class="product-brochure">
-                    <img loading="lazy" src="'. $img . '" alt=""/>
+                    <img loading="lazy" src="'. $img . '" alt="">
                     <h3 class="product-name">' . $title . '</h3>
 
                     <p><span class="product-brochure-bold">Voto</span> '. (number_format((float)$db->AverageGradeProduct($id),1) == 0 ? "X" : number_format((float)$db->AverageGradeProduct($id),1)) .' su 5</p>
