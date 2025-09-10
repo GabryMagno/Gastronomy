@@ -63,7 +63,7 @@
             <h2 class="header_text">La tua Gastronomia di fiducia</h2>
                 
         </header>
-        <main>
+        <main id="content">
             <h3 class="section-title">Accedi</h3>
             <p class="section-descrizione">Riprendi il tuo viaggio gastronomico con noi!</p>
                 <form method="post" action="login.php[reference-product][reference-tasting]" class="form-bianco" id="login-user">
@@ -87,7 +87,7 @@
                         </div>
                         <div>
                             <label id="lbl_login_password" for="login_password" class="block">Password</label>
-                            <input type="password" name="password" id="login_password" required data-msg-required="Inserisci la tua password" placeholder="Password" class="width">
+                            <input type="password" name="password" id="login_password" required data-msg-required="Inserisci la tua password" placeholder="Password" class="width" autocomplete="current-password">
                             <details open>
                                 <summary id="hints-password" class="hints" aria-expanded="false" aria-controls="hint-list-password">
                                     Suggerimenti <span lang="en">Password</span>
