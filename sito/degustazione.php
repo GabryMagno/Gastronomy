@@ -125,7 +125,19 @@ if(isset($_GET["degustazione"])){
                 $errorFound = true; 
                 $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">L'ordine può essere ritirato entro e non oltre il : ". $end_date->format("d-m-Y")."</p>", $pagina);
             }else{
-                $pagina = str_replace("[date-error]","",$pagina);
+                $UserReserved = $db->userAlreadyReserved($tasting, $date_reservation);
+                if(is_string($UserReserved) && ($UserReserved == "Connection error" || $UserReserved == "Execution error")){
+                    header("Location: 500.php"); 
+                    exit();
+                }elseif(is_string($UserReserved) && $UserReserved == "User is not logged in"){
+                    header("Location: login.php"); 
+                    exit();
+                }elseif(is_bool($UserReserved) && $UserReserved == true){
+                    $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">Hai già una prenotazione per questa degustazione in questa data : ". $reservationDate->format("d-m-Y") ."</p>", $pagina);
+                }else{
+                    $pagina = str_replace("[date-error]","", $pagina);
+                }
+
             }
 
             if($errorFound == true){//ci sono stati errori
@@ -135,11 +147,10 @@ if(isset($_GET["degustazione"])){
 
                 $addReservation = $db->AddTasting($tasting, $people, $date_reservation);
                 if(is_bool($addReservation) && $addReservation == true) {//controllo se la modifica delle informazioni è andata a buon fine
-                    $pagina = str_replace("[date-error]","",$pagina);
                     header('Location: degustazione.php?degustazione='. $tasting . '');
                     exit();
                 }elseif(is_string($addReservation) && $addReservation == "User already has a reservation for this tasting on the selected date"){//se l'utente ha già una prenotazione per questa degustazione in quella data
-                    $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">Hai già una prenotazione per questa degustazione in questa data : ". $reservationDate->format("d-m-Y") ."</p>", $pagina);
+                    $pagina = str_replace("[date-error2]","<p class=\"error\" id=\"date-error\">Hai già una prenotazione per questa degustazione in questa data : ". $reservationDate->format("d-m-Y") ."</p>", $pagina);
                 } else { //se ci sono stati errori l'utente viene reindirizzato alla pagina di errore 500
                    header("Location: 500.php"); 
                    exit();
@@ -151,6 +162,7 @@ if(isset($_GET["degustazione"])){
         if(!isset($_POST["submit-reservation"])){
             $pagina = str_replace("[quantity-error]","",$pagina);
             $pagina = str_replace("[date-error]","",$pagina);
+            $pagina = str_replace("[date-error2]","",$pagina);
         }
     }
 }else{
