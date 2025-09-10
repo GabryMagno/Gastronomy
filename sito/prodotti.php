@@ -103,7 +103,7 @@ function CreateProductBrochure(string $img, string $title, float $cost, int $id)
 function CreateOrderChanger($filters_list){
     $HIDDEN = "";
     while ($value = current($filters_list)) {
-        $HIDDEN .= "<input type=\"hidden\" name=" . key($filters_list) . " value=\"" . $value . "\"/>";//serve per
+        $HIDDEN .= "<input type=\"hidden\" name=" . key($filters_list) . " value=\"" . $value . "\">";
         next($filters_list);
     }
     return $HIDDEN;
