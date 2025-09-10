@@ -468,7 +468,7 @@ form.form-bianco textarea,
     padding: 0.5em;
     border: 1px solid #aaa;
     border-radius: 0.5em;
-
+    border: 2px solid var(--txtcolor);
     text-align: center;
 }
 
@@ -476,6 +476,13 @@ form.form-bianco textarea{
     font-size: 1em;
     resize: none;
     height: 100px;
+    border: 3px solid var(--txtcolor);
+}
+
+form.form-bianco textarea:hover,
+form.form-bianco input:hover{
+    border: 0;
+    border: 5px solid var(--headerbgcolor);
 }
 
 form.form-bianco#login-user,
