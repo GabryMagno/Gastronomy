@@ -135,7 +135,7 @@ if(isset($_GET["prodotto"])){
                     $commentList .= "<div class=\"recensione-card\">";
                 }
                 $commentList .= "<div class=\"recensione-foto\">
-                                <img src=".$otherUser['url_immagine']. " alt=\"Foto profilo di".$comment["username"]."\">
+                                <img src=".$otherUser['url_immagine']. " alt=\"Foto profilo di ".$comment["username"]."\">
                             </div>";
                 $date = new DateTime($comment["data"]);
 
@@ -155,7 +155,7 @@ if(isset($_GET["prodotto"])){
                     $commentList .= '☆';
                 }
 
-                $commentList.= '</span> <p class="hidden_testo">('.$comment["voto"].' su 5 </p>
+                $commentList.= '</span> <p class="hidden_testo">'.$comment["voto"].' stelle su 5 </p>
                                 </p></div></div>';
 
                 $commentNumber++;
@@ -440,7 +440,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
             $templateValutazione .= '☆';
         }
 
-        $templateValutazione.= '</span> ('.$isUserCommented["voto"].' su 5)';
+        $templateValutazione.= '</span> <p class="hidden_testo">'.$isUserCommented["voto"].' stelle su 5</p>';
 
         $pagina = str_replace("[Valutazione]",$templateValutazione,$pagina);
     }
