@@ -123,7 +123,9 @@ if(isset($_GET["degustazione"])){
                 $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">La prenotazione può essere effettuata oggi : ". $today->format("d-m-Y")." e nei giorni precedenti al : ". $end_date->format("d-m-Y")."</p>", $pagina);
             }else if($reservationDate > $end_date){//controllo che la data sia precedente o uguale a quella di fine degustazione
                 $errorFound = true; 
-                $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">L'ordine può essere ritirato solo nei giorni precedenti al : ". $end_date->format("d-m-Y")."</p>", $pagina);
+                $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">L'ordine può essere ritirato entro e non oltre il : ". $end_date->format("d-m-Y")."</p>", $pagina);
+            }else{
+                $pagina = str_replace("[date-error]","",$pagina);
             }
 
             if($errorFound == true){//ci sono stati errori
