@@ -525,6 +525,17 @@ div .chef-content{
     }
 }
 
+@media screen and (max-width: 319px){
+    .userprofile-brochure dl{
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5em;
+    }
+    .userprofile-brochure dd, .userprofile-brochure dt{
+        width: auto;
+    }
+}
+
 #user-profile-summary .button-container{
     flex-wrap: wrap;
     justify-content: center;
