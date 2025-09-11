@@ -1562,10 +1562,9 @@ class DB {
 
     public function ThisProductExists($product): bool | string{//Controlla se un prodotto esiste
         $newConnection = $this->OpenConnectionDB();
-        $product = array();
         if($newConnection){
-            $isProductExist = $this->connection->prepare("SELECT nome FROM prodotti WHERE nome = ?");
-            $isProductExist->bind_param("s", $product);
+            $isProductExist = $this->connection->prepare("SELECT nome FROM prodotti WHERE id = ?");
+            $isProductExist->bind_param("i", $product);
             try{
                 //esecuzione della query per verificare l'esistenza del prodotto
                 $isProductExist->execute();
@@ -1576,8 +1575,8 @@ class DB {
                 return false; //errore nell'esecuzione della query
             }
             $product = $isProductExist->get_result();
-            $this->CloseConnectionDB();
             $isProductExist->close();
+            $this->CloseConnectionDB();
             if($product->num_rows == 1){
                 //se il prodotto esiste, ritorna true
                 $product->free();
@@ -1695,8 +1694,7 @@ class DB {
                     $registerUserStatement->close();
                     return false; //errore nell'esecuzione della query
                 }
-
-                $registerUserStatement->execute($params);
+                
                 $result = $registerUserStatement->get_result();
                 $this->CloseConnectionDB();
                 $registerUserStatement->close();
