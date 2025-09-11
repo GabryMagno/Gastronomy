@@ -70,20 +70,20 @@ if(isset($_GET["prodotto"])){
     }else{
         if($infoGenreProduct["vegano"] == 0){
             $pagina = str_replace("<img src=\"assets/img/icone/vegano-verde.svg\" alt=\"icona verde con indicazione prodotto vegano\">
-                        <span class=\"diet-label\">Vegano</span>","<img src=\"assets/img/icone/vegano-rosso.svg\" alt=\"icona rossa con indicazione prodotto non vegano\">
-                        <span class=\"diet-label\">Non vegano</span>",$pagina);
+                        <span class=\"diet-label\">Prodotto adatto ai vegani</span>","<img src=\"assets/img/icone/vegano-rosso.svg\" alt=\"icona rossa con indicazione prodotto non vegano\">
+                        <span class=\"diet-label\">Prodotto non adatto ai vegani</span>",$pagina);
         }
 
         if($infoGenreProduct["vegetariano"] == 0){
             $pagina = str_replace(" <img src=\"assets/img/icone/vegetariano-verde.svg\" alt=\"icona verde con indicazione prodotto vegetariano\">
-                        <span class=\"diet-label\">Vegetariano</span>","<img src=\"assets/img/icone/vegetariano-rosso.svg\" alt=\"icona rossa con indicazione prodotto non vegetariano\">
-                        <span class=\"diet-label\">Non vegetariano</span>",$pagina);
+                        <span class=\"diet-label\">Prodotto adatto ai vegetariani</span>","<img src=\"assets/img/icone/vegetariano-rosso.svg\" alt=\"icona rossa con indicazione prodotto non vegetariano\">
+                        <span class=\"diet-label\">Prodotto non adatto ai vegetariani</span>",$pagina);
         }
 
         if($infoGenreProduct["celiaco"] == 0){
             $pagina = str_replace("<img src=\"assets/img/icone/celiaco-verde.svg\" alt=\"icona verde con indicazione prodotto per persone celiache\">
-                        <span class=\"diet-label\">Celiaco</span>","<img src=\"assets/img/icone/celiaco-rosso.svg\" alt=\"icona rossa con indicazione prodotto non adatto a persone celiache\">
-                        <span class=\"diet-label\">Non celiaco</span>",$pagina);
+                        <span class=\"diet-label\">Prodotto adatto ai celiaci</span>","<img src=\"assets/img/icone/celiaco-rosso.svg\" alt=\"icona rossa con indicazione prodotto non adatto a persone celiache\">
+                        <span class=\"diet-label\">Prodotto non adatto ai celiaci</span>",$pagina);
         }
     }
     $pagina = str_replace("[IMAGE]","<img src=". $productInfo["url_immagine"] ." alt=\"\">",$pagina);
@@ -135,7 +135,7 @@ if(isset($_GET["prodotto"])){
                     $commentList .= "<div class=\"recensione-card\">";
                 }
                 $commentList .= "<div class=\"recensione-foto\">
-                                <img src=".$otherUser['url_immagine']. " alt=\"Foto profilo di".$comment["username"]."\">
+                                <img src=".$otherUser['url_immagine']. " alt=\"Foto profilo di ".$comment["username"]."\">
                             </div>";
                 $date = new DateTime($comment["data"]);
 
@@ -155,7 +155,7 @@ if(isset($_GET["prodotto"])){
                     $commentList .= '☆';
                 }
 
-                $commentList.= '</span> <p class="hidden_testo">('.$comment["voto"].' su 5 </p>
+                $commentList.= '</span> <p class="hidden_testo">'.$comment["voto"].' stelle su 5 </p>
                                 </p></div></div>';
 
                 $commentNumber++;
@@ -360,7 +360,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
                             <summary id=\"hints-comment\" class=\"hints\" role=\"button\" aria-expanded=\"false\" aria-controls=\"hint-list-comment\">
                                 Suggerimenti Commento
                             </summary>
-                            <ul class=\"suggestions-list\" id=\"hint-list-comment\">
+                            <ul class=\"suggestions-list\" id=\"hint-list-comment\" aria-labelledby=\"hints-comment\">
                                 <li id=\"min-char-comment\">Minimo 30 caratteri</li>
                                 <li id=\"max-char-comment\">Massimo 300 caratteri</li>
                             </ul>
@@ -440,7 +440,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
             $templateValutazione .= '☆';
         }
 
-        $templateValutazione.= '</span> ('.$isUserCommented["voto"].' su 5)';
+        $templateValutazione.= '</span> <p class="hidden_testo">'.$isUserCommented["voto"].' stelle su 5</p>';
 
         $pagina = str_replace("[Valutazione]",$templateValutazione,$pagina);
     }
@@ -473,12 +473,25 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
         }else if($reservationDate > $limit_date){
             $errorFound = true; 
             $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">L'ordine può essere ritirato solo dal ". $tomorrow->format("d-m-Y")." al ".$limit_date->format("d-m-Y")."</p>", $pagina);         
-        }
+        }else{
+                $UserReserved = $db->userAlreadyReservedProduct($productInfo["id"], $date_reservation);
+                if(is_string($UserReserved) && ($UserReserved == "Connection error" || $UserReserved == "Execution error")){
+                    header("Location: 500.php"); 
+                    exit();
+                }elseif(is_string($UserReserved) && $UserReserved == "User is not logged in"){
+                    header("Location: login.php"); 
+                    exit();
+                }elseif(is_bool($UserReserved) && $UserReserved == true){
+                    $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">Hai già una prenotazione per questa degustazione in questa data : ". $reservationDate->format("d-m-Y") ."</p>", $pagina);
+                }else{
+                    $pagina = str_replace("[date-error]","", $pagina);
+                }
+
+            }
 
         if($errorFound == true){//ci sono stati errori
             $pagina = str_replace("min=\"1\"","min=\"1\" value=\"".$quantity."\"", $pagina);
             $pagina = str_replace("name=\"data_ritiro\"","name=\"data_ritiro\" value=\"".$date_reservation."\"", $pagina); 
-            header('Location: prodotto.php?prodotto='. $productInfo["id"] . '#prenotazione');
         }else{
             $addReservation = $db->AddReservation($productInfo["id"], $quantity, $date_reservation);
             if(is_bool($addReservation) && $addReservation == true) {//controllo se la modifica delle informazioni è andata a buon fine

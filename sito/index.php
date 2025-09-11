@@ -76,12 +76,12 @@ function CreateBestProductBrochure(string $img, string $title, float $cost, int 
     $TEMPLATE = '<li class="new">
                     <article>
                         <img loading="lazy" src="'. $img . '" alt="">
-                        <h4 class="product-name">' . $title . '</h4>
+                        <h4 class="product-name">' . Sanitizer::SanitizeText($title) . '</h4>
 
                         <p><span class="product-brochure-bold">Voto</span> '. (number_format((float)$db->AverageGradeProduct($id),1) == 0 ? "X" : number_format((float)$db->AverageGradeProduct($id),1)) .' su 5</p>
                         <p><span class="product-brochure-bold">Prezzo</span> '. $cost . '&euro;</p>
                         
-                        <a href="./prodotto.php?prodotto='. urlencode($id) . '" title="vai al prodotto ' . Sanitizer::SanitizeGenericInput($title) . '">Scheda del prodotto</a>
+                        <a href="./prodotto.php?prodotto='. urlencode($id) . '" title="vai al prodotto ' . Sanitizer::SanitizeText($title) . '">Scheda del prodotto</a>
                     </article>
                 </li>';
     return $TEMPLATE;

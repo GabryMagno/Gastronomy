@@ -102,7 +102,7 @@ function VisualizzaPreferito(array $preferiti, int $id, $offset_prefers, $max_pr
     $toShow = $max_preferiti + $offset_prefers;
 
     $preferito_html = '<div class="data-container" id="dc-prodotti-preferiti" aria-live="polite">
-                        <ul class="list" id="user-profile-prodotti">';
+                        <ul class="list" id="user-profile-prodotti" aria-labelledby="prodotti-preferiti">';
     
     foreach ($preferiti as $index => $value){
         if($index < $toShow){
@@ -156,12 +156,12 @@ function CreaVisualizzaPreferito(int $idProdotto, string $nomeProdotto, string $
     $TEMPLATE = '
         <li class="product-brochure">
             <img src="'.$url_immagine.'" alt="Immagine del prodotto ' . Sanitizer::SanitizeGenericInput($nomeProdotto) . '">
-                <h4 class="product-name">'.$nomeProdotto.'</h4>
+                <h4 class="product-name">'.Sanitizer::SanitizeText($nomeProdotto).'</h4>
                     <div class="brochure-links">
-                        <a href="prodotto.php?prodotto='. urlencode($idProdotto) . '" title="Vai alla scheda del prodotto ' . Sanitizer::SanitizeGenericInput($nomeProdotto) . '" class="btn-dettagli">Dettagli</a>
+                        <a href="prodotto.php?prodotto='. urlencode($idProdotto) . '" title="Vai alla scheda del prodotto ' . Sanitizer::SanitizeText($nomeProdotto) . '" class="btn-dettagli">Dettagli</a>
                         <form method="post">
                             <input type="hidden" name="id_prodotto" value="'.$idProdotto.'">
-                            <button type="submit" name="up-rimuovi-preferiti" class="btn-elimina" title="Rimuovi '.Sanitizer::SanitizeGenericInput($nomeProdotto).' dai preferiti" aria-label="Rimuovi '.Sanitizer::SanitizeGenericInput($nomeProdotto).' dai preferiti">Rimuovi</button>
+                            <button type="submit" name="up-rimuovi-preferiti" class="btn-elimina" title="Rimuovi '.Sanitizer::SanitizeText($nomeProdotto).' dai preferiti" aria-label="Rimuovi '.Sanitizer::SanitizeGenericInput($nomeProdotto).' dai preferiti">Rimuovi</button>
                         </form>
                     </div>
         </li>
@@ -188,7 +188,7 @@ function VisualizzaPrenotazione(array $prenotazioni, $offset_reservations, $max_
     $toShow = $max_prenotazioni + $offset_reservations;
 
     $prenotazioni_html = '<div class="data-container" id="dc-prodotti-prenotati" aria-live="polite">
-                            <ul class="list" id="user-profile-prodotti-prenotati">';
+                            <ul class="list" id="user-profile-prodotti-prenotati" aria-labelledby="prodotti-prenotati">';
 
     foreach ($prenotazioni as $index => $value){
         if($index < $toShow){
@@ -252,7 +252,7 @@ function CreaVisualizzaPrenotazione(int $idPrenotazione, string $nomeProdotto, D
     
     $TEMPLATE .= '
                 <div class="userprofile-brochure-content">
-                    <h4>'.$nomeProdotto.'</h4>
+                    <h4>'.Sanitizer::SanitizeText($nomeProdotto).'</h4>
                     <dl>
                         <dt>Data ritiro</dt>
                             <dd><time datetime="' . $dataRitiro->format("Y-m-d") . '">' . $dataRitiro->format("d/m/Y") . '</time></dd>
@@ -261,11 +261,11 @@ function CreaVisualizzaPrenotazione(int $idPrenotazione, string $nomeProdotto, D
                     </dl>
                 </div>
                 <div class="brochure-links">
-                    <a href="prodotto.php?prodotto='. urlencode($idProdotto) . '" title="Vai alla scheda del prodotto ' . Sanitizer::SanitizeGenericInput($nomeProdotto) . '" class="btn-dettagli">Dettagli</a>
+                    <a href="prodotto.php?prodotto='. urlencode($idProdotto) . '" title="Vai alla scheda del prodotto ' . Sanitizer::SanitizeText($nomeProdotto) . '" class="btn-dettagli">Dettagli</a>
                     <form method="get" action="conferma-scelta.php">
                         <input type="hidden" name="delete" value="delete-prodotto">
                         <input type="hidden" name="id-prenotazione" value="'.urlencode($idPrenotazione).'">
-                        <button type="submit" class="btn-elimina" title="Elimina prenotazione del prodotto '.Sanitizer::SanitizeGenericInput($nomeProdotto).'" aria-label="Elimina prenotazione degustazione">Elimina</button>
+                        <button type="submit" class="btn-elimina" title="Elimina prenotazione del prodotto '.Sanitizer::SanitizeText($nomeProdotto).'" aria-label="Elimina prenotazione degustazione">Elimina</button>
                     </form>
                 </div>
             </li>
@@ -308,7 +308,7 @@ function VisualizzaDegustazione(array $degustazioni, $offset_tastings, $max_degu
     $toShow = $offset_tastings + $max_degustazioni;
     
     $degustazione_html = '<div class="data-container" id="dc-degustazioni-prenotate" aria-live="polite">
-                            <ul class="list" id="user-profile-degustazioni-prenotate">';
+                            <ul class="list" id="user-profile-degustazioni-prenotate" aria-labelledby="degustazioni-prenotate">';
 
     foreach ($degustazioni as $index => $value){
         if($index < $toShow){
@@ -372,7 +372,7 @@ function CreaVisualizzaDegustazione(int $idDegustazione,int $idPrenotazione, str
 
     $TEMPLATE .= '
                 <div class="userprofile-brochure-content">
-                    <h4>'.$nomeProdotto.'</h4>
+                    <h4>'.Sanitizer::SanitizeText($nomeProdotto).'</h4>
                         <dl>
                             <dt>Data Scelta</dt>
                                 <dd><time datetime="' . $dataScelta->format("Y-m-d") . '">' . $dataScelta->format("d/m/Y") . '</time></dd>
@@ -383,7 +383,7 @@ function CreaVisualizzaDegustazione(int $idDegustazione,int $idPrenotazione, str
                         </dl>
                 </div>
                 <div class="brochure-links">
-                    <a href="degustazione.php?degustazione='. urlencode($idDegustazione) . '" title="Vai alla scheda degustazione del prodotto ' . Sanitizer::SanitizeGenericInput($nomeProdotto) . '" class="btn-dettagli">Dettagli</a>
+                    <a href="degustazione.php?degustazione='. urlencode($idDegustazione) . '" title="Vai alla scheda degustazione del prodotto ' . Sanitizer::SanitizeText($nomeProdotto) . '" class="btn-dettagli">Dettagli</a>
                     <form method="get" action="conferma-scelta.php">
                         <input type="hidden" name="delete" value="delete-degustazione">
                         <input type="hidden" name="id-prenotazione" value="'.urlencode($idPrenotazione).'">
@@ -414,7 +414,7 @@ function VisualizzaRecensione(array $recensioni, $offset_reviews, $max_recension
     $toShow = $offset_reviews + $max_recensioni;
     
     $recensione_html = '<div class="data-container" id="dc-recensioni" aria-live="polite">
-                        <ul class="list" id="user-profile-recensioni">';
+                        <ul class="list" id="user-profile-recensioni" aria-labelledby="recensioni-prodotti">';
 
     foreach ($recensioni as $index => $value){
         if($index < $toShow){
@@ -467,7 +467,7 @@ function CreaVisualizzaRecensioni(int $idProdotto, string $nomeProdotto, DateTim
     $TEMPLATE = '
         <li class="userprofile-brochure">
             <div class="userprofile-brochure-content">
-                <h4>'.$nomeProdotto.'</h4>
+                <h4>'.Sanitizer::SanitizeText($nomeProdotto).'</h4>
                     <dl>
                         <dt>Data</dt>
                             <dd><time class="right" datetime="' . $dataRecensione->format("Y-m-d") . '">' . $dataRecensione->format("d/m/Y") . '</time></dd>
@@ -486,7 +486,7 @@ function CreaVisualizzaRecensioni(int $idProdotto, string $nomeProdotto, DateTim
     $TEMPLATE .= '</span><p class="hidden_testo"> ('.$valutazione.' su 5)</p>';
 
     $TEMPLATE .= '</dl></div>
-                        <a href="prodotto.php?prodotto='. urlencode($idProdotto) . '#valutazione" title="Visualizza valutazione inserita per il prodotto ' . Sanitizer::SanitizeGenericInput($nomeProdotto) . '" class="btn-dettagli">Visualizza</a>
+                        <a href="prodotto.php?prodotto='. urlencode($idProdotto) . '#valutazione" title="Visualizza valutazione inserita per il prodotto ' . Sanitizer::SanitizeText($nomeProdotto) . '" class="btn-dettagli">Visualizza</a>
                 </li>';
 
     return $TEMPLATE;

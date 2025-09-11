@@ -80,11 +80,11 @@
                     <div>
                         <label for="change-username">Modifica <span lang="en">Username</span></label>
                         <input type="text" name="new-username" id="change-username" value="[username]">
-                        <details>
+                        <details open>
                             <summary id="hints-username" class="hints" aria-expanded="false" aria-controls="hint-list-username">
                                 Suggerimenti <span lang="en">Username</span>
                             </summary>
-                            <ul class="suggestions-list" id="hint-list-username">
+                            <ul class="suggestions-list" id="hint-list-username" aria-labelledby="hints-username">
                                 <li id="letter-number-username">Inserire solo lettere o numeri</li>
                                 <li id="min-char-username">Minimo 4 caratteri</li>
                                 <li id="max-char-username">Massimo 16 caratteri</li>
@@ -97,11 +97,11 @@
                     <div>
                         <label for="change-name">Modifica Nome</label>
                         <input type="text" name="new-name" id="change-name" value="[nome]">
-                        <details>
+                        <details open>
                             <summary id="hints-name" class="hints" aria-expanded="false" aria-controls="hint-list-name">
                                 Suggerimenti Nome
                             </summary>
-                            <ul class="suggestions-list" id="hint-list-name">
+                            <ul class="suggestions-list" id="hint-list-name" aria-labelledby="hints-name">
                                 <li id="letter-name">Inserire solo lettere</li>
                                 <li id="min-char-name">Minimo 1 carattere</li>
                                 <li id="max-char-name">Massimo 15 caratteri</li>
@@ -114,11 +114,11 @@
                     <div>
                         <label for="change-surname">Modifica Cognome</label>
                         <input type="text" name="new-surname" id="change-surname" value="[cognome]">
-                        <details>
+                        <details open>
                             <summary id="hints-surname" class="hints" aria-expanded="false" aria-controls="hint-list-surname">
                                 Suggerimenti Cognome
                             </summary>
-                            <ul class="suggestions-list" id="hint-list-surname">
+                            <ul class="suggestions-list" id="hint-list-surname" aria-labelledby="hints-surname">
                                 <li id="letter-surname">Inserire solo lettere</li>
                                 <li id="min-char-surname">Minimo 1 carattere</li>
                                 <li id="max-char-surname">Massimo 15 caratteri</li>
@@ -131,11 +131,11 @@
                     <div>
                         <label for="change-date">Modifica Data di Nascita</label>
                         <input type="date" name="new-date" id="change-date" min="1900-01-01" max="[max-date]" value="[data-nascita]">
-                        <details>
+                        <details open>
                             <summary id="hints-date" class="hints" aria-expanded="false" aria-controls="hint-list-date">
                                 Suggerimenti Data di Nascita
                             </summary>
-                            <ul class="suggestions-list" id="hint-list-date">
+                            <ul class="suggestions-list" id="hint-list-date" aria-labelledby="hints-date">
                                 <li id="min-date">Devi avere almeno 18 anni</li>
                                 <li id="max-date">Sono accettate solo le date successive al 1 gennaio 1900</li>
                             </ul>
@@ -145,12 +145,12 @@
 
                     <div id="new-logo">
                         <label for="change-logo">Modifica Immagine Profilo</label>
-                        <input type="file" name="new-logo" id="change-logo" accept=".jpg,.jpeg,.png,image/jpeg,image/png">
-                        <details>
+                        <input type="file" name="new-logo" id="change-logo" accept=".jpg,.jpeg,.png,image/jpeg,image/png" aria-label="Modifica immagine profilo">
+                        <details open>
                             <summary id="hints-logo" class="hints" aria-expanded="false" aria-controls="hint-list-logo">
                                 Suggerimenti Immagine Profilo
                             </summary>
-                            <ul class="suggestions-list" id="hint-list-logo">
+                            <ul class="suggestions-list" id="hint-list-logo" aria-labelledby="hints-logo">
                                 <li id="max-size-file">Dimensione massima a 2 <span lang='en'><abbr title="Megabyte">MB</abbr></span></li>
                                 <li id="type-file">Solo formati png, jpeg o jpg</li>
                             </ul>
@@ -175,12 +175,12 @@
                     <legend class="hidden" id="legend-password-info">Gestione <span lang="en">password</span></legend>
                     <div>
                         <label for="old-password">Vecchia <span lang="en">Password</span></label>
-                        <input type="password" name="old-password" id="old-password">
-                        <details>
+                        <input type="password" name="old-password" id="old-password" autocomplete="old-password">
+                        <details open>
                             <summary id="hints-old-password" class="hints" aria-expanded="false" aria-controls="hint-list-old-password">
                                 Suggerimenti <span lang="en">Password</span>
                             </summary>
-                            <ul class="suggestions-list" id="hint-list-old-password">
+                            <ul class="suggestions-list" id="hint-list-old-password" aria-labelledby="hints-old-password">
                                 <li id="lowercase-letter-old">Almeno una lettera minuscola</li>
                                 <li id="uppercase-letter-old">Almeno una lettera maiuscola</li>
                                 <li id="number-old">Almeno un numero</li>
@@ -194,12 +194,12 @@
 
                     <div>
                         <label for="new-password">Nuova <span lang="en">Password</span></label>
-                        <input type="password" name="new-password" id="new-password">
-                        <details>
+                        <input type="password" name="new-password" id="new-password" autocomplete="new-password">
+                        <details open>
                             <summary id="hints-new-password" class="hints" aria-expanded="false" aria-controls="hint-list-new-password">
                                 Suggerimenti <span lang="en">Password</span>
                             </summary>
-                            <ul class="suggestions-list" id="hint-list-new-password">
+                            <ul class="suggestions-list" id="hint-list-new-password" aria-labelledby="hints-new-password">
                                 <li id="lowercase-letter-new">Almeno una lettera minuscola</li>
                                 <li id="uppercase-letter-new">Almeno una lettera maiuscola</li>
                                 <li id="number-new">Almeno un numero</li>
@@ -213,12 +213,12 @@
 
                     <div>
                         <label for="confirm-new-password">Conferma Nuova <span lang="en">Password</span></label>
-                        <input type="password" name="confirm-new-password" id="confirm-new-password">
-                        <details>
-                            <summary id="hints-repeat-password" class="hints" aria-expanded="false" aria-controls="hint-list-repeat-password">
+                        <input type="password" name="confirm-new-password" id="confirm-new-password" autocomplete="new-password">
+                        <details open>
+                            <summary id="hints-repeat-new-password" class="hints" aria-expanded="false" aria-controls="hint-list-repeat-new-password">
                                 Suggerimenti Ripeti <span lang="en">Password</span>
                             </summary>
-                            <ul class="suggestions-list" id="hint-list-repeat-password">
+                            <ul class="suggestions-list" id="hint-list-repeat-password" aria-labelledby="hints-repeat-new-password">
                                 <li id="equal-passwords">Le <span lang="en">password</span> coincidono</li>
                             </ul>
                         </details>

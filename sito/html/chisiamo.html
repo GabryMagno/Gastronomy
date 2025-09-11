@@ -64,7 +64,7 @@
             <h2 class="header_text">La tua Gastronomia di fiducia</h2>
         </header>
 
-        <main>
+        <main id="content">
             <section id="storia">
                 <h3 class="section-title">La nostra storia</h3>
                 <p class="section-descrizione" id="descrizione-storia-iniziale">
@@ -140,9 +140,9 @@
                         <label for="user-advice" class="form-label">Scrivi qua il tuo suggerimento</label>
                         <details open>
                             <summary id="hints-advice" class="hints" aria-expanded="false" aria-controls="hint-list-advice">
-                                Suggerimenti Suggerimento
+                                Requisiti per scrivere un suggerimento
                             </summary>
-                            <ul class="suggestions-list" id="hint-list-advice">
+                            <ul class="suggestions-list" id="hint-list-advice" aria-labelledby="hints-advice">
                                 <li id="min-char-advice">Minimo 30 caratteri</li>
                                 <li id="max-char-advice">Massimo 300 caratteri</li>
                             </ul>

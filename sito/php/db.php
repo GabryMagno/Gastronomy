@@ -1267,6 +1267,76 @@ class DB {
     }
     //DA CONTROLLARE LE PROSSIME DUE FUNZIONI :AddTasting e CheckTastingAvailability -> MOLTO IMPORTANTE
 
+    public function userAlreadyReserved($tasting, $date): bool | string{
+        $isUserLogged = $this->IsUserLog();
+        if($isUserLogged == false){
+            //se l'utente non è loggato, ritorna un messaggio di errore
+            return "User is not logged in"; //l'utente non è loggato
+        }else{
+            $newConnection = $this->OpenConnectionDB();
+            if($newConnection){
+                //preparazione della query per aggiungere una prenotazione per una degustazione
+                $userAlreadyReserved = $this->connection->prepare("SELECT id FROM prenotazioni_degustazioni WHERE id_degustazione = ? AND id_cliente = ? AND data_scelta = ?");
+                $userAlreadyReserved->bind_param("iis", $tasting, $isUserLogged, $date);
+                try{
+                    //esecuzione della query per controllare se l'utente ha già una prenotazione per la stessa degustazione nella stessa data
+                    $userAlreadyReserved->execute();
+                }catch(\mysqli_sql_exception $error){   
+                    $userAlreadyReserved->close();
+                    $this->CloseConnectionDB();
+                    return "Execution error";
+                }
+                $result = $userAlreadyReserved->get_result();
+                $userAlreadyReserved->close();
+                if($result && $result->num_rows > 0){
+                    $this->CloseConnectionDB();
+                    return true; //l'utente ha già una prenotazione per questa degustazione nella stessa data
+                }else{
+                    return false;
+                }
+
+            }else{
+                return "Connection error";
+            }
+
+        }
+    }
+
+    public function userAlreadyReservedProduct($product, $date): bool | string{
+        $isUserLogged = $this->IsUserLog();
+        if($isUserLogged == false){
+            //se l'utente non è loggato, ritorna un messaggio di errore
+            return "User is not logged in"; //l'utente non è loggato
+        }else{
+            $newConnection = $this->OpenConnectionDB();
+            if($newConnection){
+                //preparazione della query per aggiungere una prenotazione per una degustazione
+                $userAlreadyReserved = $this->connection->prepare("SELECT id FROM prenotazioni WHERE id_prodotto = ? AND id_utente = ? AND data_ritiro = ?");
+                $userAlreadyReserved->bind_param("iis", $product, $isUserLogged, $date);
+                try{
+                    //esecuzione della query per controllare se l'utente ha già una prenotazione per la stessa degustazione nella stessa data
+                    $userAlreadyReserved->execute();
+                }catch(\mysqli_sql_exception $error){   
+                    $userAlreadyReserved->close();
+                    $this->CloseConnectionDB();
+                    return "Execution error";
+                }
+                $result = $userAlreadyReserved->get_result();
+                $userAlreadyReserved->close();
+                if($result && $result->num_rows > 0){
+                    $this->CloseConnectionDB();
+                    return true; //l'utente ha già una prenotazione per questa degustazione nella stessa data
+                }else{
+                    return false;
+                }
+
+            }else{
+                return "Connection error";
+            }
+
+        }
+    }
+
     public function AddTasting($tasting, $people_number, $date): bool | string{//Aggiunta di una prenotazione per una degustazione da parte dell'utente per un tot di persone e in una certa data
         $isUserLogged = $this->IsUserLog();
         if($isUserLogged == false){
