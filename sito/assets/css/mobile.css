@@ -407,16 +407,22 @@ html section#show-products{
     ===============================
 */
 
-.singleproduct-dettagli, .singleproduct-rating{
+.singleproduct-dettagli,
+.singleproduct-rating{
     display: flex;
     flex-direction: column;
     text-align: center;
 }
 
-.singleproduct_main{
-    margin-top: 1em;
-}
+.singleproduct-dettagli .row,
+.singleproduct-rating .row,
+.singledegustazione-descrizione .row{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
 
+    gap: 0.5em;
+}
 
 .singleproduct,
 .singledegustazione{
@@ -444,22 +450,19 @@ html section#show-products{
     justify-content: center;
 }
 
-.degustazione-dettagli dt,
-.degustazione-dettagli dd{
-    text-align: center;
-    width: 100%;
-}
-
-.singleproduct-dettagli dt, 
 .singleproduct-dettagli dd,
-.singleproduct-rating dt, 
-.singleproduct-rating dd{
+.singleproduct-rating dd,
+.degustazione-dettagli dd{
     text-align: left;
+    padding-left: 1em;
     width: 100%;
 }
 
 .singleproduct-dettagli dd li{
     list-style-position: inside;
+    overflow-wrap: break-word;
+    word-break: normal;
+    white-space: normal;
 }
 
 form#valutazione,#prenotazione{
