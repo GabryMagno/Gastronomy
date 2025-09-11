@@ -133,7 +133,7 @@ if(isset($_GET["degustazione"])){
                     header("Location: login.php"); 
                     exit();
                 }elseif(is_bool($UserReserved) && $UserReserved == true){
-                    $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">Hai già una prenotazione per questa degustazione in questa data : ". $reservationDate->format("d-m-Y") ."</p>", $pagina);
+                    $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">Hai già una prenotazione per questa degustazione in questa data: <time datetime=\"{$reservationDate->format('Y-m-d')}\">{$reservationDate->format('d/m/Y')}</time></p>", $pagina);
                 }else{
                     $pagina = str_replace("[date-error]","", $pagina);
                 }
