@@ -14,38 +14,34 @@ function aggiustaMenu(){
         function apriChiudiMenu(){
             const isOpen = btn_menu.getAttribute("data-hidden") === "false";
 
-            menu.setAttribute("aria-hidden", (!isOpen).toString());
-            btn_menu.setAttribute("aria-expanded", isOpen.toString());
-
-            if (isOpen) {
+            if (window.innerWidth > 767) {
+                // Desktop: menu sempre visibile
+                menu.setAttribute("aria-hidden", "false");
                 menu.setAttribute("tabindex", "0");
-
                 links.forEach(link => {
-                    link.setAttribute("tabindex", (link.id === "here" ? "-1" : "0"));
-                    link.setAttribute("aria-hidden", (link.id === "here" ? "true" : "false"));
+                    link.setAttribute("tabindex", "0");
+                    link.setAttribute("aria-hidden", "false");
                 });
-
-                btn_menu.setAttribute("aria-label", "Clicca per comprimere il menu di navigazione");
-
-                document.addEventListener("keydown", escHandler);
+                btn_menu.setAttribute("aria-label", "Menu di navigazione");
+                btn_menu.setAttribute("aria-expanded", "false");
+                btn_menu.setAttribute("aria-hidden", "true");
+                btn_menu.setAttribute("tabindex", "-1");
+                document.removeEventListener("keydown", escHandler);
             } else {
-                menu.setAttribute("tabindex", "-1");
+                // Mobile: logica aperto/chiuso
+                menu.setAttribute("aria-hidden", (!isOpen).toString());
+                menu.setAttribute("tabindex", isOpen ? "0" : "-1");
+                links.forEach(link => {
+                    link.setAttribute("tabindex", isOpen ? "0" : "-1");
+                    link.setAttribute("aria-hidden", (!isOpen).toString());
+                });
+                btn_menu.setAttribute("aria-label", isOpen
+                    ? "Clicca per comprimere il menu di navigazione"
+                    : "Clicca per espandere il menu di navigazione");
+                btn_menu.setAttribute("aria-expanded", isOpen.toString());
 
-                if (window.innerWidth > 767) {
-                    links.forEach(link => {
-                        link.setAttribute("tabindex", (link.id === "here" ? "-1" : "0"));
-                        link.setAttribute("aria-hidden", (link.id === "here" ? "true" : "false"));
-                    });
-                } else {
-                    links.forEach(link => {
-                        link.setAttribute("tabindex", "-1");
-                        link.setAttribute("aria-hidden", "true");
-                    });
-
-                    btn_menu.setAttribute("aria-label", "Clicca per espandere il menu di navigazione");
-
-                    document.removeEventListener("keydown", escHandler);
-                }
+                if (isOpen) document.addEventListener("keydown", escHandler);
+                else document.removeEventListener("keydown", escHandler);
             }
         }
 
