@@ -999,6 +999,10 @@ input#price, input#grade{
     padding: 0;
 }
 
+input#price{
+    min-height: 44px;
+}
+
 section#show-products{
     width: 75%;
     box-sizing: border-box;
