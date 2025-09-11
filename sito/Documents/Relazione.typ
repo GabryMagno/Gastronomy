@@ -88,5 +88,28 @@ Per la versione stampata, invece, è stato adottato il font _*Times New Roman*_,
 
 = Organizzazione del gruppo
 == Suddivisione dei compiti
+Il lavoro è stato suddiviso tra i due membri del gruppo, ciascuno dei quali ha progettato specifiche pagine e sviluppato le corrispondenti funzionalità, interfaccia e stile. Di seguito viene riportata la ripartizione delle attività realizzate individualmente.
+
+Durante l’intero arco della fase di progettazione e sviluppo, i membri del team si sono incontrati regolarmente tramite la piattaforma _Discord_ al fine di:
+- monitorare lo stato di avanzamento del progetto;
+- discutere eventuali osservazioni o criticità riscontrate;
+- pianificare le successive fasi di lavoro;
+- eseguire test in modo congiunto e simultaneo, riducendo così la possibilità di errori, anche di natura distrattiva.
+
+- *Nicolò Bolzon*
+  - HTML/CSS: 
+  - PHP; 
+  - JS: menu ad hamburger;
+  - DB: progettazione, creazione, connessione, inserimento e popolamento;
+  - Testing;
+  - Relazione.
+
+- *Gabriele Isacco Magnelli*
+  - HTML/CSS:
+  - PHP;
+  - JS: validazione input, visualizzazione errori;
+  - DB: progettazione, creazione, connessione, inserimento e popolamento;
+  - Testing;
+  - Relazione.
 
 = Note
