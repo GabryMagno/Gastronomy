@@ -254,7 +254,9 @@ button:focus-visible {
 
 #menu a {
     text-align: center;
-    height: 44px
+    display: inline-block;
+    min-height: 44px;
+    line-height: 44px;
 }
 
 #menu li#here {
