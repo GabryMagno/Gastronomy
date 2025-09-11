@@ -254,7 +254,9 @@ button:focus-visible {
 
 #menu a {
     text-align: center;
-    height: 44px
+    display: inline-block;
+    min-height: 44px;
+    line-height: 44px;
 }
 
 #menu li#here {
@@ -1341,8 +1343,9 @@ form#product-pages p{
 }
 
 .chef-content a {
-    display: block;
-
+    display: inline-block;
+    min-height: 44px;
+    line-height: 44px;
     margin-top: 25px;
 }
 
@@ -1520,6 +1523,12 @@ p#register,p#login{
     width: 100%;
     margin: 1em 0;
     min-height: 44px;
+    line-height: 44px;
+}
+
+p#register a, p#login a{
+    min-height: 44px;
+    line-height: 44px;
 }
 
 /*  
