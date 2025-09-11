@@ -9,7 +9,7 @@
   set enum(indent: 1em)
   set align(center)
   
-  text(25pt, weight: "bold", fill: black, font: "Liberation Sans")[CUOCHI PER CASO \ ]
+  text(25pt, weight: "bold", fill: black, font: "New Computer Modern")[CUOCHI PER CASO \ ]
 
   circle(radius: 7em, fill: rgb("#73142F"))[
     #image("../assets/img/loghi/logo_scritta_bianca.png", height: 100%)
@@ -21,7 +21,7 @@
   show grid.cell.where(x: 0): cell => align(right, cell)
   show grid.cell.where(x: 1): cell => align(left, cell)
 
-  text(15pt, weight: "bold", fill: black, font: "Liberation Sans")[
+  text(15pt, weight: "bold", fill: black, font: "New Computer Modern")[
     #box(
       width: 80%,
       table(
@@ -41,7 +41,7 @@
 
   v(1em)
 
-  text(13pt, fill: black, font: "Liberation Sans")[
+  text(13pt, fill: black, font: "New Computer Modern")[
     #box(
       width: 50%,
       table(
@@ -51,6 +51,7 @@
         [*Username*], [*Password*],
         [user], [user],
         [Gabry], [aA1!aaaa],
+        [nicolobolzon], [Ciao1234!]
       ),
     )
 
@@ -61,23 +62,23 @@
   ]
 
 
-  set text(12pt, font: "DejaVu Serif")
+  set text(12pt, font: "New Computer Modern")
 
   set par(justify: true)
 
   set page(
     numbering: "1",
     header: [
-      #set text(12pt, font: "DejaVu Serif")
+      #set text(11pt, font: "New Computer Modern")
       #grid(
         columns: (1fr, 1fr),
-        align(left)[CUOCHI PER CASO],
-        align(right)[Relazione Progetto TecWeb],
+        align(left)[Gastronomia | Cuochi per Caso],
+        align(right)[Relazione Progetto Tecnologie Web],
       )
       #line(length: 100%)
     ],
     footer: [
-      #set text(12pt, font: "DejaVu Serif")
+      #set text(11pt, font: "New Computer Modern")
       #set align(center)
       #line(length: 100%)
       #context [
@@ -96,7 +97,7 @@
     strong(it)
   }
 
-  outline(title: [#v(2em) INDICE #v(3em)], indent: auto)
+  outline(title: [#v(1em) INDICE #v(1em)], indent: auto)
   pagebreak()
 
   doc
