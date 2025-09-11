@@ -117,13 +117,13 @@ if(isset($_GET["degustazione"])){
             $end_date = new DateTime($end);
             if($reservationDate < $start_date){//controllo che la data sia successiva o uguale a quella di inizio della degustazione
                 $errorFound = true; 
-                $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">La prenotazione può essere effettuata solo nei giorni successivi al : ". $start_date->format("d-m-Y")."</p>", $pagina);
+                $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">La prenotazione può essere effettuata solo nei giorni successivi al: <time datetime=\"{$start_date->format('Y-m-d')}\">{$start_date->format('d/m/Y')}</time></p>", $pagina);
             }elseif($reservationDate < $today){//controllo che la data sia successiva o uguale a quella di oggi(non ha senso prenotare nel passato)
                 $errorFound = true;
-                $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">La prenotazione può essere effettuata oggi : ". $today->format("d-m-Y")." e nei giorni precedenti al : ". $end_date->format("d-m-Y")."</p>", $pagina);
+                $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">La prenotazione può essere effettuata oggi, <time datetime=\"{$today->format('Y-m-d')}\">{$today->format('d/m/Y')}</time>, e nei giorni precedenti al <time datetime=\"{$end_date->format('Y-m-d')}\">{$end_date->format('d/m/Y')}</time></p>", $pagina);
             }else if($reservationDate > $end_date){//controllo che la data sia precedente o uguale a quella di fine degustazione
                 $errorFound = true; 
-                $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">L'ordine può essere ritirato solo nei giorni precedenti al : ". $end_date->format("d-m-Y")."</p>", $pagina);
+                $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">La prenotazione può avvenire solo nei giorni precedenti al: <time datetime=\"{$end_date->format('Y-m-d')}\">{$end_date->format('d/m/Y')}</time></p>", $pagina);
             }
 
             if($errorFound == true){//ci sono stati errori
@@ -137,7 +137,7 @@ if(isset($_GET["degustazione"])){
                     header('Location: degustazione.php?degustazione='. $tasting . '');
                     exit();
                 }elseif(is_string($addReservation) && $addReservation == "User already has a reservation for this tasting on the selected date"){//se l'utente ha già una prenotazione per questa degustazione in quella data
-                    $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">Hai già una prenotazione per questa degustazione in questa data : ". $reservationDate->format("d-m-Y") ."</p>", $pagina);
+                    $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">Hai già una prenotazione per questa degustazione in questa data: <time datetime=\"{$reservationDate->format('Y-m-d')}\">{$reservationDate->format('d/m/Y')}</time></p>", $pagina);
                 } else { //se ci sono stati errori l'utente viene reindirizzato alla pagina di errore 500
                    header("Location: 500.php"); 
                    exit();
