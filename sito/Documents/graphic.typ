@@ -1,8 +1,8 @@
 
 #let copertina(
   doc,
-  link_website: "http://tecweb.studenti.math.unipd.it/nome_cognome/index.php",
-  link_text: "tecweb.studenti.math.unipd.it/nome_cognome/index.php",
+  link_website: "http://tecweb.studenti.math.unipd.it/nbolzon/index.php",
+  link_text: "tecweb.studenti.math.unipd.it/nbolzon/index.php",
 ) = {
   set text(lang: "it")
   set list(indent: 1em)
