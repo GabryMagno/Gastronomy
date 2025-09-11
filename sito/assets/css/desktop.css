@@ -144,6 +144,10 @@ h5 {
     font-size: 1.4em;
 }
 
+p{
+    font-size: 1.1em;
+}
+
 p#title{
     margin-bottom: 2em;
     font-size: 1.3em;
@@ -152,6 +156,12 @@ p#title{
 button:focus-visible {
   outline: 2px solid black;
   outline-offset: 2px;
+}
+
+p.new-line{
+    display: block;
+    margin: 0.1em 0;
+    padding: 0;
 }
 
 /*  
@@ -345,7 +355,7 @@ footer {
 
 footer p{
     display: inline-block;
-    margin: auto 0.2em;
+    margin: auto 0.5em;
 }
 
 footer img {
@@ -357,7 +367,7 @@ footer img {
 footer .torna-su {
     display: block;
     margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin-bottom: 1em;
 }
 
 /*

@@ -88,6 +88,7 @@ if(isset($_GET["prodotto"])){
     }
     $pagina = str_replace("[IMAGE]","<img src=". $productInfo["url_immagine"] ." alt=\"\">",$pagina);
     $pagina = str_replace("[Nome Prodotto]",$productInfo["nome"],$pagina);
+    $pagina = str_replace("[NomeProdottoKey]",Sanitizer::SanitizeGenericInput($productInfo["nome"]),$pagina);
     $pagina = str_replace("[Categoria]",ucfirst($productInfo["categoria"]),$pagina);
     $media = $db->AverageGradeProduct($productInfo["id"]);
     if (is_numeric($media) && $media != 0) {

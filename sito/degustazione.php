@@ -75,6 +75,7 @@ if(isset($_GET["degustazione"])){
     }
 
     $pagina = str_replace("[Nome Prodotto]",$productInfo["nome"],$pagina);
+    $pagina = str_replace("[NomeProdottoKey]",Sanitizer::SanitizeGenericInput($productInfo["nome"]),$pagina);
     $pagina = str_replace("[IMMAGINE]",'<img src="'.$productInfo["url_immagine"].'" alt="Immagine prodotto '.Sanitizer::SanitizeText($productInfo["nome"]).'">',$pagina);
     $pagina = str_replace("[DESCRIZIONE]",$tastingInfo["descrizione"],$pagina);
     $start_date = new DateTime($tastingInfo["data_inizio"]);
