@@ -469,10 +469,10 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
         $reservationDate = new DateTime($date_reservation);
         if($reservationDate <= $today){
             $errorFound = true; 
-            $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">L'ordine può essere ritirato solo nei giorni successivi ad oggi: ". $today1->format("d-m-Y")."</p>", $pagina);
+            $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">L'ordine può essere ritirato solo nei giorni successivi ad oggi: <time datetime=\"{$today1->format('Y-m-d')}\">{$today1->format('d/m/Y')}</time></p>", $pagina);
         }else if($reservationDate > $limit_date){
             $errorFound = true; 
-            $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">L'ordine può essere ritirato solo dal ". $tomorrow->format("d-m-Y")." al ".$limit_date->format("d-m-Y")."</p>", $pagina);         
+            $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">L'ordine può essere ritirato solo dal <time datetime=\"{$tomorrow->format('Y-m-d')}\">{$tomorrow->format('d/m/Y')}</time> al <time datetime=\"{$limit_date->format('Y-m-d')}\">{$limit_date->format('d/m/Y')}</time></p>", $pagina);         
         }else{
                 $UserReserved = $db->userAlreadyReservedProduct($productInfo["id"], $date_reservation);
                 if(is_string($UserReserved) && ($UserReserved == "Connection error" || $UserReserved == "Execution error")){
@@ -482,7 +482,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
                     header("Location: login.php"); 
                     exit();
                 }elseif(is_bool($UserReserved) && $UserReserved == true){
-                    $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">Hai già una prenotazione per questa degustazione in questa data : ". $reservationDate->format("d-m-Y") ."</p>", $pagina);
+                    $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">Hai già una prenotazione per questo prodotto in questa data: <time datetime=\"{$reservationDate->format('Y-m-d')}\">{$reservationDate->format('d/m/Y')}</time></p>", $pagina);
                 }else{
                     $pagina = str_replace("[date-error]","", $pagina);
                 }
@@ -499,7 +499,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
                 header('Location: prodotto.php?prodotto='. $productInfo["id"] . '');
                 exit();
             }elseif(is_string($addReservation) && $addReservation == "User already has a reservation for this product on the selected date"){
-                $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">È già presente una prenotazione per questo prodotto nella data selezionata: ".$date_reservation."</p>",$pagina);
+                $pagina = str_replace("[date-error]","<p class=\"error\" id=\"date-error\">È già presente una prenotazione per questo prodotto nella data selezionata: <time datetime=\"{$date_reservation->format('Y-m-d')}\">{$date_reservation->format('d/m/Y')}</time></p>",$pagina);
             } else { 
                 header('Location: 500.php');
                 exit();
