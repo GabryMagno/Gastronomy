@@ -1521,6 +1521,7 @@ p.privacy-area{
 p#register,p#login{ 
     width: 100%;
     margin: 1em 0;
+    min-height: 44px;
 }
 
 /*  
