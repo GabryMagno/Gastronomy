@@ -480,7 +480,9 @@ form.form-bianco textarea{
 }
 
 form.form-bianco textarea:hover,
-form.form-bianco input:hover{
+form.form-bianco input:hover,
+input#searching-bar:hover, 
+select#select-for:hover{
     border: 0;
     border: 5px solid var(--headerbgcolor);
 }
@@ -1030,6 +1032,7 @@ input#searching-bar, select#select-for{
     min-height: 3.5vh;
     font-size: 1.1em;
     padding: 0.4em;
+    border: 3px solid var(--txtcolor);
 }
 
 input#searching-bar{
