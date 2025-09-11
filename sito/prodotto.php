@@ -462,75 +462,75 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
 
 
         // Data
-    $date_reservation_str = $_POST["data_ritiro"];
-    $today = new DateTime();
-    $tomorrow = (clone $today)->modify('+1 day');
-    $limit_date = (clone $today)->modify('+14 day');
-    $reservationDate = new DateTime($date_reservation_str);
+        $date_reservation_str = $_POST["data_ritiro"];
+        $today = new DateTime();
+        $tomorrow = (clone $today)->modify('+1 day');
+        $limit_date = (clone $today)->modify('+14 day');
+        $reservationDate = new DateTime($date_reservation_str);
 
-    if ($reservationDate <= $today) {
-        $errorFound = true;
-        $pagina = str_replace("[date-error]", 
-            "<p class=\"error\" id=\"date-error\">L'ordine può essere ritirato solo nei giorni successivi ad oggi: <time datetime=\"" 
-            . $today->format('Y-m-d') . "\">" 
-            . $today->format('d/m/Y') . "</time></p>", 
-            $pagina
-        );
-    } elseif ($reservationDate > $limit_date) {
-        $errorFound = true;
-        $pagina = str_replace("[date-error]", 
-            "<p class=\"error\" id=\"date-error\">L'ordine può essere ritirato solo dal <time datetime=\"" 
-            . $tomorrow->format('Y-m-d') . "\">" 
-            . $tomorrow->format('d/m/Y') . "</time> al <time datetime=\"" 
-            . $limit_date->format('Y-m-d') . "\">" 
-            . $limit_date->format('d/m/Y') . "</time></p>", 
-            $pagina
-        );
-    } else {
-        // Controllo se l'utente ha già prenotato
-        $UserReserved = $db->userAlreadyReservedProduct($productInfo["id"], $reservationDate->format('Y-m-d'));
-        if (is_string($UserReserved) && ($UserReserved == "Connection error" || $UserReserved == "Execution error")) {
-            header("Location: 500.php");
-            exit();
-        } elseif (is_string($UserReserved) && $UserReserved == "User is not logged in") {
-            header("Location: login.php");
-            exit();
-        } elseif (is_bool($UserReserved) && $UserReserved == true) {
+        if ($reservationDate <= $today) {
             $errorFound = true;
             $pagina = str_replace("[date-error]", 
-                "<p class=\"error\" id=\"date-error\">Hai già una prenotazione per questo prodotto in questa data: <time datetime=\"" 
-                . $reservationDate->format('Y-m-d') . "\">" 
-                . $reservationDate->format('d/m/Y') . "</time></p>", 
+                "<p class=\"error\" id=\"date-error\">L'ordine può essere ritirato solo nei giorni successivi ad oggi: <time datetime=\"" 
+                . $today->format('Y-m-d') . "\">" 
+                . $today->format('d/m/Y') . "</time></p>", 
                 $pagina
             );
-        } else {
-            $pagina = str_replace("[date-error]", "", $pagina);
-        }
-    }
-
-    // Ripopolamento form in caso di errore
-    if ($errorFound) {
-        $pagina = str_replace('min="1"', 'min="1" value="' . $quantity . '"', $pagina);
-        $pagina = str_replace('name="data_ritiro"', 'name="data_ritiro" value="' . $reservationDate->format('Y-m-d') . '"', $pagina);
-    } else {
-        // Aggiungi prenotazione
-        $addReservation = $db->AddReservation($productInfo["id"], $quantity, $reservationDate->format('Y-m-d'));
-        if ($addReservation === true) {
-            header('Location: prodotto.php?prodotto=' . $productInfo["id"]);
-            exit();
-        } elseif ($addReservation === "User already has a reservation for this product on the selected date") {
+        } elseif ($reservationDate > $limit_date) {
+            $errorFound = true;
             $pagina = str_replace("[date-error]", 
-                '<p class="error" id="date-error">È già presente una prenotazione per questo prodotto nella data selezionata: <time datetime="' 
-                . $reservationDate->format('Y-m-d') . '">' 
-                . $reservationDate->format('d/m/Y') . '</time></p>', 
+                "<p class=\"error\" id=\"date-error\">L'ordine può essere ritirato solo dal <time datetime=\"" 
+                . $tomorrow->format('Y-m-d') . "\">" 
+                . $tomorrow->format('d/m/Y') . "</time> al <time datetime=\"" 
+                . $limit_date->format('Y-m-d') . "\">" 
+                . $limit_date->format('d/m/Y') . "</time></p>", 
                 $pagina
             );
         } else {
-            header('Location: 500.php');
-            exit();
+            // Controllo se l'utente ha già prenotato
+            $UserReserved = $db->userAlreadyReservedProduct($productInfo["id"], $reservationDate->format('Y-m-d'));
+            if (is_string($UserReserved) && ($UserReserved == "Connection error" || $UserReserved == "Execution error")) {
+                header("Location: 500.php");
+                exit();
+            } elseif (is_string($UserReserved) && $UserReserved == "User is not logged in") {
+                header("Location: login.php");
+                exit();
+            } elseif (is_bool($UserReserved) && $UserReserved == true) {
+                $errorFound = true;
+                $pagina = str_replace("[date-error]", 
+                    "<p class=\"error\" id=\"date-error\">Hai già una prenotazione per questo prodotto in questa data: <time datetime=\"" 
+                    . $reservationDate->format('Y-m-d') . "\">" 
+                    . $reservationDate->format('d/m/Y') . "</time></p>", 
+                    $pagina
+                );
+            } else {
+                $pagina = str_replace("[date-error]", "", $pagina);
+            }
+        }
+
+        // Ripopolamento form in caso di errore
+        if ($errorFound) {
+            $pagina = str_replace('min="1"', 'min="1" value="' . $quantity . '"', $pagina);
+            $pagina = str_replace('name="data_ritiro"', 'name="data_ritiro" value="' . $reservationDate->format('Y-m-d') . '"', $pagina);
+        } else {
+            // Aggiungi prenotazione
+            $addReservation = $db->AddReservation($productInfo["id"], $quantity, $reservationDate->format('Y-m-d'));
+            if ($addReservation === true) {
+                header('Location: prodotto.php?prodotto=' . $productInfo["id"]);
+                exit();
+            } elseif ($addReservation === "User already has a reservation for this product on the selected date") {
+                $pagina = str_replace("[date-error]", 
+                    '<p class="error" id="date-error">È già presente una prenotazione per questo prodotto nella data selezionata: <time datetime="' 
+                    . $reservationDate->format('Y-m-d') . '">' 
+                    . $reservationDate->format('d/m/Y') . '</time></p>', 
+                    $pagina
+                );
+            } else {
+                header('Location: 500.php');
+                exit();
+            }
         }
     }
-}
 
     //FORM COMMENTO
     if(isset($_POST["submit-user-comment"])){
