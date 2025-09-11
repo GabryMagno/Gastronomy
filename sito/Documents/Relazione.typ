@@ -35,14 +35,12 @@ In particolare, il progetto ha introdotto un sistema di prenotazione online e st
 
 
 == Schema database
-Si allega immagine dello schema relazionale del database:
+Si riporta, qui di seguito, l'immagine dello schema relazionale del database che è stato progettato in modo da rispettare sia la *Terza Forma Normale* _(3NF)_ che la *Forma Normale di Boyce-Codd* _(BCNF)_.
 
 #figure(
-  image("", width: 80%),
+  image("assets/db.png", width: 110%),
   caption: [Schema relazionale del database.],
 )
-
-Il database è stato progettato in modo da rispettare sia la *Terza Forma Normale* _(3NF)_ che la *Forma Normale di Boyce-Codd* _(BCNF)_.
 
 = Realizzazione
 == Struttura e contenuto
@@ -52,7 +50,24 @@ Il database è stato progettato in modo da rispettare sia la *Terza Forma Normal
 == Presentazione
 === CSS
 === Immagini e icone
+Le immagini del sito sono salvate principalmente in formato *WEBP* e hanno tutte una dimensione inferiore a *1MB*.
+La scelta di questo formato è stata motivata dalla sua leggerezza e rapidità di caricamento nelle varie pagine. Tuttavia, essendo un formato relativamente recente, può comportare alcuni problemi di retrocompatibilità.
+
+Un’eccezione riguarda le immagini del profilo utente: in questo caso è possibile caricare file nei formati *PNG*, *JPG* o *JPEG*, con un limite massimo di *2MB*.
+
+I loghi, invece, sono stati salvati in formato *PNG* per preservare la trasparenza dello sfondo, mantenendo comunque una dimensione inferiore a *1MB*.
+Le icone sono realizzate in grafica vettoriale e salvate in formato *SVG*.
+
+Per ogni prodotto o evento di degustazione viene mostrata la relativa immagine.
+
 === Font
+Il font scelto per l’intero sito web è _*Nunito*_.
+La decisione è stata presa perché si tratta di un carattere sans-serif dalle forme tondeggianti, che garantisce una buona leggibilità sul web. Dispone inoltre di una vasta gamma di pesi (da Light a ExtraBold), è ottimizzato per la lettura su schermi digitali e supporta pienamente caratteri accentati e simboli delle lingue europee, compreso l’italiano. Un ulteriore vantaggio è la sua gratuità e la disponibilità tramite _Google Fonts_.
+
+Per migliorare ulteriormente la leggibilità del testo, è stata applicata un’interlinea pari a 1.5em.
+
+Per la versione stampata, invece, è stato adottato il font _*Times New Roman*_, un carattere con grazie, dimensione 12pt, anch’esso accompagnato da un’interlinea di 1.5em.
+
 === Colori
 
 == Comportamento
