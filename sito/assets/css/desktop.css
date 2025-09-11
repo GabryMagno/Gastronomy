@@ -2270,10 +2270,26 @@ p#comment-log a:visited,p#reservation-log a:visited{
     text-indent: -999em;
 }
 
+.singleproduct-dettagli,
+.degustazione-dettagli{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.singleproduct-dettagli .row,
+.degustazione-dettagli .row{
+    display: flex;
+    align-items: baseline;
+    gap: 2.5em;
+}
+
 .singleproduct-dettagli dt,
 .degustazione-dettagli dt{
     font-weight: bold;
     font-size: 1.2em;
+    min-width: max-content;
+    width: 18ch;
 }
 
 .singleproduct-dettagli dt::after,
@@ -2281,23 +2297,10 @@ p#comment-log a:visited,p#reservation-log a:visited{
     content: ":";
 }
 
-.singleproduct-dettagli dt,
 .singleproduct-dettagli dd,
-.degustazione-dettagli dt,
 .degustazione-dettagli dd {
-    display: inline-block;
-}
-
-.singleproduct-dettagli,
-.degustazione-dettagli{
-    display: grid;
-    grid-template-columns: max-content 1fr;
-
-    row-gap: 0.5em;
-    column-gap: 1em;
-    grid-gap: 1.5em;
-
-    align-items: baseline;
+    flex: 1;
+    margin: 0;
 }
 
 #tua-rating::after{
@@ -2401,24 +2404,24 @@ label#order-label{
 }
 
 .singleproduct-rating {
-    display: grid;
-    grid-template-columns: max-content 1fr;
-
-    row-gap: 0.5em;
-    column-gap: 1em;
-    grid-gap: 1.5em;
-
-    align-items: baseline;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
 }
 
-.singleproduct-rating dt{
+.singleproduct-rating dt {
     font-weight: bold;
-
     font-size: 1.2em;
+    min-width: max-content; 
+    margin-right: 1em;      
 }
 
-.singleproduct-rating dt::after{
+.singleproduct-rating dt::after {
     content: ":";
+}
+
+.singleproduct-rating dd {
+    flex: 1;
 }
 
 h3 + .singleproduct-rating {
