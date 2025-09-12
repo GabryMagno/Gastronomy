@@ -71,7 +71,6 @@ textarea,
 input,
 .hidden,
 .hidden_header,
-.hidden_testo,
 .no-print {
   display: none ;
 }
@@ -127,6 +126,12 @@ hr{
   margin-top: 1em;
   font-size: 1.1em;
   font-weight: bold;
+}
+
+.print-avviso-form {
+    text-align: center;
+    font-style: italic;
+    font-weight: bold;
 }
 
 /* MESSAGGIO PER PAGINA NON STAMPABILE */
