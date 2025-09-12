@@ -1448,7 +1448,6 @@ class DB {
 
         if($isUserLogged == false){
             //se l'utente non è loggato, ritorna un messaggio di errore
-            echo "Utente non loggato";
             return "User is not logged in"; //l'utente non è loggato
         }else{
             $newConnection = $this->OpenConnectionDB();
@@ -1464,7 +1463,6 @@ class DB {
                     //se c'è un errore nell'esecuzione della query, ritorna false
                     $this->CloseConnectionDB();
                     $changePassword->close();
-                    echo "Errore Query";
                     return false; //errore nell'esecuzione della query
                 }
 
@@ -1472,13 +1470,55 @@ class DB {
                     //se la query ha cambiato una riga, allora la password è stata cambiata con successo
                     $this->CloseConnectionDB();
                     $changePassword->close();
-                    echo "Password cambiata";
                     return true; //cambio password avvenuto con successo
                 }else{
                     //se la query non ha cambiato nessuna riga, allora l'utente non esiste o c'è stato un errore
                     $this->CloseConnectionDB();
                     $changePassword->close();
                     return "Password change failed"; //nessuna riga cambiata, errore nel cambio della password
+                }
+            }else{
+                return "Connection error"; //errore nella connessione al database
+            }
+        }
+    }
+
+    function CheckOldPassword($oldPassword): bool | string{
+        $encriptedOldPassword = hash('sha256', $oldPassword);
+        $isUserLogged = $this->IsUserLog();
+
+        if($isUserLogged == false){
+            //se l'utente non è loggato, ritorna un messaggio di errore
+            return "User is not logged in"; //l'utente non è loggato
+        }else{
+            $newConnection = $this->OpenConnectionDB();
+            if($newConnection){
+                //preparazione della query per cambiare la password dell'utente
+                $takePassword = $this->connection->prepare("SELECT password FROM utenti WHERE id = ?");
+                $takePassword->bind_param("i", $isUserLogged);
+
+                try{
+                    //esecuzione della query per cambiare la password dell'utente
+                    $takePassword->execute();
+                }catch(\mysqli_sql_exception $error){
+                    //se c'è un errore nell'esecuzione della query, ritorna false
+                    $this->CloseConnectionDB();
+                    $takePassword->close();
+                    return false; //errore nell'esecuzione della query
+                }
+
+                if($row = ($takePassword->get_result())->fetch_assoc()){
+                    $dbPassword = $row["password"];
+                    if($dbPassword === $encriptedOldPassword){
+                        $this->CloseConnectionDB();
+                        return true;
+                    }else{
+                        $this->CloseConnectionDB();
+                        return "This isn't the old password";
+                    }
+                }else{
+                    $this->CloseConnectionDB();
+                    return "User not found";
                 }
             }else{
                 return "Connection error"; //errore nella connessione al database

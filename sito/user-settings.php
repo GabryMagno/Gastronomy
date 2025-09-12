@@ -225,9 +225,9 @@ if(!isset($_POST["submit-user-settings"]) && !isset($_POST["submit-password-sett
     if($errorFound == true) {//nel caso ci siano errori
         $pagina = str_replace("[username]",$isLogged,$pagina);
         if ($userInfo["url_immagine"]) {
-            $pagina = str_replace("[logo]",$userInfo["url_immagine"],$pagina);//logo sarà l'src dell'immagine profilo(in html)
+            $pagina = str_replace("[profile-image]", "src=\"".$userInfo["url_immagine"]."\"", $pagina);
         } else {
-            $pagina=str_replace("[logo]","./asset/img/def-logo.webp",$pagina);
+            $pagina = str_replace("[profile-image]", "src=\"assets/img/users_logos/default.webp\"", $pagina);
         }
         $pagina = str_replace("[nome]",$userInfo["nome"],$pagina);
         $pagina = str_replace("[cognome]",$userInfo["cognome"],$pagina);
@@ -333,17 +333,34 @@ if(!isset($_POST["submit-user-settings"]) && !isset($_POST["submit-password-sett
         $errorFound = true;
         $pagina = str_replace("[old-password-error]",'<p role="alert" class="error" id="old-password-error">La <span lang="en">password</span> attuale deve contenere almeno una lettera minuscola, una lettera maiuscola, un numero e un carattere speciale.</p>',$pagina);
     } else {
-        $pagina=str_replace("[old-password-error]","",$pagina);
+        $check = $db->CheckOldPassword($oldPassword);
+        if(is_string($check) && ($check == "Connection error" || $check == "Execution error")) {
+            header("Location: 500.php");
+            exit();
+        }elseif(is_string($check) && $check == "User not found"){
+            header("Location: login.php");
+            exit();
+        }elseif(is_string($check) && $check == "This isn't the old password"){
+            $pagina = str_replace("[old-password-error]",'<p role="alert" class="error" id="old-password-error">La <span lang="en">password</span> inserita non corrisponde con quella attuale</p>',$pagina);
+            $errorFound = true;
+        }else $pagina=str_replace("[old-password-error]","",$pagina);
     }
+
+
     if(mb_strlen($newPassword) < 8) {
-        $pagina = str_replace("[password-error]",'<p role="alert" class="error" id="password-error">La <span lang="en">password</span> deve avere una lunghezza minima di 8 caratteri.</p>',$pagina);
+        $pagina = str_replace("[new-password-error]",'<p role="alert" class="error" id="password-error">La <span lang="en">password</span> deve avere una lunghezza minima di 8 caratteri.</p>',$pagina);
         $errorFound = true;
     } elseif (preg_match("/^(?=.*[a-zß-ÿ])(?=.*[A-ZÀ-Ý])(?=.*[\d])(?=.*[.,=#!?@+\-_€$%&^*<>]).+$/",$newPassword) == 0) {
         $errorFound = true;
-        $pagina = str_replace("[password-error]",'<p role="alert" class="error" id="password-error">La <span lang="en">password</span> deve contenere almeno una lettera minuscola, una lettera maiuscola, un numero e un carattere speciale.</p>',$pagina);
+        $pagina = str_replace("[new-password-error]",'<p role="alert" class="error" id="password-error">La <span lang="en">password</span> deve contenere almeno una lettera minuscola, una lettera maiuscola, un numero e un carattere speciale.</p>',$pagina);
+    }elseif($newPassword === $oldPassword){
+        $errorFound = true;
+        $pagina = str_replace("[new-password-error]",'<p role="alert" class="error" id="password-error">La <span lang="en">password</span> nuova inserita risulta uguale a quella inserita nel campo Vecchia <span lang="en">Password</span>.</p>',$pagina);
     } else {
-        $pagina = str_replace("[password-error]","",$pagina);
+        $pagina=str_replace("[new-password-error]","",$pagina);
     }
+
+
     if(strcmp($newPassword,$repeatNewPassword) != 0) {
         $pagina = str_replace("[repeat-password-error]",'<p role="alert" class="error" id="repeat-password-error">Le <span lang="en">password</span> non coincidono.</p>',$pagina);
         $errorFound = true;
@@ -352,6 +369,16 @@ if(!isset($_POST["submit-user-settings"]) && !isset($_POST["submit-password-sett
     }
 
     if($errorFound == true) {//nel caso ci siano errori
+        $pagina = str_replace("[username]",$isLogged,$pagina);
+        if ($userInfo["url_immagine"]) {
+            $pagina = str_replace("[profile-image]", "src=\"".$userInfo["url_immagine"]."\"", $pagina);
+        } else {
+            $pagina = str_replace("[profile-image]", "src=\"assets/img/users_logos/default.webp\"", $pagina);
+        }
+        $pagina = str_replace("[nome]",$userInfo["nome"],$pagina);
+        $pagina = str_replace("[cognome]",$userInfo["cognome"],$pagina);
+        $pagina = str_replace("[data-nascita]",$userInfo["data_nascita"],$pagina);
+        //[nome/cognome/username/data-nascita] sono i campi che verranno riempiti con i dati dell'utente(input in html)
         $pagina = str_replace("[repeat-password-error]","",$pagina);
         echo $pagina;
         exit();
@@ -360,7 +387,6 @@ if(!isset($_POST["submit-user-settings"]) && !isset($_POST["submit-password-sett
     $result = $db->ChangePassword($oldPassword,$newPassword);//chiamata alla funzione per cambiare la password
     if(is_string($result) && strcmp($result,"Password change failed") == 0) {//controllo se la modifica della password è fallita
         $pagina = str_replace("[old-password-error]",'<p role="alert" class="error" id="old-password-error">La <span lang="en">password</span> attuale inserita non è corretta</p>',$pagina);
-        echo $pagina;
         exit();
     } elseif (is_string($result)) {//controllo se la modifica della password ha generato un errore
         header('Location: 500.php');

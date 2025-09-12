@@ -1,4 +1,4 @@
-let originalLogo = null;
+let originalLogo = "assets/img/users_logos/default.webp";
 
 function validateUserPersonalSettings() {
 
