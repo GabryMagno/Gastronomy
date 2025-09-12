@@ -24,6 +24,19 @@ L’obiettivo finale è stato quello di sviluppare un sito intuitivo e completo,
 In particolare, il progetto ha introdotto un sistema di prenotazione online e strumenti per raccogliere feedback e valutazioni da parte dei clienti, così da offrire al personale indicazioni utili per monitorare la qualità dei prodotti e individuare possibili miglioramenti.
 
 = Analisi dei requisiti
+La fase di sviluppo è stata preceduta da un’analisi di alcuni siti web di gastronomie locali. È emerso che molte di esse non dispongono di un sito dedicato e si limitano a pubblicare informazioni e prodotti esclusivamente sui canali social. Alcune, invece, hanno un sito web, ma con funzionalità molto ridotte, spesso limitate alla sola presentazione di informazioni di base.
+
+Da questa osservazione è nata l’idea di realizzare un sito web per una gastronomia che non solo ne curi la *presentazione online*, rendendola più visibile sul web, ma che consenta anche ai clienti di *consultare i prodotti disponibili* in negozio e prenotarli direttamente online.
+
+Inoltre, si è pensato di arricchire l’offerta integrando un servizio di *degustazione prenotabile*, attraverso il quale i clienti possono vivere un’esperienza unica: assaggiare i prodotti in negozio, scoprire nuovi sapori e ricevere consigli personalizzati dallo staff sugli abbinamenti.
+
+Infine, tenendo conto dell’importanza del feedback dei clienti, sono state introdotte funzionalità di *valutazione e recensione*. In questo modo è possibile raccogliere opinioni utili, migliorare il servizio e permettere agli utenti di visualizzare facilmente i prodotti più apprezzati.
+
+È stata così definita la struttura gerarchica della gastronomia _*Cuochi per Caso*_ e sono state inoltre stabilite alcune *convenzioni interne*, così da garantire un’esperienza d’uso coerente e intuitiva per l’utente.
+
+Le pagine del sito sono state progettate per risultare semplici da utilizzare e visivamente accattivanti, con una particolare attenzione alla *navigazione da dispositivi mobili*, oggi sempre più diffusi e parte integrante della vita quotidiana.
+
+
 == Analisi utente
 == SEO
 
@@ -58,10 +71,31 @@ Si riporta, qui di seguito, l'immagine dello schema relazionale del database che
 = Realizzazione
 == Struttura e contenuto
 === HTML
+Il sito web è stato sviluppato in *HTML5* con sintassi *XML*, in conformità al regolamento del progetto didattico.
+Durante la fase di scrittura delle pagine HTML, si è cercato di mantenere una struttura il più possibile chiara e stabile, ricorrendo a segnaposto con la sintassi `[NomeSegnaposto]`. Questi segnaposto vengono poi sostituiti dinamicamente tramite PHP, utilizzando la funzione `str_replace()` seguendo un pattern definito.
+
+Questo approccio consente di mantenere una struttura fissa nei file HTML, modificando allo stesso tempo i contenuti in maniera dinamica attraverso PHP e JavaScript.
+
+```html
+<ul class="list" id="prodotti" aria-label="Lista dei prodotti filtrati">
+    [PRODUCTS]
+</ul>
+```
+
+Grazie a `str_replace()`, il segnaposto `[PRODUCTS]` viene sostituito con l’elenco dei prodotti generato dinamicamente in PHP, aggiornato in base ai filtri selezionati dall’utente.
+
 === Popolamento database
+Per il popolamento del database è stata creata una query di inserimento.
+I prodotti sono stati scelti in modo casuale, cercando di coprire tutte le categorie principali _(antipasti, primi, secondi, contorni e dolci)_ e garantendo la presenza di alternative per diverse diete _(vegana, vegetariana e senza glutine)_.
+
+Alcuni utenti, invece, sono stati inseriti sia manualmente, sia tramite il form di registrazione integrato nel sito.
+
+Le immagini dei prodotti sono state realizzate con strumenti di intelligenza artificiale, così da ottenere un set grafico coerente e personalizzato.
 
 == Presentazione
 === CSS
+
+
 === Immagini e icone
 Le immagini del sito sono salvate principalmente in formato *WEBP* e hanno tutte una dimensione inferiore a *1MB*.
 La scelta di questo formato è stata motivata dalla sua leggerezza e rapidità di caricamento nelle varie pagine. Tuttavia, essendo un formato relativamente recente, può comportare alcuni problemi di retrocompatibilità.
@@ -72,6 +106,8 @@ I loghi, invece, sono stati salvati in formato *PNG* per preservare la trasparen
 Le icone sono realizzate in grafica vettoriale e salvate in formato *SVG*.
 
 Per ogni prodotto o evento di degustazione viene mostrata la relativa immagine.
+
+Le immagini dei prodotti sono state generate tramite strumenti di intelligenza artificiale.
 
 === Font
 Il font scelto per l’intero sito web è _*Nunito*_.
