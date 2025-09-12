@@ -234,6 +234,11 @@ nav.navbar_top{
     width: 100%;
 }
 
+.section-singleproduct, .section-singledegustazione{
+    background-color: var(--headerbgcolor);
+    height: 5px;
+}
+
 .section-title{
     text-align: center;
     font-weight: bold;
