@@ -156,7 +156,7 @@ if(isset($_GET["prodotto"])){
                     $commentList .= '☆';
                 }
 
-                $commentList.= '</span><span class="hidden_testo">'.$comment["voto"].' stelle su 5 </span>
+                $commentList.= '</span><span class="hidden_testo">'.$comment["voto"].' stelle su 5 </p>
                                 </div></div>';
 
                 $commentNumber++;
@@ -200,7 +200,6 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
     $pagina = str_replace("<form method=\"post\" id=\"modifica-preferiti\">
                             <input type=\"hidden\" name=\"id_utente\" value=\"[id_utente]\">
                             <input type=\"hidden\" name=\"nome_prodotto\" value=\"[nome_prodotto]\">
-
                             [PREFERITO]
                         </form>","",$pagina);
     $pagina = str_replace("<dl class=\"singleproduct-rating\">
@@ -237,10 +236,9 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
         exit();
     }
     if(!$isProductFavorite){
-        $pagina = str_replace("[PREFERITO]","
-        <button type=\"submit\" id=\"singleproduct-stella\" title=\"Clicca per aggiungere ai preferiti\" aria-label=\"Clicca per aggiungere ai preferiti\" name=\"favorite\">
-            <img src=\"assets/img/icone/star.svg\" alt=\"Prodotto non aggiunto ai preferiti\">
-        </button>",$pagina);
+        $pagina = str_replace("[PREFERITO]","<button type=\"submit\" id=\"singleproduct-stella\" title=\"Clicca per aggiungere ai preferiti\" aria-label=\"Clicca per aggiungere ai preferiti\" name=\"favorite\">
+                                <img src=\"assets/img/icone/star.svg\" alt=\"Prodotto non aggiunto ai preferiti\">
+                            </button>",$pagina);
     }else{
         $pagina = str_replace("[PREFERITO]","<button type=\"submit\" id=\"singleproduct-stella\" title=\"Clicca per rimuovere dai preferiti\" aria-label=\"Clicca per rimuovere dai preferiti\" name=\"remove-favorite\">
                                 <img src=\"assets/img/icone/star-checked.svg\" alt=\"Prodotto aggiunto ai preferiti\">
