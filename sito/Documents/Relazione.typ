@@ -234,19 +234,19 @@ Durante l’intero arco della fase di progettazione e sviluppo, i membri del tea
 - eseguire test in modo congiunto e simultaneo, riducendo così la possibilità di errori, anche di natura distrattiva.
 
 - *Nicolò Bolzon*
-  - HTML: index, chisiamo, 403, 404, 500, ringraziamenti, degustazioni, prodotto, user-profile;
-  - CSS: desktop, mobile, print;
+  - HTML: `index, chisiamo, 403, 404, 500, ringraziamenti, degustazioni, prodotto, user-profile`;
+  - CSS: `desktop, mobile, print`;
   - PHP; 
-  - JS: menu ad hamburger;
-  - DB: progettazione, creazione, connessione, inserimento e popolamento;
+  - JS: `menu ad hamburger`;
+  - DB: `progettazione, creazione, connessione, inserimento e popolamento`;
   - Testing;
   - Relazione.
 
 - *Gabriele Isacco Magnelli*
-  - HTML: index, ringraziamenti, conferma-scelta, degustazione, prodotti, prodotto, login, register, user-settings;
-  - CSS: desktop, mobile;
+  - HTML: `index, ringraziamenti, conferma-scelta, degustazione, prodotti, prodotto, login, register, user-settings`;
+  - CSS: `desktop, mobile`;
   - PHP;
-  - JS: validazione input, visualizzazione errori;
-  - DB: progettazione, creazione, connessione, inserimento e popolamento;
+  - JS: `validazione input, visualizzazione errori`;
+  - DB: `progettazione, creazione, connessione, inserimento e popolamento`;
   - Testing;
   - Relazione.
