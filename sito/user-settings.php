@@ -11,6 +11,9 @@ $db = new DB;
 
 $isLogged_first = $db->isUserLog();//controllo se l'utente è loggato
 $isLogged = $db->UserUsername();//recupero l'username dell'utente loggato
+if(!is_dir('assets/tmp/')){
+    mkdir('assets/tmp/');
+}
 
 if ((is_bool($isLogged_first) && $isLogged_first == false)) {//controllo se l'utente non è loggato(sia con id che con username)
     header('Location: login.php');
@@ -177,6 +180,9 @@ if(!isset($_POST["submit-user-settings"]) && !isset($_POST["submit-password-sett
             $errorFound=true;
             $pagina = str_replace("[logo-error]",'<p role="alert" id="logo-error" class="error">Il <span lang="en">file</span> caricato è un formato non supportato</p>',$pagina);
         } else {
+            if(!is_dir('assets/tmp/')){
+                mkdir('assets/tmp/');
+            }
             if(!is_dir($userBasePath)) {//controllo se la cartella base per le immagini profilo esiste
                 mkdir($userBasePath,0755,true);//crea la cartella base se non esiste
             }
