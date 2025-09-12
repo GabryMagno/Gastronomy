@@ -97,7 +97,8 @@ Durante l’intero arco della fase di progettazione e sviluppo, i membri del tea
 - eseguire test in modo congiunto e simultaneo, riducendo così la possibilità di errori, anche di natura distrattiva.
 
 - *Nicolò Bolzon*
-  - HTML/CSS: 
+  - HTML:
+  - CSS: desktop, mobile, print;
   - PHP; 
   - JS: menu ad hamburger;
   - DB: progettazione, creazione, connessione, inserimento e popolamento;
@@ -105,7 +106,8 @@ Durante l’intero arco della fase di progettazione e sviluppo, i membri del tea
   - Relazione.
 
 - *Gabriele Isacco Magnelli*
-  - HTML/CSS:
+  - HTML:
+  - CSS: desktop, mobile;
   - PHP;
   - JS: validazione input, visualizzazione errori;
   - DB: progettazione, creazione, connessione, inserimento e popolamento;

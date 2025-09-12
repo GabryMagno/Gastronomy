@@ -115,6 +115,20 @@ dt::after{
     content: ":";
 }
 
+hr{
+  color: black;
+}
+
+.nondisponibile,
+.degustazione-nondisponibile,
+.prodotto-nondisponibile,
+.error {
+  text-align: center;
+  margin-top: 1em;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
 /* MESSAGGIO PER PAGINA NON STAMPABILE */
 body.no-print-content * {
   display: none ;
@@ -131,12 +145,43 @@ body.no-print-content::before {
 
 /* PERSONALIZZAZIONI PER ALCUNE PAGINE SPECIFICHE */
 /* HOME */
-.categoria-grid{
-    width: 50%;
+.categoria-grid,
+#best-products,
+.list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
 }
 
-.new img{
-    width: 60%;
+.categoria-grid img,
+li.new img,
+li.product-brochure img {
+  width: 45%;
+}
+
+.categoria-box,
+li.new,
+li.product-brochure,
+li.userprofile-brochure {
+  flex: 0 0 48%;
+  box-sizing: border-box;
+  text-align: center;
+
+  padding: 0.5em;
+
+  border: 0.5px solid gray;
+}
+
+li.new,
+li.product-brochure,
+li.userprofile-brochure{
+  list-style-type: none;
+}
+
+
+.recensione-card{
+  border: 0.5px solid gray;
+  padding: 1em;
 }
 
 /* CHI SIAMO */
@@ -145,6 +190,11 @@ body.no-print-content::before {
 }
 
 /* PRODOTTO SINGOLO */
+.singleproduct-img img{
+  width: 60%;
+  margin: 1em auto;
+}
+
 #singleproduct-diete img {
   display: none;
 }
@@ -174,11 +224,75 @@ body.no-print-content::before {
   display: none;
 }
 
-/* DEGUSTAZIONI */
-.degustazione-card{
-    text-align: center;
+.recensione-prodotto{
+  font-weight: bold;
 }
 
+#tua-rating{
+  margin-bottom: 0em;
+  padding-bottom: 0em;
+}
+
+#tua-rating::after{
+  content: ":";
+}
+
+.singleproduct-rating{
+  border: 0.5px solid gray;
+  padding: 1em;
+  width: 100%;
+
+  margin-bottom: 1em;
+}
+
+.recensione-container::before{
+  content: "Valutazioni inserite degli altri utenti:";
+  font-weight: bold;
+}
+
+/* DEGUSTAZIONI */
+.degustazione-card{
+  text-align: center;
+}
+
+.degustazione-card::after {
+  content: "";
+  display: block;
+  margin: 1em auto;
+  width: 80%;
+  border-bottom: 1px solid #000;
+}
+
+.degustazione-card:last-child::after {
+    content: none;
+  }
+
 .degustazione-card img{
-    width: 60%;
+    width: 50%;
+    margin: 1em auto;
+}
+
+/* DEGUSTAZIONE SINGOLA */
+.singledegustazione-img img{
+  width: 60%;
+  margin: 1em auto;
+}
+
+/* USER-PROFILE */
+#user-info img{
+  max-width: 30%;
+}
+
+/* ERRORI e RINGRAZIAMENTI */
+.error_main h3, .ringraziamento h3,
+#confirm-section h3, .error_main h4,
+.ringraziamento h4, #confirm-section h4{
+  text-align: center;
+}
+
+.error_main img,
+.ringraziamento img,
+#confirm-section img{
+  max-width: 50%;
+  margin: 1em auto;
 }
