@@ -51,7 +51,7 @@
                     <span class="menu-button-3" aria-hidden="true"></span>
                 </button>
 
-                <ul id="menu">
+                <ul id="menu" aria-label="Menu del sito">
                     <li><a href="index.php"><span lang="en">Home</span></a></li>
                     <li><a href="chisiamo.php">Chi siamo</a></li>
                     <li id="here">Prodotti</li>
@@ -60,7 +60,7 @@
                 </ul>
             </nav>
 
-            <nav id="breadcrumb" aria-label="Breadcrumb">
+            <nav id="breadcrumb">
                 <p>Ti trovi in: Prodotti</p>
             </nav>
 
@@ -161,6 +161,7 @@
                     <form id="search">
                         <label for="searching-bar" class="hidden_testo">Barra di ricerca</label>
                         <input type="search" id="searching-bar" name="nome" placeholder="Cerca un prodotto">
+                        <button type="submit" id="search-submit"></button>
                     </form>
                     <form id="other-filters">
                         <label for="select-for">Filtra per: </label>

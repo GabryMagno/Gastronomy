@@ -1050,8 +1050,28 @@ input#searching-bar, select#select-for{
     border: 3px solid var(--txtcolor);
 }
 
+form#search{
+    display: flex;
+    align-items: flex-start;
+    justify-content: left;
+    gap: 1em;
+}
+
 input#searching-bar{
-    width: 100%;
+    width: 80%;
+}
+
+button#search-submit{
+    background-image: url(../img/icone/cerca.webp);
+    width: 40px;
+    height: 40px;
+    align-self: center;
+    background-size: contain;
+    cursor:pointer;
+}
+
+button#search-submit:hover{
+    outline: 4px solid var(--headerbgcolor);
 }
 
 ul.list{
