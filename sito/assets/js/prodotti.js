@@ -1,4 +1,12 @@
 function FilterForm(){
+    const priceInput = document.getElementById("price");
+    const textPrice = document.getElementById("text-price");
+
+    priceInput.addEventListener("input", () => {
+        priceInput.setAttribute("value", priceInput.value);
+        textPrice.innerText = priceInput.value + " €";
+    });
+
     let reset_button = document.getElementById("reset-filters");
     reset_button.addEventListener("click", (e) =>{
         e.preventDefault();
@@ -15,30 +23,8 @@ function FilterForm(){
         document.getElementById("text-price").innerText = priceInput.value + " €";
 
     });
-    const priceInput = document.getElementById("price");
-    document.getElementById("text-price").innerText = priceInput.value + " €";
-}
-
-function UpdatePrezzo(){
-    const Prezzo = document.forms["filter-content"]["price"].value;
-    document.getElementById("text-price").innerText = Prezzo + " €";
-    return Prezzo;
-}
-
-const filters = {
-    "price" : ["input", UpdatePrezzo],
-}
-
-function Update(){
-    for (var id in filters) {
-        if (!document.getElementById(id)) {
-            continue;
-		}
-		document.getElementById(id).addEventListener(filters[id][0], filters[id][1]);
-	}
 }
 
 window.addEventListener("load", () => {
-    Update();
     FilterForm();
 })
