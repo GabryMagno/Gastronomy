@@ -30,8 +30,21 @@ In particolare, il progetto ha introdotto un sistema di prenotazione online e st
 = Progettazione
 == Schema organizzativo
 == Tipi di utente
+Nella fase di progettazione del sito sono stati individuati i seguenti tipi di utente:
+
+- *Ospite*: l’utente ospite può visualizzare le sezioni pubbliche del sito, visitando le pagine _Home, Chi Siamo, Prodotti, Degustazioni, Dettaglio Prodotto e Dettaglio Degustazione_. Non ha la possibilità di effettuare prenotazioni _(né di prodotti né di degustazioni)_ e non può accedere all’area personale se non è registrato. Non può aggiungere prodotti ai preferiti né inserire nuove recensioni o valutazioni, ma può consultare quelle già presenti. È comunque possibile, anche senza autenticazione, inviare feedback tramite l’apposito form presente nella pagina _Chi Siamo_.
+
+- *Utente Registrato*: l’utente registrato ha accesso completo alle funzionalità riservate agli utenti autenticati. Può accedere all’area personale, che presenta una dashboard con i prodotti preferiti, le prenotazioni di prodotti e degustazioni e le recensioni inserite. Può effettuare prenotazioni, aggiungere o rimuovere prodotti dai preferiti, inserire, modificare o eliminare valutazioni e commenti. È inoltre possibile gestire i propri dati personali, inclusa la modifica della foto profilo. Anche l’invio di feedback è disponibile, e in questo caso il sistema traccia l’utente che lo invia.
+
+_L’utente amministratore e la relativa area del sito non sono stati sviluppati. Considerata la ridotta dimensione del gruppo di lavoro, si è preferito concentrarsi sulle altre sezioni del sito, lasciando la gestione amministrativa come possibile implementazione futura. I dati relativi all’amministratore sono comunque presenti e visibili nel database._
+
 == Funzionalità
+
 == Convenzioni interne
+Si riportano di seguito le convenzioni interne del sito:
+- *Link*:
+- *Link circolari*:
+- *Form*:
 
 
 == Schema database
