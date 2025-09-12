@@ -406,14 +406,20 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
         $pagina = str_replace("[OLD_COMMENT]", "
                 <h5 id=\"tua-rating\">La tua valutazione</h5>
                 <dl class=\"singleproduct-rating\">
-                    <dt>Data</dt>
-                    <dd>[Data Valutazione]</dd>
-                    <dt>Valutazione</dt>
-                    <dd class=\"rating-stars\">
-                        [Valutazione]
-                    </dd>
-                    <dt>Commento</dt>
-                    <dd>[Commento]</dd>
+                    <div class=\"row\">
+                        <dt>Data</dt>
+                        <dd>[Data Valutazione]</dd>
+                    </div>
+                    <div class=\"row\">
+                        <dt>Valutazione</dt>
+                        <dd class=\"rating-stars\">
+                            [Valutazione]
+                        </dd>
+                    </div>
+                    <div class=\"row\">
+                        <dt>Commento</dt>
+                        <dd>[Commento]</dd>
+                    </div>
                 </dl>
 
                 <form method=\"post\" id=\"elimina-valutazione\">
