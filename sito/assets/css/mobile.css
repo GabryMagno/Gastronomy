@@ -309,6 +309,21 @@ ul#best-products {
     ===============================
 */
 
+@media (max-width: 767px) {
+  #filter-toggle {
+    border: 0;
+    border-radius: 5px;
+    padding: .5em;
+  }
+  #filter-toggle > summary {
+    cursor: pointer;
+    font-weight: bold;
+    list-style: none;
+    background-color: var(--headerbgcolor);
+    color: var(--title_color);
+  }
+}
+
 form.form-bianco#filter-content{
     width: 100%;
 }

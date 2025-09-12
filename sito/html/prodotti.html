@@ -73,90 +73,93 @@
             <div id="list-content">
                 <aside id="filter">
                     <h3 class="section-title">Filtri</h3>
-                    <form id="filter-content" class="form-bianco" method="get">
-                        <fieldset>
-                            <legend>Filtra i prodotti</legend>
-                            <hr>
-                            <h4> Tipo di Cucina</h4>
-                            <div id="first" class="filters">
-                                <div class="inline">
-                                    <input type="checkbox" id="isVegetarian" name="Vegetariano" value="Vegetariano">
-                                    <label for="isVegetarian">Vegetariano</label>
-                                </div>
-                                <div class="inline">
-                                    <input type="checkbox" id="isVegan" name="Vegano" value="Vegano">
-                                    <label for="isVegan">Vegano</label>
-                                </div>
-                                <div class="inline">
-                                    <input type="checkbox" id="isCeliac" name="Celiaco" value="Celiaco">
-                                    <label for="isCeliac">Celiaco</label>
-                                </div>
-                            </div>
-
-                            <hr>
-
-                            <h4>Categoria</h4>
-                            <div id="second" class="filters">
-                                <div class="inline">
-                                    <input type="checkbox" id="Antipasto" name="Antipasto" value="Antipasto">
-                                    <label for="Antipasto">Antipasto</label>
-                                </div>
-                                <div class="inline">
-                                    <input type="checkbox" id="Primo" name="Primo" value="Primo">
-                                    <label for="Primo">Primo</label>
-                                </div>
-                                <div class="inline">
-                                    <input type="checkbox" id="Secondo" name="Secondo" value="Secondo">
-                                    <label for="Secondo">Secondo</label>
-                                </div>
-                                <div class="inline">
-                                    <input type="checkbox" id="Contorno" name="Contorno" value="Contorno">
-                                    <label for="Contorno">Contorno</label>
-                                </div>
-                                <div class="inline">
-                                    <input type="checkbox" id="Dolce" name="Dolce" value="Dolce">
-                                    <label for="Dolce">Dolce</label>
-                                </div>
-                            </div>
-
-                            <hr>
-
-                            <h4>Valutazione</h4>
-                            <small class="descrizione-quantita">Filtra per valutazioni superiori a...</small>
+                    <details id="filter-toggle" open>
+                        <summary id="toggle-summary" aria-expanded="false" aria-controls="filter-content">Filtra i prodotti<span class="hidden">, premi invio per espandere o chiudere</span></summary>
+                        <form id="filter-content" class="form-bianco" method="get">
                             <fieldset>
-                                <legend class="hidden_testo">Valutazione da 1 a 5 stelle</legend>
-                                <div class="rating">
-                                    <input type="radio" name="rating" id="star5" value="5">
-                                    <label for="star5" title="5 stelle">&#9733;<span class="hidden_testo">5 stelle</span></label>
-
-                                    <input type="radio" name="rating" id="star4" value="4">
-                                    <label for="star4" title="4 stelle">&#9733;<span class="hidden_testo">4 stelle</span></label>
-
-                                    <input type="radio" name="rating" id="star3" value="3">
-                                    <label for="star3" title="3 stelle">&#9733;<span class="hidden_testo">3 stelle</span></label>
-
-                                    <input type="radio" name="rating" id="star2" value="2">
-                                    <label for="star2" title="2 stelle">&#9733;<span class="hidden_testo">2 stelle</span></label>
-
-                                    <input type="radio" name="rating" id="star1" value="1">
-                                    <label for="star1" title="1 stelle">&#9733;<span class="hidden_testo">1 stella</span></label>
+                                <legend>Filtra i prodotti</legend>
+                                <hr>
+                                <h4> Tipo di Cucina</h4>
+                                <div id="first" class="filters">
+                                    <div class="inline">
+                                        <input type="checkbox" id="isVegetarian" name="Vegetariano" value="Vegetariano">
+                                        <label for="isVegetarian">Vegetariano</label>
+                                    </div>
+                                    <div class="inline">
+                                        <input type="checkbox" id="isVegan" name="Vegano" value="Vegano">
+                                        <label for="isVegan">Vegano</label>
+                                    </div>
+                                    <div class="inline">
+                                        <input type="checkbox" id="isCeliac" name="Celiaco" value="Celiaco">
+                                        <label for="isCeliac">Celiaco</label>
+                                    </div>
                                 </div>
-                            </fieldset>                                
-                            <hr>
 
-                            <h4>Prezzo</h4>
-                            <div class="filters">
-                                <label for="price">Prezzo massimo</label>
-                                <input type="range" id="price" name="price" min="1" max="100">
-                                <p aria-hidden="true" id="text-price">100 &euro;</p>
+                                <hr>
+
+                                <h4>Categoria</h4>
+                                <div id="second" class="filters">
+                                    <div class="inline">
+                                        <input type="checkbox" id="Antipasto" name="Antipasto" value="Antipasto">
+                                        <label for="Antipasto">Antipasto</label>
+                                    </div>
+                                    <div class="inline">
+                                        <input type="checkbox" id="Primo" name="Primo" value="Primo">
+                                        <label for="Primo">Primo</label>
+                                    </div>
+                                    <div class="inline">
+                                        <input type="checkbox" id="Secondo" name="Secondo" value="Secondo">
+                                        <label for="Secondo">Secondo</label>
+                                    </div>
+                                    <div class="inline">
+                                        <input type="checkbox" id="Contorno" name="Contorno" value="Contorno">
+                                        <label for="Contorno">Contorno</label>
+                                    </div>
+                                    <div class="inline">
+                                        <input type="checkbox" id="Dolce" name="Dolce" value="Dolce">
+                                        <label for="Dolce">Dolce</label>
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <h4>Valutazione</h4>
+                                <small class="descrizione-quantita">Filtra per valutazioni superiori a...</small>
+                                <fieldset>
+                                    <legend class="hidden_testo">Valutazione da 1 a 5 stelle</legend>
+                                    <div class="rating">
+                                        <input type="radio" name="rating" id="star5" value="5">
+                                        <label for="star5" title="5 stelle">&#9733;<span class="hidden_testo">5 stelle</span></label>
+
+                                        <input type="radio" name="rating" id="star4" value="4">
+                                        <label for="star4" title="4 stelle">&#9733;<span class="hidden_testo">4 stelle</span></label>
+
+                                        <input type="radio" name="rating" id="star3" value="3">
+                                        <label for="star3" title="3 stelle">&#9733;<span class="hidden_testo">3 stelle</span></label>
+
+                                        <input type="radio" name="rating" id="star2" value="2">
+                                        <label for="star2" title="2 stelle">&#9733;<span class="hidden_testo">2 stelle</span></label>
+
+                                        <input type="radio" name="rating" id="star1" value="1">
+                                        <label for="star1" title="1 stelle">&#9733;<span class="hidden_testo">1 stella</span></label>
+                                    </div>
+                                </fieldset>                                
+                                <hr>
+
+                                <h4>Prezzo</h4>
+                                <div class="filters">
+                                    <label for="price">Prezzo massimo</label>
+                                    <input type="range" id="price" name="price" min="1" max="100">
+                                    <p aria-hidden="true" id="text-price">100 &euro;</p>
+                                </div>
+                            </fieldset>
+                            <div class="button-container" id="vertical">
+                                <button type="button" class="bottoni-neri" id="reset-filters" name="reset">Annulla</button>
+                                <button type="submit" class="bottoni-rossi" id="submit-filters">Conferma</button>
                             </div>
-                        </fieldset>
-                        <div class="button-container" id="vertical">
-                            <button type="button" class="bottoni-neri" id="reset-filters" name="reset">Annulla</button>
-                            <button type="submit" class="bottoni-rossi" id="submit-filters">Conferma</button>
-                        </div>
 
-                    </form>
+                        </form>
+                    </details>
                 </aside>
                 <section id="show-products">
                     <h2 class="section-title">Ricerca e Risultati</h2>
