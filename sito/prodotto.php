@@ -86,7 +86,8 @@ if(isset($_GET["prodotto"])){
                         <span class=\"diet-label\">Prodotto non adatto ai celiaci</span>",$pagina);
         }
     }
-    $pagina = str_replace("[IMAGE]","<img src=". $productInfo["url_immagine"] ." alt=\"\">",$pagina);
+    $pagina = str_replace(
+    "[IMAGE]",'<img src="' . $productInfo["url_immagine"] . '" alt="Immagine del prodotto [NomeProdottoKey]">',$pagina);
     $pagina = str_replace("[Nome Prodotto]",$productInfo["nome"],$pagina);
     $pagina = str_replace("[NomeProdottoKey]",Sanitizer::SanitizeGenericInput($productInfo["nome"]),$pagina);
     $pagina = str_replace("[Categoria]",ucfirst($productInfo["categoria"]),$pagina);
@@ -156,7 +157,7 @@ if(isset($_GET["prodotto"])){
                     $commentList .= '☆';
                 }
 
-                $commentList.= '</span><span class="hidden_testo">'.$comment["voto"].' stelle su 5 </p>
+                $commentList.= '</span><span class="hidden_testo">'.$comment["voto"].' stelle su 5 </span></p>
                                 </div></div>';
 
                 $commentNumber++;
