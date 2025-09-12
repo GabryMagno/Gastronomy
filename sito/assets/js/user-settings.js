@@ -1,4 +1,4 @@
-let originalLogo = "assets/img/users_logos/default.webp";
+let originalLogo = document.getElementById("new-image").getAttribute("src");
 
 function validateUserPersonalSettings() {
 
