@@ -22,6 +22,9 @@ function validateUserPersonalSettings() {
 		resetHint("type-file","Solo immagini di tipo png, jpeg o jpg");
 
 		DefaultValue("change-username");
+		DefaultValue("change-name");
+		DefaultValue("change-surname");
+		DefaultValue("change-date");
 		disableButton("reset-user-setting");
 		document.getElementById("new-image").setAttribute("src", originalLogo);
 		disableButton("submit-user-setting");
@@ -115,7 +118,7 @@ function EliminateValue(id){
 }
 
 function DefaultValue(id){
-	document.getElementById(id).value = document.getElementById(id).defaultValue;
+	document.getElementById(id).value = document.getElementById(id).defaultValue();
 }
 
 function FirstFormUltimateCheck(){
