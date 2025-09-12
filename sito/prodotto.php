@@ -237,9 +237,10 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
         exit();
     }
     if(!$isProductFavorite){
-        $pagina = str_replace("[PREFERITO]","<button type=\"submit\" id=\"singleproduct-stella\" title=\"Clicca per aggiungere ai preferiti\" aria-label=\"Clicca per aggiungere ai preferiti\" name=\"favorite\">
-                                <img src=\"assets/img/icone/star.svg\" alt=\"Prodotto non aggiunto ai preferiti\">
-                            </button>",$pagina);
+        $pagina = str_replace("[PREFERITO]","
+        <button type=\"submit\" id=\"singleproduct-stella\" title=\"Clicca per aggiungere ai preferiti\" aria-label=\"Clicca per aggiungere ai preferiti\" name=\"favorite\">
+            <img src=\"assets/img/icone/star.svg\" alt=\"Prodotto non aggiunto ai preferiti\">
+        </button>",$pagina);
     }else{
         $pagina = str_replace("[PREFERITO]","<button type=\"submit\" id=\"singleproduct-stella\" title=\"Clicca per rimuovere dai preferiti\" aria-label=\"Clicca per rimuovere dai preferiti\" name=\"remove-favorite\">
                                 <img src=\"assets/img/icone/star-checked.svg\" alt=\"Prodotto aggiunto ai preferiti\">
