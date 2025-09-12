@@ -26,5 +26,6 @@ function FilterForm(){
 }
 
 window.addEventListener("load", () => {
+    document.getElementById("price").value = document.getElementById("price").getAttribute("max");
     FilterForm();
 })
