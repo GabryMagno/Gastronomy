@@ -22,9 +22,14 @@ function validateUserPersonalSettings() {
 		resetHint("type-file","Solo immagini di tipo png, jpeg o jpg");
 
 		DefaultValue("change-username");
+		DefaultValue("change-name");
+		DefaultValue("change-surname");
+		DefaultValue("change-date");
 		disableButton("reset-user-setting");
 		document.getElementById("new-image").setAttribute("src", originalLogo);
 		disableButton("submit-user-setting");
+		document.getElementById("reset-user-setting").disabled = true;
+		document.getElementById("reset-user-setting").classList.add("not-available");
 	});
 
 	let form = document.getElementById("change-personal-info");
