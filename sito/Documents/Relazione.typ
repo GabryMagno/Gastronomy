@@ -168,22 +168,60 @@ Per migliorare ulteriormente la leggibilità del testo, è stata applicata un’
 Per la versione stampata, invece, è stato adottato il font _*Times New Roman*_, un carattere con grazie, dimensione 12pt, anch’esso accompagnato da un’interlinea di 1.5em.
 
 === Colori
+Abbiamo scelto la palette di colori ponendo particolare attenzione al *contrasto* e alla *leggibilità*.
+La selezione è stata effettuata assicurandoci che il rapporto di contrasto tra testo e sfondo fosse sufficientemente elevato, in conformità alle *linee guida _WCAG_*: per la maggior parte dei contenuti è stato raggiunto il livello *AAA*, garantendo comunque sempre almeno il livello *AA*.
+
+La palette adottata è la seguente:
+#figure(
+  image("assets/db.png", width: 80%),
+  caption: [Palette di colori adottata all'interno del sito.],
+)
 
 == Comportamento
 === PHP
 === JavaScript
 === Validazione dell'input
 === Sicurezza
+Sicurezza adottata all'interno del sito:
+
+- Tutte le *query SQL* vengono eseguite tramite la libreria `mysqli` utilizzando i prepared statements, prevenendo tentativi di *SQL Injection*.
+- Le password non vengono memorizzate in chiaro nel database, ma vengono protette tramite *hashing*.
+- La connessione al database viene sempre chiusa tramite il metodo `CloseConnectionDB()`.
+- È stato implementato un *sanitizer* per la sanitizzazione degli input degli utenti.
+
 === Errori navigazione o del server
+Le direttive per la gestione e visualizzazione degli errori sono state definite nel file `.htaccess`.
+In sintesi:
+- Se l’utente tenta di accedere a pagine per cui non ha i permessi, viene mostrata una pagina *Error 403* personalizzata.
+- Se l’utente visita un link errato o una pagina inesistente, viene mostrata una pagina *Error 404* personalizzata.
+- In caso di errori lato server, come problemi di connessione al database, viene mostrata una pagina *Error 500* personalizzata.
+
+Ogni pagina di errore include un’immagine simpatica e una breve descrizione testuale dell’errore, con riferimenti divertenti all’ambiente della gastronomia.
 
 == Accessibilità
 === Aiuti per lo screen reader
+All’interno del sito sono stati utilizzati gli attributi *ARIA* per facilitare l’interazione con il sito a tutte le categorie di utenti.
+Seguendo le buone pratiche, all’inizio di ogni pagina è presente una sezione con link di aiuto alla navigazione, i cosiddetti *"skip to content"*. Questi link consentono agli utenti che navigano tramite tastiera o utilizzano screen reader di saltare direttamente a specifiche sezioni della pagina, evitando contenuti non rilevanti e permettendo di raggiungere più rapidamente il contenuto desiderato.
+
 === Compatibilità
+Il sito è progettato per essere completamente responsive, garantendo una visualizzazione ottimale sia su *desktop* sia su *dispositivi mobili*, con una larghezza minima dello schermo assicurata di _320px_.
+
+Per migliorare l’esperienza utente su schermi piccoli, il menu di navigazione si trasforma in un *menu hamburger*, semplificando l’accesso alle diverse sezioni del sito. Anche i filtri presenti nella pagina prodotti diventano compressi sui dispositivi mobili, permettendo una navigazione più agevole senza sovraccaricare lo schermo.
+
+L’uso di strutture CSS come *flexbox*, insieme all’impiego di *unità relative* per font e dimensioni _(em, rem, %)_, permette di mantenere un *layout flessibile e adattabile* a diverse risoluzioni. Inoltre, immagini e componenti vengono scalati dinamicamente per garantire coerenza visiva e leggibilità su tutti i dispositivi.
+
+All'interno del sito, inoltre, *non sono presenti tabelle*.
 
 = Test effettuati
 == Navigabilità ed accessibilità
 == Falsi positivi
+Vengono riportati qua di seguito i falsi positivi segnalati dagli strumenti di validazione _(Total Validator, Silktide, WAVE)_:
+- in tutte le pagine vengono erroneamente segnalati errori di ortografia;
+- sono presenti alcuni _warning_ dovuti al fatto che gli attributi `alt` delle immagini superano i 75 caratteri. Nel nostro sito, tuttavia, tutti gli `alt` rimangono comunque sotto i 100 caratteri, poiché per alcune immagini era necessario fornire descrizioni testuali più dettagliate, in modo da permettere agli utenti con disabilità visiva di comprendere meglio il contenuto.
+
+
 == Screen reader
+Durante la fase di testing, l’accessibilità del sito è stata verificata utilizzando gli screen reader _NVDA_, _VoiceOver_, _TalkBack_ e lo strumento integrato in _Silktide_. Non sono stati riscontrati problemi.
 
 = Organizzazione del gruppo
 == Suddivisione dei compiti
@@ -212,5 +250,3 @@ Durante l’intero arco della fase di progettazione e sviluppo, i membri del tea
   - DB: progettazione, creazione, connessione, inserimento e popolamento;
   - Testing;
   - Relazione.
-
-= Note

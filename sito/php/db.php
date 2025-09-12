@@ -1,12 +1,4 @@
 <?php
-/*
-    * Classe per la gestione del database
-    * Contiene le funzioni per la registrazione, login, logout, eliminazione utente, ottenimento informazioni utente, prodotti e degustazioni
-    * 
-    * Alcuni controlli ulteriori potrebbero essere controllo maggiore su degustazioni(es data fine data inizio e data scelta dall'utente), vedere se un prodotto è disponibile, ecc...
-    * @version 1.0
-*/
-
 session_start();
 
 class DB {
