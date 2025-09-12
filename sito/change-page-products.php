@@ -187,7 +187,7 @@ class ChangePageProducts
         $TEMPLATE = $previous_button ."<p id=\"current-page\">" . $currentPage . ' su ' . $totalPages . " </p>" . $next_button;//<abbr title="su">/</abbr> altrimenti al posto di 'su'
         $HIDDEN = "";
         while ($value = current($filters_list)) {
-            $HIDDEN .= "<input type=\"hidden\" name=" . key($filters_list) . " value=\"" . $value . "\"/>";// crea un input hidden per ogni filtro applicato
+            $HIDDEN .= "<input type=\"hidden\" name=" . key($filters_list) . " value=\"" . $value . "\">";// crea un input hidden per ogni filtro applicato
             next($filters_list);
         }
         return $TEMPLATE . $HIDDEN;

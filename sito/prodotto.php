@@ -156,8 +156,8 @@ if(isset($_GET["prodotto"])){
                     $commentList .= '☆';
                 }
 
-                $commentList.= '</span> <p class="hidden_testo">'.$comment["voto"].' stelle su 5 </p>
-                                </p></div></div>';
+                $commentList.= '</span><span class="hidden_testo">'.$comment["voto"].' stelle su 5 </span>
+                                </div></div>';
 
                 $commentNumber++;
             }          
