@@ -234,7 +234,7 @@ Durante l’intero arco della fase di progettazione e sviluppo, i membri del tea
 - eseguire test in modo congiunto e simultaneo, riducendo così la possibilità di errori, anche di natura distrattiva.
 
 - *Nicolò Bolzon*
-  - HTML: 
+  - HTML: index, chisiamo, 403, 404, 500, ringraziamenti, degustazioni, prodotto, user-profile;
   - CSS: desktop, mobile, print;
   - PHP; 
   - JS: menu ad hamburger;
@@ -243,7 +243,7 @@ Durante l’intero arco della fase di progettazione e sviluppo, i membri del tea
   - Relazione.
 
 - *Gabriele Isacco Magnelli*
-  - HTML:
+  - HTML: index, ringraziamenti, conferma-scelta, degustazione, prodotti, prodotto, login, register, user-settings;
   - CSS: desktop, mobile;
   - PHP;
   - JS: validazione input, visualizzazione errori;
