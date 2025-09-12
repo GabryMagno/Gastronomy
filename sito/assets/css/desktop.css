@@ -1184,7 +1184,7 @@ form#product-pages p{
 */
 
 #descrizione-storia-iniziale{
-    text-align: justify;
+    text-align: left;
 }
 
 #storia{
@@ -1247,8 +1247,6 @@ form#product-pages p{
 #storia-old .testo p, #storia-oggi .testo p{
     
     font-size: 1.2em;
-
-    text-align: justify;
     margin: 0;
 }
 

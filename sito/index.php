@@ -52,7 +52,7 @@ function createBestCommentTemplate($username, $immagine, $voto, $commento, $prod
                 <p class="recensione-data">
                     <time datetime="' . $data->format("Y-m-d") . '">' . $data->format("d/m/Y") . '</time>
                 </p>
-                <p class="recensione-prodotto">'. $prodotto . '</p>
+                <h5 class="recensione-prodotto">'. $prodotto . '</h5>
                 <p class="recensione-testo">' . $commento . '</p>
                 <p class="recensione-valutazione">Voto: <span aria-hidden="true">';
 
@@ -66,7 +66,7 @@ function createBestCommentTemplate($username, $immagine, $voto, $commento, $prod
 
     $TEMPLATE .= '</span><p class="hidden_testo"> ('.$voto.' su 5)'.'</p>';
 
-    $TEMPLATE .= '</p></div></div>';
+    $TEMPLATE .= '</div></div>';
     return $TEMPLATE;
 }
 
