@@ -10,13 +10,13 @@ function FilterForm(){
             star.checked = false;
         });
 
-        document.getElementById("price").value = 100;
-        document.getElementById("text-price").innerText = cost + " €";
+        const priceInput = document.getElementById("price");
+        priceInput.value = 100;
+        document.getElementById("text-price").innerText = priceInput.value + " €";
 
-        document.getElementById("filter-content").submit();
     });
-    var cost =  document.getElementById("price").value;
-    document.getElementById("text-price").innerText = cost + " €";
+    const priceInput = document.getElementById("price");
+    document.getElementById("text-price").innerText = priceInput.value + " €";
 }
 
 function UpdatePrezzo(){
