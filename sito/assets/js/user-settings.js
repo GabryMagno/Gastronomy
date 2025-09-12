@@ -28,6 +28,8 @@ function validateUserPersonalSettings() {
 		disableButton("reset-user-setting");
 		document.getElementById("new-image").setAttribute("src", originalLogo);
 		disableButton("submit-user-setting");
+		document.getElementById("reset-user-setting").disabled = true;
+		document.getElementById("reset-user-setting").classList.add("not-available");
 	});
 
 	let form = document.getElementById("change-personal-info");
@@ -118,7 +120,7 @@ function EliminateValue(id){
 }
 
 function DefaultValue(id){
-	document.getElementById(id).value = document.getElementById(id).defaultValue();
+	document.getElementById(id).value = document.getElementById(id).defaultValue;
 }
 
 function FirstFormUltimateCheck(){
