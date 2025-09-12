@@ -975,6 +975,18 @@ a.categoria-box:visited{
             PAGINA PRODOTTI 
     ===============================
 */
+@media (min-width: 768px) {
+    #filter-toggle {
+        display: block;
+        border: 0;
+    }
+    #filter-toggle > summary {
+        display: none;
+    }
+    #filter-toggle[open] > form#filter-content {
+        display: block;
+    }
+}
 
 div#list-content{
     margin: 0 1em;

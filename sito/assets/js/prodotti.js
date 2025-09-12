@@ -25,7 +25,27 @@ function FilterForm(){
     });
 }
 
+function updateAria() {
+    const details = document.getElementById("filter-toggle");
+    const summary = document.getElementById("toggle-summary");
+    if (window.innerWidth < 768) summary.setAttribute("aria-expanded", details.open);
+}
+
+function toggleFiltersOnResize() {
+    const filterToggle = document.getElementById("filter-toggle");
+    if (window.innerWidth >= 768) filterToggle.setAttribute("open", "");
+    else filterToggle.removeAttribute("open");
+}
+
+
 window.addEventListener("load", () => {
+    if (window.innerWidth < 768){
+        const details = document.getElementById("filter-toggle");
+        details.addEventListener("toggle", updateAria);
+        window.addEventListener("load", updateAria);
+    }
     document.getElementById("price").value = document.getElementById("price").getAttribute("max");
+    window.addEventListener("resize", toggleFiltersOnResize);
+    toggleFiltersOnResize();
     FilterForm();
 })

@@ -182,8 +182,8 @@ class ChangePageProducts
 
     private function CreatePageButtons(int $currentPage, int $totalPages, $filters_list): string
     {
-        $previous_button = ($currentPage > 1) ? '<button id="prev" name="page" value="' . max(1,min($currentPage - 1, $totalPages)) . '">Pagina precedente</button>' : "";
-        $next_button = ($currentPage < $totalPages) ? '<button id="next" name="page" value="' . max(1,min($currentPage + 1, $totalPages)). '">Pagina successiva</button>' : "";
+        $previous_button = ($currentPage > 1) ? '<button type="submit" id="prev" name="page" value="' . max(1,min($currentPage - 1, $totalPages)) . '">Pagina precedente</button>' : "";
+        $next_button = ($currentPage < $totalPages) ? '<button type="submit" id="next" name="page" value="' . max(1,min($currentPage + 1, $totalPages)). '">Pagina successiva</button>' : "";
         $TEMPLATE = $previous_button ."<p id=\"current-page\">" . $currentPage . ' su ' . $totalPages . " </p>" . $next_button;//<abbr title="su">/</abbr> altrimenti al posto di 'su'
         $HIDDEN = "";
         while ($value = current($filters_list)) {
