@@ -30,14 +30,15 @@ function validateUserComment() {
 
 	let form = document.getElementById("valutazione");
 
-
-	form.addEventListener("submit", function (event) {
-		if (! ((validateComment)) ) {
-			event.preventDefault();
-			document.getElementById("submit-comment").classList.add("not-available");
-			document.getElementById("submit-comment").disabled = true;
-		}
-	});
+    if(form){
+        form.addEventListener("submit", function (event) {
+            if (! ((validateComment)) ) {
+                event.preventDefault();
+                document.getElementById("submit-comment").classList.add("not-available");
+                document.getElementById("submit-comment").disabled = true;
+            }
+        });
+    }
 }//validateDateOrder
 
 function ValidateUserOrder(){
