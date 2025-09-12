@@ -244,8 +244,16 @@ function CreaVisualizzaPrenotazione(int $idPrenotazione, string $nomeProdotto, D
     $oggi = new DateTime("today");
     $domani = new DateTime("tomorrow");
 
-    if ($dataRitiro == $oggi || $dataRitiro == $domani){
-        $TEMPLATE = '<li class="userprofile-brochure urgent">';
+    if ($dataRitiro == $oggi){
+        $TEMPLATE = '
+        <li class="userprofile-brochure urgent">
+        <p class="hidden_testo">Urgente: prodotto da ritirare oggi.</p>
+        ';
+    } else if ($dataRitiro == $domani){
+        $TEMPLATE = '
+        <li class="userprofile-brochure urgent">
+        <p class="hidden_testo">Urgente: prodotto da ritirare domani.</p>
+        ';
     } else{
         $TEMPLATE = '<li class="userprofile-brochure">';
     }
@@ -364,8 +372,16 @@ function CreaVisualizzaDegustazione(int $idDegustazione,int $idPrenotazione, str
     $oggi = new DateTime("today");
     $domani = new DateTime("tomorrow");
 
-    if ($dataScelta == $oggi || $dataScelta == $domani){
-        $TEMPLATE = '<li class="userprofile-brochure urgent">';
+    if ($dataScelta == $oggi){
+        $TEMPLATE = '
+        <li class="userprofile-brochure urgent">
+        <p class="hidden_testo">Urgente: Degustazione prenotata per oggi.</p>
+        ';
+    } else if ($dataScelta == $domani){
+        $TEMPLATE = '
+        <li class="userprofile-brochure urgent">
+        <p class="hidden_testo">Urgente: Degustazione prenotata per domani.</p>
+        ';
     } else{
         $TEMPLATE = '<li class="userprofile-brochure">';
     }

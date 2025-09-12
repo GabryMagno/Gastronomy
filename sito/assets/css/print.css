@@ -277,6 +277,10 @@ li.userprofile-brochure{
     margin: 1em auto;
 }
 
+.userprofile-brochure.urgent p{
+  font-style: italic;
+}
+
 /* DEGUSTAZIONE SINGOLA */
 .singledegustazione-img img{
   width: 60%;
