@@ -36,9 +36,23 @@ Infine, tenendo conto dell’importanza del feedback dei clienti, sono state int
 
 Le pagine del sito sono state progettate per risultare semplici da utilizzare e visivamente accattivanti, con una particolare attenzione alla *navigazione da dispositivi mobili*, oggi sempre più diffusi e parte integrante della vita quotidiana.
 
-
 == Analisi utente
 == SEO
+Le principali *ricerche* a cui il sito intende rispondere sono:
+- il nome stesso del sito;
+- ricerche generiche come “gastronomia”, “prodotti”, “degustazioni”;
+- ricerche legate alla prenotazione di prodotti di gastronomia;
+- ricerche relative alla prenotazione delle degustazioni;
+- ricerche contenenti i nomi dei prodotti presenti nel sito.
+
+Le parole chiave sono state selezionate per rivolgersi sia agli utenti che hanno già un’idea precisa di ciò che stanno cercando, sia a nuovi visitatori interessati a scoprire di più durante la navigazione.
+
+Per *migliorare il ranking del sito* sono state intraprese diverse azioni:
+- il contenuto del tag `title` è stato strutturato dal particolare al generale e arricchito con parole chiave pertinenti;
+- in ogni pagina, tramite il metatag `keywords`, sono state indicate le parole chiave specifiche, evidenziate nel codice HTML anche attraverso il tag `<strong>`;
+- separazione tra struttura e presentazione;
+- separazione tra struttura e comportamento;
+- non è stato fatto uso di `display: none` _(se non nel foglio `print.css`)_, né di tecniche come `height: 0` o `visibility: hidden`, che possono compromettere l’indicizzazione.
 
 = Progettazione
 == Schema organizzativo
@@ -52,6 +66,32 @@ Nella fase di progettazione del sito sono stati individuati i seguenti tipi di u
 _L’utente amministratore e la relativa area del sito non sono stati sviluppati. Considerata la ridotta dimensione del gruppo di lavoro, si è preferito concentrarsi sulle altre sezioni del sito, lasciando la gestione amministrativa come possibile implementazione futura. I dati relativi all’amministratore sono comunque presenti e visibili nel database._
 
 == Funzionalità
+Elenco delle funzionalità del sito:
+- registrazione utente;
+- login utente;
+- logout utente;
+- inserimento feedback;
+- visualizzazione prodotti;
+- visualizzazione prodotti filtrati;
+- visualizzazione dei dettagli di un prodotto;
+- visualizzazione valutazioni e recensioni di un prodotto;
+- prenotazione di un prodotto _(utente registrato o autenticato)_;
+- rimozione prenotazione di un prodotto prenotato _(utente registrato o autenticato)_;
+- inserimento valutazione e recensione di un prodotto _(utente registrato o autenticato)_;
+- eliminazione valutazione e recensione di un prodotto _(utente registrato o autenticato)_;
+- visualizzazione degustazioni;
+- visualizzazione degustazioni filtrate;
+- prenotazione di una degustazione _(utente registrato o autenticato)_;
+- rimozione di una degustazione prenotata _(utente registrato o autenticato)_;
+- aggiunta di un prodotto ai preferiti _(utente registrato o autenticato)_;
+- rimozione di un prodotto dai preferiti _(utente registrato o autenticato)_;
+- visualizzazione elenco prenotazioni prodotti attive dell’utente _(utente registrato o autenticato)_;
+- visualizzazione elenco degustazioni attive dell’utente _(utente registrato o autenticato)_;
+- visualizzazione elenco prodotti preferiti dell’utente _(utente registrato o autenticato)_;
+- visualizzazione elenco valutazioni e recensioni dell’utente _(utente registrato o autenticato)_;
+- modifica dati utente _(utente registrato o autenticato)_;
+- modifica immagine profilo _(utente registrato o autenticato)_;
+- eliminazione account _(utente registrato o autenticato)_;
 
 == Convenzioni interne
 Si riportano di seguito le convenzioni interne del sito:
@@ -94,7 +134,17 @@ Le immagini dei prodotti sono state realizzate con strumenti di intelligenza art
 
 == Presentazione
 === CSS
+Per gestire al meglio l’aspetto *responsive del sito*, il CSS è stato suddiviso in tre fogli di stile distinti: `desktop.css`, `mobile.css`, `print.css`.
 
+Particolare attenzione è stata posta nella scelta dei layout, privilegiando l’uso di *flexbox*. Questo approccio è stato utilizzato in modo consapevole, evitando strutture annidate troppo complesse (oltre il secondo livello), così da garantire buone prestazioni e facilità di manutenzione.
+Non è stato invece adottato il layout *grid*, generalmente più adatto a griglie complesse ma in alcuni casi più oneroso da gestire rispetto a flexbox.
+
+Per facilitare la gestione dei colori e garantire uniformità grafica, sono state definite delle *variabili CSS* all’inizio del foglio di stile, in modo da poterle riutilizzare in diverse parti del codice.
+
+Per quanto riguarda il foglio `print.css`, è stato applicato uno stile di testo *giustificato*.
+Sono stati rimossi tutti gli elementi interattivi del sito, come la navbar, i form e gli strumenti di navigazione. Allo stesso modo, sono state eliminate le immagini di sfondo e quelle non pertinenti al contenuto effettivo.
+
+Per rendere la stampa più chiara e completa, ogni link viene seguito dal relativo indirizzo racchiuso tra parentesi quadre, ad esempio: `[collegamento]`.
 
 === Immagini e icone
 Le immagini del sito sono salvate principalmente in formato *WEBP* e hanno tutte una dimensione inferiore a *1MB*.
