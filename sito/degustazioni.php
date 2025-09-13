@@ -77,20 +77,20 @@ function CreaDegustazioneBrochure( string $img, string $nomeProdotto, float $pre
                 <p>' . $descrizione . '</p>
                 
                 <dl class="degustazione-dettagli">
-                    <dt class="degustazione-persone">Disponibilit&agrave;</dt>';
+                    <div class="row"><dt class="degustazione-persone">Disponibilit&agrave;</dt>';
 
     if ($numeroPersone < 1 || $today > $dataFine) {
-        $TEMPLATE .= '<dd><span class="persone-nondisponibile degustazione-bold">Non disponibile</span></dd>';
+        $TEMPLATE .= '<dd><span class="persone-nondisponibile degustazione-bold">Non disponibile</span></dd></div>';
     } else{
-        $TEMPLATE.= '<dd>Disponibile per <span class="degustazione-bold">' . $numeroPersone . '</span> persone</dd>';
+        $TEMPLATE.= '<dd>Disponibile per <span class="degustazione-bold">' . $numeroPersone . '</span> persone</dd></div>';
     }
             
     $TEMPLATE.= '
-            <dt class="degustazione-prenotazione">Prenotazioni</dt>
-            <dd>Prenotabile dal <span class="degustazione-bold"><time datetime="'.$dataInizio->format("Y-m-d") . '">' . $dataInizio->format("d/m/Y") . '</time></span> al <span class="degustazione-bold"><time datetime="'.$dataFine->format("Y-m-d") . '">' . $dataFine->format("d/m/Y") . '</time></span></dd>
+            <div class="row"><dt class="degustazione-prenotazione">Prenotazioni</dt>
+            <dd>Prenotabile dal <span class="degustazione-bold"><time datetime="'.$dataInizio->format("Y-m-d") . '">' . $dataInizio->format("d/m/Y") . '</time></span> al <span class="degustazione-bold"><time datetime="'.$dataFine->format("Y-m-d") . '">' . $dataFine->format("d/m/Y") . '</time></span></dd></div>
                     
-            <dt class="degustazione-prezzo">Prezzo</dt>
-            <dd class="prodotto-prezzo-testo">' . number_format($prezzo, 2, ',', '.') . ' €</dd>
+            <div class="row"><dt class="degustazione-prezzo">Prezzo</dt>
+            <dd class="prodotto-prezzo-testo">' . number_format($prezzo, 2, ',', '.') . ' €</dd></div>
         </dl>';
 
     if ($numeroPersone < 1 || $dataInizio > $today || $dataFine < $today) {

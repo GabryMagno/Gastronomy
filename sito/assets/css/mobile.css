@@ -391,6 +391,20 @@ html section#show-products{
             PAGINA DEGUSTAZIONI 
     ===============================
 */
+.degustazione-dettagli .row {
+    text-align: left;
+}
+.degustazione-dettagli .row dd{
+    padding: 0;
+}
+
+@media (max-width: 600px) {
+    .degustazione-dettagli .row {
+        flex-direction: column;
+        gap: 0.5em;
+
+    }
+}
 
 .degustazione-card{
     flex-direction: column;
