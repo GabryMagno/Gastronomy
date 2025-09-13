@@ -102,8 +102,8 @@ Elenco delle funzionalità del sito:
 
 == Convenzioni interne
 Si riportano di seguito le convenzioni interne del sito:
-- *Link*:
-- *Link circolari*:
+- *Link*: sia i link visitati sia quelli non visitati sono sempre sottolineati, per garantire coerenza e riconoscibilità. I link _non visitati_ hanno il testo di colore bianco; I link _visitati_ hanno il testo di colore giallo. Entrambi sono visualizzati su sfondo bordeaux scuro (`#73142F`). I colori scelti rientrano nella *palette grafica del sito*, riportata di seguito.
+- *Link circolari*: nel menu sono stati disabilitati e nascosti agli screen reader i link che rimandano alla stessa pagina già visualizzata, in modo da segnalare all’utente che non sono utilizzabili. Questi link hanno testo di colore bianco su sfondo blu scuro.
 - *Form*:
 
 
