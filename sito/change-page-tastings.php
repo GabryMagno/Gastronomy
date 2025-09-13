@@ -56,7 +56,7 @@ class ChangePageTastings{
             break;
 
             default:
-                $query .= "AND d.data_fine >= NOW() ORDER BY d.data_inizio ASC";
+                $query .= "ORDER BY d.data_inizio ASC";
             break;
         }
 
