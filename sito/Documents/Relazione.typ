@@ -192,8 +192,23 @@ La palette adottata è la seguente:
 
 == Comportamento
 === PHP
+
+Gestisce l’intero lato back-end dell’applicazione.
+Si occupa di:
+- Connessione al database, lettura e scrittura dei dati.
+- Validazione avanzata delle informazioni ricevute dal front-end (es. controlli di coerenza).
+- Verifica delle credenziali (es. nel cambio password: controllo che la password vecchia corrisponda a quella presente nel DB).
+- Gestione della logica applicativa (prenotazioni, valutazioni, suggerimenti, ecc.).
+- Sanitizzazione e filtraggio degli input utente, per ridurre i rischi di SQL injection, XSS e altre vulnerabilità.
+PHP effettua quindi sia controlli di sicurezza sia controlli di business logic, che non possono essere affidati al solo JavaScript.
+
 === JavaScript
-=== Validazione dell'input
+Utilizzato esclusivamente lato client per migliorare l’esperienza utente.
+Le funzionalità implementate sono le seguenti:
+- Gestione del menù ad hamburger (apertura/chiusura navigazione mobile).
+- Validazioni preliminari sui form: controllo dei requisiti minimi degli input (lunghezza minima password, formato email, campi obbligatori, ecc.).
+Questi controlli sono a scopo di usabilità (feedback immediato all’utente), ma vengono sempre replicati e approfonditi lato PHP per garantire la sicurezza e l’integrità dei dati.
+
 === Sicurezza
 Sicurezza adottata all'interno del sito:
 
