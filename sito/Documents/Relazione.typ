@@ -104,10 +104,14 @@ Elenco delle funzionalità del sito:
 
 == Convenzioni interne
 Si riportano di seguito le convenzioni interne del sito:
-- *Link*: sia i link visitati sia quelli non visitati sono sempre sottolineati, per garantire coerenza e riconoscibilità. I link _non visitati_ hanno il testo di colore bianco; I link _visitati_ hanno il testo di colore giallo. Entrambi sono visualizzati su sfondo bordeaux scuro (`#73142F`). I colori scelti rientrano nella *palette grafica del sito*, riportata di seguito.
-- *Link circolari*: nel menu sono stati disabilitati e nascosti agli screen reader i link che rimandano alla stessa pagina già visualizzata, in modo da segnalare all’utente che non sono utilizzabili. Questi link hanno testo di colore bianco su sfondo blu scuro.
-- *Form*:
+- *Link*: sia i link visitati sia quelli non visitati sono sempre sottolineati, per garantire coerenza e riconoscibilità. I link _non visitati_ hanno il testo di colore bianco; I link _visitati_ hanno il testo di colore giallo. Entrambi sono visualizzati su sfondo bordeaux scuro (`#73142F`). I colori scelti rientrano nella *palette grafica del sito*, riportata di seguito. \
+  
+  Si è riscontrato un piccolo problema legato al *contrasto insufficiente* tra il colore del testo dei link visitati e quello dei link non visitati. Per ovviare a questo problema sono state valutate diverse soluzioni: ad esempio, modificare lo stile dei link visitati (come renderli in *corsivo* o *doppia sottolineatura*), ma molti browser ne limitano l’efficacia e la funzionalità. In alternativa, era previsto l’uso di JavaScript per distinguere meglio i link, ma tale soluzione è stata successivamente commentata per mantenere una chiara separazione tra comportamento e stile. Lo script di riferimento si trova in index.html e può essere attivato decommentando la riga: `<script async src="assets/js/color.js"></script>`. È inoltre necessario decommentare la sezione CSS corrispondente in `desktop.css`.
 
+- *Link circolari*: nel menu sono stati disabilitati e nascosti agli screen reader i link che rimandano alla stessa pagina già visualizzata, in modo da segnalare all’utente che non sono utilizzabili. Questi link hanno testo di colore bianco su sfondo blu scuro.
+
+- *Form*: tutti i form del sito presentano uno sfondo bianco con testo nero, inclusi i titoli e le etichette dei campi, per garantire leggibilità e contrasto.
+I placeholder dei campi di inserimento sono invece in grigio scuro, in modo da distinguersi dal testo effettivo inserito dall’utente. Ogni campo di inserimento di un form è seguito da un elemento `<details>` che fornisce suggerimenti e indicazioni sulle eventuali limitazioni o requisiti per l’inserimento dei dati, aiutando così l’utente a compilare correttamente il form.
 
 == Schema database
 Si riporta, qui di seguito, l'immagine dello schema relazionale del database che è stato progettato in modo da rispettare sia la *Terza Forma Normale* _(3NF)_ che la *Forma Normale di Boyce-Codd* _(BCNF)_.
