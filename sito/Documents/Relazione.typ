@@ -223,7 +223,25 @@ In sintesi:
 Ogni pagina di errore include un’immagine simpatica e una breve descrizione testuale dell’errore, con riferimenti divertenti all’ambiente della gastronomia.
 
 == Accessibilità
-
+Sono di seguito elencate tutte le scelte effettuate per migliorare l’accessibilità del sito web a tutte le categorie di utenti.
+Ognuna mira al raggiungimento del livello di conformità *AA* delle _WCAG_, come stabilito dalla legge italiana:
+- Navigazione da tastiera completa e accessibile.
+- Form accessibili.
+- Struttura gerarchica del sito ampia e poco profonda.
+- I tag di heading `(h1, h2, …)` sono stati utilizzati rispettando la gerarchia.
+- La sezione _above the fold_ è stata progettata per rispondere alle domande: _Dove sono? Dove posso andare? Di cosa si tratta?_
+- Contrasto adeguato tra colore del testo e colore di sfondo.
+- Distinzione tra link visitati e non visitati.
+- Le immagini di contenuto possiedono un attributo alt adeguato.
+- Le immagini puramente decorative sono state inserite in background tramite CSS, poiché fanno parte della presentazione.
+- Utilizzo del tag `<abbr>` per le abbreviazioni.
+- Utilizzo del tag `<span lang="">` per permettere agli screen reader di leggere correttamente parole in una lingua diversa da quella principale del sito.
+- Utilizzo del tag `<time datetime="">` per le date.
+- Presenza di skip link _(es. “Salta al contenuto principale”)_ per evitare di dover scorrere il menu a ogni pagina.
+- Evidenza visiva dello stato di focus sugli elementi interattivi _(link, pulsanti, campi input)_.
+- Ordine logico e coerente della navigazione tramite tabulazione.
+- Etichette (`<label>`) collegate correttamente ai campi dei form.
+- Indicazioni sugli errori nei form chiare e non basate solo sul colore.
 
 === Aiuti per lo screen reader
 All’interno del sito sono stati utilizzati gli attributi *ARIA* per facilitare l’interazione con il sito a tutte le categorie di utenti.
@@ -234,25 +252,34 @@ Il sito è progettato per essere completamente responsive, garantendo una visual
 
 Per migliorare l’esperienza utente su schermi piccoli, il menu di navigazione si trasforma in un *menu hamburger*, semplificando l’accesso alle diverse sezioni del sito. Anche i filtri presenti nella pagina prodotti diventano compressi sui dispositivi mobili, permettendo una navigazione più agevole senza sovraccaricare lo schermo.
 
-L’uso di strutture CSS come *flexbox*, insieme all’impiego di *unità relative* per font e dimensioni _(em, rem, %)_, permette di mantenere un *layout flessibile e adattabile* a diverse risoluzioni. Inoltre, immagini e componenti vengono scalati dinamicamente per garantire coerenza visiva e leggibilità su tutti i dispositivi.
+L’uso di strutture CSS come *flexbox*, insieme all’impiego di *unità relative* per font e dimensioni (`em, rem, %`), permette di mantenere un *layout flessibile e adattabile* a diverse risoluzioni. Inoltre, immagini e componenti vengono scalati dinamicamente per garantire coerenza visiva e leggibilità su tutti i dispositivi.
 
 All'interno del sito, inoltre, *non sono presenti tabelle*.
 
 = Test effettuati
 == Navigabilità ed accessibilità
-Abbiamo utilizzato i seguenti strumenti per effettuare test manuali e automatici:
-- WCAG Color contrast checker: controllo contrasto dei colori ed applicazione di vari filtri visivi (protanopia, protanomalia, deuteranopia, deuteranomalia, tritanopia, tritanomalia, acromatopsia, acromatomalia), sempre raggiunto un livello di conformità WCAG AA e nella maggior parte dei casi AAA;
-- WAVE by WebAIM, Silktide Inspector: per controlli generali di accessibilità e non vengono segnalati errori, in particolre nella maggior parte delle pagine i test automatici effettuati da Silktide hanno sempre raggiunto un livello di conformità WCAG AA e nella maggior parte dei casi AAA;
-- W3C Validator (per HTML e CSS): non vengono segnalati errori;
-- TotalValidator;
-- Lighthouse: calcolo prestazioni del sito con buoni e, in alcuni casi, ottimi punteggi;
-- Compatibilità con browser diversi quali Microsoft Edge, Google Chrome, Mozilla Firefox e Opera;
+Abbiamo utilizzato diversi strumenti per effettuare test manuali e automatici:
+
+- *WCAG Color Contrast Checker*: per la verifica del contrasto dei colori e l’applicazione di vari filtri visivi _(protanopia, protanomalia, deuteranopia, deuteranomalia, tritanopia, tritanomalia, acromatopsia, acromatomalia)_. I test hanno sempre raggiunto un livello di conformità *WCAG AA* e, nella maggior parte dei casi, AAA;
+- *WAVE by WebAIM, Silktide Inspector*: per controlli generali di accessibilità. Non sono stati segnalati errori; in particolare, i test automatici effettuati da Silktide hanno evidenziato una conformità *WCAG AA* e, nella maggior parte dei casi, AAA;
+- *W3C Validator (HTML e CSS)*: non sono stati riscontrati errori
+- *TotalValidator*: utilizzato per ulteriori verifiche di accessibilità e validità del codice;
+- *Lighthouse:* per la valutazione delle prestazioni del sito, che hanno registrato punteggi buoni e, in alcuni casi, ottimi.
+- *WCAG Color contrast checker*: controllo contrasto dei colori ed applicazione di vari filtri visivi _(protanopia, protanomalia, deuteranopia, deuteranomalia, tritanopia, tritanomalia, acromatopsia, acromatomalia)_, sempre raggiunto un livello di conformità WCAG AA e nella maggior parte dei casi AAA;
+- *WAVE by WebAIM, Silktide Inspector*: per controlli generali di accessibilità e non vengono segnalati errori, in particolre nella maggior parte delle pagine i test automatici effettuati da Silktide hanno sempre raggiunto un livello di conformità WCAG AA e nella maggior parte dei casi AAA;
+- *W3C Validator (per HTML e CSS)*: non vengono segnalati errori;
+- *TotalValidator*;
+- *Lighthouse*: calcolo prestazioni del sito con buoni e, in alcuni casi, ottimi punteggi;
+- *Compatibilità con browser diversi* quali Microsoft Edge, Google Chrome, Mozilla Firefox e Opera;
+- *Compatibilità con sistemi operativi diversi* quali Microsoft Windows 10, Windows 11, Ubuntu 23.10, Ubuntu 22.04, Android 15, iPadOS 18.6.2; 
+
+L’unico problema riscontrato su _iPadOS_ riguarda la proprietà `background-attachment: fixed`, che non è correttamente supportata sui dispositivi iOS. Apple ha scelto di disattivarne il comportamento nativo per motivi legati alle prestazioni e alla gestione della GPU. Si tratta comunque di un aspetto puramente decorativo, che non compromette l’accessibilità né la fruizione dei contenuti.
 
 == Falsi positivi
 Vengono riportati qua di seguito i falsi positivi segnalati dagli strumenti di validazione _(Total Validator, Silktide, WAVE)_:
 - in tutte le pagine vengono erroneamente segnalati errori di ortografia;
 - sono presenti alcuni _warning_ dovuti al fatto che gli attributi `alt` delle immagini superano i 75 caratteri. Nel nostro sito, tuttavia, tutti gli `alt` rimangono comunque sotto i 100 caratteri, poiché per alcune immagini era necessario fornire descrizioni testuali più dettagliate, in modo da permettere agli utenti con disabilità visiva di comprendere meglio il contenuto.
-- in _WAVE_ viene visualizzato un alert in cui si evidenzia la sottolineatura errata dei link, cosa che è, invece, corretta.
+- in _WAVE_ viene visualizzato un alert in cui si evidenzia la sottolineatura errata dei link nella pagina user-profile.php, cosa che è, invece, corretta.
 
 
 == Screen reader
