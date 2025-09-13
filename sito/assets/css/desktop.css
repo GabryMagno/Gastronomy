@@ -1074,7 +1074,7 @@ input#searching-bar{
 }
 
 button#search-submit{
-    background-image: url(../img/icone/cerca.webp);
+    background-image: url(../img/icone/cerca.svg);
     height: 45px;
 
     aspect-ratio: 1 / 1;

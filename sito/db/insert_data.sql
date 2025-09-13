@@ -62,7 +62,13 @@ VALUES
 ('Crostata alla Marmellata', 'dolce', 'pezzo', 1, 8, 'Frolla con confettura di albicocca', 3.00, TRUE, 'assets/img/prodotti/crostata.webp'),
 ('Bign&egrave; alla Crema', 'dolce', 'pezzo', 2, 12, 'Pasta <span lang="fr">choux</span> ripiena di crema pasticcera', 1.50, TRUE, 'assets/img/prodotti/bigne.webp'),
 ('Biscotti Artigianali', 'dolce', 'kg', 1, 3, 'Selezione di biscotti di frolla artigianali', 18.00, TRUE, 'assets/img/prodotti/biscotti.webp'),
-('<span lang="en">Cheesecake</span>', 'dolce', 'porzione', 1, 6, '<span lang="en">Cheesecake</span> con topping ai frutti rossi', 4.50, TRUE, 'assets/img/prodotti/cheesecake.webp');
+('<span lang="en">Cheesecake</span>', 'dolce', 'porzione', 1, 6, '<span lang="en">Cheesecake</span> con topping ai frutti rossi', 4.50, TRUE, 'assets/img/prodotti/cheesecake.webp'),
+
+-- ALTRO
+('Pasta al Pesto', 'primo', 'porzione', 1, 6, 'Pasta senza glutine con pesto genovese e patate', 8.00, TRUE, 'assets/img/prodotti/pasta_pesto.webp'),
+('Frittata di Patate', 'secondo', 'pezzo', 1, 6, 'Frittata morbida con patate e cipolle', 4.50, TRUE, 'assets/img/prodotti/frittata_patate.webp'),
+('Polpette di Ceci', 'secondo', 'pezzo', 2, 12, 'Polpette vegane a base di ceci e verdure con salsa di pomodoro', 1.50, TRUE, 'assets/img/prodotti/polpette_ceci.webp'),
+('Biscotti alle Mandorle', 'dolce', 'kg', 1, 3, 'Biscotti artigianali alle mandorle senza ingredienti di origine animale', 20.00, TRUE, 'assets/img/prodotti/biscotti_mandorle.webp');
 
 
 -- INGREDIENTI
@@ -161,7 +167,12 @@ INSERT INTO ingredienti VALUES
 ("Lonza di maiale",1,0,0),
 ("Cacao amaro in polvere",1,1,1),
 ("Gelatina in fogli",1,0,0),
-("Origano",1,1,1);
+("Origano",1,1,1),
+("Pasta senza glutine",1,1,1),
+("Pinoli",1,1,1),
+("Lievito alimentare",1,1,1),
+("Ceci",1,1,1),
+("Mandorle",1,1,1);
 
 -- PRODOTTI_INGREDIENTI
 INSERT INTO prodotto_ingredienti VALUES
@@ -432,7 +443,39 @@ INSERT INTO prodotto_ingredienti VALUES
 (34,"Uova",0,2,"num_el"),
 (34,"Burro",0,50,"g"),
 (34,"Frutti di bosco misti",0,100,"g"),
-(34,"Vaniglia",1,null,null);
+(34,"Vaniglia",1,null,null),
+-- Pesto senza glutine
+(35,"Pasta senza glutine",0,180,"g"),
+(35,"Pesto alla genovese",0,100,"g"),
+(35,"Patate",0,100,"g"),
+(35,"Fagiolini",0,100,"g"),
+(35,"Parmiggiano Reggiano <abbr title=\"Denominazione di Origine Protetta\">DOP</abbr>",0,30,"g"),
+(35,"Olio <abbr title=\"Extra Vergine di Oliva\">EVO</abbr>",1,null,null),
+(35,"Sale fino",1,null,null),
+-- Frittata patate
+(36,"Uova",0,3,"num_el"),
+(36,"Patate",0,200,"g"),
+(36,"Cipolle",0,50,"g"),
+(36,"Olio <abbr title=\"Extra Vergine di Oliva\">EVO</abbr>",1,null,null),
+(36,"Sale fino",1,null,null),
+(36,"Pepe nero",1,null,null),
+-- Biscotti mandorle
+(37,"Farina 00",0,300,"g"),
+(37,"Mandorle",0,100,"g"),
+(37,"Zucchero",0,100,"g"),
+(37,"Olio <abbr title=\"Extra Vergine di Oliva\">EVO</abbr>",0,50,"ml"),
+(37,"Vaniglia",1,null,null),
+-- Polpette ceci
+(38,"Ceci",0,150,"g"),
+(38,"Pane casereccio",0,50,"g"),
+(38,"Carote",0,50,"g"),
+(38,"Cipolle",0,50,"g"),
+(38,"Passata di pomodoro",0,150,"g"),
+(38,"Prezzemolo",1,null,null),
+(38,"Olio <abbr title=\"Extra Vergine di Oliva\">EVO</abbr>",1,null,null),
+(38,"Sale fino",1,null,null),
+(38,"Pepe nero",1,null,null);
+
 
 -- DEGUSTAZIONI
 INSERT INTO degustazioni 
