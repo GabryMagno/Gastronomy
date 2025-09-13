@@ -63,6 +63,8 @@ Per *migliorare il ranking del sito* sono state intraprese diverse azioni:
 
 = Progettazione
 == Schema organizzativo
+
+
 == Tipi di utente
 Nella fase di progettazione del sito sono stati individuati i seguenti tipi di utente:
 
@@ -70,7 +72,7 @@ Nella fase di progettazione del sito sono stati individuati i seguenti tipi di u
 
 - *Utente Registrato*: l’utente registrato ha accesso completo alle funzionalità riservate agli utenti autenticati. Può accedere all’area personale, che presenta una dashboard con i prodotti preferiti, le prenotazioni di prodotti e degustazioni e le recensioni inserite. Può effettuare prenotazioni, aggiungere o rimuovere prodotti dai preferiti, inserire, modificare o eliminare valutazioni e commenti. È inoltre possibile gestire i propri dati personali, inclusa la modifica della foto profilo. Anche l’invio di feedback è disponibile, e in questo caso il sistema traccia l’utente che lo invia.
 
-_L’utente amministratore e la relativa area del sito non sono stati sviluppati. Considerata la ridotta dimensione del gruppo di lavoro, si è preferito concentrarsi sulle altre sezioni del sito, lasciando la gestione amministrativa come possibile implementazione futura. I dati relativi all’amministratore sono comunque presenti e visibili nel database._
+_L’utente amministratore e la relativa area del sito non sono stati sviluppati. Considerata la ridotta dimensione del gruppo di lavoro, si è preferito concentrarsi sulle altre sezioni del sito, lasciando la gestione amministrativa come possibile implementazione futura._
 
 == Funzionalità
 Elenco delle funzionalità del sito:
