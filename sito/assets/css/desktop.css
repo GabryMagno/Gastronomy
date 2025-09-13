@@ -2326,6 +2326,9 @@ p#comment-log a:visited,p#reservation-log a:visited{
 .degustazione-dettagli .row{
     display: flex;
     align-items: baseline;
+}
+
+.singleproduct-dettagli .row{
     gap: 2.5em;
 }
 

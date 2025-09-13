@@ -32,7 +32,7 @@ if(isset($_GET["reference-tasting"])) {
 if (isset($_POST['submit-login'])) {
     
     //CONTROLLO USERNAME
-    $username = $_POST["username"];
+    $username = Sanitizer::SanitizeUsername($_POST["username"]);
     if(mb_strlen($username) == 0) {
         $pagina = str_replace("[username-error]",'<p role="alert" class="error" id="username-error">Lo <span lang="en">username</span> è un campo obbligatorio</p>',$pagina);
         $error = true;
