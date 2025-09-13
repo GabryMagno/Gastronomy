@@ -37,6 +37,13 @@ Infine, tenendo conto dell’importanza del feedback dei clienti, sono state int
 Le pagine del sito sono state progettate per risultare semplici da utilizzare e visivamente accattivanti, con una particolare attenzione alla *navigazione da dispositivi mobili*, oggi sempre più diffusi e parte integrante della vita quotidiana.
 
 == Analisi utente
+Il sito della gastronomia _Cuochi per Caso_ ha come obiettivo quello di raggiungere clienti abituali e nuovi utenti, offrendo la possibilità di *prenotare online i prodotti* direttamente da casa, evitando così la necessità di recarsi fisicamente in negozio. Inoltre, il sito propone la possibilità di *prenotare esperienze di degustazione* presso i locali della gastronomia.
+Non sono richieste conoscenze pregresse per visitare il sito: tutte le informazioni sono presentate in modo chiaro e accessibile. I clienti hanno anche la possibilità di *visualizzare gli ingredienti* utilizzati per la preparazione dei prodotti gastronomici in vendita.
+
+La navigazione risulta quindi intuitiva e consente all’utente di acquisire facilmente nuove informazioni semplicemente esplorando le pagine. Il *layout* e la *struttura* del sito sono stati progettati per favorire un’interazione semplice e immediata, così da facilitare la familiarizzazione con l’interfaccia.
+
+Non esiste un target minimo o massimo per la visualizzazione del sito: tuttavia, la *registrazione* e la possibilità di effettuare prenotazioni sono consentite esclusivamente agli *utenti maggiorenni* _(18 anni in su)_.
+
 == SEO
 Le principali *ricerche* a cui il sito intende rispondere sono:
 - il nome stesso del sito;
@@ -199,6 +206,8 @@ In sintesi:
 Ogni pagina di errore include un’immagine simpatica e una breve descrizione testuale dell’errore, con riferimenti divertenti all’ambiente della gastronomia.
 
 == Accessibilità
+
+
 === Aiuti per lo screen reader
 All’interno del sito sono stati utilizzati gli attributi *ARIA* per facilitare l’interazione con il sito a tutte le categorie di utenti.
 Seguendo le buone pratiche, all’inizio di ogni pagina è presente una sezione con link di aiuto alla navigazione, i cosiddetti *"skip to content"*. Questi link consentono agli utenti che navigano tramite tastiera o utilizzano screen reader di saltare direttamente a specifiche sezioni della pagina, evitando contenuti non rilevanti e permettendo di raggiungere più rapidamente il contenuto desiderato.
@@ -218,6 +227,7 @@ All'interno del sito, inoltre, *non sono presenti tabelle*.
 Vengono riportati qua di seguito i falsi positivi segnalati dagli strumenti di validazione _(Total Validator, Silktide, WAVE)_:
 - in tutte le pagine vengono erroneamente segnalati errori di ortografia;
 - sono presenti alcuni _warning_ dovuti al fatto che gli attributi `alt` delle immagini superano i 75 caratteri. Nel nostro sito, tuttavia, tutti gli `alt` rimangono comunque sotto i 100 caratteri, poiché per alcune immagini era necessario fornire descrizioni testuali più dettagliate, in modo da permettere agli utenti con disabilità visiva di comprendere meglio il contenuto.
+- in _WAVE_ viene visualizzato un alert in cui si evidenzia la sottolineatura errata dei link, cosa che è, invece, corretta.
 
 
 == Screen reader
