@@ -240,6 +240,15 @@ All'interno del sito, inoltre, *non sono presenti tabelle*.
 
 = Test effettuati
 == Navigabilità ed accessibilità
+Abbiamo utilizzato i seguenti strumenti per effettuare test manuali e automatici:
+- WCAG Color contrast checker: controllo contrasto dei colori ed applicazione di vari filtri visivi (protanopia, protanomalia, deuteranopia, deuteranomalia, tritanopia, tritanomalia, acromatopsia,
+acromatomalia), sempre raggiunto un livello di conformità WCAG AA e nella maggior parte dei casi AAA;
+- WAVE by WebAIM, Silktide Inspector: per controlli generali di accessibilità e non vengono segnalati errori, in particolre nella maggior parte delle pagine i test automatici effettuati da Silktide hanno sempre raggiunto un livello di conformità WCAG AA e nella maggior parte dei casi AAA;
+- W3C Validator (per HTML e CSS): non vengono segnalati errori;
+- TotalValidator;
+- Lighthouse: calcolo prestazioni del sito con buoni e in alcuni casi ottimi punteggi;
+- compatibilità con browser diversi quali Microsoft Edge, Google Chrome, Mozilla Firefox e Opera;
+
 == Falsi positivi
 Vengono riportati qua di seguito i falsi positivi segnalati dagli strumenti di validazione _(Total Validator, Silktide, WAVE)_:
 - in tutte le pagine vengono erroneamente segnalati errori di ortografia;
