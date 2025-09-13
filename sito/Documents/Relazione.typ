@@ -62,9 +62,6 @@ Per *migliorare il ranking del sito* sono state intraprese diverse azioni:
 - non è stato fatto uso di `display: none` _(se non nel foglio `print.css`)_, né di tecniche come `height: 0` o `visibility: hidden`, che possono compromettere l’indicizzazione.
 
 = Progettazione
-== Schema organizzativo
-
-
 == Tipi di utente
 Nella fase di progettazione del sito sono stati individuati i seguenti tipi di utente:
 
@@ -186,13 +183,12 @@ La selezione è stata effettuata assicurandoci che il rapporto di contrasto tra 
 
 La palette adottata è la seguente:
 #figure(
-  image("assets/db.png", width: 80%),
+  image("assets/colori.png", width: 75%),
   caption: [Palette di colori adottata all'interno del sito.],
 )
 
 == Comportamento
 === PHP
-
 Gestisce l’intero lato back-end dell’applicazione.
 Si occupa di:
 - Connessione al database, lettura e scrittura dei dati.

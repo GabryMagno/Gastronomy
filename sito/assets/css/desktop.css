@@ -14,21 +14,21 @@
     --title_color: #FAF4ED;
     --txtcolor: #2C1C18;
     --errorcolor: #7C0A01;
-    --buttoncolor_arancio: #C65C45;
+
     --buttoncolor_rosso: #73142F;
     --buttoncolor_rosso_hover: #991d40;
     
     --buttoncolor_nero: #2C1C18;
     --buttoncolor_nero_hover: #494140;
 
+    --herelinkcolor: #000638;
     --herelinkcolor_hover: #0f1657;
 
     --headerbgcolor: #73142F;
+    --secondaryelementcolor: #B8D86C;
 
     --hintsuccess: #1b5021;
-
-    --secondaryelementcolor: #B8D86C;
-    --herelinkcolor: #000638;
+    
     --linkcolor: #FAF4ED;
     --visitedcolor: #F3FF00;
     /*
