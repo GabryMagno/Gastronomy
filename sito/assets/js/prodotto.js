@@ -110,7 +110,7 @@ function validateDateOrder(){
         var now_year = todaysDate.getFullYear();
         if(now_day < 10) now_day = "0"+todaysDate.getDate();
         if(now_month < 10) now_month = "0"+(todaysDate.getMonth()+1); 
-        p.innerHTML= "L'ordine può essere ritirato solo nei giorni successivi ad oggi: " + (now_day) + "-" + (now_month) +"-" + now_year;
+        p.innerHTML= "L'ordine può essere ritirato solo nei giorni successivi ad oggi: <time datetime=" + (now_day) + "/" + (now_month) +"/" + now_year +">" + (now_day) + "/" + (now_month) +"/" + now_year+"</time>";
         document.getElementById("submit-order").classList.add("not-available");
 		document.getElementById("submit-order").disabled = true;
         const parent = document.getElementById("data-ritiro").parentNode;
