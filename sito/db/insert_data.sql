@@ -171,7 +171,7 @@ INSERT INTO prodotto_ingredienti VALUES
 (1,"Aglio",0,1,"num_el"),
 (1,"Olio <abbr title=\"Extra Vergine di Oliva\">EVO</abbr>",1,null,null),
 (1,"Sale",1,null,null),
-(1,"Origano",0,3000,"g"),
+(1,"Origano",0,10,"g"),
 -- Tagliere di salumi
 (2,"Prosciutto crudo",0,100,"g"),
 (2,"Prosciutto cotto",0,100,"g"),
