@@ -265,11 +265,6 @@ Abbiamo utilizzato diversi strumenti per effettuare test manuali e automatici:
 - *W3C Validator (HTML e CSS)*: non sono stati riscontrati errori
 - *TotalValidator*: utilizzato per ulteriori verifiche di accessibilità e validità del codice;
 - *Lighthouse:* per la valutazione delle prestazioni del sito, che hanno registrato punteggi buoni e, in alcuni casi, ottimi.
-- *WCAG Color contrast checker*: controllo contrasto dei colori ed applicazione di vari filtri visivi _(protanopia, protanomalia, deuteranopia, deuteranomalia, tritanopia, tritanomalia, acromatopsia, acromatomalia)_, sempre raggiunto un livello di conformità WCAG AA e nella maggior parte dei casi AAA;
-- *WAVE by WebAIM, Silktide Inspector*: per controlli generali di accessibilità e non vengono segnalati errori, in particolre nella maggior parte delle pagine i test automatici effettuati da Silktide hanno sempre raggiunto un livello di conformità WCAG AA e nella maggior parte dei casi AAA;
-- *W3C Validator (per HTML e CSS)*: non vengono segnalati errori;
-- *TotalValidator*;
-- *Lighthouse*: calcolo prestazioni del sito con buoni e, in alcuni casi, ottimi punteggi;
 - *Compatibilità con browser diversi* quali Microsoft Edge, Google Chrome, Mozilla Firefox e Opera;
 - *Compatibilità con sistemi operativi diversi* quali Microsoft Windows 10, Windows 11, Ubuntu 23.10, Ubuntu 22.04, Android 15, iPadOS 18.6.2; 
 
