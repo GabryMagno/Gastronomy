@@ -28,7 +28,11 @@ function FilterForm(){
 function updateAria() {
     const details = document.getElementById("filter-toggle");
     const summary = document.getElementById("toggle-summary");
-    if (window.innerWidth < 768) summary.setAttribute("aria-expanded", details.open);
+    const text = document.getElementById("summary-text");
+    if (window.innerWidth < 768){
+        summary.setAttribute("aria-expanded", details.open ? "true" : "false");
+        text.innerText = details.open ? "Chiudi i filtri" : "Apri i filtri";
+    }
 }
 
 function toggleFiltersOnResize() {
@@ -39,11 +43,10 @@ function toggleFiltersOnResize() {
 
 
 window.addEventListener("load", () => {
-    if (window.innerWidth < 768){
-        const details = document.getElementById("filter-toggle");
-        details.addEventListener("toggle", updateAria);
-        window.addEventListener("load", updateAria);
-    }
+   
+    const details = document.getElementById("filter-toggle");
+    details.addEventListener("toggle", updateAria);
+    
     document.getElementById("price").value = document.getElementById("price").getAttribute("max");
     window.addEventListener("resize", toggleFiltersOnResize);
     toggleFiltersOnResize();
