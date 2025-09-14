@@ -48,7 +48,8 @@ header p.header_text {
   font-style: italic;
 }
 
-h2.section-title {
+h2.section-title,
+h3.section-title {
   display: block;
   margin-top: 2em;
   font-size: 1.2em;
@@ -75,7 +76,7 @@ input,
   display: none ;
 }
 
-h1, h2, h3, img {
+h1, h2, h3, h4, img {
   break-inside: avoid;
   page-break-after: avoid;
 }
@@ -293,9 +294,9 @@ li.userprofile-brochure{
 }
 
 /* ERRORI e RINGRAZIAMENTI */
-.error_main h3, .ringraziamento h3,
-#confirm-section h3, .error_main h4,
-.ringraziamento h4, #confirm-section h4{
+.error_main h2, .ringraziamento h2,
+#confirm-section h2, .error_main h3,
+.ringraziamento h3, #confirm-section h3{
   text-align: center;
 }
 

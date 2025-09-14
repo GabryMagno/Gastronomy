@@ -630,12 +630,11 @@ div .chef-content{
     height: auto;
 }
 
-.error_main h3,
-.ringraziamento h3{
+.error_main h2{
     font-size: 2.2em;
 }
 
-#confirm-section h3, .ringraziamento h3{
+#confirm-section h2, .ringraziamento h2{
     font-size: 2.7em;
 }
 

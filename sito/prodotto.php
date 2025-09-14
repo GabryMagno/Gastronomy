@@ -141,7 +141,7 @@ if(isset($_GET["prodotto"])){
                 $date = new DateTime($comment["data"]);
 
                 $commentList .= '<div class="recensione-contenuto">
-                                    <h5 class="recensione-cliente">' . htmlspecialchars($comment["username"]) . '</h5>
+                                    <h4 class="recensione-cliente">' . htmlspecialchars($comment["username"]) . '</h4>
                                     <span class="recensione-data">
                                         <time datetime="' . $date->format("Y-m-d") . '">' . $date->format("d/m/Y") . '</time>
                                     </span>
@@ -336,7 +336,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
                 "<form method=\"post\" id=\"valutazione\" class=\"form-bianco\">
                     <fieldset>
                         <legend>La tua valutazione del prodotto</legend>
-                        <h5 class=\"form-label\">Valutazione</h5>
+                        <h4 class=\"form-label\">Valutazione</h4>
                         <div class=\"rating\" role=\"radiogroup\" aria-label=\"Valutazione da 1 a 5 stelle\">
                             <input type=\"radio\" name=\"rating\" id=\"star5\" value=\"5\">
                             <label for=\"star5\" title=\"5 stelle\" id=\"cinque-stelle\">&#9733;</label>
@@ -403,7 +403,7 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
 
         $data = new DateTime($isUserCommented["data"]);
         $pagina = str_replace("[OLD_COMMENT]", "
-                <h5 id=\"tua-rating\">La tua valutazione</h5>
+                <h4 id=\"tua-rating\" class=\"left\">La tua valutazione</h4>
                 <dl class=\"singleproduct-rating\">
                     <div class=\"row\">
                         <dt>Data</dt>
@@ -429,11 +429,11 @@ if(is_bool($isUserLogged) && $isUserLogged == false){//Se l'utente non è loggat
                         <button type=\"submit\" aria-label=\"Elimina Valutazione\" class=\"bottoni-rossi\" name=\"delete-review\">Elimina Valutazione</button>
                     </div>
                 </form>", $pagina);
-        $pagina = str_replace("<h4 class=\"no-print left\">Inserisci Valutazione e Commento</h4>[COMMENT]","",$pagina);
+        $pagina = str_replace("<h3 class=\"no-print left\">Inserisci Valutazione e Commento</h3>[COMMENT]","",$pagina);
         $pagina = str_replace("[Data Valutazione]",'<time datetime="'.$data->format("Y-m-d"). '">'.$data->format("d/m/Y").'</time>',$pagina);
         $pagina = str_replace("[Commento]",htmlspecialchars($isUserCommented["commento"]),$pagina);
         $pagina = str_replace("[voto]",$isUserCommented["voto"],$pagina);
-        $pagina = str_replace("<h4 class=\"no-print left\">Inserisci Valutazione e Commento</h4>","",$pagina);
+        $pagina = str_replace("<h3 class=\"no-print left\">Inserisci Valutazione e Commento</h3>","",$pagina);
         $pagina = str_replace("[COMMENT]","",$pagina);
 
         $templateValutazione = '<span aria-hidden="true">';

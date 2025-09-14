@@ -74,7 +74,7 @@
 
         <main id="user-settings-main">
 
-            <h3 class="section-title">Impostazioni</h3>
+            <h2 class="section-title">Impostazioni</h2>
 
             <form method="post" id="change-personal-info" class="form-bianco" enctype="multipart/form-data">
                 <div class="info-sezione">
@@ -85,7 +85,7 @@
                     <legend class="hidden" id="legend-personal-info">Informazioni anagrafiche e immagine profilo</legend>
                     <div>
                         <label for="change-username">Modifica <span lang="en">Username</span></label>
-                        <input type="text" name="new-username" id="change-username" value="[username]">
+                        <input type="text" name="new-username" id="change-username" value="[username]" autocomplete="username">
                         <details open>
                             <summary id="hints-username" class="hints" aria-expanded="false" aria-controls="hint-list-username">
                                 Suggerimenti <span lang="en">Username</span>
@@ -102,7 +102,7 @@
 
                     <div>
                         <label for="change-name">Modifica Nome</label>
-                        <input type="text" name="new-name" id="change-name" value="[nome]">
+                        <input type="text" name="new-name" id="change-name" value="[nome]" autocomplete="given-name">
                         <details open>
                             <summary id="hints-name" class="hints" aria-expanded="false" aria-controls="hint-list-name">
                                 Suggerimenti Nome
@@ -119,7 +119,7 @@
 
                     <div>
                         <label for="change-surname">Modifica Cognome</label>
-                        <input type="text" name="new-surname" id="change-surname" value="[cognome]">
+                        <input type="text" name="new-surname" id="change-surname" value="[cognome]" autocomplete="family-name">
                         <details open>
                             <summary id="hints-surname" class="hints" aria-expanded="false" aria-controls="hint-list-surname">
                                 Suggerimenti Cognome
@@ -136,7 +136,7 @@
 
                     <div>
                         <label for="change-date">Modifica Data di Nascita</label>
-                        <input type="date" name="new-date" id="change-date" min="1900-01-01" max="[max-date]" value="[data-nascita]">
+                        <input type="date" name="new-date" id="change-date" min="1900-01-01" max="[max-date]" value="[data-nascita]" autocomplete="bday">
                         <details open>
                             <summary id="hints-date" class="hints" aria-expanded="false" aria-controls="hint-list-date">
                                 Suggerimenti Data di Nascita
@@ -181,7 +181,7 @@
                     <legend class="hidden" id="legend-password-info">Gestione <span lang="en">password</span></legend>
                     <div>
                         <label for="old-password">Vecchia <span lang="en">Password</span></label>
-                        <input type="password" name="old-password" id="old-password" autocomplete="old-password">
+                        <input type="password" name="old-password" id="old-password" autocomplete="current-password">
                         <details open>
                             <summary id="hints-old-password" class="hints" aria-expanded="false" aria-controls="hint-list-old-password">
                                 Suggerimenti <span lang="en">Password</span>
@@ -221,7 +221,7 @@
                         <label for="confirm-new-password">Conferma Nuova <span lang="en">Password</span></label>
                         <input type="password" name="confirm-new-password" id="confirm-new-password" autocomplete="new-password">
                         <details open>
-                            <summary id="hints-repeat-new-password" class="hints" aria-expanded="false" aria-controls="hint-list-repeat-new-password">
+                            <summary id="hints-repeat-new-password" class="hints" aria-expanded="false" aria-controls="hint-list-repeat-password">
                                 Suggerimenti Ripeti <span lang="en">Password</span>
                             </summary>
                             <ul class="suggestions-list" id="hint-list-repeat-password" aria-labelledby="hints-repeat-new-password">

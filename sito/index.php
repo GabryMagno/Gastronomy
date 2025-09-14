@@ -48,11 +48,11 @@ function createBestCommentTemplate($username, $immagine, $voto, $commento, $prod
                 <img loading="lazy" src="' . $immagine . '" alt="Foto profilo di ' . $username . '">
             </div>
             <div class="recensione-contenuto">
-                <h4 class="recensione-cliente">' . $username . '</h4>
+                <h3 class="recensione-cliente">' . $username . '</h3>
                 <p class="recensione-data">
                     <time datetime="' . $data->format("Y-m-d") . '">' . $data->format("d/m/Y") . '</time>
                 </p>
-                <h5 class="recensione-prodotto">'. $prodotto . '</h5>
+                <h4 class="recensione-prodotto">'. $prodotto . '</h4>
                 <p class="recensione-testo">' . $commento . '</p>
                 <p class="recensione-valutazione">Voto: <span aria-hidden="true">';
 
@@ -76,7 +76,7 @@ function CreateBestProductBrochure(string $img, string $title, float $cost, int 
     $TEMPLATE = '<li class="new">
                     <article>
                         <img loading="lazy" src="'. $img . '" alt="">
-                        <h4 class="product-name">' . Sanitizer::SanitizeText($title) . '</h4>
+                        <h3 class="product-name">' . Sanitizer::SanitizeText($title) . '</h3>
 
                         <p><span class="product-brochure-bold">Voto</span> '. (number_format((float)$db->AverageGradeProduct($id),1) == 0 ? "X" : number_format((float)$db->AverageGradeProduct($id),1)) .' su 5</p>
                         <p><span class="product-brochure-bold">Prezzo</span> '. $cost . '&euro;</p>

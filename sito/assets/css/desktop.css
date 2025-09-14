@@ -136,7 +136,10 @@ h4{
     text-align: center;
 }
 
-h4.left{
+h3.left,
+h4.left {
+    margin: 0;
+    font-size: 1.6em;
     text-align: left;
 }
 
@@ -291,7 +294,11 @@ p.new-line{
     position: absolute;
     margin: -9999em;
 }
+
 /*
+
+==== TICK PER LINK VISITATI ====
+
 #menu a.visited-link::after {
   content: "✓";
   margin-left: 3px;
@@ -313,7 +320,8 @@ p.new-line{
     #menu li {
         padding: 0.5em 0;
     }
-}*/
+}
+*/
 
 /*  
     ===============================
@@ -522,6 +530,11 @@ form.form-bianco label{
 
 form.form-bianco label::after{
     content: "";
+}
+
+#change-personal-info label,
+#change-password-email label{
+    display: block;
 }
 
 /* === BOTTONI === */
@@ -831,7 +844,7 @@ a.categoria-box:visited{
     z-index: 1;
 }
 
-#degustazioni-home h3{
+#degustazioni-home h2{
     margin-top: 0;
     padding-top: 1em;
     color: var(--title_color);
@@ -878,7 +891,7 @@ a.categoria-box:visited{
     margin: 0;
 }
 
-.recensioni h3{
+.recensioni h2{
     margin: 0;
     padding-top: 1rem;
 }
@@ -947,6 +960,10 @@ a.categoria-box:visited{
     margin: 0.5rem 0;
 }
 
+h4.recensione-prodotto{
+    font-size: 1.4em;
+}
+
 .recensione-data{
     font-size: 0.85rem;
     font-style: italic;
@@ -986,9 +1003,11 @@ a.categoria-box:visited{
     #filter-toggle > summary {
         display: none;
     }
+    /*
     #filter-toggle[open] > form#filter-content {
         display: block;
     }
+    */
 }
 
 div#list-content{
@@ -1276,7 +1295,7 @@ form#product-pages p{
     align-items: flex-start;
 }
 
-#storia-old .testo h4, #storia-oggi .testo h4{
+#storia-old .testo h3, #storia-oggi .testo h3{
     width: 100%;
     color: var(--txtcolor);
 
@@ -1403,6 +1422,10 @@ form#product-pages p{
     justify-content: center;
 }
 
+form#advice-form label{
+    margin-top: -2.5em;
+}
+
 form#advice-form{
     margin-top: 2em;
 }
@@ -1420,16 +1443,16 @@ form#advice-form textarea{
     color: var(--txtcolor);
 }
 
-#chisiamo-info h3{
+#chisiamo-info h2{
     margin-top: 0em;
 }
 
-#chisiamo-info h4{
+#chisiamo-info h3{
     margin-top: 1em;
 }
 
-#chisiamo-info h3,
-#chisiamo-info h4 {
+#chisiamo-info h2,
+#chisiamo-info h3 {
     margin-bottom: 0.5em;
     color: var(--txtcolor);
 }
@@ -2213,8 +2236,8 @@ p#comment-log a:visited,p#reservation-log a:visited{
     align-items: center;
 }
 
-.singleproduct-intestazione h3,
-.singledegustazione-intestazione h3{
+.singleproduct-intestazione h2,
+.singledegustazione-intestazione h2{
     color: var(--headerbgcolor);
 
     text-align: left;
@@ -2239,8 +2262,8 @@ p#comment-log a:visited,p#reservation-log a:visited{
     height: auto;
 }
 
-.singleproduct h4::before,
-.singledegustazione h4::before{
+.singleproduct h3::before,
+.singledegustazione h3::before{
     content: "";
     display: inline-block;
     position: relative;
@@ -2251,15 +2274,15 @@ p#comment-log a:visited,p#reservation-log a:visited{
     height: 20px;
 }
 
-.singleproduct h4:not(#reserve-this-product)::before,
-.singledegustazione h4:not(#reserve-this-degustazione)::before{
+.singleproduct h3:not(#reserve-this-product)::before,
+.singledegustazione h3:not(#reserve-this-degustazione)::before{
     background-size: contain;
 
     background-image: url('../img/icone/valutazione-nero.svg');
 }
 
-.singleproduct h4::after
-.singledegustazione h4::after{
+.singleproduct h3::after
+.singledegustazione h3::after{
     content: ":";
 }
 
@@ -2564,25 +2587,25 @@ a#pin-comment{
             PAGINE AUSILIARIE (CONFERMA-SCELTA E RINGRAZIAMENTI) 
     =================================================================
 */
-#confirm-section h3{
+#confirm-section h2{
     color: var(--txtcolor);
 }
 
-.ringraziamento h4{
+.ringraziamento h3{
     color: var(--hintsuccess);
 }
 
 
-#confirm-section h3,
-.ringraziamento h3{
+#confirm-section h2,
+.ringraziamento h2{
     text-align: center;
     font-weight: bold;
     font-size: 3em;
     padding-top: 0.2em;
 }
 
-#confirm-section h4,
-.ringraziamento h4{
+#confirm-section h3,
+.ringraziamento h3{
     text-align: center;
     font-weight: bold;
     font-size: 2em;
@@ -2615,7 +2638,7 @@ form#delete-choice button{
     ===============================
 */
 
-.ringraziamento h3{
+.ringraziamento h2{
     color: var(--hintsuccess);
 
     text-align: center;
@@ -2624,7 +2647,7 @@ form#delete-choice button{
     padding-top: 0.2em;
 }
 
-.ringraziamento h4{
+.ringraziamento h3{
     color: var(--hintsuccess);
 
     text-align: center;
@@ -2640,7 +2663,7 @@ form#delete-choice button{
     ===============================
 */
 
-.error_main h3{
+.error_main h2{
     color: var(--errorcolor);
 
     text-align: center;
@@ -2649,7 +2672,7 @@ form#delete-choice button{
     padding-top: 0.2em;
 }
 
-.error_main h4{
+.error_main h3{
     color: var(--errorcolor);
 
     text-align: center;
