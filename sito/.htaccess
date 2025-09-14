@@ -1,16 +1,30 @@
 # Pagine di errore personalizzate
-ErrorDocument 403 http://localhost/gastronomia/sito/403.php
-ErrorDocument 404 http://localhost/gastronomia/sito/404.php
-ErrorDocument 500 http://localhost/gastronomia/sito/500.php
+ErrorDocument 403 /nbolzon/403.php
+ErrorDocument 404 /nbolzon/404.php
+ErrorDocument 500 /nbolzon/500.php
 
 # Attivazione riscrittura
 RewriteEngine On
 
 # Blocco accesso diretto a cartelle sensibili se referer vuoto
 RewriteCond %{HTTP_REFERER} ^$
-RewriteRule ^assets/ - [F,L]
-RewriteRule ^php/ - [F,L]
-RewriteRule ^html/ - [F,L]
+RewriteRule ^assets\/(.*)$ /nbolzon/403.php [L,R=301]
+RewriteRule ^php\/(.*)$ /nbolzon/403.php [L,R=301]
+RewriteRule ^html\/(.*)$ /nbolzon/403.php [L,R=301]
 
-# Redirect dei file HTML ai corrispondenti PHP (senza R=301, rewrite interno)
-RewriteRule ^chisiamo.html$ chisiamo.php [L]
+# Redirect dei file HTML ai corrispondenti PHP
+RewriteRule ^403\.html$ /nbolzon/403.php [L,R=301]
+RewriteRule ^404\.html$ /nbolzon/404.php [L,R=301]
+RewriteRule ^500\.html$ /nbolzon/500.php [L,R=301]
+RewriteRule ^chisiamo\.html$ /nbolzon/chisiamo.php [L,R=301]
+RewriteRule ^conferma-scelta\.html$ /nbolzon/conferma-scelta.php [L,R=301]
+RewriteRule ^degustazione\.html$ /nbolzon/degustazione.php [L,R=301]
+RewriteRule ^degustazioni\.html$ /nbolzon/degustazioni.php [L,R=301]
+RewriteRule ^index\.html$ /nbolzon/index.php [L,R=301]
+RewriteRule ^login\.html$ /nbolzon/login.php [L,R=301]
+RewriteRule ^prodotti\.html$ /nbolzon/prodotti.php [L,R=301]
+RewriteRule ^prodotto\.html$ /nbolzon/prodotto.php [L,R=301]
+RewriteRule ^register\.html$ /nbolzon/register.php [L,R=301]
+RewriteRule ^ringraziamenti\.html$ /nbolzon/ringraziamenti.php [L,R=301]
+RewriteRule ^user-profile\.html$ /nbolzon/user-profile.php [L,R=301]
+RewriteRule ^user-settings\.html$ /nbolzon/user-settings.php [L,R=301]
