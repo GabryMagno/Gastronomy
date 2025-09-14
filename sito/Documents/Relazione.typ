@@ -307,3 +307,10 @@ Durante l’intero arco della fase di progettazione e sviluppo, i membri del tea
   - DB: `progettazione, creazione, connessione, inserimento e popolamento`;
   - Testing;
   - Relazione.
+
+  = Note
+  - ll caricamento della nuova immagine profilo sul server `tecweb` risulta funzionante, ma alcune volte la modifica diventa visibile solo dopo alcuni secondi. Riteniamo che questo possibile ritardo sia dovuto alla connessione tramite tunneling. In ambiente locale, invece, l’aggiornamento è pressoché immediato.
+  - Il file `.htaccess` funziona correttamente, ma è necessario aggiornare i percorsi. Avevamo provato a creare una versione compatibile con tutti i server su cui potrebbe essere installato il progetto, tuttavia la configurazione dell’ambiente di hosting potrebbe generare malfunzionamenti se i percorsi non vengono impostati manualmente. Nel file di consegna è indicato il percorso utilizzato sul server `tecweb`.
+  - Per il corretto funzionamento del sito sono richiesti i seguenti requisiti minimi:
+    - PHP 8.1
+    - database MariaDB 10.6.7
