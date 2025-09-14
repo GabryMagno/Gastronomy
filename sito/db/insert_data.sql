@@ -459,22 +459,22 @@ INSERT INTO prodotto_ingredienti VALUES
 (36,"Olio <abbr title=\"Extra Vergine di Oliva\">EVO</abbr>",1,null,null),
 (36,"Sale fino",1,null,null),
 (36,"Pepe nero",1,null,null),
--- Biscotti mandorle
-(37,"Farina 00",0,300,"g"),
-(37,"Mandorle",0,100,"g"),
-(37,"Zucchero",0,100,"g"),
-(37,"Olio <abbr title=\"Extra Vergine di Oliva\">EVO</abbr>",0,50,"ml"),
-(37,"Vaniglia",1,null,null),
 -- Polpette ceci
-(38,"Ceci",0,150,"g"),
-(38,"Pane casereccio",0,50,"g"),
-(38,"Carote",0,50,"g"),
-(38,"Cipolle",0,50,"g"),
-(38,"Passata di pomodoro",0,150,"g"),
-(38,"Prezzemolo",1,null,null),
-(38,"Olio <abbr title=\"Extra Vergine di Oliva\">EVO</abbr>",1,null,null),
-(38,"Sale fino",1,null,null),
-(38,"Pepe nero",1,null,null);
+(37,"Ceci",0,150,"g"),
+(37,"Pane casereccio",0,50,"g"),
+(37,"Carote",0,50,"g"),
+(37,"Cipolle",0,50,"g"),
+(37,"Passata di pomodoro",0,150,"g"),
+(37,"Prezzemolo",1,null,null),
+(37,"Olio <abbr title=\"Extra Vergine di Oliva\">EVO</abbr>",1,null,null),
+(37,"Sale fino",1,null,null),
+(37,"Pepe nero",1,null,null),
+-- Biscotti mandorle
+(38,"Farina 00",0,300,"g"),
+(38,"Mandorle",0,100,"g"),
+(38,"Zucchero",0,100,"g"),
+(38,"Olio <abbr title=\"Extra Vergine di Oliva\">EVO</abbr>",0,50,"ml"),
+(38,"Vaniglia",1,null,null);
 
 
 -- DEGUSTAZIONI
